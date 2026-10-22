@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "public_container_checks": [
+    {
+      "member": "rmlp_v4aux_k10",
+      "zip_entries_and_npy_headers": {
+        "oof.npy": {
+          "shape": [
+            699635
+          ],
+          "dtype": "float64",
+          "fortran": false
+        },
+        "test.npy": {
+          "shape": [
+            299844
+          ],
+          "dtype": "float64",
+          "fortran": false
+        }
+      },
+      "fingerprint_matches": true
+    },
+    {
+      "member": "rmlp_v4aux_k10s2",
+      "zip_entries_and_npy_headers": {
+        "oof.npy": {
+          "shape": [
+            699635
+          ],
+          "dtype": "float64",
+          "fortran": false
+        },
+        "test.npy": {
+          "shape": [
+            299844
+          ],
+          "dtype": "float64",
+          "fortran": false
+        }
+      },
+      "fingerprint_matches": true
+    }
+  ],
+  "local_scope_checks": [
+    {
+      "outer_fold": 0,
+      "phase": "selection",
+      "fit_memberships_per_allowed_row": [
+        4,
+        4
+      ],
+      "heldout_memberships_per_allowed_row": [
+        1,
+        1
+      ],
+      "saved_inner_lean_checkpoints": [],
+      "outer_or_stopping_rows_excluded_from_all_inner_fit_and_query_scopes": true
+    },
+    {
+      "outer_fold": 0,
+      "phase": "refit",
+      "fit_memberships_per_allowed_row": [
+        4,
+        4
+      ],
+      "heldout_memberships_per_allowed_row": [
+        1,
+        1
+      ],
+      "saved_inner_lean_checkpoints": [],
+      "outer_or_stopping_rows_excluded_from_all_inner_fit_and_query_scopes": true
+    },
+    {
+      "outer_fold": 1,
+      "phase": "selection",
+      "fit_memberships_per_allowed_row": [
+        4,
+        4
+      ],
+      "heldout_memberships_per_allowed_row": [
+        1,
+        1
+      ],
+      "saved_inner_lean_checkpoints": [],
+      "outer_or_stopping_rows_excluded_from_all_inner_fit_and_query_scopes": true
+    },
+    {
+      "outer_fold": 1,
+      "phase": "refit",
+      "fit_memberships_per_allowed_row": [
+        4,
+        4
+      ],
+      "heldout_memberships_per_allowed_row": [
+        1,
+        1
+      ],
+      "saved_inner_lean_checkpoints": [],
+      "outer_or_stopping_rows_excluded_from_all_inner_fit_and_query_scopes": true
+    }
+  ],
+  "new_fits": 0,
+  "new_base_inferences": 0,
+  "raw_target_labels_read": false,
+  "new_submissions": 0,
+  "best_and_current_records_unchanged": true,
+  "is_generalization_test": false
+}

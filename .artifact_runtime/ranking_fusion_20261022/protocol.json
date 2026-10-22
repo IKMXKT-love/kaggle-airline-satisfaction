@@ -1,0 +1,30 @@
+{
+  "started_epoch": 1792646546.159322,
+  "budget_seconds": 900,
+  "status": "frozen_before_candidate_effects",
+  "mechanism": "One fixed hybrid: 0.5 mean pointwise BCE + 0.5 mean uniformly sampled positive-negative pair logistic loss + ||w||^2/(2*C*n); C=.003; intercept unpenalized. Same first246 public logits. No hard-pair mining.",
+  "pair_count": 4194304,
+  "seed": 20261022,
+  "max_iterations": 220,
+  "inner_fit_native_folds": [
+    1,
+    2,
+    3
+  ],
+  "inner_score_native_fold": 4,
+  "inner_gate_delta": 3e-05,
+  "outer_screen_fold": 0,
+  "outer_screen_gate_delta": 5e-05,
+  "confirmation_gate_mean_delta": 0.0001,
+  "confirmation_min_positive_folds": 4,
+  "confirmation_mean_minus_two_se_positive": true,
+  "no_test_predictions_before_confirmation": true,
+  "caveat": "Exploratory historically observed native meta folds. Upstream OOF dependencies remain; not nested base-model validation. One fixed recipe; no search or retuning on score.",
+  "gate_revision": "Prospective cheap refinement gate because current public target gap is .00013; previous expensive mechanism failures and their .0003 gates remain unchanged.",
+  "protected": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  }
+}

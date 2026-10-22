@@ -1,0 +1,48 @@
+{
+  "note": "Exploratory moment calculation only. Within-pattern variance/n approximates sampling noise under iid scored rows conditional on a fixed model. Not a formal variance-components fit, significance test, bound, or reliability estimate; unequal context composition and shared model history remain. No training.",
+  "source_cache": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1",
+  "results": [
+    {
+      "minimum_rows_per_stage": 3,
+      "patterns": 2728,
+      "screen": {
+        "variance_of_group_means": 0.009050424417656189,
+        "mean_estimated_sampling_variance": 0.009698820174955968,
+        "noise_to_observed_ratio": 1.0716425802125749
+      },
+      "confirmation": {
+        "variance_of_group_means": 0.008778228357710261,
+        "mean_estimated_sampling_variance": 0.008398241691449265,
+        "noise_to_observed_ratio": 0.9567126018170581
+      }
+    },
+    {
+      "minimum_rows_per_stage": 5,
+      "patterns": 1717,
+      "screen": {
+        "variance_of_group_means": 0.0047797002884785575,
+        "mean_estimated_sampling_variance": 0.005124363383639599,
+        "noise_to_observed_ratio": 1.0721097713996524
+      },
+      "confirmation": {
+        "variance_of_group_means": 0.00447711734353221,
+        "mean_estimated_sampling_variance": 0.004256709566369155,
+        "noise_to_observed_ratio": 0.9507701585080267
+      }
+    },
+    {
+      "minimum_rows_per_stage": 10,
+      "patterns": 997,
+      "screen": {
+        "variance_of_group_means": 0.0034463802281543463,
+        "mean_estimated_sampling_variance": 0.0035520368410963854,
+        "noise_to_observed_ratio": 1.030657271092407
+      },
+      "confirmation": {
+        "variance_of_group_means": 0.003201824178728353,
+        "mean_estimated_sampling_variance": 0.0031391825257510815,
+        "noise_to_observed_ratio": 0.9804356362246753
+      }
+    }
+  ]
+}

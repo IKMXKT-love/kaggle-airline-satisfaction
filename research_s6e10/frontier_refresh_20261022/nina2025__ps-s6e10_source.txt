@@ -1,0 +1,415 @@
+### CELL 0 code
+import numpy as np, polars as pl
+import os,ast,copy, pandas as pd, shutil, matplotlib.pyplot as plt, seaborn as sns
+import warnings; warnings.filterwarnings('ignore')
+
+# An example of working with Seaborn is taken from a notebook:
+# https://www.kaggle.com/code/likithagedipudi/kaggle-success-factors
+# Presented by an expert from Buffalo, New York, United States - Likitha Gedipudi
+# https://www.kaggle.com/likithagedipudi
+
+# highSpeed h-blend working with NumPy is taken from a notebook:
+# (www.kaggle.com/code/flexonafft/f1-submission-blender-0-9545?scriptVersionId=320041962)
+# Presented by an master from Moscow, Russia - Igor Zharov
+# https://www.kaggle.com/flexonafft)
+
+from bokeh.plotting import figure, gridplot 
+from bokeh.io import output_file, show, output_notebook
+output_notebook()
+
+def seaborn_display_1(params, df_cross):
+    
+    colors = [subm['color'] for subm in params['subm']]
+    
+    def dossier(js,subms,cols):
+        def quant(i,js,subms,cols):
+            return {"c" : i, "q" : sum([1 for subm in cols[i] if subm == subms[js]])}
+        return {
+            'name' : subms[js],
+            'q_in' : [quant(i,js,subms,cols) for i in range(len(subms))]
+        }
+    alls = pd.read_csv(f'tida_desc.csv')
+    matrix = [ast.literal_eval(str(row.alls)) for row in alls.itertuples()]
+    subms = sorted(matrix[0])
+    cols = [[data[i] for data in matrix] for i in range(len(subms))]
+    df_subms = pd.DataFrame({f'col_{i}': [x[i] for x in matrix] for i in range(len(subms))})
+    dossiers = [dossier(js,subms,cols) for js in range(len(subms))]
+    subm_names = [one_dossier['name'] for one_dossier in dossiers]
+    
+    nqs,qss,i = [],[],0
+    
+    for one_dossier in dossiers: 
+        qs = [one['q'] for one in one_dossier['q_in']]
+        x_names = [name.replace("Group","").replace("subm_","") for name in subm_names]
+        qss.append(qs)
+        nqs.append({'n':x_names, 'q':qs})
+        i+=1
+    
+    plt.style.use('seaborn-v0_8-whitegrid')
+    plt.rcParams['font.size']      = 7
+    plt.rcParams['axes.titlesize'] = 9
+    plt.rcParams['axes.labelsize'] = 8
+
+    len_nqs = len(nqs) if len(nqs) > 3 else 4
+
+    fig, axes = plt.subplots(2, len_nqs, figsize=(2.1*len_nqs, 4))
+    
+    def ric(j, i, n, q, colors):
+        ax1 = axes[j, i]
+        bars1 = ax1.bar(n, q, color=colors)
+        ax1.set_title(f'ratios in alls.col {i}', fontweight='bold')
+        ax1.set_xticklabels(n, rotation=45, ha='right')
+        i = 0
+        for bar, val in zip(bars1, q):
+            if i != 0:
+                ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 50, 
+                         f'{val:,.0f}', ha='center', va='bottom', fontsize=8)
+            i += 1
+
+    lm_max = 0
+    for i in range(len(nqs)):
+        for q in nqs[i]['q']:
+            if q > lm_max: lm_max = q  
+    lm_colors = ['whitesmoke'] + colors
+    for nq in nqs:
+        nq['n'].insert(0,'')
+        nq['q'].insert(0, lm_max*1.13)
+
+    for i in range(len(nqs)): ric(0, i, nqs[i]['n'], nqs[i]['q'], lm_colors)
+
+    ax10 = axes[1, 0]
+    #--------------------------------------------------------------------------------
+    sub_wts = params['subwts']
+    main_wts = [subm['weight'] for subm in params['subm']]
+    mms,acc_mass = [],[]
+    for j in range(len(dossiers)):
+        one_dossier = dossiers[j]
+        qs = [one['q'] for one in one_dossier['q_in']]
+        mm = [qs[h] * (main_wts[j] + sub_wts[h]) for h in range(len(sub_wts))]
+        mass = sum(mm)
+        mms.append(mm)
+        acc_mass.append(round(mass))
+    acc_mass = acc_mass
+    y_names = [str(mass) + " - " + name for name,mass in zip(subm_names,acc_mass)]
+    colors  .insert(0,'whitesmoke')
+    y_names .insert(0,'')
+    acc_mass.insert(0, max(acc_mass) * 1.13)
+    irbis = ax10.barh(y_names[::-1], acc_mass[::-1], color=colors[::-1])
+    ax10.set_title('relations of g.masses', fontweight='bold')
+    ax10.set_xlabel('weights')
+
+    ax11 = axes[1, 1]
+    #--------------------------------------------------------------------------------
+    corr_matrix = alls[subm_names].corr()
+    mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
+    mask = 0.5*mask
+    sns.heatmap(corr_matrix, mask=mask, annot=True, cmap='RdBu_r', 
+                center=0,fmt='.3f', square=True, linewidths=0.5, ax=ax11,
+                cbar_kws={'shrink': 0.8})
+    ax11.set_title('Correlation Matrix', fontweight='bold', fontsize=9)
+    ax11.set_xticklabels(subm_names, rotation=45, ha='right')
+
+    ax13 = axes[1,3]
+    #--------------------------------------------------------------------------------
+    ip1 = len(nqs)-4
+    ip2 = len(nqs)-2
+    sample  = alls.sample(min(100_000, len(alls)), random_state=42)
+    scatter = ax13.scatter(np.log10(sample[subm_names[ip2]] + 1), 
+                           np.log10(sample[subm_names[ip1]] + 1), 
+                           c=sample[params['id_target'][1]], cmap='viridis', alpha=0.5,s=10)
+    ax13.set_title(f'{subm_names[ip2]} vs {subm_names[ip1]}', fontweight='bold', fontsize=8)
+    plt.colorbar(scatter, ax=ax13, label='Score')
+
+    if len(nqs) >= 5:
+        ax14 = axes[1,4]
+        #----------------------------------------------------------------------------
+        ip1 = len(nqs)-1
+        ip2 = len(nqs)-2
+        sample  = alls.sample(min(100_000, len(alls)), random_state=42)
+        scatter = ax14.scatter(np.log10(sample[subm_names[ip2]] + 1), 
+                               np.log10(sample[subm_names[ip1]] + 1), 
+                               c=sample[params['id_target'][1]], cmap='viridis', alpha=0.5,s=10)
+        ax14.set_title(f'{subm_names[ip2]} vs {subm_names[ip1]}', fontweight='bold', fontsize=8)
+        plt.colorbar(scatter, ax=ax14, label='Score')
+
+
+    if len(nqs) >= 6:
+        ax15 = axes[1,5]
+        #----------------------------------------------------------------------------
+        ip1 = len(nqs)-3
+        ip2 = len(nqs)-2
+        sample  = alls.sample(min(100_000, len(alls)), random_state=42)
+        scatter = ax15.scatter(np.log10(sample[subm_names[ip2]] + 1), 
+                               np.log10(sample[subm_names[ip1]] + 1), 
+                               c=sample[params['id_target'][1]], cmap='viridis', alpha=0.5,s=10)
+        ax15.set_title(f'{subm_names[ip2]} vs {subm_names[ip1]}', fontweight='bold', fontsize=8)
+        plt.colorbar(scatter, ax=ax15, label='Score')
+
+
+    ax12 = axes[1, 2]
+    #--------------------------------------------------------------------------------
+    colors = [subm['color'] for subm in params['subm']]
+    
+    for subm,color in zip(subm_names,colors):
+        subm_data = alls[subm]
+        ax12.hist(np.log10(subm_data + 1), bins=30, alpha=0.5, label=subm, color=color)
+    ax12.set_title('(Log Scale)', fontweight='bold')
+    ax12.set_xlabel('log10')
+    ax12.set_ylabel('Frequency')
+    ax12.legend()
+ 
+    plt.tight_layout()
+    plt.show()
+
+
+def matrix_vs(path,fs_names, params):
+    _id     = params['id_target'][0]
+    _target = params['id_target'][1]
+    def load(path,fs_names):
+        dfs = [pd.read_csv(path + name_subm +'.csv') for name_subm in fs_names]
+        for i in range(len(dfs)):
+            dfs[i] = dfs[i].rename(columns={_target: f'{fs_names[i]}'})
+        dfsm = pd.merge(dfs[0], dfs[1], on=_id)
+        for i in range(2,len(dfs)):
+            dfsm = pd.merge(dfsm,dfs[i],on=_id)
+        return dfsm   
+    def make_list_vs(fs_names):
+        list = []
+        for i in range(0,len(fs_names)-1):
+            for j in range(i+1,len(fs_names)):
+                list.append(fs_names[i] + "_vs_" + fs_names[j])
+        return list
+    def get_mvs(dfs, list_vs):
+        def get_abs_distance(x,t1,t2):
+            return abs(x[t1]-x[t2])
+        for vs in list_vs:
+            t = vs.split('_vs_')
+            dfs[vs] = dfs.apply(lambda x: get_abs_distance(x,t[0],t[1]), axis=1)
+        return dfs   
+    def distance_vs(name, st_names, list_vs, dfs):
+        distances = []
+        for st in st_names:
+            vs_between = name + "_vs_" + st
+            if vs_between not in list_vs:
+                distances.append(0)
+            else: distances.append(round(dfs[vs_between].sum()))
+        return distances
+    dfs = load(path,fs_names)
+    list_vs = make_list_vs(fs_names)
+    mvs = get_mvs(dfs, list_vs)
+    m1 = pd.DataFrame({'subm':fs_names})
+    m2 = pd.DataFrame({ name :distance_vs(name, fs_names, list_vs, mvs) for name in fs_names})
+    matrix = pd.concat([m1,m2],axis=1)
+    return matrix
+
+
+def display_distances(params):
+    files = [subm['name'] for subm in params['subm']]
+    distances = matrix_vs ( params['path'], files, params )            
+    display(distances)
+
+
+def seaborn_display_2(params, file_name_cross=""):
+    display_distances(params)
+    plt.figure(figsize=(9, 2.5))
+    for subm in params['subm']:
+        pred = pd.read_csv(params['path']+subm['name']+'.csv')[params['id_target'][1]]
+        sns.kdeplot(pred, label = subm['name'], linewidth = 0.5)
+    if file_name_cross != '':
+        pred = pd.read_csv(file_name_cross)[params['id_target'][1]]
+        sns.kdeplot(pred, label = 'blend', linewidth = 1, linestyle = 'dashed')
+    plt.title("KDE")
+    plt.xlabel("target")
+    plt.ylabel("Density")
+    plt.legend()
+    plt.grid(alpha=0.3)
+    plt.show()
+
+
+def h_blend( params, _update={}, show_details=False, subm=''):    
+    if _update != {}: params.update(_update)
+    file_short_names = [subm['name'] for subm in params['subm']]
+    _id,_target = params['id_target'][0], params['id_target'][1]
+    
+    def read(params,i):
+        target_new_name = params["subm"][i]["name"]
+        file_subm = params["path"] + target_new_name + ".csv"
+        df = pl.read_csv(file_subm).rename({_target:target_new_name})
+        return df 
+        
+    def merge(dfs_subm):
+        df_subms =  dfs_subm[0].join(dfs_subm[1], on=[_id], how="inner")
+        for i in range(2, len(params["subm"])): 
+            df_subms = df_subms.join(dfs_subm[i], on=[_id], how="inner")
+        return df_subms
+        
+    def da(params, show_details, sorting_direction):
+        
+        df_subms = merge([read(params,i) for i in range(len(params["subm"]))])
+        cols = [col for col in df_subms.columns if col != _id]
+        short_name_cols = [c for c in cols]
+            
+        def summa(x,cs,wts,ic_alls): 
+            return sum([x[cs[j]] * (wts[0][j] + wts[1][ic_alls[j]]) for j in range(len(cs))])
+         
+        correct = [wt for wt in params["subwts"]]
+        weights = [subm['weight'] for subm in params["subm"]]
+        
+        def f_corr(x, cs=cols, w=weights, cw=correct):
+            ic = [x['alls'].index(c) for c in short_name_cols]
+            cS = [x[cols[j]] * (w[j] + cw[ic[j]]) for j in range(len(cols))]
+            return sum(cS)
+            
+        def f_alls(x, sd=sorting_direction,cs=cols):
+            tes = {c: x[c] for c in cs}.items()
+            return [t[0] for t in sorted(tes,key=lambda k:k[1],reverse=sd=='desc')]
+
+        df_subms = df_subms.with_columns(
+            pl.struct(cols)         .map_elements(lambda x: f_alls(x))
+            .alias("alls"),
+        )
+        df_subms = df_subms.with_columns(
+            pl.struct(cols+['alls']).map_elements(lambda x: f_corr(x), return_dtype=pl.Float32)
+            .alias(sorting_direction)
+        )
+        df_subms = df_subms.rename({c:nc for c,nc in zip(cols, short_name_cols)})
+
+        if sorting_direction=='desc': 
+            return df_subms, params['type_sort'][2]
+        if sorting_direction=='asc': 
+            return df_subms, params['type_sort'][1]
+
+    def pandas_save(polars_df, params=params, filename='tida_desc.csv'):
+        pandas_df = polars_df.to_pandas()
+        pandas_df['alls'] = pandas_df.apply(lambda x:str(x['alls']).replace(' ',' ,'),axis=1)
+        pandas_df . to_csv(filename, index=False)
+            
+    def ensemble (params, show_details): 
+        dfD, wtsD = da(params, show_details,'desc')
+        dfA, wtsA = da(params, show_details,'asc')
+        dfA = dfA[['id','asc']]
+        dfj = dfD.join(dfA, on="id", how="left")
+        dfe = dfj.with_columns((pl.col("desc") *wtsD + wtsA* pl.col("asc")).alias(_target))
+        pandas_save(dfe, params=params)
+        if show_details: 
+            display(dfe.head(4))
+        return dfe[[_id,_target]]
+    
+    df = ensemble(params, show_details)
+    if subm != '': df.write_csv(subm)
+    if show_details == 'seaborn':
+        seaborn_display_1(params, df)
+        seaborn_display_2(params, file_name_cross=subm)
+    return df
+
+def ancle_sam():
+    kic = '/kaggle/input/competitions/'
+    df_sample_submission = pd.read_csv(kic+'playground-series-s6e10/sample_submission.csv')
+    return df_sample_submission
+
+# Its core runs on NumPy and was presented by [Igor Zharov](https://www.kaggle.com/flexonafft) 
+# (https://www.kaggle.com/code/flexonafft/f1-submission-blender-0-9545?scriptVersionId=320041962)
+
+def highSpeed_blend(params): 
+    
+    def read_data(subm_name):
+        return pd.read_csv(params['path']+subm_name+'.csv')[params['id_target'][1]]
+
+    subms_datas = [{'subm_name':read_data(subm['name'])} for subm in params['subm']]
+    matrix      = np.vstack([subm_one_data['subm_name'] for subm_one_data in subms_datas]).T
+    main_wts    = np.asarray([subm['weight'] for subm in params['subm']], dtype=float)
+    correct_wts = np.asarray(params['subwts'], dtype=float)
+    
+    def side(reverse):
+        order = np.argsort(-matrix if reverse else matrix, axis=1)
+        out = np.zeros(matrix.shape[0], dtype=float)
+        for rank_idx in range(matrix.shape[1]):
+            col_idx = order[:, rank_idx]
+            new_weights = main_wts[col_idx] + correct_wts[rank_idx]
+            out += matrix[np.arange(matrix.shape[0]), col_idx] * new_weights
+        return out
+
+    df_sample = ancle_sam()
+    
+    ASC_,DESC_ = side(False),side(True)
+    df_sample[params['id_target'][1]] =\
+        ASC_ *params['type_sort'][1]  + \
+        DESC_*params['type_sort'][2]
+    return df_sample
+
+
+def cmbn(df_0, wts, df_1, target, file_name):
+    df_sample = ancle_sam()
+    df_sample = \
+        df_0[target] * wts[0] + \
+        df_1[target] * wts[1]
+    df_sample.to_csv('/kaggle/working/'+file_name+".csv",index=False)
+
+### CELL 1 markdown
+## high-speed h-blend
+
+### CELL 2 code
+# ML
+df183  = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-7/0.96183.csv')
+df188a = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-7/0.96188.txt')
+df188b = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-7/0.96188b.txt')
+df190a = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-7/0.96190_a.csv')
+df190b = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-7/0.96190_b.csv')
+
+# rank
+df207  = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-7/0.96207.csv')
+df208a = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-02/0.96208a.csv')
+df208b = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-02/0.96208b.csv')
+df209  = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-02/0.96209.csv')
+df210  = pd.read_csv('/kaggle/input/datasets/nina2025/ps-s6e10-02/0.96210.csv')
+
+# combine
+cmbn(df190a,[0.045, 0.955],df207, 'satisfaction',"190a_207")
+cmbn(df188a,[0.045, 0.955],df208a,'satisfaction',"188a_208a")
+cmbn(df188b,[0.045, 0.955],df208b,'satisfaction',"188b_208b")
+cmbn(df190b,[0.045, 0.955],df209, 'satisfaction',"190b_209")
+
+cmbn(df183, [0.0330, 0.9670],df210, 'satisfaction',"183_210")
+cmbn(df188a,[0.0332, 0.9668],df210, 'satisfaction',"188a_210")
+cmbn(df190a,[0.0333, 0.9667],df210, 'satisfaction',"190a_210")
+cmbn(df190b,[0.0335, 0.9665],df210, 'satisfaction',"190b_210")
+
+### CELL 3 code
+%%time
+
+params = {
+  'path'     : f'/kaggle/working/',
+  'id_target': ['id', 'satisfaction'],
+  'type_sort': ['asc/desc',0.30,0.70 ],
+  'subwts'   : [+0.011,-0.001,-0.003,-0.007],
+  'subm'     : [ 
+      {'name': f'183_210',  'weight': -0.05},
+      {'name': f'188a_210', 'weight': +0.05},
+      {'name': f'190a_210', 'weight': +0.05},
+      {'name': f'190b_210', 'weight': +0.95},
+]}
+
+df = highSpeed_blend(params)
+
+### CELL 4 code
+for file in '190a_207,188a_208a,188b_208b,190b_209'.split(','): 
+    if os.path.isfile(file+'.csv'): os.remove(file+'.csv')
+for file in '183_210,188a_210,190a_210,190b_210,'.split(','): 
+    if os.path.isfile(file+'.csv'): os.remove(file+'.csv')
+
+### CELL 5 markdown
+## Submit
+
+### CELL 6 code
+# v3 < v4 < v6 < v5 < v7 < v9
+# v8 < v5           < v7 < v9
+# v10               < v7 < v9
+
+# v11 < v12 < v13
+# v14 < v12 < v13
+# v15 < v12 < v13
+# v16 < v12 < v13
+
+### CELL 7 code
+df.to_csv('submission.csv',index=False)
+df

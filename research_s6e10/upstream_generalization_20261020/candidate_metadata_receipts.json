@@ -1,0 +1,86 @@
+[
+  {
+    "tag": "megayak__s6e10-oof-library__metadata",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/megayak/s6e10-oof-library",
+    "bytes": 3311,
+    "sha256": "e5627c12fff22d504b5b5fccc2b18a0ef860883af02ca7d405ab7b8b1ef52dcb",
+    "elapsed": 1.441031300004397
+  },
+  {
+    "tag": "megayak__s6e10-oof-library__files",
+    "url": "https://www.kaggle.com/api/v1/datasets/list/megayak/s6e10-oof-library?pageSize=200",
+    "bytes": 1115,
+    "sha256": "f5204263576a8bdf1dd20362fd6db8c6fae91d070eac893d8f6f21249894762c",
+    "elapsed": 1.3817682000008062
+  },
+  {
+    "tag": "anhadmahajan06__ps-s6e10-predicting-airline-satisfaction__metadata",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/anhadmahajan06/ps-s6e10-predicting-airline-satisfaction",
+    "bytes": 6429,
+    "sha256": "804ffe34101444a1aedceeea1441eb6dcce9c9a6a611ae55e6d4a50fe22bdc9c",
+    "elapsed": 1.3851090000025579
+  },
+  {
+    "tag": "anhadmahajan06__ps-s6e10-predicting-airline-satisfaction__files",
+    "url": "https://www.kaggle.com/api/v1/datasets/list/anhadmahajan06/ps-s6e10-predicting-airline-satisfaction?pageSize=200",
+    "bytes": 3001,
+    "sha256": "37866ff72262f44eeb78834f054c969d45f99e995a89f953f7f0b1ee12ceb5d6",
+    "elapsed": 1.3484809000001405
+  },
+  {
+    "tag": "slimypunk03__ps-s6e10-benchmark-models-starter__metadata",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/slimypunk03/ps-s6e10-benchmark-models-starter",
+    "bytes": 1895,
+    "sha256": "f332c73b2ed14b382f2196f6b2b773f402eca8a5648fc757650f78e6d5338eb3",
+    "elapsed": 1.4341053999960423
+  },
+  {
+    "tag": "slimypunk03__ps-s6e10-benchmark-models-starter__files",
+    "url": "https://www.kaggle.com/api/v1/datasets/list/slimypunk03/ps-s6e10-benchmark-models-starter?pageSize=200",
+    "bytes": 1107,
+    "sha256": "023dd304f9efacc2d2503e201ff12988753b7cdb664cbca9b0295d22925281ac",
+    "elapsed": 1.3247463000006974
+  },
+  {
+    "tag": "slimypunk03__ps-s6e10-dataset-2__metadata",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/slimypunk03/ps-s6e10-dataset-2",
+    "bytes": 3425,
+    "sha256": "8f26d6f08f68022850e26ca3f0d3308c299115ae89b8c01b39de68ecf0e4bde5",
+    "elapsed": 1.3725460999994539
+  },
+  {
+    "tag": "slimypunk03__ps-s6e10-dataset-2__files",
+    "url": "https://www.kaggle.com/api/v1/datasets/list/slimypunk03/ps-s6e10-dataset-2?pageSize=200",
+    "bytes": 3323,
+    "sha256": "1fe0385ccd44fccac2c7ad8d3674934689d38dba4ef093314b8a6782721510ad",
+    "elapsed": 2.373252000004868
+  },
+  {
+    "tag": "dariushafshar__s6e10-original-data-aligned__metadata",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/dariushafshar/s6e10-original-data-aligned",
+    "bytes": 17307,
+    "sha256": "8a6214da39929f83cd1018b840772de718fe5eed8c3e09b12b27f73f14dc3d11",
+    "elapsed": 1.0364723999955459
+  },
+  {
+    "tag": "dariushafshar__s6e10-original-data-aligned__files",
+    "url": "https://www.kaggle.com/api/v1/datasets/list/dariushafshar/s6e10-original-data-aligned?pageSize=200",
+    "bytes": 3814,
+    "sha256": "d1865a9dc6e11421b9573bd0e2a151c185e6b7bdafde416846d14b06eff7269f",
+    "elapsed": 0.8453582999936771
+  },
+  {
+    "tag": "beraterolelk__kaggle-grandmaster-tabular-stacking-benchmark__metadata",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/beraterolelk/kaggle-grandmaster-tabular-stacking-benchmark",
+    "bytes": 16707,
+    "sha256": "8f12ab3cbdf6338e79feec4e9c7baf441e311f7a5bb732c5a58dae99ea7a60e9",
+    "elapsed": 1.0753547999993316
+  },
+  {
+    "tag": "beraterolelk__kaggle-grandmaster-tabular-stacking-benchmark__files",
+    "url": "https://www.kaggle.com/api/v1/datasets/list/beraterolelk/kaggle-grandmaster-tabular-stacking-benchmark?pageSize=200",
+    "bytes": 2709,
+    "sha256": "a889886c479e474fe3d46ec9bf647087194a06307cbdc28c8d63350fd8f03822",
+    "elapsed": 0.8562129999991157
+  }
+]

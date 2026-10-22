@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-20",
+  "purpose": "Research contrast on publicly shared fixed OOF; no models trained or loaded; no test predictions requested",
+  "chosen_before_reading_predictions": [
+    {
+      "dataset": "goodpjw2008/s6e10-tabpfn-member",
+      "file": "oof_tabpfn_full_raw.csv"
+    },
+    {
+      "dataset": "goodpjw2008/s6e10-tabpfn-member",
+      "file": "oof_tabpfn_catfd10.csv"
+    },
+    {
+      "dataset": "dariushafshar/s6e10-golem-oof-library",
+      "file": "stack247_oof.npy"
+    },
+    {
+      "dataset": "dariushafshar/s6e10-golem-oof-library",
+      "file": "folds_seed42.npy"
+    }
+  ],
+  "fixed_tfm_use": "20 percent new, 80 percent current, logit mean with clipping 1e-6; no weight search",
+  "stack247_use": "standalone external reference only, not own-model result or a clean end-to-end validation",
+  "indirect_target_dependency_and_historical_selection_caveats": true
+}

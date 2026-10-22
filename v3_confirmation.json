@@ -1,0 +1,10 @@
+{
+  "auc": 0.9612484169783693,
+  "baseline_auc": 0.9608683292227892,
+  "change": 0.0003800877555800719,
+  "directory": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\v3\\confirmation\\f8070b1c8026703e7d6e",
+  "signature": "f8070b1c8026703e7d6e1b8d1d41900154ea9e2a7f3c07cc61f05a1a6e7225be",
+  "previously_seen_split": true,
+  "labels_used_for_early_stopping": false,
+  "nn_internal_development_holdout_fraction": 0.05
+}

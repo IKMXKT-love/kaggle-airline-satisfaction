@@ -1,0 +1,13 @@
+{
+  "tag": "selected_full_refit",
+  "columns": 246,
+  "fit_rows": 699635,
+  "C": 0.003,
+  "seconds": 18.623812913894653,
+  "solver": "streaming damped Newton, identical penalized objective",
+  "resumed_same_fold_checkpoint": false,
+  "iterations": 7,
+  "converged": true,
+  "value": 0.21969457307051682,
+  "max_gradient": 6.570206127065733e-14
+}

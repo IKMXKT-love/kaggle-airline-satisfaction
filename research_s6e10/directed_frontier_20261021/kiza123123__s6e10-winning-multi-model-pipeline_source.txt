@@ -1,0 +1,447 @@
+### CELL 0 markdown
+# ✈️ S6E10 Winning Multi-Model Pipeline: 84D Feature Space & Orthogonal Level-2 Stacking
+### Kaggle Playground Series Season 6 Episode 10 · Predicting Airline Passenger Satisfaction
+**Author: Kizabgd123**
+
+---
+
+## 📌 Architecture & Design Principles
+
+This notebook implements an authentic, first-party machine learning solution engineered from scratch to resolve the core challenges of the CTGAN-generated airline satisfaction dataset:
+
+### 1. The "Rating 0" Semantic Anomaly & Cognitive Expectation Gaps:
+- Rating `0` in survey items denotes **"Not Applicable / Service Not Used"**, NOT extreme dissatisfaction.
+- Passengers rating `Inflight wifi service = 0` have an **88.7% satisfaction rate**, while rating `1` has only **39.1%**!
+- To prevent artificial skewing of satisfaction averages, rating zeros are replaced with `NaN` when computing horizontal statistics (`Rating_Mean`, `Rating_Std`, `Rating_Max`, `Rating_Min`).
+- We also compute cognitive expectation gap residuals:
+  - `T3_2 = Inflight wifi service - Ease of Online booking`
+  - `T3_3 = Inflight wifi service - Inflight entertainment`
+  - `T3_4 = Inflight wifi service - Online boarding`
+  - `T3_6 = Food and drink - Inflight entertainment`
+  - `T3_Seat = Inflight entertainment - Seat comfort`
+
+### 2. 38 Cross-Domain Behavioral Interactions:
+- Passengers in `Business` travel evaluate service levels with completely different expectations than `Personal / Leisure` travelers.
+- We construct 38 pairwise crosses between all 13 service items and background descriptors (`Class`, `Type of Travel`, `Customer Type`).
+
+### 3. Stratified 10-Fold Bayesian Target Encoding:
+- High-order key combinations (`['Flight Distance', 'Class']`, `['Inflight wifi', 'Online boarding']`, `['Age', 'Class', 'Type of Travel', 'Customer Type']`) are target-encoded out-of-fold with empirical Bayesian m-estimate smoothing (`strength = 20.0`).
+
+### 4. GPU-Accelerated 10-Fold Multi-Model Zoo:
+- **LightGBM** (High leaf capacity `num_leaves=127`, `cat_smooth=40.0`, `colsample_bytree=0.7`).
+- **XGBoost CUDA** (`tree_method='hist'`, `device='cuda'`, `max_depth=7`, `enable_categorical=True`).
+- **CatBoost GPU** (`task_type='GPU'`, `depth=7`, `l2_leaf_reg=5.0`, `min_data_in_leaf=100`).
+
+### 5. Orthogonal Logit-Space Level-2 Stacking:
+- Predictions are mapped to unbounded logit space: $z = \ln \left( rac{p}{1 - p} ight)$.
+- Meta-stacked with Tabular Foundation Models (TabPFN-3.5, RealMLP, KumoLarge) using $L_2$-regularized Logistic Regression ($C=0.003$).
+
+
+### CELL 1 code
+import os
+import gc
+import sys
+import time
+import json
+import warnings
+from pathlib import Path
+from typing import Dict, List, Tuple
+
+import numpy as np
+import pandas as pd
+from scipy.stats import rankdata
+from scipy.special import logit, expit
+from sklearn.model_selection import StratifiedKFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+
+import lightgbm as lgb
+import xgboost as xgb
+from catboost import CatBoostClassifier
+
+warnings.filterwarnings('ignore')
+SEED = 42
+np.random.seed(SEED)
+
+print(f"Python: {sys.version.split()[0]} | NumPy: {np.__version__} | Pandas: {pd.__version__}")
+print(f"LightGBM: {lgb.__version__} | XGBoost: {xgb.__version__}")
+
+try:
+    import torch
+    print(f"CUDA Available: {torch.cuda.is_available()} | Device: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None'}")
+except Exception:
+    pass
+
+
+### CELL 2 markdown
+## 1. Data Ingestion & Dataset Discovery
+Loading raw competition tables and validating test identifier alignments.
+
+
+### CELL 3 code
+def find_comp_dir():
+    if os.path.exists('/kaggle/input'):
+        for root, dirs, files in os.walk('/kaggle/input'):
+            if 'train.csv' in files and 'test.csv' in files:
+                if 'playground' in root.lower() or 's6e10' in root.lower():
+                    return Path(root)
+        for root, dirs, files in os.walk('/kaggle/input'):
+            if 'train.csv' in files and 'test.csv' in files:
+                return Path(root)
+    raise FileNotFoundError("Could not find competition dataset.")
+
+DATA_DIR = find_comp_dir()
+print(f"📂 Dataset location: {DATA_DIR}")
+
+train = pd.read_csv(DATA_DIR / 'train.csv')
+test = pd.read_csv(DATA_DIR / 'test.csv')
+sample_sub = pd.read_csv(DATA_DIR / 'sample_submission.csv')
+
+print(f"Train Shape: {train.shape} (Rows: {len(train):,})")
+print(f"Test Shape:  {test.shape} (Rows: {len(test):,})")
+assert (test['id'].values == sample_sub['id'].values).all(), "Test ID alignment mismatch!"
+print("✅ Test IDs strictly verified against sample submission.")
+
+y = train['satisfaction'].map({True: 1, False: 0, "True": 1, "False": 0, 1: 1, 0: 0, 'satisfied': 1, 'neutral or dissatisfied': 0}).values.astype(np.int32)
+N_train = len(train)
+N_test = len(test)
+
+
+### CELL 4 markdown
+## 2. Engineered 84D Feature Space
+Implementing zero-rating semantics, delay physics, 38 cross-domain interactions, and 10-fold Bayesian target encodings.
+
+
+### CELL 5 code
+CATS = ["Gender", "Customer Type", "Type of Travel", "Class"]
+RATINGS = [
+    'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
+    'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
+    'Inflight entertainment', 'On-board service', 'Leg room service',
+    'Baggage handling', 'Checkin service', 'Cleanliness'
+]
+BACKGROUND = ["Class", "Type of Travel", "Customer Type"]
+NUMERIC_CATS_KEEP = ["Age", "Flight Distance", "Arrival Delay in Minutes"]
+
+print("⚙️ Building 84D Feature Space...")
+t0 = time.time()
+
+for df in [train, test]:
+    # 1. Delay Physics & Recovery
+    arr_delay = df['Arrival Delay in Minutes'].fillna(df['Departure Delay in Minutes']).fillna(0.0)
+    dep_delay = df['Departure Delay in Minutes'].fillna(0.0)
+    
+    df['Arrival Delay in Minutes'] = arr_delay
+    df['Departure Delay in Minutes'] = dep_delay
+    df['Delay_Sum'] = arr_delay + dep_delay
+    df['Delay_Diff'] = arr_delay - dep_delay  # Negative = made up time in flight!
+    df['Arr_Delay_Log1p'] = np.log1p(arr_delay.clip(lower=0))
+    df['Dep_Delay_Log1p'] = np.log1p(dep_delay.clip(lower=0))
+    df['Delay_per_Distance'] = df['Delay_Sum'] / (df['Flight Distance'] + 1.0)
+    df['Has_Severe_Delay'] = ((arr_delay > 60) | (dep_delay > 60)).astype(np.int32)
+    
+    # 2. Rating 0 Semantics (Replace 0 with NaN for horizontal statistics)
+    df['Zero_Count'] = (df[RATINGS] == 0).sum(axis=1)
+    ratings_no_zero = df[RATINGS].replace(0, np.nan)
+    df['Rating_Mean'] = ratings_no_zero.mean(axis=1)
+    df['Rating_Std'] = ratings_no_zero.std(axis=1).fillna(0.0)
+    df['Rating_Max'] = ratings_no_zero.max(axis=1)
+    df['Rating_Min'] = ratings_no_zero.min(axis=1)
+    
+    # Binary flags for critical zero-rating signals
+    for r in ['Inflight wifi service', 'Online boarding', 'Ease of Online booking']:
+        df[f'{r}_is_zero'] = (df[r] == 0).astype(np.int32)
+        
+    for col in NUMERIC_CATS_KEEP:
+        df[col + "_cat_copy"] = df[col].astype(str)
+        
+    # 3. 38 Cross-Domain Interactions
+    for rating in RATINGS:
+        for bg in BACKGROUND:
+            cross_name = f"{rating}__X__{bg}"
+            if cross_name != "Food and drink__X__Customer Type":
+                df[cross_name] = df[rating].astype(str) + "|" + df[bg].astype(str)
+
+# 4. Out-of-fold Bayesian Target Encoding
+TARGET_KEYS = [
+    ['Flight Distance'], ['Age'], ['Flight Distance', 'Age'],
+    ['Flight Distance', 'Class'], ['Flight Distance', 'Type of Travel'],
+    ['Age', 'Class', 'Type of Travel', 'Customer Type'],
+    ['Inflight wifi service', 'Online boarding'], ['Class', 'Type of Travel']
+]
+
+def make_key(df, cols):
+    return df[cols].astype(str).fillna('__missing__').agg('|'.join, axis=1)
+
+N_FOLDS = 10
+skf_cv = StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
+prior_global = y.mean()
+strength = 20.0
+
+for i, cols in enumerate(TARGET_KEYS):
+    key_train = make_key(train, cols)
+    key_test = make_key(test, cols)
+    te_name = f'TE_{i}'
+    train[te_name] = 0.0
+    test[te_name] = 0.0
+    
+    for trn_idx, val_idx in skf_cv.split(train, y):
+        trn_keys, val_keys = key_train.iloc[trn_idx], key_train.iloc[val_idx]
+        trn_y = y[trn_idx]
+        stats = pd.DataFrame({'key': trn_keys, 'label': trn_y}).groupby('key').label.agg(['sum', 'count'])
+        mapping = (stats['sum'] + strength * prior_global) / (stats['count'] + strength)
+        train.loc[val_idx, te_name] = val_keys.map(mapping).fillna(prior_global)
+        
+    stats = pd.DataFrame({'key': key_train, 'label': y}).groupby('key').label.agg(['sum', 'count'])
+    mapping = (stats['sum'] + strength * prior_global) / (stats['count'] + strength)
+    test[te_name] = key_test.map(mapping).fillna(prior_global)
+
+# 5. Cognitive Expectation Gap Ratios
+cols_to_drop = ['id', 'satisfaction', 'Customer Type', 'Departure Delay in Minutes']
+X = train.drop(columns=[c for c in cols_to_drop if c in train.columns], errors='ignore')
+X_test = test.drop(columns=[c for c in cols_to_drop if c in test.columns], errors='ignore')
+
+for df in [X, X_test]:
+    df['T3_2'] = df['Inflight wifi service'] - df['Ease of Online booking']
+    df['T3_3'] = df['Inflight wifi service'] - df['Inflight entertainment']
+    df['T3_4'] = df['Inflight wifi service'] - df['Online boarding']
+    df['T3_6'] = df['Food and drink'] - df['Inflight entertainment']
+    df['T3_Seat'] = df['Inflight entertainment'] - df['Seat comfort']
+
+cat_cols = ['Gender', 'Type of Travel', 'Class'] +            [col + "_cat_copy" for col in NUMERIC_CATS_KEEP] +            [f"{rating}__X__{bg}" for rating in RATINGS for bg in BACKGROUND if f"{rating}__X__{bg}" != "Food and drink__X__Customer Type"]
+
+combined = pd.concat([X, X_test], axis=0)
+for c in cat_cols:
+    combined[c] = combined[c].astype('category')
+
+X = combined.iloc[:N_train].copy()
+X_test = combined.iloc[N_train:].reset_index(drop=True).copy()
+
+print(f"✅ Feature Space Pruned & Finalized in {time.time()-t0:.1f}s: {X.shape[1]} Dimensions!")
+
+
+### CELL 6 markdown
+## 3. Multi-Model GPU Hyperparameters & CV Engine
+Configuring LightGBM, CatBoost GPU, and XGBoost CUDA with optimized regularizers.
+
+
+### CELL 7 code
+X_cat = X.copy()
+X_test_cat = X_test.copy()
+for col in cat_cols:
+    X_cat[col] = X_cat[col].astype(str)
+    X_test_cat[col] = X_test_cat[col].astype(str)
+cat_features_idx = [X_cat.columns.get_loc(c) for c in cat_cols]
+
+lgb_params = {
+    'objective': 'binary',
+    'metric': 'auc',
+    'boosting_type': 'gbdt',
+    'learning_rate': 0.035,
+    'num_leaves': 127,
+    'max_depth': -1,
+    'min_child_samples': 160,
+    'subsample': 0.80,
+    'colsample_bytree': 0.70,
+    'reg_alpha': 0.0,
+    'reg_lambda': 5.0,
+    'cat_smooth': 40.0,
+    'random_state': SEED,
+    'n_jobs': -1,
+    'verbose': -1
+}
+
+xgb_params = {
+    'objective': 'binary:logistic',
+    'eval_metric': 'auc',
+    'learning_rate': 0.035,
+    'max_depth': 7,
+    'min_child_weight': 100,
+    'subsample': 0.80,
+    'colsample_bytree': 0.70,
+    'reg_alpha': 0.0,
+    'reg_lambda': 5.0,
+    'tree_method': 'hist',
+    'device': 'cuda',
+    'enable_categorical': True,
+    'random_state': SEED
+}
+
+cat_params = {
+    'iterations': 1800,
+    'learning_rate': 0.035,
+    'depth': 7,
+    'l2_leaf_reg': 5.0,
+    'min_data_in_leaf': 100,
+    'eval_metric': 'AUC',
+    'random_seed': SEED,
+    'task_type': 'GPU',
+    'verbose': False
+}
+
+oof_lgb = np.zeros(N_train, dtype=np.float32)
+oof_xgb = np.zeros(N_train, dtype=np.float32)
+oof_cat = np.zeros(N_train, dtype=np.float32)
+
+test_lgb = np.zeros(N_test, dtype=np.float32)
+test_xgb = np.zeros(N_test, dtype=np.float32)
+test_cat = np.zeros(N_test, dtype=np.float32)
+
+
+### CELL 8 markdown
+## 4. 10-Fold GPU Multi-Model Training Loop
+Executing parallel 10-fold cross-validation on Kaggle GPU across LightGBM, XGBoost, and CatBoost.
+
+
+### CELL 9 code
+print("=" * 75)
+print(f"🚀 Starting {N_FOLDS}-Fold GPU Training (LightGBM + XGBoost CUDA + CatBoost GPU)")
+print("=" * 75)
+t0_all = time.time()
+
+for fold, (trn_idx, val_idx) in enumerate(skf_cv.split(X, y)):
+    t_fold = time.time()
+    trn_x, val_x = X.iloc[trn_idx], X.iloc[val_idx]
+    trn_y, val_y = y[trn_idx], y[val_idx]
+    
+    # 1. LightGBM
+    trn_data = lgb.Dataset(trn_x, label=trn_y)
+    val_data = lgb.Dataset(val_x, label=val_y, reference=trn_data)
+    m_lgb = lgb.train(
+        lgb_params, trn_data, num_boost_round=1800,
+        valid_sets=[val_data], callbacks=[lgb.early_stopping(50, verbose=False)]
+    )
+    oof_lgb[val_idx] = m_lgb.predict(val_x, num_iteration=m_lgb.best_iteration)
+    test_lgb += m_lgb.predict(X_test, num_iteration=m_lgb.best_iteration) / float(N_FOLDS)
+    auc_l = roc_auc_score(val_y, oof_lgb[val_idx])
+    
+    # 2. XGBoost (CUDA GPU)
+    dtrain = xgb.DMatrix(trn_x, label=trn_y, enable_categorical=True)
+    dval = xgb.DMatrix(val_x, label=val_y, enable_categorical=True)
+    dtest = xgb.DMatrix(X_test, enable_categorical=True)
+    m_xgb = xgb.train(
+        xgb_params, dtrain, num_boost_round=1800,
+        evals=[(dval, 'val')], early_stopping_rounds=50, verbose_eval=False
+    )
+    oof_xgb[val_idx] = m_xgb.predict(dval, iteration_range=(0, m_xgb.best_iteration + 1))
+    test_xgb += m_xgb.predict(dtest, iteration_range=(0, m_xgb.best_iteration + 1)) / float(N_FOLDS)
+    auc_x = roc_auc_score(val_y, oof_xgb[val_idx])
+    
+    # 3. CatBoost (CUDA GPU)
+    trn_x_c, val_x_c = X_cat.iloc[trn_idx], X_cat.iloc[val_idx]
+    m_cat = CatBoostClassifier(**cat_params)
+    m_cat.fit(trn_x_c, trn_y, eval_set=(val_x_c, val_y), cat_features=cat_features_idx,
+              early_stopping_rounds=50, use_best_model=True)
+    oof_cat[val_idx] = m_cat.predict_proba(val_x_c)[:, 1]
+    test_cat += m_cat.predict_proba(X_test_cat)[:, 1] / float(N_FOLDS)
+    auc_c = roc_auc_score(val_y, oof_cat[val_idx])
+    
+    print(f"[{fold+1:02d}/{N_FOLDS}] LightGBM: {auc_l:.5f} | XGBoost: {auc_x:.5f} | CatBoost: {auc_c:.5f} | Time: {time.time()-t_fold:.1f}s")
+
+print(f"\n🏁 {N_FOLDS} Folds Completed in {(time.time()-t0_all)/60:.2f} mins!")
+auc_lgb_total = roc_auc_score(y, oof_lgb)
+auc_xgb_total = roc_auc_score(y, oof_xgb)
+auc_cat_total = roc_auc_score(y, oof_cat)
+print(f"⭐ LightGBM OOF ROC-AUC: {auc_lgb_total:.6f}")
+print(f"⭐ XGBoost  OOF ROC-AUC: {auc_xgb_total:.6f}")
+print(f"⭐ CatBoost OOF ROC-AUC: {auc_cat_total:.6f}")
+
+
+### CELL 10 markdown
+## 5. Orthogonal Logit-Space Level-2 Stacking
+Stacking tree predictions in logit space and fusing with Tabular Foundation Models if mounted.
+
+
+### CELL 11 code
+eps = 1e-6
+tree_oof_list = [
+    logit(np.clip(oof_lgb, eps, 1 - eps)),
+    logit(np.clip(oof_xgb, eps, 1 - eps)),
+    logit(np.clip(oof_cat, eps, 1 - eps))
+]
+
+tree_test_list = [
+    logit(np.clip(test_lgb, eps, 1 - eps)),
+    logit(np.clip(test_xgb, eps, 1 - eps)),
+    logit(np.clip(test_cat, eps, 1 - eps))
+]
+
+model_names = ['LightGBM', 'XGBoost', 'CatBoost']
+
+# Check for Tabular Foundation Models (cdeotte dataset)
+tfm_dir = None
+for candidate in ['/kaggle/input/s6e10-tfm-oof-and-test-predictions', '/kaggle/input/datasets/cdeotte/s6e10-tfm-oof-and-test-predictions']:
+    if os.path.exists(candidate):
+        tfm_dir = Path(candidate)
+        break
+
+if tfm_dir is not None:
+    print(f"🔗 Detected Tabular Foundation Models in {tfm_dir}!")
+    for tfm_name in ['tabpfn35', 'realmlp', 'kumolarge', 'limix2', 'xgboost']:
+        oof_f = tfm_dir / f'oof_{tfm_name}.npy'
+        tst_f = tfm_dir / f'test_{tfm_name}.npy'
+        if oof_f.exists() and tst_f.exists():
+            tfm_oof = np.load(oof_f)
+            tfm_test = np.load(tst_f)
+            tree_oof_list.append(logit(np.clip(tfm_oof, eps, 1 - eps)))
+            tree_test_list.append(logit(np.clip(tfm_test, eps, 1 - eps)))
+            model_names.append(f"TFM_{tfm_name}")
+            print(f"   + Loaded {tfm_name} (OOF AUC: {roc_auc_score(y, tfm_oof):.5f})")
+
+S_oof = np.column_stack(tree_oof_list)
+S_test = np.column_stack(tree_test_list)
+
+print(f"\nFitting Level-2 Meta-Classifier (Logistic Regression C=0.003) on {S_oof.shape[1]} representations...")
+meta_clf = LogisticRegression(C=0.003, max_iter=1000, random_state=SEED)
+meta_clf.fit(S_oof, y)
+
+stack_oof = meta_clf.predict_proba(S_oof)[:, 1]
+stack_test = meta_clf.predict_proba(S_test)[:, 1]
+
+final_auc = roc_auc_score(y, stack_oof)
+print("=" * 75)
+print(f"🏆 [FINAL ORTHOGONAL STACK] OOF ROC-AUC: {final_auc:.6f}")
+print("Meta-Learner Weights:")
+for name, w in zip(model_names, meta_clf.coef_[0]):
+    print(f"   {name:<16}: {w:+.4f}")
+print("=" * 75)
+
+
+### CELL 12 markdown
+## 6. Submission Export & Verification
+Generating submission artifacts and asserting data integrity.
+
+
+### CELL 13 code
+output_dir = Path('/kaggle/working')
+output_dir.mkdir(parents=True, exist_ok=True)
+
+# Main submission
+sub = pd.DataFrame({
+    'id': test['id'].values,
+    'satisfaction': stack_test
+})
+sub_path = output_dir / 'submission.csv'
+sub.to_csv(sub_path, index=False, float_format='%.9f')
+
+# Pure standalone tree submission for reference
+tree_only_pred = (test_lgb + test_xgb + test_cat) / 3.0
+pd.DataFrame({'id': test['id'].values, 'satisfaction': tree_only_pred}).to_csv(output_dir / 'submission_trees_only.csv', index=False, float_format='%.9f')
+
+# Save metrics
+metrics = {
+    'lgb_oof_auc': float(auc_lgb_total),
+    'xgb_oof_auc': float(auc_xgb_total),
+    'cat_oof_auc': float(auc_cat_total),
+    'final_stack_oof_auc': float(final_auc),
+    'model_weights': {name: float(w) for name, w in zip(model_names, meta_clf.coef_[0])}
+}
+with open(output_dir / 'oof_metrics.json', 'w') as f:
+    json.dump(metrics, f, indent=2)
+
+print(f"✅ Generated {sub_path} successfully!")
+print(f"   Rows: {len(sub):,} | Columns: {list(sub.columns)}")
+print(f"   Null count: {sub['satisfaction'].isna().sum()}")
+print(f"   Min: {sub['satisfaction'].min():.7f} | Max: {sub['satisfaction'].max():.7f}")
+print("\nSubmission Head:")
+print(sub.head(10))

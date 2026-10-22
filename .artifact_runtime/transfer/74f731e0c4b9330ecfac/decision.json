@@ -1,0 +1,10 @@
+{
+  "status": "stopped_screen",
+  "reason": "Below fixed 0.0002 blend gain gate",
+  "best": {
+    "name": "teacher_offset",
+    "standalone_auc": 0.9598755980325542,
+    "blend_auc": 0.9604375166273914,
+    "gain": 3.3456861838421226e-05
+  }
+}

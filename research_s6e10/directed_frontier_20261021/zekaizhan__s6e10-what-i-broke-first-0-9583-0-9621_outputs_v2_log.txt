@@ -1,0 +1,97 @@
+[{"stream_name":"stderr","time":7.697495577,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.697559957,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.697565767,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.697569267,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.301394323,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.301453423,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.301460513,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.301464363000001,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":14.570614231,"data":"competition dir: /kaggle/input/competitions/playground-series-s6e10\n"}
+,{"stream_name":"stdout","time":14.570659881,"data":"train: (699635, 23) | test: (299844, 1) | positive rate: 0.443573\n"}
+,{"stream_name":"stdout","time":14.865058634,"data":"                   stage      auc     kind\n"}
+,{"stream_name":"stdout","time":14.865123724,"data":"        Competition only 0.958330 baseline\n"}
+,{"stream_name":"stdout","time":14.865130044,"data":"+ original rows (concat) 0.958197 negative\n"}
+,{"stream_name":"stdout","time":14.865133914,"data":" + teacher / stats / kNN 0.958532 positive\n"}
+,{"stream_name":"stdout","time":14.865137984,"data":"        Best single GBDT 0.958879 positive\n"}
+,{"stream_name":"stdout","time":14.865141544,"data":"    4-member logit stack 0.960909 positive\n"}
+,{"stream_name":"stdout","time":14.865145014,"data":"       RealMLP 128-epoch 0.957489 negative\n"}
+,{"stream_name":"stdout","time":14.865148644,"data":"   RealMLP public recipe 0.960791 positive\n"}
+,{"stream_name":"stdout","time":14.865152264,"data":"          124 public OOF 0.962056 positive\n"}
+,{"stream_name":"stdout","time":14.865155634,"data":"          182 public OOF 0.962106 positive\n"}
+,{"stream_name":"stdout","time":14.865158624,"data":"        199 public + own 0.962142 positive\n"}
+,{"stream_name":"stdout","time":14.865161534,"data":"\n"}
+,{"stream_name":"stdout","time":14.865164504,"data":"Delta baseline -\u003e final: +0.003812\n"}
+,{"stream_name":"stdout","time":14.865168244,"data":"Delta 128-epoch RealMLP -\u003e 6-epoch: +0.003302\n"}
+,{"stream_name":"stdout","time":15.411323334,"data":"Business + wifi=0: 0.9310\n"}
+,{"stream_name":"stdout","time":15.411361863,"data":"Eco + wifi=0     : 0.8106\n"}
+,{"stream_name":"stdout","time":15.411366383,"data":"Insight: ratings are numeric 0–5, but 0 is a missing-service flag. Do not declare them categorical.\n"}
+,{"stream_name":"stdout","time":15.683727318,"data":"             representation      oof\n"}
+,{"stream_name":"stdout","time":15.683763418,"data":"           Competition only 0.958330\n"}
+,{"stream_name":"stdout","time":15.683767788,"data":"Competition + original rows 0.958197\n"}
+,{"stream_name":"stdout","time":15.683770878,"data":"      Teacher + stats + kNN 0.958532\n"}
+,{"stream_name":"stdout","time":15.683774008,"data":"concat delta: -0.000133 | transfer delta: +0.000202\n"}
+,{"stream_name":"stdout","time":17.478620027,"data":"leaky fold AUCs: ['0.7699', '0.7658', '0.7598', '0.7685', '0.7663']\n"}
+,{"stream_name":"stdout","time":17.478663147,"data":"safe  fold AUCs: ['0.5059', '0.4959', '0.4938', '0.4974', '0.5011']\n"}
+,{"stream_name":"stdout","time":17.478685887,"data":"Insight: the fake ID has no real relationship with the target. The leaky encoder still scores ~0.77.\n"}
+,{"stream_name":"stdout","time":17.631548429,"data":"         model      auc  group\n"}
+,{"stream_name":"stdout","time":17.631591869,"data":"      LightGBM 0.958879 single\n"}
+,{"stream_name":"stdout","time":17.631597618,"data":"      CatBoost 0.958852 single\n"}
+,{"stream_name":"stdout","time":17.631601649,"data":"       XGBoost 0.958856 single\n"}
+,{"stream_name":"stdout","time":17.631605298,"data":"   3-GBDT rank 0.959903  blend\n"}
+,{"stream_name":"stdout","time":17.631608838,"data":"4-member logit 0.960909  blend\n"}
+,{"stream_name":"stdout","time":17.631612218,"data":"GBDT spread: 0.000027\n"}
+,{"stream_name":"stdout","time":17.631615589,"data":"3-GBDT rank gain: +0.001024 | RealMLP stack gain over 3-GBDT rank: +0.001006\n"}
+,{"stream_name":"stdout","time":17.800124389,"data":"128-epoch : [0.958044, 0.957105, 0.95871, 0.958144, 0.958416] OOF 0.957489\n"}
+,{"stream_name":"stdout","time":17.800157719,"data":"public    : [0.961086, 0.959844, 0.961591, 0.960993, 0.960673] OOF 0.960791\n"}
+,{"stream_name":"stdout","time":17.800163059,"data":"delta     : +0.003302\n"}
+,{"stream_name":"stdout","time":18.268347353,"data":"           stage  members      auc\n"}
+,{"stream_name":"stdout","time":18.268389283,"data":" 124 (+nj blend)      124 0.962056\n"}
+,{"stream_name":"stdout","time":18.268394653,"data":"      135 (+TFM)      135 0.962104\n"}
+,{"stream_name":"stdout","time":18.268398593,"data":"    137 (+golem)      137 0.962111\n"}
+,{"stream_name":"stdout","time":18.268402063,"data":"175 (+artifacts)      175 0.962102\n"}
+,{"stream_name":"stdout","time":18.268405913,"data":"    181 (+forge)      181 0.962107\n"}
+,{"stream_name":"stdout","time":18.268409443,"data":"   182 (with nj)      182 0.962106\n"}
+,{"stream_name":"stdout","time":18.268412913,"data":"198 (honest raw)      198 0.962136\n"}
+,{"stream_name":"stdout","time":18.268416393,"data":"      199 (+own)      199 0.962142\n"}
+,{"stream_name":"stdout","time":18.268419903,"data":"\n"}
+,{"stream_name":"stdout","time":18.268423003,"data":"C grid:\n"}
+,{"stream_name":"stdout","time":18.268426483,"data":"       C      auc\n"}
+,{"stream_name":"stdout","time":18.268430043,"data":"0.000300 0.962090\n"}
+,{"stream_name":"stdout","time":18.268433443,"data":"0.001000 0.962133\n"}
+,{"stream_name":"stdout","time":18.268436473,"data":"0.003000 0.962142\n"}
+,{"stream_name":"stdout","time":18.268439973,"data":"0.010000 0.962131\n"}
+,{"stream_name":"stdout","time":18.268443333,"data":"1.000000 0.962118\n"}
+,{"stream_name":"stdout","time":18.268446343,"data":"\n"}
+,{"stream_name":"stdout","time":18.268449413,"data":"Leave-one-source-out at C=0.003:\n"}
+,{"stream_name":"stdout","time":18.268453113,"data":"       source  dropped     delta\n"}
+,{"stream_name":"stdout","time":18.268457123,"data":"   cdeotte124      123 -0.000065\n"}
+,{"stream_name":"stdout","time":18.268460783,"data":"          TFM       11 -0.000041\n"}
+,{"stream_name":"stdout","time":18.268464483,"data":"goodpjw_extra       17 -0.000036\n"}
+,{"stream_name":"stdout","time":18.268467753,"data":"        golem        3 -0.000007\n"}
+,{"stream_name":"stdout","time":18.268471003,"data":"     amanatar        6 +0.000001\n"}
+,{"stream_name":"stdout","time":18.268474392999998,"data":"          own        1 +0.000002\n"}
+,{"stream_name":"stdout","time":18.268477723,"data":"  sadamtorres       38 +0.000006\n"}
+,{"stream_name":"stdout","time":18.268481123,"data":"\n"}
+,{"stream_name":"stdout","time":18.268503723,"data":"Family-wise scaling: 0.962143 vs flat 0.962142 -\u003e +0.000001 (noise, disabled).\n"}
+,{"stream_name":"stdout","time":22.325170464,"data":"SD of absolute AUC      : 0.000672\n"}
+,{"stream_name":"stdout","time":22.325208084,"data":"SE of difference, rho=.999: 0.000030\n"}
+,{"stream_name":"stdout","time":22.325212964,"data":"95% band width          : 0.002634\n"}
+,{"stream_name":"stdout","time":22.325216425,"data":"Insight: selecting a member on +1e-4 public LB is selecting noise.\n"}
+,{"stream_name":"stderr","time":25.332076725,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":25.332124225,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":25.495122846,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":25.495154816,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":26.258221003,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":26.334288769,"data":"[NbConvertApp] Writing 691390 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":28.717806315,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":29.316626641,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":29.316675371,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.316828481,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.317020001,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.317157381,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.317310851,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.317449371,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.317591121,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.317768171,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":29.317966921,"data":"[NbConvertApp] Writing 414502 bytes to __results__.html\n"}
+]

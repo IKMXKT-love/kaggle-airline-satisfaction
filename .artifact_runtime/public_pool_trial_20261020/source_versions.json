@@ -1,0 +1,151 @@
+[
+  {
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "version": 1,
+    "license": "Unknown",
+    "sha256": "6ca81c01875e239fa3fb183ce5656d36ec0a83764dfe60f9f0e9c9cceacb51f7",
+    "captured_epoch": 1792500893.1732082
+  },
+  {
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "version": 1,
+    "license": "CC0: Public Domain",
+    "sha256": "9ac285317092225ba86ea22f655e3908b59b19299f2678c3c9343240b17db3d7",
+    "captured_epoch": 1792500893.222435
+  },
+  {
+    "source": "golem",
+    "source_ref": "dariushafshar/s6e10-golem-oof-library",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/dariushafshar/s6e10-golem-oof-library",
+    "version": 6,
+    "license": "CC0: Public Domain",
+    "sha256": "300bdf109d83d25fe1248b8a31a54dff312580cd8c8eaedca322b153cd298009",
+    "captured_epoch": 1792500893.4714684
+  },
+  {
+    "source": "abdullah",
+    "source_ref": "abdullahsafwan333/oof-dataset",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/abdullahsafwan333/oof-dataset",
+    "version": 1,
+    "license": "MIT",
+    "sha256": "e9c5c3291f68a2aaac0fa47568986134a9edc576b7f1597869bc1b6b99e5b5aa",
+    "captured_epoch": 1792500893.1252115
+  },
+  {
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "version": 7,
+    "license": "Unknown",
+    "sha256": "714a187e387157938dfedc92f85eb22511c9eb9c913cf81daed3239ff99feb9d",
+    "captured_epoch": 1792500893.2218647
+  },
+  {
+    "source": "forge",
+    "source_ref": "amanatar/s6e10-forge-own-pairs",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/amanatar/s6e10-forge-own-pairs",
+    "version": 1,
+    "license": "CC0: Public Domain",
+    "sha256": "723f093867957ff0e09376837b68165578f698be3fec63c618cf241819745f34",
+    "captured_epoch": 1792500893.23115
+  },
+  {
+    "source": "sachith",
+    "source_ref": "sachith7/s6e10-stack-oof-predictions",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/sachith7/s6e10-stack-oof-predictions",
+    "version": 3,
+    "license": "CC0: Public Domain",
+    "sha256": "55310202c4fa7df7b8be778ce08fd9799f3f1413d82b8f11d5950c2d616b0aa7",
+    "captured_epoch": 1792500894.0205417
+  },
+  {
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/koumeimaki/s6e10-route-tfm-nn-oof",
+    "version": 2,
+    "license": "Other (specified in description)",
+    "sha256": "050efda1b42cff982fdce8c4a149ce785dddc2953c23b62a875c24890dc6d2a4",
+    "captured_epoch": 1792500894.3214972
+  },
+  {
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "version": 9,
+    "license": "CC0: Public Domain",
+    "sha256": "3a9b3693b0a6607c7432ab125fecbd7e0f7e421d6d457d0f00a47b31c75d203e",
+    "captured_epoch": 1792500894.1122234
+  },
+  {
+    "source": "dmitriy",
+    "source_ref": "dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test",
+    "version": 1,
+    "license": "Apache 2.0",
+    "sha256": "ea7c69c6baf2e74d5312ac0b43edc1cc83b61ab62d91f1a0a5e9cecab7cc32f6",
+    "captured_epoch": 1792500894.1901402
+  },
+  {
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/kagankoral/s6e10-ablation-members-oof",
+    "version": 1,
+    "license": "CC BY-SA 4.0",
+    "sha256": "e433d5396ac7db8a7f3019bc8724e6bf347cf63b71ace6cbe7e8870d31fea4df",
+    "captured_epoch": 1792500894.1081827
+  },
+  {
+    "source": "yekenot",
+    "source_ref": "yekenot/ps-s6-e10-realmlp-pytabkit",
+    "metadata_url": "https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernel",
+    "version": 8,
+    "license": null,
+    "sha256": "907a7fa5f89ae870478552f62cdea9eb69a1dbd74faf16006840f8f962b35f7d",
+    "captured_epoch": 1792500894.7803187
+  },
+  {
+    "source": "hermengardo",
+    "source_ref": "hermengardo/single-catboost-eda-ps6e10",
+    "metadata_url": "https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernel",
+    "version": 28,
+    "license": null,
+    "sha256": "655bc9bb14e8863d505d026ecb690a6ee5216085a4ccd0157f66adf010cedca1",
+    "captured_epoch": 1792500895.5609534
+  },
+  {
+    "source": "kratosyan",
+    "source_ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+    "metadata_url": "https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernel",
+    "version": 2,
+    "license": null,
+    "sha256": "5e7f7f2038192f0621f6426e946ffdcf50aec854ef8aa0332e24e962015f551c",
+    "captured_epoch": 1792500895.5420995
+  },
+  {
+    "source": "kagan_enc",
+    "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "metadata_url": "https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernel",
+    "version": 1,
+    "license": null,
+    "sha256": "0237e3698f9586759d873adea811fe4d21c78db269041c636565bf805d692c0c",
+    "captured_epoch": 1792500895.6225839
+  },
+  {
+    "source": "aman_v5",
+    "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "metadata_url": "https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernel",
+    "version": 1,
+    "license": null,
+    "sha256": "25be6a8fc8fdce9d7a45fbbab5a7bf486777c406b54b95d60de516d6285eb280",
+    "captured_epoch": 1792500895.5795536
+  },
+  {
+    "source": "kozy",
+    "metadata_error": "HTTPError: HTTP Error 404: Not Found",
+    "version": "unavailable; per-file hashes retained"
+  }
+]

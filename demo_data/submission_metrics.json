@@ -1,0 +1,47 @@
+{
+  "task": "classification",
+  "target": "satisfaction",
+  "metric": "auc",
+  "n_splits": 10,
+  "random_state": 42,
+  "train_rows": 800,
+  "test_rows": 200,
+  "feature_columns": [
+    "age",
+    "service_rating",
+    "arrival_delay",
+    "travel_type"
+  ],
+  "classes": [
+    0,
+    1
+  ],
+  "fold_scores": [
+    0.9053884711779449,
+    0.8041979949874687,
+    0.8198874296435272,
+    0.7523452157598499,
+    0.9027517198248906,
+    0.8608505315822389,
+    0.8398999374609131,
+    0.889618511569731,
+    0.8424015009380863,
+    0.7811131957473421
+  ],
+  "mean_score": 0.8398454508691993,
+  "std_score": 0.04894182893098347,
+  "oof_score": 0.8086027424682213,
+  "best_iterations": [
+    1,
+    5,
+    1,
+    44,
+    2,
+    9,
+    1,
+    13,
+    3,
+    5
+  ],
+  "data_source": "synthetic_demo"
+}

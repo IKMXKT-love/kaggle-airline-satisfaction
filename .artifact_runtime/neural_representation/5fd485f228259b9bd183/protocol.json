@@ -1,0 +1,47 @@
+{
+  "specs": [
+    {
+      "name": "control",
+      "category": false,
+      "sigma": 0.1
+    },
+    {
+      "name": "distance_category",
+      "category": true,
+      "sigma": 0.1
+    },
+    {
+      "name": "numeric_sigma32",
+      "category": false,
+      "sigma": 32.0
+    }
+  ],
+  "epochs": 64,
+  "seed": 20261018,
+  "internal_validation_fraction": 0.08,
+  "weights": [
+    0.14,
+    0.3,
+    0.5
+  ],
+  "gate_blend_gain": 0.0002,
+  "screen_only": true,
+  "outer_selection_used_for_nn_stopping": false,
+  "existing_tree_predictions_have_selection_exposure": true,
+  "historical_selection_and_audit_already_seen": true,
+  "full_cv_requires_confirmation": true,
+  "note": "64 epoch feasibility screen, not a claim about 128 epoch performance; sigma affects all numeric features.",
+  "protected": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "submission_v4.csv": "75f42132377e87fa2a0a9c4c34610c094c01d6b9fa743bd5437e4ff9b71d5958",
+    "submission_v3.csv": "e3b94a849f853e682418197f59c1d0eaf4370a895cfa0b6076400d74b4d8516e",
+    "v3_recipe.json": "b2b0d5f5577cf13dd875e5be17ec206f302ada2e4b2199d73538871519d54f3b",
+    "v4_recipe.json": "5c7b5354ccad21ad5d5aa43e8466cbc69b864adf05a9bd6310a65b2696e15566",
+    "v3_features.py": "74312b65e935a069db027ab6b9532392f48f51aa1f4f58b4ee1864be71d31047",
+    "v3_training.py": "8fda35592d1820dbae8d7d385625a4ef41ce6324bf810b4b7261054e48f48303",
+    "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+    "optimized_training.py": "a6a7ccfe7d5bb8d18cadc547a1c0aa201ec64b23403cf5aa365b88a0c55ff485"
+  },
+  "signature": "5fd485f228259b9bd183a6936e7ba075c5b36dc9dc3e7eb2e3c1f83b9f337c7a"
+}

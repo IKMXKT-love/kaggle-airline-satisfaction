@@ -1,0 +1,37 @@
+{
+  "verified": true,
+  "initial_states_match_across_arms": true,
+  "encoder_scope_rebuilt": true,
+  "original_labels_and_encodings_rebuilt": true,
+  "row_partitions_and_ids_verified": true,
+  "baseline_rebuild_max_error": 8.881784197001252e-16,
+  "prediction_evidence": {
+    "competition_only": {
+      "prediction_rebuild_max_error": 0.0,
+      "single_auc": 0.9602520262950435,
+      "primary_blend_auc": 0.9623393065979499,
+      "selected_epoch": 5,
+      "refit_weight_sha256": "151b7cc4f5d19b395474cc19f56cecaa54ab4c67c1223dba3141a71147f39fff"
+    },
+    "shared_head": {
+      "prediction_rebuild_max_error": 0.0,
+      "single_auc": 0.960112323991039,
+      "primary_blend_auc": 0.9623487356004764,
+      "selected_epoch": 5,
+      "refit_weight_sha256": "b074ba4e9382a24e63016854daccf0e40dcf1cb8980499d011be28bd137cdbf3"
+    },
+    "dual_head": {
+      "prediction_rebuild_max_error": 0.0,
+      "single_auc": 0.9604558001259388,
+      "primary_blend_auc": 0.9623457433831097,
+      "selected_epoch": 5,
+      "refit_weight_sha256": "2d33d0b492095099dee24e534a7d2e84c6c98cf238024cb7980b581eea5131e4"
+    }
+  },
+  "protected_files_unchanged": true,
+  "verification_seconds": 22.70609712600708,
+  "cumulative_seconds": 349.28934812545776,
+  "cumulative_deadline_met": true,
+  "gate": false,
+  "public_validation_caveat": "Fixed public OOF baseline inherits upstream early-stopping and indirect fold label dependence; not end-to-end nested validation."
+}

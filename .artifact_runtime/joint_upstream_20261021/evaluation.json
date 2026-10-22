@@ -1,0 +1,199 @@
+{
+  "complete": true,
+  "rows_train": 699635,
+  "rows_test": 299844,
+  "completed_meta_fits": 20,
+  "baseline_auc": 0.9622047560968178,
+  "baseline_max_abs_difference_vs_saved_oof": 7.23598958529692e-12,
+  "baseline_test_meta_average_max_difference_vs_incumbent_full_refit": 0.050738783924763275,
+  "comparisons": [
+    {
+      "arm": "baseline246",
+      "auc": 0.9622047560968178,
+      "pooled_delta": 0.0,
+      "fold_aucs": [
+        0.9623591653196826,
+        0.9614093108360477,
+        0.9627989282529895,
+        0.9624455506060633,
+        0.9620440478732256
+      ],
+      "fold_deltas": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_fold_delta": 0.0,
+      "paired_fold_se": 0.0,
+      "positive_folds": 0,
+      "passes_expansion_reference": false,
+      "extra_coefficients_per_fold": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "oof_logit_difference_std": 0.0,
+      "test_logit_difference_std": 0.0,
+      "oof_percentile_rank_difference_std": 0.0,
+      "test_percentile_rank_difference_std": 0.0,
+      "rank_difference_test_to_oof_ratio": null,
+      "test_mean_probability": 0.44356462477525815
+    },
+    {
+      "arm": "plus_kumo",
+      "auc": 0.9622054018098434,
+      "pooled_delta": 6.457130256043442e-07,
+      "fold_aucs": [
+        0.9623586208851118,
+        0.9614096009518871,
+        0.962799644023809,
+        0.9624458719683306,
+        0.9620453606370529
+      ],
+      "fold_deltas": [
+        -5.444345707594778e-07,
+        2.90115839352012e-07,
+        7.157708195038026e-07,
+        3.213622673525762e-07,
+        1.3127638273102704e-06
+      ],
+      "mean_fold_delta": 4.191156365518367e-07,
+      "paired_fold_se": 3.034169620584161e-07,
+      "positive_folds": 4,
+      "passes_expansion_reference": false,
+      "extra_coefficients_per_fold": [
+        [
+          -0.009039288843737817
+        ],
+        [
+          -0.018105760588733012
+        ],
+        [
+          -0.023490635503514542
+        ],
+        [
+          -0.012704444653517302
+        ],
+        [
+          -0.019477208591044754
+        ]
+      ],
+      "oof_logit_difference_std": 0.003915094855310565,
+      "test_logit_difference_std": 0.003595418338300184,
+      "oof_percentile_rank_difference_std": 0.0008288968832387179,
+      "test_percentile_rank_difference_std": 0.0007188505420768177,
+      "rank_difference_test_to_oof_ratio": 0.8672375980810542,
+      "test_mean_probability": 0.4435593307643885
+    },
+    {
+      "arm": "plus_neighborhood",
+      "auc": 0.9622025844728056,
+      "pooled_delta": -2.1716240121705255e-06,
+      "fold_aucs": [
+        0.9623605794838239,
+        0.961403147633363,
+        0.9628010705991283,
+        0.9624461747068995,
+        0.9620349642676571
+      ],
+      "fold_deltas": [
+        1.4141641413445427e-06,
+        -6.1632026847613375e-06,
+        2.1423461388225817e-06,
+        6.24100836232877e-07,
+        -9.083605568505071e-06
+      ],
+      "mean_fold_delta": -2.2132394273732813e-06,
+      "paired_fold_se": 2.2691829222674734e-06,
+      "positive_folds": 3,
+      "passes_expansion_reference": false,
+      "extra_coefficients_per_fold": [
+        [
+          0.00431487081145521
+        ],
+        [
+          0.02970904217270481
+        ],
+        [
+          0.00986818258443853
+        ],
+        [
+          0.009647297400985223
+        ],
+        [
+          0.02139681574448511
+        ]
+      ],
+      "oof_logit_difference_std": 0.005620123136326612,
+      "test_logit_difference_std": 0.0027237551952179325,
+      "oof_percentile_rank_difference_std": 0.0012272208515697644,
+      "test_percentile_rank_difference_std": 0.0006047670351871058,
+      "rank_difference_test_to_oof_ratio": 0.4927939697353866,
+      "test_mean_probability": 0.44356847615776424
+    },
+    {
+      "arm": "plus_both",
+      "auc": 0.9622031707886093,
+      "pooled_delta": -1.5853082084849035e-06,
+      "fold_aucs": [
+        0.9623599475175835,
+        0.9614035896358116,
+        0.9628016574525669,
+        0.9624467123110014,
+        0.9620360090571534
+      ],
+      "fold_deltas": [
+        7.821979008948432e-07,
+        -5.72120023611955e-06,
+        2.729199577333752e-06,
+        1.1617049381351663e-06,
+        -8.038816072253319e-06
+      ],
+      "mean_fold_delta": -1.8173827784018216e-06,
+      "paired_fold_se": 2.1242671374088724e-06,
+      "positive_folds": 3,
+      "passes_expansion_reference": false,
+      "extra_coefficients_per_fold": [
+        [
+          -0.009070225743386347,
+          0.004345524548153769
+        ],
+        [
+          -0.018207881755120933,
+          0.02973914772905851
+        ],
+        [
+          -0.023472513388450803,
+          0.009847865467728947
+        ],
+        [
+          -0.012697658898487146,
+          0.00964329987346431
+        ],
+        [
+          -0.01949672363247435,
+          0.021405822568583904
+        ]
+      ],
+      "oof_logit_difference_std": 0.006848920123250616,
+      "test_logit_difference_std": 0.004503765376752343,
+      "oof_percentile_rank_difference_std": 0.001490963466616991,
+      "test_percentile_rank_difference_std": 0.00094319924692608,
+      "rank_difference_test_to_oof_ratio": 0.6326105689673317,
+      "test_mean_probability": 0.4435631766173617
+    }
+  ],
+  "data_preparation_seconds": 2.6560800075531006,
+  "fit_and_validation_seconds_sum": 174.69933891296387,
+  "execution_elapsed_seconds": 181.99231433868408,
+  "elapsed_including_setup_allowance": 400.7348973751068,
+  "remaining_budget_seconds_for_verification": 499.26510071754456,
+  "new_base_fits": 0,
+  "new_base_inferences": 0,
+  "new_submission_generated": false,
+  "validation_status": "Exploratory fixed-public-base-OOF meta-CV; not end-to-end independent validation."
+}

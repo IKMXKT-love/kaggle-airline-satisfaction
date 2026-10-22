@@ -1,0 +1,19 @@
+[
+  {
+    "name": "recent_kernels",
+    "url": "https://www.kaggle.com/api/v1/kernels/list?competition=playground-series-s6e10&sortBy=dateRun&pageSize=100",
+    "error": "HTTP Error 401: Unauthorized"
+  },
+  {
+    "name": "goodpjw_kernels",
+    "url": "https://www.kaggle.com/api/v1/kernels/list?user=goodpjw2008&search=s6e10&sortBy=dateRun&pageSize=100",
+    "error": "HTTP Error 401: Unauthorized"
+  },
+  {
+    "name": "datasets",
+    "url": "https://www.kaggle.com/api/v1/datasets/list?search=s6e10&pageSize=100&sortBy=updated",
+    "sha256": "9a0d860f51b693624e873970d8d8d779f7da8eb3b45140794c5da4d8c4ac3b2d",
+    "bytes": 47316,
+    "epoch": 1792502276.2716362
+  }
+]

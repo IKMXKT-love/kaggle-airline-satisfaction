@@ -1,0 +1,19 @@
+{
+  "status": "stopped_inner_gate",
+  "elapsed_seconds": 157.36079478263855,
+  "results": [
+    {
+      "tag": "inner",
+      "rows": 139927,
+      "baseline_auc": 0.9620133930582603,
+      "raw_control_auc": 0.9620130917682015,
+      "raw_control_delta": -3.0129005879064863e-07,
+      "raw_control_rounds": 1,
+      "conditional_auc": 0.9620195208759176,
+      "conditional_delta": 6.127817657297641e-06,
+      "conditional_rounds": 11,
+      "conditional_vs_control": 6.429107716088289e-06
+    }
+  ],
+  "submission_generated": false
+}

@@ -1,0 +1,100 @@
+{
+  "outer_folds": [
+    0,
+    1
+  ],
+  "outer_splits": 10,
+  "split_seed": 20261020,
+  "inner_folds": 5,
+  "internal_stop_fraction": 0.08,
+  "base_rounds": {
+    "old_xgb": 435,
+    "old_cat": 907,
+    "control": 623,
+    "realmlp": 63,
+    "lgb": 641
+  },
+  "legacy_nn_original_schedule_epochs": 128,
+  "legacy_nn_fixed_stop_epoch": 63,
+  "nn_validation_fraction": 0.0,
+  "lean_epochs": 3,
+  "lean_seeds": [
+    42,
+    20261019
+  ],
+  "weights": {
+    "old_xgb": 0.07,
+    "old_cat": 0.21,
+    "control": 0.28,
+    "realmlp": 0.14,
+    "lgb": 0.3
+  },
+  "blend_logit_weights": [
+    0.65,
+    0.35
+  ],
+  "modes": [
+    "plain",
+    "offset"
+  ],
+  "correction_params": {
+    "iterations": 2500,
+    "depth": 6,
+    "learning_rate": 0.03,
+    "l2_leaf_reg": 20,
+    "max_ctr_complexity": 2,
+    "loss_function": "Logloss",
+    "eval_metric": "AUC",
+    "task_type": "GPU",
+    "thread_count": 4,
+    "allow_writing_files": false,
+    "verbose": false
+  },
+  "patience": 150,
+  "no_outer_early_stopping": true,
+  "raw_features_and_numeric_copies_only": true,
+  "train_base_margins_are_inner_oof": true,
+  "selection_stop_excluded_from_base_oof_fit": true,
+  "refit_all_outer_training_after_inner_stopping": true,
+  "historical_data_and_hyperparameter_selection_seen": true,
+  "base_rounds_source": "completed_transfer_screen_74f731e0c4b9330ecfac",
+  "screen_min_gain": 0.0003,
+  "both_folds_positive": true,
+  "require_interval_lower_positive": true,
+  "no_continuous_blend_search": true,
+  "no_kaggle_submission": true,
+  "hashes": {
+    "experiment_correction.py": "5f1fbfb13be94b4010fef42c21fda2374e3c35b77f2a909112ddb98f883ee1c4",
+    "correction_support.py": "3a61fa0efe9d5c16aea59bd053ebed2e72a9ec0db7813e4550d119fadb4765ca",
+    "experiment_realmlp_factorial.py": "efb7b3bb62da39db75d9c00e50d7c62566d1a779ebf8a8118a831d0fde4634b2",
+    "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+    "optimized_training.py": "a6a7ccfe7d5bb8d18cadc547a1c0aa201ec64b23403cf5aa365b88a0c55ff485",
+    "v3_features.py": "74312b65e935a069db027ab6b9532392f48f51aa1f4f58b4ee1864be71d31047",
+    "v2_training.py": "ce21ebc2649804738ba7e262e97fbd2666a88ee2466269dc35df292344009db7",
+    "report_neural.py": "b44ca4c6794d750c5f5eb14ddd4f154cb8e537c1404391ed50f5d4b37fa40ca4",
+    "experiment_neural.py": "3a9d27807a01564cc5f90d4ba40e985544ba6580d025f1f59aa697e3e62aa398",
+    "tests/test_correction_contract.py": "eb3fb97581968594f21cda87f2215681967a5464a579408da600cd077192b1fd",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898",
+    "optimized_recipe.json": "782e3095fca89eb9b6d3fb0f96d1cdb32dcefed3210befe59cc8f835f2c5790c",
+    ".artifact_runtime/optimized_cache/train_priors.npy": "4ca7c094daa72965b64224aff25ebbe3d4929e8263481a657fd891171ee5ae3b",
+    ".artifact_runtime/optimized_cache/test_priors.npy": "dd559a0668548087172ef82e469c0f03b7924651f9cadf67ec4cfdc2b7a03624",
+    ".artifact_runtime/optimized_cache/metadata.json": "804de7d9be8df3a2169010edbfef382fe1286c8260f768f71e7a761ba0d75a22",
+    ".artifact_runtime/v3/aux_train.npy": "27ac65e1c3e1a61465719c243465359ef944f3da28368702e8f043b59bac6f6c",
+    ".artifact_runtime/v3/aux_test.npy": "b01cac4a4d59e662915fad9fca76145e893364d505770c348daf1f678ba9e6ae",
+    ".artifact_runtime/v3/auxiliary.json": "298aaf13e41bad77cc81083c8586922d23d07a949539b62a8b1d475772a291e3"
+  },
+  "versions": {
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "torch": "2.11.0+cu128",
+    "pytabkit": "1.7.3",
+    "xgboost": "3.4.1",
+    "catboost": "1.2.10",
+    "lightgbm": "4.7.0"
+  },
+  "signature": "b1385337dbf19f77097b"
+}

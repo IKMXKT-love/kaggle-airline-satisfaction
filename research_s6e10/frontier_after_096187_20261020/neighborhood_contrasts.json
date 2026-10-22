@@ -1,0 +1,88 @@
+{
+  "training": false,
+  "model_inference": false,
+  "submission_generated": false,
+  "protocol": {
+    "frozen_epoch": 1792502822.8493834,
+    "training": false,
+    "model_inference": false,
+    "submission_generated": false,
+    "current_baseline": "selected_predictions.npz of public246, user public0.96187",
+    "candidate_selection": "Sources chosen after reading author-reported standalone results; all contrasts exploratory, not blind confirmation.",
+    "fixed_rule": "0.8 * current saved OOF logit + 0.2 * logit(candidate probability clipped to 1e-6,1-1e-6); no weight fitting or search.",
+    "candidate_sources": [
+      "Den Pugovkin version45 neighborhood combined/head/neighbor OOF",
+      "najiama 07 XGBoost OOF"
+    ],
+    "validation_caveat": "Different source folds and historical selection; contrasts are fixed-prediction exploratory, not end-to-end isolated CV."
+  },
+  "current_oof_auc": 0.9622047560968178,
+  "source_oof_ids_full_unique_coverage": true,
+  "test_ids_verified": true,
+  "author_single_model_auc_reproduced": true,
+  "source": "denpugovkin/s6e10-passenger-context-foundation-ensemble version45",
+  "rows": [
+    {
+      "candidate": "combined",
+      "standalone_auc": 0.9580775526618024,
+      "fixed20_auc": 0.9621112786677678,
+      "fixed20_delta": -9.34774290499707e-05,
+      "current_native_folds_deltas": [
+        -3.578245000446234e-05,
+        -0.00014763854360455575,
+        -1.2787859236862431e-05,
+        -0.00012726442417299033,
+        -0.0001528223466684686
+      ],
+      "candidate_native_folds_deltas": [
+        -0.00011540564383782925,
+        -0.0001292106006857141,
+        -6.0383411316089486e-05,
+        -8.798518127717259e-05,
+        -7.21742818832194e-05
+      ]
+    },
+    {
+      "candidate": "head",
+      "standalone_auc": 0.9579897494594513,
+      "fixed20_auc": 0.9620869242175966,
+      "fixed20_delta": -0.00011783187922120852,
+      "current_native_folds_deltas": [
+        -5.5652966785113556e-05,
+        -0.0001843506131020689,
+        -1.4672991403896773e-05,
+        -0.00015908839355571747,
+        -0.0001859398353897257
+      ],
+      "candidate_native_folds_deltas": [
+        -0.00014062655980462413,
+        -0.000151109794109483,
+        -8.046058621824503e-05,
+        -0.00010408805887995864,
+        -9.923099826270043e-05
+      ]
+    },
+    {
+      "candidate": "neighbor",
+      "standalone_auc": 0.9580194716810898,
+      "fixed20_auc": 0.9621239622922443,
+      "fixed20_delta": -8.079380457348684e-05,
+      "current_native_folds_deltas": [
+        -2.9114316364986514e-05,
+        -0.00012029791928536149,
+        -2.1297234096051554e-05,
+        -0.00010702046370247853,
+        -0.00013382307006004623
+      ],
+      "candidate_native_folds_deltas": [
+        -0.00010150197268454786,
+        -0.00011527428002999773,
+        -5.060990117622399e-05,
+        -8.251229702338492e-05,
+        -5.180843965146842e-05
+      ]
+    }
+  ],
+  "candidate_test_probability_mean": 0.4431149983627802,
+  "scope": "A fixed20 negative result rejects this fixed use, not every possible weight, sign, conditional use or the whole model family."
+}

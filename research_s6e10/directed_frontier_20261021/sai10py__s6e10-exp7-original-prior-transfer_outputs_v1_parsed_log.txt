@@ -1,0 +1,85 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+PyTorch CUDA / GPU Available: True
+Device Name: Tesla T4
+XGBoost Version: 3.4.1
+Loading train: /kaggle/input/competitions/playground-series-s6e10/train.csv
+Loading test:  /kaggle/input/competitions/playground-series-s6e10/test.csv
+Train raw shape: (699635, 23) | Test raw shape: (299844, 22)
+Original train rows: 103,904 | exact overlaps excluded: 16
+Source holdout AUC: 0.994604 | best iteration: 848
+Added source prior for 699,635 train and 299,844 test rows.
+Feature engineering complete. Total feature count: 85
+
+============================================================
+Starting 5-Fold Cross-Validation Ensemble Training
+============================================================
+
+--- Fold 1/5 ---
+  [Model 1: LGBM Deep]     Best Iter:  574 | Val AUC: 0.960841
+  [Model 2: LGBM Balanced] Best Iter:  384 | Val AUC: 0.961002
+  [Model 3: XGB Hist]      Best Iter:  441 | Val AUC: 0.960854
+  Fold prediction time: 327.3s
+--- Fold 2/5 ---
+  [Model 1: LGBM Deep]     Best Iter:  528 | Val AUC: 0.959457
+  [Model 2: LGBM Balanced] Best Iter:  506 | Val AUC: 0.959651
+  [Model 3: XGB Hist]      Best Iter:  431 | Val AUC: 0.959473
+  Fold prediction time: 349.8s
+--- Fold 3/5 ---
+  [Model 1: LGBM Deep]     Best Iter:  519 | Val AUC: 0.961262
+  [Model 2: LGBM Balanced] Best Iter:  393 | Val AUC: 0.961444
+  [Model 3: XGB Hist]      Best Iter:  333 | Val AUC: 0.961248
+  Fold prediction time: 302.5s
+--- Fold 4/5 ---
+  [Model 1: LGBM Deep]     Best Iter:  371 | Val AUC: 0.960719
+  [Model 2: LGBM Balanced] Best Iter:  414 | Val AUC: 0.960921
+  [Model 3: XGB Hist]      Best Iter:  365 | Val AUC: 0.960884
+  Fold prediction time: 255.3s
+--- Fold 5/5 ---
+  [Model 1: LGBM Deep]     Best Iter:  451 | Val AUC: 0.960581
+  [Model 2: LGBM Balanced] Best Iter:  310 | Val AUC: 0.960624
+  [Model 3: XGB Hist]      Best Iter:  393 | Val AUC: 0.960616
+  Fold prediction time: 274.2s
+Meta fold 1: weights=[0.20000000298023224, 0.6000000238418579, 0.20000000298023224] | held-out AUC=0.961071
+Meta fold 2: weights=[0.20000000298023224, 0.4000000059604645, 0.4000000059604645] | held-out AUC=0.959666
+Meta fold 3: weights=[0.20000000298023224, 0.4000000059604645, 0.4000000059604645] | held-out AUC=0.961454
+Meta fold 4: weights=[0.20000000298023224, 0.6000000238418579, 0.20000000298023224] | held-out AUC=0.960986
+Meta fold 5: weights=[0.20000000298023224, 0.6000000238418579, 0.20000000298023224] | held-out AUC=0.960730
+
+Base pooled OOF AUCs:
+  LGBM deep: 0.960563
+  LGBM balanced: 0.960714
+  XGBoost hist: 0.960610
+Fold-specific weight mean: [0.20000000298023224, 0.5199999809265137, 0.2800000011920929]
+Nested meta-OOF ROC-AUC: 0.960771
+Total Training & Validation Time: 1531.5s
+============================================================
+Submission successfully saved to: /kaggle/working/submission.csv
+Shape: (299844, 2) | Null count: {'id': 0, 'satisfaction': 0}
+       id  satisfaction
+0  699635      0.528029
+1  699636      0.591241
+2  699637      0.672825
+3  699638      0.441059
+4  699639      0.373470
+5  699640      0.718134
+6  699641      0.215835
+7  699642      0.635069
+8  699643      0.902063
+9  699644      0.219522
+
+Verified contents of /kaggle/working: ['submission.csv']
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 44889 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 426602 bytes to __results__.html

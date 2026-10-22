@@ -1,0 +1,65 @@
+[
+  {
+    "model": "causilo",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_causilo.npy",
+    "bytes": 2798668,
+    "sha256": "7ec5e7aa6cd8a9cce957069bfea454ce11bfd5b7c634000e6a4efaea22038ab3",
+    "seconds": 3.894372900002054
+  },
+  {
+    "model": "exaone",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_exaone.npy",
+    "bytes": 2798668,
+    "sha256": "591b5cbb8e7e9053062ceeab5a5a7aa5bc7854c02cb2853804385301e7b72d73",
+    "seconds": 4.40241309999692
+  },
+  {
+    "model": "kumolarge",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_kumolarge.npy",
+    "bytes": 2798668,
+    "sha256": "94bce98307807b60a88862e4ac9a6044f4d4fecf5f792e775e8a8ea4b727a118",
+    "seconds": 4.628835399998934
+  },
+  {
+    "model": "kumosmall",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_kumosmall.npy",
+    "bytes": 2798668,
+    "sha256": "2193c207e5f8dce99374baf8d37a0953be0b9b3204ab26e5d452df72e2608803",
+    "seconds": 6.658363299997291
+  },
+  {
+    "model": "limix2",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_limix2.npy",
+    "bytes": 2798668,
+    "sha256": "2634847729c54bc4807f6475cd186fe0cd3c0dbc19d5793b2bbcbf421b8688a3",
+    "seconds": 4.342561700002989
+  },
+  {
+    "model": "mitra2",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_mitra2.npy",
+    "bytes": 2798668,
+    "sha256": "d9f62d11790ce2084f2dd03994fddc49b1cb182c6878aebcdad48b3b4c745897",
+    "seconds": 4.028914200000145
+  },
+  {
+    "model": "tabfm",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_tabfm.npy",
+    "bytes": 2798668,
+    "sha256": "f18a495a22acf272a468135b22aed2245f7cc609e3720f766662e15b2979feed",
+    "seconds": 4.450920299997961
+  },
+  {
+    "model": "tabicl2",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_tabicl2.npy",
+    "bytes": 2798668,
+    "sha256": "9b27d7d1769a4bd7afab9ba68112cef013339b54fe0f4ae0ce3985a9849c9a1f",
+    "seconds": 3.610397299999022
+  },
+  {
+    "model": "tabpfn35",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_tabpfn35.npy",
+    "bytes": 2798668,
+    "sha256": "f75c9d1de9ea23c310a36c175e4552916928f16b3530ed5f51b8c783c3e75e95",
+    "seconds": 4.492691800001921
+  }
+]

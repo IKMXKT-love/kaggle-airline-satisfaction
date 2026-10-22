@@ -1,0 +1,22 @@
+{
+  "context": 8192,
+  "fit_seconds": 2.466308832168579,
+  "warmup_seconds": 0.2001819610595703,
+  "probe_seconds": 0.18560194969177246,
+  "projected_query_seconds": 20.289700637105852,
+  "peak_gpu_gb": 1.3399467468261719,
+  "process_rss_gb": 1.6377830505371094,
+  "status": "screen_complete",
+  "auc": 0.9541033009561538,
+  "current_auc": 0.9605788365209832,
+  "blend_auc": 0.9602563135950354,
+  "paired": {
+    "delta": -0.00032252292594784184,
+    "approximate_se": 6.60811973892014e-05,
+    "interval95": [
+      -0.00045204207283067654,
+      -0.0001930037790650071
+    ]
+  },
+  "query_total_seconds": 20.26408052444458
+}

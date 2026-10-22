@@ -1,0 +1,54 @@
+{
+  "verified": true,
+  "seed_caches_rebuilt": true,
+  "folds": 10,
+  "all_rows_scored_once": true,
+  "rows": 299844,
+  "ids_verified": true,
+  "blend_verified": true,
+  "protected_unchanged": true,
+  "output_sha256": "b8cbfd891761efa14fac950684f03929b01da2d10a2c868fdb8228e7cb878eb8",
+  "folds_auc": [
+    {
+      "fold": 1,
+      "new_model_auc": 0.9616066394768572
+    },
+    {
+      "fold": 2,
+      "new_model_auc": 0.9616491626288386
+    },
+    {
+      "fold": 3,
+      "new_model_auc": 0.9600217975591547
+    },
+    {
+      "fold": 4,
+      "new_model_auc": 0.9607154535530009
+    },
+    {
+      "fold": 5,
+      "new_model_auc": 0.9616798574009157
+    },
+    {
+      "fold": 6,
+      "new_model_auc": 0.9623149740030064
+    },
+    {
+      "fold": 7,
+      "new_model_auc": 0.9604417411330475
+    },
+    {
+      "fold": 8,
+      "new_model_auc": 0.9621601031801253
+    },
+    {
+      "fold": 9,
+      "new_model_auc": 0.9612835286401971
+    },
+    {
+      "fold": 10,
+      "new_model_auc": 0.9614019694355751
+    }
+  ],
+  "fixed_cv_probability20_auc": 0.9616131714383116
+}

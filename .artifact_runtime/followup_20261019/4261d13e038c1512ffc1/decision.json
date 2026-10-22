@@ -1,0 +1,18 @@
+{
+  "current_recipe_stable": true,
+  "frozen_fusion_improves_current": true,
+  "full_cv_warranted": true,
+  "chosen_fusion": {
+    "weight": 0.35,
+    "form": "logit"
+  },
+  "seed_average_incremental_confirmation": {
+    "delta": 8.566487535075417e-06,
+    "approximate_se": 5.252306990796971e-06,
+    "interval95": [
+      -1.7280341668866452e-06,
+      1.886100923703748e-05
+    ]
+  },
+  "note": "Historical split already seen; not a pristine holdout. Full CV is a separate next phase."
+}

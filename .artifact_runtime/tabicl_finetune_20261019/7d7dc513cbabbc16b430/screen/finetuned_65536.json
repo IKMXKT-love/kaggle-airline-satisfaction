@@ -1,0 +1,43 @@
+{
+  "name": "finetuned_65536",
+  "state": "finetuned",
+  "context": 65536,
+  "status": "complete",
+  "fit_seconds": 1.8002982139587402,
+  "query_seconds": 80.89578938484192,
+  "seconds": 82.69608926773071,
+  "auc": 0.9561172873502725,
+  "baseline_auc": 0.9606333828423025,
+  "trials": [
+    {
+      "weight": 0.05,
+      "form": "probability",
+      "auc": 0.9606229494177283,
+      "paired": {
+        "delta": -1.043342457418873e-05,
+        "approximate_se": 1.1554792723785103e-05,
+        "interval95": [
+          -3.308081831280753e-05,
+          1.2213969164430071e-05
+        ]
+      }
+    },
+    {
+      "weight": 0.2,
+      "form": "probability",
+      "auc": 0.9605088985623825,
+      "paired": {
+        "delta": -0.00012448427991984504,
+        "approximate_se": 4.008155149237361e-05,
+        "interval95": [
+          -0.00020304412084489734,
+          -4.5924438994792764e-05
+        ]
+      }
+    }
+  ],
+  "peak_gpu_gb": 4.185009002685547,
+  "process_rss_gb": 2.5020904541015625,
+  "checkpoint_sha256": "2d42aeee538a86594d8a804faf8332e0b069d688dbef01a4eea6151fa382c758",
+  "prediction_sha256": "d59961340b0b24512e10ed04c3eaf93af2f1144d7cc9e29a93717d4035e64d67"
+}

@@ -1,0 +1,78 @@
+{
+  "protocol": {
+    "date": "2026-10-20",
+    "training": false,
+    "model_inference": false,
+    "seed": 20261021,
+    "pairs_per_fold": 2000000,
+    "chunk": 100000,
+    "folds": [
+      0,
+      1
+    ],
+    "components": [
+      "old_xgb",
+      "old_cat",
+      "control",
+      "realmlp",
+      "lgb",
+      "lean_42",
+      "lean_20261019"
+    ],
+    "definition": "Uniform positive-negative pairs sampled with replacement within each frozen outer fold. A strictly inverted pair on every component stays inverted under any nonzero global nonnegative weighted sum of strictly increasing component transforms.",
+    "uncertainty": "Monte Carlo error only, conditional on the fixed observed rows and predictions; not generalization uncertainty."
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "pairs": 2000000,
+      "counts": {
+        "base_wrong": 75328,
+        "base_ties": 0,
+        "all_seven_strictly_wrong": 53766,
+        "base_wrong_with_some_component_correct": 21562,
+        "base_correct_with_some_component_wrong": 26336
+      },
+      "estimated_current_pair_error": 0.037664,
+      "estimated_unanimous_wrong_pair_rate": 0.026883,
+      "unanimous_wrong_fraction_of_current_strict_errors": 0.7137584961767205,
+      "approx_mc_se_of_conditional_fraction": 0.0016468867272908933,
+      "sampled_auc_upper_bound_for_global_nonnegative_blends": 0.973117,
+      "bound_note": "Optimistic bound, not an achievable blend, not a ceiling on new models, not a public-score forecast."
+    },
+    {
+      "fold": 1,
+      "pairs": 2000000,
+      "counts": {
+        "base_wrong": 77490,
+        "base_ties": 0,
+        "all_seven_strictly_wrong": 55250,
+        "base_wrong_with_some_component_correct": 22240,
+        "base_correct_with_some_component_wrong": 27297
+      },
+      "estimated_current_pair_error": 0.038745,
+      "estimated_unanimous_wrong_pair_rate": 0.027625,
+      "unanimous_wrong_fraction_of_current_strict_errors": 0.7129952251903472,
+      "approx_mc_se_of_conditional_fraction": 0.0016250436886077948,
+      "sampled_auc_upper_bound_for_global_nonnegative_blends": 0.972375,
+      "bound_note": "Optimistic bound, not an achievable blend, not a ceiling on new models, not a public-score forecast."
+    }
+  ],
+  "hashes": {
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_0\\refit\\full_fit\\old_xgb.npz": "be4e767db3fc19f4ee6c4fb26a37de4d3f15475b3bb303fd9e8279baa8aa657a",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_0\\refit\\full_fit\\old_cat.npz": "f68255949345d474beada7f4d7873aab62b3bf5ec548afcb0fc902e42d54a7ea",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_0\\refit\\full_fit\\control.npz": "0e043ef243f42f3f4a789ba25691a081f73c69344ce412bf43cd4fed1e2c356c",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_0\\refit\\full_fit\\realmlp.npz": "d22c3c866e79fca6ae79c41af0582bdf2c5f59670cf98f5d2a2d0aa67b01f242",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_0\\refit\\full_fit\\lgb.npz": "4983abca02b0886045c8a8953682c472684f471c0b47d28efd2fdc0746638466",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_0\\refit\\full_fit\\lean_42.npz": "804dadfe10db86d1cca8dc22a6aed5f325e5c055cebe860e215abeec4845e801",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_0\\refit\\full_fit\\lean_20261019.npz": "7ef9e9ddaa5b6692dedcb9df829f95e76facb8a6cad033768fda2de4e3782b5e",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_1\\refit\\full_fit\\old_xgb.npz": "caea0598842880609446a8068e5751acec2217d5fdc8394b3cb2b42c572a65e8",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_1\\refit\\full_fit\\old_cat.npz": "ce7215e19c2d254d686712c7e986e87b7d15fc6c06f1ddb3acae8ca3122f6809",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_1\\refit\\full_fit\\control.npz": "dcfcf788fc25db64f65be184677c9f0eb4d2023639aee1af48aee05b4cc959bf",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_1\\refit\\full_fit\\realmlp.npz": "200e1ada5bbddcd8d8f25f559de20a89b40beac11289fd86f1a0b06a6f712353",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_1\\refit\\full_fit\\lgb.npz": "1317e7674f433fd81085aa7864645284ea8b99be21d84d2bd574350abb37eec6",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_1\\refit\\full_fit\\lean_42.npz": "89015d3499f6f386f7596abd7b2ef6950145f503662c365fe61f141509c39e2d",
+    ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b\\outer_1\\refit\\full_fit\\lean_20261019.npz": "559d0b3ce0ef3ed5a831dbbdd402e9ddd87f110018b315b10c53df2b7ee290ac"
+  },
+  "elapsed_seconds": 0.9386773999976867
+}

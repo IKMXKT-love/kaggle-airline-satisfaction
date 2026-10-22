@@ -1,0 +1,28 @@
+[
+  {
+    "ref": "goodpjw2008/s6e10-twin-stacks-family-reg-lb-0-96187",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/goodpjw2008/s6e10-twin-stacks-family-reg-lb-0-96187",
+    "bytes": 118474,
+    "sha256": "43085ddefbd7ac3fbe9afd835f4f071bb09fb3185fc3c45814bf158f80a22682",
+    "source_chars": 46918
+  },
+  {
+    "ref": "ewtherka/s6e10-0-96188-lb-l2-family-wise-actually-helps",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/ewtherka/s6e10-0-96188-lb-l2-family-wise-actually-helps",
+    "bytes": 106496,
+    "sha256": "e288e391bc34e29a9273a43a9bd6d28e9c7b20effb089e86fbac802d116836ef",
+    "source_chars": 34193
+  },
+  {
+    "ref": "mayankraaz/lb-surface-ascent",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/mayankraaz/lb-surface-ascent",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "ref": "hanifnoerrofiq/agentic-ensemble",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/hanifnoerrofiq/agentic-ensemble",
+    "bytes": 6419,
+    "sha256": "f7e18e8a8fcee93e10b42e36f71bcadbaf0ea57e5175268d6bebcad3f48f114b",
+    "source_chars": 591
+  }
+]

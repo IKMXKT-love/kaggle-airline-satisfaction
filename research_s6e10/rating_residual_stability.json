@@ -1,0 +1,63 @@
+{
+  "note": "Exploratory unweighted pattern-level correlations. No new model fit. Not an independent blind test; predictions share training history. No significance test or reliability correction. Small groups and different contexts can obscure real effects. In-sample majority fraction is not validation accuracy or a Bayes ceiling.",
+  "error_definition": "y - expit(0.65*logit(v4)+0.35*logit(lean_mean)), clip=1e-6",
+  "collision_check": "Each hash maps to exactly one distinct rating tuple",
+  "label_composition": [
+    {
+      "minimum_train_support": 2,
+      "patterns": 83621,
+      "rows": 445375,
+      "rows_in_mixed_label_patterns": 212924,
+      "in_sample_majority_fraction": 0.9327308447937132
+    },
+    {
+      "minimum_train_support": 10,
+      "patterns": 6458,
+      "rows": 185620,
+      "rows_in_mixed_label_patterns": 151228,
+      "in_sample_majority_fraction": 0.935384118090723
+    },
+    {
+      "minimum_train_support": 20,
+      "patterns": 2309,
+      "rows": 133407,
+      "rows_in_mixed_label_patterns": 124697,
+      "in_sample_majority_fraction": 0.9446655722713201
+    }
+  ],
+  "pattern_stability": [
+    {
+      "minimum_scored_support_per_stage": 3,
+      "common_patterns": 2728,
+      "screen_rows": 23091,
+      "confirmation_rows": 28284,
+      "target_rate_pearson": 0.9382816574075065,
+      "mean_error_pearson": -0.02239978988528705
+    },
+    {
+      "minimum_scored_support_per_stage": 5,
+      "common_patterns": 1717,
+      "screen_rows": 19270,
+      "confirmation_rows": 23865,
+      "target_rate_pearson": 0.8502606303407122,
+      "mean_error_pearson": 0.015505165039613134
+    },
+    {
+      "minimum_scored_support_per_stage": 10,
+      "common_patterns": 997,
+      "screen_rows": 13693,
+      "confirmation_rows": 16083,
+      "target_rate_pearson": 0.140198590361647,
+      "mean_error_pearson": 0.0012838904064665947
+    }
+  ],
+  "inputs_sha256": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    ".artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1\\screen\\baseline.npz": "acdba50916e98b6bb829caf7ca320cc3df4dba037dcc63900f8bb433fa88fda3",
+    ".artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1\\screen\\lean_mean.npz": "30a350c88a1de0de3eede5afef4e22544a14878618b6d8d0013da834d6b77550",
+    ".artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1\\screen\\indices.npz": "8d9f8c524576ee8df4c05f0b50dcd0975903466b5bd99ee5143d58d1c8bde5be",
+    ".artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1\\confirmation\\baseline.npz": "f8288df5d9891d044c06c42ac09876556c35d7a315da2ec2c117cc424fe7d5a7",
+    ".artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1\\confirmation\\lean_mean.npz": "85727453eec022d987096bb9ee5d955b6887663d3d7e18779a015bc00ac59a30",
+    ".artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1\\confirmation\\indices.npz": "18b860641a3f12003a4566ed28aeea80c3e0844c9cba9cd958130938e0caaf2d"
+  }
+}

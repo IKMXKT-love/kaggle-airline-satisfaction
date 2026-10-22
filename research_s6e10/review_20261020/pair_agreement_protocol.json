@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-20",
+  "training": false,
+  "model_inference": false,
+  "seed": 20261021,
+  "pairs_per_fold": 2000000,
+  "chunk": 100000,
+  "folds": [
+    0,
+    1
+  ],
+  "components": [
+    "old_xgb",
+    "old_cat",
+    "control",
+    "realmlp",
+    "lgb",
+    "lean_42",
+    "lean_20261019"
+  ],
+  "definition": "Uniform positive-negative pairs sampled with replacement within each frozen outer fold. A strictly inverted pair on every component stays inverted under any nonzero global nonnegative weighted sum of strictly increasing component transforms.",
+  "uncertainty": "Monte Carlo error only, conditional on the fixed observed rows and predictions; not generalization uncertainty."
+}

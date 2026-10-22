@@ -1,0 +1,41 @@
+{
+  "verified": true,
+  "full_scored_prediction_rebuild": true,
+  "all_encodings_and_overlap_filter_rebuilt": true,
+  "independent_baseline_max_error": 2.220446049250313e-15,
+  "teacher_4096_row_prediction_max_errors": {
+    "6": 0.0,
+    "3": 0.0,
+    "9": 0.0
+  },
+  "source_teacher_full_cache_recomputed": false,
+  "initial_states_match": true,
+  "evidence": {
+    "direct": {
+      "full_prediction_max_error": 0.0,
+      "full_contrast_max_error": 0.0,
+      "selected_epoch": 8,
+      "single_auc": 0.9600394440584911,
+      "primary_blend_auc": 0.9627774145701289
+    },
+    "teacher_offset": {
+      "full_prediction_max_error": 0.0,
+      "full_contrast_max_error": 0.0,
+      "selected_epoch": 15,
+      "single_auc": 0.9594294297743873,
+      "primary_blend_auc": 0.9627355338034562
+    },
+    "conditional_ratio": {
+      "full_prediction_max_error": 0.0,
+      "full_contrast_max_error": 0.0,
+      "selected_epoch": 1,
+      "single_auc": 0.9554107710316956,
+      "primary_blend_auc": 0.9623277552980215
+    }
+  },
+  "protected_unchanged": true,
+  "passes_expansion_gate": false,
+  "verification_seconds": 36.34006381034851,
+  "cumulative_seconds": 414.9342133998871,
+  "cumulative_deadline_met": true
+}

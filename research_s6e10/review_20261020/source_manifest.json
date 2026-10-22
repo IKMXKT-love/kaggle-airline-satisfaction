@@ -1,0 +1,96 @@
+{
+  "read_date": "2026-10-20",
+  "author_code_executed": false,
+  "files": [
+    {
+      "repo": "alvis1111/s6e10-airline-solution",
+      "commit": "eb0882d472584244520f74de8c64264485e08df2",
+      "path": "independent_repro/tabr_compat.py",
+      "url": "https://raw.githubusercontent.com/alvis1111/s6e10-airline-solution/eb0882d472584244520f74de8c64264485e08df2/independent_repro/tabr_compat.py",
+      "local": "research_s6e10\\review_20261020\\sources\\alvis1111__s6e10-airline-solution__independent_repro__tabr_compat.py",
+      "bytes": 3921,
+      "sha256": "10100402f50753f9188583e3d075f0e551454e561c2a76ec4fc35277931e6e06"
+    },
+    {
+      "repo": "alvis1111/s6e10-airline-solution",
+      "commit": "eb0882d472584244520f74de8c64264485e08df2",
+      "path": "independent_repro/tabr_fold.py",
+      "url": "https://raw.githubusercontent.com/alvis1111/s6e10-airline-solution/eb0882d472584244520f74de8c64264485e08df2/independent_repro/tabr_fold.py",
+      "local": "research_s6e10\\review_20261020\\sources\\alvis1111__s6e10-airline-solution__independent_repro__tabr_fold.py",
+      "bytes": 2468,
+      "sha256": "6f5a2886e4b8dd37a651e97a1b212d7ed020f9c81cff44412fb387b6051e0437"
+    },
+    {
+      "repo": "alvis1111/s6e10-airline-solution",
+      "commit": "eb0882d472584244520f74de8c64264485e08df2",
+      "path": "independent_repro/README.md",
+      "url": "https://raw.githubusercontent.com/alvis1111/s6e10-airline-solution/eb0882d472584244520f74de8c64264485e08df2/independent_repro/README.md",
+      "local": "research_s6e10\\review_20261020\\sources\\alvis1111__s6e10-airline-solution__independent_repro__README.md",
+      "bytes": 5000,
+      "sha256": "ec46256ec1740f4702d3ac08ecc4dfe771cc89bf3d6741a515852bc1f5e97763"
+    },
+    {
+      "repo": "alvis1111/s6e10-airline-solution",
+      "commit": "eb0882d472584244520f74de8c64264485e08df2",
+      "path": "independent_repro/realmlp_repro_lean.py",
+      "url": "https://raw.githubusercontent.com/alvis1111/s6e10-airline-solution/eb0882d472584244520f74de8c64264485e08df2/independent_repro/realmlp_repro_lean.py",
+      "local": "research_s6e10\\review_20261020\\sources\\alvis1111__s6e10-airline-solution__independent_repro__realmlp_repro_lean.py",
+      "bytes": 7210,
+      "sha256": "9aa27182f252c085b473678f241ad7a5608831aafc4df3d1763e201d3a7c11c2"
+    },
+    {
+      "repo": "LAMDA-Tabular/TALENT",
+      "commit": "39b54024902955e51063a34bce17d514cd68ff42",
+      "path": "TALENT/model/models/modernNCA.py",
+      "url": "https://raw.githubusercontent.com/LAMDA-Tabular/TALENT/39b54024902955e51063a34bce17d514cd68ff42/TALENT/model/models/modernNCA.py",
+      "local": "research_s6e10\\review_20261020\\sources\\LAMDA-Tabular__TALENT__TALENT__model__models__modernNCA.py",
+      "bytes": 4470,
+      "sha256": "02fce6a107998ab7212774507998e77535f630fbf4ee328acf8519ad7c10632f"
+    },
+    {
+      "repo": "yandex-research/tabular-dl-tabr",
+      "commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+      "path": "bin/tabr_scaling.py",
+      "url": "https://raw.githubusercontent.com/yandex-research/tabular-dl-tabr/17baa9082506f8e7a0f8d11bb1e08212926a1507/bin/tabr_scaling.py",
+      "local": "research_s6e10\\review_20261020\\sources\\yandex-research__tabular-dl-tabr__bin__tabr_scaling.py",
+      "bytes": 21916,
+      "sha256": "c0bcf0b32ab6915ccdd80bb015fbd09dea97625626809c70d4d4cbc894097913"
+    },
+    {
+      "repo": "yandex-research/tabular-dl-tabr",
+      "commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+      "path": "bin/tabr.py",
+      "url": "https://raw.githubusercontent.com/yandex-research/tabular-dl-tabr/17baa9082506f8e7a0f8d11bb1e08212926a1507/bin/tabr.py",
+      "local": "research_s6e10\\review_20261020\\sources\\yandex-research__tabular-dl-tabr__bin__tabr.py",
+      "bytes": 19189,
+      "sha256": "7ad417baa846f500aa5ae8546907936ed9d538dbaa6680086cc060e6edc6c841"
+    },
+    {
+      "repo": "yandex-research/tabular-dl-tabr",
+      "commit": "17baa9082506f8e7a0f8d11bb1e08212926a1507",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/yandex-research/tabular-dl-tabr/17baa9082506f8e7a0f8d11bb1e08212926a1507/README.md",
+      "local": "research_s6e10\\review_20261020\\sources\\yandex-research__tabular-dl-tabr__README.md",
+      "bytes": 16528,
+      "sha256": "741e3c7318fa619f3e765871fa4cabc7e7bd4d3ff5886e02c195cfb302018f9e"
+    },
+    {
+      "repo": "LAMDA-Tabular/TALENT",
+      "commit": "39b54024902955e51063a34bce17d514cd68ff42",
+      "path": "TALENT/configs/default/modernNCA.json",
+      "url": "https://raw.githubusercontent.com/LAMDA-Tabular/TALENT/39b54024902955e51063a34bce17d514cd68ff42/TALENT/configs/default/modernNCA.json",
+      "local": "research_s6e10\\review_20261020\\sources\\LAMDA-Tabular__TALENT__TALENT__configs__default__modernNCA.json",
+      "bytes": 585,
+      "sha256": "ea4dc58f92ea9c5d0be7e1c35b38d28d247b6d3c589da10e16c2dcd951a74700"
+    },
+    {
+      "repo": "LAMDA-Tabular/TALENT",
+      "commit": "39b54024902955e51063a34bce17d514cd68ff42",
+      "path": "TALENT/model/methods/modernNCA.py",
+      "url": "https://raw.githubusercontent.com/LAMDA-Tabular/TALENT/39b54024902955e51063a34bce17d514cd68ff42/TALENT/model/methods/modernNCA.py",
+      "local": "research_s6e10\\review_20261020\\sources\\LAMDA-Tabular__TALENT__TALENT__model__methods__modernNCA.py",
+      "bytes": 15409,
+      "sha256": "608c85e94714718fd5690a8096890b6232f2da94d0c94d5489734278df112d3e"
+    }
+  ]
+}

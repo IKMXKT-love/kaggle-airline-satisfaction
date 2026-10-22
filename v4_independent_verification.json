@@ -1,0 +1,11 @@
+{
+  "previous_files_unchanged": 12,
+  "code_signature_verified": true,
+  "kaggle_score": null,
+  "independently_queried_kaggle": false,
+  "confirmation_reconstructed": true,
+  "ten_folds_reconstructed": true,
+  "rows": 299844,
+  "oof_auc": 0.9614461831268378,
+  "submission_sha256": "75f42132377e87fa2a0a9c4c34610c094c01d6b9fa743bd5437e4ff9b71d5958"
+}

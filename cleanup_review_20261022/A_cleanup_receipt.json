@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "scope": "A only",
+  "deleted_files": 15533,
+  "deleted_logical_bytes": 4767249621,
+  "remaining_approved_files": [],
+  "preserved_file_count": 32112,
+  "preserved_hashed_files": 5981,
+  "unexpected_missing_files": [],
+  "unexpected_changed_files": [],
+  "preserved_hash_changes": [],
+  "B_download_files_preserved": 433,
+  "reparse_points_preserved": true,
+  "free_bytes_before": 122569138176,
+  "free_bytes_after": 127060955136,
+  "free_bytes_delta": 4491816960,
+  "finished_epoch": 1792652856.2610657,
+  "note": "Free-space delta is drive-wide and can include concurrent system activity. Logical deleted byte count is from the authorized manifest."
+}

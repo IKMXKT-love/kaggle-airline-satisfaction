@@ -1,0 +1,97 @@
+{
+  "baseline_auc": 0.9627989282529895,
+  "arms": {
+    "direct": {
+      "single_auc": 0.9600394440584911,
+      "primary_blend_auc": 0.9627774145701289,
+      "primary_blend_delta": {
+        "delta": -2.151368286080893e-05,
+        "approximate_se": 2.003132499193854e-05,
+        "interval95": [
+          -6.077507984500847e-05,
+          1.7747714123390608e-05
+        ]
+      },
+      "contrast_quantiles": [
+        -5.9894819259643555,
+        -4.271194276809692,
+        -1.6314680576324463,
+        5.198221025466917,
+        7.379861831665039
+      ],
+      "diagnostic_weights": {
+        "0.05": -4.2979357964822995e-06,
+        "0.2": -9.972907873745385e-05
+      }
+    },
+    "teacher_offset": {
+      "single_auc": 0.9594294297743873,
+      "primary_blend_auc": 0.9627355338034562,
+      "primary_blend_delta": {
+        "delta": -6.339444953339175e-05,
+        "approximate_se": 3.510635231577933e-05,
+        "interval95": [
+          -0.00013220290007231924,
+          5.414001005535742e-06
+        ]
+      },
+      "contrast_quantiles": [
+        -7.999999046325684,
+        -7.995155239105225,
+        -0.2382110357284546,
+        7.525909013748168,
+        7.9969162940979
+      ],
+      "diagnostic_weights": {
+        "0.05": -1.2977820963544495e-05,
+        "0.2": -0.00025169721842632775
+      }
+    },
+    "conditional_ratio": {
+      "single_auc": 0.9554107710316956,
+      "primary_blend_auc": 0.9623277552980215,
+      "primary_blend_delta": {
+        "delta": -0.00047117295496804573,
+        "approximate_se": 0.00010362935606023924,
+        "interval95": [
+          -0.0006742864928461147,
+          -0.00026805941708997683
+        ]
+      },
+      "contrast_quantiles": [
+        -1.6962231397628784,
+        -1.4002276420593263,
+        -0.397932767868042,
+        1.336020822525024,
+        2.22159743309021
+      ],
+      "diagnostic_weights": {
+        "0.05": -9.036549689867002e-05,
+        "0.2": -0.001607162289789854
+      }
+    }
+  },
+  "ratio_vs_controls": {
+    "direct": {
+      "delta": -0.00044965927210723685,
+      "approximate_se": 0.00010548527315978782,
+      "interval95": [
+        -0.000656410407500421,
+        -0.00024290813671405272
+      ]
+    },
+    "teacher_offset": {
+      "delta": -0.000407778505434654,
+      "approximate_se": 0.00010293890188677298,
+      "interval95": [
+        -0.0006095387531327291,
+        -0.00020601825773657896
+      ]
+    }
+  },
+  "teacher_alone_auc": 0.9556095655647076,
+  "teacher_10pct_blend_auc": 0.9622434590575942,
+  "passes_expansion_gate": false,
+  "cumulative_seconds": 367.02572870254517,
+  "caveat": "Conditional screen: public upstream OOF inherits early-stopping and indirect label dependence, not nested CV; historical folds seen."
+}

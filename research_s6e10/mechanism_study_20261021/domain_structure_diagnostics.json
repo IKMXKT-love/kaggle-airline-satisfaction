@@ -1,0 +1,79 @@
+{
+  "purpose": "Exploratory descriptive counts only; no fitted predictor or AUC gain evaluation.",
+  "rows": {
+    "competition_train": 699635,
+    "competition_test": 299844,
+    "original_after_exact_overlap_shield": 129859,
+    "original_removed_exact_overlap": 21
+  },
+  "shared_feature_count": 21,
+  "original_extra_predictors": [
+    "Inflight service"
+  ],
+  "rating_pattern_support": {
+    "definition": "Exact injective base-8 encoding of 13 ratings; context not in match key.",
+    "source_unique_patterns": 97865,
+    "competition_train_matching_source_fraction": 0.4108513725013757,
+    "conditional_column_shuffle_null_fractions": [
+      0.0007232342578630286,
+      0.000711799724141874,
+      0.0006789254396935545
+    ],
+    "null_preserves": "Each rating's empirical marginal within Gender/Customer Type/Travel/Class; destroys within-row rating dependence.",
+    "does_not_establish": "Source-row recovery, actual generator type, residual signal, or improvement over current pool."
+  },
+  "replicated_domain_cell_changes": {
+    "cell_columns": [
+      "Customer Type",
+      "Type of Travel",
+      "Class",
+      "Inflight wifi service",
+      "Online boarding"
+    ],
+    "random_split_seed": 58203,
+    "min_source_rows_per_half": 150,
+    "min_competition_rows_per_half": 500,
+    "eligible_cells": 70,
+    "cell_pairs": 2415,
+    "delta_log_odds_split_correlation": 0.9914750178547623,
+    "delta_log_odds_half_a_quantiles": [
+      -4.127880063860617,
+      -0.437133398051724,
+      -0.01442775123796658,
+      2.9767325950171437,
+      4.166827738349268
+    ],
+    "replicated_pair_order_reversals": 161,
+    "well_separated_pairs_all_four_halves": 1937,
+    "replicated_reversals_well_separated_all_four_halves": 2,
+    "limitations": "Exploratory aggregate-cell rates; not full-vector posteriors, not independent validation, not residual gain. Wald separation is descriptive and not multiple-testing-adjusted. Cell composition differences can produce reversals."
+  },
+  "extra_field_source_description": {
+    "Inflight service": {
+      "missing": 0,
+      "unique": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ],
+      "pearson_correlation_with_source_target": 0.2448563672411857
+    }
+  },
+  "input_sha256": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898"
+  },
+  "protected_before": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  },
+  "elapsed_seconds": 13.05833419999999,
+  "protected_files_unchanged": true
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "ref": "nina2025/ps-s6e10-02",
+    "currentVersionNumber": 8,
+    "lastUpdated": "2026-10-21T20:04:37.467Z",
+    "totalBytes": 40432679,
+    "title": "PS-s6e10-02",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "anhadmahajan06/ps-s6e10-predicting-airline-satisfaction",
+    "currentVersionNumber": 4,
+    "lastUpdated": "2026-10-21T18:08:09.52Z",
+    "totalBytes": 51157664,
+    "title": "PS S6E10 || Predicting Airline Satisfaction",
+    "subtitle": "Submission files, predictions, ensembles, and experiments for Kaggle competition",
+    "retained_version": null
+  },
+  {
+    "ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "currentVersionNumber": 10,
+    "lastUpdated": "2026-10-21T14:48:14.993Z",
+    "totalBytes": 162087014,
+    "title": "S6E10 goodpjw2008 extra members OOF",
+    "subtitle": "",
+    "retained_version": 9
+  },
+  {
+    "ref": "mayankraaz/s6e10-lb-surface-atlas",
+    "currentVersionNumber": 4,
+    "lastUpdated": "2026-10-21T08:01:43.13Z",
+    "totalBytes": 89940074,
+    "title": "S6E10 LB Surface Atlas",
+    "subtitle": "Scored S6E10 submissions, the 0.96206 summit basis, and a 181-member CV stack",
+    "retained_version": null
+  },
+  {
+    "ref": "nina2025/ps-s6e10-7",
+    "currentVersionNumber": 15,
+    "lastUpdated": "2026-10-20T11:07:43.08Z",
+    "totalBytes": 51270388,
+    "title": "ps-s6e10-7",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "beraterolelk/kaggle-grandmaster-tabular-stacking-benchmark",
+    "currentVersionNumber": 5,
+    "lastUpdated": "2026-10-19T14:11:52.267Z",
+    "totalBytes": 462200,
+    "title": "Kaggle Grandmaster Tabular Stacking Benchmark",
+    "subtitle": "OOF matrices, targets & Nelder-Mead simplex weights for 10 Kaggle benchmarks.",
+    "retained_version": null
+  },
+  {
+    "ref": "kozykappa/dataset-submission-for-lb-score-0-96192",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-17T20:51:30.64Z",
+    "totalBytes": 3189325,
+    "title": "S6E10 Dataset LB 0.96192",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "rabari9999/s6e10-top18-artifacts",
+    "currentVersionNumber": 5,
+    "lastUpdated": "2026-10-16T11:08:29.883Z",
+    "totalBytes": 51036078,
+    "title": "S6E10 Top 18 Artifacts",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "yangkuangou/playground-leaderboard-shakeup-s3-s6",
+    "currentVersionNumber": 2,
+    "lastUpdated": "2026-10-15T00:27:23.137Z",
+    "totalBytes": 7824213,
+    "title": "Playground Leaderboard Shake-up: S3-S6",
+    "subtitle": "Public/private ranks, matched scores and top-N retention from Meta Kaggle",
+    "retained_version": null
+  },
+  {
+    "ref": "dariushafshar/s6e10-golem-oof-library",
+    "currentVersionNumber": 6,
+    "lastUpdated": "2026-10-14T07:01:18.667Z",
+    "totalBytes": 0,
+    "title": "S6E10 OOF library - 21 models + 247-pair stack",
+    "subtitle": "OOF + test predictions of 21 models and a 247-pair stack on one frozen split",
+    "retained_version": 6
+  },
+  {
+    "ref": "najiama/s6e10-oof",
+    "currentVersionNumber": 9,
+    "lastUpdated": "2026-10-13T00:32:31.157Z",
+    "totalBytes": 78900142,
+    "title": "S6E10 OOF",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "kagankoral/s6e10-ablation-members-oof",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-11T15:23:22.243Z",
+    "totalBytes": 105202789,
+    "title": "S6E10 Ablation Members OOF",
+    "subtitle": "OOF + test predictions of 17 S6E10 models for stacking",
+    "retained_version": 1
+  },
+  {
+    "ref": "dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-10T13:53:11.663Z",
+    "totalBytes": 11012272,
+    "title": "S6E10 CatBoost all-categorical OOF and test",
+    "subtitle": "OOF and test probabilities, StratifiedKFold(5, seed 42), CV AUC 0.96067",
+    "retained_version": 1
+  },
+  {
+    "ref": "sachith7/s6e10-stack-oof-predictions",
+    "currentVersionNumber": 3,
+    "lastUpdated": "2026-10-10T08:06:36.39Z",
+    "totalBytes": 177310491,
+    "title": "S6E10 Stack OOF Predictions",
+    "subtitle": "OOF + test predictions for 22 S6E10 models on the standard 5-fold split",
+    "retained_version": 3
+  },
+  {
+    "ref": "dmitriykolmikov/s6e10-flight-distance-oof-lgb-xgb-cb",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-09T13:31:38.523Z",
+    "totalBytes": 3452051,
+    "title": "S6E10 Flight Distance OOF (LGB XGB CB)",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "alexanderwang2001/s6e10-frontier-reset-candidates",
+    "currentVersionNumber": 2,
+    "lastUpdated": "2026-10-08T16:36:11.49Z",
+    "totalBytes": 19589670,
+    "title": "S6E10 Frontier Reset Candidates",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "currentVersionNumber": 2,
+    "lastUpdated": "2026-10-08T15:15:28.443Z",
+    "totalBytes": 26013854,
+    "title": "S6E10 TabPFN/TabICL/NN/GBDT OOFs (shared folds)",
+    "subtitle": "Stack-ready OOF/test predictions on the shared seed-42 5-fold split",
+    "retained_version": 2
+  },
+  {
+    "ref": "dariushafshar/s6e10-original-data-aligned",
+    "currentVersionNumber": 2,
+    "lastUpdated": "2026-10-08T06:02:19.98Z",
+    "totalBytes": 11362063,
+    "title": "S6E10 Original Data + Lookup Tables + Model",
+    "subtitle": "CC0 original aligned to train.csv, plus per-value lookups and a fitted model",
+    "retained_version": null
+  },
+  {
+    "ref": "arunklenin/ps6e10-best-public-submissions",
+    "currentVersionNumber": 3,
+    "lastUpdated": "2026-10-07T09:28:56.96Z",
+    "totalBytes": 63982894,
+    "title": "PS6E10 | Best Public Submissions",
+    "subtitle": "Test-set submission.csv outputs of top public notebooks for Playground S6E10",
+    "retained_version": null
+  },
+  {
+    "ref": "amanatar/s6e10-forge-own-pairs",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-07T01:37:06.36Z",
+    "totalBytes": 21568540,
+    "title": "S6E10 Forge Own Pairs (OOF + test)",
+    "subtitle": "",
+    "retained_version": 1
+  },
+  {
+    "ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-06T18:39:29.17Z",
+    "totalBytes": 707927851,
+    "title": "S6E10 124 Public OOF and Test Predictions",
+    "subtitle": "",
+    "retained_version": 1
+  },
+  {
+    "ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-06T16:38:53.923Z",
+    "totalBytes": 37044032,
+    "title": "S6E10 TFM OOF and Test Predictions",
+    "subtitle": "OOF + test preds of 9 tabular foundation models, XGBoost and RealMLP",
+    "retained_version": 1
+  },
+  {
+    "ref": "kratosyan/s6e10-busyaprime-five-members-oof",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-06T07:08:31.44Z",
+    "totalBytes": 17980066,
+    "title": "S6E10 busyaprime five members OOF",
+    "subtitle": "OOF + test predictions of the 5 models of busyaprime's S6E10 notebook",
+    "retained_version": null
+  },
+  {
+    "ref": "nina2025/ps-s6e10-04",
+    "currentVersionNumber": 3,
+    "lastUpdated": "2026-10-04T23:51:31.117Z",
+    "totalBytes": 24550073,
+    "title": "PS-s6e10-04",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "currentVersionNumber": 7,
+    "lastUpdated": "2026-10-04T20:50:34.317Z",
+    "totalBytes": 252621832,
+    "title": "ps-s6e10-airline-satisfaction-artifacts",
+    "subtitle": "",
+    "retained_version": 7
+  },
+  {
+    "ref": "goodpjw2008/s6e10-tabpfn-member",
+    "currentVersionNumber": 2,
+    "lastUpdated": "2026-10-04T06:03:29.54Z",
+    "totalBytes": 52874279,
+    "title": "S6E10 TabPFN-3.5 full-context member (OOF + test)",
+    "subtitle": "Foundation-model members (TabPFN-3.5, TabICL), OOF and test, 5 folds",
+    "retained_version": null
+  },
+  {
+    "ref": "megayak/s6e10-oof-library",
+    "currentVersionNumber": 3,
+    "lastUpdated": "2026-10-03T03:36:39.7Z",
+    "totalBytes": 116625984,
+    "title": "S6E10 OOF Library",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "slimypunk03/ps-s6e10-dataset-2",
+    "currentVersionNumber": 5,
+    "lastUpdated": "2026-10-02T19:22:23.173Z",
+    "totalBytes": 34216621,
+    "title": "PS- s6e10 | Dataset 2",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "arhancanli12/s6e10-oof-test-predictions",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-01T05:42:24.987Z",
+    "totalBytes": 19425314,
+    "title": "S6E10 OOF & test predictions: LGBM XGB CatBoost",
+    "subtitle": "Same-fold OOF and test predictions of four S6E10 models for honest blending",
+    "retained_version": null
+  },
+  {
+    "ref": "slimypunk03/ps-s6e10-benchmark-models-starter",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2026-10-01T01:15:37.483Z",
+    "totalBytes": 10209298,
+    "title": "PS- s6e10 benchmark models starter",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "helenkwok/hk-property",
+    "currentVersionNumber": 5,
+    "lastUpdated": "2026-10-19T23:53:46.737Z",
+    "totalBytes": 5738661,
+    "title": "Milleleaf HK property market statistics",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "huynguyen5604/virus-win32-gpcode",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2023-12-19T06:43:32.633Z",
+    "totalBytes": 10958645,
+    "title": "Virus.Win32.Gpcode",
+    "subtitle": "",
+    "retained_version": null
+  },
+  {
+    "ref": "fedesoriano/gender-pay-gap-dataset",
+    "currentVersionNumber": 1,
+    "lastUpdated": "2022-02-02T19:40:06.387Z",
+    "totalBytes": 61650632,
+    "title": "Gender Pay Gap Dataset",
+    "subtitle": "The Gender Wage Gap: Extent, Trends, and Explanations for differences in Salary",
+    "retained_version": null
+  },
+  {
+    "ref": "pschale/mlb-pitch-data-20152018",
+    "currentVersionNumber": 2,
+    "lastUpdated": "2020-05-17T22:24:27.927Z",
+    "totalBytes": 388156397,
+    "title": "MLB Pitch Data 2015-2018",
+    "subtitle": "Pitches categorized by type (fastball, slider, etc), with game situation info",
+    "retained_version": null
+  },
+  {
+    "ref": "analystmasters/earn-your-6-figure-prize",
+    "currentVersionNumber": 10,
+    "lastUpdated": "2017-09-19T01:29:12.1Z",
+    "totalBytes": 11275621,
+    "title": "A 6-figure prize by soccer prediction",
+    "subtitle": "Clean, yet rich dataset of 7300 soccer matches ",
+    "retained_version": null
+  }
+]

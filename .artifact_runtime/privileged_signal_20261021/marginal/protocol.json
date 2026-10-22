@@ -1,0 +1,22 @@
+{
+  "primary": "conditional_integral",
+  "max_trees": 800,
+  "early_stopping": 80,
+  "minimum_source_auc_gain": 0.0003,
+  "require_logloss_not_worse": true,
+  "require_lower_positive": true,
+  "require_at_least_global_mixture_auc": true,
+  "source_protocol_sha256": "a3812aec50b456f388fe557a22289e7b7fbdff471bc833e52dae64ae6c83215c",
+  "input_sha256": {
+    "experiment_privileged_marginal.py": "23d13fc6a31ddebe81f40fd14d2d11333bc2efac16cac44b818f9d016a12a797",
+    "verify_privileged_marginal.py": "410bf0acfa803a9e8c9ccc288a3fd2e80257625e28511e18c8d18f83b5d71644",
+    "PRIVILEGED_MARGINAL_PLAN_20261021.md": "41308e9e6c731193a8b01b90efda13dd4cd1824c92cf10f0c13e486dc5da3913"
+  },
+  "clock": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\privileged_signal_20261021\\clock.json",
+  "resource_probe_seconds": 1.1219592000002194,
+  "projected_cumulative_seconds": 619.615032816447,
+  "source_extra_true_value_in_query_input": false,
+  "scored_rows_already_observed_in_previous_stage": true,
+  "competition_labels_used": false,
+  "caveat": "Source generalization and deployability gate only; no competition gain measured."
+}

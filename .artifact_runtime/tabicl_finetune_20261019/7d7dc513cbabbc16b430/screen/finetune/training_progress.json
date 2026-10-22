@@ -1,0 +1,29 @@
+{
+  "epochs": [
+    {
+      "train/epoch": 0,
+      "val/roc_auc": 0.9564969527608469,
+      "train/mean_loss": 0.25002209259436864,
+      "val/log_loss": 0.23476718366146088,
+      "step": 202,
+      "seconds": 123.5203607082367
+    },
+    {
+      "train/epoch": 1,
+      "val/roc_auc": 0.9560648985026119,
+      "train/mean_loss": 0.23670633056081167,
+      "val/log_loss": 0.23967109620571136,
+      "step": 404,
+      "seconds": 230.9883840084076
+    },
+    {
+      "train/epoch": 2,
+      "val/roc_auc": 0.9563367952612198,
+      "train/mean_loss": 0.23783607124397071,
+      "val/log_loss": 0.23887015879154205,
+      "step": 606,
+      "seconds": 337.6587073802948
+    }
+  ],
+  "steps": 606
+}

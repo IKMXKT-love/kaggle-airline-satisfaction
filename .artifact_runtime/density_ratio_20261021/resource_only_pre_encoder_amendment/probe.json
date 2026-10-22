@@ -1,0 +1,12 @@
+{
+  "step_seconds": {
+    "direct": 0.011774321875009264,
+    "teacher_offset": 0.011899596874968665,
+    "conditional_ratio": 0.011466493750049267
+  },
+  "worst_seconds_per_step": 0.011899596874968665,
+  "prediction_seconds_per_row": 1.939001464834611e-06,
+  "probe_discarded": true,
+  "peak_gb": 0.5011839866638184,
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+}

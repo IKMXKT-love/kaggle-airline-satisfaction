@@ -1,0 +1,10 @@
+{
+  "phase": "refit",
+  "arm": "privileged22",
+  "trees": 818,
+  "seconds": 3.5967893600463867,
+  "auc": 0.9954939472771615,
+  "logloss": 0.08270787447690964,
+  "fitted_rows": 97394,
+  "scored_rows": 32465
+}

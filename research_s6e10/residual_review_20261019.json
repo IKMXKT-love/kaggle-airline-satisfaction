@@ -1,0 +1,745 @@
+{
+  "rows": 699635,
+  "frozen_auc": 0.9616745833317898,
+  "note": "Descriptive only; legacy OOF outer stopping and historical selection caveats apply.",
+  "decompositions": {
+    "Class x Type of Travel": {
+      "within_group_error_share": 0.4514066799869025,
+      "across_group_error_share": 0.5485933200130975,
+      "groups": [
+        {
+          "group": "Business | Business travel",
+          "rows": 338272,
+          "row_share": 0.4834978238653012,
+          "global_error_endpoint_share": 0.46149752730356786,
+          "touched_error_ceiling": 0.02428436586108063,
+          "auc": 0.9402510562406157,
+          "nn_auc": 0.939717745546749,
+          "base_auc": 0.9397622110619113,
+          "halves": [
+            {
+              "rows": 169057,
+              "auc": 0.9404859530224219,
+              "new_minus_base": 0.0005271858402251528
+            },
+            {
+              "rows": 169215,
+              "auc": 0.9400174795295351,
+              "new_minus_base": 0.00044799195909106526
+            }
+          ]
+        },
+        {
+          "group": "Business | Personal Travel",
+          "rows": 3940,
+          "row_share": 0.005631507857668642,
+          "global_error_endpoint_share": 0.0063407467221837386,
+          "touched_error_ceiling": 0.0004838221644985467,
+          "auc": 0.8276449571921748,
+          "nn_auc": 0.8217300829067455,
+          "base_auc": 0.8297064467398849,
+          "halves": [
+            {
+              "rows": 1966,
+              "auc": 0.8459949464209964,
+              "new_minus_base": -0.001757422938189701
+            },
+            {
+              "rows": 1974,
+              "auc": 0.8100127551020408,
+              "new_minus_base": -0.0020484693877550475
+            }
+          ]
+        },
+        {
+          "group": "Eco Plus | Business travel",
+          "rows": 17557,
+          "row_share": 0.02509451356778892,
+          "global_error_endpoint_share": 0.02748120931711529,
+          "touched_error_ceiling": 0.002075284052655424,
+          "auc": 0.9460319267213404,
+          "nn_auc": 0.9453264942103491,
+          "base_auc": 0.9454319315016994,
+          "halves": [
+            {
+              "rows": 8871,
+              "auc": 0.9474981585272881,
+              "new_minus_base": 0.0003592146890951664
+            },
+            {
+              "rows": 8686,
+              "auc": 0.9445204552974197,
+              "new_minus_base": 0.0008280117755680161
+            }
+          ]
+        },
+        {
+          "group": "Eco Plus | Personal Travel",
+          "rows": 12462,
+          "row_share": 0.017812144904128583,
+          "global_error_endpoint_share": 0.01805539723961139,
+          "touched_error_ceiling": 0.0013655678552816537,
+          "auc": 0.8342106227156784,
+          "nn_auc": 0.8301636120513023,
+          "base_auc": 0.8344005717271266,
+          "halves": [
+            {
+              "rows": 6252,
+              "auc": 0.8218400838725076,
+              "new_minus_base": 1.1527127970922812e-05
+            },
+            {
+              "rows": 6210,
+              "auc": 0.8486682885739515,
+              "new_minus_base": -0.0005652711647449182
+            }
+          ]
+        },
+        {
+          "group": "Eco | Business travel",
+          "rows": 141612,
+          "row_share": 0.2024083986650182,
+          "global_error_endpoint_share": 0.21599751771042994,
+          "touched_error_ceiling": 0.014521067088017939,
+          "auc": 0.9362742877649595,
+          "nn_auc": 0.935695599184073,
+          "base_auc": 0.9358554519159337,
+          "halves": [
+            {
+              "rows": 70530,
+              "auc": 0.9363939221456753,
+              "new_minus_base": 0.00048050260347998197
+            },
+            {
+              "rows": 71082,
+              "auc": 0.9361630864623169,
+              "new_minus_base": 0.0003588971465593449
+            }
+          ]
+        },
+        {
+          "group": "Eco | Personal Travel",
+          "rows": 185792,
+          "row_share": 0.26555561114009446,
+          "global_error_endpoint_share": 0.27062760170709005,
+          "touched_error_ceiling": 0.016620377217574634,
+          "auc": 0.8353509760273385,
+          "nn_auc": 0.8336987166450934,
+          "base_auc": 0.835052473282133,
+          "halves": [
+            {
+              "rows": 93141,
+              "auc": 0.8380196854023697,
+              "new_minus_base": 3.69789272941512e-05
+            },
+            {
+              "rows": 92651,
+              "auc": 0.8327036426886523,
+              "new_minus_base": 0.0005794994768451023
+            }
+          ]
+        }
+      ],
+      "largest_error_pairs": [
+        {
+          "positive_group": "Business | Business travel",
+          "negative_group": "Business | Business travel",
+          "pair_weight": 0.18560669848985373,
+          "error_contribution": 0.011089804189435283,
+          "pair_auc": 0.9402510562406157
+        },
+        {
+          "positive_group": "Eco | Personal Travel",
+          "negative_group": "Eco | Personal Travel",
+          "pair_weight": 0.025043901734852454,
+          "error_contribution": 0.004123453977110696,
+          "pair_auc": 0.8353509760273387
+        },
+        {
+          "positive_group": "Eco | Personal Travel",
+          "negative_group": "Business | Business travel",
+          "pair_weight": 0.013510981656151505,
+          "error_contribution": 0.003960388381992991,
+          "pair_auc": 0.70687634083273
+        },
+        {
+          "positive_group": "Eco | Business travel",
+          "negative_group": "Business | Business travel",
+          "pair_weight": 0.027584546325375187,
+          "error_contribution": 0.003851945741787667,
+          "pair_auc": 0.860358561045311
+        },
+        {
+          "positive_group": "Eco | Personal Travel",
+          "negative_group": "Eco | Business travel",
+          "pair_weight": 0.015643705255808757,
+          "error_contribution": 0.003209428760179226,
+          "pair_auc": 0.7948421612592379
+        },
+        {
+          "positive_group": "Business | Business travel",
+          "negative_group": "Eco | Business travel",
+          "pair_weight": 0.21490492390366378,
+          "error_contribution": 0.0022422841012057996,
+          "pair_auc": 0.9895661576269376
+        },
+        {
+          "positive_group": "Eco | Business travel",
+          "negative_group": "Eco | Personal Travel",
+          "pair_weight": 0.05113060509993746,
+          "error_contribution": 0.002195850770014108,
+          "pair_auc": 0.9570540820762398
+        },
+        {
+          "positive_group": "Eco | Business travel",
+          "negative_group": "Eco | Business travel",
+          "pair_weight": 0.03193879788393468,
+          "error_contribution": 0.0020353226430847417,
+          "pair_auc": 0.9362742877649595
+        },
+        {
+          "positive_group": "Business | Business travel",
+          "negative_group": "Eco | Personal Travel",
+          "pair_weight": 0.34403983637961066,
+          "error_contribution": 0.0017619669770308091,
+          "pair_auc": 0.9948785960498869
+        },
+        {
+          "positive_group": "Eco Plus | Business travel",
+          "negative_group": "Business | Business travel",
+          "pair_weight": 0.004555349270961261,
+          "error_contribution": 0.0005266095276773326,
+          "pair_auc": 0.8843975518991964
+        },
+        {
+          "positive_group": "Eco | Personal Travel",
+          "negative_group": "Eco Plus | Business travel",
+          "pair_weight": 0.0017132252575715132,
+          "error_contribution": 0.000418960307217709,
+          "pair_auc": 0.755455212111697
+        },
+        {
+          "positive_group": "Business | Business travel",
+          "negative_group": "Eco Plus | Business travel",
+          "pair_weight": 0.02353537973182725,
+          "error_contribution": 0.0003335031916634948,
+          "pair_auc": 0.98582970848724
+        }
+      ]
+    },
+    "Customer Type x Type of Travel": {
+      "within_group_error_share": 0.5195417915872352,
+      "across_group_error_share": 0.48045820841276476,
+      "groups": [
+        {
+          "group": "Loyal Customer | Business travel",
+          "rows": 374901,
+          "row_share": 0.5358522658243227,
+          "global_error_endpoint_share": 0.5265398298838065,
+          "touched_error_ceiling": 0.026810133723767823,
+          "auc": 0.943477290856651,
+          "nn_auc": 0.9429707031257796,
+          "base_auc": 0.9429797483437914,
+          "halves": [
+            {
+              "rows": 187265,
+              "auc": 0.9437625908682203,
+              "new_minus_base": 0.0005156463278286338
+            },
+            {
+              "rows": 187636,
+              "auc": 0.9431947179286974,
+              "new_minus_base": 0.0004781971830708498
+            }
+          ]
+        },
+        {
+          "group": "Loyal Customer | Personal Travel",
+          "rows": 202089,
+          "row_share": 0.28884918564680157,
+          "global_error_endpoint_share": 0.29478803881501736,
+          "touched_error_ceiling": 0.017706954376806788,
+          "auc": 0.8352752097403422,
+          "nn_auc": 0.8333571471634824,
+          "base_auc": 0.835048138647256,
+          "halves": [
+            {
+              "rows": 101313,
+              "auc": 0.8371074087134673,
+              "new_minus_base": 3.30209425150052e-05
+            },
+            {
+              "rows": 100776,
+              "auc": 0.8334391550413267,
+              "new_minus_base": 0.000446555035477858
+            }
+          ]
+        },
+        {
+          "group": "disloyal Customer | Business travel",
+          "rows": 122540,
+          "row_share": 0.1751484702737856,
+          "global_error_endpoint_share": 0.17843642444730656,
+          "touched_error_ceiling": 0.012204025284194025,
+          "auc": 0.9261978235940087,
+          "nn_auc": 0.925624003155915,
+          "base_auc": 0.9258079429355281,
+          "halves": [
+            {
+              "rows": 61193,
+              "auc": 0.9255560977520023,
+              "new_minus_base": 0.0005042989349072213
+            },
+            {
+              "rows": 61347,
+              "auc": 0.9268318077083062,
+              "new_minus_base": 0.00027223264341558195
+            }
+          ]
+        },
+        {
+          "group": "disloyal Customer | Personal Travel",
+          "rows": 105,
+          "row_share": 0.00015007825509015415,
+          "global_error_endpoint_share": 0.00023570685386788788,
+          "touched_error_ceiling": 1.8064312522438997e-05,
+          "auc": 0.6953405017921147,
+          "nn_auc": 0.6729390681003584,
+          "base_auc": 0.7087813620071685,
+          "halves": [
+            {
+              "rows": 46,
+              "auc": 0.8166666666666668,
+              "new_minus_base": -0.004166666666666541
+            },
+            {
+              "rows": 59,
+              "auc": 0.5786163522012578,
+              "new_minus_base": -0.0062893081761006275
+            }
+          ]
+        }
+      ],
+      "largest_error_pairs": [
+        {
+          "positive_group": "Loyal Customer | Business travel",
+          "negative_group": "Loyal Customer | Business travel",
+          "pair_weight": 0.239719277914996,
+          "error_contribution": 0.01354958302164299,
+          "pair_auc": 0.9434772908566509
+        },
+        {
+          "positive_group": "Loyal Customer | Personal Travel",
+          "negative_group": "Loyal Customer | Business travel",
+          "pair_weight": 0.017709527470084693,
+          "error_contribution": 0.005424178482941501,
+          "pair_auc": 0.6937141043371068
+        },
+        {
+          "positive_group": "Loyal Customer | Personal Travel",
+          "negative_group": "Loyal Customer | Personal Travel",
+          "pair_weight": 0.029678559300437262,
+          "error_contribution": 0.0048887944559733425,
+          "pair_auc": 0.8352752097403423
+        },
+        {
+          "positive_group": "disloyal Customer | Business travel",
+          "negative_group": "Loyal Customer | Business travel",
+          "pair_weight": 0.02219592908164222,
+          "error_contribution": 0.0036103664802640185,
+          "pair_auc": 0.8373410517314153
+        },
+        {
+          "positive_group": "Loyal Customer | Personal Travel",
+          "negative_group": "disloyal Customer | Business travel",
+          "pair_weight": 0.015927528738607782,
+          "error_contribution": 0.0028433442389250406,
+          "pair_auc": 0.8214823978290573
+        },
+        {
+          "positive_group": "disloyal Customer | Business travel",
+          "negative_group": "Loyal Customer | Personal Travel",
+          "pair_weight": 0.037197107522523205,
+          "error_contribution": 0.0022974216747737634,
+          "pair_auc": 0.9382365504257918
+        },
+        {
+          "positive_group": "Loyal Customer | Business travel",
+          "negative_group": "Loyal Customer | Personal Travel",
+          "pair_weight": 0.4017341974299547,
+          "error_contribution": 0.0022449489390219857,
+          "pair_auc": 0.9944118550191052
+        },
+        {
+          "positive_group": "Loyal Customer | Business travel",
+          "negative_group": "disloyal Customer | Business travel",
+          "pair_weight": 0.21559782973538286,
+          "error_contribution": 0.0019754397148818185,
+          "pair_auc": 0.9908373858989842
+        },
+        {
+          "positive_group": "disloyal Customer | Business travel",
+          "negative_group": "disloyal Customer | Business travel",
+          "pair_weight": 0.019962491880437853,
+          "error_contribution": 0.001473275347263245,
+          "pair_auc": 0.9261978235940086
+        },
+        {
+          "positive_group": "disloyal Customer | Personal Travel",
+          "negative_group": "Loyal Customer | Personal Travel",
+          "pair_weight": 1.812062234686309e-05,
+          "error_contribution": 6.223009517513243e-06,
+          "pair_auc": 0.6565785987703383
+        },
+        {
+          "positive_group": "disloyal Customer | Personal Travel",
+          "negative_group": "Loyal Customer | Business travel",
+          "pair_weight": 1.081277753337826e-05,
+          "error_contribution": 4.742391395632152e-06,
+          "pair_auc": 0.5614085852601023
+        },
+        {
+          "positive_group": "disloyal Customer | Personal Travel",
+          "negative_group": "disloyal Customer | Business travel",
+          "pair_weight": 9.72475551354907e-06,
+          "error_contribution": 3.1960026042120586e-06,
+          "pair_auc": 0.6713539379206799
+        }
+      ]
+    },
+    "Class x Customer Type x Type of Travel": {
+      "within_group_error_share": 0.38079355699999257,
+      "across_group_error_share": 0.6192064430000075,
+      "groups": [
+        {
+          "group": "Business | Loyal Customer | Business travel",
+          "rows": 294376,
+          "row_share": 0.4207565373373259,
+          "global_error_endpoint_share": 0.38905596621636757,
+          "touched_error_ceiling": 0.020708707778226008,
+          "auc": 0.922946502388591,
+          "nn_auc": 0.9223023839844345,
+          "base_auc": 0.9222773334074976,
+          "halves": [
+            {
+              "rows": 147072,
+              "auc": 0.9229940186773666,
+              "new_minus_base": 0.0006978264471803053
+            },
+            {
+              "rows": 147304,
+              "auc": 0.9229013530286858,
+              "new_minus_base": 0.0006375487922721801
+            }
+          ]
+        },
+        {
+          "group": "Business | Loyal Customer | Personal Travel",
+          "rows": 3939,
+          "row_share": 0.0056300785409534974,
+          "global_error_endpoint_share": 0.006339982938318925,
+          "touched_error_ceiling": 0.0004837641992331577,
+          "auc": 0.8276410621424098,
+          "nn_auc": 0.8216823607659187,
+          "base_auc": 0.8297381464497368,
+          "halves": [
+            {
+              "rows": 1966,
+              "auc": 0.8459949464209964,
+              "new_minus_base": -0.001757422938189701
+            },
+            {
+              "rows": 1973,
+              "auc": 0.8100062280486808,
+              "new_minus_base": -0.0021313199379238146
+            }
+          ]
+        },
+        {
+          "group": "Business | disloyal Customer | Business travel",
+          "rows": 43896,
+          "row_share": 0.0627412865279753,
+          "global_error_endpoint_share": 0.07244156108720025,
+          "touched_error_ceiling": 0.005322998750604668,
+          "auc": 0.9353290779897241,
+          "nn_auc": 0.9348527730497909,
+          "base_auc": 0.9349277456916802,
+          "halves": [
+            {
+              "rows": 21985,
+              "auc": 0.9350349304249945,
+              "new_minus_base": 0.000518010379506606
+            },
+            {
+              "rows": 21911,
+              "auc": 0.9356109762318234,
+              "new_minus_base": 0.0002854865083973257
+            }
+          ]
+        },
+        {
+          "group": "Eco Plus | Loyal Customer | Business travel",
+          "rows": 14983,
+          "row_share": 0.021415452343007426,
+          "global_error_endpoint_share": 0.024899213287350005,
+          "touched_error_ceiling": 0.0018827777643281663,
+          "auc": 0.9419636761654078,
+          "nn_auc": 0.9410210838955404,
+          "base_auc": 0.9413844669086188,
+          "halves": [
+            {
+              "rows": 7600,
+              "auc": 0.9438872463768115,
+              "new_minus_base": 0.00033971014492761853
+            },
+            {
+              "rows": 7383,
+              "auc": 0.9399948809176147,
+              "new_minus_base": 0.000815920929676861
+            }
+          ]
+        },
+        {
+          "group": "Eco Plus | Loyal Customer | Personal Travel",
+          "rows": 12459,
+          "row_share": 0.01780785695398315,
+          "global_error_endpoint_share": 0.018051530374573205,
+          "touched_error_ceiling": 0.0013652735840957173,
+          "auc": 0.834060819354937,
+          "nn_auc": 0.8300150605513927,
+          "base_auc": 0.8342750845634351,
+          "halves": [
+            {
+              "rows": 6250,
+              "auc": 0.8215588118660183,
+              "new_minus_base": -7.041111076078188e-06
+            },
+            {
+              "rows": 6209,
+              "auc": 0.848645972661107,
+              "new_minus_base": -0.0005952782440595827
+            }
+          ]
+        },
+        {
+          "group": "Eco Plus | disloyal Customer | Business travel",
+          "rows": 2574,
+          "row_share": 0.0036790612247814933,
+          "global_error_endpoint_share": 0.002581996029765293,
+          "touched_error_ceiling": 0.00019747675810184186,
+          "auc": 0.8676654464948362,
+          "nn_auc": 0.8696755852422104,
+          "base_auc": 0.866427663937004,
+          "halves": [
+            {
+              "rows": 1271,
+              "auc": 0.8672075324622043,
+              "new_minus_base": 0.0021436337155633645
+            },
+            {
+              "rows": 1303,
+              "auc": 0.8684673118704326,
+              "new_minus_base": -5.9253407070802844e-05
+            }
+          ]
+        },
+        {
+          "group": "Eco Plus | disloyal Customer | Personal Travel",
+          "rows": 3,
+          "row_share": 4.2879501454329755e-06,
+          "global_error_endpoint_share": 3.866865038185743e-06,
+          "touched_error_ceiling": 2.963984275764064e-07,
+          "auc": 1.0,
+          "nn_auc": 1.0,
+          "base_auc": 1.0,
+          "halves": [
+            {
+              "rows": 2,
+              "auc": 1.0,
+              "new_minus_base": 0.0
+            },
+            {
+              "rows": 1,
+              "auc": null,
+              "new_minus_base": null
+            }
+          ]
+        },
+        {
+          "group": "Eco | Loyal Customer | Business travel",
+          "rows": 65542,
+          "row_share": 0.09368027614398937,
+          "global_error_endpoint_share": 0.11258465038008893,
+          "touched_error_ceiling": 0.008090057016921531,
+          "auc": 0.9373838781115048,
+          "nn_auc": 0.9366219671140579,
+          "base_auc": 0.9367709125760094,
+          "halves": [
+            {
+              "rows": 32593,
+              "auc": 0.9385431111059649,
+              "new_minus_base": 0.0006621565222351133
+            },
+            {
+              "rows": 32949,
+              "auc": 0.9362802178754951,
+              "new_minus_base": 0.0005707900271832989
+            }
+          ]
+        },
+        {
+          "group": "Eco | Loyal Customer | Personal Travel",
+          "rows": 185691,
+          "row_share": 0.2654112501518649,
+          "global_error_endpoint_share": 0.2703965255021253,
+          "touched_error_ceiling": 0.016610188342632143,
+          "auc": 0.8354628117491294,
+          "nn_auc": 0.8338317459056414,
+          "base_auc": 0.8351449924560244,
+          "halves": [
+            {
+              "rows": 93097,
+              "auc": 0.8380552717059891,
+              "new_minus_base": 3.211153600890526e-05
+            },
+            {
+              "rows": 92594,
+              "auc": 0.8328913434387377,
+              "new_minus_base": 0.0006237584484872771
+            }
+          ]
+        },
+        {
+          "group": "Eco | disloyal Customer | Business travel",
+          "rows": 76070,
+          "row_share": 0.10872812252102883,
+          "global_error_endpoint_share": 0.10341286733034102,
+          "touched_error_ceiling": 0.007377452985556386,
+          "auc": 0.8975796521114608,
+          "nn_auc": 0.89656687096714,
+          "base_auc": 0.8970999851240398,
+          "halves": [
+            {
+              "rows": 37937,
+              "auc": 0.8979282639092482,
+              "new_minus_base": 0.0006687299675636194
+            },
+            {
+              "rows": 38133,
+              "auc": 0.8972163931594646,
+              "new_minus_base": 0.00027753587165602056
+            }
+          ]
+        },
+        {
+          "group": "Eco | disloyal Customer | Personal Travel",
+          "rows": 101,
+          "row_share": 0.00014436098822957684,
+          "global_error_endpoint_share": 0.00023107620496488917,
+          "touched_error_ceiling": 1.7709477028798487e-05,
+          "auc": 0.6696969696969697,
+          "nn_auc": 0.6454545454545455,
+          "base_auc": 0.6858585858585858,
+          "halves": [
+            {
+              "rows": 44,
+              "auc": 0.7897435897435897,
+              "new_minus_base": -0.01025641025641022
+            },
+            {
+              "rows": 57,
+              "auc": 0.5784313725490196,
+              "new_minus_base": -0.009803921568627527
+            }
+          ]
+        }
+      ],
+      "largest_error_pairs": [
+        {
+          "positive_group": "Business | Loyal Customer | Business travel",
+          "negative_group": "Business | Loyal Customer | Business travel",
+          "pair_weight": 0.11826531603693897,
+          "error_contribution": 0.009112756246764797,
+          "pair_auc": 0.9229465023885911
+        },
+        {
+          "positive_group": "Eco | Loyal Customer | Personal Travel",
+          "negative_group": "Eco | Loyal Customer | Personal Travel",
+          "pair_weight": 0.025015199980826443,
+          "error_contribution": 0.004115930668378414,
+          "pair_auc": 0.8354628117491295
+        },
+        {
+          "positive_group": "Eco | Loyal Customer | Personal Travel",
+          "negative_group": "Business | Loyal Customer | Business travel",
+          "pair_weight": 0.009146200210087933,
+          "error_contribution": 0.0027736237451840094,
+          "pair_auc": 0.6967457871603553
+        },
+        {
+          "positive_group": "Eco | Loyal Customer | Business travel",
+          "negative_group": "Business | Loyal Customer | Business travel",
+          "pair_weight": 0.013726150451211578,
+          "error_contribution": 0.0018722447314862565,
+          "pair_auc": 0.8636001595537665
+        },
+        {
+          "positive_group": "Eco | Loyal Customer | Personal Travel",
+          "negative_group": "Eco | Loyal Customer | Business travel",
+          "pair_weight": 0.005742726983777216,
+          "error_contribution": 0.0018085625414370695,
+          "pair_auc": 0.6850690366186436
+        },
+        {
+          "positive_group": "Eco | disloyal Customer | Business travel",
+          "negative_group": "Eco | Loyal Customer | Personal Travel",
+          "pair_weight": 0.01356163851387717,
+          "error_contribution": 0.0015562067234283568,
+          "pair_auc": 0.8852493581925265
+        },
+        {
+          "positive_group": "Eco | Loyal Customer | Personal Travel",
+          "negative_group": "Eco | disloyal Customer | Business travel",
+          "pair_weight": 0.00989143731185113,
+          "error_contribution": 0.0013973073517556235,
+          "pair_auc": 0.858735661188341
+        },
+        {
+          "positive_group": "Business | Loyal Customer | Business travel",
+          "negative_group": "Eco | Loyal Customer | Personal Travel",
+          "pair_weight": 0.3234600668588717,
+          "error_contribution": 0.0012616631512355817,
+          "pair_auc": 0.9960994778629473
+        },
+        {
+          "positive_group": "Eco | disloyal Customer | Business travel",
+          "negative_group": "Business | Loyal Customer | Business travel",
+          "pair_weight": 0.00495848368671175,
+          "error_contribution": 0.0012250577923016061,
+          "pair_auc": 0.7529370126628346
+        },
+        {
+          "positive_group": "Eco | Loyal Customer | Personal Travel",
+          "negative_group": "Business | disloyal Customer | Business travel",
+          "pair_weight": 0.004356541215512579,
+          "error_contribution": 0.001183045788007592,
+          "pair_auc": 0.7284437976174643
+        },
+        {
+          "positive_group": "Business | Loyal Customer | Business travel",
+          "negative_group": "Eco | Loyal Customer | Business travel",
+          "pair_weight": 0.07425656622967584,
+          "error_contribution": 0.0011095913561207755,
+          "pair_auc": 0.9850573301128845
+        },
+        {
+          "positive_group": "Business | disloyal Customer | Business travel",
+          "negative_group": "Business | Loyal Customer | Business travel",
+          "pair_weight": 0.007457007394588199,
+          "error_contribution": 0.0010816250648522806,
+          "pair_auc": 0.8549518583504084
+        }
+      ]
+    }
+  }
+}

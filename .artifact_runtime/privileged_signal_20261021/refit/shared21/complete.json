@@ -1,0 +1,10 @@
+{
+  "phase": "refit",
+  "arm": "shared21",
+  "trees": 853,
+  "seconds": 3.9289066791534424,
+  "auc": 0.99481775263941,
+  "logloss": 0.0884719118475914,
+  "fitted_rows": 97394,
+  "scored_rows": 32465
+}

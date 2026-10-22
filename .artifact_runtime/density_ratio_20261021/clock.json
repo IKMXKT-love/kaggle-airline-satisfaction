@@ -1,0 +1,6 @@
+{
+  "started_epoch": 1792578183.6201715,
+  "deadline_epoch": 1792579083.6201715,
+  "seconds": 900,
+  "includes": "all data preparation, fingerprint checks, probe, six fits, predictions and independent verification"
+}

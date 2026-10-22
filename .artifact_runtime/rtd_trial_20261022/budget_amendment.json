@@ -1,0 +1,9 @@
+{
+  "timestamp": 1792682701.9887974,
+  "authorization": "Direct user instruction: more than two hours is acceptable; do not stop at the original two-hour limit.",
+  "previous_deadline_epoch": 1792689263.0,
+  "new_budget_seconds": 9000,
+  "new_deadline_epoch": 1792691063.0,
+  "training_recipe_changed": false,
+  "scoring_rule_changed": false
+}

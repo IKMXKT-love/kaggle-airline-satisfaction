@@ -1,0 +1,415 @@
+# S6E10 | Analysis-first: hidden rating-equality structure, route IDs & a 7-model stack
+
+**This notebook: 7 models → stack CV 0.961655** (about 2 h on a T4). The full 24-model version of the same pipeline reached CV 0.96169 / public LB 0.96120.
+
+| model (this run) | CV AUC |
+|---|---|
+| XGBoost depth 7 | 0.961247 |
+| XGBoost depth 5 | 0.961288 |
+| GLM → XGBoost from its margin | 0.961065 |
+| RealMLP, lean engineered view | **0.961316** |
+| RealMLP, 21 raw columns | 0.960986 |
+| CatBoost, own CTR on every column | 0.961144 |
+| LightGBM, Flight Distance as native categorical | 0.961027 |
+| **hill-climb on per-fold ranks** | **0.961655** |
+
+The goal of this notebook is **understanding first, models second**. All numbers are out-of-fold AUC on the same split, `StratifiedKFold(5, shuffle=True, random_state=42)`, so every OOF saved here stacks row for row with other public OOF libraries.
+
+**What is in here**
+1. **EDA**, including findings I have not seen written up elsewhere:
+   - **Rating-equality blocks.** When *wifi = departure/arrival-time = gate location*, 80 % of passengers are satisfied, against 12–33 % otherwise. Equal *food / seat / entertainment / cleanliness* ratings point the **other** way. The original survey shows the same structure.
+   - Ratings work like a step between 3 and 4, not a linear scale, and a rating of **0 means "not applicable"**.
+   - Personal travellers are satisfied almost only when wifi is 0 or 5.
+2. **Feature engineering.** Every block is justified by an EDA finding and kept or dropped by a cumulative CV ablation (table below).
+3. **Label-free meta features.** Models trained on the *original* survey act as a teacher, and auxiliary tasks predict each column from the other 20.
+4. **Models.** XGBoost ×2, GLM→XGBoost, LightGBM with *Flight Distance as a native categorical*, CatBoost with its own CTR, and RealMLP ×2. They are combined by a hill-climb on per-fold ranks.
+5. **A pytabkit pitfall worth knowing:** `RealMLP.fit(X, y)` without `X_val` silently holds out 20 % (`val_fraction=0.2`). Passing the validation fold took our RealMLP from **0.96072 to 0.96133**.
+
+### Feature ablation (one fast XGBoost, CV noise about ±0.00003)
+| step | CV AUC | Δ |
+|---|---|---|
+| raw 21 columns | 0.958681 | |
+| + cleaning, rating aggregates, block-equality, segment rules | 0.958515 | ≈0 for trees (kept for NNs) |
+| + Flight Distance as a route: composition + rating profile | 0.960195 | **+0.0017** |
+| + original-data priors + in-fold target encoding | 0.960346 | +0.00015 |
+| + original-data teacher logits | 0.960806 | **+0.00046** |
+| + auxiliary expected ratings | 0.960894 | +0.00009 |
+| + GPT-2 token keys of Flight Distance | 0.960942 | +0.00005 |
+
+### Credits
+Ideas I took from public work, with thanks:
+- **goodpjw2008**: route-ID features, the original-data teacher, auxiliary tasks, CatBoost CTR and GLM-margin XGBoost.
+- **Vladimir Demidov (yekenot)**: the RealMLP hyper-parameters.
+- **Arhan canli**: GPT-2 token fingerprints.
+- **megayak**: value counts and original-data target means.
+- **thisray**: the leaderboard-noise estimate.
+
+What is new here: the rating-equality block analysis, the segment/age/zero-rating findings, the RealMLP `val_fraction` fix, the native-categorical route LightGBM, and the per-fold-rank hill-climb.
+
+**Inputs:** the competition data, plus the dataset `teejmahal20/airline-passenger-satisfaction`. Turn on **GPU** and **Internet** (needed for `pytabkit` and the GPT-2 tokenizer).
+
+!pip install -q pytabkit tiktoken
+
+import glob, itertools, time, warnings
+import numpy as np, pandas as pd
+import matplotlib.pyplot as plt
+import xgboost as xgb, lightgbm as lgb
+from catboost import CatBoostClassifier
+from scipy.stats import rankdata
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold, KFold
+warnings.filterwarnings("ignore")
+
+FAST = False          # True: smaller models for a quick end-to-end run
+N_JOBS = 4            # Kaggle CPU cores
+DEV = "cuda"
+
+def find(name, hint):
+    return [p for p in glob.glob(f"/kaggle/input/**/{name}", recursive=True) if hint in p][0]
+
+TARGET = "satisfaction"
+CATS = ["Gender", "Customer Type", "Type of Travel", "Class"]
+RATINGS = ["Inflight wifi service", "Departure/Arrival time convenient", "Ease of Online booking",
+           "Gate location", "Food and drink", "Online boarding", "Seat comfort", "Inflight entertainment",
+           "On-board service", "Leg room service", "Baggage handling", "Checkin service", "Cleanliness"]
+NUMS = ["Age", "Flight Distance", "Departure Delay in Minutes", "Arrival Delay in Minutes"]
+BASE = NUMS + RATINGS + CATS
+DEP, ARR, FD, AGE = "Departure Delay in Minutes", "Arrival Delay in Minutes", "Flight Distance", "Age"
+WIFI, DATC, EOOB, GATE = "Inflight wifi service", "Departure/Arrival time convenient", "Ease of Online booking", "Gate location"
+
+tr = pd.read_csv(find("train.csv", "s6e10"))
+te = pd.read_csv(find("test.csv", "s6e10"))
+o = pd.concat([pd.read_csv(find("train.csv", "airline-passenger")), pd.read_csv(find("test.csv", "airline-passenger"))], ignore_index=True)
+o = o.drop(columns=[c for c in ["Unnamed: 0", "id", "Inflight service"] if c in o])
+o[TARGET] = (o[TARGET] == "satisfied").astype(int)
+tr[TARGET] = tr[TARGET].astype(int)
+y = tr[TARGET].values
+FOLDS = list(StratifiedKFold(5, shuffle=True, random_state=42).split(tr, y))
+print(tr.shape, te.shape, o.shape, "positive rate", y.mean().round(4))
+
+## 1. EDA
+
+### 1.1 Validation trust and data quality
+
+X_ = pd.concat([tr[BASE], te[BASE]]).copy()
+for c in CATS: X_[c] = X_[c].astype("category")
+yy = np.r_[np.zeros(len(tr)), np.ones(len(te))]
+from sklearn.model_selection import cross_val_predict
+p = cross_val_predict(xgb.XGBClassifier(n_estimators=200, max_depth=6, device=DEV, enable_categorical=True), X_, yy, cv=3, method="predict_proba")[:, 1]
+print("adversarial AUC train vs test:", round(roc_auc_score(yy, p), 4), "-> same distribution, CV is trustworthy")
+print("Arrival delay NaN:", tr[ARR].isna().sum(), "train /", te[ARR].isna().sum(), "test; max |arr-dep| =",
+      (tr[ARR] - tr[DEP]).abs().max(), "-> fill with departure delay + flag")
+print("zero delays: synthetic", (tr[DEP] == 0).mean().round(3), "| original", (o[DEP] == 0).mean().round(3), "(generator collapses delays)")
+z = (tr[RATINGS] == 0).sum(1)
+print("rating 0 = 'not applicable': wifi=0 satisfied rate", tr.loc[tr[WIFI] == 0, TARGET].mean().round(3),
+      "| rows with >=3 zero ratings", tr.loc[z >= 3, TARGET].mean().round(3))
+
+### 1.2 Ratings are a step at 4, and travel purpose changes everything
+For business travellers, levels 1, 2 and 3 have about the same target rate, and the jump comes at 4–5. For **personal** travellers, comfort ratings do not matter at all. Only wifi at 0 or 5 makes them satisfied.
+
+fig, ax = plt.subplots(1, 3, figsize=(17, 4))
+for a, c in zip(ax, [WIFI, "Seat comfort", "Online boarding"]):
+    tr.pivot_table(index=c, columns="Type of Travel", values=TARGET).plot(marker="o", ax=a)
+    a.set_title(c); a.set_ylabel("satisfied rate")
+plt.tight_layout(); plt.show()
+
+### 1.3 Hidden structure: *equality* inside rating blocks
+The **equality** of certain ratings predicts the target far beyond their values. For example, wifi = 1 with gate = 1 gives 78 % satisfied, while wifi = 1 with gate ≥ 3 gives 4 %. The original survey has the same pattern, so it is a property of the source data, not generator noise.
+
+| block | ratings | all equal | otherwise |
+|---|---|---|---|
+| A, pre-flight | wifi, dep/arr time, ease of booking, gate | **0.80** | 0.12–0.33 |
+| B, service | on-board, leg room, baggage, entertainment | **0.76** | 0.24–0.40 |
+| C, comfort | food, seat, entertainment, cleanliness | **0.29** (reversed) | 0.51–0.77 |
+
+BLOCKS = {"A": [WIFI, DATC, EOOB, GATE], "A3": [WIFI, DATC, GATE],
+          "B": ["On-board service", "Leg room service", "Baggage handling", "Inflight entertainment"],
+          "C": ["Food and drink", "Seat comfort", "Inflight entertainment", "Cleanliness"]}
+fig, ax = plt.subplots(1, 4, figsize=(18, 3.6))
+for a, (k, blk) in zip(ax, BLOCKS.items()):
+    eq = sum((tr[p] == tr[q]).astype(int) for p, q in itertools.combinations(blk, 2))
+    eqo = sum((o[p] == o[q]).astype(int) for p, q in itertools.combinations(blk, 2))
+    pd.DataFrame({"synthetic": tr[TARGET].groupby(eq).mean(), "original": o[TARGET].groupby(eqo).mean()}).plot.bar(ax=a)
+    a.set_title(f"block {k}: # equal pairs"); a.set_ylim(0, 1)
+plt.tight_layout(); plt.show()
+print(tr.pivot_table(index=WIFI, columns=GATE, values=TARGET).round(2))
+
+### 1.4 Flight Distance is a route ID, and Age has steps at 39 and 61
+I took the satisfaction rate left over after accounting for travel type × class × customer type × age band × distance bin, and grouped it by exact distance. On two random halves of the rows, these per-distance values correlate at **0.90**, while neighbouring distances are barely related. The model needs to know *which* distance it is, not how long the flight is. The per-route mean of the ratings, computed over train + test without labels, explains this effect: wifi correlates 0.61 with the route's leftover rate.
+
+seg = tr["Type of Travel"] + tr["Class"] + tr["Customer Type"] + pd.cut(tr[AGE], [0, 17, 24, 30, 38, 60, 90]).astype(str) \
+      + pd.qcut(tr[FD], 20, duplicates="drop").astype(str)
+res = y - pd.Series(y).groupby(seg.values).transform("mean").values
+h = np.random.RandomState(0).rand(len(y)) < .5
+g1 = pd.Series(res[h]).groupby(tr[FD].values[h]).agg(["mean", "size"]); g2 = pd.Series(res[~h]).groupby(tr[FD].values[~h]).mean()
+j = g1[g1["size"] >= 200].join(g2.rename("m2"), how="inner")
+fig, ax = plt.subplots(1, 2, figsize=(14, 4))
+ax[0].scatter(j["mean"], j["m2"], s=6); ax[0].set_title(f"route residual, half A vs half B (corr {np.corrcoef(j['mean'], j['m2'])[0,1]:.2f})")
+tr[tr["Type of Travel"] == "Business travel"].groupby(AGE)[TARGET].mean().plot(ax=ax[1], marker=".")
+ax[1].axvline(39, ls="--", c="gray"); ax[1].axvline(61, ls="--", c="gray"); ax[1].set_title("business travel: satisfied rate by exact age")
+plt.tight_layout(); plt.show()
+
+## 2. Feature engineering
+Every block maps to a finding above. Target encodings are computed **inside each CV fold**, with an inner 5-fold on the fitting part, so a row never sees its own label.
+
+def clean(df):
+    df = df.copy(); df["arr_na"] = df[ARR].isna().astype("int8"); df[ARR] = df[ARR].fillna(df[DEP]); return df
+
+def _pattern(df, blk):
+    return sum((df[a] == df[b]).astype("int16") * (2 ** i) for i, (a, b) in enumerate(itertools.combinations(blk, 2)))
+
+def row_features(df):
+    r = df[RATINGS]; out = {}
+    out["r_sum"] = r.sum(1); out["r_n45"] = (r >= 4).sum(1); out["r_n5"] = (r == 5).sum(1)
+    out["r_std"] = r.std(1); out["r_n0"] = (r == 0).sum(1)
+    out["comfort_sum"] = df[["Seat comfort", "Inflight entertainment", "Leg room service", "Cleanliness", "Food and drink", "On-board service"]].sum(1)
+    for k, blk in BLOCKS.items():
+        out[f"eq{k}"] = sum((df[a] == df[b]).astype("int8") for a, b in itertools.combinations(blk, 2))
+        out[f"std{k}"] = df[blk].std(1)
+        if k != "A3": out[f"pat{k}"] = _pattern(df, blk)
+    out["allA_val"] = np.where(out["eqA3"] == 3, df[WIFI], -1)
+    out["wifi_ext"] = df[WIFI].isin([0, 5]).astype("int8")
+    out["personal_wifi"] = np.where(df["Type of Travel"] == "Personal Travel", df[WIFI], -1)
+    out["age_39_60"] = df[AGE].between(39, 60).astype("int8")
+    out["delay_max"] = np.maximum(df[DEP], df[ARR]); out["delay_diff"] = df[ARR] - df[DEP]
+    out["delayed"] = (out["delay_max"] > 0).astype("int8")
+    return pd.concat([df, pd.DataFrame(out, index=df.index)], axis=1)
+
+def token_features(df):
+    # the generator writes numbers as GPT-2 text: ' 460' is one token, ' 694' is ' 6' + '94'
+    import tiktoken
+    enc = tiktoken.get_encoding("gpt2"); tok = {v: enc.encode(" " + str(int(v))) for v in df[FD].unique()}
+    df["fd_ntok"] = df[FD].map(lambda v: len(tok[v])).astype("int8")
+    df["fd_tok0"] = df[FD].map(lambda v: tok[v][0]).astype("int32"); df["fd_tok1"] = df[FD].map(lambda v: tok[v][-1]).astype("int32")
+    df["fd_d100"] = (df[FD] // 100).astype("int16"); df["fd_mod100"] = (df[FD] % 100).astype("int16")
+    return df
+
+def group_features(df, full):
+    g = full.groupby(FD)
+    agg = pd.DataFrame({"fd_cnt": g.size(), "fd_bus": g["Class"].apply(lambda s: (s == "Business").mean()),
+                        "fd_personal": g["Type of Travel"].apply(lambda s: (s == "Personal Travel").mean()),
+                        "fd_loyal": g["Customer Type"].apply(lambda s: (s == "Loyal Customer").mean()),
+                        "fd_age": g[AGE].mean(), "fd_rsum": g["r_sum"].mean()})
+    agg = agg.join(g[RATINGS + [DEP]].mean().add_prefix("fdm_")); agg["fd_eqA"] = g["eqA"].mean()
+    out = df[[FD]].join(agg, on=FD).drop(columns=FD)
+    for c in [WIFI, "Food and drink", "Inflight entertainment", "Online boarding"]:
+        out[f"dev_{c}"] = df[c] - out[f"fdm_{c}"]
+    out["fd_cls_cnt"] = df[[FD, "Class"]].merge(full.groupby([FD, "Class"]).size().rename("n").reset_index(), how="left", on=[FD, "Class"])["n"].values
+    out["age_cnt"] = df[AGE].map(full[AGE].value_counts()); out["rsum_vs_fd"] = df["r_sum"] - out["fd_rsum"]
+    return pd.concat([df, out.astype("float32")], axis=1)
+
+def orig_te(df, o, cols):
+    return pd.concat([df, pd.DataFrame({f"oTE_{c}": df[c].map(o.groupby(c)[TARGET].mean()).astype("float32") for c in cols}, index=df.index)], axis=1)
+
+def te_keys(df):
+    seg = df["Type of Travel"].str[0] + df["Class"].str[:5] + df["Customer Type"].str[0]
+    fdbin = pd.cut(df[FD], [0, 500, 1000, 1500, 2000, 3000, 6000], labels=False).astype(str)
+    agebin = pd.cut(df[AGE], [0, 17, 24, 30, 38, 60, 100], labels=False).astype(str)
+    return pd.DataFrame({"FD": df[FD], "AGE": df[AGE], "seg": seg, "seg_age": seg + "_" + agebin, "seg_fdbin": seg + "_" + fdbin,
+                         "patA": df["patA"], "patB": df["patB"], "patC": df["patC"],
+                         "wifi_gate": df[WIFI] * 10 + df[GATE], "wifi_datc": df[WIFI] * 10 + df[DATC],
+                         "fd_tok0": df["fd_tok0"], "fd_tok1": df["fd_tok1"], "fd_mod100": df["fd_mod100"]}, index=df.index)
+
+def encode_cats(df):
+    for c in CATS: df[c] = df[c].map({v: i for i, v in enumerate(sorted(df[c].unique()))}).astype("int8")
+    return df
+
+def target_encode(Ka, Kb, ya, smooth=20, inner=5, seed=0):
+    prior = ya.mean(); out_a = pd.DataFrame(index=Ka.index); out_b = pd.DataFrame(index=Kb.index)
+    def fit(k, yy):
+        g = pd.DataFrame({"k": k, "y": yy}).groupby("k")["y"].agg(["sum", "count"]); return (g["sum"] + prior * smooth) / (g["count"] + smooth)
+    for c in Ka.columns:
+        va = Ka[c].values; col = np.empty(len(va), dtype="float32")
+        for i, j in KFold(inner, shuffle=True, random_state=seed).split(va):
+            col[j] = pd.Series(va[j]).map(fit(va[i], ya[i])).fillna(prior).values
+        out_a[f"TE_{c}"] = col; out_b[f"TE_{c}"] = Kb[c].map(fit(va, ya)).fillna(prior).astype("float32").values
+    return out_a, out_b
+
+## 3. Label-free meta features
+- **`og_*` (teacher):** models trained only on the 130k original rows, which have clean labels, used to predict competition rows. On their own they score AUC **0.955** against competition labels, which suggests the competition target is the original decision function plus label noise.
+- **`aux_*`:** each rating and categorical column predicted from the other 20, without the label, cross-fitted over train + test. The expected rating given the rest of the row is a useful feature.
+
+def og_models(full, o):
+    out = {}; yo = o[TARGET].values
+    F_raw = encode_cats(pd.concat([full[BASE], o[BASE]], ignore_index=True)); Xf, Xo = F_raw.iloc[:len(full)], F_raw.iloc[len(full):]
+    out["og_xgb"] = xgb.XGBClassifier(n_estimators=600, learning_rate=0.05, max_depth=8, subsample=0.8, colsample_bytree=0.5,
+                                      device=DEV, random_state=0).fit(Xo, yo).predict_proba(Xf)[:, 1]
+    out["og_lgb"] = lgb.LGBMClassifier(n_estimators=1500, learning_rate=0.03, num_leaves=63, subsample=0.8, subsample_freq=1,
+                                       colsample_bytree=0.5, verbose=-1, n_jobs=N_JOBS, random_state=0).fit(Xo, yo).predict_proba(Xf)[:, 1]
+    rf = lambda d: row_features(clean(d[BASE]))
+    F_eng = encode_cats(pd.concat([rf(full), rf(o)], ignore_index=True))
+    out["og_xgb_eng"] = xgb.XGBClassifier(n_estimators=800, learning_rate=0.04, max_depth=7, subsample=0.8, colsample_bytree=0.5,
+                                          device=DEV, random_state=1).fit(F_eng.iloc[len(full):], yo).predict_proba(F_eng.iloc[:len(full)])[:, 1]
+    return pd.DataFrame(out).astype("float32")
+
+def aux_tasks(full):
+    coded = encode_cats(full[BASE].copy()); coded[ARR] = coded[ARR].fillna(coded[DEP]); out = {}
+    for c in RATINGS + ["Class", "Type of Travel", "Customer Type"]:
+        yc, uniq = pd.factorize(coded[c], sort=True); k = len(uniq); others = [f for f in BASE if f != c]
+        P = np.zeros((len(coded), k), dtype="float32")
+        for a, b in KFold(5, shuffle=True, random_state=0).split(coded):
+            m = xgb.XGBClassifier(n_estimators=150 if FAST else 300, learning_rate=0.1, max_depth=6, subsample=0.8, colsample_bytree=0.7,
+                                  device=DEV, random_state=0, objective="multi:softprob" if k > 2 else "binary:logistic")
+            P[b] = m.fit(coded.iloc[a][others], yc[a]).predict_proba(coded.iloc[b][others])
+        out[f"aux_p_{c}"] = P[np.arange(len(coded)), yc]
+        if c in RATINGS:
+            out[f"aux_ev_{c}"] = P @ np.asarray(uniq, dtype="float32"); out[f"aux_res_{c}"] = coded[c].values - out[f"aux_ev_{c}"]
+    A = pd.DataFrame(out); A["aux_sum_logp"] = np.log(np.clip(A[[c for c in A if c.startswith("aux_p_")]].values, 1e-6, 1)).sum(1)
+    return A.astype("float32")
+
+t0 = time.time()
+full_raw = pd.concat([tr[BASE], te[BASE]], ignore_index=True)
+META = pd.concat([og_models(full_raw, o), aux_tasks(full_raw)], axis=1)
+for c in [c for c in META if c.startswith("og_")]:
+    print(c, "AUC vs competition labels:", round(roc_auc_score(y, META[c].values[:len(tr)]), 5))
+    q = META[c].clip(1e-6, 1 - 1e-6); META[c] = np.log(q / (1 - q)).astype("float32")   # near-0/1 probabilities -> logits
+print(META.shape, f"{time.time()-t0:.0f}s")
+
+def build(tr, te, o):
+    tr, te, o = clean(tr), clean(te), row_features(clean(o))
+    tr, te = token_features(row_features(tr)), token_features(row_features(te))
+    full = pd.concat([tr, te], ignore_index=True)
+    tr, te = group_features(tr, full), group_features(te, full)
+    oc = [AGE, FD, WIFI, "Online boarding", "patA", "patB", "patC"]
+    tr, te = orig_te(tr, o, oc), orig_te(te, o, oc)
+    Ktr, Kte = te_keys(tr), te_keys(te)
+    tr = pd.concat([tr, META.iloc[:len(tr)].set_index(tr.index)], axis=1)
+    te = pd.concat([te, META.iloc[len(tr):].set_index(te.index)], axis=1)
+    Xtr = encode_cats(tr.drop(columns=["id", TARGET])); Xte = encode_cats(te.drop(columns=["id"]))
+    return Xtr, Xte[Xtr.columns], Ktr, Kte
+
+X, Xt, K, Kt = build(tr, te, o)
+print("features:", X.shape[1], "+", K.shape[1], "fold-safe target encodings")
+
+## 4. Models
+Every model uses the same folds. GBDTs early-stop on the validation fold, so their OOF is very slightly optimistic, as is standard. RealMLP trains for a fixed number of epochs; the validation fold goes to `fit()` only so that pytabkit does **not** carve out its own 20 % holdout.
+
+ES = 200 if FAST else 400
+def fit_xgb(Xa, ya, Xb, yb, Xt, seed, depth=7, colsample=0.5, mcw=10, lam=5):
+    p = dict(objective="binary:logistic", eval_metric="auc", device=DEV, tree_method="hist", seed=seed, learning_rate=0.04 if FAST else 0.02,
+             max_depth=depth, subsample=0.8, colsample_bytree=colsample, min_child_weight=mcw, reg_lambda=lam, max_bin=512)
+    m = xgb.train(p, xgb.DMatrix(Xa, ya), 20000, evals=[(xgb.DMatrix(Xb, yb), "v")], early_stopping_rounds=ES, verbose_eval=False)
+    it = (0, m.best_iteration + 1)
+    return m.predict(xgb.DMatrix(Xb), iteration_range=it), m.predict(xgb.DMatrix(Xt), iteration_range=it)
+
+def fit_glm_xgb(Xa, ya, Xb, yb, Xt, seed):
+    # GLM on target-rate / prior logits, then XGBoost boosted from its margin
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.preprocessing import StandardScaler
+    g = [c for c in Xa if c.startswith(("TE_", "oTE_", "og_", "aux_ev_"))]
+    lg = lambda d: np.log(np.clip(d, 1e-4, 1 - 1e-4) / (1 - np.clip(d, 1e-4, 1 - 1e-4)))
+    tf = lambda d: np.column_stack([lg(d[c].fillna(0.5).values) if c.startswith(("TE_", "oTE_")) else d[c].values for c in g])
+    sc = StandardScaler().fit(tf(Xa)); glm = LogisticRegression(C=0.05, max_iter=500).fit(sc.transform(tf(Xa)), ya)
+    ma, mb, mt = (glm.decision_function(sc.transform(tf(d))) for d in (Xa, Xb, Xt))
+    p = dict(objective="binary:logistic", eval_metric="auc", device=DEV, tree_method="hist", seed=seed,
+             learning_rate=0.03, max_depth=4, subsample=0.8, colsample_bytree=0.5, min_child_weight=20, reg_lambda=5)
+    m = xgb.train(p, xgb.DMatrix(Xa, ya, base_margin=ma), 20000, evals=[(xgb.DMatrix(Xb, yb, base_margin=mb), "v")],
+                  early_stopping_rounds=300, verbose_eval=False)
+    it = (0, m.best_iteration + 1)
+    return m.predict(xgb.DMatrix(Xb, base_margin=mb), iteration_range=it), m.predict(xgb.DMatrix(Xt, base_margin=mt), iteration_range=it)
+
+def fit_lgb_cat(Xa, ya, Xb, yb, Xt, seed):
+    # Flight Distance (route) and Age as native LightGBM categoricals: highest-weight GBDT in our stack
+    cc = [FD, AGE, "patA", "patB", "patC"]
+    Xa, Xb, Xt = (d.astype({c: "category" for c in cc}) for d in (Xa, Xb, Xt))
+    for c in cc:
+        u = sorted(set(Xa[c].cat.categories) | set(Xb[c].cat.categories) | set(Xt[c].cat.categories))
+        for d in (Xa, Xb, Xt): d[c] = d[c].cat.set_categories(u)
+    m = lgb.LGBMClassifier(n_estimators=20000, learning_rate=0.04 if FAST else 0.02, num_leaves=127, min_child_samples=50,
+                           subsample=0.8, subsample_freq=1, colsample_bytree=0.4, reg_lambda=5, max_bin=255, cat_smooth=50, cat_l2=10,
+                           min_data_per_group=200, max_cat_threshold=64, random_state=seed, n_jobs=N_JOBS, verbose=-1)
+    m.fit(Xa, ya, eval_set=[(Xb, yb)], eval_metric="auc", callbacks=[lgb.early_stopping(ES, verbose=False)])
+    return m.predict_proba(Xb)[:, 1], m.predict_proba(Xt)[:, 1]
+
+TWIN = NUMS + RATINGS   # categorical twin of every raw numeric column (per-value embedding / CTR)
+def fit_cat_ctr(Xa, ya, Xb, yb, Xt, seed, depth=7, lr=0.05, l2=10):
+    # CatBoost's own ordered target statistics on every raw column as categorical; none of our TE
+    cats = CATS + [c + "_cat" for c in TWIN] + ["patA", "patB", "patC"]
+    def prep(d):
+        d = d[[c for c in d if not c.startswith("TE_")]].copy()
+        for c in TWIN: d[c + "_cat"] = d[c].fillna(-1).astype("int32")
+        return d.astype({c: "int32" for c in cats})
+    Xa, Xb, Xt = prep(Xa), prep(Xb), prep(Xt)
+    m = CatBoostClassifier(iterations=20000, learning_rate=lr, depth=depth, l2_leaf_reg=l2, border_count=254, eval_metric="AUC",
+                           task_type="GPU", random_seed=seed, od_type="Iter", od_wait=ES, cat_features=cats, verbose=0)
+    m.fit(Xa, ya, eval_set=(Xb, yb), use_best_model=True)
+    return m.predict_proba(Xb)[:, 1], m.predict_proba(Xt)[:, 1]
+
+REALMLP = dict(n_ens=8, n_epochs=4, batch_size=256, use_early_stopping=False, lr=0.053, wd=0.0236, sq_mom=0.988,
+               lr_sched="flat_anneal", wd_sched="cos_log_15", first_layer_lr_factor=0.25, embedding_size=5,
+               max_one_hot_cat_size=18, hidden_sizes=[512, 256, 128], act="silu", p_drop=0.05, p_drop_sched="expm4t",
+               plr_hidden_1=16, plr_hidden_2=8, plr_act_name="gelu", plr_lr_factor=0.1151, plr_sigma=2.33,
+               ls_eps=0.01, ls_eps_sched="sqrt_cos", add_front_scale=False, bias_init_mode="neg-uniform-dynamic-2",
+               tfms=["one_hot", "median_center", "robust_scale", "smooth_clip", "embedding", "l2_normalize"])
+
+def _nn_prep(*dfs):
+    cats = CATS + [c + "_cat" for c in TWIN]; out = []
+    for d in dfs:
+        d = d.fillna(-1).astype("float32")
+        for c in TWIN: d[c + "_cat"] = d[c].astype("int32")
+        d[cats] = d[cats].astype("int32").astype("category"); out.append(d)
+    return out, cats
+
+def fit_realmlp(Xa, ya, Xb, yb, Xt, seed, view="lean", epochs=3):
+    from pytabkit import RealMLP_TD_Classifier
+    if view == "lean":   # raw + route profile + counts + teacher logits + TE + aux expected ratings
+        cols = [c for c in Xa if c in BASE or c.startswith(("fd_", "fdm_", "og_", "TE_", "aux_ev_")) or c in ("age_cnt", "arr_na")]
+    else:                # the 21 raw columns only: weaker alone, the most diverse member of the stack
+        cols = BASE
+    (Xa, Xb, Xt), cats = _nn_prep(Xa[cols], Xb[cols], Xt[cols])
+    m = RealMLP_TD_Classifier(**{**REALMLP, "n_epochs": epochs}, device=DEV, random_state=seed, verbosity=0)
+    m.fit(Xa, ya, Xb, yb, cat_col_names=cats)   # pass X_val! otherwise pytabkit holds out 20% (val_fraction=0.2)
+    return m.predict_proba(Xb)[:, 1], m.predict_proba(Xt)[:, 1]
+
+OOF, TEST = {}, {}
+def run_cv(name, fit, seed=0):
+    t0 = time.time(); oof, pred = np.zeros(len(X)), np.zeros(len(Xt))
+    for k, (a, b) in enumerate(FOLDS):
+        ta, tb = target_encode(K.iloc[a], K.iloc[b], y[a], seed=k); _, tt = target_encode(K.iloc[a], Kt, y[a], seed=k)
+        Xa, Xb, Xtt = pd.concat([X.iloc[a], ta], axis=1), pd.concat([X.iloc[b], tb], axis=1), pd.concat([Xt, tt], axis=1)
+        oof[b], p = fit(Xa, y[a], Xb, y[b], Xtt, seed + k); pred += p / len(FOLDS)
+        print(f"  {name} fold {k}: {roc_auc_score(y[b], oof[b]):.6f}")
+    OOF[name], TEST[name] = oof, pred
+    print(f"{name:14s} CV {roc_auc_score(y, oof):.6f}  ({time.time()-t0:.0f}s)")
+
+from functools import partial
+run_cv("xgb", fit_xgb)
+run_cv("xgb_d5", partial(fit_xgb, depth=5, colsample=0.3, mcw=20, lam=10))
+run_cv("glm_xgb", fit_glm_xgb)
+run_cv("realmlp_lean", partial(fit_realmlp, view="lean", epochs=3))
+run_cv("realmlp_raw", partial(fit_realmlp, view="raw", epochs=4))
+run_cv("cat_ctr", fit_cat_ctr)
+run_cv("lgb_route_cat", fit_lgb_cat)
+
+## 5. Ensemble: hill-climb on per-fold ranks
+The test predictions are the average of 5 fold models, so a calibration shift between folds should not count against a model. I rank-normalise each OOF **within its fold** before blending. Greedy forward selection with replacement then sets the weights (Caruana). On our full 24-model stack this matched a nested-CV weight search: 0.961670 against 0.961651.
+
+def fold_rank(p):
+    q = np.zeros(len(p))
+    for _, b in FOLDS: q[b] = rankdata(p[b]) / len(b)
+    return q
+names = list(OOF)
+O = np.column_stack([fold_rank(OOF[n]) for n in names]); T = np.column_stack([rankdata(TEST[n]) / len(te) for n in names])
+w = np.zeros(len(names)); best = 0
+for _ in range(50):
+    sc = [roc_auc_score(y, (O @ w + O[:, j]) / (w.sum() + 1)) for j in range(len(names))]
+    j = int(np.argmax(sc))
+    if sc[j] <= best + 1e-7: break
+    best = sc[j]; w[j] += 1
+w /= w.sum()
+print("weights:", {n: round(x, 3) for n, x in zip(names, w) if x > 0})
+print(f"hill-climb CV AUC: {best:.6f}")
+pd.DataFrame({"id": te["id"], TARGET: T @ w}).to_csv("submission.csv", index=False)
+pd.DataFrame({"id": tr["id"], **OOF}).to_parquet("oof_predictions.parquet", index=False)
+pd.DataFrame({"id": te["id"], **TEST}).to_parquet("test_predictions.parquet", index=False)
+pd.read_csv("submission.csv").head()
+
+## 6. What did not help (so you can skip it)
+- **Original rows as extra training data:** −0.0002 at full weight. The original data has a different joint distribution (adversarial AUC 0.83), so use it as a teacher, not as rows.
+- **Rating aggregates and block-equality features for GBDTs:** 0 gain, because depth-7 trees learn them from raw ratings on 700k rows. They still help the NN views.
+- **Target encodings by segment × Flight Distance, an age profile, or a Flight Distance × Age key:** 0.
+- **A bagged (10-model) teacher instead of one:** AUC 0.95517 against 0.95514, not worth it.
+- **XGBoost with native categorical Flight Distance:** weaker than the LightGBM version and gets 0 weight in the stack.
+- **A level-2 LightGBM stacker on OOF logits plus segment features:** 0.96145, worse than a linear blend at 0.96151.
+- **Row `id` order:** no autocorrelation of target or residuals, so there is no leak.
+- **Residual scan of the final stack** (split-half reliability by distance, age, rating vectors, segments and delays): about 0 everywhere. What is left looks like label noise.

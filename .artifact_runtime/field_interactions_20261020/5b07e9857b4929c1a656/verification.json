@@ -1,0 +1,29 @@
+{
+  "verified": true,
+  "checks": {
+    "0": {
+      "additive": {
+        "checkpoint_max_difference": 0.0,
+        "selected_epoch": 16
+      },
+      "ffm": {
+        "checkpoint_max_difference": 0.0,
+        "selected_epoch": 2
+      }
+    },
+    "1": {
+      "additive": {
+        "checkpoint_max_difference": 0.0,
+        "selected_epoch": 11
+      },
+      "ffm": {
+        "checkpoint_max_difference": 0.0,
+        "selected_epoch": 1
+      }
+    }
+  },
+  "encoder_refitted_and_identical": true,
+  "checkpoint_predictions_rebuilt": true,
+  "outer_scope_and_gates_rebuilt": true,
+  "protected_files_unchanged": true
+}

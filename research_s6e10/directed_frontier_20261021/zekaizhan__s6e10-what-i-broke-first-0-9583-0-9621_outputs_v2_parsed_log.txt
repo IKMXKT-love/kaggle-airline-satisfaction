@@ -1,0 +1,96 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+competition dir: /kaggle/input/competitions/playground-series-s6e10
+train: (699635, 23) | test: (299844, 1) | positive rate: 0.443573
+                   stage      auc     kind
+        Competition only 0.958330 baseline
++ original rows (concat) 0.958197 negative
+ + teacher / stats / kNN 0.958532 positive
+        Best single GBDT 0.958879 positive
+    4-member logit stack 0.960909 positive
+       RealMLP 128-epoch 0.957489 negative
+   RealMLP public recipe 0.960791 positive
+          124 public OOF 0.962056 positive
+          182 public OOF 0.962106 positive
+        199 public + own 0.962142 positive
+
+Delta baseline -> final: +0.003812
+Delta 128-epoch RealMLP -> 6-epoch: +0.003302
+Business + wifi=0: 0.9310
+Eco + wifi=0     : 0.8106
+Insight: ratings are numeric 0–5, but 0 is a missing-service flag. Do not declare them categorical.
+             representation      oof
+           Competition only 0.958330
+Competition + original rows 0.958197
+      Teacher + stats + kNN 0.958532
+concat delta: -0.000133 | transfer delta: +0.000202
+leaky fold AUCs: ['0.7699', '0.7658', '0.7598', '0.7685', '0.7663']
+safe  fold AUCs: ['0.5059', '0.4959', '0.4938', '0.4974', '0.5011']
+Insight: the fake ID has no real relationship with the target. The leaky encoder still scores ~0.77.
+         model      auc  group
+      LightGBM 0.958879 single
+      CatBoost 0.958852 single
+       XGBoost 0.958856 single
+   3-GBDT rank 0.959903  blend
+4-member logit 0.960909  blend
+GBDT spread: 0.000027
+3-GBDT rank gain: +0.001024 | RealMLP stack gain over 3-GBDT rank: +0.001006
+128-epoch : [0.958044, 0.957105, 0.95871, 0.958144, 0.958416] OOF 0.957489
+public    : [0.961086, 0.959844, 0.961591, 0.960993, 0.960673] OOF 0.960791
+delta     : +0.003302
+           stage  members      auc
+ 124 (+nj blend)      124 0.962056
+      135 (+TFM)      135 0.962104
+    137 (+golem)      137 0.962111
+175 (+artifacts)      175 0.962102
+    181 (+forge)      181 0.962107
+   182 (with nj)      182 0.962106
+198 (honest raw)      198 0.962136
+      199 (+own)      199 0.962142
+
+C grid:
+       C      auc
+0.000300 0.962090
+0.001000 0.962133
+0.003000 0.962142
+0.010000 0.962131
+1.000000 0.962118
+
+Leave-one-source-out at C=0.003:
+       source  dropped     delta
+   cdeotte124      123 -0.000065
+          TFM       11 -0.000041
+goodpjw_extra       17 -0.000036
+        golem        3 -0.000007
+     amanatar        6 +0.000001
+          own        1 +0.000002
+  sadamtorres       38 +0.000006
+
+Family-wise scaling: 0.962143 vs flat 0.962142 -> +0.000001 (noise, disabled).
+SD of absolute AUC      : 0.000672
+SE of difference, rho=.999: 0.000030
+95% band width          : 0.002634
+Insight: selecting a member on +1e-4 public LB is selecting noise.
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 691390 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Support files will be in __results___files/
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Writing 414502 bytes to __results__.html

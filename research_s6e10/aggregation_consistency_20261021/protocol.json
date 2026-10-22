@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-21",
+  "kind": "label-free descriptive audit",
+  "samples": "three disjoint OOF samples A/B/C and two disjoint test samples A/B; 20000 rows each",
+  "seed": 202610211,
+  "columns": "first 246 cached public members; assert manifest order",
+  "fits": 0,
+  "base_inferences": 0,
+  "labels_read": false,
+  "submissions": 0,
+  "pair_selection": "same author and name-inferred family; rank correlation >.97 in OOF A and B; rank-difference SD >.002 in OOF A and B",
+  "descriptive_flag": "test/OOF rank-difference SD ratio <.8 in both A and B; not a significance test",
+  "limits": [
+    "not an AUC comparison",
+    "not a covariate-shift attribution",
+    "row sampling cannot establish retraining uncertainty",
+    "name-based family classification is approximate",
+    "no rescaling or new prediction recipe"
+  ],
+  "protected_before": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  }
+}

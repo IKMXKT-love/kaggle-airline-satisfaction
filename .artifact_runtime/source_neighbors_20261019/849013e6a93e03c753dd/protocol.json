@@ -1,0 +1,55 @@
+{
+  "k": [
+    16,
+    64
+  ],
+  "shrink": 20,
+  "group_columns": [
+    "Gender",
+    "Customer Type",
+    "Type of Travel",
+    "Class"
+  ],
+  "numeric_scale": "source_IQR_clip8_delay_log1p",
+  "neighbors_from_public_source_only": true,
+  "competition_targets_used_for_neighbors": false,
+  "workers": 2,
+  "max_projected_feature_seconds": 600,
+  "screen_gate": 0.0002,
+  "confirmation_gate": 0.0001,
+  "new_xgb_weight_within_v4": 0.28,
+  "one_feature_variant": true,
+  "hashes": {
+    "experiment_source_neighbors.py": "dd27018f4a1b269edd67bd34f947df06ebdd54a0bd65331565fd38e753c1c8da",
+    "experiment_transfer.py": "ea8c99c9e9f507647648d8bd2b450d2960e86e3c35f4db3dbe8e5fd98a2fe66a",
+    "experiment_followup.py": "86605e80950028e3f2a08c5250f62ace1917836f87ad787c335fb8ead6f3a748",
+    "v3_features.py": "74312b65e935a069db027ab6b9532392f48f51aa1f4f58b4ee1864be71d31047",
+    "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+    "optimized_training.py": "a6a7ccfe7d5bb8d18cadc547a1c0aa201ec64b23403cf5aa365b88a0c55ff485",
+    "v2_training.py": "ce21ebc2649804738ba7e262e97fbd2666a88ee2466269dc35df292344009db7",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898",
+    "follow_protocol": "94e484671f8c6b0aa6ca2f3e4db242b3f4352256b55a3693378bd1e5ae347451",
+    "follow_choice": "30ddc5bb074278a41904203b65c277cfdeb7433a2df8445437531b6fed82a0d0"
+  },
+  "follow": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1",
+  "protected": {
+    "main.py": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+    "submission_optimized.csv": "797e4f7307deb3d6fbeb6224f5d26fe5e5b8f49769cb11c0650e633784b96e94",
+    "submission_v3.csv": "e3b94a849f853e682418197f59c1d0eaf4370a895cfa0b6076400d74b4d8516e",
+    "submission_v3_oof.csv": "7413a15b8be0053dc217e1fa735619ef5aa5e5c8ff82ec5d59123f36b96afdb1",
+    "v3_recipe.json": "b2b0d5f5577cf13dd875e5be17ec206f302ada2e4b2199d73538871519d54f3b",
+    "v3_confirmation.json": "e9f0da7e64db7754394c5dd58a95a12e1616999a806bb9e309c0f642e1c8e37d",
+    "v3_verification.json": "5623ead8b1e6e9120d55f454115efa240ff0ce97cf6753f5642ad8b1a7fa0a0e",
+    "submission_v3_metrics.json": "2294651a83115b6eaafcff59bd3d10b0f7de31053a10167bfe44c37b60837cb2",
+    "leaderboard_feedback.json": "ac8326f8f9e783240112188aa26f089a272bd22e5ab62559fef97e26e043c5d5",
+    "submission_v4_lean_realmlp_trial.csv": "9b9c360a926109d778d839662f98ad36a732e1cee2b897bee39870d0f5249beb",
+    "submission_v4_lean_realmlp_trial.json": "0fe8c9287406d6d969941cbacda79293db2b74bf82e6bc1b1c84a7109a96ed14",
+    "submission_v4_lean_realmlp_trial_public_result.json": "218d42668fde2093c617a56fe8c5ae32a31c33dd815e826579692f496ac041d5"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "ref": "sai10py/s6e10-exp7-original-prior-transfer",
+  "pull": {
+    "tag": "sai10py__s6e10-exp7-original-prior-transfer_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/sai10py/s6e10-exp7-original-prior-transfer",
+    "bytes": 73559,
+    "sha256": "401c3dc4839b41a28990902f45d18f151995db3ca806920d84c8ea2e0fcd408b",
+    "elapsed": 1.6837831999996524
+  },
+  "version": 1,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 1,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 139829090,
+    "ref": "sai10py/s6e10-exp7-original-prior-transfer",
+    "title": "S6E10 Exp7 Original Prior Transfer",
+    "author": "Sairaj Adhav",
+    "slug": "s6e10-exp7-original-prior-transfer",
+    "lastRunTime": "2026-10-18T03:49:36.5917912Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "teejmahal20/airline-passenger-satisfaction"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 0,
+    "currentVersionNumber": 1,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 29003,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "sai10py__s6e10-exp7-original-prior-transfer_outputs_v1",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 14721,
+    "sha256": "67edad05f980968cb8797b1d63e2c70c8a250fefb4e6058260483850245b240c",
+    "elapsed": 1.2463117000002057
+  }
+}

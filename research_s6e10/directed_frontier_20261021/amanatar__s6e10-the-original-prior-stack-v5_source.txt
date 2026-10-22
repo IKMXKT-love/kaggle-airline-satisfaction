@@ -1,0 +1,921 @@
+### CELL 0 markdown
+# S6E10 | The Original-Prior Stack v5 — pytabkit, unlocked
+
+**Playground S6E10 · airline satisfaction · ROC-AUC · GPU**
+
+The v4 post-mortem was surgical, and the finding stings in the best way: the notebook
+ran flawlessly — but on Kaggle the offline `pip install pytabkit` died (no internet),
+so the **entire neural pillar never trained**. No pytabkit engine, no RealMLP-on-original
+teacher. What shipped was a five-engine stack of tree models only, OOF 0.96036,
+and it landed at LB 0.95971 — a dead-on forecast once you apply our measured
+OOF→LB gap of −0.0006. The calibration was right; the arsenal was halved.
+
+What the v4 forensics table put on the record (all five engines + three stacks,
+same folds):
+
+| candidate | OOF | note |
+|---|---|---|
+| lr_stack (shipped) | 0.96036 | → LB 0.95971, gap −0.00065 ✓ calibration |
+| catboost_gpu | 0.95981 | best single engine — its CSV never even hit the LB |
+| lgbm_te_rows vs lgbm_te | 0.95857 vs 0.95801 | **row-append verdict: +0.00056, appending the real rows wins** |
+| lgbm_te | 0.95801 | LR stacker gave it **−0.16 weight** — evgendvorkin's params don't transfer to our features |
+
+v5 makes exactly one change, and it is the whole game: the pytabkit wheels now ride
+**inside an attached dataset** (offline `pip install --no-index`, internet stays OFF,
+submission stays valid). That re-arms the two things v4 lost to the sandbox —
+yekenot's RealMLP engine (n_ens 8) on the full dynamic block, and the RealMLP-on-original
+second teacher. Everything else is byte-identical v4: proven frame, same seed-42 folds,
+every engine saved separately, OOF decides what rides in `submission.csv`.
+
+Ladder so far: champion 0.95847 → v1 0.95908 → v2 0.96014 → v3 0.96027 → v4 0.95971
+(pillar missing). v5's target is the top of the public board: 0.96102 single,
+0.96165 blend — and with the sixth engine in the stack, the OOF ceiling moves
+from 0.96036 toward ~0.9615–0.9620, which calibrates to **LB ≈ 0.9609–0.9614**.
+
+
+### CELL 1 code
+import os, sys, gc, time, glob, random, subprocess, warnings
+import numpy as np
+import pandas as pd
+
+warnings.filterwarnings('ignore')
+SEED = 42
+random.seed(SEED); np.random.seed(SEED)
+
+import torch
+import torch.nn as nn
+
+GPU = torch.cuda.is_available()
+DEV = torch.device('cuda' if GPU else 'cpu')
+if GPU:
+    torch.cuda.manual_seed_all(SEED)
+    torch.backends.cudnn.benchmark = True
+    print('GPU:', torch.cuda.get_device_name(0), '| torch', torch.__version__)
+else:
+    print('no GPU visible -> budgets auto-shrink so the notebook still finishes '
+          '(on Kaggle: Settings > Accelerator > GPU P100/T4)')
+
+# AMP compat shim (torch 2.x API with 1.x fallback)
+try:
+    from torch.amp import autocast, GradScaler
+    def amp_ctx():
+        return autocast('cuda', enabled=GPU)
+    def make_scaler():
+        return GradScaler('cuda', enabled=GPU)
+except Exception:
+    from torch.cuda.amp import autocast, GradScaler
+    def amp_ctx():
+        return autocast(enabled=GPU)
+    def make_scaler():
+        return GradScaler(enabled=GPU)
+
+from sklearn.model_selection import StratifiedKFold, KFold
+from sklearn.metrics import roc_auc_score
+import lightgbm as lgb
+
+# third engine: official RealMLP via pytabkit (needs internet on Kaggle; optional)
+HAVE_PYTABKIT = False
+try:
+    import importlib.util
+    if importlib.util.find_spec('pytabkit') is None:
+        # v4 lesson, paid in GPU-hours: Kaggle is offline, so the wheels ride in
+        # an attached dataset (s6e10-pytabkit-wheelhouse). Fully offline, internet stays OFF.
+        whl = sorted(glob.glob('/kaggle/input/*/pytabkit-*.whl'))
+        if whl:
+            whl_dir = os.path.dirname(whl[0])
+            print(f'pytabkit not installed -> offline install from {whl_dir}')
+            subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', '--no-deps',
+                            '--no-index', '--find-links', whl_dir,
+                            'pytabkit', 'pytorch-lightning', 'torchmetrics',
+                            'lightning-utilities', 'psutil', 'pyyaml', 'fsspec',
+                            'typing-extensions', 'packaging', 'tqdm'],
+                           check=False, timeout=900)
+        else:
+            print('wheelhouse dataset not attached -> trying PyPI (works only with internet)...')
+            subprocess.run([sys.executable, '-m', 'pip', 'install', '-q', 'pytabkit'],
+                           check=False, timeout=900)
+    from pytabkit import RealMLP_TD_Classifier
+    HAVE_PYTABKIT = True
+    print(f'pytabkit {__import__("pytabkit").__version__ if hasattr(__import__("pytabkit"), "__version__") else "1.7.3"} available '
+          f'-> RealMLP engine + og_rmlp teacher ARMED (offline wheelhouse)')
+except Exception as e:
+    print('pytabkit unavailable -> in-house torch engine runs the RealMLP recipe instead:', repr(e))
+
+# S6E10_FAST=1 is my local smoke-test switch: tiny budgets + 120k-row subsample.
+# On Kaggle leave it unset - full settings apply.
+FAST = os.environ.get('S6E10_FAST', '0') == '1'
+N_BAG  = 1 if (FAST or not GPU) else 3
+EP_A   = 2  if FAST else (20 if GPU else 8)
+EP_FT  = 2  if FAST else (10 if GPU else 4)
+EP_SCR = 3  if FAST else (16 if GPU else 6)
+print(f'budget: bags={N_BAG} | epochs StageA/finetune/scratch = {EP_A}/{EP_FT}/{EP_SCR}'
+      + ('  [FAST smoke mode]' if FAST else ''))
+
+T0 = time.time()
+def tick(msg):
+    print(f'[{time.time() - T0:6.0f}s] {msg}', flush=True)
+
+### CELL 2 code
+def find_one(patterns, must=True):
+    for p in patterns:
+        hits = sorted(glob.glob(p, recursive=True))
+        if hits:
+            return hits[0]
+    if must:
+        raise FileNotFoundError('no match for any of: ' + ' | '.join(patterns))
+    return None
+
+# local smoke harness can point me anywhere with env vars; on Kaggle they are unset
+# and the /kaggle/input globs take over
+CD = os.environ.get('S6E10_COMP_DIR', '')
+OD = os.environ.get('S6E10_ORIG_DIR', '')
+
+def _local_or(d, name, fallback_patterns):
+    if d:
+        cand = os.path.join(d, name)
+        if os.path.exists(cand):
+            return cand
+    return find_one(fallback_patterns)
+
+P_TRAIN = _local_or(CD, 'train.csv', [
+    '/kaggle/input/**/playground-series-s6e10/train.csv',
+    'input/playground-series-s6e10/train.csv', 'train.csv'])
+P_TEST = _local_or(CD, 'test.csv', [
+    '/kaggle/input/**/playground-series-s6e10/test.csv',
+    'input/playground-series-s6e10/test.csv', 'test.csv'])
+P_ORIG = _local_or(OD, 'data.csv', [
+    '/kaggle/input/**/binary-aviation-satisfaction-129k/data.csv',
+    '/kaggle/input/**/data.csv', 'data.csv'])
+if P_ORIG is None:
+    raise FileNotFoundError('original data.csv not found - attach dataset '
+                            'arseniyshutko/binary-aviation-satisfaction-129k (file data.csv)')
+print('train:', P_TRAIN)
+print('test :', P_TEST)
+print('orig :', P_ORIG)
+
+
+### CELL 3 code
+# tolerant canonicalization - the classic column-name trap this competition inherited
+def canon_key(c):
+    return ' '.join(str(c).strip().lower().replace('/', ' ').replace('_', ' ')
+                    .replace('-', ' ').split())
+
+NAMES = {
+    'gender': 'Gender', 'customer type': 'Customer Type', 'type of travel': 'Type of Travel',
+    'class': 'Class', 'age': 'Age', 'flight distance': 'Flight Distance',
+    'departure delay in minutes': 'Dep Delay', 'arrival delay in minutes': 'Arr Delay',
+    'departure delay': 'Dep Delay', 'arrival delay': 'Arr Delay',
+    'inflight wifi service': 'Wifi', 'wifi service': 'Wifi', 'inflight wifi': 'Wifi',
+    'departure arrival time convenient': 'Time Convenient',
+    'departurearrival time convenient': 'Time Convenient',
+    'ease of online booking': 'Ease of Booking', 'gate location': 'Gate Location',
+    'food and drink': 'Food and Drink', 'online boarding': 'Online Boarding',
+    'seat comfort': 'Seat Comfort', 'inflight entertainment': 'Entertainment',
+    'on board service': 'On-board Service', 'inflight service': 'Inflight Service',
+    'leg room service': 'Leg Room Service', 'baggage handling': 'Baggage Handling',
+    'checkin service': 'Checkin Service', 'cleanliness': 'Cleanliness',
+    'id': 'id', 'satisfaction': 'satisfaction', 'target': 'satisfaction',
+}
+
+def std_cols(df):
+    ren = {}
+    for c in df.columns:
+        key = canon_key(c)
+        if key in NAMES:
+            ren[c] = NAMES[key]
+        elif key.startswith('unnamed'):
+            ren[c] = 'DROPME'
+    out = df.rename(columns=ren)
+    return out.loc[:, [c for c in out.columns if c != 'DROPME']]
+
+def load_labels(s):
+    if s.dtype == bool:
+        return s.astype('int8')
+    if s.dtype == object:
+        mp = {'satisfied': 1, 'neutral or dissatisfied': 0, 'dissatisfied': 0,
+              'true': 1, 'false': 0, '1': 1, '0': 0, 'y': 1, 'n': 0}
+        return s.astype(str).str.strip().str.lower().map(mp).astype('int8')
+    return pd.to_numeric(s, errors='raise').astype('int8')
+
+train = std_cols(pd.read_csv(P_TRAIN))
+test  = std_cols(pd.read_csv(P_TEST))
+orig  = std_cols(pd.read_csv(P_ORIG))
+train['satisfaction'] = load_labels(train['satisfaction'])
+orig['satisfaction']  = load_labels(orig['satisfaction'])
+
+# keep only features present in BOTH frames (the original carries one extra
+# column, Inflight Service, that the generator never saw -> dropped)
+FEATS = [c for c in orig.columns if c in train.columns and c not in ('id', 'satisfaction')]
+CATS   = ['Gender', 'Customer Type', 'Type of Travel', 'Class']
+RATING = ['Wifi', 'Time Convenient', 'Ease of Booking', 'Gate Location', 'Food and Drink',
+          'Online Boarding', 'Seat Comfort', 'Entertainment', 'On-board Service',
+          'Leg Room Service', 'Baggage Handling', 'Checkin Service', 'Cleanliness']
+assert all(c in FEATS for c in CATS + RATING), 'canonicalization failed: ' + str(FEATS)
+
+print('train', train.shape, '| test', test.shape, '| orig', orig.shape)
+print('shared features:', len(FEATS))
+print('label balance - orig:', round(float(orig['satisfaction'].mean()), 4),
+      '| comp train:', round(float(train['satisfaction'].mean()), 4))
+
+if FAST:
+    train = train.sample(min(120000, len(train)), random_state=SEED).reset_index(drop=True)
+    orig = orig.sample(min(30000, len(orig)), random_state=SEED).reset_index(drop=True)
+    print('FAST smoke mode: train subsampled to', len(train), 'rows · orig to', len(orig))
+
+### CELL 4 markdown
+## Strategy in one paragraph
+
+Keep v3's entire proven frame — champion FE block, count encodings, dual-view numerics,
+per-value original target means, the LGBM teacher, the XGB/CatBoost/pytabkit engines,
+OOF-gated shipping — and fix the two measured weaknesses. First: v3's wide LGBM trained
+with loose params **and** 129,880 appended real rows and paid for it (0.95853 against the
+community's 0.96102), so v4 runs evgendvorkin's exact recipe as the control arm and keeps
+our append variant as the B arm — the row-append question gets answered on the record,
+same folds, same seeds, same features. Second: v3's target encoding was a single m=100
+manual encoder; v4 upgrades to the triple-smoothing cross-fitted ladder (auto / 10 / 100)
+over the full 13-key set, adds evgendvorkin's remaining pair features, route-profile
+standard deviations, and goodpjw2008's RealMLP-on-original teacher beside our LGBM
+teacher. No new ideas of our own in v4 — that is the point. The assembly and the
+measurement are the contribution.
+
+
+### CELL 5 code
+# ---- base FE block: exact parity with our champion (EDA notebook sec 15) ----
+def add_base_fe(df):
+    df = df.copy()
+    df['wifi_na']  = (df['Wifi'] == 0).astype('int8')
+    df['eob_zero'] = (df['Ease of Booking'] == 0).astype('int8')
+    df['ob_zero']  = (df['Online Boarding'] == 0).astype('int8')
+    df['n_zero']   = (df[RATING] == 0).sum(axis=1).astype('int16')
+    for c in ('Dep Delay', 'Arr Delay'):
+        df[c + ' log'] = np.log1p(df[c].fillna(0))
+    df['arr_nan']   = df['Arr Delay'].isna().astype('int8')
+    df['Arr Delay'] = df['Arr Delay'].fillna(0)
+    df['dep_zero']  = (df['Dep Delay'] == 0).astype('int8')
+    arr = df[RATING].to_numpy(dtype=np.float64)
+    ok = arr > 0
+    svc = np.where(ok, arr, np.nan)
+    with np.errstate(invalid='ignore'):
+        sm = np.nanmean(svc, axis=1)
+    fill = float(np.nanmean(sm)) if np.isfinite(sm).any() else 3.0
+    df['svc_mean'] = np.nan_to_num(sm, nan=fill)
+    vc = np.stack([((arr == v) & ok).sum(axis=1) for v in range(1, 6)], axis=1).astype(np.float64)
+    tot = vc.sum(axis=1, keepdims=True)
+    p = vc / np.where(tot > 0, tot, 1.0)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        H = -np.nansum(np.where(p > 0, p * np.log(p), 0.0), axis=1)
+    df['svc_entropy'] = np.nan_to_num(H / np.log(5), nan=0.0)
+    df['Wifi'] = df['Wifi'].replace(0, np.nan)   # sentinel -> NaN for LGBM (champion parity)
+    return df
+
+tr_b = add_base_fe(train)
+te_b = add_base_fe(test)
+og_b = add_base_fe(orig)
+tick(f'base FE done | cols tr_b={len(tr_b.columns)}')
+
+### CELL 6 code
+# ---- torch-side extras: counts, numeric-as-category, interaction combos ----
+# (a) count encodings, fitted on competition train only - no test peeking
+COUNT_COLS = CATS + ['Leg Room Service']
+count_maps = {c: tr_b[c].value_counts() for c in COUNT_COLS}
+for fr in (tr_b, te_b, og_b):
+    for c in COUNT_COLS:
+        fr[c + ' cnt'] = fr[c].map(count_maps[c]).fillna(0).astype('float32')
+
+# (b) every numeric column ALSO as a category (yekenot's dual-view trick);
+#     levels fit jointly over train+test+orig so codes are consistent everywhere
+NUM2CAT = ['Age', 'Flight Distance', 'Dep Delay', 'Arr Delay'] + RATING
+for c in NUM2CAT:
+    joined = pd.concat([tr_b[c].fillna(-1), te_b[c].fillna(-1), og_b[c].fillna(-1)]).astype('int64')
+    codes, levels = pd.factorize(joined)
+    n1, n2 = len(tr_b), len(tr_b) + len(te_b)
+    tr_b[c + ' cat'] = codes[:n1].astype('int32')
+    te_b[c + ' cat'] = codes[n1:n2].astype('int32')
+    og_b[c + ' cat'] = codes[n2:].astype('int32')
+
+# (c) the three interaction combos yekenot ships (kept raw; TE variants only for pytabkit)
+COMBOS = [('Class', 'Type of Travel', 'Gender'),
+          ('Class', 'Type of Travel', 'Age'),
+          ('Flight Distance', 'Time Convenient')]
+for fr in (tr_b, te_b, og_b):
+    for cols in COMBOS:
+        name = 'x_' + '_x_'.join(cols)
+        s = fr[cols[0]].astype(str)
+        for cc in cols[1:]:
+            s = s + '_' + fr[cc].astype(str)
+        fr[name] = s
+
+tick('counts / dual-view / combos done')
+
+### CELL 7 code
+# ---- original-data knowledge: target means + clean-label teacher logits ----
+# (a) per-value satisfaction mean from the real data, mapped onto every frame
+org_global = float(orig['satisfaction'].mean())
+for c in FEATS:
+    stats = orig.groupby(c, observed=True)['satisfaction'].mean()
+    tr_b[c + ' org'] = tr_b[c].map(stats).fillna(org_global).astype('float32')
+    te_b[c + ' org'] = te_b[c].map(stats).fillna(org_global).astype('float32')
+    og_b[c + ' org'] = og_b[c].map(stats).fillna(org_global).astype('float32')
+
+# (b) LightGBM teacher fitted ONLY on the 129,880 clean rows.
+#     - KFold OOF on the original  -> honest og_logit for Stage A inputs
+#     - full fit                   -> og_logit for competition train/test
+teacher_params = dict(objective='binary', n_estimators=600, learning_rate=.05, max_depth=8,
+                      min_child_samples=20, subsample=.8, colsample_bytree=.5,
+                      reg_lambda=5.0, reg_alpha=.05, random_state=123, n_jobs=-1, verbose=-1)
+
+Xog = og_b[FEATS].copy()
+yog = orig['satisfaction'].values.astype('int8')
+for c in CATS:
+    Xog[c] = Xog[c].astype('category')
+
+og_oof = np.zeros(len(Xog))
+for itr, iva in KFold(5, shuffle=True, random_state=SEED).split(Xog, yog):
+    t = lgb.LGBMClassifier(**teacher_params)
+    t.fit(Xog.iloc[itr], yog[itr], categorical_feature=CATS)
+    og_oof[iva] = t.predict_proba(Xog.iloc[iva])[:, 1]
+print(f'teacher OOF AUC on clean rows: {roc_auc_score(yog, og_oof):.5f}')
+
+t_full = lgb.LGBMClassifier(**teacher_params)
+t_full.fit(Xog, yog, categorical_feature=CATS)
+og_b['og_logit'] = og_oof
+
+def to_comp_frame(fr):
+    out = fr[FEATS].copy()
+    for c in CATS:
+        out[c] = pd.Categorical(out[c], categories=Xog[c].cat.categories)
+    return out
+
+tr_b['og_logit'] = t_full.predict_proba(to_comp_frame(tr_b))[:, 1]
+te_b['og_logit'] = t_full.predict_proba(to_comp_frame(te_b))[:, 1]
+print('teacher vs competition labels:',
+      round(roc_auc_score(train['satisfaction'].values, tr_b['og_logit'].values), 5),
+      '(clean function vs noisy labels - the gap IS the headroom)')
+del Xog, t_full
+gc.collect()
+tick('original-data knowledge done')
+
+### CELL 8 code
+# ---- assemble engine matrices (one shared definition, no ambiguity later) ----
+DROP = ('id', 'satisfaction')
+TORCH_EXTRAS = [c for c in tr_b.columns if c.endswith(' cat') or c.endswith(' cnt')
+                or c.startswith('x_') or c.endswith(' org')
+                or c in ('og_logit', 'og_rmlp')]
+BASE_FE = [c for c in tr_b.columns if c not in DROP and c not in TORCH_EXTRAS]
+NUMC   = [c for c in tr_b.columns if c.endswith(' cat')]
+COMBOC = [c for c in tr_b.columns if c.startswith('x_')]
+CNTC   = [c for c in tr_b.columns if c.endswith(' cnt')]
+ORGC   = [c for c in tr_b.columns if c.endswith(' org')]
+CONT_FE = [c for c in BASE_FE if c not in CATS] + CNTC + ORGC + ['og_logit', 'og_rmlp']
+CAT_FE  = CATS + NUMC + COMBOC
+print(f'X_BASE (champion LGBM): {len(BASE_FE)} feats | engines: cont={len(CONT_FE)}, cat={len(CAT_FE)}')
+
+# multi-resolution route/age/delay bins (evgendvorkin's smooth keys, all five)
+for fr in (tr_b, te_b, og_b):
+    fr['age_5_bin']        = np.floor(fr['Age'] / 5).astype('int32')
+    fr['distance_250_bin'] = np.floor(fr['Flight Distance'] / 250).astype('int32')
+    fr['distance_100']     = np.floor(fr['Flight Distance'] / 100).astype('int32')
+    fr['distance_500']     = np.floor(fr['Flight Distance'] / 500).astype('int32')
+    fr['dep_delay_10']     = np.floor(fr['Dep Delay'].fillna(0) / 10).astype('int32')
+
+# v4: evgendvorkin's FULL pair set (v3 shipped only the first five)
+PAIRS = [('Flight Distance', 'Class'), ('Flight Distance', 'Type of Travel'),
+         ('Age', 'Class'), ('Class', 'Type of Travel'), ('Class', 'Gender'),
+         ('Customer Type', 'Type of Travel'), ('Class', 'Customer Type'),
+         ('Wifi', 'Online Boarding'), ('Wifi', 'Type of Travel'),
+         ('Online Boarding', 'Type of Travel'), ('Seat Comfort', 'Entertainment'),
+         ('Class', 'Wifi'), ('Class', 'Online Boarding')]
+for fr in (tr_b, te_b, og_b):
+    for cols in PAIRS:
+        name = 'p_' + '_x_'.join(cols)
+        s = fr[cols[0]].astype(str)
+        for cc in cols[1:]:
+            s = s + '_' + fr[cc].astype(str)
+        fr[name] = s
+TE_COLS = (COMBOC + [c for c in tr_b.columns if c.startswith('p_')]
+           + ['age_5_bin', 'distance_250_bin', 'distance_100', 'distance_500', 'dep_delay_10'])
+PROFILE_SRC = RATING + ['Age', 'Dep Delay', 'Arr Delay']
+
+# v4: triple smoothing (auto / 10 / 100) via sklearn's cross-fitting TargetEncoder -
+# evgendvorkin's exact ladder, replacing v3's single m=100 manual encoder.
+# fit_transform cross-fits INSIDE the fold-train (no self-leak); transform encodes
+# val/test with the full fold-train mapping. keys x 3 smoothings = 3x TE columns.
+from sklearn.preprocessing import TargetEncoder
+TE_SMOOTHS = ['auto', 10.0, 100.0]
+
+def te3_fit_apply(fit_fr, fit_y, parts):
+    out = {name: [] for name, _ in parts}
+    for sm in TE_SMOOTHS:
+        enc = TargetEncoder(smooth=sm, cv=5, shuffle=True, random_state=SEED)
+        Zf = enc.fit_transform(fit_fr[TE_COLS].astype(str), np.asarray(fit_y, dtype=float))
+        for name, fr in parts:
+            if fr is fit_fr:
+                out[name].append(Zf.astype(np.float32))
+            else:
+                out[name].append(enc.transform(fr[TE_COLS].astype(str)).astype(np.float32))
+    return {name: np.hstack(blocks) for name, blocks in out.items()}
+
+def profile_fit(fit_fr):
+    g = fit_fr.groupby('Flight Distance')[PROFILE_SRC].agg(['mean', 'std'])
+    return g, fit_fr[PROFILE_SRC].mean(), fit_fr[PROFILE_SRC].std()
+
+def profile_apply(fr, grp, defm, defs):
+    fd = fr['Flight Distance']
+    K = len(PROFILE_SRC)
+    out = np.empty((len(fr), 3 * K), dtype=np.float32)
+    for j, c in enumerate(PROFILE_SRC):
+        v = np.nan_to_num(fr[c].to_numpy(dtype=np.float64), nan=0.0)
+        pm = fd.map(grp[(c, 'mean')]).fillna(defm[c]).to_numpy()
+        ps = fd.map(grp[(c, 'std')]).fillna(defs[c]).to_numpy()
+        out[:, j] = pm
+        out[:, K + j] = np.nan_to_num(ps, nan=0.0)
+        out[:, 2 * K + j] = v - pm
+    return out
+
+def cont_block(fr, cols=None):
+    cols = CONT_FE if cols is None else cols
+    X = fr[cols].to_numpy(dtype=np.float64, copy=True)
+    return np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0).astype(np.float32)
+
+def build_dyn(fit_fr, fit_y, parts):
+    'dynamic continuous block: global cont + triple TE + route profiles (mean/std/resid)'
+    te3 = te3_fit_apply(fit_fr, fit_y, parts)
+    grp, defm, defs = profile_fit(fit_fr)
+    out = {}
+    for name, fr in parts:
+        out[name] = np.hstack([cont_block(fr), te3[name],
+                               profile_apply(fr, grp, defm, defs)]).astype(np.float32)
+    return out
+
+DYN_DIM = len(CONT_FE) + 3 * len(TE_COLS) + 3 * len(PROFILE_SRC)
+print(f'dynamic block: cont {len(CONT_FE)} + TE {3 * len(TE_COLS)} + profile {3 * len(PROFILE_SRC)} = {DYN_DIM}')
+
+# category codes fit jointly over train+test+orig -> one embedding space for teacher/engines/test
+_cat_codes = {}
+CAT_CARDS = []
+for c in CAT_FE:
+    joined = pd.concat([tr_b[c].astype(str), te_b[c].astype(str), og_b[c].astype(str)])
+    codes, levels = pd.factorize(joined)
+    n1, n2 = len(tr_b), len(tr_b) + len(te_b)
+    _cat_codes[c] = (codes[:n1], codes[n1:n2], codes[n2:])
+    CAT_CARDS.append(len(levels))
+
+def cat_block(which):
+    idx = {'tr': 0, 'te': 1, 'og': 2}[which]
+    n = {'tr': len(tr_b), 'te': len(te_b), 'og': len(og_b)}[which]
+    out = np.empty((n, len(CAT_FE)), dtype=np.int64)
+    for j, c in enumerate(CAT_FE):
+        out[:, j] = _cat_codes[c][idx]
+    return out
+
+TRK, TEK, OGK = cat_block('tr'), cat_block('te'), cat_block('og')
+del _cat_codes
+gc.collect()
+
+# robust scale + smooth saturation (RealMLP-flavoured): z/(1+|z|/8) is linear near 0,
+# saturates around +-8, kills the delay tails without a hard cliff
+def fit_scale(A):
+    med = np.median(A, axis=0)
+    q1, q3 = np.percentile(A, 25, axis=0), np.percentile(A, 75, axis=0)
+    iqr = np.where(q3 - q1 < 1e-9, 1.0, q3 - q1)
+    return med.astype(np.float32), iqr.astype(np.float32)
+
+def apply_scale(A, med, iqr):
+    z = (A - med) / iqr
+    return (z / (1.0 + np.abs(z) / 8.0)).astype(np.float32)
+
+tick(f'matrices ready | train {TRK.shape}, test {TEK.shape}, orig {OGK.shape}')
+
+
+### CELL 9 code
+# ---- second teacher: the official RealMLP fitted ONLY on the real 129,880 rows ----
+# goodpjw2008's channel: same idea as the LGBM teacher, different inductive bias.
+# Raw continuous block only (no TE - the teacher must not see synthetic target rates),
+# package-internal 5% validation, three seeds averaged. Output: og_rmlp logits, the
+# sibling of og_logit; both feed every engine's continuous block.
+if 'og_rmlp' not in tr_b.columns:
+    for fr in (tr_b, te_b, og_b):
+        fr['og_rmlp'] = 0.0
+og_rmlp_ok = False
+if HAVE_PYTABKIT:
+    try:
+        TCH = dict(verbosity=0, val_metric_name='1-auc_ovr',
+                   n_ens=1, n_epochs=2 if FAST else 8, batch_size=256, use_early_stopping=False,
+                   lr=.053, wd=.015, sq_mom=.988, lr_sched='flat_anneal', wd_sched='cos_log_15',
+                   first_layer_lr_factor=.25, embedding_size=5, max_one_hot_cat_size=18,
+                   hidden_sizes=[512, 256, 128], act='silu', p_drop=.05,
+                   p_drop_sched='invsqrtp1e-3', plr_hidden_1=16, plr_hidden_2=8,
+                   plr_act_name='gelu', plr_lr_factor=.1151, plr_sigma=2.33,
+                   ls_eps=.01, ls_eps_sched='sqrt_cos', add_front_scale=False,
+                   bias_init_mode='neg-uniform-dynamic-2',
+                   tfms=['one_hot', 'median_center', 'robust_scale', 'smooth_clip',
+                         'embedding', 'l2_normalize'])
+        _med, _iqr = fit_scale(cont_block(og_b, cols=[c for c in CONT_FE if c != 'og_rmlp']))
+
+        def tch_frame(fr, cats_arr):
+            df = pd.DataFrame(apply_scale(
+                cont_block(fr, cols=[c for c in CONT_FE if c != 'og_rmlp']), _med, _iqr))
+            df.columns = df.columns.astype(str)
+            for j, c in enumerate(CAT_FE):
+                df[str(c)] = pd.Categorical(cats_arr[:, j])
+            return df
+
+        Xog_t = tch_frame(og_b, OGK)
+        Xtr_t = tch_frame(tr_b, TRK)
+        Xte_t = tch_frame(te_b, TEK)
+        pr_tr = np.zeros(len(tr_b)); pr_te = np.zeros(len(te_b)); pr_og = np.zeros(len(og_b))
+        tch_seeds = [SEED] if FAST else [SEED, 7, 2026]
+        for sd in tch_seeds:
+            m = RealMLP_TD_Classifier(**{**TCH, 'random_state': sd}, val_fraction=0.05)
+            m.fit(Xog_t, yog, cat_col_names=[str(c) for c in CAT_FE])
+            pr_tr += m.predict_proba(Xtr_t)[:, 1] / len(tch_seeds)
+            pr_te += m.predict_proba(Xte_t)[:, 1] / len(tch_seeds)
+            pr_og += m.predict_proba(Xog_t)[:, 1] / len(tch_seeds)
+            print(f'  teacher seed {sd} done', flush=True)
+            del m; gc.collect()
+
+        def _logit0(p, eps=1e-6):
+            p = np.clip(p, eps, 1 - eps)
+            return np.log(p / (1 - p))
+
+        tr_b['og_rmlp'] = _logit0(pr_tr).astype('float32')
+        te_b['og_rmlp'] = _logit0(pr_te).astype('float32')
+        og_b['og_rmlp'] = _logit0(pr_og).astype('float32')
+        og_rmlp_ok = True
+        print('RealMLP teacher vs competition labels:',
+              round(roc_auc_score(train['satisfaction'].values, pr_tr), 5),
+              '| vs own clean labels:',
+              round(roc_auc_score(yog, pr_og), 5),
+              '(self-fit upper bound)')
+    except Exception as e:
+        print('RealMLP teacher failed -> og_rmlp stays a dead zero column:', repr(e))
+else:
+    print('pytabkit unavailable -> og_rmlp stays a dead zero column (LGBM teacher still active)')
+og_rmlp_col = 'og_rmlp' if og_rmlp_ok else '__dead_og_rmlp__'
+if not og_rmlp_ok:
+    for fr in (tr_b, te_b, og_b):
+        fr['__dead_og_rmlp__'] = 0.0
+tick('RealMLP teacher complete')
+
+
+### CELL 10 markdown
+## The MLP engine
+
+The literal RealMLP (pytabkit, yekenot's exact recipe, ensemble of 8) carries the deep
+side, trained on the full dynamic block: champion features + both teachers + triple TE +
+route profiles, with every numeric duplicated as a category so the net learns an embedding
+per distinct value. The in-house torch engine from v1–v3 is retired — it lost to the
+official package three runs in a row, and the GPU hours are better spent on the ensemble.
+
+
+### CELL 11 code
+# ---- folds: one split, reused by every engine (the ledger's backbone) ----
+y = train['satisfaction'].values.astype('int8')
+skf = StratifiedKFold(5, shuffle=True, random_state=SEED)   # identical split across v1-v4
+print(f'folds ready | train {len(y)} | test {len(te_b)} | y_mean {y.mean():.4f}')
+tick('folds defined')
+
+
+### CELL 12 code
+# ---- champion LightGBM re-run on the same folds (the number to beat) ----
+Xl  = tr_b[BASE_FE].copy()
+Xlt = te_b[BASE_FE].copy()
+for c in CATS:
+    Xl[c] = Xl[c].astype('category')
+    Xlt[c] = Xlt[c].astype('category')
+
+oof_lgb = np.zeros(len(y)); tst_lgb = np.zeros(len(Xlt)); lgb_folds = []
+_n_est = 60 if FAST else 3000
+_es = 30 if FAST else 150
+for k, (itr, iva) in enumerate(skf.split(Xl, y), 1):
+    m = lgb.LGBMClassifier(n_estimators=_n_est, learning_rate=.05, num_leaves=63,
+                           min_child_samples=100, subsample=.8, subsample_freq=1,
+                           colsample_bytree=.85, reg_lambda=1.0, importance_type='gain',
+                           random_state=SEED + k, n_jobs=-1, verbose=-1)
+    m.fit(Xl.iloc[itr], y[itr], eval_set=[(Xl.iloc[iva], y[iva])], eval_metric='auc',
+          callbacks=[lgb.early_stopping(_es, verbose=False), lgb.log_evaluation(0)])
+    oof_lgb[iva] = m.predict_proba(Xl.iloc[iva])[:, 1]
+    tst_lgb += m.predict_proba(Xlt)[:, 1] / 5.0
+    lgb_folds.append(roc_auc_score(y[iva], oof_lgb[iva]))
+    print(f'  fold {k} AUC {lgb_folds[-1]:.5f} (best_iter {m.best_iteration_})')
+
+oof_lgb_auc = roc_auc_score(y, oof_lgb)
+print(f'LGBM champion rerun OOF {oof_lgb_auc:.5f}  (v1 rerun: 0.95867 / reference 0.95863 / LB 0.95847)')
+tick('champion rerun complete')
+
+### CELL 13 code
+# ---- XGBoost on GPU with the full feature set (trees see TE + profiles too) ----
+oof_xgb, tst_xgb, xgb_folds = None, None, []
+try:
+    import xgboost as xgb
+    XGB_BASE = [c for c in BASE_FE if c not in CATS] + CNTC + ORGC + ['og_logit']
+
+    def xgb_block(fr, idx, cats_arr):
+        sub = fr if idx is None else fr.iloc[idx]
+        A = np.nan_to_num(sub[XGB_BASE].to_numpy(dtype=np.float64), 0.0).astype(np.float32)
+        return np.hstack([A, cats_arr.astype(np.float32)])
+
+    xgb_params = dict(n_estimators=3000, learning_rate=.02, max_depth=8, min_child_weight=5,
+                      subsample=.85, colsample_bytree=.7, reg_lambda=5.0, reg_alpha=.1,
+                      tree_method='hist', device='cuda' if GPU else 'cpu',
+                      eval_metric='auc', random_state=SEED, verbosity=0,
+                      early_stopping_rounds=150)
+    XGB_SEEDS = [SEED] if FAST else [SEED, 2026]
+    print(f'xgb seeds: {XGB_SEEDS}')
+    oof_xgb = np.zeros(len(y)); tst_xgb = np.zeros(len(TEK))
+    for k, (itr, iva) in enumerate(skf.split(np.zeros(len(y)), y), 1):
+        dyn = build_dyn(tr_b.iloc[itr], y[itr],
+                        [('tr', tr_b.iloc[itr]), ('va', tr_b.iloc[iva]), ('te', te_b)])
+        Xtr = np.hstack([xgb_block(tr_b, itr, TRK[itr]), dyn['tr']])
+        Xva = np.hstack([xgb_block(tr_b, iva, TRK[iva]), dyn['va']])
+        Xte = np.hstack([xgb_block(te_b, None, TEK), dyn['te']])
+        pv, pt = np.zeros(len(iva)), np.zeros(len(TEK))
+        for sd in XGB_SEEDS:
+            mdl = xgb.XGBClassifier(**{**xgb_params, 'random_state': sd})
+            mdl.fit(Xtr, y[itr], eval_set=[(Xva, y[iva])], verbose=False)
+            pv += mdl.predict_proba(Xva)[:, 1] / len(XGB_SEEDS)
+            pt += mdl.predict_proba(Xte)[:, 1] / len(XGB_SEEDS)
+            print(f'    xgb seed {sd} fold best_iter {mdl.best_iteration}', flush=True)
+        oof_xgb[iva] = pv
+        tst_xgb += pt / 5.0
+        xgb_folds.append(roc_auc_score(y[iva], pv))
+        print(f'  xgb fold {k}: {xgb_folds[-1]:.5f}', flush=True)
+        del dyn, Xtr, Xva, Xte, mdl
+        gc.collect()
+        if GPU:
+            torch.cuda.empty_cache()
+    print(f'XGBoost GPU OOF {roc_auc_score(y, oof_xgb):.5f}')
+except Exception as e:
+    print('xgboost engine failed -> skipped safely:', repr(e))
+    oof_xgb = None
+tick('xgboost engine complete')
+
+### CELL 14 code
+# ---- engine: official RealMLP (pytabkit) with yekenot's exact recipe, n_ens=8 ----
+oof_pytk, pytk_folds = None, []
+if HAVE_PYTABKIT:
+    try:
+        gc.collect()   # give the package room to breathe on small boxes
+        PK = dict(random_state=42, verbosity=0, val_metric_name='1-auc_ovr',
+                  n_ens=1 if FAST else 8, n_epochs=1 if FAST else 3, batch_size=256,
+                  use_early_stopping=False,
+                  lr=.053, wd=.015, sq_mom=.988, lr_sched='flat_anneal', wd_sched='cos_log_15',
+                  first_layer_lr_factor=.25, embedding_size=5, max_one_hot_cat_size=18,
+                  hidden_sizes=[512, 256, 128], act='silu', p_drop=.05,
+                  p_drop_sched='invsqrtp1e-3', plr_hidden_1=16, plr_hidden_2=8,
+                  plr_act_name='gelu', plr_lr_factor=.1151, plr_sigma=2.33,
+                  ls_eps=.01, ls_eps_sched='sqrt_cos', add_front_scale=False,
+                  bias_init_mode='neg-uniform-dynamic-2',
+                  tfms=['one_hot', 'median_center', 'robust_scale', 'smooth_clip',
+                        'embedding', 'l2_normalize'])
+        oof_pytk = np.zeros(len(y)); tst_pytk = np.zeros(len(TEK))
+        for k, (itr, iva) in enumerate(skf.split(np.zeros(len(y)), y), 1):
+            dyn = build_dyn(tr_b.iloc[itr], y[itr],
+                            [('tr', tr_b.iloc[itr]), ('va', tr_b.iloc[iva]), ('te', te_b)])
+            med, iqr = fit_scale(dyn['tr'][:, :len(CONT_FE)])
+
+            def mk_df(dyn_part, cats_arr):
+                cont = apply_scale(dyn_part[:, :len(CONT_FE)], med, iqr)
+                df = pd.DataFrame(np.hstack([cont, dyn_part[:, len(CONT_FE):]]))
+                df.columns = df.columns.astype(str)
+                for j, c in enumerate(CAT_FE):
+                    df[str(c)] = pd.Categorical(cats_arr[:, j])
+                return df
+
+            Xtr_df = mk_df(dyn['tr'], TRK[itr])
+            Xva_df = mk_df(dyn['va'], TRK[iva])
+            Xte_df = mk_df(dyn['te'], TEK)
+            mdl = RealMLP_TD_Classifier(**PK)
+            mdl.fit(Xtr_df, y[itr], Xva_df, y[iva])
+            oof_pytk[iva] = mdl.predict_proba(Xva_df)[:, 1]
+            tst_pytk += mdl.predict_proba(Xte_df)[:, 1] / 5.0
+            pytk_folds.append(roc_auc_score(y[iva], oof_pytk[iva]))
+            print(f'  pytabkit fold {k}: {pytk_folds[-1]:.5f}', flush=True)
+            del dyn, Xtr_df, Xva_df, Xte_df, mdl
+            gc.collect()
+        print(f'pytabkit RealMLP OOF {roc_auc_score(y, oof_pytk):.5f}')
+    except Exception as e:
+        print('pytabkit engine failed -> skipped safely:', repr(e))
+        oof_pytk = None
+else:
+    print('pytabkit not available in this session -> engine skipped safely')
+tick('pytabkit engine complete')
+
+
+### CELL 15 code
+# ---- engine pair: LightGBM on the wide matrix - evgendvorkin's exact recipe ----
+# his public ladder hits 0.96102 with lr .02 / depth 8 / min_child 5 / triple TE and
+# NO original rows appended. v3 shipped the append variant with loose params and got
+# 0.95853, so v4 runs BOTH arms of that one design choice, identical in every other
+# respect - the row-append question gets a measured answer:
+#   lgbm_te      = pure synthetic fold-train (his control arm)
+#   lgbm_te_rows = + 129,880 clean original rows appended (our v3 arm)
+CATF_NAMES = [f'c{j}' for j in range(len(CAT_FE))]
+CATF_IDX  = list(range(DYN_DIM, DYN_DIM + len(CAT_FE)))
+
+def wide_frame(dyn_part, cats_arr):
+    # plain int64 columns for both engines: LightGBM gets categorical_feature=CATF_NAMES,
+    # CatBoost gets cat_features=CATF_IDX - no pandas Categorical anywhere (its per-frame
+    # category domains and dtype coercion broke both engines; smoke tests caught both)
+    num = pd.DataFrame(dyn_part, columns=[f'n{j}' for j in range(dyn_part.shape[1])])
+    cat = pd.DataFrame({f'c{j}': cats_arr[:, j].astype(np.int64)
+                        for j in range(cats_arr.shape[1])})
+    return pd.concat([num, cat], axis=1)
+
+def fit_lgbm_wide(Xtr, ytr, Xva, yva, Xte):
+    _n4 = 80 if FAST else 2000
+    _es4 = 20 if FAST else 100
+    mdl = lgb.LGBMClassifier(
+        n_estimators=_n4, learning_rate=.02, max_depth=8,
+        reg_lambda=5.0, reg_alpha=0.05, min_child_samples=5,
+        bagging_fraction=.9, bagging_freq=1, feature_fraction=.9,
+        random_state=SEED, n_jobs=-1, verbose=-1)
+    mdl.fit(Xtr, ytr, eval_set=[(Xva, yva)], eval_metric='auc',
+            categorical_feature=CATF_NAMES,
+            callbacks=[lgb.early_stopping(_es4, verbose=False), lgb.log_evaluation(0)])
+    return (mdl.predict_proba(Xva)[:, 1], mdl.predict_proba(Xte)[:, 1],
+            getattr(mdl, 'best_iteration_', -1))
+
+oof_lgbte = np.zeros(len(y)); tst_lgbte = np.zeros(len(TEK)); lgbte_folds = []
+oof_lgbrow = np.zeros(len(y)); tst_lgbrow = np.zeros(len(TEK)); lgbrow_folds = []
+print(f'lgbm pair: {DYN_DIM} numeric + {len(CAT_FE)} categorical, evgendvorkin params, seed {SEED}')
+for k, (itr, iva) in enumerate(skf.split(np.zeros(len(y)), y), 1):
+    dyn = build_dyn(tr_b.iloc[itr], y[itr],
+                    [('tr', tr_b.iloc[itr]), ('va', tr_b.iloc[iva]), ('te', te_b)])
+    XtrA = wide_frame(dyn['tr'], TRK[itr]); XvaA = wide_frame(dyn['va'], TRK[iva])
+    XteA = wide_frame(dyn['te'], TEK)
+    # rows-arm: same dynamic machinery; TE/profiles fitted on the same fold-train
+    dyn_og = build_dyn(tr_b.iloc[itr], y[itr], [('og', og_b)])
+    XtrB = pd.concat([XtrA, wide_frame(dyn_og['og'], OGK)], ignore_index=True)
+    ytrB = np.concatenate([y[itr], yog])
+    pvA, ptA, biA = fit_lgbm_wide(XtrA, y[itr], XvaA, y[iva], XteA)
+    oof_lgbte[iva] = pvA; tst_lgbte += ptA / 5.0
+    lgbte_folds.append(roc_auc_score(y[iva], pvA))
+    pvB, ptB, biB = fit_lgbm_wide(XtrB, ytrB, XvaA, y[iva], XteA)
+    oof_lgbrow[iva] = pvB; tst_lgbrow += ptB / 5.0
+    lgbrow_folds.append(roc_auc_score(y[iva], pvB))
+    print(f'  fold {k}: lgbm_te {lgbte_folds[-1]:.5f} (iter {biA}) | '
+          f'lgbm_te_rows {lgbrow_folds[-1]:.5f} (iter {biB})', flush=True)
+    del dyn, dyn_og, XtrA, XvaA, XteA, XtrB
+    gc.collect()
+print(f'LGBM-te (no rows)    OOF {roc_auc_score(y, oof_lgbte):.5f}')
+print(f'LGBM-te (+orig rows) OOF {roc_auc_score(y, oof_lgbrow):.5f}')
+print(f'row-append effect:   {roc_auc_score(y, oof_lgbrow) - roc_auc_score(y, oof_lgbte):+.5f} OOF')
+tick('lgbm_te pair complete')
+
+
+### CELL 16 code
+# ---- v3 engine: CatBoost on GPU - a third tree family with native categoricals ----
+# Same wide matrix and same clean-original-rows treatment as lgbm_te; different splitting
+# machinery (oblivious trees, ordered target statistics) = blend diversity for free.
+oof_cat, tst_cat, cat_folds = None, None, []
+try:
+    from catboost import CatBoostClassifier
+    CB_SEEDS = [SEED]
+    oof_cat = np.zeros(len(y)); tst_cat = np.zeros(len(TEK))
+    print(f'catboost seeds: {CB_SEEDS} | task_type {"GPU" if GPU else "CPU"}')
+    for k, (itr, iva) in enumerate(skf.split(np.zeros(len(y)), y), 1):
+        dyn = build_dyn(tr_b.iloc[itr], y[itr],
+                        [('tr', tr_b.iloc[itr]), ('va', tr_b.iloc[iva]),
+                         ('te', te_b), ('og', og_b)])
+        Xtr = pd.concat([wide_frame(dyn['tr'], TRK[itr]),
+                         wide_frame(dyn['og'], OGK)],
+                        ignore_index=True)
+        ytr = np.concatenate([y[itr], yog])
+        Xva = wide_frame(dyn['va'], TRK[iva])
+        Xte = wide_frame(dyn['te'], TEK)
+        pv, pt = np.zeros(len(iva)), np.zeros(len(TEK))
+        for sd in CB_SEEDS:
+            cb_kw = dict(iterations=60 if FAST else 2500, learning_rate=.05, depth=8,
+                         l2_leaf_reg=4.0, bootstrap_type='Bernoulli', subsample=.85,
+                         eval_metric='AUC', random_seed=sd, verbose=0,
+                         allow_writing_files=False,
+                         early_stopping_rounds=10 if FAST else 150,
+                         task_type='GPU' if GPU else 'CPU')
+            if GPU:
+                cb_kw['devices'] = '0'
+            mdl = CatBoostClassifier(**cb_kw)
+            mdl.fit(Xtr, ytr, eval_set=(Xva, y[iva]), cat_features=CATF_IDX)
+            pv += mdl.predict_proba(Xva)[:, 1] / len(CB_SEEDS)
+            pt += mdl.predict_proba(Xte)[:, 1] / len(CB_SEEDS)
+        oof_cat[iva] = pv
+        tst_cat += pt / 5.0
+        cat_folds.append(roc_auc_score(y[iva], pv))
+        print(f'  catboost fold {k}: {cat_folds[-1]:.5f}', flush=True)
+        del dyn, Xtr, Xva, Xte, mdl
+        gc.collect()
+    print(f'CatBoost OOF {roc_auc_score(y, oof_cat):.5f}')
+except Exception as e:
+    print('catboost engine failed -> skipped safely:', repr(e))
+    oof_cat = None
+tick('catboost engine complete')
+
+### CELL 17 code
+# ---- GROUND TRUTH: fold-by-fold, same split, one table, no cherry-picking ----
+cands = {'lgbm_champion': (lgb_folds, oof_lgb, tst_lgb),
+         'lgbm_te':       (lgbte_folds, oof_lgbte, tst_lgbte),
+         'lgbm_te_rows':  (lgbrow_folds, oof_lgbrow, tst_lgbrow)}
+if oof_xgb is not None:
+    cands['xgb_gpu'] = (xgb_folds, oof_xgb, tst_xgb)
+if oof_pytk is not None:
+    cands['pytabkit_realmlp'] = (pytk_folds, oof_pytk, tst_pytk)
+if oof_cat is not None:
+    cands['catboost_gpu'] = (cat_folds, oof_cat, tst_cat)
+
+# ---- stacking the engine logits three ways, all judged on the same OOF ----
+def _logit(p, eps=1e-6):
+    p = np.clip(p, eps, 1 - eps)
+    return np.log(p / (1 - p))
+
+from scipy.special import expit as _expit
+from scipy.stats import rankdata
+from sklearn.linear_model import LogisticRegression
+
+members = list(cands.keys())
+L  = np.column_stack([_logit(cands[k][1]) for k in members])
+LT = np.column_stack([_logit(cands[k][2]) for k in members])
+
+# (a) equal-weight logit mean - v2's blend, kept for continuity
+oof_eq, tst_eq = _expit(L.mean(1)), _expit(LT.mean(1))
+cands['logit_blend'] = ([], oof_eq, tst_eq)
+
+# (b) rank mean - scale-free, immune to any single member's fat tail
+oof_rank = np.column_stack([rankdata(cands[k][1]) / len(y) for k in members]).mean(1)
+tst_rank = np.column_stack([rankdata(cands[k][2]) / len(test) for k in members]).mean(1)
+cands['rank_blend'] = ([], oof_rank, tst_rank)
+
+# (c) LR on OOF logits - goodpjw's exact stacker, CROSS-FIT so its OOF stays honest
+#     (the full-data refit is used only to produce the test-side transform)
+oof_lr = np.zeros(len(y))
+for itr, iva in skf.split(np.zeros(len(y)), y):
+    st = LogisticRegression(C=100., max_iter=2000).fit(L[itr], y[itr])
+    oof_lr[iva] = st.predict_proba(L[iva])[:, 1]
+lr_full = LogisticRegression(C=100., max_iter=2000).fit(L, y)
+tst_lr = lr_full.predict_proba(LT)[:, 1]
+cands['lr_stack'] = ([], oof_lr, tst_lr)
+print(f'logit_blend OOF {roc_auc_score(y, oof_eq):.5f} | rank_blend {roc_auc_score(y, oof_rank):.5f}'
+      f' | lr_stack {roc_auc_score(y, oof_lr):.5f}')
+print('LR stack coefficients:')
+print('  ' + ' | '.join(f'{k} {w:+.2f}' for k, w in zip(members, lr_full.coef_[0])))
+
+rows = []
+for name, (folds, o, t) in cands.items():
+    oauc = roc_auc_score(y, o)
+    rows.append({'engine': name,
+                 **{f'fold{i + 1}': round(a, 5) for i, a in enumerate(folds)},
+                 'OOF': round(oauc, 5),
+                 'd_vs_champ': round(oauc - oof_lgb_auc, 5)})
+gt = pd.DataFrame(rows).sort_values('OOF', ascending=False)
+print(gt.to_string(index=False))
+gt.to_csv('ground_truth_folds.csv', index=False)
+
+np.savez_compressed('oof_artifacts.npz',
+                    y=y,
+                    **{f'oof_{k}': v[1] for k, v in cands.items()},
+                    **{f'test_{k}': v[2] for k, v in cands.items()})
+print('artifacts saved: ground_truth_folds.csv, oof_artifacts.npz')
+tick('ground truth + stacking complete')
+
+
+### CELL 18 code
+# ---- submission: OOF decides, runner-up rides along for the LB to arbitrate ----
+oof_scores = {k: roc_auc_score(y, v[1]) for k, v in cands.items()}
+ranking = sorted(oof_scores.items(), key=lambda kv: -kv[1])
+print('OOF ranking:', [(k, round(v, 5)) for k, v in ranking])
+
+# calibration from our own LB history: OOF 0.96048 -> LB 0.95995, OOF 0.96100 -> 0.96027
+# (20% public split, transfer gap ~ -0.0005/-0.0007). A guess, printed as a guess.
+CAL_GAP = -0.0006
+best = ranking[0][0]
+print(f'calibrated LB guess for {best}: {oof_scores[best] + CAL_GAP:.5f} (gap ~ {CAL_GAP} +- 0.0002)')
+
+test_ids = test['id'].values.astype(int)
+sub = pd.DataFrame({'id': test_ids, 'satisfaction': cands[best][2]})
+assert len(sub) == len(test_ids) and sub['satisfaction'].between(0, 1).all()
+sub.to_csv('submission.csv', index=False)
+for name, (_, _, t) in cands.items():
+    if name != best:
+        pd.DataFrame({'id': test_ids, 'satisfaction': t}).to_csv(f'submission_{name}.csv', index=False)
+
+print(f'\nsubmission.csv <- {best} (OOF {oof_scores[best]:.5f})')
+print('v4 ledger: champion 0.95847 -> v1 0.95908 -> v2 0.96014 -> v3 0.96027 -> this run')
+print('id range:', test_ids.min(), '->', test_ids.max(), '| rows:', len(sub))
+sub.head()
+
+
+### CELL 19 markdown
+## Reading the results honestly
+
+- The **lgbm_te vs lgbm_te_rows** pair is v4's cleanest experiment: identical folds, seed,
+  params and features — the only difference is the 129,880 appended real rows. Whatever the
+  delta says, it settles the design question v3 left open, on the record.
+- The **lgbm_champion** row is re-run in-session; `d_vs_champ` is measured against it, so
+  every number in the table is same-environment, same-split.
+- OOF→LB transfer on our own submissions so far: 0.96048 → 0.95995 and 0.96100 → 0.96027
+  (gaps −0.0005 / −0.0007 on a 20% public split). The calibrated guess printed next to the
+  OOF ranking inherits that uncertainty — treat it as a guess, not a promise.
+- Every engine still gets its own `submission_<engine>.csv`; the OOF winner rides in
+  `submission.csv`. That gate has been honest for three runs straight.
+- Next rungs if v4 lands where the pieces suggest: flip CatBoost to the no-append arm if
+  the LGBM pair says append hurts, then the 30–50 member stack direction the top publics
+  use — with the two teachers already paid for.

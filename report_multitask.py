@@ -1,0 +1,147 @@
+"""Write a plain-language report for the bounded rating-denoising experiment."""
+import json
+from pathlib import Path
+
+from multitask_support import ROOT
+
+FAMILY = ROOT / '.artifact_runtime/denoising_multitask_20261019'
+LABELS = {'A_clean': 'A：完整输入分类', 'B_masked': 'B：遮蔽分类→完整输入微调',
+          'C_multitask': 'C：遮蔽分类＋评分恢复→完整输入微调'}
+
+
+def read(path):
+    return json.loads(Path(path).read_text(encoding='utf-8'))
+
+
+def main():
+    folder = Path(read(FAMILY / 'latest.json')['directory'])
+    protocol = read(folder / 'protocol.json')
+    summary = read(folder / 'screen/summary.json')
+    verification = read(folder / 'verification.json')
+    assert verification['passed'] and verification['checkpoint_replay']
+    config = protocol['training']
+    rows, blend_rows, contrast_rows = [], [], []
+    for spec, auc in summary['standalone_auc'].items():
+        detail = summary['details'][spec]
+        rows.append(f"| {LABELS[spec]} | {auc:.9f} | {detail['best_epoch']} | "
+                    f"{detail['seconds']/60:.2f} | {detail['peak_allocated_gb']:.2f} |")
+    for trial in summary['trials']:
+        usage = '替换35%精简RealMLP' if trial['usage'] == 'replace35' else '20%加入当前组合'
+        lo, hi = trial['interval95']
+        blend_rows.append(f"| {trial['spec']} | {usage} | {trial['auc']:.9f} | "
+                          f"{trial['delta']:+.9f} | [{lo:+.9f}, {hi:+.9f}] |")
+    for name, values in summary['arm_comparisons'].items():
+        lo, hi = values['interval95']
+        contrast_rows.append(f"| {name} | {values['delta']:+.9f} | [{lo:+.9f}, {hi:+.9f}] |")
+    recovery, stage_comparison = [], []
+    for spec in summary['standalone_auc']:
+        arm = folder / 'screen' / spec
+        initial = read(arm / 'initial_recovery.json')
+        history = read(arm / 'history.json')
+        warm = history[config['warm_epochs']-1]['masked_stopping_recovery']
+        warm_best = max(h['stopping_auc'] for h in history[:config['warm_epochs']])
+        fine_best = max(h['stopping_auc'] for h in history[config['warm_epochs']:])
+        stage_comparison.append(f"| {spec} | {warm_best:.9f} | {fine_best:.9f} | {fine_best-warm_best:+.9f} |")
+        recovery.append(f"| {spec} | {initial['cross_entropy']:.6f} | {warm['cross_entropy']:.6f} | "
+                        f"{warm['accuracy']:.2%} |")
+    winner = summary['winner']
+    if not summary['passed']:
+        decision = '三组均未通过预设初筛门槛，停止当前配置；不进入第二划分、第二种子或完整十折，不生成新提交。'
+    elif (folder / 'confirmation/summary.json').exists():
+        confirmation = read(folder / 'confirmation/summary.json')
+        decision = ('初筛及冻结方案复核均通过；仍需预算对照、第二种子及完整十折，尚无新公榜成绩。'
+                    if confirmation['passed'] else '初筛通过，但冻结方案复核未通过；停止扩展，不生成新提交。')
+    else:
+        decision = '初筛通过，尚待按冻结方案进行第二划分复核；不能视为最终改善。'
+    groups = []
+    for name, group in summary['pattern_groups'].items():
+        groups.append(f"| {name} | {group['rows']} | {group['baseline_auc']:.9f} | {group['candidate_blend_auc']:.9f} |")
+    report = f'''# 评分去噪多任务实验实测
+
+日期：2026-10-19，Asia/Taipei。状态：A/B/C三组实际GPU训练完成。
+
+{decision}
+
+当前最佳仍为用户反馈公榜0.96114的 `submission_lean_realmlp_10fold.csv`。本报告没有新的线上成绩，未上传Kaggle。
+
+## 实验设计
+
+- 411944行拟合、35822行内部停止、111942行外部计分，索引互斥且与当前组合对齐。
+- 21个原始字段；17个数值视图及21字段类别视图，没有目标编码、计数、源教师或当前预测输入。词表、缺失处理和稳健尺度只由拟合行学习；延误先log1p。
+- 独立实现的MLP：周期数值嵌入、类别嵌入，隐藏层512/256/128，SiLU、dropout0.05，{protocol['model']['members']}个独立参数成员共享小批行。不是pytabkit的原版RealMLP。
+- 三组均训练前{config['warm_epochs']}轮、后{config['fine_epochs']}轮，batch={config['batch_size']}；两阶段都完成全部预算，最终只从后阶段按内部停止AUC选择权重。
+- A完整输入分类；B前阶段遮蔽15%的评分并分类；C与B使用相同遮蔽，同时增加0.1权重的恢复损失。第二阶段三组均关闭遮蔽和辅助任务，用完整输入微调。
+- 评分0、真实缺失、未知类别和人工遮蔽分开；同项数值和类别副本一起遮蔽。恢复只对被遮蔽位置计算，并按位置和成员平均；标签不进入前向输入。
+- 三组主干/分类头初始权重完全一致，主干更新次数相同；C有额外恢复头计算开销。恢复头在A/B未更新，C发生真实更新；若C胜出仍需要等计算预算对照。
+- 探针只使用拟合行，未使用停止或计分数据；探针参数丢弃后重置。正式训练预算在任何外部效果计算之前冻结。
+
+## 单模型
+
+相同计分行的当前组合AUC为 **{summary['baseline_auc']:.9f}**；这与公榜或完整OOF不是同一集合，绝对数值不能直接相减。
+
+| 设置 | 外部计分AUC | 最佳总轮次 | 训练分钟 | 峰值分配显存GB |
+|---|---:|---:|---:|---:|
+{chr(10).join(rows)}
+
+## 两种预先固定的融合用途
+
+全部在logit空间合并，概率先裁剪到[1e-6,1−1e-6]。替换用途为65% v4＋35%新模型；新增用途为80%当前组合＋20%新模型。没有连续搜索权重。
+
+| 设置 | 用途 | 融合AUC | 相对当前组合 | 固定预测差值约95%区间 |
+|---|---|---:|---:|---|
+{chr(10).join(blend_rows)}
+
+初筛最好为 {winner['spec']} / {winner['usage']}，增益{winner['delta']:+.9f}。预设门槛+0.0003且区间下界大于0；通过：{summary['passed']}。若进入复核，门槛为+0.0002且区间下界大于0，模型与用途须冻结。
+
+## 学习目标的消融
+
+下表直接比较单模型，不能将这些差值直接加到现有组合。
+
+| 比较 | 单模型AUC差值 | 约95%配对区间 |
+|---|---:|---|
+{chr(10).join(contrast_rows)}
+
+固定相同内部停止行及遮蔽随机种子，恢复交叉熵按内部成员平均；恢复准确率使用成员平均分布。
+
+| 设置 | 初始化恢复交叉熵 | 前阶段结束恢复交叉熵 | 前阶段结束恢复准确率 |
+|---|---:|---:|---:|
+{chr(10).join(recovery)}
+
+评分恢复改善不自动证明分类或融合改善。C相对B才直接对应增加恢复任务的作用，不能仅比较C与旧RealMLP就归因。
+
+## 训练预算的诊断
+
+| 设置 | 前阶段最高内部停止AUC | 后阶段最高内部停止AUC | 后阶段减前阶段 |
+|---|---:|---:|---:|
+{chr(10).join(stage_comparison)}
+
+协议预先规定只在后阶段选择最终权重，前阶段停止分数只用于诊断。如果后阶段分数低于前阶段，说明固定阶段长度/学习率存在局限，不能宣称这次实验已覆盖最优训练时长。训练损失下降而内部停止AUC回落属于过拟合迹象；本轮没有根据外部结果事后改轮次或追加调参。A在前阶段本身就使用完整输入，因此A与B/C的最优训练阶段也未必相同。
+
+## 最好初筛用途的评分模式分层
+
+仅描述，不用于选择不同组别权重。
+
+| 模式是否在拟合区出现 | 行数 | 当前组合AUC | 候选融合AUC |
+|---|---:|---:|---:|
+{chr(10).join(groups)}
+
+## 核验与限制
+
+- 四项契约检查通过：拟合区限定及未知/缺失处理；改变被遮蔽原值后全部输入视图和预测不变；恢复损失只使用遮蔽位置；固定融合的恒等关系。
+- 独立核验重新拟合编码器、核对所有输入/源码指纹、三组同初始化及完整更新预算、仅用内部停止选择后阶段权重、恢复头是否真实更新。
+- 从三个最佳权重重新预测全部111942计分行，与缓存逐行比对；另行重建AUC、融合公式、配对区间及门槛决定。原有{verification['original_files']}个根目录文件指纹保持一致。
+- 两个历史划分已被多次查看，不称新盲测。六项固定初筛仍存在选择偏差；名义区间未校正多重筛选，也不覆盖训练随机性、配置选择、未来分布或公榜变化。
+- 本次只检验一个有限网络/训练配方，负结果不能否定整个自监督或多任务学习家族。新分支原始输入与现有47特征RealMLP不同，二者不是单独改变损失的对照。
+
+证据目录：`{folder}`。
+
+复现：`experiment_multitask.py all`；独立核验：`verify_multitask.py`；契约测试：`python -m unittest discover -s tests -p test_multitask_contract.py -v`。
+'''
+    output = ROOT / 'DENOISING_MULTITASK_REPORT.md'
+    output.write_text(report, encoding='utf-8')
+    print('REPORT', output)
+    print(decision)
+
+
+if __name__ == '__main__':
+    main()

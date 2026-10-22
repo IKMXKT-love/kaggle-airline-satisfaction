@@ -1,0 +1,71 @@
+{
+  "ref": "najiama/s6e10-oof",
+  "complete": true,
+  "files": [
+    {
+      "name": "01_blend_oof.csv",
+      "bytes": 18268131
+    },
+    {
+      "name": "01_submission.csv",
+      "bytes": 7876896
+    },
+    {
+      "name": "02_blend_oof.csv",
+      "bytes": 18268131
+    },
+    {
+      "name": "02_submission.csv",
+      "bytes": 7876896
+    },
+    {
+      "name": "03_blend_oof.csv",
+      "bytes": 18268131
+    },
+    {
+      "name": "03_submission.csv",
+      "bytes": 7876896
+    },
+    {
+      "name": "04_blend_oof.csv",
+      "bytes": 18530105
+    },
+    {
+      "name": "04_submission.csv",
+      "bytes": 7989095
+    },
+    {
+      "name": "05_blend_oof.csv",
+      "bytes": 18531653
+    },
+    {
+      "name": "05_submission.csv",
+      "bytes": 7989530
+    },
+    {
+      "name": "06_blend_oof.csv",
+      "bytes": 18268198
+    },
+    {
+      "name": "06_submission.csv",
+      "bytes": 7876705
+    },
+    {
+      "name": "07_XGBoost_oof.csv",
+      "bytes": 18521874
+    },
+    {
+      "name": "07_submission.csv",
+      "bytes": 7985612
+    }
+  ],
+  "receipts": [
+    {
+      "tag": "najiama_files_p1",
+      "url": "https://www.kaggle.com/api/v1/datasets/list/najiama/s6e10-oof",
+      "bytes": 4775,
+      "sha256": "1294f43f8596d757b89f99a2c4a178ade27cdb6de1c070610cb58d9f00ff28ee",
+      "elapsed": 0.959059900000284
+    }
+  ]
+}

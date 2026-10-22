@@ -1,0 +1,13 @@
+{
+  "time": "2026-10-17T12:05:22.043168",
+  "candidates": [
+    "One XGBoost with route/count/TE6/teacher/13 expected ratings",
+    "One official RealMLP-TD, 128 epochs batch1024, same66 features"
+  ],
+  "screen": "Original fit/selection split; not using audit labels for selection",
+  "final": "Fixed 15-combination convex grid, baseline retains >=20%; matching stratified10fold seed42",
+  "audit": "Old audit has been seen; evaluation only after recipe frozen; NN uses internal5% development holdout",
+  "additional_source": "https://www.kaggle.com/code/sachith7/s6e10-what-each-step-was-worth",
+  "external_predictions_imported": false,
+  "v2_status": "First2folds preserved; paused to prioritize evidence-backed feature candidates; no complete v2 CV claims"
+}

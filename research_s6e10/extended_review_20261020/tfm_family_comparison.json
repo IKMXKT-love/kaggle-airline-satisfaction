@@ -1,0 +1,218 @@
+{
+  "training": false,
+  "model_inference": false,
+  "submission_generated": false,
+  "scope": "Prespecified exploratory fixed-prediction comparisons only. Public label and split provenance not fully audited; legacy baseline outer stopping, historical selection, row-order reliance and multiple comparisons apply. No independent generalization claim.",
+  "current_auc": 0.9616745833317898,
+  "models": [
+    {
+      "name": "causilo",
+      "scale": "probabilities",
+      "standalone_auc": 0.958275404186907,
+      "fixed20": {
+        "auc": 0.9616271820725432,
+        "delta": -4.740125924671585e-05,
+        "fixed_prediction_approx_se": 1.0604013999349662e-05,
+        "fixed_prediction_nominal_interval95": [
+          -6.818512668544119e-05,
+          -2.6617391807990514e-05
+        ]
+      },
+      "five_fold_deltas": [
+        -5.891771183308414e-05,
+        -3.4674223001407434e-05,
+        -2.8079364367328274e-05,
+        -7.17368318942091e-05,
+        -3.9555287496884084e-05
+      ]
+    },
+    {
+      "name": "exaone",
+      "scale": "probabilities",
+      "standalone_auc": 0.958557058876498,
+      "fixed20": {
+        "auc": 0.9616310398956136,
+        "delta": -4.354343617631625e-05,
+        "fixed_prediction_approx_se": 1.1977749552730799e-05,
+        "fixed_prediction_nominal_interval95": [
+          -6.701982529966862e-05,
+          -2.0067047052963884e-05
+        ]
+      },
+      "five_fold_deltas": [
+        -5.79186505987872e-05,
+        -3.763994355210354e-05,
+        -4.9305621478312744e-05,
+        -6.096115983522665e-05,
+        -5.187941663709061e-06
+      ]
+    },
+    {
+      "name": "kumolarge",
+      "scale": "probabilities",
+      "standalone_auc": 0.9600362894077622,
+      "fixed20": {
+        "auc": 0.9617140668403857,
+        "delta": 3.948350859570498e-05,
+        "fixed_prediction_approx_se": 1.2385174091488139e-05,
+        "fixed_prediction_nominal_interval95": [
+          1.520856737638823e-05,
+          6.375844981502173e-05
+        ]
+      },
+      "five_fold_deltas": [
+        1.9052106013939252e-05,
+        4.693130682587032e-05,
+        4.0275817705826e-05,
+        5.561098506301487e-05,
+        4.055124151658429e-05
+      ]
+    },
+    {
+      "name": "kumosmall",
+      "scale": "probabilities",
+      "standalone_auc": 0.9584836353020306,
+      "fixed20": {
+        "auc": 0.9616192118609679,
+        "delta": -5.537147082190698e-05,
+        "fixed_prediction_approx_se": 1.2980515792413344e-05,
+        "fixed_prediction_nominal_interval95": [
+          -8.081328177503714e-05,
+          -2.992965986877683e-05
+        ]
+      },
+      "five_fold_deltas": [
+        -6.95564310074781e-05,
+        -5.676048113190113e-05,
+        -3.956873794597193e-05,
+        -6.19426287558067e-05,
+        -4.618863510819082e-05
+      ]
+    },
+    {
+      "name": "limix2",
+      "scale": "probabilities",
+      "standalone_auc": 0.9584738798380872,
+      "fixed20": {
+        "auc": 0.96167901664408,
+        "delta": 4.433312290263952e-06,
+        "fixed_prediction_approx_se": 1.1196241350418826e-05,
+        "fixed_prediction_nominal_interval95": [
+          -1.7511320756556944e-05,
+          2.6377945337084852e-05
+        ]
+      },
+      "five_fold_deltas": [
+        2.158907592586523e-06,
+        1.263307560783744e-05,
+        -2.0343907653375126e-05,
+        1.1546072394730267e-05,
+        1.8746201236430338e-05
+      ]
+    },
+    {
+      "name": "mitra2",
+      "scale": "probabilities",
+      "standalone_auc": 0.9570748881951691,
+      "fixed20": {
+        "auc": 0.9615857713575165,
+        "delta": -8.881197427342726e-05,
+        "fixed_prediction_approx_se": 1.1781267341690775e-05,
+        "fixed_prediction_nominal_interval95": [
+          -0.00011190325826314118,
+          -6.572069028371334e-05
+        ]
+      },
+      "five_fold_deltas": [
+        -8.822178361489463e-05,
+        -6.821509047305607e-05,
+        -0.0001053602644299767,
+        -0.00010432644222291287,
+        -7.445940971195775e-05
+      ]
+    },
+    {
+      "name": "tabfm",
+      "scale": "probabilities",
+      "standalone_auc": 0.9588708422401792,
+      "fixed20": {
+        "auc": 0.9616848407006022,
+        "delta": 1.0257368812419456e-05,
+        "fixed_prediction_approx_se": 1.3494982273853388e-05,
+        "fixed_prediction_nominal_interval95": [
+          -1.6192796444333183e-05,
+          3.67075340691721e-05
+        ]
+      },
+      "five_fold_deltas": [
+        1.2162142705052226e-05,
+        9.363167978726494e-06,
+        8.465712632022004e-06,
+        -6.9098060720973464e-06,
+        3.706488512267292e-05
+      ]
+    },
+    {
+      "name": "tabicl2",
+      "scale": "probabilities",
+      "standalone_auc": 0.9580880168158842,
+      "fixed20": {
+        "auc": 0.9615930256074288,
+        "delta": -8.155772436118355e-05,
+        "fixed_prediction_approx_se": 1.57202959326863e-05,
+        "fixed_prediction_nominal_interval95": [
+          -0.0001123695043892487,
+          -5.07459443331184e-05
+        ]
+      },
+      "five_fold_deltas": [
+        -9.84261553304e-05,
+        -8.534144378369302e-05,
+        -6.506189135579987e-05,
+        -9.291177036896414e-05,
+        -5.5572909945733606e-05
+      ]
+    },
+    {
+      "name": "tabpfn35",
+      "scale": "probabilities",
+      "standalone_auc": 0.9611450967635963,
+      "fixed20": {
+        "auc": 0.9617935230900454,
+        "delta": 0.0001189397582554971,
+        "fixed_prediction_approx_se": 1.0780646850879367e-05,
+        "fixed_prediction_nominal_interval95": [
+          9.780969042777353e-05,
+          0.00014006982608322064
+        ]
+      },
+      "five_fold_deltas": [
+        9.802512370815641e-05,
+        0.00014550571624505348,
+        9.481469851457813e-05,
+        0.0001442407532444845,
+        0.00011568441526099704
+      ]
+    }
+  ],
+  "collective": {
+    "name": "equal_logits_all_nine",
+    "standalone_auc": 0.9597431949423724,
+    "fixed20": {
+      "auc": 0.9616775330047787,
+      "delta": 2.9496729886218693e-06,
+      "fixed_prediction_approx_se": 1.0100489200172242e-05,
+      "fixed_prediction_nominal_interval95": [
+        -1.6847285843715722e-05,
+        2.2746631820959462e-05
+      ]
+    },
+    "five_fold_deltas": [
+      -6.901137564518933e-06,
+      1.1408463954420967e-05,
+      6.435522537096006e-08,
+      -3.0393876253587138e-06,
+      1.8529545541601244e-05
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "as_of_local_date": "2026-10-20",
+  "timezone": "Asia/Taipei",
+  "score_source": "user_reported",
+  "public_auc": 0.96187,
+  "submission_file": "submission_public_pool_20261020.csv",
+  "sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+  "file_association": "Most recently delivered candidate; user supplied score without a filename or submission ID.",
+  "kaggle_submission_record_independently_verified": false,
+  "previous_best_public_auc": 0.96114,
+  "public_gain_vs_previous_best": 0.00073,
+  "target_public_auc": 0.962,
+  "gap_to_target": 0.00013,
+  "method": "246 public base predictions; L2 logistic regression on logits, C=0.003; five-fold meta-CV; own seven branches excluded after comparison.",
+  "source_attribution": "public_pool_sources_20261020.csv",
+  "oof_auc": 0.9622047560968178,
+  "no_new_training": true
+}

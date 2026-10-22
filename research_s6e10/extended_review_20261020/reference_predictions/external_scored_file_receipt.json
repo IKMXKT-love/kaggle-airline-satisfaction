@@ -1,0 +1,11 @@
+{
+  "url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/stack247_test.npy",
+  "test_array_sha256": "6af61a8b54d3e609e9ba44af0af533ac307c5cdaa2cf9fc5420bc331eba7c86e",
+  "test_rows": 299844,
+  "reconstructed_csv_sha256": "c42cdf35a02fe4d0ac42254f55d348e4141ec7e3cc8f059768386f885fed6b60",
+  "author_scored_csv_sha256_prefix": "ac2f1c51d067615e",
+  "matches_author_prefix": false,
+  "csv_written_to_disk": false,
+  "kaggle_score_independently_queried": false,
+  "training": false
+}

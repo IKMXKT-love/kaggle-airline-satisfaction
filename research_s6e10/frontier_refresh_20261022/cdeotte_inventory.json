@@ -1,0 +1,110 @@
+{
+  "ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+  "complete": true,
+  "files": [
+    {
+      "name": "oof_causilo.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_exaone.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_kumolarge.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_kumosmall.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_limix2.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_mitra2.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_tabfm.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_tabicl2.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_tabpfn35.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_xgboost.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "test_causilo.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_exaone.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_kumolarge.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_kumosmall.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_limix2.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_mitra2.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_tabfm.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_tabicl2.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_tabpfn35.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_xgboost.npy",
+      "bytes": 1199504
+    }
+  ],
+  "receipts": [
+    {
+      "tag": "cdeotte_files_p1",
+      "url": "https://www.kaggle.com/api/v1/datasets/list/cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "bytes": 7036,
+      "sha256": "1319fc78a5e1bdfb11e44f4a0357577f7ffe275a156f2695931c2198f5e16b1a",
+      "elapsed": 1.0079968000009103
+    },
+    {
+      "tag": "cdeotte_files_p2",
+      "url": "https://www.kaggle.com/api/v1/datasets/list/cdeotte/s6e10-tfm-oof-and-test-predictions?pageToken=CfDJ8JDwKpgsc5hJpcljKjpYpOFGsTo3-6Cztk5Sv4EJpkFIshVGHcgOTogBNgCVh2bTAHOFlThGLXhTwVfTPc3zzfIch5YdzUCaxK8_8P2Ge2dOshFFc5cp7Ldko9I_ibgOaN1u__G3HVI2rL4",
+      "bytes": 770,
+      "sha256": "07135f31fe14f94d963c52785c836dee2b0fc6bef7c6c0745fcb969cfca42e94",
+      "elapsed": 0.856986799999504
+    }
+  ]
+}

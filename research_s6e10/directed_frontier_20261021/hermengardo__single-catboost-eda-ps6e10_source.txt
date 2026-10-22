@@ -1,0 +1,1602 @@
+### CELL 0 markdown
+<div style="width:100%; box-sizing:border-box; border-radius:0px; background-color:#15152E; background-image: linear-gradient(to bottom, rgba(21, 21, 46, 0.65), rgba(21, 21, 46, 0.30) 40%, rgba(21, 21, 46, 0.72)), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center;">
+
+<div style="width:100%; max-width:850px; box-sizing:border-box; margin:0 auto; padding:48px 32px 40px 32px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:13px; font-weight:bold; letter-spacing:4px; color:#FFF; text-align:center; text-shadow:0 2px 12px rgba(0,0,0,0.95);">PLAYGROUND SERIES — SEASON 6, EPISODE 10</p>
+
+<p style="margin:14px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:44px; font-weight:900; line-height:1.1; color:#FFF; text-align:center; text-shadow:0 4px 24px rgba(0,0,0,0.95);">Predicting Airline Satisfaction</p>
+
+<p style="margin:0; margin-top: 14px; font-family:Georgia, 'Times New Roman', serif; font-size:12px; font-weight:bold; letter-spacing:2px; color:#F3EEE4; text-align:center; text-shadow:0 2px 10px rgba(0,0,0,0.95);">FRANZ MARC | FATE OF THE ANIMALS, 1913 | PUBLIC DOMAIN</p>
+
+<div style="margin-top:38px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:14px; font-weight:bold; letter-spacing:4px; color:#FFF; text-align:left; text-shadow:0 2px 10px rgba(0,0,0,0.95);">ABOUT THIS NOTEBOOK</p>
+
+<div style="width:100%; max-width:700px; box-sizing:border-box; margin:20px auto 0 auto;">
+<p style="margin:0 0 16px 0; font-family:Arial, sans-serif; font-size:16px; line-height:1.75; color:#FFFFFF; text-align:justify; text-shadow:0 2px 10px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,1);">
+<b>— </b>And yet another classification problem... 
+</p>
+<p style="margin:0 0 16px 0; font-family:Arial, sans-serif; font-size:16px; line-height:1.75; color:#FFFFFF; text-align:justify; text-shadow:0 2px 10px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,1);">
+<b>— </b> I borrowed many ideas from <a href="https://www.kaggle.com/code/goodpjw2008/s6e10-auxiliary-task-features-lb-0-96129" style="color:#F0B429; text-decoration:underline;">@goodpjw2008's</a> S6E10 | Auxiliary-Task Features | LB 0.96129 notebook. If you find this notebook useful, check his out as well and give it an upvote.
+</p>
+<p style="margin:0 0 16px 0; font-family:Arial, sans-serif; font-size:16px; line-height:1.75; color:#FFFFFF; text-align:justify; text-shadow:0 2px 10px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,1);">
+<b>— </b> I also took the idea of including statistics from the original dataset from this <a href="https://www.kaggle.com/competitions/playground-series-s6e9/writeups/3rd-place-solution-feature-engineering-and-logis" style="color:#F0B429; text-decoration:underline;">really well-written write-up</a> of the previous playground competition. If you're a beginner, like me, I believe it will really help you with this competition also. So take a look.</p>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+### CELL 1 code
+import logging
+import matplotlib.colors as mc
+import matplotlib.pyplot as plt
+import numpy as np
+import optuna
+import os
+import pandas as pd
+import polars as pl
+import re
+import seaborn as sns
+import warnings
+
+from sklearn.base import BaseEstimator
+from matplotlib.colors import LinearSegmentedColormap, Normalize
+from sklearn.compose import make_column_selector
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import FunctionTransformer, KBinsDiscretizer, OneHotEncoder, RobustScaler, StandardScaler, TargetEncoder
+from sklearn.impute import SimpleImputer
+from catboost import CatBoostClassifier
+from collections import defaultdict
+from dataclasses import dataclass, field
+from enum import Enum
+from itertools import combinations, permutations
+from lightgbm import LGBMClassifier, early_stopping, log_evaluation
+from matplotlib.cm import ScalarMappable
+from matplotlib.collections import LineCollection
+from matplotlib.colors import BoundaryNorm, LinearSegmentedColormap, ListedColormap, Normalize
+from matplotlib.gridspec import GridSpec
+from matplotlib.patches import Patch
+from random import randint
+from rich.console import Console
+from rich.text import Text
+from scipy import stats
+from scipy.stats import rankdata
+from sklearn.base import clone
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.cluster import KMeans
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
+from sklearn.dummy import DummyClassifier
+from sklearn.ensemble import AdaBoostClassifier, BaggingClassifier, ExtraTreesClassifier, GradientBoostingClassifier, HistGradientBoostingClassifier, RandomForestClassifier
+from sklearn.feature_selection import mutual_info_classif
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.inspection import permutation_importance
+from sklearn.isotonic import IsotonicRegression
+from sklearn.linear_model import LogisticRegression, LogisticRegressionCV, RidgeClassifier, SGDClassifier
+from sklearn.metrics import auc, confusion_matrix, mean_absolute_error, roc_auc_score, roc_curve
+from sklearn.model_selection import KFold, StratifiedKFold, cross_val_score, train_test_split, cross_val_predict
+from sklearn.naive_bayes import BernoulliNB, CategoricalNB, ComplementNB, GaussianNB, MultinomialNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.decomposition import PCA
+from sklearn.pipeline import Pipeline
+from sklearn.tree import DecisionTreeClassifier, ExtraTreeClassifier
+from tqdm import tqdm
+from typing import Callable, Dict, List
+from xgboost import XGBClassifier
+from sklearn.decomposition import PCA
+
+warnings.filterwarnings("ignore")
+
+### CELL 2 code
+rc = {
+    "axes.grid": True,
+    "grid.alpha": 0.2,
+    "xtick.labelsize": 12,
+    "ytick.labelsize": 12,
+    "font.size": 14,
+    "font.family": "serif",
+    "axes.labelweight": "bold",
+    "axes.titleweight": "bold",
+    "axes.titlesize": 16,
+    "axes.labelsize": 12,
+    "figure.facecolor": "#FFF",
+    "axes.facecolor": "#FFF"
+}
+
+fire = LinearSegmentedColormap.from_list("fire", ["#F3EEE4", "#F7D9A8", "#F0B429", "#EE6C2B", "#C23A33", "#7A2A55", "#15152E"])
+
+sns.set(rc=rc)
+sns.despine()
+
+console = Console()
+
+### CELL 3 code
+@dataclass
+class Settings:
+    target: str
+    identifier: str | None
+    shuffle: bool
+    splits: int
+    seed:int
+    path:str
+    
+
+    def __repr__(self) -> str:
+        return f"""
+        {"="*12} Settings {"="*12}
+        ==> Target: {self.target}
+        ==> Identifier: {self.identifier}
+        ==> Shuffle: {self.shuffle}
+        ==> Number of splits: {self.splits}
+        ==> Seed: {self.seed}
+        {"="*34}
+        """
+
+### CELL 4 code
+CFG = Settings(
+    target="satisfaction",
+    identifier="id",
+    shuffle=True,
+    splits=3,
+    seed=7,
+    path="/kaggle/input/competitions/playground-series-s6e10"
+)
+
+np.random.seed(CFG.seed)
+
+### CELL 5 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 8%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 14px));">
+<div style="text-align:left; padding:30px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:12px; font-weight:bold; letter-spacing:4px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:32px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Loading</p>
+<div style="width:56px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 6 code
+def plot_kde(df1: pd.DataFrame,
+             df2: pd.DataFrame,
+             cols: int = 3,
+             fill: bool = True,
+             figsize: tuple = (15, 12),
+             colors: list = ["#009E73", "#D55E00"],
+             title: str = None,
+             labels=("Train", "Test")) -> None:
+
+    df1 = df1.copy()
+    df2 = df2.copy()
+
+    df1.drop([CFG.target], axis=1, inplace=True)
+
+    numeric_columns = df1.select_dtypes(include='number').columns
+    rows = np.ceil(len(numeric_columns) / cols).astype(int)
+
+    fig, ax = plt.subplots(nrows=rows, ncols=cols, figsize=figsize)
+    fig.patch.set_facecolor("#FFFCFC")
+
+    for i, x in enumerate(numeric_columns):
+        current_ax = ax[i // cols, i % cols] if rows > 1 else ax[i % cols]
+        current_ax.set_facecolor("#FFFCFC")
+        sns.kdeplot(x=x, color=colors[0], fill=fill, data=df1, label=labels[0], ax=current_ax, linewidth=2.5)
+        sns.kdeplot(x=x, color=colors[1], fill=fill, data=df2, label=labels[1], ax=current_ax, linewidth=2.5)
+        current_ax.set_xlabel(x, fontsize=14, weight="bold")
+        current_ax.set_ylabel("Density", fontsize=12)
+        current_ax.tick_params(labelsize=11)
+
+        current_ax.spines["left"].set_visible(False)
+        current_ax.spines["bottom"].set_visible(True)
+        current_ax.spines["right"].set_visible(False)
+        current_ax.spines["top"].set_visible(False)
+
+        current_ax.spines["bottom"].set_color("#000")
+        current_ax.spines["bottom"].set_linewidth(2)
+        
+        current_ax.xaxis.grid(False)
+        current_ax.yaxis.grid(True, color="#000", linestyle="--", linewidth=1.0, alpha=0.2, zorder=0)
+        current_ax.set_axisbelow(True)
+
+    if len(numeric_columns) < (rows * cols):
+        for i in range(len(numeric_columns), rows * cols):
+            fig.delaxes(np.atleast_1d(ax).flatten()[i])
+
+    legend_elements = [
+        Patch(facecolor=colors[0], edgecolor='black', label=labels[0]),
+        Patch(facecolor=colors[1], edgecolor='black', label=labels[1])
+    ]
+
+    fig.legend(handles=legend_elements, loc='upper center', ncol=2,
+               bbox_to_anchor=(0.5, 0.97), frameon=False, fontsize=13)
+
+    if title:
+        fig.suptitle(title, fontsize=22, weight="bold", y=0.99)
+
+    fig.subplots_adjust(left=0.07, right=0.97, top=0.90, bottom=0.07, hspace=0.5, wspace=0.3)
+    plt.show()
+
+### CELL 7 code
+def read_data(directory:str) -> tuple:
+    """
+        Read CSV files from a directory and return train, test, and submission DataFrames.
+    """
+    data = {}
+    for filename in os.listdir(directory):
+        key = re.search("(.*).csv", filename).group(1)
+        data[key] = pd.read_csv(
+            os.path.join(directory, filename)
+        )
+
+    train = data["train"]
+    test = data["test"]
+    sub = data["sample_submission"]
+
+    return train, test, sub
+
+### CELL 8 code
+train, test, submission = read_data(CFG.path)
+
+train.drop("id", axis=1, inplace=True)
+test.drop("id", axis=1, inplace=True)
+
+### CELL 9 code
+original = pd.read_csv("/kaggle/input/datasets/arseniyshutko/binary-aviation-satisfaction-129k/data.csv")
+
+### CELL 10 code
+cols = [col for col in original.columns if col in train.columns]
+original = original.loc[:, cols]
+
+### CELL 11 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 28%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 14px));">
+<div style="text-align:left; padding:30px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:12px; font-weight:bold; letter-spacing:4px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:32px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Exploratory Data Analysis</p>
+<div style="width:56px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 12 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 50%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Original Dataset</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 13 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p style="margin:0 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Are there any duplicates?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>21 rows from the original dataset appear in the synthetic set. 17 of those are in train and 4 are in test.</li>
+</ul>
+</div>
+
+### CELL 14 code
+feature_cols = [col for col in original.columns if col != CFG.target]
+
+original_features = original[feature_cols].drop_duplicates()
+
+train_overlap = train[feature_cols].merge(
+    original_features,
+    on=feature_cols,
+    how="inner"
+)
+
+test_overlap = test[feature_cols].merge(
+    original_features,
+    on=feature_cols,
+    how="inner"
+)
+
+print(f"Train overlap: {len(train_overlap)}")
+print(f"Test overlap:  {len(test_overlap)}") 
+
+### CELL 15 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p style="margin:0 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Can we safely add those 4 rows from test to train?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>Maybe? If you look at the table below, some of the target values don't match between train and original, although the features are exactly the same. So it's most likely that those 4 rows don't have exactly the correct labels in test either. Beyond that, it's just 4 rows, so I don't believe that will make any difference.</li>
+<li>One more thing: look at the distribution of true and false values in original compared to test in the same table. All inversions in train is from true to false. Comparing proportions, the original dataset has 43/57 true values per false values of satisfaction. Playground's synthetic version of the same dataset has 44/56 (so, proportionally, both are close). Maybe this is just noise, but I want to check whether Playground's dataset distribution is shifted in comparison to the original dataset.
+</li>
+</ul>
+</div>
+
+### CELL 16 code
+temp = train.merge(
+    original,
+    on=feature_cols,
+    how="inner"
+)
+
+temp = temp[["satisfaction_x", "satisfaction_y"]].rename(
+    columns={
+        "satisfaction_x": "satisfaction_train",
+        "satisfaction_y": "satisfaction_original"
+    }
+)
+
+display(temp)
+
+### CELL 17 code
+overlap = pd.concat([train_overlap, test_overlap], ignore_index=True)
+
+original = pd.concat([overlap, original], axis=0).drop_duplicates(subset=feature_cols, keep=False)
+
+original.reset_index(drop=True, inplace=True)
+
+### CELL 18 code
+plot_kde(
+    pd.concat([train, test], ignore_index=True),
+    original,
+    title="Features Distributions between Playground dataset and Original dataset",
+    colors=['#2B3FA0', '#EE6C2B'], 
+    fill=False,
+    cols=4,
+    figsize=(15, 12),
+    labels=("Playground", "Original"),
+)
+
+### CELL 19 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p>Let's try to detect covariate shift using PCA. PCA compresses the data into a lower-dimensional space, but this compression involves some information loss. This means that if we reconstruct the data from its compressed representation, the result won't exactly match the original data. The difference between the original data and the PCA reconstruction is called the reconstruction error.</p>
+<p>The general idea is the following. We fit the PCA on a reference dataset R and measure the reconstruction error on data that the PCA never saw (a held-out part of R). If another dataset D has the same joint distribution as R, the PCA should reconstruct D about as well as it reconstructs the held-out R, so both errors will be similar. If the joint distribution has shifted, the directions learned from R no longer describe D well, and the reconstruction error changes.</p>
+<p>One small caveat before we start, PCA only captures changes in means, variances and linear correlations, so a purely non-linear shift can go undetected.</p>
+</div>
+
+### CELL 20 code
+def reconstruction_error_per_row(data):
+    scaled = scaler.transform(data)
+    reconstructed = pca.inverse_transform(pca.transform(scaled))
+    return np.sqrt(((scaled - reconstructed) ** 2).sum(axis=1))
+
+
+def reconstruction_error_per_chunk(data, chunk_size):
+    row_errors = reconstruction_error_per_row(data)
+    shuffled_positions = np.random.default_rng(CFG.seed).permutation(len(row_errors))
+    n_chunks = len(row_errors) // chunk_size
+
+    return np.array([
+        row_errors[shuffled_positions[i * chunk_size:(i + 1) * chunk_size]].mean()
+        for i in range(n_chunks)
+    ])
+
+### CELL 21 code
+# I used this article (https://medium.com/data-science/detecting-covariate-shift-a-guide-to-the-multivariate-approach-c099bd1891b9) as my reference.
+
+categorical = ["Gender", "Customer Type", "Type of Travel", "Class"]
+features = [col for col in original.columns if col != CFG.target]
+
+reference = original[features].dropna().sample(frac=1, random_state=CFG.seed).reset_index(drop=True)
+analysis = train[features].dropna().reset_index(drop=True)
+
+reference_encoded = pd.get_dummies(reference, columns=categorical, dtype=float)
+analysis_encoded = (
+    pd.get_dummies(analysis, columns=categorical, dtype=float)
+    .reindex(columns=reference_encoded.columns, fill_value=0.0)
+)
+
+split = len(reference_encoded) // 2
+pca_fit_data = reference_encoded.iloc[:split]
+reference_holdout = reference_encoded.iloc[split:]
+
+scaler = StandardScaler().fit(pca_fit_data)
+pca = PCA(n_components=0.65, random_state=CFG.seed).fit(scaler.transform(pca_fit_data))
+
+### CELL 22 code
+chunk_size = 2000
+reference_errors = reconstruction_error_per_chunk(reference_holdout, chunk_size)
+analysis_errors = reconstruction_error_per_chunk(analysis_encoded, chunk_size)
+
+reference_mean = reference_errors.mean()
+reference_std = reference_errors.std(ddof=1)
+lower_bound = reference_mean - 3 * reference_std
+upper_bound = reference_mean + 3 * reference_std
+
+analysis_outside_bounds = (analysis_errors < lower_bound) | (analysis_errors > upper_bound)
+analysis_distance_in_stds = (analysis_errors.mean() - reference_mean) / reference_std
+
+print(f"Reference error: {reference_mean:.4f} ± {reference_std:.4f}")
+print(f"Expected interval: [{lower_bound:.4f}, {upper_bound:.4f}]")
+print(f"Playground error: {analysis_errors.mean():.4f} ({analysis_distance_in_stds:+.1f} reference stds)")
+
+### CELL 23 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p style="margin:0 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Is there covariate shift between Playground and the original dataset?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>Reference error (2.7381) measures the mean reconstruction error over the held-out part of R by each chunk of 2000 rows. 2.409 is the same error but calculated over the chunks on Playground. So PCA fitted on original dataset reconstructs Playground with a lower error than it reconstructs the held-out original data. The Playground error is way below the expected interval. So we can conclude that there is a shift in the joint distribution between the two datasets</li>
+</ul>
+</div>
+
+### CELL 24 code
+cmap = LinearSegmentedColormap.from_list("fire_d", fire(np.linspace(0.15, 1, 256)))
+
+# Let's compare PCA plots. Just for the sake of it.
+def fit_and_project(data, sample_size):
+    scaled = StandardScaler().fit_transform(data)
+    pca_2d = PCA(n_components=2, random_state=CFG.seed).fit(scaled)
+
+    sampled_positions = np.random.default_rng(CFG.seed).choice(len(scaled), sample_size, replace=False)
+    return pca_2d.transform(scaled[sampled_positions]), pca_2d, sampled_positions
+
+sample_size = len(reference)
+original_projected, original_pca, original_positions = fit_and_project(reference_encoded, sample_size)
+playground_projected, playground_pca, playground_positions = fit_and_project(analysis_encoded, sample_size)
+
+for k in range(2):
+    similarity = original_pca.components_[k] @ playground_pca.components_[k]
+    if similarity < 0:
+        playground_projected[:, k] *= -1
+
+### CELL 25 code
+fig, axes = plt.subplots(1, 2, figsize=(14, 6), constrained_layout=True, sharex=True)
+for ax, projected, pca, title in zip(
+    axes,
+    [original_projected, playground_projected],
+    [original_pca, playground_pca],
+    ["Original", "Playground"],
+):
+    hexbin = ax.hexbin(projected[:, 0], projected[:, 1], gridsize=60, mincnt=1, bins="log", cmap=cmap)
+    
+    if title == "Playground":
+        fig.colorbar(hexbin, ax=ax, label="Points per bin (log scale)")
+        
+    ax.set_title(title)
+
+fig.suptitle("PCA fitted separately on each dataset", fontsize=18, weight="bold")
+plt.show()
+
+### CELL 26 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 50%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Missing Values</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 27 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p style="margin:0 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Are there any missing values?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>Yes. "Arrival Delay in Minutes" has 292 missing values (Train) and 130 missing values (Test). Nothing else is missing.</li>
+</ul>
+<p style="margin:16px 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Are there any duplicates?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>No. There are zero duplicate rows in Train and zero in Test.</li>
+</ul>
+</div>
+
+### CELL 28 code
+def missing_grid(df, n, m):
+    per_row = df.isna().sum(axis=1).to_numpy()
+    slices = np.array_split(per_row, n * m)
+    return np.array([s.sum() for s in slices]).reshape(n, m)
+
+### CELL 29 code
+grids = {"Train": missing_grid(train, 5, 20), "Test": missing_grid(test, 5, 20)}
+vmax = max(g.max() for g in grids.values())
+norm = Normalize(vmin=0, vmax=max(vmax, 1))
+
+icefire_seq = LinearSegmentedColormap.from_list(
+    "icefire_seq",
+    sns.color_palette("icefire", as_cmap=True)(np.linspace(0, 0.5, 256)),
+)
+
+fig, axes = plt.subplots(2, 1, constrained_layout=True, figsize=(12, 8))
+fig.patch.set_facecolor("white")
+
+for ax, (name, grid), df in zip(axes, grids.items(), [train, test]):
+    nrows, ncols = grid.shape
+    y, x = np.mgrid[0:nrows, 0:ncols]
+    
+    x_flat = x.flatten()
+    y_flat = y.flatten()
+    values_flat = grid.flatten()
+    
+    max_val = vmax if vmax > 0 else 1
+    sizes = 400 + (values_flat / max_val) * 1500  
+    
+    sc = ax.scatter(
+        x_flat,
+        y_flat,
+        s=sizes,
+        c=values_flat,
+        cmap=cmap,
+        norm=norm,
+        edgecolors="none",
+        alpha=0.9,
+    )
+    
+    ax.invert_yaxis()
+    ax.set_aspect('equal')
+    
+    for xi, yi, val in zip(x_flat, y_flat, values_flat):
+        norm_val = norm(val)
+        text_color = "black" if norm_val < 0.35 else "white"
+        
+        ax.text(
+            xi, yi, f"{int(val)}",
+            ha="center", 
+            va="center",
+            fontsize=9, 
+            fontweight="bold",
+            color=text_color
+        )
+            
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_xlim(-0.5, ncols - 0.5)
+    ax.set_ylim(nrows - 0.5, -0.5)
+    
+    ax.set_title(
+        f"{name}: {int(grid.sum())} missing",
+        fontsize=16,
+        fontweight="bold",
+    )
+    
+    ax.text(
+        1,
+        -0.04,
+        f"Each slice has ~{len(df) / grid.size:,.0f} rows",
+        transform=ax.transAxes,
+        ha="right",
+        va="top",
+        fontsize=12,
+        fontstyle="italic",
+    )
+
+plt.show()
+
+### CELL 30 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+Rows without arrival delay have a mean departure delay of 7.4 min (1.17 min everywhere else) and a lower satisfaction rate.
+</div>
+
+### CELL 31 code
+cat_cols = train.select_dtypes(exclude=["number", "bool"]).columns
+
+# cat -> num encoding. For a practical purpose, I will discard it later. 
+for col in cat_cols:
+    mapping = {value: i for i, value in enumerate(train[col].unique())}
+    train[col] = train[col].map(mapping)
+    test[col] = test[col].map(mapping)
+
+### CELL 32 code
+missing = train["Arrival Delay in Minutes"].isna()
+
+table_missing = train[missing]
+table_present = train[~missing]
+
+numeric_cols = table_missing.select_dtypes(include="number").columns
+numeric_cols = [c for c in numeric_cols if c != "Arrival Delay in Minutes"]
+
+mean_missing, mean_present, se_missing, se_present = [], [], [], []
+
+for col in numeric_cols:
+    values_missing = table_missing[col].dropna()
+    values_present = table_present[col].dropna()
+
+    mean_missing.append(values_missing.mean())
+    mean_present.append(values_present.mean())
+    se_missing.append(values_missing.sem() * 2)
+    se_present.append(values_present.sem() * 2)
+
+forest = pd.DataFrame({
+    "feature": numeric_cols,
+    "missing": mean_missing,
+    "present": mean_present,
+    "se_missing": se_missing,
+    "se_present": se_present,
+})
+
+forest = forest.sort_values("present", ascending=True).reset_index(drop=True)
+
+fig, ax = plt.subplots(figsize=(10, 18))
+fig.patch.set_facecolor("white")
+
+y = np.arange(len(forest))
+
+ax.errorbar(
+    forest["missing"], y - 0.12, xerr=forest["se_missing"],
+    fmt="o", ecolor="#2B3FA0", elinewidth=1.6, capsize=5, capthick=1.6,
+    markerfacecolor="#2B3FA0", markeredgecolor="#000", markersize=9,
+    markeredgewidth=1.2, label="Arrival Delay missing", zorder=3,
+)
+ax.errorbar(
+    forest["present"], y + 0.12, xerr=forest["se_present"],
+    fmt="o", ecolor="#EE6C2B", elinewidth=1.6, capsize=5, capthick=1.6,
+    markerfacecolor="#EE6C2B", markeredgecolor="#000", markersize=9,
+    markeredgewidth=1.2, label="Arrival Delay present", zorder=3,
+)
+
+ax.set_ylim(len(forest) - 0.7, -0.7)
+ax.set_yticks(y)
+ax.set_yticklabels(forest["feature"])
+
+ax.set_xscale("log")
+low_candidates = pd.concat([forest["missing"] - forest["se_missing"],
+                            forest["present"] - forest["se_present"]])
+low_candidates = low_candidates[low_candidates > 0]
+ax.set_xlim(low_candidates.min() * 0.8,
+            max(forest["missing"].max(), forest["present"].max()) * 1.15)
+ax.set_xlabel("Mean ± 2·SE", fontsize=18, weight="bold")
+
+ax.set_title("Mean value per Feature", fontsize=22, weight="bold", pad=16)
+
+ax.spines["left"].set_visible(False)
+ax.spines["bottom"].set_visible(False)
+ax.spines["right"].set_visible(False)
+ax.spines["top"].set_visible(False)
+
+ax.set_axisbelow(True)
+ax.yaxis.grid(True, color="#000", linestyle="--", linewidth=1.4, alpha=0.25, zorder=0)
+ax.xaxis.grid(False)
+
+ax.set_ylabel("Feature", fontsize=18, weight="bold")
+ax.tick_params(axis="y", labelsize=13)
+ax.tick_params(axis="x", labelsize=14)
+
+ax.legend(fontsize=12, frameon=False, loc="upper right")
+
+fig.text(0.01, 0.01, "* Log scale: raw scales differ by orders of magnitude.",
+         ha="left", va="bottom", fontsize=10, color="#000")
+
+fig.subplots_adjust(left=0.25, right=0.97, top=0.94, bottom=0.05)
+plt.show()
+
+### CELL 33 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p>Let's test whether those values are Missing Completely At Random (MCAR). We have two hypotheses:</p>
+<ul>
+<li>Null hypothesis: the data are Missing Completely At Random (MCAR).</li>
+<li>Alternative hypothesis: the data are not MCAR.</li>
+</ul>
+<p>Under MCAR, missingness in Arrival Delay in Minutes is independent of all other variables. A necessary consequence is that, for every other variable X, the mean of X should be the same in rows where Arrival Delay in Minutes is missing as in rows where it is present:</p>
+</div>
+
+### CELL 34 markdown
+$$E[X \mid \text{Arrival Delay is missing}] = E[X \mid \text{Arrival Delay is present}]$$
+
+
+
+
+### CELL 35 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p>So we just want to calculate how likely it is to observe a difference at least as large as the one in the data, given that the null hypothesis is true. If that probability p is very low, then what we observe would be very unlikely under the null hypothesis. So we reject it.</p> <p>That is what happens in this case (given an alpha of 0.001). If Departure Delay were independent of whether Arrival Delay is missing, a difference this large between the two group means would be extremely unlikely (p = 3.52e-61).</p>
+</div>
+
+### CELL 36 code
+# Simplified version of Little's MCAR test (chi-square on the difference between the group means). You can read more about the original here: https://journals.sagepub.com/doi/pdf/10.1177/1536867X1301300407
+def little_mcar(df, col):
+    missing = df[col].isna()
+    X = df.drop(columns=col).astype(float)
+
+    diff = X[missing].mean() - X[~missing].mean()
+    d = diff.to_numpy()
+    cov = np.cov(X.to_numpy(), rowvar=False, bias=True)
+
+    chi2 = missing.sum() * (~missing).sum() / len(X) * d @ np.linalg.pinv(cov) @ d
+    dof = np.linalg.matrix_rank(cov)
+
+    return chi2, dof, stats.chi2.sf(chi2, dof)
+
+alpha = 0.001
+chi2, dof, p = little_mcar(train, "Arrival Delay in Minutes")
+print(f"chi2 = {chi2:.1f} | dof = {dof} | p = {p:.3g} | H0 rejected: {p < alpha}")
+
+### CELL 37 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+A rating of 0 is not the worst score. According to the original dataset description, 0 just means "not rated". Additionally, some ordinal variables have a non-monotonic (U-shaped) relationship with satisfaction.
+</div>
+
+### CELL 38 code
+rating_cols = [
+    "Inflight wifi service", "Departure/Arrival time convenient",
+    "Ease of Online booking", "Gate location", "Food and drink",
+    "Online boarding", "Seat comfort", "Inflight entertainment",
+    "On-board service", "Leg room service", "Baggage handling",
+    "Checkin service", "Cleanliness"
+]
+
+fig = plt.figure(figsize=(16, 20), constrained_layout=True)
+fig.patch.set_facecolor("white")
+
+for i, col in enumerate(rating_cols):
+    ax = fig.add_subplot(5, 3, i + 1)
+    rate = train.groupby(col)["satisfaction"].mean()
+
+    bars = ax.bar(
+        rate.index.astype(str), rate.values,
+        color=plt.cm.colors.to_rgba("#2B3FA0"),
+        edgecolor="w", linewidth=0.8
+    )
+
+    for bar, v in zip(bars, rate):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height() + 0.02,
+            f"{v:.0%}",
+            ha="center", va="bottom",
+            fontsize=11, fontweight="bold"
+        )
+
+    ax.set_ylim(0, 1.05)
+    ax.set_title(col, fontsize=13, fontweight="bold", pad=12)
+    if i % 3 == 0:
+        ax.set_ylabel("Satisfaction rate", fontsize=12, fontweight="semibold")
+    ax.tick_params(axis="both", labelsize=11)
+
+    ax.spines["right"].set_visible(False)
+    ax.spines["top"].set_visible(False)
+    ax.spines["left"].set_visible(False)
+    ax.spines["bottom"].set_color("#000")
+    ax.spines["bottom"].set_linewidth(1.5)
+
+    ax.set_axisbelow(True)
+    ax.yaxis.grid(
+        True, color="#000", linestyle="--",
+        linewidth=1, alpha=0.12, zorder=0
+    )
+
+plt.show()
+
+### CELL 39 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 70%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Target Distribution</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 40 code
+df = train.assign(satisfaction=train["satisfaction"].map({True: "Satisfied", False: "Not satisfied"}))
+df["rate"] = train["satisfaction"].astype(int)
+
+sat_colors = {"Not satisfied": "#2B3FA0", "Satisfied": "#EE6C2B"}
+order = df.groupby("Class")["rate"].mean().sort_values().index.tolist()
+class_colors = dict(zip(order, ["#2B3FA0", "#F0B429", "#C23A33"][:len(order)]))
+
+counts = df["satisfaction"].value_counts().reset_index()
+counts.columns = ["satisfaction", "count"]
+
+fig = plt.figure(constrained_layout=True, figsize=(13, 10))
+gs = GridSpec(2, 2, figure=fig)
+
+ax1 = fig.add_subplot(gs[0, 0])
+ax2 = fig.add_subplot(gs[0, 1])
+ax3 = fig.add_subplot(gs[1, :])
+
+sns.barplot(
+    data=counts,
+    y="satisfaction",
+    x="count",
+    hue="satisfaction",
+    orient="h",
+    palette=sat_colors,
+    edgecolor="w",
+    linewidth=0.4,
+    legend=False,
+    ax=ax3
+)
+
+sns.barplot(
+    data=df,
+    x="Class",
+    y="rate",
+    hue="Class",
+    order=order,
+    palette=class_colors,
+    edgecolor="w",
+    linewidth=0,
+    errorbar=None,
+    legend=False,
+    ax=ax1
+)
+
+sns.swarmplot(
+    data=df.sample(1000, random_state=42),
+    x="satisfaction",
+    y="Flight Distance",
+    hue="satisfaction",
+    order=["Not satisfied", "Satisfied"],
+    palette=sat_colors,
+    size=5,
+    alpha=0.8,
+    linewidth=0,
+    edgecolor="w",
+    legend=False,
+    ax=ax2
+)
+
+ax1.set_xlabel("Class", fontsize=13, fontweight="bold")
+ax1.set_ylabel("Satisfaction proportion", fontsize=13, fontweight="bold")
+
+ax2.set_xlabel("Satisfaction", fontsize=13, fontweight="bold")
+ax2.set_ylabel("Flight Distance", fontsize=13, fontweight="bold")
+
+ax3.set_xlabel("Count", fontsize=13, fontweight="bold")
+ax3.set_ylabel("Satisfaction", fontsize=13, fontweight="bold")
+
+for ax in [ax1, ax2, ax3]:
+    ax.spines["right"].set_visible(False)
+    ax.spines["top"].set_visible(False)
+    ax.spines["bottom"].set_visible(True)
+    ax.spines["bottom"].set_color("#000")
+    ax.spines["bottom"].set_linewidth(2)
+    ax.set_axisbelow(True)
+    ax.tick_params(axis="both", labelsize=13)
+
+
+ax3.spines["left"].set_visible(True)
+ax3.spines["left"].set_color("#000")
+ax3.spines["left"].set_linewidth(2)
+ax3.spines["bottom"].set_visible(False)
+
+ax1.yaxis.grid(True, color="#000", linestyle="--", linewidth=1.2, alpha=0.15, zorder=0)
+ax2.xaxis.grid(True, color="#000", linestyle="--", linewidth=1.2, alpha=0.15, zorder=0)
+ax2.yaxis.grid(True, color="#000", linestyle="--", linewidth=1.2, alpha=0.15, zorder=0)
+ax3.xaxis.grid(True, color="#000", linestyle="--", linewidth=1.2, alpha=0.15, zorder=0)
+
+plt.show()
+
+### CELL 41 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 18%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Data Distributions</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 42 code
+plot_kde(
+    train, 
+    test, 
+    title="Features Distributions between datasets",
+    colors=['#2B3FA0', '#EE6C2B'], 
+    fill=False,
+    cols=4,
+    figsize=(15, 12), 
+)
+
+### CELL 43 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 86%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Baselines</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+
+### CELL 44 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p style="margin:0 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Why do this?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>The idea here is to quickly check the performance of models from different families with very basic hyperparameters.</li>
+<li>Having baselines helps you make better decisions, since every experiment has something to compare against.</li>
+<li>The results below are based on a single run for each model. Results may vary across runs, but they still give us a general idea of how well each model performs on this task.</li>
+</ul>
+</div>
+
+### CELL 45 markdown
+| Model | ROC AUC |
+|:--|--:|
+| lightgbm | 0.9565 |
+| hist_gradient_boosting | 0.9564 |
+| xgboost_hist | 0.9560 |
+| random_forest | 0.9557 |
+| xgboost_dart | 0.9551 |
+| mlp | 0.9549 |
+| ada_boost | 0.9409 |
+| decision_tree | 0.9367 |
+| logistic_regression | 0.9199 |
+| lda | 0.9176 |
+| gaussian_nb | 0.9104 |
+| qda | 0.9008 |
+
+### CELL 46 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p style="margin:0 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Is the logistic regression low because of the ratings?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>Logistic regression got 0.9199 in the table above. That is far from the tree models and the MLP, which are all above 0.95. Some ratings are U-shaped, so a linear model can't use them as numbers.</li>
+<li>Here I fit it twice on the same split: ratings as numbers, and ratings as categories (one-hot). If the second one gets close to the trees, most of the signal is in the level of each rating. It's not some complex interaction between features.</li>
+<li>This split is not the one from the table, so compare the two results below only with each other.</li>
+</ul>
+</div>
+
+### CELL 47 code
+numeric_cols = ["Age", "Flight Distance", "Departure Delay in Minutes", "Arrival Delay in Minutes"]
+categorical_cols = ["Gender", "Customer Type", "Type of Travel", "Class"]
+
+X = train.drop(columns=[CFG.target])
+y = train[CFG.target].astype(int)
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, stratify=y, random_state=CFG.seed)
+
+def logistic_auc(ratings_as_categories):
+    scaled = numeric_cols if ratings_as_categories else numeric_cols + rating_cols
+    onehot = categorical_cols + rating_cols if ratings_as_categories else categorical_cols
+
+    preprocess = ColumnTransformer([
+        ("numeric", Pipeline([("impute", SimpleImputer()), ("scale", StandardScaler())]), scaled),
+        ("categorical", OneHotEncoder(handle_unknown="ignore"), onehot),
+    ])
+    model = Pipeline([("preprocess", preprocess), ("model", LogisticRegression(max_iter=1000))])
+    model.fit(X_train, y_train)
+
+    return roc_auc_score(y_val, model.predict_proba(X_val)[:, 1])
+
+print(f"Ratings as numbers: {logistic_auc(False):.4f}")
+print(f"Ratings as categories: {logistic_auc(True):.4f}")
+
+### CELL 48 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 40%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Mutual Information</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 49 code
+cat_cols = train.select_dtypes(exclude=["number", "bool"]).columns
+
+for col in cat_cols:
+    mapping = {value: i for i, value in enumerate(train[col].unique())}
+    train[col] = train[col].map(mapping)
+    test[col] = test[col].map(mapping)
+
+train["satisfaction"] = train["satisfaction"].astype(int)
+
+### CELL 50 code
+categorical_cols = ["Gender", "Customer Type", "Type of Travel", "Class"]
+
+X = train.drop(columns=[CFG.target]).select_dtypes(include="number")
+y = train[CFG.target]
+
+X_imp = pd.DataFrame(SimpleImputer().fit_transform(X), columns=X.columns)
+discrete = X.columns.isin(categorical_cols + rating_cols)
+
+mi = mutual_info_classif(X_imp, y, discrete_features=discrete, random_state=CFG.seed)
+mi_s = pd.Series(mi, index=X.columns).sort_values(ascending=False)
+
+### CELL 51 code
+fig, ax = plt.subplots(figsize=(15, 10))
+
+ax.barh(
+    y=mi_s.index,
+    width=mi_s.values,
+    color="#EE6C2B",
+    linewidth=0,
+    zorder=1
+)
+
+ax.spines["left"].set_visible(True)
+ax.spines["bottom"].set_visible(False)
+ax.spines["right"].set_visible(False)
+ax.spines["top"].set_visible(False)
+
+ax.spines["left"].set_color("#000")
+ax.spines["left"].set_linewidth(1.8)
+
+ax.yaxis.grid(True, color="#000", linestyle="--", linewidth=1.2, alpha=0.1, zorder=0)
+ax.set_axisbelow(True)
+
+fig.suptitle("Mutual Information", fontsize=22, weight="bold", y=0.9, x=0.55)
+ax.set_ylabel("Feature", fontsize=18, weight="bold")
+ax.tick_params(axis="y", labelsize=12)
+ax.tick_params(axis="x", labelsize=14)
+
+fig.subplots_adjust(left=0.25, right=0.97, top=0.88, bottom=0.12)
+plt.show()
+
+### CELL 52 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 62%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Single Feature AUC</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 53 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+<p style="margin:0 0 12px 0; font-family:'Times', Courier, monospace; font-size:14px; font-weight:bold; letter-spacing:3px; color:#000;">Why am I doing this?</p>
+<ul style="margin:0; padding-left:20px; font-family:Arial, sans-serif; font-size:15.5px; line-height:1.75; color:#2B2B2B;">
+<li>I want to measure how well each feature separates satisfied from unsatisfied passengers on its own, before training any model.</li>
+<li>An AUC of 0.5 means the feature carries no signal. Values closer to 1 mean it separates the classes well by itself.</li>
+</ul>
+</div>
+
+### CELL 54 code
+categorical_cols = ["Gender", "Customer Type", "Type of Travel", "Class"]
+
+X = train.drop(columns=[CFG.target]).select_dtypes(include="number").copy()
+y = train[CFG.target].astype(int)
+
+for col in categorical_cols + rating_cols:
+    X[col] = X[col].map(y.groupby(X[col]).mean())
+
+X_imp = pd.DataFrame(SimpleImputer().fit_transform(X), columns=X.columns)
+
+auc_s = pd.Series({col: roc_auc_score(y, X_imp[col]) for col in X_imp.columns})
+auc_s = auc_s.map(lambda a: max(a, 1 - a)).sort_values()
+
+fig, ax = plt.subplots(figsize=(13, 9))
+fig.patch.set_facecolor("white")
+
+sns.barplot(
+    x=auc_s.values,
+    y=auc_s.index,
+    color="#2B3FA0",
+    edgecolor="#2B3FA0",
+    linewidth=0.4,
+    legend=False,
+    ax=ax
+)
+
+for i, value in enumerate(auc_s.values):
+    ax.text(value + 0.003, i, f"{value:.2f}", va="center", fontsize=12, fontweight="bold")
+
+ax.axvline(0.5, color="#000", linestyle="--", linewidth=1.2, alpha=0.5)
+ax.set_xlim(0.45, auc_s.max() + 0.05)
+ax.set_xlabel("Univariate AUC", fontsize=13, fontweight="bold")
+ax.set_ylabel("Feature", fontsize=13, fontweight="bold")
+
+ax.spines["right"].set_visible(False)
+ax.spines["top"].set_visible(False)
+ax.spines["bottom"].set_visible(False)
+
+ax.spines["left"].set_visible(True)
+ax.spines["left"].set_color("#000")
+ax.spines["left"].set_linewidth(2)
+
+ax.set_axisbelow(True)
+ax.tick_params(axis="both", labelsize=12)
+ax.xaxis.grid(True, color="#000", linestyle="--", linewidth=1.2, alpha=0.15, zorder=0)
+
+fig.text(0.01, 0.01, "* Dashed line at 0.5 = no predictive power. Ratings and categorical features are encoded by their satisfaction rate per level.", ha="left", va="bottom", fontsize=10)
+
+plt.show()
+
+### CELL 55 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 14%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Rank Correlation</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+
+### CELL 56 code
+matrix = train[rating_cols].corr(method="spearman")
+mask = np.triu(np.ones_like(matrix, dtype=bool), k=1)
+cmap = LinearSegmentedColormap.from_list("div", ["#2B3FA0", "#6070BF", "#AEB7E0", "#F3EEE4", "#F5BE9B", "#EE6C2B", "#C23A33"])
+
+fig, ax = plt.subplots(figsize=(10, 10))
+
+sns.heatmap(
+    matrix,
+    annot=False,
+    cmap=cmap,
+    mask=mask,
+    linewidths=0,
+    vmin=-1,
+    vmax=1,
+    cbar=False,
+    ax=ax
+)
+
+ax.xaxis.grid(False)
+ax.yaxis.grid(False)
+ax.tick_params(axis="both", labelsize=12)
+
+fig.suptitle("Rank Correlation Matrix", fontsize=22, weight="bold", y=0.98)
+
+cbar_ax = fig.add_axes([0.35, 0.90, 0.30, 0.02])
+cbar = fig.colorbar(ax.collections[0], cax=cbar_ax, orientation="horizontal")
+cbar.ax.tick_params(labelsize=10)
+cbar.outline.set_visible(False)
+
+fig.subplots_adjust(left=0.15, right=0.97, top=0.85, bottom=0.08)
+plt.show()
+
+### CELL 57 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 76%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Linear Correlation</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+
+### CELL 58 code
+matrix = train.corr()
+mask = np.triu(np.ones_like(matrix, dtype=bool), k=1)
+
+fig, ax = plt.subplots(figsize=(8, 8))
+
+sns.heatmap(
+    matrix,
+    annot=False,
+    mask=mask,
+    cmap=cmap,
+    linewidths=0,
+    vmin=-1,
+    vmax=1,
+    cbar=False,
+    ax=ax
+)
+
+ax.xaxis.grid(False)
+ax.yaxis.grid(False)
+ax.tick_params(axis="both", labelsize=12)
+
+fig.suptitle("Linear Correlation Matrix", fontsize=22, weight="bold", y=0.98)
+
+cbar_ax = fig.add_axes([0.35, 0.90, 0.30, 0.02])
+cbar = fig.colorbar(ax.collections[0], cax=cbar_ax, orientation="horizontal")
+cbar.ax.tick_params(labelsize=10)
+cbar.outline.set_visible(False)
+
+fig.subplots_adjust(left=0.15, right=0.97, top=0.85, bottom=0.08)
+plt.show()
+
+### CELL 59 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 34%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8px));">
+<div style="text-align:left; padding:20px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:11px; font-weight:bold; letter-spacing:3px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SUBSECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:22px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Feature Engineering</p>
+<div style="width:36px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+
+### CELL 60 code
+train, test, submission = read_data(CFG.path)
+
+train["satisfaction"] = train["satisfaction"].astype(int)
+
+train.drop(["id"], axis=1, inplace=True)
+test.drop(["id"], axis=1, inplace=True)
+
+temp = train.copy()
+
+### CELL 61 code
+def apply_features(df, train, test, original):
+    original = original.copy()
+    train = train.copy()
+    df = df.copy()
+    
+    numeric_cols = ["Age", "Flight Distance", "Departure Delay in Minutes", "Arrival Delay in Minutes"]
+    categorical_cols = ["Customer Type", "Type of Travel", "Class"]
+    rating_cols = ["Inflight wifi service", "Departure/Arrival time convenient", "Ease of Online booking", "Gate location", "Food and drink", "Online boarding", "Seat comfort", "Inflight entertainment", "On-board service", "Leg room service", "Baggage handling", "Checkin service", "Cleanliness"]
+
+    # Missing
+    df["arr_missing"] = df["Arrival Delay in Minutes"].isna().astype(int)
+    df["Arrival Delay in Minutes"] = df["Arrival Delay in Minutes"].fillna(df["Departure Delay in Minutes"])
+
+    # Interactions
+    df["delay_total"] = df["Departure Delay in Minutes"] + df["Arrival Delay in Minutes"]
+    df["delay_diff"] = df["Arrival Delay in Minutes"] - df["Departure Delay in Minutes"]
+    df["delay_recovered"] = df["Departure Delay in Minutes"] - df["Arrival Delay in Minutes"]
+    df["delay_recovered_flag"] = (df["delay_recovered"] > 0).astype(int)
+    df["delay_per_distance"] = df["Arrival Delay in Minutes"] / (df["Flight Distance"] + 1)
+    
+    # Stats
+    distance_group = pd.concat([train, test]).groupby("Flight Distance")
+    df["flight_distance_count"] = df["Flight Distance"].map(pd.concat([train, test])["Flight Distance"].value_counts()).fillna(0)
+
+    services = ["Seat comfort", "Cleanliness", "Inflight entertainment", "Food and drink"]
+    services_clean = df[services].replace(0, np.nan).fillna(0)
+    df["cabin_score"] = services_clean.mean(axis=1)
+    df["cabin_min"] = services_clean.min(axis=1)
+    df["cabin_std"] = services_clean.std(axis=1)
+    df["cabin_unrated_count"] = (df[services] == 0).sum(axis=1)
+
+    digital = ["Inflight wifi service", "Ease of Online booking", "Online boarding"]
+    df["digital_score"] = df[digital].mean(axis=1)
+    df["digital_min"] = df[digital].min(axis=1)
+
+    df["distance_vs_class"] = df["Flight Distance"] - df["Class"].map(train.groupby("Class")["Flight Distance"].mean())
+
+    # Ratings
+    df["rating_zeros"] = (df[rating_cols] == 0).sum(axis=1)
+    df["rating_high"] = (df[rating_cols] >= 4).sum(axis=1)
+    for col in ["Seat comfort", "Leg room service", "Inflight entertainment"]:
+        df[f"{col}_high"] = (df[col] >= 4).astype(int)
+    df["Cleanliness_high"] = (df["Cleanliness"] >= 3).astype(int)
+
+    # Frequency encoding
+    for col in numeric_cols:
+        df[f"{col}_category"] = df[col].astype(int).astype(str)
+        df[f"{col}_frequency"] = df[col].map(train[col].value_counts()).fillna(0)
+
+    # Convert ratings to categorical features
+    for col in rating_cols:
+        df[f"{col}_category"] = df[col].astype(str)
+
+    # Mean of each feature within the same flight-distance group
+    for col in rating_cols + numeric_cols:
+        df[f"{col}_flight_distance_mean"] = df["Flight Distance"].map(distance_group[col].mean())
+
+    # Mean category code within the same flight-distance group
+    for col in categorical_cols:
+        codes = pd.concat([train, test])[col].astype("category").cat.codes
+        df[f"{col}_flight_distance_mean"] = df["Flight Distance"].map(codes.groupby(pd.concat([train, test])["Flight Distance"]).mean())
+
+    # Original dataset statistics
+    prior = original[CFG.target].mean()
+    groups = {
+        "distance": ["Flight Distance"],
+        "class_travel_customer": ["Class", "Type of Travel", "Customer Type"],
+        "boarding_wifi": ["Online boarding", "Inflight wifi service"]
+    }
+
+    for name, cols in groups.items():
+        stats = original.groupby(cols)[CFG.target].agg(["sum", "count"]).reset_index()
+        stats["target_mean"] = (stats["sum"] + 20 * prior) / (stats["count"] + 20)
+        df = df.merge(stats[cols + ["target_mean", "count"]], on=cols, how="left")
+        df[f"original_target_mean_{name}"] = df.pop("target_mean").fillna(prior)
+        df[f"original_count_{name}"] = df.pop("count").fillna(0)
+
+    for col in numeric_cols:
+        df[f"original_frequency_{col}"] = df[col].map(original[col].value_counts()).fillna(0)
+
+    return df
+
+### CELL 62 code
+train = apply_features(train, train, test, original)
+
+### CELL 63 code
+test = apply_features(test, train, test, original)
+
+### CELL 64 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+I will use hillclimbing (LGBM with no finetuning) to decide between groups of features (instead of doing it feature by feature).
+</div>
+
+### CELL 65 code
+def hill_climbing(X, y, model):
+    feature_groups = {
+        "stats": ["flight_distance_count", "cabin_score", "cabin_min", "cabin_std", "digital_score", "digital_min", "distance_vs_class"],
+        "ratings": ["rating_zeros", "rating_high", "Seat comfort_high", "Leg room service_high", "Inflight entertainment_high", "Cleanliness_high"],
+        "delay": ["delay_total", "delay_diff", "delay_recovered", "delay_recovered_flag", "delay_per_distance"],
+        "frequency": [col for col in X if col.endswith("_frequency")],
+        "category": [col for col in X if col.endswith("_category")],
+        "flight_distance_mean": [col for col in X if col.endswith("_flight_distance_mean")],
+        "original": [col for col in X if col.startswith("original_")]
+    }
+
+    features = [col for col in X if not any(col in group for group in feature_groups.values())]
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, stratify=y, random_state=CFG.seed)
+
+    model.fit(X_train[features], y_train)
+    best_score = roc_auc_score(y_val, model.predict_proba(X_val[features])[:, 1])
+    print(f"Baseline: {best_score:.6f}", flush=True)
+
+    selected = []
+
+    while True:
+        scores = {}
+
+        for group, group_features in feature_groups.items():
+            if group not in selected:
+                candidate = features.copy()
+                for selected_group in selected:
+                    candidate += feature_groups[selected_group]
+                candidate += group_features
+                model.fit(X_train[candidate], y_train)
+                scores[group] = roc_auc_score(y_val, model.predict_proba(X_val[candidate])[:, 1])
+
+        group = max(scores, key=scores.get)
+
+        if scores[group] <= best_score:
+            break
+
+        selected.append(group)
+        best_score = scores[group]
+        print(f"{group}: {best_score:.6f}", flush=True)
+
+    for group in selected:
+        features += feature_groups[group]
+
+    return features
+
+### CELL 66 code
+X = train.drop(CFG.target, axis=1)
+y = train[CFG.target]
+
+model = Pipeline([
+    ("encode", ColumnTransformer(
+        [("ohe", OneHotEncoder(handle_unknown="ignore"), make_column_selector(dtype_include=["object", "category", "string"]))],
+        remainder="passthrough",
+    )),
+    ("lgbm", LGBMClassifier(
+        n_estimators=200,
+        learning_rate=0.05,
+        random_state=CFG.seed,
+        n_jobs=-1,
+        verbose=-1,
+    )),
+])
+
+# selected = hill_climbing(X, y, model) 
+
+### CELL 67 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+I'll avoid running it again. Here are my results from the previous one:
+</div>
+
+### CELL 68 markdown
+| Feature group | ROC-AUC |
+|---|---:|
+| Baseline | 0.957623 |
+| + Flight Distance Mean | 0.959005 |
+| + Original | 0.959079 |
+| + Ratings | 0.959155 |
+
+### CELL 69 code
+selected = [
+    'Age',
+    'Flight Distance',
+    'Inflight wifi service',
+    'Departure/Arrival time convenient',
+    'Ease of Online booking',
+    'Gate location',
+    'Food and drink',
+    'Online boarding',
+    'Seat comfort',
+    'Inflight entertainment',
+    'On-board service',
+    'Leg room service',
+    'Baggage handling',
+    'Checkin service',
+    'Cleanliness',
+    'Departure Delay in Minutes',
+    'Arrival Delay in Minutes',
+    'Gender',
+    'Customer Type',
+    'Type of Travel',
+    'Class',
+    'arr_missing',
+    'cabin_unrated_count',
+    'Inflight wifi service_flight_distance_mean',
+    'Departure/Arrival time convenient_flight_distance_mean',
+    'Ease of Online booking_flight_distance_mean',
+    'Gate location_flight_distance_mean',
+    'Food and drink_flight_distance_mean',
+    'Online boarding_flight_distance_mean',
+    'Seat comfort_flight_distance_mean',
+    'Inflight entertainment_flight_distance_mean',
+    'On-board service_flight_distance_mean',
+    'Leg room service_flight_distance_mean',
+    'Baggage handling_flight_distance_mean',
+    'Checkin service_flight_distance_mean',
+    'Cleanliness_flight_distance_mean',
+    'Age_flight_distance_mean',
+    'Flight Distance_flight_distance_mean',
+    'Departure Delay in Minutes_flight_distance_mean',
+    'Arrival Delay in Minutes_flight_distance_mean',
+    'Customer Type_flight_distance_mean',
+    'Type of Travel_flight_distance_mean',
+    'Class_flight_distance_mean',
+    'original_target_mean_distance',
+    'original_count_distance',
+    'original_target_mean_class_travel_customer',
+    'original_count_class_travel_customer',
+    'original_target_mean_boarding_wifi',
+    'original_count_boarding_wifi',
+    'original_frequency_Age',
+    'original_frequency_Flight Distance',
+    'original_frequency_Departure Delay in Minutes',
+    'original_frequency_Arrival Delay in Minutes',
+    'rating_zeros',
+    'rating_high',
+    'Seat comfort_high',
+    'Leg room service_high',
+    'Inflight entertainment_high',
+    'Cleanliness_high'
+]
+
+### CELL 70 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 56%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 14px));">
+<div style="text-align:left; padding:30px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:12px; font-weight:bold; letter-spacing:4px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:32px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Training</p>
+<div style="width:56px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 71 code
+train, test, submission = read_data(CFG.path)
+
+train["satisfaction"] = train["satisfaction"].astype(int)
+
+train = apply_features(train, train, test, original)
+test = apply_features(test, train, test, original)
+
+train = train.loc[:, selected + [CFG.target]]
+test = test.loc[:, selected]
+
+train.drop(["Gender"], axis=1, inplace=True)
+test.drop(["Gender"], axis=1, inplace=True)
+
+### CELL 72 code
+def cross_validation(model, X, y, test, n_splits=CFG.splits):
+    cv = StratifiedKFold(n_splits, shuffle=True, random_state=CFG.seed)
+    categorical = X.select_dtypes(exclude="number").columns.tolist()
+    
+    oof_train = np.zeros(len(X))
+    oof_test = np.zeros(len(test))
+    oof_train_logits = np.zeros(len(X))
+    oof_test_logits = np.zeros(len(test))
+    scores = []
+
+    for i, (train_idx, test_idx) in enumerate(cv.split(X, y)):
+        X_train, y_train = X.iloc[train_idx], y.iloc[train_idx]
+        X_test, y_test = X.iloc[test_idx], y.iloc[test_idx]
+
+        X_fit, X_stop, y_fit, y_stop = train_test_split(
+            X_train, y_train, test_size=0.1, stratify=y_train, random_state=CFG.seed
+        )
+
+        clf = clone(model).fit(
+            X_fit,
+            y_fit,
+            eval_set=(X_stop, y_stop),
+            cat_features=categorical,
+            early_stopping_rounds=300,
+        )
+
+        y_pred = clf.predict_proba(X_test)[:, 1]
+        
+        oof_train[test_idx] = y_pred
+        oof_train_logits[test_idx] = clf.predict(X_test, prediction_type="RawFormulaVal")
+        oof_test += clf.predict_proba(test)[:,1]/n_splits
+        oof_test_logits += clf.predict(test, prediction_type="RawFormulaVal")/n_splits
+
+        rauc = roc_auc_score(y_test, y_pred)
+        scores.append(rauc)
+        
+        print(f"Fold {i + 1}: {scores[-1]:.4f}")
+        
+    print(f"Overall: {np.mean(scores):.4f} ± {np.std(scores):.4f}")
+
+    return {
+        "train": oof_train,
+        "test": oof_test,
+        "train_logits": oof_train_logits,
+        "test_logits": oof_test_logits,
+        "scores": scores,
+        "mean_score": np.mean(scores),
+    }
+
+### CELL 73 code
+X = train.drop(CFG.target, axis=1)
+y = train[CFG.target]
+
+### CELL 74 code
+model = CatBoostClassifier(
+    iterations=5000,
+    learning_rate=0.05,
+    depth=8,
+    l2_leaf_reg=4.715300746595898,
+    random_strength=0.013165436785512684,
+    bagging_temperature=0.41526726166711747,
+    border_count=87,
+    one_hot_max_size=3,
+    max_ctr_complexity=3,
+    random_seed=CFG.seed,
+    eval_metric="AUC",
+    verbose=0,
+)
+
+oof = cross_validation(model, X, y, test)
+
+### CELL 75 code
+meta_train_pred = np.asarray(oof["train"]).ravel()
+fpr, tpr, _ = roc_curve(y, meta_train_pred)
+roc_auc = auc(fpr, tpr)
+cm = confusion_matrix(y, (meta_train_pred >= 0.5).astype(int))
+
+fig, axes = plt.subplots(1, 2, figsize=(18, 8))
+ax_roc, ax_cm = axes
+
+for ax in axes:
+    ax.spines["left"].set_visible(False)
+    ax.spines["bottom"].set_visible(True)
+    ax.spines["right"].set_visible(False)
+    ax.spines["top"].set_visible(False)
+    ax.spines["bottom"].set_color("#000")
+    ax.spines["bottom"].set_linewidth(4)
+
+ax_roc.plot(fpr, tpr, color="#526EB6", linewidth=3, label=f"AUC = {roc_auc:.4f}")
+ax_roc.plot([0, 1], [0, 1], color="#121212", linestyle="--", linewidth=2.5, label="random")
+
+ax_roc.set_xlabel("False Positive Rate", fontsize=16, weight="bold")
+ax_roc.set_ylabel("True Positive Rate", fontsize=16, weight="bold")
+ax_roc.set_title("ROC", fontsize=16, weight="bold")
+
+ax_roc.legend(frameon=False, fontsize=12)
+ax_roc.xaxis.grid(False)
+ax_roc.yaxis.grid(True, color="#000", linestyle="--", linewidth=1.0, alpha=0.2, zorder=0)
+ax_roc.set_axisbelow(True)
+ax_roc.tick_params(labelsize=12)
+ax_roc.set_aspect("equal", adjustable="box")
+
+sns.heatmap(
+    cm, 
+    annot=True,
+    fmt="d",
+    cmap="Blues", 
+    cbar=False, 
+    linewidths=1, 
+    linecolor="white",
+    square=True, 
+    annot_kws={"fontsize": 16, "weight": "bold"}, 
+    ax=ax_cm
+)
+
+ax_cm.set_xlabel("Predicted", fontsize=16, weight="bold")
+ax_cm.set_ylabel("True", fontsize=16, weight="bold")
+ax_cm.set_title("Confusion Matrix", fontsize=16, weight="bold")
+ax_cm.tick_params(labelsize=12)
+
+fig.suptitle("ROC AUC and Confusion Matrix", fontsize=22, weight="bold", y=0.98)
+fig.subplots_adjust(left=0.06, right=0.97, top=0.85, bottom=0.12, wspace=0.3)
+plt.show()
+
+### CELL 76 markdown
+<div style="width:100%; border-radius:0px; background-color:#15152E; background-image:linear-gradient(to right, rgba(21,21,46,0.92) 0%, rgba(21,21,46,0.55) 45%, rgba(21,21,46,0.08) 100%), url(https://upload.wikimedia.org/wikipedia/commons/3/32/Franz_Marc-The_fate_of_the_animals-1913.jpg); background-size:cover; background-position:center 92%; clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 14px));">
+<div style="text-align:left; padding:30px 28px;">
+<p style="margin:0; font-family:Georgia, 'Times New Roman', serif; font-size:12px; font-weight:bold; letter-spacing:4px; color:#F3EEE4; text-shadow:0 2px 10px rgba(0,0,0,0.95);">SECTION</p>
+<p style="margin:8px 0 0 0; font-family:Georgia, 'Times New Roman', serif; font-size:32px; font-weight:bold; line-height:1.15; color:#FFFFFF; text-shadow:0 4px 20px rgba(0,0,0,0.95);">Submission</p>
+<div style="width:56px; height:3px; background:#FFF; margin:14px 0 0 0; border-radius:0px;"></div>
+</div>
+</div>
+
+### CELL 77 markdown
+<div style="background:#FFF; border:1px solid #000; border-left:5px solid #000; border-radius:14px; padding:22px 26px; margin:12px 0;">
+I won't ensemble or stack the OOF predictions, since I have already validated the results. So, to squeeze a little more AUC out of it, I will train on 100% of the data across multiple seeds for the final submission.
+</div>
+
+### CELL 78 code
+preds = []
+categorical = X.select_dtypes(exclude="number").columns.tolist()
+
+for n_seed in range(5):
+    seed = CFG.seed + n_seed * 10
+    
+    print(f"Seed {seed}")
+
+    model = CatBoostClassifier(
+        iterations=5000,
+        learning_rate=0.05,
+        depth=8,
+        l2_leaf_reg=4.715300746595898,
+        random_strength=0.013165436785512684,
+        bagging_temperature=0.41526726166711747,
+        border_count=87,
+        one_hot_max_size=3,
+        max_ctr_complexity=3,
+        random_seed=seed,
+        verbose=0,
+    )
+    
+    model.fit(X, y, cat_features=categorical)
+
+    preds.append(model.predict_proba(test)[:, 1])
+    
+y_pred = np.mean(preds, axis=0)
+
+### CELL 79 code
+np.save("oof_train.npy", oof["train"])
+np.save("oof_test.npy", oof["test"])
+np.save("oof_logits_train.npy", oof["train_logits"])
+np.save("oof_logits_test.npy", oof["test_logits"])
+
+submission["satisfaction"] = oof["test"]
+submission.to_csv("submission.csv", index=False)

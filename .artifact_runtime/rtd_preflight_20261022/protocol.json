@@ -1,0 +1,24 @@
+{
+  "start_epoch": 1792681549.6973372,
+  "deadline_epoch": 1792682449.6973372,
+  "budget_seconds": 900,
+  "stage": "feasibility before scoring",
+  "architecture": "ModernBERT-base 22 layers, width768, intermediate1152, heads12; position_ids0; 24 token embedding input",
+  "batch_probe": [
+    32,
+    64
+  ],
+  "effective_batch": 512,
+  "pretrain_rows": 1129359,
+  "pretrain_epochs": 3,
+  "supervised_fit_rows": 419781,
+  "supervised_epochs": 2,
+  "supervised_arms": 2,
+  "cost_gate": "Do not train on real data if projected optimistic training time alone exceeds remaining budget. Probe optimizer updates synthetic tensors only. No candidate AUC or test inference before gate. No reduced-depth fallback.",
+  "preserved": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "fold": 0,
+  "arm": "plus_kumo",
+  "columns": 247,
+  "fit_rows": 559708,
+  "auc": 0.9623586208851118,
+  "fit_and_validation_seconds": 8.014248371124268,
+  "iterations": 2,
+  "converged": true,
+  "value": 0.21979587430926828,
+  "max_gradient": 5.093511333195688e-13
+}

@@ -1,0 +1,18 @@
+{
+  "mode": "ffm",
+  "phase": "refit",
+  "fit_rows": 629671,
+  "stop_rows": 0,
+  "best_epoch": 1,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.2643516110100081,
+      "steps": 308
+    }
+  ],
+  "steps": 308,
+  "seconds": 3.692366361618042,
+  "peak_gpu_gb": 0.4685235023498535,
+  "parameters": 2697420
+}

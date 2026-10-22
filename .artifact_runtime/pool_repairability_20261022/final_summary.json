@@ -1,0 +1,29 @@
+{
+  "sampled_pairs": 10000000,
+  "current_wrong": 377881,
+  "some_of246_correct": 266178,
+  "some_of246_correct_fraction": 0.7043963575834721,
+  "all246_strictly_wrong": 111680,
+  "all246_strictly_wrong_fraction": 0.29554277669425033,
+  "current_correct_some_member_wrong": 562751,
+  "top12_correct_fraction": 0.4318872872676848,
+  "top12_correct_pairs_broken": 239392,
+  "conditional_result": [
+    {
+      "tag": "inner",
+      "rows": 139927,
+      "baseline_auc": 0.9620133930582603,
+      "raw_control_auc": 0.9620130917682015,
+      "raw_control_delta": -3.0129005879064863e-07,
+      "raw_control_rounds": 1,
+      "conditional_auc": 0.9620195208759176,
+      "conditional_delta": 6.127817657297641e-06,
+      "conditional_rounds": 11,
+      "conditional_vs_control": 6.429107716088289e-06
+    }
+  ],
+  "status": "stopped_inner_gate",
+  "total_elapsed_seconds": 417.1547255516052,
+  "protected_files_unchanged": true,
+  "new_submission": null
+}

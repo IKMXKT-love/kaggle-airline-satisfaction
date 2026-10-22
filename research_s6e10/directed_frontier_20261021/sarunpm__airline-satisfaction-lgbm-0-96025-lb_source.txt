@@ -1,0 +1,686 @@
+### CELL 0 markdown
+# Experiments
+- **Expt 1:** Single CPU - LGBM Baseline model trained of Competition dataset. **LB -> 0.95905** 
+- **Expt 2:** Feature engineering of the Competition dataset and reduction of features having signification up to 0.70 (`FEATURE_KEEP_RATIO = 0.70`). **LB -> 0.95765**
+- **Expt 3:** Same Feature engineering, Slightly increased Feature Significance (`FEATURE_KEEP_RATIO = 0.75`). **LB -> 0.95787**
+- **Expt 4:** Removed Feature engineering as it is not useful, but, created a new features by considering Flight Distance as a route ID, target encoding, value counts, route profile as suggested by [goodpjw2008](https://www.kaggle.com/code/goodpjw2008/s6e10-auxiliary-task-features-lb-0-96129). **LB -> 0.96025**
+- **Expt 5:** Kept a Common Random Seed (`SEED = 42`), Changed `N_FOLDS` from 5 to 10 (`N_FOLDS = 10`) and LBGM model `learning_rate": 0.01`. No much improvement in LB score with doubling of `N_FOLDS` and consume a lot of CPU runtime. **LB -> 0.96027**
+- **Expt 6:** Apply logit transform, Revert to `N_FOLDS = 5`. The mean submission file LB reduced by -0.00009 with **LB -> 0.96016**. The private roc-auc score for logit transform was **0.98659** high but not peformed well in **LB -> 0.95706**. The overfitting is due to huge leakage.
+- **Expt 7:** Blending of prediction probability by CV, Full data and logit with various weights. **LB -> 0.96014**
+- **Expt 8:** Nested Log.Reg. in logit space. No improvement in LB, but has better CV ROC-AUC score. 🤔 😠 **LB -> 0.95706**
+- **Expt 9:** Training the Original dataset. The CV score is high as 0.99480. But LB plunged to **LB -> 0.95429**
+- **Expt 10** Training with Original dataset decays the LB score. So, removing Original dataset training and sticking to Competetion Dataset.
+
+|Expt.|Private Score| Private Gain|Public Score|LB Gain| Version| CPU Run Time|
+|---  |--- |---     |---    |--- |---|---|
+|1|0.95905|+0.00000|0.95844|+0.00000|2 |24 min. 10 sec.|
+|2|0.95887|-0.00018|0.95765|-0.00079|3 |59 min. 40 sec.|
+|3|0.95857|+0.00030|0.95787|+0.00025|6 |22 min. 42 sec.|
+|4|0.96057|+0.00200|0.96025|+0.00238|8 |14 min. 44 sec.|
+|5|0.96102|+0.00050|0.96027|+0.00002|9 |1h 26min 11sec.|
+|6|0.98659|+0.02557|0.95706|-0.00321|11|37 min. 57 sec.|
+|7|0.96062|-0.00040|0.96016|-0.00009|13|39 min. 01 sec.|
+|8|0.98652|+0.02552|0.95706|-0.00310|14|40 min. 49 sec.|
+|9|0.99480|+0.00828|0.95429|-0.00280|26|40 min. 40 sec.|
+
+### CELL 1 code
+import numpy as np
+import pandas as pd
+import lightgbm as lgb
+from sklearn.model_selection import StratifiedKFold, KFold
+from sklearn.metrics import roc_auc_score
+from scipy.stats import rankdata
+import matplotlib.pyplot as plt
+import warnings, os, time
+
+warnings.filterwarnings("ignore")
+
+SEED = 42
+#SEED = 2025
+#SEED = 5000
+#SEED = 7777
+
+N_FOLDS = 2
+np.random.seed(SEED)
+
+plt.rcParams["figure.dpi"] = 110
+plt.rcParams["font.size"] = 9
+plt.rcParams["axes.grid"] = True
+plt.rcParams["grid.alpha"] = 0.3
+
+### CELL 2 markdown
+# Load
+
+### CELL 3 code
+df_train  = pd.read_csv("/kaggle/input/competitions/playground-series-s6e10/train.csv")
+df_test   = pd.read_csv("/kaggle/input/competitions/playground-series-s6e10/test.csv")
+df_sub    = pd.read_csv("/kaggle/input/competitions/playground-series-s6e10/sample_submission.csv")
+
+TARGET = "satisfaction"
+
+### CELL 4 code
+df_train.head(2)
+
+### CELL 5 markdown
+# Step 1: Missing & negative value audit
+
+### CELL 6 code
+def audit_missing_and_negative(df, name="df"):
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    report = []
+    total_missing = 0
+    total_negative = 0
+    for c in df.columns:
+        n_miss = int(df[c].isna().sum())
+        n_neg  = 0
+        if c in numeric_cols:
+            n_neg = int((df[c] < 0).sum())
+        total_missing += n_miss
+        total_negative += n_neg
+        if n_miss > 0 or n_neg > 0:
+            report.append({"column": c, "dtype": str(df[c].dtype),
+                           "missing": n_miss, "negative": n_neg})
+    rep_df = pd.DataFrame(report)
+    print(f"\n{'='*70}\nMISSING / NEGATIVE REPORT — {name}\n{'='*70}")
+    if len(rep_df) == 0:
+        print("No missing or negative values found.")
+    else:
+        print(rep_df.to_string(index=False))
+    print(f"\nTotal missing values : {total_missing}")
+    print(f"Total negative values: {total_negative}")
+    return total_missing, total_negative
+
+audit_missing_and_negative(df_train, "TRAIN (raw)")
+audit_missing_and_negative(df_test,  "TEST (raw)")
+
+### CELL 7 markdown
+# Step 2: Impute missing & negative values with train mean
+
+### CELL 8 code
+RAW_CONTINUOUS_COLS = [
+    "Age", "Flight Distance",
+    "Departure Delay in Minutes", "Arrival Delay in Minutes",
+]
+
+SERVICE_COLS = [
+    "Inflight wifi service", "Departure/Arrival time convenient",
+    "Ease of Online booking", "Gate location", "Food and drink",
+    "Online boarding", "Seat comfort", "Inflight entertainment",
+    "On-board service", "Leg room service", "Baggage handling",
+    "Checkin service", "Cleanliness",
+]
+
+def impute_mean(df, train_df, cols):
+    df = df.copy()
+    impute_report = []
+    for c in cols:
+        if c not in df.columns:
+            continue
+        train_mean = train_df[c].mean()
+        mask_miss = df[c].isna()
+        n_miss = int(mask_miss.sum())
+        if n_miss > 0:
+            df.loc[mask_miss, c] = train_mean
+        mask_neg = df[c] < 0
+        n_neg = int(mask_neg.sum())
+        if n_neg > 0:
+            df.loc[mask_neg, c] = train_mean
+        if n_miss > 0 or n_neg > 0:
+            impute_report.append((c, n_miss, n_neg, train_mean))
+    return df, impute_report
+
+# Loading the dataset
+train_df = df_train.copy()
+test_df  = df_test.copy()
+
+# Arrival Delay → Departure Delay (domain knowledge)
+def preprocess_data(df, reference_df):
+    df["Arrival Delay in Minutes"] = df["Arrival Delay in Minutes"].fillna(
+        df["Departure Delay in Minutes"])
+    return impute_mean(df, reference_df, RAW_CONTINUOUS_COLS)
+
+train_df,  rep_tr = preprocess_data(df_train, train_df)
+test_df,   rep_te = preprocess_data(df_test, train_df)
+
+print(f"\n{'='*70}\nMEAN IMPUTATION REPORT (missing + negative → train mean)\n{'='*70}")
+print(f"{'column':32s} {'train_miss':>10s} {'train_neg':>10s} "
+      f"{'test_miss':>10s} {'test_neg':>10s} {'mean':>10s}")
+te_map = {r[0]: r for r in rep_te}
+for c, n_miss, n_neg, m in rep_tr:
+    t = te_map.get(c, (c, 0, 0, m))
+    print(f"{c:32s} {n_miss:10d} {n_neg:10d} {t[1]:10d} {t[2]:10d} {m:10.3f}")
+
+### CELL 9 markdown
+# Step 3: Flight-Distance Route features
+**Route = unique `Flight Distance` value.** Only these features are added — no other
+engineering.
+
+### CELL 10 code
+def add_route_features(train_df, test_df, service_cols):
+    # ---- Route ID ----
+    train_df["Route_ID"] = train_df["Flight Distance"].astype(int)
+    test_df["Route_ID"]  = test_df["Flight Distance"].astype(int)
+
+    # ---- Route popularity ----
+    all_routes = pd.concat(
+        [train_df["Route_ID"], test_df["Route_ID"]],
+        ignore_index=True)
+
+    route_counts = all_routes.value_counts()
+    total_flights = len(all_routes)
+
+    for df in [train_df, test_df]:
+        df["Route_Freq"] = (
+            df["Route_ID"].map(route_counts).astype(np.int32))
+        df["Route_Freq_Ratio"] = df["Route_Freq"] / total_flights
+
+    freq_q75 = route_counts.quantile(0.75)
+
+    for df in [train_df, test_df]:
+        df["Route_Is_Common"] = (df["Route_Freq"] >= freq_q75).astype(np.int8)
+
+    # ---- Route profile (train only) ----
+    route_profile_cols = (
+        ["Age", "Departure Delay in Minutes","Arrival Delay in Minutes"]
+        + service_cols)
+
+    route_profile = (
+        train_df.groupby("Route_ID")[route_profile_cols]
+        .mean().rename(
+            columns=lambda c:
+            f"Route_Mean_{c.replace(' ', '_').replace('/', '_')}"
+        ).reset_index()
+    )
+
+    train_df = train_df.merge(
+        route_profile, on="Route_ID", how="left")
+
+    test_df = test_df.merge(
+        route_profile, on="Route_ID", how="left")
+
+    # ---- Statistics ----
+    print("\nRoute statistics:")
+    print(f"  unique routes    : {route_counts.shape[0]}")
+    print(f"  max frequency    : {route_counts.max()}")
+    print(f"  min frequency    : {route_counts.min()}")
+    print(f"  median frequency : {route_counts.median():.0f}")
+    print(f"  75th percentile  : {freq_q75:.0f}")
+
+    return train_df, test_df, route_profile
+
+train_df, test_df, route_profile = add_route_features(
+    train_df, test_df, SERVICE_COLS)
+
+# Fill unseen test routes with global train mean 
+for c in route_profile.columns:
+    if c == "Route_ID":
+        continue
+    train_df[c]   = train_df[c].fillna(train_df[c].mean())
+    test_df[c]    = test_df[c].fillna(train_df[c].mean())
+
+# ---- 3d. Target encoding (K-fold, smoothed) — no leakage into train ----
+def target_encode_kfold(train_df, test_df, col, target,
+                        n_folds=5, smoothing=20.0, seed=SEED):
+    """Out-of-fold smoothed target-mean encoding."""
+    train_encoded = np.full(len(train_df), np.nan, dtype=np.float32)
+    global_mean = train_df[target].astype(float).mean()
+
+    kf = KFold(n_splits=n_folds, shuffle=True, random_state=seed)
+    for tr_idx, va_idx in kf.split(train_df):
+        tr_data = train_df.iloc[tr_idx]
+        agg = tr_data.groupby(col)[target].agg(["mean", "count"])
+        smoothed = (agg["mean"] * agg["count"] + global_mean * smoothing) / (agg["count"] + smoothing)
+        mapping = smoothed.to_dict()
+        train_encoded[va_idx] = (
+            train_df.iloc[va_idx][col].map(mapping).fillna(global_mean).values
+        )
+
+    agg = train_df.groupby(col)[target].agg(["mean", "count"])
+    smoothed = (agg["mean"] * agg["count"] + global_mean * smoothing) / (agg["count"] + smoothing)
+    mapping = smoothed.to_dict()
+    test_encoded = test_df[col].map(mapping).fillna(global_mean).values.astype(np.float32)
+    return train_encoded, test_encoded
+
+
+def target_std_kfold(train_df, test_df, col, target,
+                     n_folds=5, smoothing=20.0, seed=SEED):
+    """Out-of-fold smoothed target-std per route (volatility)."""
+    train_std = np.full(len(train_df), np.nan, dtype=np.float32)
+    global_std = train_df[target].astype(float).std()
+
+    kf = KFold(n_splits=n_folds, shuffle=True, random_state=seed)
+    for tr_idx, va_idx in kf.split(train_df):
+        tr_data = train_df.iloc[tr_idx]
+        agg = tr_data.groupby(col)[target].agg(["std", "count"])
+        agg["std"] = agg["std"].fillna(global_std)
+        smoothed = (agg["std"] * agg["count"] + global_std * smoothing) / (agg["count"] + smoothing)
+        mapping = smoothed.to_dict()
+        train_std[va_idx] = (
+            train_df.iloc[va_idx][col].map(mapping).fillna(global_std).values
+        )
+
+    agg = train_df.groupby(col)[target].agg(["std", "count"])
+    agg["std"] = agg["std"].fillna(global_std)
+    smoothed = (agg["std"] * agg["count"] + global_std * smoothing) / (agg["count"] + smoothing)
+    mapping = smoothed.to_dict()
+    test_std = test_df[col].map(mapping).fillna(global_std).values.astype(np.float32)
+    return train_std, test_std
+
+
+train_df["Route_Target_Enc"], test_df["Route_Target_Enc"] = target_encode_kfold(
+    train_df, test_df, col="Route_ID", target=TARGET, n_folds=N_FOLDS, smoothing=20.0)
+
+train_df["Route_Target_Enc_S50"], test_df["Route_Target_Enc_S50"] = target_encode_kfold(
+    train_df, test_df, col="Route_ID", target=TARGET, n_folds=N_FOLDS, smoothing=50.0)
+
+train_df["Route_Target_Std"], test_df["Route_Target_Std"] = target_std_kfold(
+    train_df, test_df, col="Route_ID", target=TARGET, n_folds=N_FOLDS, smoothing=20.0)
+
+# ---- 3e. Feature list ----
+ROUTE_FEATURES = [
+    "Route_Freq", "Route_Freq_Ratio", "Route_Is_Common",
+    "Route_Target_Enc", "Route_Target_Enc_S50", "Route_Target_Std",
+] + [c for c in route_profile.columns if c != "Route_ID"]
+
+print(f"\nRoute features added ({len(ROUTE_FEATURES)}):")
+for f in ROUTE_FEATURES:
+    print(f"  {f}")
+
+### CELL 11 markdown
+# Step 4: Encode categoricals
+
+### CELL 12 code
+cat_cols = ["Gender", "Customer Type", "Type of Travel", "Class"]
+
+train_enc = pd.get_dummies(train_df, columns=cat_cols, drop_first=False)
+test_enc  = pd.get_dummies(test_df,  columns=cat_cols, drop_first=False)
+test_enc  = test_enc.reindex(columns=train_enc.columns, fill_value=0)
+
+# Drop id, target, and Route_ID (equals Flight Distance — already in X)
+drop_cols = ["id", TARGET, "Route_ID"]
+drop_cols_p = [TARGET, "Route_ID"]
+X = train_enc.drop(columns=drop_cols).astype(np.float32)
+y = train_enc[TARGET].astype(int).values
+
+X_test   = test_enc.reindex(columns=X.columns, fill_value=0).astype(np.float32)
+test_ids = test_df["id"].values
+
+print(f"\nX: {X.shape}, X_test: {X_test.shape}")
+print(f"Positive rate of train: {y.mean():.4f}")
+
+# ---- Base-only view for before/after comparison ----
+base_features  = [c for c in X.columns if c not in ROUTE_FEATURES]
+X_base         = X[base_features].copy()
+X_test_base    = X_test[base_features].copy()
+print(f"Base-only features: {X_base.shape}")
+
+# ---- Target Imbalance Check ----
+unique, counts = np.unique(y, return_counts=True)
+for cls, cnt in zip(unique, counts):
+    print(f"Class {cls}: {cnt} ({cnt/len(y):.2%})")
+
+### CELL 13 markdown
+# Step 5: LightGBM params (CPU)
+
+### CELL 14 code
+LGB_PARAMS = {
+    "objective": "binary",
+    "metric": "auc",
+    "boosting_type": "gbdt",
+    "learning_rate": 0.01,
+    "num_leaves": 128,          # 255 to be tested
+    "max_depth": 10,            # -1 to be tested
+    "min_data_in_leaf": 60,     # 100 to be tested
+    "feature_fraction": 0.80,   # 0.70 to be tested
+    "bagging_fraction": 0.85,   # 0.80 to be tested
+    "bagging_freq": 1,
+    "lambda_l1": 0.1,
+    "lambda_l2": 1.0,
+    "min_gain_to_split": 0.0,
+    "verbosity": -1,
+    "seed": SEED,
+    "is_unbalance": False,      # Changed to False in version 40
+    "num_threads": -1,
+    "device_type": "cpu",
+    "force_col_wise": True,
+}
+
+### CELL 15 code
+LGB_PARAMS_CPS = {
+    "objective": "binary",
+    "metric": "auc",
+    "boosting_type": "gbdt",
+    "learning_rate": 0.01,
+    "num_leaves": 255,          
+    "max_depth": -1,            
+    "min_data_in_leaf": 100,     
+    "feature_fraction": 0.70,   
+    "bagging_fraction": 0.80,   
+    "bagging_freq": 1,
+    "lambda_l1": 0.1,
+    "lambda_l2": 1.0,
+    "min_gain_to_split": 0.0,
+    "verbosity": -1,
+    "seed": SEED,
+    "is_unbalance": False,
+    "num_threads": -1,
+    "device_type": "cpu",
+    "force_col_wise": True,
+}
+
+### CELL 16 code
+params_dart = LGB_PARAMS_CPS.copy()
+params_dart.update({
+    "boosting_type": "dart",
+    "drop_rate": 0.05,
+    "skip_drop": 0.5,
+})
+
+### CELL 17 markdown
+# Step 6: CV runner
+
+### CELL 18 code
+def run_cv(X_data, y_data, X_test_data, params, n_folds=N_FOLDS,
+           tag="", return_feat_imp=False):
+    skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=SEED)
+    oof = np.zeros(len(X_data))
+    test_pred = np.zeros(len(X_test_data))
+    fold_aucs = []
+    best_iters = []
+    feat_imp_gain = np.zeros(X_data.shape[1]) if return_feat_imp else None
+
+    for fold, (tr_idx, va_idx) in enumerate(skf.split(X_data, y_data), 1):
+        X_tr, X_va = X_data.iloc[tr_idx], X_data.iloc[va_idx]
+        y_tr, y_va = y_data[tr_idx], y_data[va_idx]
+
+        dtr = lgb.Dataset(X_tr, y_tr)
+        dva = lgb.Dataset(X_va, y_va, reference=dtr)
+
+        gbm = lgb.train(
+            params, dtr, num_boost_round=10000,
+            valid_sets=[dva],
+            callbacks=[lgb.early_stopping(200, verbose=False)],
+        )
+
+        va_pred = gbm.predict(X_va, num_iteration=gbm.best_iteration)
+        oof[va_idx] = va_pred
+        fold_aucs.append(roc_auc_score(y_va, va_pred))
+        best_iters.append(gbm.best_iteration)
+        test_pred += gbm.predict(X_test_data, num_iteration=gbm.best_iteration) / n_folds
+
+        if return_feat_imp:
+            feat_imp_gain += gbm.feature_importance(importance_type="gain")
+
+        print(f"  [{tag}] Fold {fold:2d}/{n_folds}  AUC={fold_aucs[-1]:.5f}  "
+              f"best_iter={gbm.best_iteration}")
+
+    oof_auc = roc_auc_score(y_data, oof)
+    print(f"\n[{tag}] OOF AUC        : {oof_auc:.5f}")
+    print(f"[{tag}] Mean fold AUC  : {np.mean(fold_aucs):.5f} (+/- {np.std(fold_aucs):.5f})")
+    print(f"[{tag}] Mean best_iter : {int(np.mean(best_iters))}")
+
+    result = {"oof": oof, "test": test_pred, "oof_auc": oof_auc,
+              "fold_aucs": fold_aucs, "best_iters": best_iters}
+    if return_feat_imp:
+        result["feat_imp"] = feat_imp_gain
+    return result, gbm
+
+### CELL 19 markdown
+# Step 7: OOF - TRAIN BASE only (no route features)
+
+### CELL 20 code
+print(f"\n{'='*70}\nOOF — TRAIN BASE (no route features)\n{'='*70}")
+t0 = time.time()
+res_base, gbm_base = run_cv(X_base, y, X_test_base, LGB_PARAMS, tag="BASE")
+print(f"Total time: {time.time() - t0:.1f}s")
+t0 = time.time()
+res_base_cps, gbm_base_cps = run_cv(X_base, y, X_test_base, LGB_PARAMS_CPS, tag="BASE")
+print(f"Total time: {time.time() - t0:.1f}s")
+
+### CELL 21 markdown
+# Step 8: OOF - TRAIN BASE + ROUTE features
+
+### CELL 22 code
+print(f"\n{'='*70}\nOOF — TRAIN BASE + ROUTE\n{'='*70}")
+t0 = time.time()
+res_route, gbm_base_route = run_cv(X, y, X_test, LGB_PARAMS, tag="+ROUTE", return_feat_imp=True)
+print(f"Total time: {time.time() - t0:.1f}s")
+t0 = time.time()
+res_route_cps, gbm_base_route_cps = run_cv(X, y, X_test, LGB_PARAMS_CPS, tag="+ROUTE", return_feat_imp=True)
+print(f"Total time: {time.time() - t0:.1f}s")
+
+### CELL 23 markdown
+# Step 9: Compare OOF results
+
+### CELL 24 code
+print(f"\n{'='*70}\nOOF COMPARISON: BASE vs BASE+ROUTE\n{'='*75}")
+print(f"{'Metric':30s} {'BASE':>15s} {'+ROUTE':>15s} {'Delta':>10s}")
+print(f"{'-'*70}")
+print(f"{'OOF AUC - BASE':30s} {res_base['oof_auc']:15.5f} {res_route['oof_auc']:15.5f} "
+      f"{res_route['oof_auc'] - res_base['oof_auc']:+10.5f}"
+      f"{res_route_cps['oof_auc'] - res_base_cps['oof_auc']:+10.5f}")
+print(f"{'Mean fold AUC - BASE':30s} {np.mean(res_base['fold_aucs']):15.5f} "
+      f"{np.mean(res_route['fold_aucs']):15.5f} "
+      f"{np.mean(res_route['fold_aucs']) - np.mean(res_base['fold_aucs']):+10.5f}")  
+print(f"{'Mean fold AUC - BASE':30s} {np.mean(res_base_cps['fold_aucs']):15.5f} "
+      f"{np.mean(res_route_cps['fold_aucs']):15.5f} "
+      f"{np.mean(res_route_cps['fold_aucs']) - np.mean(res_base_cps['fold_aucs']):+10.5f}")  
+print(f"{'Fold AUC std - BASE':30s} {np.std(res_base['fold_aucs']):15.5f} "
+      f"{np.std(res_route['fold_aucs']):15.5f} "
+      f"{np.std(res_route['fold_aucs']) - np.std(res_base['fold_aucs']):+10.5f}")
+print(f"{'Fold AUC std - BASE':30s} {np.std(res_base_cps['fold_aucs']):15.5f} "
+      f"{np.std(res_route_cps['fold_aucs']):15.5f} "
+      f"{np.std(res_route_cps['fold_aucs']) - np.std(res_base_cps['fold_aucs']):+10.5f}")
+print(f"{'Features - BASE':30s} {X_base.shape[1]:15d} {X.shape[1]:15d} "
+      f"{X.shape[1] - X_base.shape[1]:+10d}")
+
+### CELL 25 markdown
+# Step 10: Feature importance from the BASE+ROUTE run
+
+### CELL 26 code
+feat_imp_df = pd.DataFrame({
+    "feature":  X.columns,
+    "gain":     res_route["feat_imp"],
+})
+feat_imp_df["is_route"] = feat_imp_df["feature"].isin(ROUTE_FEATURES)
+feat_imp_df = feat_imp_df.sort_values("gain", ascending=False)
+
+print("\nTop 30 features by gain (CV, TRAIN BASE+ROUTE):")
+print(feat_imp_df.head(30).to_string(index=False))
+
+# How much total gain do route features contribute?
+route_gain_total = feat_imp_df[feat_imp_df["is_route"]]["gain"].sum()
+all_gain_total   = feat_imp_df["gain"].sum()
+print(f"\nRoute features : Train  → {route_gain_total / all_gain_total * 100:.2f}% of total gain")
+
+### CELL 27 code
+feat_imp_df = pd.DataFrame({
+    "feature":  X.columns,
+    "gain":     res_route_cps["feat_imp"],
+})
+feat_imp_df_cps["is_route"] = feat_imp_df_cps["feature"].isin(ROUTE_FEATURES)
+feat_imp_df_cps = feat_imp_df_cps.sort_values("gain", ascending=False)
+
+print("\nTop 30 features by gain (CV, TRAIN BASE+ROUTE):")
+print(feat_imp_df_cps.head(30).to_string(index=False))
+
+# How much total gain do route features contribute?
+route_gain_total_cps = feat_imp_df_cps[feat_imp_df_cps["is_route"]]["gain"].sum()
+all_gain_total_cps   = feat_imp_df_cps["gain"].sum()
+print(f"\nRoute features : Train  → {route_gain_total_cps / all_gain_total_cps * 100:.2f}% of total gain")
+
+### CELL 28 markdown
+# Step 11: Final model trained on 100% of data (BASE+ROUTE)
+
+### CELL 29 code
+FINAL_ROUNDS   = int(np.mean(res_route["best_iters"]) * 1.05)
+FINAL_ROUNDS_CPS   = int(np.mean(res_route_cps["best_iters"]) * 1.05)
+print(f"\nTraining final model on full data with {FINAL_ROUNDS} and {FINAL_ROUNDS_CPS} rounds ...")
+
+dfull           = lgb.Dataset(X, y)
+final_gbm       = lgb.train(LGB_PARAMS, dfull, num_boost_round=FINAL_ROUNDS)
+final_gbm_cps   = lgb.train(LGB_PARAMS_CPS, dfull, num_boost_round=FINAL_ROUNDS_CPS)
+
+test_preds_base         = gbm_base.predict(X_test_base)
+test_preds_base_route   = gbm_base_route.predict(X_test)
+test_preds_full         = final_gbm.predict(X_test)
+test_preds_full_cps     = final_gbm_cps.predict(X_test)
+
+### CELL 30 markdown
+# Step 12: Blending and Saving of Predictions
+## Rank-blend of CV-averaged predictions and full-data model
+
+### CELL 31 code
+r_cv    = rankdata(res_route["test"]) / len(res_route["test"])
+r_full  = rankdata(test_preds_full) / len(test_preds_full)
+
+### CELL 32 code
+r_cv_cps    = rankdata(res_route_cps["test"]) / len(res_route_cps["test"])
+r_full_cps  = rankdata(test_preds_full_cps) / len(test_preds_full_cps)
+
+### CELL 33 markdown
+## Submission Folders
+
+### CELL 34 code
+os.makedirs("submissions", exist_ok=True)
+os.makedirs("blend_cv_submissions", exist_ok=True)
+os.makedirs("blend_cv_cps_submissions", exist_ok=True)
+os.makedirs("blend_route_submissions", exist_ok=True)
+os.makedirs("blend_submissions", exist_ok=True)
+os.makedirs("hc_submissions", exist_ok=True)
+os.makedirs("oof", exist_ok=True)
+
+### CELL 35 markdown
+## Median Blend of Prediction of Predictions by Models trained from Competition
+**Only Scoring in LB**. Also LB saturated at around **ROC-AUC Score: 0.96**. No further improvement.
+
+### CELL 36 code
+blend_test      = 0.5 * r_cv + 0.5 * r_full                # Best performing blend
+blend_test_cps  = 0.5 * r_cv_cps + 0.5 * r_full_cps        # LB Pending
+
+pd.DataFrame({"id": test_ids, "satisfaction": blend_test}) \
+  .to_csv("submission.csv", index=False)
+pd.DataFrame({"id": test_ids, "satisfaction": blend_test_cps}) \
+  .to_csv("submission_cps.csv", index=False)
+
+### CELL 37 markdown
+## Blending of Predictions by Model trained from Competition dataset - CV and Full
+**Only Scoring in LB**. Also LB saturated at around **ROC-AUC Score: 0.96**. No further improvement.
+
+### CELL 38 code
+weights = np.arange(0.0, 1.01, 0.10)
+for w in weights:
+    blend = w * r_cv + (1 - w) * r_full
+    filename = f"blend_cv_submissions/sub_r_cv_full_w{w:.2f}.csv"
+    pd.DataFrame({"id": test_ids, "satisfaction": blend}).to_csv(filename, index=False)
+    print(f"Saved Submission in {filename}")
+
+### CELL 39 code
+weights = np.arange(0.0, 1.01, 0.10)
+for w in weights:
+    blend = w * r_cv_cps + (1 - w) * r_full_cps
+    filename = f"blend_cv_cps_submissions/sub_cps_r_cv_full_w{w:.2f}.csv"
+    pd.DataFrame({"id": test_ids, "satisfaction": blend}).to_csv(filename, index=False)
+    print(f"Saved Submission in {filename}")
+
+### CELL 40 markdown
+## Cross Blending of Predictions of Models by all the Dataset¶
+
+### CELL 41 code
+r_bs = rankdata(test_preds_base)/len(test_preds_base)
+r_br = rankdata(test_preds_base_route)/len(test_preds_base_route)
+r_fb = rankdata(test_preds_full)/len(test_preds_full)
+
+### CELL 42 markdown
+### Cross Blending of Predictions : Route Features added Competition
+
+### CELL 43 code
+route_preds = [r_br, r_fb]
+for w in weights:
+    blend = w * r_br + (1 - w) * r_fb
+    filename = f"blend_route_submissions/sub_br_fb_w{w:.2f}.csv"
+    pd.DataFrame({"id": test_ids, "satisfaction": blend}).to_csv(filename, index=False)
+    print(f"Saved Submission in {filename}")
+
+### CELL 44 markdown
+### Cross Blending of Predictions : All cominations
+
+### CELL 45 code
+preds = [r_bs, r_br, r_fb]
+
+step = 0.20
+count = 0
+
+for w1 in np.arange(0, 1 + step, step):
+    for w2 in np.arange(0, 1 - w1 + step, step):
+        w3 = round(1 - w1 - w2, 10)
+        if w3 < 0:
+            continue
+        blend = (w1*r_bs + w2*r_br + w3*r_fb)
+        fname = (f"blend_submissions/sub_bs_{w1:.3f}_br_{w2:.3f}_fb_{w3:.3f}.csv")
+        pd.DataFrame({"id": test_ids, "satisfaction": blend
+                }).to_csv(fname, index=False)
+        count += 1
+print(f"Saved Submission in {fname} for {count} is created")
+
+### CELL 46 code
+pd.DataFrame({"id": test_ids, "satisfaction": res_base["test"]}) \
+  .to_csv("submissions/submission_lgbm_base_cv.csv", index=False)
+
+pd.DataFrame({"id": test_ids, "satisfaction": res_route["test"]}) \
+  .to_csv("submissions/submission_lgbm_route_cv.csv", index=False)
+
+pd.DataFrame({"id": test_ids, "satisfaction": test_preds_full}) \
+  .to_csv("submissions/submission_lgbm_route_full.csv", index=False)
+
+pd.DataFrame({"id": test_ids, "satisfaction": r_cv}) \
+  .to_csv("submissions/submission_lgbm_route_full_r_cv.csv", index=False)
+
+pd.DataFrame({"id": test_ids, "satisfaction": r_full}) \
+  .to_csv("submissions/submission_lgbm_route_full_r_full.csv", index=False)
+
+# OOF for stacking / hill climbing
+pd.DataFrame({"id": train_df["id"].values,
+              "satisfaction": res_route["oof"],
+              "target": y}).to_csv("oof/oof_lgbm_base_route.csv", index=False)
+
+print("Saved:")
+print("  submission.csv                                  (train rank-blend CV + full)")
+print("  submissions/submission_lgbm_route_r_cv.csv      (train ranked base + route)")
+print("  submissions/submission_lgbm_route_r_full.csv    (train ranked full-data model)")
+print("  submissions/submission_lgbm_base_cv.csv         (train base only)")
+print("  submissions/submission_lgbm_route_cv.csv        (train base + route)")
+print("  submissions/submission_lgbm_route_full.csv      (train full-data model)")
+print("  oof/oof_lgbm_base_route.csv                     (train OOF for stacking)")
+
+### CELL 47 markdown
+# Step 13: Summary
+
+### CELL 48 code
+print("\n" + "="*70)
+print("FINAL SUMMARY (LightGBM, CPU) — Train dataset Route-based features only")
+print("="*70)
+print(f"Base features                       : {X_base.shape[1]}")
+print(f"Route features added                : {len(ROUTE_FEATURES)}")
+print(f"Total features                      : {X.shape[1]}")
+print(f"OOF AUC — BASE                      : {res_base['oof_auc']:.5f}")
+print(f"OOF AUC — BASE+ROUTE                : {res_route['oof_auc']:.5f}")
+print(f"OOF AUC — BASE CPS                  : {res_base_cps['oof_auc']:.5f}")
+print(f"OOF AUC — BASE+ROUTE CPS            : {res_route_cps['oof_auc']:.5f}")
+print(f"OOF BASE AUC delta                  : "
+      f"{res_route['oof_auc'] - res_base['oof_auc']:+.5f}")
+print(f"OOF BASE AUC delta                  : "
+      f"{res_route_cps['oof_auc'] - res_base_cps['oof_auc']:+.5f}")
+print(f"Mean fold AUC (BASE+ROUTE)          : "
+      f"{np.mean(res_route['fold_aucs']):.5f} "
+      f"(+/- {np.std(res_route['fold_aucs']):.5f})")
+print(f"Mean fold AUC (BASE+ROUTE) CPS      : "
+      f"{np.mean(res_route_cps['fold_aucs']):.5f} "
+      f"(+/- {np.std(res_route_cps['fold_aucs']):.5f})")
+print(f"Route share of total gain - BASE    : "
+      f"{route_gain_total / all_gain_total * 100:.2f}%")
+print(f"Route share of total gain - BASE CPS: "
+      f"{route_gain_total_cps / all_gain_total_cps * 100:.2f}%")
+print(f"Final training rounds - BASE        : {FINAL_ROUNDS}")
+print(f"Final training rounds - BASE CPS    : {FINAL_ROUNDS_CPS}")
+print("="*70)

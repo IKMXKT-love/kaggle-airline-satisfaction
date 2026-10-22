@@ -1,0 +1,13 @@
+{
+  "layers": 22,
+  "width": 768,
+  "intermediate": 1152,
+  "heads": 12,
+  "total_backbone_parameters": 149014272,
+  "synthetic_tokenizer_parameters": 3145728,
+  "attention_implementation": "sdpa",
+  "reference_compile": false,
+  "weight_initialization": "random; no pretrained weights downloaded",
+  "torch": "2.11.0+cu128",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+}

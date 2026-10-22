@@ -1,0 +1,13 @@
+{
+  "tag": "public_only_fold1",
+  "columns": 246,
+  "fit_rows": 559708,
+  "C": 0.003,
+  "seconds": 12.18538236618042,
+  "solver": "streaming damped Newton, identical penalized objective",
+  "resumed_same_fold_checkpoint": false,
+  "iterations": 7,
+  "converged": true,
+  "value": 0.21898223185668692,
+  "max_gradient": 8.130933873786751e-14
+}

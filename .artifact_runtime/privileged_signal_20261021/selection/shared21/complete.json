@@ -1,0 +1,10 @@
+{
+  "phase": "selection",
+  "arm": "shared21",
+  "trees": 853,
+  "seconds": 4.806028127670288,
+  "auc": 0.9940269203026062,
+  "logloss": 0.09447352588176727,
+  "fitted_rows": 87654,
+  "scored_rows": 9740
+}

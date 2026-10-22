@@ -1,0 +1,15 @@
+{
+  "decision": "STOP_COST_GATE",
+  "elapsed_seconds": 212.2098250389099,
+  "remaining_seconds": 687.7901737689972,
+  "preserved": {
+    "submission_public_pool_20261020.csv": true,
+    "CURRENT_BEST_RESULT.md": true,
+    "CURRENT_BEST_SUBMISSION.json": true,
+    "CURRENT_RECOMMENDED_CANDIDATE.json": true
+  },
+  "competition_labels_read": false,
+  "real_data_training_started": false,
+  "candidate_auc_computed": false,
+  "new_submission_generated": false
+}

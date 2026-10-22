@@ -1,0 +1,67 @@
+{
+  "ref": "kiza123123/s6e10-winning-multi-model-pipeline",
+  "pull": {
+    "tag": "kiza123123__s6e10-winning-multi-model-pipeline_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/kiza123123/s6e10-winning-multi-model-pipeline",
+    "bytes": 49382,
+    "sha256": "9e953cd77dc8055ab4c243977672eb516372f30b13b0d43be8fc882b8830db68",
+    "elapsed": 1.5785382999997637
+  },
+  "version": 8,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 8,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 139044126,
+    "ref": "kiza123123/s6e10-winning-multi-model-pipeline",
+    "title": "S6E10 Winning Multi-Model Pipeline",
+    "author": "Kizabgd123",
+    "slug": "s6e10-winning-multi-model-pipeline",
+    "lastRunTime": "2026-10-18T03:49:36.5020768Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "cdeotte/s6e10-tfm-oof-and-test-predictions"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 0,
+    "currentVersionNumber": 8,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 17806,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "kiza123123__s6e10-winning-multi-model-pipeline_outputs_v8",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 10,
+    "sha256": "6989526cc8fefbd77739858ba1f9ba7e9386f18bc7b2ec7e708178044a041c5a",
+    "elapsed": 0.9611887999999453
+  }
+}

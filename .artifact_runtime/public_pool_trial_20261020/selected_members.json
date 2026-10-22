@@ -1,0 +1,3151 @@
+[
+  {
+    "member": "ar_cat_5f",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Arhan canli",
+    "files": [
+      "oof_ar_cat_5f.npy",
+      "test_ar_cat_5f.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96094,
+    "reference_scale": "logits"
+  },
+  {
+    "member": "ar_lgb_5f",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Arhan canli",
+    "files": [
+      "oof_ar_lgb_5f.npy",
+      "test_ar_lgb_5f.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961029,
+    "reference_scale": "logits"
+  },
+  {
+    "member": "ar_realmlp_5f",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Arhan canli",
+    "files": [
+      "oof_ar_realmlp_5f.npy",
+      "test_ar_realmlp_5f.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960879,
+    "reference_scale": "logits"
+  },
+  {
+    "member": "ar_xgb_5f",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Arhan canli",
+    "files": [
+      "oof_ar_xgb_5f.npy",
+      "test_ar_xgb_5f.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961049,
+    "reference_scale": "logits"
+  },
+  {
+    "member": "bp_cat",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "files": [
+      "oof_bp_cat.npy",
+      "test_bp_cat.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960887,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "bp_lgbm",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "files": [
+      "oof_bp_lgbm.npy",
+      "test_bp_lgbm.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961058,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "bp_lgbm_xt",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "files": [
+      "oof_bp_lgbm_xt.npy",
+      "test_bp_lgbm_xt.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96093,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "bp_realmlp",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "files": [
+      "oof_bp_realmlp.npy",
+      "test_bp_realmlp.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961216,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "bp_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "files": [
+      "oof_bp_xgb.npy",
+      "test_bp_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96102,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_a",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_a.npy",
+      "test_gl_a.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.959568,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_b",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_b.npy",
+      "test_gl_b.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958727,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_c",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_c.npy",
+      "test_gl_c.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958338,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_d",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_d.npy",
+      "test_gl_d.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958341,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_e",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_e.npy",
+      "test_gl_e.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.956817,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_f",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_f.npy",
+      "test_gl_f.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.948865,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_g",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_g.npy",
+      "test_gl_g.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.954592,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_h",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_h.npy",
+      "test_gl_h.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.959791,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_i",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_i.npy",
+      "test_gl_i.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.959651,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_j",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_j.npy",
+      "test_gl_j.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96115,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_k",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_k.npy",
+      "test_gl_k.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960934,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_l",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_l.npy",
+      "test_gl_l.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960956,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_m",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_m.npy",
+      "test_gl_m.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960411,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_n",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Dariush Afshar (this library, v4)",
+    "files": [
+      "oof_gl_n.npy",
+      "test_gl_n.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961233,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_cat_ctr",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_cat_ctr.npy",
+      "test_gp_cat_ctr.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961045,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_cat_ctr3",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_cat_ctr3.npy",
+      "test_gp_cat_ctr3.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961118,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_cat_ctr5",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_cat_ctr5.npy",
+      "test_gp_cat_ctr5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96109,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_cat_v3",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_cat_v3.npy",
+      "test_gp_cat_v3.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960833,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_cat_vb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_cat_vb.npy",
+      "test_gp_cat_vb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960805,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_deepfm_rawaux",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_deepfm_rawaux.npy",
+      "test_gp_deepfm_rawaux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960479,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_deepfm_v1",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_deepfm_v1.npy",
+      "test_gp_deepfm_v1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960728,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_glm6_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_glm6_xgb.npy",
+      "test_gp_glm6_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960803,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_glm_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_glm_xgb.npy",
+      "test_gp_glm_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960751,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_lgb_auxall",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_lgb_auxall.npy",
+      "test_gp_lgb_auxall.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961153,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_lgb_v3",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_lgb_v3.npy",
+      "test_gp_lgb_v3.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961057,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_lgb_vb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_lgb_vb.npy",
+      "test_gp_lgb_vb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961011,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_lgb_vb_aux",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_lgb_vb_aux.npy",
+      "test_gp_lgb_vb_aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961061,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_lgb_vb_ogev",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_lgb_vb_ogev.npy",
+      "test_gp_lgb_vb_ogev.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961057,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa.npy",
+      "test_gp_realmlp_fa.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960946,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa_aux",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa_aux.npy",
+      "test_gp_realmlp_fa_aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961004,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa_aux3",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa_aux3.npy",
+      "test_gp_realmlp_fa_aux3.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961077,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa_aux_s2",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa_aux_s2.npy",
+      "test_gp_realmlp_fa_aux_s2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961018,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa_auxog",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa_auxog.npy",
+      "test_gp_realmlp_fa_auxog.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960888,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa_auxogev",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa_auxogev.npy",
+      "test_gp_realmlp_fa_auxogev.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961029,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa_s123",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa_s123.npy",
+      "test_gp_realmlp_fa_s123.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960908,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_fa_s7",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_fa_s7.npy",
+      "test_gp_realmlp_fa_s7.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960976,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_og",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_og.npy",
+      "test_gp_realmlp_og.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960779,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_pub",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_pub.npy",
+      "test_gp_realmlp_pub.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960769,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_pub_aux",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_pub_aux.npy",
+      "test_gp_realmlp_pub_aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960914,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_pub_s1",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_pub_s1.npy",
+      "test_gp_realmlp_pub_s1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960718,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_pub_s2",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_pub_s2.npy",
+      "test_gp_realmlp_pub_s2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960757,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_v4",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_v4.npy",
+      "test_gp_realmlp_v4.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961136,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_v4_s1",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_v4_s1.npy",
+      "test_gp_realmlp_v4_s1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961105,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_v4_s2",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_v4_s2.npy",
+      "test_gp_realmlp_v4_s2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96116,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_v4fa",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_v4fa.npy",
+      "test_gp_realmlp_v4fa.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961179,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_vb_aux",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_vb_aux.npy",
+      "test_gp_realmlp_vb_aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961345,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_realmlp_vb_aux_s2",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_realmlp_vb_aux_s2.npy",
+      "test_gp_realmlp_vb_aux_s2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961316,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabicl_full_raw",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabicl_full_raw.npy",
+      "test_gp_tabicl_full_raw.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.95759,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabpfn_catfd",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabpfn_catfd.npy",
+      "test_gp_tabpfn_catfd.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960925,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabpfn_catfd10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabpfn_catfd10.npy",
+      "test_gp_tabpfn_catfd10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961071,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabpfn_catfd_s1",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabpfn_catfd_s1.npy",
+      "test_gp_tabpfn_catfd_s1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960895,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabpfn_full_raw",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabpfn_full_raw.npy",
+      "test_gp_tabpfn_full_raw.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960729,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabpfn_full_raw_s1",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabpfn_full_raw_s1.npy",
+      "test_gp_tabpfn_full_raw_s1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960628,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabpfn_te",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabpfn_te.npy",
+      "test_gp_tabpfn_te.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961099,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_tabpfn_te4",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_tabpfn_te4.npy",
+      "test_gp_tabpfn_te4.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961142,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_xgb_auxall",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_xgb_auxall.npy",
+      "test_gp_xgb_auxall.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961156,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_xgb_auxev",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_xgb_auxev.npy",
+      "test_gp_xgb_auxev.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961174,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_xgb_v3",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_xgb_v3.npy",
+      "test_gp_xgb_v3.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961072,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_xgb_v3_d10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_xgb_v3_d10.npy",
+      "test_gp_xgb_v3_d10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961061,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_xgb_v3_s1",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_xgb_v3_s1.npy",
+      "test_gp_xgb_v3_s1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961095,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_xgb_v4_tuned",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_xgb_v4_tuned.npy",
+      "test_gp_xgb_v4_tuned.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961113,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gp_xgb_vb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gp_xgb_vb.npy",
+      "test_gp_xgb_vb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960926,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "meh_cat",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_meh_cat.npy",
+      "test_meh_cat.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960329,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "meh_lgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_meh_lgb.npy",
+      "test_meh_lgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960689,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "meh_realmlp",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_meh_realmlp.npy",
+      "test_meh_realmlp.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960958,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "meh_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_meh_xgb.npy",
+      "test_meh_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960432,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_cat",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_cat.npy",
+      "test_mg_cat.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960901,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_cat_ctr",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_cat_ctr.npy",
+      "test_mg_cat_ctr.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96098,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_lgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_lgb.npy",
+      "test_mg_lgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961014,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_lgb_ogteach",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_lgb_ogteach.npy",
+      "test_mg_lgb_ogteach.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_lgb_route",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_lgb_route.npy",
+      "test_mg_lgb_route.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961035,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_realmlp",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_realmlp.npy",
+      "test_mg_realmlp.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961007,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_realmlp_fa4",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_realmlp_fa4.npy",
+      "test_mg_realmlp_fa4.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961015,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_realmlp_og",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_realmlp_og.npy",
+      "test_mg_realmlp_og.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960922,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_realmlp_v4",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_realmlp_v4.npy",
+      "test_mg_realmlp_v4.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961198,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_realmlp_v4og",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_realmlp_v4og.npy",
+      "test_mg_realmlp_v4og.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961232,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mg_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "files": [
+      "oof_mg_xgb.npy",
+      "test_mg_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960911,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mi_cat_ctr",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Mitudru Dutta",
+    "files": [
+      "oof_mi_cat_ctr.npy",
+      "test_mi_cat_ctr.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96112,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mi_glm_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Mitudru Dutta",
+    "files": [
+      "oof_mi_glm_xgb.npy",
+      "test_mi_glm_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961065,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mi_lgb_route_cat",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Mitudru Dutta",
+    "files": [
+      "oof_mi_lgb_route_cat.npy",
+      "test_mi_lgb_route_cat.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961027,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mi_realmlp_lean",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Mitudru Dutta",
+    "files": [
+      "oof_mi_realmlp_lean.npy",
+      "test_mi_realmlp_lean.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961307,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mi_realmlp_raw",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Mitudru Dutta",
+    "files": [
+      "oof_mi_realmlp_raw.npy",
+      "test_mi_realmlp_raw.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960976,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mi_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Mitudru Dutta",
+    "files": [
+      "oof_mi_xgb.npy",
+      "test_mi_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961247,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "mi_xgb_d5",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Mitudru Dutta",
+    "files": [
+      "oof_mi_xgb_d5.npy",
+      "test_mi_xgb_d5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961288,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "nj_01",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Naji",
+    "files": [
+      "oof_nj_01.npy",
+      "test_nj_01.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961744,
+    "reference_scale": "ranks"
+  },
+  {
+    "member": "pfn_hemingweb_raw",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "samanyu1808 and Hemingweb",
+    "files": [
+      "oof_pfn_hemingweb_raw.npy",
+      "test_pfn_hemingweb_raw.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961053,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "pfn_samanyu_route_og",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "samanyu1808 and Hemingweb",
+    "files": [
+      "oof_pfn_samanyu_route_og.npy",
+      "test_pfn_samanyu_route_og.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961268,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "pfn_samanyu_seeds",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "samanyu1808 and Hemingweb",
+    "files": [
+      "oof_pfn_samanyu_seeds.npy",
+      "test_pfn_samanyu_seeds.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961008,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_cat_ctr_auxall_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_cat_ctr_auxall_k10.npy",
+      "test_sa_cat_ctr_auxall_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961174,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_cat_ctr_auxev",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_cat_ctr_auxev.npy",
+      "test_sa_cat_ctr_auxev.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960984,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_cat_ctr_auxev_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_cat_ctr_auxev_k10.npy",
+      "test_sa_cat_ctr_auxev_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96116,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_lgb_A",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_lgb_A.npy",
+      "test_sa_lgb_A.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960971,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_lgb_A_auxall",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_lgb_A_auxall.npy",
+      "test_sa_lgb_A_auxall.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961136,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_lgb_A_auxall_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_lgb_A_auxall_k10.npy",
+      "test_sa_lgb_A_auxall_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961237,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_lgb_B_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_lgb_B_k10.npy",
+      "test_sa_lgb_B_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961065,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_B",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_B.npy",
+      "test_sa_rmlp_B.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961282,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_B_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_B_k10.npy",
+      "test_sa_rmlp_B_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961378,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_ogx_aux",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_ogx_aux.npy",
+      "test_sa_rmlp_ogx_aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961081,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_ogx_aux_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_ogx_aux_k10.npy",
+      "test_sa_rmlp_ogx_aux_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961175,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_raw_aux_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_raw_aux_k10.npy",
+      "test_sa_rmlp_raw_aux_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961252,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_raw_aux_s2",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_raw_aux_s2.npy",
+      "test_sa_rmlp_raw_aux_s2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961118,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_v4aux",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_v4aux.npy",
+      "test_sa_rmlp_v4aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961268,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_v4aux_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_v4aux_k10.npy",
+      "test_sa_rmlp_v4aux_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961398,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_v4aux_k10s2",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_v4aux_k10s2.npy",
+      "test_sa_rmlp_v4aux_k10s2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961413,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_rmlp_v4ev_e4_k10",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_rmlp_v4ev_e4_k10.npy",
+      "test_sa_rmlp_v4ev_e4_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961244,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_xgb_A",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_xgb_A.npy",
+      "test_sa_xgb_A.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960903,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_xgb_A_auxev",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_xgb_A_auxev.npy",
+      "test_sa_xgb_A_auxev.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961044,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_xgb_raw",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_xgb_raw.npy",
+      "test_sa_xgb_raw.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958832,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_xgb_route",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_xgb_route.npy",
+      "test_sa_xgb_route.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960317,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "sa_xgb_te",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Sachith7",
+    "files": [
+      "oof_sa_xgb_te.npy",
+      "test_sa_xgb_te.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960179,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "th_catboost",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "thisray",
+    "files": [
+      "oof_th_catboost.npy",
+      "test_th_catboost.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960941,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "th_realmlp",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "thisray",
+    "files": [
+      "oof_th_realmlp.npy",
+      "test_th_realmlp.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961042,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "th_xgb",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "thisray",
+    "files": [
+      "oof_th_xgb.npy",
+      "test_th_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961093,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "wx_context_numeric",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Shelton Wang",
+    "files": [
+      "oof_wx_context_numeric.npy",
+      "test_wx_context_numeric.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960649,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "wx_rating_segments",
+    "source": "c124",
+    "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "author": "Shelton Wang",
+    "files": [
+      "oof_wx_rating_segments.npy",
+      "test_wx_rating_segments.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960811,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_causilo",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_causilo.npy",
+      "test_causilo.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958275,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_exaone",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_exaone.npy",
+      "test_exaone.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958557,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_kumolarge",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_kumolarge.npy",
+      "test_kumolarge.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960036,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_kumosmall",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_kumosmall.npy",
+      "test_kumosmall.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958484,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_limix2",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_limix2.npy",
+      "test_limix2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958474,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_mitra2",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_mitra2.npy",
+      "test_mitra2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.957075,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_realmlp",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_realmlp.npy",
+      "test_realmlp.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.959311,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_tabfm",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_tabfm.npy",
+      "test_tabfm.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958871,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_tabicl2",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_tabicl2.npy",
+      "test_tabicl2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958088,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_tabpfn35",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_tabpfn35.npy",
+      "test_tabpfn35.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961145,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "tfm_xgboost",
+    "source": "tfm",
+    "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "author": "Chris Deotte",
+    "files": [
+      "oof_xgboost.npy",
+      "test_xgboost.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.959852,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_o_tabpfn35",
+    "source": "golem",
+    "source_ref": "dariushafshar/s6e10-golem-oof-library",
+    "author": "Dariush Afshar (this library, v5)",
+    "files": [
+      "oof_o_tabpfn35.npy",
+      "test_o_tabpfn35.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961082,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_p_lgbm_auxev",
+    "source": "golem",
+    "source_ref": "dariushafshar/s6e10-golem-oof-library",
+    "author": "Dariush Afshar (this library, v5)",
+    "files": [
+      "oof_p_lgbm_auxev.npy",
+      "test_p_lgbm_auxev.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961314,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gl_q_lgbm_auxev_10fold",
+    "source": "golem",
+    "source_ref": "dariushafshar/s6e10-golem-oof-library",
+    "author": "Dariush Afshar (this library, v5)",
+    "files": [
+      "oof_q_lgbm_auxev_10fold.npy",
+      "test_q_lgbm_auxev_10fold.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961388,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "ab_tabpfn_catfd10",
+    "source": "abdullah",
+    "source_ref": "abdullahsafwan333/oof-dataset",
+    "author": "AbdullahSafwan333",
+    "files": [
+      "tabpfn_catfd10_oof.csv",
+      "tabpfn_catfd10_test.csv"
+    ],
+    "kind": "csv_pred",
+    "reference_auc": 0.961596,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "ab_tabpfn_raw",
+    "source": "abdullah",
+    "source_ref": "abdullahsafwan333/oof-dataset",
+    "author": "AbdullahSafwan333",
+    "files": [
+      "tabpfn_raw_oof.csv",
+      "tabpfn_raw_test.csv"
+    ],
+    "kind": "csv_pred",
+    "reference_auc": 0.960872,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "ab_tabpfn_te_cnt",
+    "source": "abdullah",
+    "source_ref": "abdullahsafwan333/oof-dataset",
+    "author": "AbdullahSafwan333",
+    "files": [
+      "tabpfn_te_cnt_oof.csv",
+      "tabpfn_te_cnt_test.csv"
+    ],
+    "kind": "csv_pred",
+    "reference_auc": 0.961376,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "ab_cat_v3",
+    "source": "abdullah",
+    "source_ref": "abdullahsafwan333/oof-dataset",
+    "author": "AbdullahSafwan333",
+    "files": [
+      "cat_v3_oof.csv",
+      "cat_v3_test.csv"
+    ],
+    "kind": "csv_pred",
+    "reference_auc": 0.961396,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "ab_xgb_v3",
+    "source": "abdullah",
+    "source_ref": "abdullahsafwan333/oof-dataset",
+    "author": "AbdullahSafwan333",
+    "files": [
+      "xgb_v3_oof.csv",
+      "xgb_v3_test.csv"
+    ],
+    "kind": "csv_pred",
+    "reference_auc": 0.961377,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_cat_base",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_cat_base.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958067,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_cat_tuned",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_cat_tuned.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958523,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e10_sparselr_lr",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e10_sparselr_lr.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958106,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e11_knn_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e11_knn_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959862,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e11_knn_lgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e11_knn_lgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.960065,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e11_knn_xgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e11_knn_xgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.960094,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e12_route_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e12_route_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.960978,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e12_route_lgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e12_route_lgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961072,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e12_route_xgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e12_route_xgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961083,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e13_realmlp_realmlp",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e13_realmlp_realmlp.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961238,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e14_rmlpseeds_realmlp",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e14_rmlpseeds_realmlp.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961253,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e14_seed2026",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e14_seed2026.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961192,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e14_seed7",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e14_seed7.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961202,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e14_seed77",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e14_seed77.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961219,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e14_seed777",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e14_seed777.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961191,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e1_allcat_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e1_allcat_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958757,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e2_origfeat_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e2_origfeat_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959489,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e2_origfeat_lgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e2_origfeat_lgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959862,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e2_origfeat_xgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e2_origfeat_xgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959899,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e3_origconcat_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e3_origconcat_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958652,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e3_origconcat_lgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e3_origconcat_lgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958883,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e3_origconcat_xgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e3_origconcat_xgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959124,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e5_origpred_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e5_origpred_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959823,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e5_origpred_lgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e5_origpred_lgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.96009,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e5_origpred_xgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e5_origpred_xgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.960109,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e6_origwide_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e6_origwide_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959453,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e6_origwide_lgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e6_origwide_lgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959661,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e6_origwide_xgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e6_origwide_xgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959621,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e7_combo_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e7_combo_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959885,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e8_tuned_cat",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e8_tuned_cat.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.959913,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e8_tuned_lgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e8_tuned_lgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.96006,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e8_tuned_xgb",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e8_tuned_xgb.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.960066,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_e9_mlp_mlp",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_e9_mlp_mlp.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958675,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_lgb_base",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_lgb_base.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958661,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_lgb_raw",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_lgb_raw.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958886,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_lgb_tuned",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_lgb_tuned.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958868,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_xgb_base",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_xgb_base.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958358,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_xgb_tuned",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "preds_xgb_tuned.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.958987,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_orig_cat_pred",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "orig_cat_pred.npz"
+    ],
+    "kind": "npz_orig",
+    "reference_auc": 0.95463,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "st_orig_model_pred",
+    "source": "sadam",
+    "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "author": "Sadam Torres",
+    "files": [
+      "orig_model_pred.npz"
+    ],
+    "kind": "npz_orig",
+    "reference_auc": 0.954908,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "am_forge_cat",
+    "source": "forge",
+    "source_ref": "amanatar/s6e10-forge-own-pairs",
+    "author": "Aman Atar",
+    "files": [
+      "oof_forge_cat.npy",
+      "test_forge_cat.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960908,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "am_forge_ghost_xt",
+    "source": "forge",
+    "source_ref": "amanatar/s6e10-forge-own-pairs",
+    "author": "Aman Atar",
+    "files": [
+      "oof_forge_ghost_xt.npy",
+      "test_forge_ghost_xt.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96092,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "am_forge_lgbm",
+    "source": "forge",
+    "source_ref": "amanatar/s6e10-forge-own-pairs",
+    "author": "Aman Atar",
+    "files": [
+      "oof_forge_lgbm.npy",
+      "test_forge_lgbm.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961037,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "am_forge_lgbm_xt",
+    "source": "forge",
+    "source_ref": "amanatar/s6e10-forge-own-pairs",
+    "author": "Aman Atar",
+    "files": [
+      "oof_forge_lgbm_xt.npy",
+      "test_forge_lgbm_xt.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960903,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "am_forge_realmlp",
+    "source": "forge",
+    "source_ref": "amanatar/s6e10-forge-own-pairs",
+    "author": "Aman Atar",
+    "files": [
+      "oof_forge_realmlp.npy",
+      "test_forge_realmlp.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96122,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "am_forge_xgb",
+    "source": "forge",
+    "source_ref": "amanatar/s6e10-forge-own-pairs",
+    "author": "Aman Atar",
+    "files": [
+      "oof_forge_xgb.npy",
+      "test_forge_xgb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961047,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "s7_lgb_cpu_strong",
+    "source": "sachith",
+    "source_ref": "sachith7/s6e10-stack-oof-predictions",
+    "author": "Sachith7",
+    "files": [
+      "lgb_cpu_strong.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961083,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "s7_xgb_A_auxall",
+    "source": "sachith",
+    "source_ref": "sachith7/s6e10-stack-oof-predictions",
+    "author": "Sachith7",
+    "files": [
+      "xgb_A_auxall.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.960916,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "km_cat_w1",
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "author": "Koumei Maki",
+    "files": [
+      "oof_cat_w1.npy",
+      "test_cat_w1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961223,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "km_lgb_w1",
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "author": "Koumei Maki",
+    "files": [
+      "oof_lgb_w1.npy",
+      "test_lgb_w1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961198,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "km_rmlp_f_nc",
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "author": "Koumei Maki",
+    "files": [
+      "oof_rmlp_f_nc.npy",
+      "test_rmlp_f_nc.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961295,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "km_tabicl_fdcat_c250k",
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "author": "Koumei Maki",
+    "files": [
+      "oof_tabicl_fdcat_c250k.npy",
+      "test_tabicl_fdcat_c250k.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.957281,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "km_tabm_bcd_rc_v2",
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "author": "Koumei Maki",
+    "files": [
+      "oof_tabm_bcd_rc_v2.npy",
+      "test_tabm_bcd_rc_v2.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960768,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "km_tabpfn_catfd10",
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "author": "Koumei Maki",
+    "files": [
+      "oof_tabpfn_catfd10.npy",
+      "test_tabpfn_catfd10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961178,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "km_xgb_w1",
+    "source": "koumeimaki",
+    "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "author": "Koumei Maki",
+    "files": [
+      "oof_xgb_w1.npy",
+      "test_xgb_w1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961197,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_cat_aux",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_cat_aux.npy",
+      "test_cat_aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960937,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_cat_ctr_k",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_cat_ctr_k.npy",
+      "test_cat_ctr_k.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961003,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_cat_k10",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_cat_k10.npy",
+      "test_cat_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961114,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_gen_v1",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_gen_v1.npy",
+      "test_gen_v1.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.952399,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_glm6_xgb_k",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_glm6_xgb_k.npy",
+      "test_glm6_xgb_k.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960829,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_lgb_k10",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_lgb_k10.npy",
+      "test_lgb_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961215,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_realmlp_fa_aux3_k",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_realmlp_fa_aux3_k.npy",
+      "test_realmlp_fa_aux3_k.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961072,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_realmlp_fa_aux_n16",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_realmlp_fa_aux_n16.npy",
+      "test_realmlp_fa_aux_n16.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961071,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_realmlp_fa_auxev",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_realmlp_fa_auxev.npy",
+      "test_realmlp_fa_auxev.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961055,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_realmlp_fa_s7_k",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_realmlp_fa_s7_k.npy",
+      "test_realmlp_fa_s7_k.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960968,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_realmlp_pub_aux_k",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_realmlp_pub_aux_k.npy",
+      "test_realmlp_pub_aux_k.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960916,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_realmlp_v4fa_auxfull",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_realmlp_v4fa_auxfull.npy",
+      "test_realmlp_v4fa_auxfull.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961275,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_realmlp_vb",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_realmlp_vb.npy",
+      "test_realmlp_vb.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96115,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_tabm_v4aux",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_tabm_v4aux.npy",
+      "test_tabm_v4aux.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960466,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_xgb_d10_k10",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_xgb_d10_k10.npy",
+      "test_xgb_d10_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961258,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "gpx_xgb_k10",
+    "source": "gp_extra",
+    "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "author": "goodpjw2008",
+    "files": [
+      "oof_xgb_k10.npy",
+      "test_xgb_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961256,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "dk_cb_cat",
+    "source": "dmitriy",
+    "source_ref": "dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test",
+    "author": "Dmitriy Kolmikov",
+    "files": [
+      "oof_cb_cat.npy",
+      "test_cb_cat.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960665,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_cat_allcat_v1_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_cat_allcat_v1_k5.npy",
+      "test_cat_allcat_v1_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961095,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_cat_allcat_v2_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_cat_allcat_v2_k5.npy",
+      "test_cat_allcat_v2_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961127,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_cat_enc3_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_cat_enc3_k5.npy",
+      "test_cat_enc3_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960635,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_cat_enc4_k10",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_cat_enc4_k10.npy",
+      "test_cat_enc4_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.961022,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_cat_enc4_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_cat_enc4_k5.npy",
+      "test_cat_enc4_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960805,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_cat_raw_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_cat_raw_k5.npy",
+      "test_cat_raw_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958711,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_lgb_enc3_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_lgb_enc3_k5.npy",
+      "test_lgb_enc3_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960585,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_lgb_enc4_k10",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_lgb_enc4_k10.npy",
+      "test_lgb_enc4_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960987,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_lgb_enc4_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_lgb_enc4_k5.npy",
+      "test_lgb_enc4_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960731,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_lgb_raw_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_lgb_raw_k5.npy",
+      "test_lgb_raw_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.959041,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_realmlp_enc_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_realmlp_enc_k5.npy",
+      "test_realmlp_enc_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960956,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_realmlp_raw_s42_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_realmlp_raw_s42_k5.npy",
+      "test_realmlp_raw_s42_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960883,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_realmlp_raw_s7_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_realmlp_raw_s7_k5.npy",
+      "test_realmlp_raw_s7_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960885,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_xgb_enc3_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_xgb_enc3_k5.npy",
+      "test_xgb_enc3_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.96059,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_xgb_enc4_k10",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_xgb_enc4_k10.npy",
+      "test_xgb_enc4_k10.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960972,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_xgb_enc4_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_xgb_enc4_k5.npy",
+      "test_xgb_enc4_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960793,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kga_xgb_raw_k5",
+    "source": "kagan_abl",
+    "source_ref": "kagankoral/s6e10-ablation-members-oof",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_xgb_raw_k5.npy",
+      "test_xgb_raw_k5.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.958899,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "yk_realmlp",
+    "source": "yekenot",
+    "source_ref": "yekenot/ps-s6-e10-realmlp-pytabkit",
+    "author": "Vladimir Demidov",
+    "files": [
+      "oof_preds.csv",
+      "submission.csv"
+    ],
+    "kind": "csv_satisfaction",
+    "reference_auc": 0.961218,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "hm_cat",
+    "source": "hermengardo",
+    "source_ref": "hermengardo/single-catboost-eda-ps6e10",
+    "author": "Hermengardo",
+    "files": [
+      "oof_train.npy",
+      "oof_test.npy"
+    ],
+    "kind": "npy",
+    "reference_auc": 0.960201,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kr_rmlp_route_ogaux",
+    "source": "kratosyan",
+    "source_ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+    "author": "Kratosyan",
+    "files": [
+      "rmlp_route_ogaux.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961017,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kr_xgb_route_ogaux",
+    "source": "kratosyan",
+    "source_ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+    "author": "Kratosyan",
+    "files": [
+      "xgb_route_ogaux.npz"
+    ],
+    "kind": "npz",
+    "reference_auc": 0.961039,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kg_lgb",
+    "source": "kagan_enc",
+    "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_members.csv",
+      "test_members.csv"
+    ],
+    "kind": "csv_member",
+    "reference_auc": 0.960821,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kg_xgb",
+    "source": "kagan_enc",
+    "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_members.csv",
+      "test_members.csv"
+    ],
+    "kind": "csv_member",
+    "reference_auc": 0.960792,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kg_cat",
+    "source": "kagan_enc",
+    "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_members.csv",
+      "test_members.csv"
+    ],
+    "kind": "csv_member",
+    "reference_auc": 0.960778,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kg_cat_allcat",
+    "source": "kagan_enc",
+    "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_members.csv",
+      "test_members.csv"
+    ],
+    "kind": "csv_member",
+    "reference_auc": 0.960799,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "kg_realmlp",
+    "source": "kagan_enc",
+    "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "author": "Ahmet Kağan Koral",
+    "files": [
+      "oof_members.csv",
+      "test_members.csv"
+    ],
+    "kind": "csv_member",
+    "reference_auc": 0.960979,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "av5_lgbm_champion",
+    "source": "aman_v5",
+    "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "author": "Aman Atar",
+    "files": [
+      "oof_artifacts.npz"
+    ],
+    "kind": "npz_aman",
+    "reference_auc": 0.958668,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "av5_lgbm_te",
+    "source": "aman_v5",
+    "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "author": "Aman Atar",
+    "files": [
+      "oof_artifacts.npz"
+    ],
+    "kind": "npz_aman",
+    "reference_auc": 0.958013,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "av5_lgbm_te_rows",
+    "source": "aman_v5",
+    "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "author": "Aman Atar",
+    "files": [
+      "oof_artifacts.npz"
+    ],
+    "kind": "npz_aman",
+    "reference_auc": 0.958568,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "av5_xgb_gpu",
+    "source": "aman_v5",
+    "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "author": "Aman Atar",
+    "files": [
+      "oof_artifacts.npz"
+    ],
+    "kind": "npz_aman",
+    "reference_auc": 0.958502,
+    "reference_scale": "probabilities"
+  },
+  {
+    "member": "av5_catboost_gpu",
+    "source": "aman_v5",
+    "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "author": "Aman Atar",
+    "files": [
+      "oof_artifacts.npz"
+    ],
+    "kind": "npz_aman",
+    "reference_auc": 0.95982,
+    "reference_scale": "probabilities"
+  }
+]

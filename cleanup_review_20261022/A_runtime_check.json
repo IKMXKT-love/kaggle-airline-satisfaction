@@ -1,0 +1,8 @@
+{
+  "torch": "2.11.0+cu128",
+  "xgboost": "3.4.1",
+  "sklearn": "1.9.0",
+  "tensor_sum": 3.0,
+  "imports_passed": true,
+  "training_rerun": false
+}

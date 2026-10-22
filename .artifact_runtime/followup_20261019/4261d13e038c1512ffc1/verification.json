@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "hashes_verified": true,
+  "protected_unchanged": true,
+  "stages": {
+    "screen": {
+      "rows": 111942,
+      "trials": 6,
+      "auc_verified": true
+    },
+    "confirmation": {
+      "rows": 139927,
+      "trials": 1,
+      "auc_verified": true
+    }
+  },
+  "frozen_choice_verified": true
+}

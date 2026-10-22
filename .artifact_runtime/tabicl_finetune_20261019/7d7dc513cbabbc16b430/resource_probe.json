@@ -1,0 +1,23 @@
+{
+  "cache_adapter_verified": true,
+  "maximum_prediction_difference": 0.0,
+  "official_query_batch_sensitivity": 0.0010664761066436768,
+  "checks": [
+    {
+      "chunk": 2048,
+      "status": "ok",
+      "step_seconds": [
+        0.4902050495147705,
+        0.3201258182525635
+      ],
+      "loss": 0.24606861174106598,
+      "gradient_norm": 1.702118158340454,
+      "peak_gpu_gb": 3.955327033996582,
+      "projected_training_seconds": 297.0642600059509,
+      "parameters_updated": true
+    }
+  ],
+  "chosen_chunk": 2048,
+  "system_ram_gb": 15.217926025390625,
+  "available_ram_gb": 5.641387939453125
+}

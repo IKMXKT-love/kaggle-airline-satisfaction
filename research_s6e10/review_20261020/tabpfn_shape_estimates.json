@@ -1,0 +1,28 @@
+{
+  "scope": "Analytic shape estimates only; actual checkpoint configuration and runtime peaks unverified",
+  "context_rows": 629671,
+  "assumed_nlayers": 24,
+  "assumed_context_width": 1024,
+  "assumed_test_kv_heads": 1,
+  "assumed_head_dim": 64,
+  "int8_icl_kv_cache_gib": 1.8015031814575195,
+  "fp16_decoder_keys_gib": 0.6005010604858398,
+  "one_fp16_full_head_context_kv_gib": 2.4020042419433594,
+  "fp16_context_residual_gib": 1.2010021209716797,
+  "included": [
+    "ICL KV cache",
+    "one full-head K/V layer",
+    "context residual",
+    "decoder keys"
+  ],
+  "excluded": [
+    "model weights",
+    "other persistent feature caches",
+    "attention workspace",
+    "normalization copies",
+    "allocator fragmentation",
+    "preprocessing",
+    "other processes"
+  ],
+  "note": "These tensors have different lifetimes and must not simply be added into a claimed peak. No speed or fit claim follows."
+}

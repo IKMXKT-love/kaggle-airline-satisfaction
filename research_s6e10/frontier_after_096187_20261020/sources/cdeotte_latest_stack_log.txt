@@ -1,0 +1,42 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+Train 699,635 rows | Test 299,844 rows | positive rate 0.4436
+Loaded 135 OOF/test pairs: X_oof (699635, 135), X_test (299844, 135)
+dataset
+s6e10-124-public-oof-and-test-predictions    124
+s6e10-tfm-oof-and-test-predictions            11
+
+Already logits (used as is, not converted):
+        model                                   dataset  already_logit  oof_auc
+    ar_cat_5f s6e10-124-public-oof-and-test-predictions           True 0.960940
+    ar_lgb_5f s6e10-124-public-oof-and-test-predictions           True 0.961029
+ar_realmlp_5f s6e10-124-public-oof-and-test-predictions           True 0.960879
+    ar_xgb_5f s6e10-124-public-oof-and-test-predictions           True 0.961049
+
+Best single models by OOF AUC:
+[2026-10-06 22:59:59.000] [CUML] [warning] L-BFGS line search failed (code 3); stopping at the last valid step
+Fold 0 AUC: 0.962178
+[2026-10-06 23:00:02.097] [CUML] [warning] L-BFGS line search failed (code 3); stopping at the last valid step
+Fold 1 AUC: 0.961193
+[2026-10-06 23:00:03.942] [CUML] [warning] L-BFGS line search failed (code 3); stopping at the last valid step
+Fold 2 AUC: 0.962656
+[2026-10-06 23:00:06.334] [CUML] [warning] L-BFGS line search failed (code 3); stopping at the last valid step
+Fold 3 AUC: 0.962322
+Fold 4 AUC: 0.962014
+
+Stack CV AUC: 0.962068 (135 models)
+Top 20 of 135 models by |coefficient|:
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 37180 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 319380 bytes to __results__.html

@@ -1,0 +1,70 @@
+[
+  {
+    "name": "allcat_original_d5",
+    "use_te": false,
+    "original": true,
+    "numeric_categories": true,
+    "digits": false,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.035,
+    "selection_auc": 0.9584030617224392,
+    "best_rounds": 247,
+    "features": 115,
+    "seconds": 17.560746669769287
+  },
+  {
+    "name": "digits_original_d5",
+    "use_te": false,
+    "original": true,
+    "numeric_categories": false,
+    "digits": true,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.035,
+    "selection_auc": 0.9597138068798532,
+    "best_rounds": 1199,
+    "features": 122,
+    "seconds": 22.11401867866516
+  },
+  {
+    "name": "te_digits_original_d4",
+    "use_te": true,
+    "original": true,
+    "numeric_categories": false,
+    "digits": true,
+    "depth": 4,
+    "child": 20,
+    "lr": 0.035,
+    "selection_auc": 0.9597427861539072,
+    "best_rounds": 1245,
+    "features": 160,
+    "seconds": 34.15655708312988
+  },
+  {
+    "name": "raw_original_rows025",
+    "use_te": false,
+    "original": false,
+    "rows_weight": 0.25,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.035,
+    "selection_auc": 0.9580561824455077,
+    "best_rounds": 2145,
+    "features": 22,
+    "seconds": 10.787240505218506
+  },
+  {
+    "name": "raw_original_rows1",
+    "use_te": false,
+    "original": false,
+    "rows_weight": 1.0,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.035,
+    "selection_auc": 0.9582434913381749,
+    "best_rounds": 2563,
+    "features": 22,
+    "seconds": 12.881699085235596
+  }
+]

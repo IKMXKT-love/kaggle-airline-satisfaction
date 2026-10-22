@@ -1,0 +1,19 @@
+from pathlib import Path
+import shutil
+import pandas as pd
+
+files = list(Path("/kaggle/input").rglob("latest_result.csv"))
+assert len(files) == 1, f"Expected one CSV, found: {files}"
+
+df = pd.read_csv(files[0])
+assert list(df.columns) == ["id", "satisfaction"]
+assert len(df) == 299844
+assert df["id"].is_unique
+assert df["satisfaction"].between(0, 1).all()
+
+output = "/kaggle/working/submission.csv"
+shutil.copyfile(files[0], output)
+
+display(df.head())
+
+thanks to my local agentic LLM model for the overtime works, tt’s a combination of Gemini 4 Argon, the snail GPT-5.1 Sol, and Opus 5.5.

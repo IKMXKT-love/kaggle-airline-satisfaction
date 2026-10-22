@@ -1,0 +1,151 @@
+# Stacking Tabular Foundation Models (TFMs) with 124 Public OOF/Test prediction pairs
+
+This notebook stacks **9 tabular foundation models** plus tuned XGBoost and RealMLP baselines (from Kaggle dataset [here][2]) with **124 public** OOF/test prediction pairs (from version 3 public notebook [here][1])
+
+- Every pair is an out-of-fold prediction for `train.csv` plus a test prediction, from `StratifiedKFold(5, shuffle=True, random_state=42)`.
+- Probabilities are converted to logits. A few pairs are **already logits** (values outside 0–1); they are detected and used as they are.
+- The stacker is an L2 logistic regression on GPU (**cuML**), trained per fold on the same 5 folds.
+- Outputs: stack CV AUC, the top models by coefficient, `stack_oof.npy`, `stack_test.npy` and `submission.csv`.
+
+Enable a **GPU** accelerator for cuML.
+
+[1]: https://www.kaggle.com/code/kratosyan/s6e10-stacking-every-public-oof-library?scriptVersionId=355670407
+[2]: https://www.kaggle.com/datasets/cdeotte/s6e10-tfm-oof-and-test-predictions
+
+# Sources (please upvote them)
+
+| source | what it contributes |
+|---|---|
+| [goodpjw2008 · Part 8](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160) | 48 members: GBDT / RealMLP / DeepFM on route-ID features, plus 8 TabPFN-3.5 and TabICL members |
+| [sachith7 · stack OOF predictions](https://www.kaggle.com/datasets/sachith7/s6e10-stack-oof-predictions) | 22 members, 10 of them trained on 10 folds |
+| [megayak · OOF library](https://www.kaggle.com/datasets/megayak/s6e10-oof-library) | LightGBM / XGBoost / CatBoost / RealMLP (seed groups averaged → 11) |
+| [dariushafshar · golem OOF library](https://www.kaggle.com/datasets/dariushafshar/s6e10-golem-oof-library) | 14 members |
+| [arhancanli12 · OOF + test predictions](https://www.kaggle.com/datasets/arhancanli12/s6e10-oof-test-predictions) | LGB / XGB / CatBoost / RealMLP |
+| [najiama · OOF](https://www.kaggle.com/datasets/najiama/s6e10-oof) | blend 01 (blend 02 adds nothing on top) |
+| [samanyu1808 · TabPFN route + og](https://www.kaggle.com/code/samanyu1808/s6e10-tabpfn-route-og), [TabPFN seeds](https://www.kaggle.com/code/samanyu1808/s6e10-tabpfn-seeds) | TabPFN-3.5 multi-seed |
+| [hemingweb · TabPFN-3.5 full context](https://www.kaggle.com/code/hemingweb/s6e10-exp01-tabpfn35-full-context) | TabPFN-3.5, raw columns |
+| [mitudru · equality blocks](https://www.kaggle.com/code/mitudru/s6e10-analysis-first-equality-blocks-stack) | 7 members |
+| [wangxintong111 · CatBoost rating crosses](https://www.kaggle.com/code/wangxintong111/s6e10-catboost-rating-crosses-cv-0-96080), [LightGBM context stats](https://www.kaggle.com/code/wangxintong111/s6e10-lightgbm-context-stats-cv-0-96065) | 2 members |
+| [thisray · XGB / RealMLP / CatBoost](https://www.kaggle.com/code/thisray/s6e10-xgb-realmlp-catboost-lb-0-96123) | 3 members |
+| [megayak · honest OOF stack](https://www.kaggle.com/code/megayak/s6e10-honest-oof-stack) | 4 members |
+| [busyaprime · Route or distance? Both](https://www.kaggle.com/code/busyaprime/s6e10-route-or-distance-both-lb-0-96169) | 5 members (2 LightGBM, CatBoost, XGBoost, RealMLP), OOF saved by re-running their notebook: [dataset](https://www.kaggle.com/datasets/kratosyan/s6e10-busyaprime-five-members-oof) |
+| [cdeotte · TFMs](https://www.kaggle.com/datasets/cdeotte/s6e10-tfm-oof-and-test-predictions) | 11 members (9 TFMs, baseline XGBoost, baseline RealMLP)|
+
+Notebook outputs are pinned to the version attached to this notebook; if an author re-runs theirs, the numbers can move
+in the 5th decimal. The TabPFN-3.5 members come with Prior Labs' non-commercial licence; their authors note that it
+allows use in Kaggle competitions.
+
+[1]: https://www.kaggle.com/code/kratosyan/s6e10-stacking-every-public-oof-library?scriptVersionId=355670407
+
+## Configuration
+
+import os
+import glob
+import numpy as np
+import pandas as pd
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
+from cuml.linear_model import LogisticRegression
+
+COMP = "/kaggle/input/competitions/playground-series-s6e10"
+PRED_DIRS = [
+    "/kaggle/input/datasets/cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "/kaggle/input/datasets/cdeotte/s6e10-tfm-oof-and-test-predictions",
+]
+OUT = "/kaggle/working"
+TARGET = "satisfaction"
+TOP_N = 20  # number of models to list by |logistic regression coefficient|
+C = 1.0     # inverse L2 regularization strength of the stacker
+
+## Labels and folds
+
+The same `StratifiedKFold(5, shuffle=True, random_state=42)` folds that produced the OOF predictions.
+
+train = pd.read_csv(f"{COMP}/train.csv", usecols=["id", TARGET])
+test = pd.read_csv(f"{COMP}/test.csv", usecols=["id"])
+y = train[TARGET].astype(int).to_numpy()
+
+folds = np.zeros(len(y), dtype=int)
+for k, (_, valid_idx) in enumerate(StratifiedKFold(5, shuffle=True, random_state=42).split(np.zeros(len(y)), y)):
+    folds[valid_idx] = k
+print(f"Train {len(train):,} rows | Test {len(test):,} rows | positive rate {y.mean():.4f}")
+
+## Load every OOF/test pair
+
+Each `oof_<model>.npy` is matched with `test_<model>.npy`. Probabilities become logits (clipped at 1e-15, then at ±30).
+
+A pair is treated as **already logits** if any OOF or test value lies outside 0–1. Those pairs are not converted.
+
+def to_logit(p):
+    p = np.clip(p.astype(np.float64), 1e-15, 1 - 1e-15)
+    return np.log(p / (1 - p))
+
+names, X_oof, X_test, rows = [], [], [], []
+for d in PRED_DIRS:
+    for f in sorted(glob.glob(f"{d}/oof_*.npy")):
+        name = os.path.basename(f)[len("oof_"):-len(".npy")]
+        oof, tst = np.load(f), np.load(f"{d}/test_{name}.npy")
+        assert oof.shape == (len(train),) and tst.shape == (len(test),), name
+        assert np.isfinite(oof).all() and np.isfinite(tst).all(), name
+        already_logit = bool(oof.min() < 0 or oof.max() > 1 or tst.min() < 0 or tst.max() > 1)
+        if not already_logit:
+            oof, tst = to_logit(oof), to_logit(tst)
+        names.append(name)
+        X_oof.append(np.clip(oof, -30, 30).astype(np.float32))
+        X_test.append(np.clip(tst, -30, 30).astype(np.float32))
+        rows.append(dict(model=name, dataset=os.path.basename(d), already_logit=already_logit,
+                         oof_auc=roc_auc_score(y, X_oof[-1])))
+
+assert len(set(names)) == len(names), "duplicate model names"
+X_oof, X_test = np.stack(X_oof, axis=1), np.stack(X_test, axis=1)
+models = pd.DataFrame(rows)
+print(f"Loaded {len(names)} OOF/test pairs: X_oof {X_oof.shape}, X_test {X_test.shape}")
+print(models["dataset"].value_counts().to_string())
+print("\nAlready logits (used as is, not converted):")
+print(models[models["already_logit"]].to_string(index=False))
+print("\nBest single models by OOF AUC:")
+models.sort_values("oof_auc", ascending=False).head(10).reset_index(drop=True)
+
+## Stack with cuML logistic regression
+
+For each fold, an L2 logistic regression is trained on the other folds' OOF logits and predicts the held-out fold. Test predictions are the mean of the 5 fold models.
+
+Note: cuML's solver is not bit-for-bit deterministic, so CV can differ by about 1e-6 between runs. cuML may print `L-BFGS line search failed` warnings; they are expected here and harmless (the solver stops at its last valid step).
+
+oof_stack = np.zeros(len(y))
+test_stack = np.zeros(len(test))
+coefs = []
+for k in range(5):
+    tr, va = folds != k, folds == k
+    lr = LogisticRegression(penalty="l2", C=C, fit_intercept=True, solver="qn", max_iter=2000, tol=1e-7,
+                            output_type="numpy", verbose=False)
+    lr.fit(X_oof[tr], y[tr])
+    oof_stack[va] = lr.predict_proba(X_oof[va])[:, 1]
+    test_stack += lr.predict_proba(X_test)[:, 1] / 5
+    coefs.append(np.ravel(lr.coef_))
+    print(f"Fold {k} AUC: {roc_auc_score(y[va], oof_stack[va]):.6f}")
+
+print(f"\nStack CV AUC: {roc_auc_score(y, oof_stack):.6f} ({len(names)} models)")
+
+## Most important models
+
+The `TOP_N` models with the largest absolute coefficient, averaged over the 5 fold models.
+
+Coefficients are per unit of logit. Members on a different scale, such as the already-logit pairs, get proportionally different coefficients.
+
+coef = np.mean(coefs, axis=0)
+importance = models.assign(coefficient=coef, abs_coefficient=np.abs(coef))
+importance = importance.sort_values("abs_coefficient", ascending=False).reset_index(drop=True)
+print(f"Top {TOP_N} of {len(names)} models by |coefficient|:")
+importance.head(TOP_N)
+
+## Save stack predictions and submission
+
+np.save(f"{OUT}/stack_oof.npy", oof_stack)
+np.save(f"{OUT}/stack_test.npy", test_stack)
+
+submission = pd.read_csv(f"{COMP}/sample_submission.csv")
+assert np.array_equal(submission["id"].to_numpy(), test["id"].to_numpy())
+submission[TARGET] = test_stack
+submission.to_csv(f"{OUT}/submission.csv", index=False)
+submission.head()

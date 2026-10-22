@@ -1,0 +1,5 @@
+{
+  "fold": 8,
+  "matching_replayed_epochs": 81,
+  "same_reported_validation_metric_each_epoch": true
+}

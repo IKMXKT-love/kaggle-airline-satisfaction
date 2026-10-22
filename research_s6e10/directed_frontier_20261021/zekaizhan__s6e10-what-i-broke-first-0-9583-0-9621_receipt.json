@@ -1,0 +1,63 @@
+{
+  "ref": "zekaizhan/s6e10-what-i-broke-first-0-9583-0-9621",
+  "pull": {
+    "tag": "zekaizhan__s6e10-what-i-broke-first-0-9583-0-9621_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/zekaizhan/s6e10-what-i-broke-first-0-9583-0-9621",
+    "bytes": 94941,
+    "sha256": "8cb33d453f2f4e61f84989c5194a973cddbb6aac34f6c097ec73b036ad7f3370",
+    "elapsed": 1.5378461000000243
+  },
+  "version": 2,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": false,
+    "enableTpuNullable": false,
+    "enableInternetNullable": false,
+    "currentVersionNumberNullable": 2,
+    "dockerImageNullable": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "machineShapeNullable": "None",
+    "id": 139841165,
+    "ref": "zekaizhan/s6e10-what-i-broke-first-0-9583-0-9621",
+    "title": "S6E10 | What I Broke First: 0.9583→0.9621🚀",
+    "author": "ZeKai Z.",
+    "slug": "s6e10-what-i-broke-first-0-9583-0-9621",
+    "lastRunTime": "2026-10-18T03:49:36.4453914Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": false,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": false,
+    "hasEnableInternet": true,
+    "categoryIds": [],
+    "datasetDataSources": [],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 2,
+    "currentVersionNumber": 2,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "hasDockerImage": true,
+    "machineShape": "None",
+    "hasMachineShape": true
+  },
+  "source_chars": 37508,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "zekaizhan__s6e10-what-i-broke-first-0-9583-0-9621_outputs_v2",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 15181,
+    "sha256": "b5c998b2d28653feb4d4a073e99e7266919038554c59d2d2f871268a9ad8fdcb",
+    "elapsed": 1.1324808999997913
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "baseline_mean_auc": 0.9587033164023714,
+  "enhanced_mean_auc": 0.9584119611608702,
+  "mean_auc_change": -0.00029135524150114556,
+  "baseline_oof_auc": 0.9586952438560881,
+  "enhanced_oof_auc": 0.9584056291607158,
+  "same_validation_folds_verified": true,
+  "baseline_training_device": "not_recorded",
+  "enhanced_training_device": "cuda",
+  "comparison_note": "combined_change_comparison_not_a_controlled_feature_vs_synthetic_ablation",
+  "enhancement_improved_mean_auc": false,
+  "recommended_submission": "submission.csv",
+  "checks": {
+    "original_data_and_baseline_hashes_unchanged": true,
+    "submission_rows_columns_ids_probabilities_valid": true,
+    "oof_each_real_row_once_and_ten_folds": true,
+    "synthetic_preview_parents_exclude_validation_fold": true,
+    "synthetic_preview_labels_and_numeric_bounds_valid": true
+  }
+}

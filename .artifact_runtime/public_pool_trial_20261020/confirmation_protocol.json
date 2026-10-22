@@ -1,0 +1,21 @@
+{
+  "started_epoch": 1792500589.7557683,
+  "deadline_epoch": 1792504189.7557685,
+  "arms": [
+    "public_only",
+    "public_plus_own"
+  ],
+  "C": 0.003,
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "no_base_model_retraining": true,
+  "includes_remaining_download_and_matrix_preparation": true,
+  "reason": "Proceed within the previously authorized 60-minute confirmation stage based on independently recomputed external OOF delta +0.000530 in all five folds and successful source import checks. Initial phase yielded no fitted candidate score; no claim of a passed new-model screening gate.",
+  "reference_missing_member": "kz_source_transfer",
+  "no_parameter_search": true
+}

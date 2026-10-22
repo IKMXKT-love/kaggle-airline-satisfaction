@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-20",
+  "source": ".artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b",
+  "scope": "Saved fit timers, not complete wall-clock attribution; no model trained or loaded in this audit",
+  "base_fit_count": 168,
+  "base_fit_minutes": 208.51706080436708,
+  "base_minutes_by_model": {
+    "control": 5.628466566403707,
+    "lean_20261019": 26.677995280424753,
+    "lean_42": 26.477344131469728,
+    "lgb": 13.082718722025554,
+    "old_cat": 37.477299654483794,
+    "old_xgb": 11.554091215133667,
+    "realmlp": 87.61914523442586
+  },
+  "base_minutes_by_phase": {
+    "selection": 99.90389899015426,
+    "refit": 108.6131618142128
+  },
+  "correction_selection_fits": [
+    {
+      "outer": 0,
+      "mode": "plain",
+      "seconds": 120.0878312587738,
+      "internal_auc_gain": 1.2809991148055033e-05
+    },
+    {
+      "outer": 0,
+      "mode": "offset",
+      "seconds": 124.3121325969696,
+      "internal_auc_gain": 0.000129950438682358
+    },
+    {
+      "outer": 1,
+      "mode": "plain",
+      "seconds": 42.9346981048584,
+      "internal_auc_gain": 6.561787438763567e-05
+    },
+    {
+      "outer": 1,
+      "mode": "offset",
+      "seconds": 55.633336782455444,
+      "internal_auc_gain": 6.945145144687803e-05
+    }
+  ],
+  "ffm_and_additive_fit_minutes": 1.3203734795252482
+}

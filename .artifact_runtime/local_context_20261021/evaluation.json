@@ -1,0 +1,100 @@
+{
+  "completed": true,
+  "baseline_auc": 0.9621958267222972,
+  "arms": {
+    "random_frozen": {
+      "single_auc": 0.9518453521608238,
+      "primary_blend_auc": 0.9620821085068937,
+      "primary_delta": {
+        "delta": -0.00011371821540364694,
+        "se": 7.774152318851055e-05,
+        "interval95": [
+          -0.00026609160085312765,
+          3.865517004583374e-05
+        ]
+      },
+      "diagnostic_deltas": {
+        "0.05": -2.1853304509988902e-05,
+        "0.2": -0.00047759725960661026
+      }
+    },
+    "local_frozen": {
+      "single_auc": 0.9517510246382689,
+      "primary_blend_auc": 0.9620184097960074,
+      "primary_delta": {
+        "delta": -0.00017741692628987646,
+        "se": 7.661810630222316e-05,
+        "interval95": [
+          -0.0003275884146422338,
+          -2.724543793751908e-05
+        ]
+      },
+      "diagnostic_deltas": {
+        "0.05": -6.06448192014275e-05,
+        "0.2": -0.0005680061276158721
+      }
+    },
+    "random_tuned": {
+      "single_auc": 0.9528104604328943,
+      "primary_blend_auc": 0.9621259467928351,
+      "primary_delta": {
+        "delta": -6.987992946199058e-05,
+        "se": 6.515528676592833e-05,
+        "interval95": [
+          -0.00019758429152321008,
+          5.7824432599228934e-05
+        ]
+      },
+      "diagnostic_deltas": {
+        "0.05": -7.78413187296767e-06,
+        "0.2": -0.00033442392971172463
+      }
+    },
+    "local_tuned": {
+      "single_auc": 0.9521880881962197,
+      "primary_blend_auc": 0.962022717150697,
+      "primary_delta": {
+        "delta": -0.00017310957160025244,
+        "se": 7.033758431645383e-05,
+        "interval95": [
+          -0.00031097123686050197,
+          -3.5247906340002936e-05
+        ]
+      },
+      "diagnostic_deltas": {
+        "0.05": -6.18223147514918e-05,
+        "0.2": -0.0005325622454344092
+      }
+    }
+  },
+  "passes_expansion_gate": false,
+  "local_tuned_vs_random_tuned_single": {
+    "delta": -0.0006223722366746505,
+    "se": 0.0005712294940155667,
+    "interval95": [
+      -0.001741982044945161,
+      0.00049723757159586
+    ]
+  },
+  "local_tuned_vs_local_frozen_single": {
+    "delta": 0.0004370635579507864,
+    "se": 0.00021910587138766814,
+    "interval95": [
+      7.616050030956865e-06,
+      0.000866511065870616
+    ]
+  },
+  "local_frozen_vs_random_frozen_single": {
+    "delta": -9.432752255485599e-05,
+    "se": 0.0006137121108542232,
+    "interval95": [
+      -0.0012972032598291335,
+      0.0011085482147194217
+    ]
+  },
+  "primary_blend_delta_vs_random_tuned": -0.00010322964213815844,
+  "scored_rows": 40000,
+  "new_public_score": null,
+  "elapsed_seconds": 596.8347911834717,
+  "validation": "New branch outer fold isolated; fusion with fixed public OOF remains conditional, not end-to-end nested."
+}

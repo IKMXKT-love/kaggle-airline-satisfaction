@@ -1,0 +1,67 @@
+[
+  {
+    "path": "research_s6e10\\upstream_generalization_20261020\\kumo_threebag_predictions.npz",
+    "bytes": 14793270,
+    "sha256": "098db5a388040cdbcfb39af817f89d5b94902362e77de1ba99134f5ac59792bf"
+  },
+  {
+    "path": "fit_public_pool.py",
+    "bytes": 16457,
+    "sha256": "570616596ba14b9052596fdc03c62846b74a93ad3d01951d0899d6ec83e37151"
+  },
+  {
+    "path": "experiment_joint_upstream.py",
+    "bytes": 10622,
+    "sha256": "f4b653f10f43ea1f8aa7135f0f05dd43978e8619a85f366fd2d49652d2268aa1"
+  },
+  {
+    "path": ".artifact_runtime\\public_pool_trial_20261020\\matrix_manifest.json",
+    "bytes": 152214,
+    "sha256": "3706aeb91d669a4b14e7abd7b6eea4ef8636c9cf638322a3e8d8eabe4c11ad94"
+  },
+  {
+    "path": ".artifact_runtime\\public_pool_trial_20261020\\train_logits.npy",
+    "bytes": 1416061368,
+    "sha256": "966abd1448fdf751e9d3d1da66a5c18c010bf5ddb7188822df368b1d0936128f"
+  },
+  {
+    "path": ".artifact_runtime\\public_pool_trial_20261020\\test_logits.npy",
+    "bytes": 606884384,
+    "sha256": "403287e1e71a3655d23b3a004cb2670b9c7aaeb905d9ad13dec5ce297af0769a"
+  },
+  {
+    "path": "train.csv",
+    "bytes": 67245068,
+    "sha256": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36"
+  },
+  {
+    "path": "test.csv",
+    "bytes": 27200964,
+    "sha256": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6"
+  },
+  {
+    "path": "research_s6e10\\frontier_after_096187_20261020\\predictions\\den_fold0.npz",
+    "bytes": 5596782,
+    "sha256": "7d97aae9d5a2a53192d238677db1a3f28df2a4e32915a72f93d3b88b9e2d79fc"
+  },
+  {
+    "path": "research_s6e10\\frontier_after_096187_20261020\\predictions\\den_fold1.npz",
+    "bytes": 5597663,
+    "sha256": "018d77ba969914dedbe3da559bb88af43661fcd574ccfe8b21bb0e46eb2fcb1a"
+  },
+  {
+    "path": "research_s6e10\\frontier_after_096187_20261020\\predictions\\den_fold2.npz",
+    "bytes": 5594219,
+    "sha256": "ae6eb05694b799ff63edf8fb5587050b53be940f067e0a5c34cb9e1052add631"
+  },
+  {
+    "path": "research_s6e10\\frontier_after_096187_20261020\\predictions\\den_fold3.npz",
+    "bytes": 5590123,
+    "sha256": "9d269f2a622d41c4613489844e085ccaaa1424f4f3f6b8acd69450a836e9050d"
+  },
+  {
+    "path": "research_s6e10\\frontier_after_096187_20261020\\predictions\\den_fold4.npz",
+    "bytes": 5594485,
+    "sha256": "a54e2a3bde65450e853238cfb577d67e1abffc8cb0d47d03ada89b5dc8b64bbc"
+  }
+]

@@ -1,0 +1,93 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+files loaded: 299844 test rows
+  0.96190 B (yuvrajlamba01)    +0.908
+  0.96190 A (yeashusemwal)     +0.193
+  T188                         +1.401
+  E188 (ewtherka)              -1.502
+  sum of weights 1.000   residual sd 0.00036 vs total spread 0.289
+corr(T188, ewtherka plain LR)              = 0.999946
+corr(E188, ewtherka plain LR)              = 0.999870
+corr(T188 - E188, plain LR - E188)         = 0.7639
+E188 = sigmoid(0.8*z(LR) + 0.2*z(LGB)): so T188 - E188 points along 'take the LGB stacker out'
+pinned anchor vs recomputed: max diff 2.6e-02
+corr(final, anchor) 0.999800   corr(final, the 0.96193 file) 0.999881
+submission_measure_096191.csv written (public 0.96191, measured 10-18)
+182 public OOF members
+  fold 0: LR 0.962765  LGB 0.962648  (76s)
+  fold 1: LR 0.961630  LGB 0.961462  (158s)
+  fold 2: LR 0.961847  LGB 0.961706  (243s)
+  fold 3: LR 0.961985  LGB 0.961846  (340s)
+  fold 4: LR 0.962340  LGB 0.962193  (427s)
+
+LR stack 0.962112   LGB stack 0.961958   rank corr 0.99463
+  g = -0.25   0.962121   (   +9.6 x 1e-6)   5/5 folds up
+  g = -0.10   0.962119   (   +7.6 x 1e-6)   5/5 folds up
+  g = +0.10   0.962099   (  -12.8 x 1e-6)   0/5 folds up
+  g = +0.25   0.962070   (  -42.2 x 1e-6)   0/5 folds up
+  g = +0.50   0.961994   ( -118.3 x 1e-6)   0/5 folds up
+  g = +1.00   0.961718   ( -393.3 x 1e-6)   0/5 folds up
+  g = +1.50   0.961179   ( -932.6 x 1e-6)   0/5 folds up
+pinned step file vs V196 + 2u recomputed: rank corr 1.0000000
+H198 on known files: V196 +0.99  H193 +0.62  T188 -1.56  E188 +0.96 | share of its new part NOT explained: 43%
+H198 + 20% toward our LGB stacker: corr with H198 0.999828  -> public 0.96196 (measured 10-19)
+H198 + 30% toward our LGB stacker: corr with H198 0.999612  -> public 0.96195 (measured 10-19)
+submission.csv written: 1/2 our surface step + 1/2 hanifnoerrofiq's 10-19 file, public 0.96197
+g = -0.2: CV   +10.3e-6, public-size sd  18.0e-6, k = sd / std(rank move) = 0.0030
+g = +1.0: CV  -393.3e-6, public-size sd  89.6e-6, k = sd / std(rank move) = 0.0030
+
+move                      CV x1e-6   public x1e-6     sd      z    (test/OOF move size 0.897)
+  +0.5 (LR - LGB)             -99.7        -40      38.6   +1.55
+  +1.5 (LR - LGB)            -725.5       -490     110.4   +2.13
+  +1.0 (LR - LGB)            -320.0       -190      75.4   +1.72
+  LGB alone                  -113.8       -260      78.1   -1.87
+  60% toward tabpfn_ne4      -156.2       -280      77.7   -1.59
+  35% toward tabm_v4aux      -181.7       -230      68.9   -0.70
+  55% toward xgb_k10         -147.4       -270      88.4   -1.39
+  40% toward cat_ctr_k       -131.2       -280      62.4   -2.39
+joint test of the six distinct moves: chi2 8.8 on 6 df, p = 0.19   (as if independent: chi2 17.1, p = 0.009)
+  our twin 0.96187 -> this page's 0.96197    rank corr 0.99797   public sd by the rule 5.52e-5
+  hanif 0.96198 -> this page's 0.96197       rank corr 0.99991   public sd by the rule 1.14e-5
+  mayankraaz 0.96196 -> hanif 0.96198        rank corr 0.99970   public sd by the rule 2.14e-5
+  our 0.96188 anchor -> this page            rank corr 0.99835   public sd by the rule 4.98e-5
+182 members x 699,635 OOF rows   (48 of them ours, prefix gp_)
+our 48 alone, same folds      0.961917
+cdeotte 124 + 11 TFMs, C=1    0.962088
+cdeotte 124 + 11 TFMs, C=.003 0.962102   <- LB 0.96175
+all 182, C=0.003              0.962110   <- LB 0.96180 (Part 1's file)
+largest |weights|:
+tfm_tabfm                  0.221
+tfm_limix2                 0.171
+tfm_causilo                0.133
+am_forge_realmlp           0.121
+bp_realmlp                 0.116
+gl2_q_lgbm_auxev_10fold    0.108
+sa_rmlp_ogx_aux            0.095
+sa_rmlp_raw_aux_k10        0.087
+sa_xgb_A_auxev             0.087
+gp_realmlp_pub_s1          0.085
+gp_realmlp_pub_aux         0.081
+sa_cat_ctr_auxall_k10      0.076
+tfm_mitra2                 0.072
+gp_cat_v3                  0.071
+tfm_kumosmall              0.068
+
+ours among the top 30: ['gp_realmlp_pub_s1', 'gp_realmlp_pub_aux', 'gp_cat_v3', 'gp_realmlp_pub_s2', 'gp_tabpfn_catfd', 'gp_realmlp_og']
+submission_part1_182stack.csv written (public 0.96180)
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 837359 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Support files will be in __results___files/
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Writing 546484 bytes to __results__.html

@@ -1,0 +1,14 @@
+{
+  "phase": "refit",
+  "arm": "teacher_offset",
+  "initial_state_hash": "97833d1d4aa50bcbc8c3d0345fd549dc8aab88bc2c8929d8dc7f7aba6d1e3e16",
+  "epochs_completed": 15,
+  "updates": 4110,
+  "best_epoch": 15,
+  "best_stopping_auc": null,
+  "competition_draws": 4208640,
+  "original_draws": 4208640,
+  "original_labels_used": false,
+  "prior": 0.44357236273199596,
+  "seconds": 49.331029176712036
+}

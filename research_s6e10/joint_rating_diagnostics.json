@@ -1,0 +1,156 @@
+{
+  "note": "Descriptive diagnostics only; no satisfaction predictor trained.",
+  "raw_columns": [
+    "Inflight wifi service",
+    "Departure/Arrival time convenient",
+    "Ease of Online booking",
+    "Gate location",
+    "Food and drink",
+    "Online boarding",
+    "Seat comfort",
+    "Inflight entertainment",
+    "On-board service",
+    "Leg room service",
+    "Baggage handling",
+    "Checkin service",
+    "Cleanliness"
+  ],
+  "train_rows": 699635,
+  "test_rows": 299844,
+  "exact_rating_patterns": 337881,
+  "rows_in_repeated_pattern": 445375,
+  "rows_in_pattern_ge10": 185620,
+  "collision_check": "Exact tuple and 64-bit hash pattern multiplicities agree",
+  "test_from_full_train_support": {
+    "fit_support_ge1": {
+      "rows": 190693,
+      "fraction": 0.635974039834047
+    },
+    "fit_support_ge2": {
+      "rows": 159795,
+      "fraction": 0.5329271221034938
+    },
+    "fit_support_ge5": {
+      "rows": 112301,
+      "fraction": 0.3745314230066301
+    },
+    "fit_support_ge10": {
+      "rows": 75354,
+      "fraction": 0.2513106815544083
+    }
+  },
+  "matched_split_support": {
+    "screen": {
+      "fit_support_ge1": {
+        "rows": 64737,
+        "fraction": 0.5783084097121723
+      },
+      "fit_support_ge2": {
+        "rows": 51197,
+        "fraction": 0.45735291490236013
+      },
+      "fit_support_ge5": {
+        "rows": 32050,
+        "fraction": 0.2863089814368155
+      },
+      "fit_support_ge10": {
+        "rows": 22509,
+        "fraction": 0.2010773436243769
+      }
+    },
+    "confirmation": {
+      "fit_support_ge1": {
+        "rows": 84556,
+        "fraction": 0.6042865208287178
+      },
+      "fit_support_ge2": {
+        "rows": 68825,
+        "fraction": 0.49186361459904093
+      },
+      "fit_support_ge5": {
+        "rows": 44980,
+        "fraction": 0.32145332923595876
+      },
+      "fit_support_ge10": {
+        "rows": 30658,
+        "fraction": 0.21909995926447362
+      }
+    }
+  },
+  "within_label_correlations": [
+    {
+      "label": 0,
+      "rows": 389296,
+      "seat_entertainment": 0.757618840133983,
+      "seat_cleanliness": 0.804625823323442
+    },
+    {
+      "label": 1,
+      "rows": 310339,
+      "seat_entertainment": 0.5537065859714374,
+      "seat_cleanliness": 0.5736296048925896
+    }
+  ],
+  "within_context_and_label_correlations": [
+    {
+      "cabin": "Business",
+      "travel": "Business travel",
+      "label": 0,
+      "rows": 90503,
+      "seat_entertainment": 0.6846233885039088
+    },
+    {
+      "cabin": "Business",
+      "travel": "Business travel",
+      "label": 1,
+      "rows": 247769,
+      "seat_entertainment": 0.3996414368833186
+    },
+    {
+      "cabin": "Eco",
+      "travel": "Business travel",
+      "label": 0,
+      "rows": 104789,
+      "seat_entertainment": 0.8434351542719732
+    },
+    {
+      "cabin": "Eco",
+      "travel": "Business travel",
+      "label": 1,
+      "rows": 36823,
+      "seat_entertainment": 0.74199523362818
+    },
+    {
+      "cabin": "Eco",
+      "travel": "Personal Travel",
+      "label": 0,
+      "rows": 167756,
+      "seat_entertainment": 0.7505801745683904
+    },
+    {
+      "cabin": "Eco",
+      "travel": "Personal Travel",
+      "label": 1,
+      "rows": 18036,
+      "seat_entertainment": 0.7575005420093617
+    },
+    {
+      "cabin": "Eco Plus",
+      "travel": "Business travel",
+      "label": 0,
+      "rows": 11476,
+      "seat_entertainment": 0.7617427139298139
+    },
+    {
+      "cabin": "Eco Plus",
+      "travel": "Personal Travel",
+      "label": 0,
+      "rows": 11273,
+      "seat_entertainment": 0.720739624791136
+    }
+  ],
+  "input_sha256": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "started_epoch": 1792499572.5963478,
+  "screen_deadline_epoch": 1792500472.596349,
+  "confirmation_seconds": 3600,
+  "C": 0.003,
+  "tol": 1e-08,
+  "arms": [
+    "public_247",
+    "public_247_plus_own_branches"
+  ],
+  "base_training": false,
+  "memory_guard_available_gb": 0.5,
+  "source_manifest": "research_s6e10/extended_review_20261020/sources/stack247_inputs.csv",
+  "source_version_reference": "v1",
+  "no_dynamic_new_members": true,
+  "validation_caveat": "Fixed base OOF meta-CV, not end-to-end nested CV; source fold and early-stopping label dependence remain."
+}

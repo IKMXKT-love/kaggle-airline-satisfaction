@@ -1,0 +1,14 @@
+[
+  {
+    "name": "stack247_source",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187",
+    "bytes": 106591,
+    "sha256": "3d8c96963471454ecf24b8121ecda3354f07b3cfa5dc3659b645a97fe33f507e"
+  },
+  {
+    "name": "stack247_inputs",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/stack247_inputs.csv",
+    "bytes": 28636,
+    "sha256": "73d12b14a17a24ebb3b0d878bbb9017dbd924501a2d129e9869c80780f68981f"
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "context_size": 2048,
+  "query_size": 512,
+  "steps": 128,
+  "projection_seconds": 666.0599161423473,
+  "projected_train_seconds": 232.64061439968646,
+  "projected_prediction_seconds": 185.62242399999377,
+  "seed": 20261022,
+  "outer_fold": 1,
+  "reference_rows": 559708,
+  "outer_eval_rows": 139927,
+  "scored_rows": 40000,
+  "anchors": 64,
+  "retrieval_pool": 8192,
+  "background_rows": 128,
+  "norm_methods": [
+    "none",
+    "power"
+  ],
+  "training_views": 2,
+  "inference_views": 2,
+  "prediction_batch": 1024,
+  "learning_rate": 1e-05,
+  "weight_decay": 0.01,
+  "warmup_fraction": 0.1,
+  "grad_clip": 1.0,
+  "amp": "float16",
+  "fixed_update_count_no_score_selection": true,
+  "query_tasks_identical_across_training_arms": true,
+  "input": "21 raw fields, numerical encoder fitted on outer train; no original teachers or target encodings",
+  "approximation": "Queries assigned to nearest feature-only anchor; related queries share retrieved context",
+  "arms": [
+    "random_frozen",
+    "local_frozen",
+    "random_tuned",
+    "local_tuned"
+  ],
+  "primary_candidate": "local_tuned",
+  "primary_weight": 0.1,
+  "diagnostic_weights": [
+    0.05,
+    0.2
+  ],
+  "expansion_gate": 0.0003,
+  "require_paired_lower_above_zero": true,
+  "require_primary_candidate_better_than_random_tuned": true,
+  "checkpoint": ".artifact_runtime\\tabicl_probe_20261019\\tabicl-classifier-v2-20260212.ckpt",
+  "checkpoint_sha256": "bdc7dbd5e4ff21f8f0456fcf90c6b7cdf72dbea960f2d05b19bec19f9b3d4ed0",
+  "protected": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  },
+  "input_sha256": {
+    "experiment_local_context.py": "cc68461a57dbcca615bd5b0af27bb3c9070026e325749ef8249745ef08088938",
+    "local_context_support.py": "ac748cd8a3ba30045faa8bdb44ce646bddfee894de9fb04d78208049ade66bde",
+    "tabicl_finetune_support.py": "ee7900614a9548f6a0752c918e25b3a598b664b80ca005b694cfb2c98c92502c",
+    "tests/test_local_context_contract.py": "65f5ae0b865de23558b14f70595aba813fa46786b8d8d3f6947478eaa9d28452",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "LOCAL_CONTEXT_PLAN_20261021.md": "f5367942f437950e6936d48f8aaf666cc5ae0bde6d8de831c53c5af5eb4099d5",
+    ".artifact_runtime\\public_pool_trial_20261020\\public_only_fold1_validation.npz": "755bd95e12b03bdc19a025273ae81af910aeb2487343931bae092e8c51127449",
+    ".artifact_runtime\\public_pool_trial_20261020\\public_only_fold1.npz": "942f291ed2bea2be8a4323efe60c8babc9fb70083e2028cc4cf6cf85b59237e2",
+    ".artifact_runtime\\public_pool_trial_20261020\\matrix_manifest.json": "3706aeb91d669a4b14e7abd7b6eea4ef8636c9cf638322a3e8d8eabe4c11ad94"
+  },
+  "runtime_source_sha256": "c5fa8b2f1d8287491a8b90775e6a0b9c093437dde1e51a3d1015a16766148cef",
+  "budget": {
+    "preparation_probe_and_plan_seconds": 73.57980227470398,
+    "deadline_epoch": 1792560835.01761,
+    "verification_reserve_seconds": 60
+  },
+  "validation": "New branch outer fold isolated; fusion with fixed public OOF remains conditional, not end-to-end nested.",
+  "historical_folds_and_recipes_seen": true,
+  "no_submission": true,
+  "numeric_repair": {
+    "reason": "FP16 scaled-gradient overflow before any scoring; preserve normal GradScaler skip-and-reduce behavior, retry same task with no bad updates",
+    "successful_updates_unchanged": 128,
+    "max_scale_reductions": 8,
+    "deadline_unchanged": true,
+    "failed_run_preserved": "interrupted_random_fp16",
+    "scores_observed": false
+  }
+}

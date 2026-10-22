@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "outer_fold": 1,
+  "selection_fit_rows": 579297,
+  "selection_stop_rows": 50374,
+  "refit_rows": 629671,
+  "eval_rows": 69964,
+  "correction_training_margin": "inner_oof",
+  "base_prediction_margin": "full_outer_fit",
+  "margin_distribution": {
+    "oof_mean": -0.42143917109970847,
+    "oof_std": 3.040446011415393,
+    "eval_mean": -0.43119481530981735,
+    "eval_std": 3.0398554440974475
+  }
+}

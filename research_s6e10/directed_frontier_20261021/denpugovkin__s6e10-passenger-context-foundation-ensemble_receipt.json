@@ -1,0 +1,78 @@
+{
+  "ref": "denpugovkin/s6e10-passenger-context-foundation-ensemble",
+  "pull": {
+    "tag": "denpugovkin__s6e10-passenger-context-foundation-ensemble_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/denpugovkin/s6e10-passenger-context-foundation-ensemble",
+    "bytes": 549592,
+    "sha256": "401c84b83cd0fc932ebfa9c879dfbe5ea01c4207374023115b34b022f710666a",
+    "elapsed": 2.1805082999999286
+  },
+  "version": 47,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": false,
+    "currentVersionNumberNullable": 47,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:37c64f7dd9c54116ecd1bcc88817c5469b88387388fade02bfa8bf3fc647d461",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 136608054,
+    "ref": "denpugovkin/s6e10-passenger-context-foundation-ensemble",
+    "title": "S6E10 ✈️ Passenger Context + Foundation Ensemble",
+    "author": "Den Pugovkin",
+    "slug": "s6e10-passenger-context-foundation-ensemble",
+    "lastRunTime": "2026-10-18T03:51:51.7941653Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": false,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "",
+      "",
+      "arseniyshutko/binary-aviation-satisfaction-129k",
+      "abdullahsafwan333/oof-dataset",
+      "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "kagankoral/s6e10-ablation-members-oof",
+      "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "dariushafshar/s6e10-golem-oof-library",
+      "sachith7/s6e10-stack-oof-predictions",
+      "koumeimaki/s6e10-route-tfm-nn-oof",
+      "cdeotte/s6e10-tfm-oof-and-test-predictions"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 6,
+    "currentVersionNumber": 47,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:37c64f7dd9c54116ecd1bcc88817c5469b88387388fade02bfa8bf3fc647d461",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 270345,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "denpugovkin__s6e10-passenger-context-foundation-ensemble_outputs_v47",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 161898,
+    "sha256": "ea537eae7e6ad20b39fe4619bc4b833cf7038c0d1bc550e8165a89ab1b46c086",
+    "elapsed": 1.526317299999846
+  }
+}

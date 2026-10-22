@@ -1,0 +1,82 @@
+{
+  "verified": true,
+  "rows": 111942,
+  "hashes_verified": true,
+  "baseline_rebuilt": true,
+  "predictions_valid": true,
+  "score_recomputed": true,
+  "factorial_comparisons": {
+    "lean_old minus existing_old": {
+      "solo": {
+        "delta": -0.0008302616901147042,
+        "approximate_se": 0.00021777737418866513,
+        "interval95": [
+          -0.0012571053435244878,
+          -0.0004034180367049206
+        ]
+      },
+      "blend": {
+        "delta": 7.150900232692698e-05,
+        "approximate_se": 4.8790735856986116e-05,
+        "interval95": [
+          -2.4120839952765808e-05,
+          0.00016713884460661978
+        ]
+      }
+    },
+    "existing_reference minus existing_old": {
+      "solo": {
+        "delta": 0.00026938453010838087,
+        "approximate_se": 0.00014173220380414716,
+        "interval95": [
+          -8.41058934774756e-06,
+          0.0005471796495645092
+        ]
+      },
+      "blend": {
+        "delta": 3.696834987918449e-05,
+        "approximate_se": 3.081678792877685e-05,
+        "interval95": [
+          -2.343255446121813e-05,
+          9.736925421958712e-05
+        ]
+      }
+    },
+    "lean_reference minus existing_reference": {
+      "solo": {
+        "delta": -1.9542018592963073e-05,
+        "approximate_se": 0.00015838826801498065,
+        "interval95": [
+          -0.0003299830239023251,
+          0.000290898986716399
+        ]
+      },
+      "blend": {
+        "delta": 0.00013626484458168587,
+        "approximate_se": 3.7033057359846835e-05,
+        "interval95": [
+          6.368005215638608e-05,
+          0.00020884963700698567
+        ]
+      }
+    },
+    "lean_reference minus lean_old": {
+      "solo": {
+        "delta": 0.0010801042016301218,
+        "approximate_se": 0.00014853717105468422,
+        "interval95": [
+          0.0007889713463629408,
+          0.0013712370568973028
+        ]
+      },
+      "blend": {
+        "delta": 0.00010172419213394338,
+        "approximate_se": 3.408545820772701e-05,
+        "interval95": [
+          3.491669404679843e-05,
+          0.00016853169022108832
+        ]
+      }
+    }
+  }
+}

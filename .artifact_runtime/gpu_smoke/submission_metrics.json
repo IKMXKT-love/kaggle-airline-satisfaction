@@ -1,0 +1,124 @@
+{
+  "task": "classification",
+  "target": "satisfaction",
+  "metric": "auc",
+  "n_splits": 10,
+  "random_state": 42,
+  "train_rows": 800,
+  "test_rows": 200,
+  "feature_columns": [
+    "age",
+    "service_rating",
+    "arrival_delay",
+    "travel_type",
+    "fe_missing_count",
+    "fe_frequency_travel_type"
+  ],
+  "raw_feature_columns": [
+    "age",
+    "service_rating",
+    "arrival_delay",
+    "travel_type"
+  ],
+  "classes": [
+    0,
+    1
+  ],
+  "feature_engineering": true,
+  "synthetic_ratio": 0.15,
+  "synthetic_weight": 0.25,
+  "augmentation_by_fold": [
+    {
+      "fold": 1,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 2,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 3,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 4,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 5,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 6,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 7,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 8,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 9,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    },
+    {
+      "fold": 10,
+      "real_training_rows": 720,
+      "synthetic_rows": 108,
+      "validation_rows": 80
+    }
+  ],
+  "synthetic_method": "same_context_same_class_continuous_interpolation",
+  "statistics_fitted_on": "real_training_fold_only",
+  "device": "cuda",
+  "n_estimators": 20,
+  "fold_scores": [
+    0.9326441102756894,
+    0.7979323308270677,
+    0.7851782363977486,
+    0.7645403377110696,
+    0.9136960600375235,
+    0.8545966228893058,
+    0.8430268918073797,
+    0.8880550343964979,
+    0.8424015009380864,
+    0.7836147592245153
+  ],
+  "mean_score": 0.8405685884504883,
+  "std_score": 0.05495148322032055,
+  "oof_score": 0.8051277399659693,
+  "best_iterations": [
+    1,
+    8,
+    20,
+    1,
+    8,
+    6,
+    19,
+    2,
+    2,
+    15
+  ],
+  "data_source": "synthetic_demo"
+}

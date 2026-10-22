@@ -1,0 +1,115 @@
+{
+  "purpose": "Unlabelled representation feasibility only; not an efficacy experiment",
+  "fields": 21,
+  "rows_train": 699635,
+  "rows_test": 299844,
+  "fields_summary": {
+    "Age": {
+      "unique_train_including_missing": 75,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 3.335067568468937e-06
+    },
+    "Flight Distance": {
+      "unique_train_including_missing": 3474,
+      "test_unseen_fraction": 0.00020343912167660518,
+      "test_support_below_10_fraction": 0.004292231960619522
+    },
+    "Inflight wifi service": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Departure/Arrival time convenient": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Ease of Online booking": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Gate location": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Food and drink": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Online boarding": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Seat comfort": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Inflight entertainment": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "On-board service": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Leg room service": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Baggage handling": {
+      "unique_train_including_missing": 5,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Checkin service": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Cleanliness": {
+      "unique_train_including_missing": 6,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Departure Delay in Minutes": {
+      "unique_train_including_missing": 167,
+      "test_unseen_fraction": 7.337148650631662e-05,
+      "test_support_below_10_fraction": 0.00034684702712076945
+    },
+    "Arrival Delay in Minutes": {
+      "unique_train_including_missing": 169,
+      "test_unseen_fraction": 4.0020810821627246e-05,
+      "test_support_below_10_fraction": 0.0003768626352369899
+    },
+    "Gender": {
+      "unique_train_including_missing": 2,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Customer Type": {
+      "unique_train_including_missing": 2,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Type of Travel": {
+      "unique_train_including_missing": 2,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    },
+    "Class": {
+      "unique_train_including_missing": 3,
+      "test_unseen_fraction": 0.0,
+      "test_support_below_10_fraction": 0.0
+    }
+  },
+  "ffm_rank8_embedding_parameter_count_with_unknown_per_field": 638720,
+  "best_submission_sha256": "b8cbfd891761efa14fac950684f03929b01da2d10a2c868fdb8228e7cb878eb8"
+}

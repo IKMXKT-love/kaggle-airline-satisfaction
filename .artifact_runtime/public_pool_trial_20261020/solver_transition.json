@@ -1,0 +1,12 @@
+{
+  "previous_solver": "streaming L-BFGS",
+  "replacement": "streaming damped Newton",
+  "same_objective": true,
+  "same_C": 0.003,
+  "same_folds": true,
+  "candidate_auc_not_observed": true,
+  "old_process_wall_seconds": 199.82032799720764,
+  "old_process_cpu_seconds": 277.0625,
+  "checkpoint_columns": 246,
+  "epoch": 1792501128.0671062
+}

@@ -1,0 +1,16 @@
+{
+  "python_project_files_parsed": 110,
+  "markdown_documents_adjusted": 0,
+  "archive_only_links_labeled": 0,
+  "historical_unresolved_links": [
+    {
+      "document": "research_s6e10/review_20261020/sources/alvis1111__s6e10-airline-solution__independent_repro__README.md",
+      "target": "./S6E10独立复现总结.md"
+    },
+    {
+      "document": "research_s6e10/review_20261020/sources/yandex-research__tabular-dl-tabr__README.md",
+      "target": "notebooks/results.ipynb"
+    }
+  ],
+  "note": "Unresolved original historical citations are retained as evidence; not interpreted as runnable dependencies."
+}

@@ -1,0 +1,248 @@
+member,source,source_ref,source_kind,author,oof_auc,scale
+ar_cat_5f,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Arhan canli,0.96094,logits
+ar_lgb_5f,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Arhan canli,0.961029,logits
+ar_realmlp_5f,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Arhan canli,0.960879,logits
+ar_xgb_5f,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Arhan canli,0.961049,logits
+bp_cat,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Akmal Xodarev (Busya PRIME),0.960887,probabilities
+bp_lgbm,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Akmal Xodarev (Busya PRIME),0.961058,probabilities
+bp_lgbm_xt,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Akmal Xodarev (Busya PRIME),0.96093,probabilities
+bp_realmlp,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Akmal Xodarev (Busya PRIME),0.961216,probabilities
+bp_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Akmal Xodarev (Busya PRIME),0.96102,probabilities
+gl_a,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.959568,probabilities
+gl_b,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.958727,probabilities
+gl_c,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.958338,probabilities
+gl_d,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.958341,probabilities
+gl_e,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.956817,probabilities
+gl_f,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.948865,probabilities
+gl_g,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.954592,probabilities
+gl_h,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.959791,probabilities
+gl_i,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.959651,probabilities
+gl_j,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.96115,probabilities
+gl_k,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.960934,probabilities
+gl_l,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.960956,probabilities
+gl_m,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.960411,probabilities
+gl_n,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,"Dariush Afshar (this library, v4)",0.961233,probabilities
+gp_cat_ctr,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961045,probabilities
+gp_cat_ctr3,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961118,probabilities
+gp_cat_ctr5,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.96109,probabilities
+gp_cat_v3,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960833,probabilities
+gp_cat_vb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960805,probabilities
+gp_deepfm_rawaux,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960479,probabilities
+gp_deepfm_v1,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960728,probabilities
+gp_glm6_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960803,probabilities
+gp_glm_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960751,probabilities
+gp_lgb_auxall,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961153,probabilities
+gp_lgb_v3,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961057,probabilities
+gp_lgb_vb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961011,probabilities
+gp_lgb_vb_aux,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961061,probabilities
+gp_lgb_vb_ogev,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961057,probabilities
+gp_realmlp_fa,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960946,probabilities
+gp_realmlp_fa_aux,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961004,probabilities
+gp_realmlp_fa_aux3,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961077,probabilities
+gp_realmlp_fa_aux_s2,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961018,probabilities
+gp_realmlp_fa_auxog,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960888,probabilities
+gp_realmlp_fa_auxogev,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961029,probabilities
+gp_realmlp_fa_s123,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960908,probabilities
+gp_realmlp_fa_s7,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960976,probabilities
+gp_realmlp_og,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960779,probabilities
+gp_realmlp_pub,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960769,probabilities
+gp_realmlp_pub_aux,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960914,probabilities
+gp_realmlp_pub_s1,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960718,probabilities
+gp_realmlp_pub_s2,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960757,probabilities
+gp_realmlp_v4,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961136,probabilities
+gp_realmlp_v4_s1,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961105,probabilities
+gp_realmlp_v4_s2,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.96116,probabilities
+gp_realmlp_v4fa,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961179,probabilities
+gp_realmlp_vb_aux,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961345,probabilities
+gp_realmlp_vb_aux_s2,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961316,probabilities
+gp_tabicl_full_raw,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.95759,probabilities
+gp_tabpfn_catfd,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960925,probabilities
+gp_tabpfn_catfd10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961071,probabilities
+gp_tabpfn_catfd_s1,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960895,probabilities
+gp_tabpfn_full_raw,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960729,probabilities
+gp_tabpfn_full_raw_s1,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960628,probabilities
+gp_tabpfn_te,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961099,probabilities
+gp_tabpfn_te4,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961142,probabilities
+gp_xgb_auxall,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961156,probabilities
+gp_xgb_auxev,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961174,probabilities
+gp_xgb_v3,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961072,probabilities
+gp_xgb_v3_d10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961061,probabilities
+gp_xgb_v3_s1,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961095,probabilities
+gp_xgb_v4_tuned,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.961113,probabilities
+gp_xgb_vb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,goodpjw2008,0.960926,probabilities
+meh_cat,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.960329,probabilities
+meh_lgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.960689,probabilities
+meh_realmlp,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.960958,probabilities
+meh_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.960432,probabilities
+mg_cat,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.960901,probabilities
+mg_cat_ctr,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.96098,probabilities
+mg_lgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.961014,probabilities
+mg_lgb_ogteach,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.961,probabilities
+mg_lgb_route,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.961035,probabilities
+mg_realmlp,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.961007,probabilities
+mg_realmlp_fa4,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.961015,probabilities
+mg_realmlp_og,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.960922,probabilities
+mg_realmlp_v4,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.961198,probabilities
+mg_realmlp_v4og,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.961232,probabilities
+mg_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,인공저능연구소( Artificial Idiocy Lab ),0.960911,probabilities
+mi_cat_ctr,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Mitudru Dutta,0.96112,probabilities
+mi_glm_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Mitudru Dutta,0.961065,probabilities
+mi_lgb_route_cat,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Mitudru Dutta,0.961027,probabilities
+mi_realmlp_lean,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Mitudru Dutta,0.961307,probabilities
+mi_realmlp_raw,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Mitudru Dutta,0.960976,probabilities
+mi_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Mitudru Dutta,0.961247,probabilities
+mi_xgb_d5,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Mitudru Dutta,0.961288,probabilities
+nj_01,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Naji,0.961744,ranks
+pfn_hemingweb_raw,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,samanyu1808 and Hemingweb,0.961053,probabilities
+pfn_samanyu_route_og,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,samanyu1808 and Hemingweb,0.961268,probabilities
+pfn_samanyu_seeds,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,samanyu1808 and Hemingweb,0.961008,probabilities
+sa_cat_ctr_auxall_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961174,probabilities
+sa_cat_ctr_auxev,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.960984,probabilities
+sa_cat_ctr_auxev_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.96116,probabilities
+sa_lgb_A,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.960971,probabilities
+sa_lgb_A_auxall,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961136,probabilities
+sa_lgb_A_auxall_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961237,probabilities
+sa_lgb_B_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961065,probabilities
+sa_rmlp_B,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961282,probabilities
+sa_rmlp_B_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961378,probabilities
+sa_rmlp_ogx_aux,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961081,probabilities
+sa_rmlp_ogx_aux_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961175,probabilities
+sa_rmlp_raw_aux_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961252,probabilities
+sa_rmlp_raw_aux_s2,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961118,probabilities
+sa_rmlp_v4aux,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961268,probabilities
+sa_rmlp_v4aux_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961398,probabilities
+sa_rmlp_v4aux_k10s2,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961413,probabilities
+sa_rmlp_v4ev_e4_k10,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961244,probabilities
+sa_xgb_A,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.960903,probabilities
+sa_xgb_A_auxev,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.961044,probabilities
+sa_xgb_raw,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.958832,probabilities
+sa_xgb_route,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.960317,probabilities
+sa_xgb_te,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Sachith7,0.960179,probabilities
+th_catboost,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,thisray,0.960941,probabilities
+th_realmlp,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,thisray,0.961042,probabilities
+th_xgb,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,thisray,0.961093,probabilities
+wx_context_numeric,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Shelton Wang,0.960649,probabilities
+wx_rating_segments,c124,cdeotte/s6e10-124-public-oof-and-test-predictions,dataset,Shelton Wang,0.960811,probabilities
+tfm_causilo,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.958275,probabilities
+tfm_exaone,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.958557,probabilities
+tfm_kumolarge,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.960036,probabilities
+tfm_kumosmall,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.958484,probabilities
+tfm_limix2,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.958474,probabilities
+tfm_mitra2,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.957075,probabilities
+tfm_realmlp,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.959311,probabilities
+tfm_tabfm,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.958871,probabilities
+tfm_tabicl2,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.958088,probabilities
+tfm_tabpfn35,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.961145,probabilities
+tfm_xgboost,tfm,cdeotte/s6e10-tfm-oof-and-test-predictions,dataset,Chris Deotte,0.959852,probabilities
+gl_o_tabpfn35,golem,dariushafshar/s6e10-golem-oof-library,dataset,"Dariush Afshar (this library, v5)",0.961082,probabilities
+gl_p_lgbm_auxev,golem,dariushafshar/s6e10-golem-oof-library,dataset,"Dariush Afshar (this library, v5)",0.961314,probabilities
+gl_q_lgbm_auxev_10fold,golem,dariushafshar/s6e10-golem-oof-library,dataset,"Dariush Afshar (this library, v5)",0.961388,probabilities
+ab_tabpfn_catfd10,abdullah,abdullahsafwan333/oof-dataset,dataset,AbdullahSafwan333,0.961596,probabilities
+ab_tabpfn_raw,abdullah,abdullahsafwan333/oof-dataset,dataset,AbdullahSafwan333,0.960872,probabilities
+ab_tabpfn_te_cnt,abdullah,abdullahsafwan333/oof-dataset,dataset,AbdullahSafwan333,0.961376,probabilities
+ab_cat_v3,abdullah,abdullahsafwan333/oof-dataset,dataset,AbdullahSafwan333,0.961396,probabilities
+ab_xgb_v3,abdullah,abdullahsafwan333/oof-dataset,dataset,AbdullahSafwan333,0.961377,probabilities
+st_cat_base,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958067,probabilities
+st_cat_tuned,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958523,probabilities
+st_e10_sparselr_lr,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958106,probabilities
+st_e11_knn_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959862,probabilities
+st_e11_knn_lgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.960065,probabilities
+st_e11_knn_xgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.960094,probabilities
+st_e12_route_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.960978,probabilities
+st_e12_route_lgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961072,probabilities
+st_e12_route_xgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961083,probabilities
+st_e13_realmlp_realmlp,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961238,probabilities
+st_e14_rmlpseeds_realmlp,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961253,probabilities
+st_e14_seed2026,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961192,probabilities
+st_e14_seed7,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961202,probabilities
+st_e14_seed77,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961219,probabilities
+st_e14_seed777,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.961191,probabilities
+st_e1_allcat_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958757,probabilities
+st_e2_origfeat_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959489,probabilities
+st_e2_origfeat_lgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959862,probabilities
+st_e2_origfeat_xgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959899,probabilities
+st_e3_origconcat_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958652,probabilities
+st_e3_origconcat_lgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958883,probabilities
+st_e3_origconcat_xgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959124,probabilities
+st_e5_origpred_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959823,probabilities
+st_e5_origpred_lgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.96009,probabilities
+st_e5_origpred_xgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.960109,probabilities
+st_e6_origwide_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959453,probabilities
+st_e6_origwide_lgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959661,probabilities
+st_e6_origwide_xgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959621,probabilities
+st_e7_combo_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959885,probabilities
+st_e8_tuned_cat,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.959913,probabilities
+st_e8_tuned_lgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.96006,probabilities
+st_e8_tuned_xgb,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.960066,probabilities
+st_e9_mlp_mlp,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958675,probabilities
+st_lgb_base,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958661,probabilities
+st_lgb_raw,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958886,probabilities
+st_lgb_tuned,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958868,probabilities
+st_xgb_base,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958358,probabilities
+st_xgb_tuned,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.958987,probabilities
+st_orig_cat_pred,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.95463,probabilities
+st_orig_model_pred,sadam,sadamtorres/ps-s6e10-airline-satisfaction-artifacts,dataset,Sadam Torres,0.954908,probabilities
+am_forge_cat,forge,amanatar/s6e10-forge-own-pairs,dataset,Aman Atar,0.960908,probabilities
+am_forge_ghost_xt,forge,amanatar/s6e10-forge-own-pairs,dataset,Aman Atar,0.96092,probabilities
+am_forge_lgbm,forge,amanatar/s6e10-forge-own-pairs,dataset,Aman Atar,0.961037,probabilities
+am_forge_lgbm_xt,forge,amanatar/s6e10-forge-own-pairs,dataset,Aman Atar,0.960903,probabilities
+am_forge_realmlp,forge,amanatar/s6e10-forge-own-pairs,dataset,Aman Atar,0.96122,probabilities
+am_forge_xgb,forge,amanatar/s6e10-forge-own-pairs,dataset,Aman Atar,0.961047,probabilities
+s7_lgb_cpu_strong,sachith,sachith7/s6e10-stack-oof-predictions,dataset,Sachith7,0.961083,probabilities
+s7_xgb_A_auxall,sachith,sachith7/s6e10-stack-oof-predictions,dataset,Sachith7,0.960916,probabilities
+km_cat_w1,koumeimaki,koumeimaki/s6e10-route-tfm-nn-oof,dataset,Koumei Maki,0.961223,probabilities
+km_lgb_w1,koumeimaki,koumeimaki/s6e10-route-tfm-nn-oof,dataset,Koumei Maki,0.961198,probabilities
+km_rmlp_f_nc,koumeimaki,koumeimaki/s6e10-route-tfm-nn-oof,dataset,Koumei Maki,0.961295,probabilities
+km_tabicl_fdcat_c250k,koumeimaki,koumeimaki/s6e10-route-tfm-nn-oof,dataset,Koumei Maki,0.957281,probabilities
+km_tabm_bcd_rc_v2,koumeimaki,koumeimaki/s6e10-route-tfm-nn-oof,dataset,Koumei Maki,0.960768,probabilities
+km_tabpfn_catfd10,koumeimaki,koumeimaki/s6e10-route-tfm-nn-oof,dataset,Koumei Maki,0.961178,probabilities
+km_xgb_w1,koumeimaki,koumeimaki/s6e10-route-tfm-nn-oof,dataset,Koumei Maki,0.961197,probabilities
+gpx_cat_aux,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.960937,probabilities
+gpx_cat_ctr_k,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961003,probabilities
+gpx_cat_k10,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961114,probabilities
+gpx_gen_v1,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.952399,probabilities
+gpx_glm6_xgb_k,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.960829,probabilities
+gpx_lgb_k10,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961215,probabilities
+gpx_realmlp_fa_aux3_k,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961072,probabilities
+gpx_realmlp_fa_aux_n16,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961071,probabilities
+gpx_realmlp_fa_auxev,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961055,probabilities
+gpx_realmlp_fa_s7_k,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.960968,probabilities
+gpx_realmlp_pub_aux_k,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.960916,probabilities
+gpx_realmlp_v4fa_auxfull,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961275,probabilities
+gpx_realmlp_vb,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.96115,probabilities
+gpx_tabm_v4aux,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.960466,probabilities
+gpx_xgb_d10_k10,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961258,probabilities
+gpx_xgb_k10,gp_extra,goodpjw2008/s6e10-goodpjw2008-extra-members-oof,dataset,goodpjw2008,0.961256,probabilities
+dk_cb_cat,dmitriy,dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test,dataset,Dmitriy Kolmikov,0.960665,probabilities
+kga_cat_allcat_v1_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.961095,probabilities
+kga_cat_allcat_v2_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.961127,probabilities
+kga_cat_enc3_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960635,probabilities
+kga_cat_enc4_k10,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.961022,probabilities
+kga_cat_enc4_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960805,probabilities
+kga_cat_raw_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.958711,probabilities
+kga_lgb_enc3_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960585,probabilities
+kga_lgb_enc4_k10,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960987,probabilities
+kga_lgb_enc4_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960731,probabilities
+kga_lgb_raw_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.959041,probabilities
+kga_realmlp_enc_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960956,probabilities
+kga_realmlp_raw_s42_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960883,probabilities
+kga_realmlp_raw_s7_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960885,probabilities
+kga_xgb_enc3_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.96059,probabilities
+kga_xgb_enc4_k10,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960972,probabilities
+kga_xgb_enc4_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.960793,probabilities
+kga_xgb_raw_k5,kagan_abl,kagankoral/s6e10-ablation-members-oof,dataset,Ahmet Kağan Koral,0.958899,probabilities
+yk_realmlp,yekenot,yekenot/ps-s6-e10-realmlp-pytabkit,notebook,Vladimir Demidov,0.961218,probabilities
+hm_cat,hermengardo,hermengardo/single-catboost-eda-ps6e10,notebook,Hermengardo,0.960201,probabilities
+kr_rmlp_route_ogaux,kratosyan,kratosyan/s6e10-xgboost-realmlp-route-id-teacher,notebook,Kratosyan,0.961017,probabilities
+kr_xgb_route_ogaux,kratosyan,kratosyan/s6e10-xgboost-realmlp-route-id-teacher,notebook,Kratosyan,0.961039,probabilities
+kg_lgb,kagan_enc,kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961,notebook,Ahmet Kağan Koral,0.960821,probabilities
+kg_xgb,kagan_enc,kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961,notebook,Ahmet Kağan Koral,0.960792,probabilities
+kg_cat,kagan_enc,kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961,notebook,Ahmet Kağan Koral,0.960778,probabilities
+kg_cat_allcat,kagan_enc,kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961,notebook,Ahmet Kağan Koral,0.960799,probabilities
+kg_realmlp,kagan_enc,kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961,notebook,Ahmet Kağan Koral,0.960979,probabilities
+av5_lgbm_champion,aman_v5,amanatar/s6e10-the-original-prior-stack-v5,notebook,Aman Atar,0.958668,probabilities
+av5_lgbm_te,aman_v5,amanatar/s6e10-the-original-prior-stack-v5,notebook,Aman Atar,0.958013,probabilities
+av5_lgbm_te_rows,aman_v5,amanatar/s6e10-the-original-prior-stack-v5,notebook,Aman Atar,0.958568,probabilities
+av5_xgb_gpu,aman_v5,amanatar/s6e10-the-original-prior-stack-v5,notebook,Aman Atar,0.958502,probabilities
+av5_catboost_gpu,aman_v5,amanatar/s6e10-the-original-prior-stack-v5,notebook,Aman Atar,0.95982,probabilities
+kz_source_transfer,kozy,kozykappa/s6e10-source-transfer-foundation-model-oof,notebook,Kozykorpesh,0.958646,probabilities

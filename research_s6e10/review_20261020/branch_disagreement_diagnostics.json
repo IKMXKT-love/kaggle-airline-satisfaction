@@ -1,0 +1,325 @@
+{
+  "protocol": {
+    "training": false,
+    "model_inference": false,
+    "date": "2026-10-20",
+    "score_bin_width": 0.02,
+    "minimum_rows_per_sign_per_cell": 30,
+    "difference_threshold_in_logits": 0.25,
+    "cells": [
+      [
+        "score_bin"
+      ],
+      [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ]
+    ],
+    "limitation": "Exploratory fixed-prediction calibration contrasts, not AUC gains. No model or weight selected; intervals uncorrected for multiple comparisons and training history."
+  },
+  "rows": [
+    {
+      "fold": 0,
+      "branch": "old_xgb",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 24,
+      "covered_rows": 11121,
+      "higher_minus_lower_branch_residual": -0.01044232631695591,
+      "approx_fixed_cell_se": 0.004630616143689746
+    },
+    {
+      "fold": 0,
+      "branch": "old_xgb",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 24,
+      "covered_rows": 8033,
+      "higher_minus_lower_branch_residual": -0.010618273692077494,
+      "approx_fixed_cell_se": 0.004485082134248708
+    },
+    {
+      "fold": 0,
+      "branch": "old_cat",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 18,
+      "covered_rows": 6208,
+      "higher_minus_lower_branch_residual": -0.008071013929393944,
+      "approx_fixed_cell_se": 0.006810385741371793
+    },
+    {
+      "fold": 0,
+      "branch": "old_cat",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 15,
+      "covered_rows": 3686,
+      "higher_minus_lower_branch_residual": -0.0025007125123376523,
+      "approx_fixed_cell_se": 0.00718608152458776
+    },
+    {
+      "fold": 0,
+      "branch": "control",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 15,
+      "covered_rows": 4817,
+      "higher_minus_lower_branch_residual": -0.008112316909603906,
+      "approx_fixed_cell_se": 0.00578146690949199
+    },
+    {
+      "fold": 0,
+      "branch": "control",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 11,
+      "covered_rows": 2783,
+      "higher_minus_lower_branch_residual": -0.011364291141951597,
+      "approx_fixed_cell_se": 0.006185124454492594
+    },
+    {
+      "fold": 0,
+      "branch": "realmlp",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 29,
+      "covered_rows": 14409,
+      "higher_minus_lower_branch_residual": -0.008210051681714707,
+      "approx_fixed_cell_se": 0.004703354416080203
+    },
+    {
+      "fold": 0,
+      "branch": "realmlp",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 25,
+      "covered_rows": 10287,
+      "higher_minus_lower_branch_residual": -0.01248269370528037,
+      "approx_fixed_cell_se": 0.0049101041520998165
+    },
+    {
+      "fold": 0,
+      "branch": "lgb",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 13,
+      "covered_rows": 3631,
+      "higher_minus_lower_branch_residual": -0.017389154937949725,
+      "approx_fixed_cell_se": 0.007074125850372981
+    },
+    {
+      "fold": 0,
+      "branch": "lgb",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 9,
+      "covered_rows": 2085,
+      "higher_minus_lower_branch_residual": -0.00615597374682175,
+      "approx_fixed_cell_se": 0.007469393740109146
+    },
+    {
+      "fold": 0,
+      "branch": "lean_mean",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 20,
+      "covered_rows": 7443,
+      "higher_minus_lower_branch_residual": 0.021142504977218892,
+      "approx_fixed_cell_se": 0.006922876388211121
+    },
+    {
+      "fold": 0,
+      "branch": "lean_mean",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 16,
+      "covered_rows": 5131,
+      "higher_minus_lower_branch_residual": 0.01656768699542855,
+      "approx_fixed_cell_se": 0.007540816268314728
+    },
+    {
+      "fold": 1,
+      "branch": "old_xgb",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 23,
+      "covered_rows": 11169,
+      "higher_minus_lower_branch_residual": -0.01121590791592839,
+      "approx_fixed_cell_se": 0.0045600906868117205
+    },
+    {
+      "fold": 1,
+      "branch": "old_xgb",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 28,
+      "covered_rows": 8782,
+      "higher_minus_lower_branch_residual": -0.007441991192440551,
+      "approx_fixed_cell_se": 0.0045665674132756365
+    },
+    {
+      "fold": 1,
+      "branch": "old_cat",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 20,
+      "covered_rows": 6542,
+      "higher_minus_lower_branch_residual": 0.000308801277864049,
+      "approx_fixed_cell_se": 0.006341869245725229
+    },
+    {
+      "fold": 1,
+      "branch": "old_cat",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 15,
+      "covered_rows": 3664,
+      "higher_minus_lower_branch_residual": -0.006839712717372292,
+      "approx_fixed_cell_se": 0.007030883994867215
+    },
+    {
+      "fold": 1,
+      "branch": "control",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 16,
+      "covered_rows": 5079,
+      "higher_minus_lower_branch_residual": -0.009565586988580177,
+      "approx_fixed_cell_se": 0.006501439659722766
+    },
+    {
+      "fold": 1,
+      "branch": "control",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 10,
+      "covered_rows": 2792,
+      "higher_minus_lower_branch_residual": -0.014168474275164347,
+      "approx_fixed_cell_se": 0.00736833909856768
+    },
+    {
+      "fold": 1,
+      "branch": "realmlp",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 9,
+      "covered_rows": 21777,
+      "higher_minus_lower_branch_residual": 0.0027642011661353173,
+      "approx_fixed_cell_se": 0.00578943738109432
+    },
+    {
+      "fold": 1,
+      "branch": "realmlp",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 8,
+      "covered_rows": 13795,
+      "higher_minus_lower_branch_residual": 0.004988771694683856,
+      "approx_fixed_cell_se": 0.006715227153962493
+    },
+    {
+      "fold": 1,
+      "branch": "lgb",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 16,
+      "covered_rows": 4108,
+      "higher_minus_lower_branch_residual": 0.001299085564759652,
+      "approx_fixed_cell_se": 0.006714973421765129
+    },
+    {
+      "fold": 1,
+      "branch": "lgb",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 9,
+      "covered_rows": 2300,
+      "higher_minus_lower_branch_residual": 0.008507519730438975,
+      "approx_fixed_cell_se": 0.007762732617747514
+    },
+    {
+      "fold": 1,
+      "branch": "lean_mean",
+      "cells": [
+        "score_bin"
+      ],
+      "common_cells": 21,
+      "covered_rows": 7490,
+      "higher_minus_lower_branch_residual": 0.0003549545226931079,
+      "approx_fixed_cell_se": 0.006445733888491896
+    },
+    {
+      "fold": 1,
+      "branch": "lean_mean",
+      "cells": [
+        "Class",
+        "Type of Travel",
+        "Customer Type",
+        "score_bin"
+      ],
+      "common_cells": 20,
+      "covered_rows": 5299,
+      "higher_minus_lower_branch_residual": -0.00059680234150234,
+      "approx_fixed_cell_se": 0.00688609499839915
+    }
+  ],
+  "elapsed_seconds": 1.062769100000878
+}

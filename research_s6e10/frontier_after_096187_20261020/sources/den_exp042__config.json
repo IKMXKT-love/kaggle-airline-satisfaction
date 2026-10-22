@@ -1,0 +1,380 @@
+{
+  "competition": {
+    "name": "Predicting Airline Satisfaction",
+    "slug": "playground-series-s6e10",
+    "url": "https://www.kaggle.com/competitions/playground-series-s6e10",
+    "modality": "tabular",
+    "deadline_utc": null
+  },
+  "data": {
+    "train_file": "data/raw/train.csv",
+    "test_file": "data/raw/test.csv",
+    "sample_submission_file": "data/raw/sample_submission.csv",
+    "source_file": "data/raw/original/data.csv",
+    "id_columns": [
+      "id"
+    ],
+    "target_columns": [
+      "satisfaction"
+    ],
+    "group_columns": [],
+    "time_column": null,
+    "sha256": {
+      "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+      "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+      "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6"
+    },
+    "source_sha256": "2ad76465f6115f93d16121891a6b1235acb8007a4ab065cae0dc46b60ad116e3"
+  },
+  "evaluation": {
+    "metric": "roc_auc",
+    "direction": "maximize",
+    "implementation": "sklearn.metrics.roc_auc_score",
+    "positive_class": "True / satisfied"
+  },
+  "validation": {
+    "strategy": "imported StratifiedKFold; development and viewed lockbox retained",
+    "n_splits": 5,
+    "seed": 2036,
+    "fold_version": "v1",
+    "fold_file": "folds/v1.npz",
+    "fold_sha256": "1b76b6f36674fcfccaba4e58ce7a0d7cc67c9391ae06e9f614b13be3f58b415d",
+    "leakage_risks": [
+      "Legacy model selection and blend weights used development validation, not independent OOF.",
+      "Legacy lockbox has been inspected; it is not untouched for future experiments.",
+      "Exact feature overlaps removed from source; grouped/near-duplicate audit pending."
+    ],
+    "fold_assignment_sha256": "0d2df9a59085ee4ac172f74548ccb3b02d46be5bf5386db2e2d58263ad424c08",
+    "allow_verified_reconstruction": true
+  },
+  "runtime": {
+    "internet": false,
+    "accelerator": "gpu",
+    "time_limit_minutes": 240,
+    "execute_on": "kaggle",
+    "seed": 2026,
+    "resume": true,
+    "library_versions": {}
+  },
+  "submission": {
+    "format": "csv",
+    "prediction_columns": [
+      "satisfaction"
+    ],
+    "allowed_daily_submissions": 10
+  },
+  "tracking": {
+    "primary_experiment_log": "experiments/EXPERIMENTS.md",
+    "submission_log": "submissions/SUBMISSIONS.md",
+    "repository_revision_at_prepare": "ec39ffedb633c0dca359cd2069ee2ba8e078289d",
+    "source_snapshot_dirty": true
+  },
+  "reference": {
+    "file": "artifacts/reference/exp036_anchor/owned_components_v1.npz",
+    "sha256": "bb5ad639bcf9bab25f63f46a2c76c8a2ded9203bfc21fd80fafb47a23a5154c9",
+    "submission_file": "artifacts/reference/exp036_anchor/control_exp024.csv",
+    "submission_sha256": "aa8c171eab5a5b95d6fe3f88daf83f33802591f34dcb5626b93fdaec78bd6a56",
+    "parent": "exp024",
+    "allow_retrain": false
+  },
+  "baseline": {
+    "parent": "exp037",
+    "models": [],
+    "note": "New raw-feature GPU learner added to audited exp037; final public-assisted stack not promoted by v1 validation."
+  },
+  "public_stack": {
+    "version": "public-global-neural-refresh-v6",
+    "params": {
+      "C": 0.003,
+      "solver": "lbfgs",
+      "max_iter": 2000,
+      "tol": 1e-07,
+      "fit_intercept": true,
+      "random_state": 2026
+    },
+    "own_models": [
+      "exp012_control",
+      "lightgbm_view_b",
+      "catboost_numeric_ctr",
+      "realmlp_route_interactions"
+    ],
+    "manifest_file": "reports/public_prediction_manifest_v28.json",
+    "manifest_sha256": "3f3cf37192f0d710b49c76cffd76cf878bdf42d047eb383420c2b564c422de03",
+    "validation_policy": "none_without_nested_base_refits",
+    "test_only_members_allowed": false,
+    "hypothesis": "Add one newly trained raw-feature PLR metric/retrieval view via frozen-v1 OOF; refit fixed C=.003 202-input LR and retain exp036 bounded correction. Final mixed-public stack CV unavailable.",
+    "public_pairs": 197
+  },
+  "exploratory_parent": {
+    "experiment": "exp031",
+    "submission_file": "artifacts/reference/exp036_anchor/control_exp031.csv",
+    "submission_sha256": "1dc3c4134459904f6f71eb949d72387f78ed410e245739a4852e5863a06fbca9",
+    "reported_public_score": 0.96179,
+    "state_file": "artifacts/reference/exp036_anchor/parent_exp031_stacker.json",
+    "state_sha256": "295946c14e738a8bb3a885cfa3f9962be7ad21425578e502c2c1fcaef2af23c4",
+    "state_used_for": "fixed supervised training init_score and exact test replay; train values not OOF"
+  },
+  "coverage_extension": {
+    "parent_catalogue_sha256": "bcfe1d00158382d7c6a79cb39c93fb830277b49466921a8ba67cf375c8ed0e98",
+    "added_members": 13,
+    "base_members": 185
+  },
+  "residual_stack": {
+    "version": "shallow-logit-correction-v1",
+    "params": {
+      "objective": "binary",
+      "metric": "None",
+      "device_type": "cpu",
+      "num_threads": 4,
+      "deterministic": true,
+      "force_col_wise": true,
+      "boost_from_average": false,
+      "learning_rate": 0.015,
+      "num_leaves": 7,
+      "max_depth": 3,
+      "min_data_in_leaf": 5000,
+      "min_sum_hessian_in_leaf": 20.0,
+      "lambda_l2": 50.0,
+      "lambda_l1": 0.0,
+      "feature_fraction": 0.8,
+      "bagging_fraction": 0.8,
+      "bagging_freq": 1,
+      "max_bin": 255,
+      "seed": 2026,
+      "feature_fraction_seed": 2026,
+      "bagging_seed": 2026,
+      "data_random_seed": 2026,
+      "verbosity": -1
+    },
+    "num_boost_round": 600,
+    "max_abs_logit_update": 0.5,
+    "expected_base_members": 198,
+    "validation_policy": "none_without_nested_base_refits",
+    "parent_train_margin_role": "supervised_initial_score_only_not_oof"
+  },
+  "bagged_residual": {
+    "version": "equal-two-seed-logit-corrections-v1",
+    "control_experiment": "exp032",
+    "control_submission_sha256": "99c4d36dbe63dc8e6b8d53ecda099d1280b18d8a3e15841422314aabd055f407",
+    "control_native_sha256": "924a5a8dee0c2cbf6e81f152db524cf42d76f949e01a4231c44f745918c46563",
+    "control_state_sha256": "7b43658f71fc54ccd74a141728d25db748d3057080c1fe075620a3ce885511bf",
+    "second_params": {
+      "objective": "binary",
+      "metric": "None",
+      "device_type": "cpu",
+      "num_threads": 4,
+      "deterministic": true,
+      "force_col_wise": true,
+      "boost_from_average": false,
+      "learning_rate": 0.015,
+      "num_leaves": 7,
+      "max_depth": 3,
+      "min_data_in_leaf": 5000,
+      "min_sum_hessian_in_leaf": 20.0,
+      "lambda_l2": 50.0,
+      "lambda_l1": 0.0,
+      "feature_fraction": 0.8,
+      "bagging_fraction": 0.8,
+      "bagging_freq": 1,
+      "max_bin": 255,
+      "seed": 2027,
+      "feature_fraction_seed": 2027,
+      "bagging_seed": 2027,
+      "data_random_seed": 2026,
+      "verbosity": -1
+    },
+    "num_boost_round": 600,
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "composition": "mean_raw_corrections_then_clip_then_add_exp031_offset_once",
+    "training_initialization": "exp031_only_not_exp032_fitted_predictions",
+    "validation_policy": "none_without_nested_base_refits"
+  },
+  "bagged_control": {
+    "experiment": "exp032",
+    "reported_public_score": 0.96182,
+    "native_file": "artifacts/reference/exp036_anchor/correction_seed2026.txt",
+    "state_file": "artifacts/reference/exp036_anchor/control_exp032_state.json",
+    "submission_file": "artifacts/reference/exp036_anchor/control_exp032.csv"
+  },
+  "third_residual": {
+    "version": "equal-three-seed-logit-corrections-v1",
+    "control_experiment": "exp033",
+    "control_submission_sha256": "73aea3d39915fc513e775c383591dfc252f4cd7cde34a387c2cfa888457da324",
+    "second_native_sha256": "1f91157c6b8b1a4e6fe2268c6868232d497ea9a62b02e1afd1332cd618f11ebd",
+    "control_state_sha256": "952509830a34bd4456a07e801b7089c6f32297f291222c124085729fc36323d6",
+    "third_params": {
+      "objective": "binary",
+      "metric": "None",
+      "device_type": "cpu",
+      "num_threads": 4,
+      "deterministic": true,
+      "force_col_wise": true,
+      "boost_from_average": false,
+      "learning_rate": 0.015,
+      "num_leaves": 7,
+      "max_depth": 3,
+      "min_data_in_leaf": 5000,
+      "min_sum_hessian_in_leaf": 20.0,
+      "lambda_l2": 50.0,
+      "lambda_l1": 0.0,
+      "feature_fraction": 0.8,
+      "bagging_fraction": 0.8,
+      "bagging_freq": 1,
+      "max_bin": 255,
+      "seed": 2028,
+      "feature_fraction_seed": 2028,
+      "bagging_seed": 2028,
+      "data_random_seed": 2026,
+      "verbosity": -1
+    },
+    "num_boost_round": 600,
+    "seeds": [
+      2026,
+      2027,
+      2028
+    ],
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "composition": "mean_three_raw_corrections_then_clip_then_add_exp031_offset_once",
+    "training_initialization": "exp031_only_not_exp033_fitted_predictions",
+    "validation_policy": "none_without_nested_base_refits"
+  },
+  "third_control": {
+    "experiment": "exp033",
+    "reported_public_score": 0.96183,
+    "second_native_file": "artifacts/reference/exp036_anchor/correction_seed2027.txt",
+    "state_file": "artifacts/reference/exp036_anchor/control_exp033_state.json",
+    "submission_file": "artifacts/reference/exp036_anchor/control_exp033.csv"
+  },
+  "gpu_residual": {
+    "version": "one-cuda-xgb-correction-v1",
+    "params": {
+      "objective": "binary:logistic",
+      "disable_default_eval_metric": 1,
+      "tree_method": "hist",
+      "device": "cuda:0",
+      "eta": 0.015,
+      "max_depth": 4,
+      "min_child_weight": 20.0,
+      "lambda": 50.0,
+      "alpha": 0.0,
+      "gamma": 0.0,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "max_bin": 255,
+      "base_score": 0.5,
+      "seed": 2026,
+      "seed_per_iteration": true,
+      "nthread": 4,
+      "verbosity": 1
+    },
+    "num_boost_round": 600,
+    "expected_base_members": 198,
+    "xgboost_version": "3.2.0",
+    "lightgbm_version": "4.6.0",
+    "old_average_weight": 0.75,
+    "xgb_weight": 0.25,
+    "max_abs_logit_update": 0.5,
+    "control_experiment": "exp034",
+    "control_sha256": "7aa886dba417b30d5563daba9f59889fe30f9e89158f1f8b1f6a3d9ead20fa97",
+    "native_sha256": "90d7a5a8d6e1304fcb6b97fc056f29995da82a6567b0d8574b6b2a8efc5c1b97",
+    "state_sha256": "c560f7cde09527b07fc2305d15c086a567c2c870c57a6c054d39df459e39c574",
+    "training_initialization": "exp031_only_not_exp034_fitted_predictions",
+    "prediction_base_margin": "explicit_zero_for_correction",
+    "validation_policy": "none_without_nested_base_refits",
+    "offset_float32_check_atol": 0.0002
+  },
+  "gpu_control": {
+    "experiment": "exp034",
+    "reported_public_score": 0.96183,
+    "third_native_file": "artifacts/reference/exp036_anchor/correction_seed2028.txt",
+    "state_file": "artifacts/reference/exp036_anchor/control_exp034_state.json",
+    "submission_file": "artifacts/reference/exp036_anchor/control_exp034.csv"
+  },
+  "neural_coverage": {
+    "version": "three-external-neural-views-v1",
+    "parent_experiment": "exp035",
+    "parent_manifest_sha256": "0b5fcabc8e3348d74f2004dbfb6acdef54c8bbe49701c682d886965dca88bede",
+    "manifest_sha256": "3f3cf37192f0d710b49c76cffd76cf878bdf42d047eb383420c2b564c422de03",
+    "public_pairs": 197,
+    "old_members": 198,
+    "new_members": 201,
+    "extra_names": [
+      "coverage/kk_realmlp_enc_k5",
+      "coverage/kk_realmlp_raw_s42_k5",
+      "coverage/kk_realmlp_raw_s7_k5"
+    ],
+    "control_sha256": "e0d5702d500ec999a774b2904f0de5a36bd9961585ce7148290f9aa429a6f93b",
+    "native_sha256": "c6d92e602a5683eed2d0dee0cefea8c0ac8a452e2dd01781b73b220d4efdbf0d",
+    "state_sha256": "93f76a2e4c3f98963329eabe912a8340d1ff2dcf75687c0d22c10733a1778cb0",
+    "matrix_order": "exact_parent198_then_three_neural_views",
+    "gpu_params_unchanged": true,
+    "parent_train_margin_role": "supervised_initial_score_only_not_oof",
+    "validation_policy": "none_without_nested_base_refits"
+  },
+  "coverage_control": {
+    "experiment": "exp035",
+    "reported_public_score": 0.96183,
+    "native_file": "artifacts/reference/exp036_anchor/parent_exp035_xgb.ubj",
+    "state_file": "artifacts/reference/exp036_anchor/control_exp035_state.json",
+    "submission_file": "artifacts/reference/exp036_anchor/control_exp035.csv"
+  },
+  "global_refresh": {
+    "version": "refit201-linear-keep036-correction-v1",
+    "control_experiment": "exp036",
+    "linear_fit_members": 201,
+    "control_sha256": "9e046811f40ad94eb6b897444aee7e8a21b94f4e009f26051c1c02365f87ba41",
+    "native_sha256": "7d3c49f23c51a571a5a78b3c328568dc8c5b5661a73c3be2b3ede48619e38eff",
+    "state_sha256": "2792ace60f2d1bee40fbd86dd1cf8c7cbcdfba5af495a67b168237e0c82cfe27",
+    "linear_params_source": "unchanged_exp031_C0.003",
+    "correction_policy": "freeze_verified_exp036_bounded_correction",
+    "validation_policy": "none_without_nested_base_refits"
+  },
+  "refresh_control": {
+    "experiment": "exp036",
+    "reported_public_score": 0.96183,
+    "submission_file": "artifacts/reference/exp036_anchor/control_exp036.csv",
+    "state_file": "artifacts/reference/exp036_anchor/control_exp036_state.json",
+    "native_file": "artifacts/reference/exp036_anchor/parent_exp036_xgb.ubj"
+  },
+  "neighborhood_gpu": {
+    "version": "new-neighborhood-view-202-v1",
+    "params": {
+      "version": "hybrid-neighborhood-plr-v1",
+      "epochs": 12,
+      "batch_size": 512,
+      "context_rows": 2048,
+      "frequencies": 8,
+      "frequency_scale": 2.0,
+      "category_dim": 8,
+      "width": 256,
+      "metric_dim": 64,
+      "dropout": 0.1,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0001,
+      "temperature": 1.0,
+      "nca_loss_weight": 0.5,
+      "retrieval_prediction_weight": 0.5,
+      "gradient_clip": 1.0,
+      "encode_batch": 4096,
+      "query_batch": 256,
+      "bank_chunk": 32768,
+      "precision": "float32_no_amp",
+      "seed": 2026
+    },
+    "old_members": 201,
+    "new_members": 202,
+    "parent": "exp037",
+    "parent_submission_sha256": "5724eb0a2e303129ab351a535d3d2e7e8bf02d675068727ec2b9345201ffd345",
+    "fold_assignment_sha256": "0d2df9a59085ee4ac172f74548ccb3b02d46be5bf5386db2e2d58263ad424c08",
+    "final_stack_cv": "unavailable_without_nested_external_base_refits",
+    "frozen_correction": "exp036_unchanged",
+    "early_stopping": false
+  }
+}

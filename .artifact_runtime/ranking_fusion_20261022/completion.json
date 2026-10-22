@@ -1,0 +1,15 @@
+{
+  "status": "stopped_inner_gate",
+  "elapsed_seconds": 42.33084726333618,
+  "results": [
+    {
+      "tag": "inner",
+      "rows": 139927,
+      "baseline_auc": 0.9620133930582603,
+      "candidate_auc": 0.962009333505807,
+      "delta": -4.059552453306026e-06,
+      "seconds": 20.258655071258545
+    }
+  ],
+  "submission_generated": false
+}

@@ -1,0 +1,4486 @@
+{
+  "public_columns": 246,
+  "own_columns": 7,
+  "rows_train": 699635,
+  "rows_test": 299844,
+  "columns": [
+    {
+      "member": "ar_cat_5f",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Arhan canli",
+      "files": [
+        "oof_ar_cat_5f.npy",
+        "test_ar_cat_5f.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96094,
+      "reference_scale": "logits",
+      "actual_auc": 0.9609400448773212,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "logits",
+      "captured_source_version": 1
+    },
+    {
+      "member": "ar_lgb_5f",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Arhan canli",
+      "files": [
+        "oof_ar_lgb_5f.npy",
+        "test_ar_lgb_5f.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961029,
+      "reference_scale": "logits",
+      "actual_auc": 0.9610288520218457,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "logits",
+      "captured_source_version": 1
+    },
+    {
+      "member": "ar_realmlp_5f",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Arhan canli",
+      "files": [
+        "oof_ar_realmlp_5f.npy",
+        "test_ar_realmlp_5f.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960879,
+      "reference_scale": "logits",
+      "actual_auc": 0.9608794654513025,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "logits",
+      "captured_source_version": 1
+    },
+    {
+      "member": "ar_xgb_5f",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Arhan canli",
+      "files": [
+        "oof_ar_xgb_5f.npy",
+        "test_ar_xgb_5f.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961049,
+      "reference_scale": "logits",
+      "actual_auc": 0.9610491579918106,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "logits",
+      "captured_source_version": 1
+    },
+    {
+      "member": "bp_cat",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Akmal Xodarev (Busya PRIME)",
+      "files": [
+        "oof_bp_cat.npy",
+        "test_bp_cat.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960887,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608870942737034,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "bp_lgbm",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Akmal Xodarev (Busya PRIME)",
+      "files": [
+        "oof_bp_lgbm.npy",
+        "test_bp_lgbm.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961058,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961057955874205,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "bp_lgbm_xt",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Akmal Xodarev (Busya PRIME)",
+      "files": [
+        "oof_bp_lgbm_xt.npy",
+        "test_bp_lgbm_xt.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96093,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609295773006152,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "bp_realmlp",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Akmal Xodarev (Busya PRIME)",
+      "files": [
+        "oof_bp_realmlp.npy",
+        "test_bp_realmlp.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961216,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612163156797269,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "bp_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Akmal Xodarev (Busya PRIME)",
+      "files": [
+        "oof_bp_xgb.npy",
+        "test_bp_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96102,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610200590809425,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_a",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_a.npy",
+        "test_gl_a.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.959568,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9595680692073701,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_b",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_b.npy",
+        "test_gl_b.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958727,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9587269567496258,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_c",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_c.npy",
+        "test_gl_c.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958338,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.958338396066351,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_d",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_d.npy",
+        "test_gl_d.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958341,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9583406464148585,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_e",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_e.npy",
+        "test_gl_e.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.956817,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9568174633879554,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_f",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_f.npy",
+        "test_gl_f.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.948865,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9488654957571856,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_g",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_g.npy",
+        "test_gl_g.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.954592,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9545918709117627,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_h",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_h.npy",
+        "test_gl_h.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.959791,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9597906944603176,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_i",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_i.npy",
+        "test_gl_i.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.959651,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9596512456632927,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_j",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_j.npy",
+        "test_gl_j.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96115,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611498047466515,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_k",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_k.npy",
+        "test_gl_k.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960934,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609344918454553,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_l",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_l.npy",
+        "test_gl_l.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960956,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609563427598393,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_m",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_m.npy",
+        "test_gl_m.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960411,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9604113514433098,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_n",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Dariush Afshar (this library, v4)",
+      "files": [
+        "oof_gl_n.npy",
+        "test_gl_n.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961233,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612332572639096,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_cat_ctr",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_cat_ctr.npy",
+        "test_gp_cat_ctr.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961045,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610452064542271,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_cat_ctr3",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_cat_ctr3.npy",
+        "test_gp_cat_ctr3.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961118,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611182298092865,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_cat_ctr5",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_cat_ctr5.npy",
+        "test_gp_cat_ctr5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96109,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610899535366974,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_cat_v3",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_cat_v3.npy",
+        "test_gp_cat_v3.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960833,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608329179940107,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_cat_vb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_cat_vb.npy",
+        "test_gp_cat_vb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960805,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608054110917487,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_deepfm_rawaux",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_deepfm_rawaux.npy",
+        "test_gp_deepfm_rawaux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960479,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9604788246345549,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_deepfm_v1",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_deepfm_v1.npy",
+        "test_gp_deepfm_v1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960728,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.960727503420201,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_glm6_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_glm6_xgb.npy",
+        "test_gp_glm6_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960803,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608033590154056,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_glm_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_glm_xgb.npy",
+        "test_gp_glm_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960751,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607511778524711,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_lgb_auxall",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_lgb_auxall.npy",
+        "test_gp_lgb_auxall.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961153,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611531608428128,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_lgb_v3",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_lgb_v3.npy",
+        "test_gp_lgb_v3.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961057,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961056660988282,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_lgb_vb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_lgb_vb.npy",
+        "test_gp_lgb_vb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961011,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610108126071554,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_lgb_vb_aux",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_lgb_vb_aux.npy",
+        "test_gp_lgb_vb_aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961061,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610606818805647,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_lgb_vb_ogev",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_lgb_vb_ogev.npy",
+        "test_gp_lgb_vb_ogev.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961057,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961056558437853,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa.npy",
+        "test_gp_realmlp_fa.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960946,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609464979558855,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa_aux",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa_aux.npy",
+        "test_gp_realmlp_fa_aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961004,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610040993470733,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa_aux3",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa_aux3.npy",
+        "test_gp_realmlp_fa_aux3.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961077,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610772877040724,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa_aux_s2",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa_aux_s2.npy",
+        "test_gp_realmlp_fa_aux_s2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961018,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610184900291644,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa_auxog",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa_auxog.npy",
+        "test_gp_realmlp_fa_auxog.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960888,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608878302579248,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa_auxogev",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa_auxogev.npy",
+        "test_gp_realmlp_fa_auxogev.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961029,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610293573162301,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa_s123",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa_s123.npy",
+        "test_gp_realmlp_fa_s123.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960908,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.960907808425747,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_fa_s7",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_fa_s7.npy",
+        "test_gp_realmlp_fa_s7.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960976,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609755546530089,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_og",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_og.npy",
+        "test_gp_realmlp_og.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960779,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607789460164263,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_pub",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_pub.npy",
+        "test_gp_realmlp_pub.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960769,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607689561792896,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_pub_aux",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_pub_aux.npy",
+        "test_gp_realmlp_pub_aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960914,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609141322930052,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_pub_s1",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_pub_s1.npy",
+        "test_gp_realmlp_pub_s1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960718,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607182013070431,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_pub_s2",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_pub_s2.npy",
+        "test_gp_realmlp_pub_s2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960757,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607568686170254,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_v4",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_v4.npy",
+        "test_gp_realmlp_v4.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961136,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611358739750309,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_v4_s1",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_v4_s1.npy",
+        "test_gp_realmlp_v4_s1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961105,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961104676871373,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_v4_s2",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_v4_s2.npy",
+        "test_gp_realmlp_v4_s2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96116,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611601623524143,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_v4fa",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_v4fa.npy",
+        "test_gp_realmlp_v4fa.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961179,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611788584722583,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_vb_aux",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_vb_aux.npy",
+        "test_gp_realmlp_vb_aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961345,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613448631579582,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_realmlp_vb_aux_s2",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_realmlp_vb_aux_s2.npy",
+        "test_gp_realmlp_vb_aux_s2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961316,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613156228476003,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabicl_full_raw",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabicl_full_raw.npy",
+        "test_gp_tabicl_full_raw.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.95759,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9575902496967745,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabpfn_catfd",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabpfn_catfd.npy",
+        "test_gp_tabpfn_catfd.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960925,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609247756692646,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabpfn_catfd10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabpfn_catfd10.npy",
+        "test_gp_tabpfn_catfd10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961071,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610711041023272,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabpfn_catfd_s1",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabpfn_catfd_s1.npy",
+        "test_gp_tabpfn_catfd_s1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960895,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608946238193095,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabpfn_full_raw",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabpfn_full_raw.npy",
+        "test_gp_tabpfn_full_raw.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960729,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.960728591032499,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabpfn_full_raw_s1",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabpfn_full_raw_s1.npy",
+        "test_gp_tabpfn_full_raw_s1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960628,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9606277494322567,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabpfn_te",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabpfn_te.npy",
+        "test_gp_tabpfn_te.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961099,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610993584486006,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_tabpfn_te4",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_tabpfn_te4.npy",
+        "test_gp_tabpfn_te4.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961142,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611421776748794,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_xgb_auxall",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_xgb_auxall.npy",
+        "test_gp_xgb_auxall.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961156,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611559857452159,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_xgb_auxev",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_xgb_auxev.npy",
+        "test_gp_xgb_auxev.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961174,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611739831158443,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_xgb_v3",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_xgb_v3.npy",
+        "test_gp_xgb_v3.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961072,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961071813661572,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_xgb_v3_d10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_xgb_v3_d10.npy",
+        "test_gp_xgb_v3_d10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961061,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610608290078805,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_xgb_v3_s1",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_xgb_v3_s1.npy",
+        "test_gp_xgb_v3_s1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961095,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610946731119778,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_xgb_v4_tuned",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_xgb_v4_tuned.npy",
+        "test_gp_xgb_v4_tuned.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961113,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611126659218664,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gp_xgb_vb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gp_xgb_vb.npy",
+        "test_gp_xgb_vb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960926,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609259388027797,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "meh_cat",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_meh_cat.npy",
+        "test_meh_cat.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960329,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9603291540151737,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "meh_lgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_meh_lgb.npy",
+        "test_meh_lgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960689,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9606888201062431,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "meh_realmlp",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_meh_realmlp.npy",
+        "test_meh_realmlp.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960958,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609575480036339,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "meh_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_meh_xgb.npy",
+        "test_meh_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960432,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9604316573056708,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_cat",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_cat.npy",
+        "test_mg_cat.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960901,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609005714503611,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_cat_ctr",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_cat_ctr.npy",
+        "test_mg_cat_ctr.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96098,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.960979693363025,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_lgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_lgb.npy",
+        "test_mg_lgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961014,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610139562026372,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_lgb_ogteach",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_lgb_ogteach.npy",
+        "test_mg_lgb_ogteach.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609998152810633,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_lgb_route",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_lgb_route.npy",
+        "test_mg_lgb_route.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961035,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610354289149783,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_realmlp",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_realmlp.npy",
+        "test_mg_realmlp.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961007,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610072433191679,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_realmlp_fa4",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_realmlp_fa4.npy",
+        "test_mg_realmlp_fa4.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961015,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610153343779335,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_realmlp_og",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_realmlp_og.npy",
+        "test_mg_realmlp_og.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960922,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609221409563353,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_realmlp_v4",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_realmlp_v4.npy",
+        "test_mg_realmlp_v4.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961198,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611975257170732,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_realmlp_v4og",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_realmlp_v4og.npy",
+        "test_mg_realmlp_v4og.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961232,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961231935559843,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mg_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "인공저능연구소( Artificial Idiocy Lab )",
+      "files": [
+        "oof_mg_xgb.npy",
+        "test_mg_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960911,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609106606139557,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mi_cat_ctr",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Mitudru Dutta",
+      "files": [
+        "oof_mi_cat_ctr.npy",
+        "test_mi_cat_ctr.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96112,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611197889284191,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mi_glm_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Mitudru Dutta",
+      "files": [
+        "oof_mi_glm_xgb.npy",
+        "test_mi_glm_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961065,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610648594644733,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mi_lgb_route_cat",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Mitudru Dutta",
+      "files": [
+        "oof_mi_lgb_route_cat.npy",
+        "test_mi_lgb_route_cat.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961027,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610272921660421,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mi_realmlp_lean",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Mitudru Dutta",
+      "files": [
+        "oof_mi_realmlp_lean.npy",
+        "test_mi_realmlp_lean.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961307,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613074455776077,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mi_realmlp_raw",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Mitudru Dutta",
+      "files": [
+        "oof_mi_realmlp_raw.npy",
+        "test_mi_realmlp_raw.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960976,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609761971379245,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mi_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Mitudru Dutta",
+      "files": [
+        "oof_mi_xgb.npy",
+        "test_mi_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961247,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612471091620455,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "mi_xgb_d5",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Mitudru Dutta",
+      "files": [
+        "oof_mi_xgb_d5.npy",
+        "test_mi_xgb_d5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961288,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612882165092381,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "nj_01",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Naji",
+      "files": [
+        "oof_nj_01.npy",
+        "test_nj_01.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961744,
+      "reference_scale": "ranks",
+      "actual_auc": 0.9617440495994619,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "pfn_hemingweb_raw",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "samanyu1808 and Hemingweb",
+      "files": [
+        "oof_pfn_hemingweb_raw.npy",
+        "test_pfn_hemingweb_raw.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961053,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610532632908894,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "pfn_samanyu_route_og",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "samanyu1808 and Hemingweb",
+      "files": [
+        "oof_pfn_samanyu_route_og.npy",
+        "test_pfn_samanyu_route_og.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961268,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612684167813977,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "pfn_samanyu_seeds",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "samanyu1808 and Hemingweb",
+      "files": [
+        "oof_pfn_samanyu_seeds.npy",
+        "test_pfn_samanyu_seeds.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961008,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610079439928336,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_cat_ctr_auxall_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_cat_ctr_auxall_k10.npy",
+        "test_sa_cat_ctr_auxall_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961174,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611744083282718,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_cat_ctr_auxev",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_cat_ctr_auxev.npy",
+        "test_sa_cat_ctr_auxev.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960984,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609837006517215,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_cat_ctr_auxev_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_cat_ctr_auxev_k10.npy",
+        "test_sa_cat_ctr_auxev_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96116,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611595343484682,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_lgb_A",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_lgb_A.npy",
+        "test_sa_lgb_A.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960971,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609714199698528,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_lgb_A_auxall",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_lgb_A_auxall.npy",
+        "test_sa_lgb_A_auxall.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961136,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611355531464331,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_lgb_A_auxall_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_lgb_A_auxall_k10.npy",
+        "test_sa_lgb_A_auxall_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961237,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612370101485772,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_lgb_B_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_lgb_B_k10.npy",
+        "test_sa_lgb_B_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961065,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961065062210467,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_B",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_B.npy",
+        "test_sa_rmlp_B.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961282,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612819175687821,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_B_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_B_k10.npy",
+        "test_sa_rmlp_B_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961378,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613779209896762,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_ogx_aux",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_ogx_aux.npy",
+        "test_sa_rmlp_ogx_aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961081,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610812312665689,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_ogx_aux_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_ogx_aux_k10.npy",
+        "test_sa_rmlp_ogx_aux_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961175,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961175464735508,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_raw_aux_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_raw_aux_k10.npy",
+        "test_sa_rmlp_raw_aux_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961252,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612519703396076,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_raw_aux_s2",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_raw_aux_s2.npy",
+        "test_sa_rmlp_raw_aux_s2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961118,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961118115906671,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_v4aux",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_v4aux.npy",
+        "test_sa_rmlp_v4aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961268,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612681465347988,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_v4aux_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_v4aux_k10.npy",
+        "test_sa_rmlp_v4aux_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961398,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613979791690987,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_v4aux_k10s2",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_v4aux_k10s2.npy",
+        "test_sa_rmlp_v4aux_k10s2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961413,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961412715395521,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_rmlp_v4ev_e4_k10",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_rmlp_v4ev_e4_k10.npy",
+        "test_sa_rmlp_v4ev_e4_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961244,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612440570793401,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_xgb_A",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_xgb_A.npy",
+        "test_sa_xgb_A.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960903,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609030457096748,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_xgb_A_auxev",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_xgb_A_auxev.npy",
+        "test_sa_xgb_A_auxev.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961044,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610442187229595,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_xgb_raw",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_xgb_raw.npy",
+        "test_sa_xgb_raw.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958832,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9588324278070812,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_xgb_route",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_xgb_route.npy",
+        "test_sa_xgb_route.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960317,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9603173327885292,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "sa_xgb_te",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Sachith7",
+      "files": [
+        "oof_sa_xgb_te.npy",
+        "test_sa_xgb_te.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960179,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9601785611082452,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "th_catboost",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "thisray",
+      "files": [
+        "oof_th_catboost.npy",
+        "test_th_catboost.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960941,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609412255750649,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "th_realmlp",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "thisray",
+      "files": [
+        "oof_th_realmlp.npy",
+        "test_th_realmlp.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961042,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610415714824807,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "th_xgb",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "thisray",
+      "files": [
+        "oof_th_xgb.npy",
+        "test_th_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961093,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610927030089329,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "wx_context_numeric",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Shelton Wang",
+      "files": [
+        "oof_wx_context_numeric.npy",
+        "test_wx_context_numeric.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960649,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9606491619693186,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "wx_rating_segments",
+      "source": "c124",
+      "source_ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "author": "Shelton Wang",
+      "files": [
+        "oof_wx_rating_segments.npy",
+        "test_wx_rating_segments.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960811,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608108679259402,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_causilo",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_causilo.npy",
+        "test_causilo.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958275,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.958275404186907,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_exaone",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_exaone.npy",
+        "test_exaone.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958557,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.958557058876498,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_kumolarge",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_kumolarge.npy",
+        "test_kumolarge.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960036,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.960036289407762,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_kumosmall",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_kumosmall.npy",
+        "test_kumosmall.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958484,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9584836353020306,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_limix2",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_limix2.npy",
+        "test_limix2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958474,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.958473879809117,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_mitra2",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_mitra2.npy",
+        "test_mitra2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.957075,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9570748881951691,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_realmlp",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_realmlp.npy",
+        "test_realmlp.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.959311,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9593114544488064,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_tabfm",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_tabfm.npy",
+        "test_tabfm.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958871,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9588708438749269,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_tabicl2",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_tabicl2.npy",
+        "test_tabicl2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958088,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9580880168158842,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_tabpfn35",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_tabpfn35.npy",
+        "test_tabpfn35.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961145,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611450968380912,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "tfm_xgboost",
+      "source": "tfm",
+      "source_ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "author": "Chris Deotte",
+      "files": [
+        "oof_xgboost.npy",
+        "test_xgboost.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.959852,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9598524043538624,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "gl_o_tabpfn35",
+      "source": "golem",
+      "source_ref": "dariushafshar/s6e10-golem-oof-library",
+      "author": "Dariush Afshar (this library, v5)",
+      "files": [
+        "oof_o_tabpfn35.npy",
+        "test_o_tabpfn35.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961082,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610816221575668,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 6
+    },
+    {
+      "member": "gl_p_lgbm_auxev",
+      "source": "golem",
+      "source_ref": "dariushafshar/s6e10-golem-oof-library",
+      "author": "Dariush Afshar (this library, v5)",
+      "files": [
+        "oof_p_lgbm_auxev.npy",
+        "test_p_lgbm_auxev.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961314,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613136427788006,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 6
+    },
+    {
+      "member": "gl_q_lgbm_auxev_10fold",
+      "source": "golem",
+      "source_ref": "dariushafshar/s6e10-golem-oof-library",
+      "author": "Dariush Afshar (this library, v5)",
+      "files": [
+        "oof_q_lgbm_auxev_10fold.npy",
+        "test_q_lgbm_auxev_10fold.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961388,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961387529065572,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 6
+    },
+    {
+      "member": "ab_tabpfn_catfd10",
+      "source": "abdullah",
+      "source_ref": "abdullahsafwan333/oof-dataset",
+      "author": "AbdullahSafwan333",
+      "files": [
+        "tabpfn_catfd10_oof.csv",
+        "tabpfn_catfd10_test.csv"
+      ],
+      "kind": "csv_pred",
+      "reference_auc": 0.961596,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9615956584372938,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "ab_tabpfn_raw",
+      "source": "abdullah",
+      "source_ref": "abdullahsafwan333/oof-dataset",
+      "author": "AbdullahSafwan333",
+      "files": [
+        "tabpfn_raw_oof.csv",
+        "tabpfn_raw_test.csv"
+      ],
+      "kind": "csv_pred",
+      "reference_auc": 0.960872,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608722234599306,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "ab_tabpfn_te_cnt",
+      "source": "abdullah",
+      "source_ref": "abdullahsafwan333/oof-dataset",
+      "author": "AbdullahSafwan333",
+      "files": [
+        "tabpfn_te_cnt_oof.csv",
+        "tabpfn_te_cnt_test.csv"
+      ],
+      "kind": "csv_pred",
+      "reference_auc": 0.961376,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961376066316391,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "ab_cat_v3",
+      "source": "abdullah",
+      "source_ref": "abdullahsafwan333/oof-dataset",
+      "author": "AbdullahSafwan333",
+      "files": [
+        "cat_v3_oof.csv",
+        "cat_v3_test.csv"
+      ],
+      "kind": "csv_pred",
+      "reference_auc": 0.961396,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613958558011906,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "ab_xgb_v3",
+      "source": "abdullah",
+      "source_ref": "abdullahsafwan333/oof-dataset",
+      "author": "AbdullahSafwan333",
+      "files": [
+        "xgb_v3_oof.csv",
+        "xgb_v3_test.csv"
+      ],
+      "kind": "csv_pred",
+      "reference_auc": 0.961377,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9613773144857698,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "st_cat_base",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_cat_base.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958067,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.958066596403062,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_cat_tuned",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_cat_tuned.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958523,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9585226288580411,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e10_sparselr_lr",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e10_sparselr_lr.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958106,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.95810608727837,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e11_knn_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e11_knn_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959862,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9598617651027395,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e11_knn_lgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e11_knn_lgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.960065,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9600652133054112,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e11_knn_xgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e11_knn_xgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.960094,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9600935741544793,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e12_route_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e12_route_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.960978,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609777003445383,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e12_route_lgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e12_route_lgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961072,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610724202275575,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e12_route_xgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e12_route_xgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961083,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610834343894842,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e13_realmlp_realmlp",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e13_realmlp_realmlp.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961238,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612378265251504,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e14_rmlpseeds_realmlp",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e14_rmlpseeds_realmlp.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961253,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612532045825891,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e14_seed2026",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e14_seed2026.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961192,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611920697188793,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e14_seed7",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e14_seed7.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961202,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612021131426399,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e14_seed77",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e14_seed77.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961219,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612190915479685,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e14_seed777",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e14_seed777.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961191,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611908180316885,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e1_allcat_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e1_allcat_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958757,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9587566397124822,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e2_origfeat_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e2_origfeat_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959489,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9594894538720572,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e2_origfeat_lgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e2_origfeat_lgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959862,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9598622308858864,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e2_origfeat_xgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e2_origfeat_xgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959899,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9598988766789661,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e3_origconcat_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e3_origconcat_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958652,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9586515736834902,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e3_origconcat_lgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e3_origconcat_lgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958883,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9588833522751162,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e3_origconcat_xgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e3_origconcat_xgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959124,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9591239335043907,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e5_origpred_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e5_origpred_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959823,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9598231842316071,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e5_origpred_lgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e5_origpred_lgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.96009,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9600903686041193,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e5_origpred_xgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e5_origpred_xgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.960109,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9601091700720877,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e6_origwide_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e6_origwide_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959453,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9594528059062114,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e6_origwide_lgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e6_origwide_lgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959661,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.959660936540207,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e6_origwide_xgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e6_origwide_xgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959621,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9596214894182037,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e7_combo_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e7_combo_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959885,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9598853881956466,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e8_tuned_cat",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e8_tuned_cat.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.959913,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9599129963902028,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e8_tuned_lgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e8_tuned_lgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.96006,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9600596464216429,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e8_tuned_xgb",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e8_tuned_xgb.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.960066,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9600663366504025,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_e9_mlp_mlp",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_e9_mlp_mlp.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958675,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9586751437443461,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_lgb_base",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_lgb_base.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958661,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9586612504767403,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_lgb_raw",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_lgb_raw.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958886,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9588862775758751,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_lgb_tuned",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_lgb_tuned.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958868,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9588681322791808,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_xgb_base",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_xgb_base.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958358,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9583584830421692,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_xgb_tuned",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "preds_xgb_tuned.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.958987,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9589873918106903,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_orig_cat_pred",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "orig_cat_pred.npz"
+      ],
+      "kind": "npz_orig",
+      "reference_auc": 0.95463,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9546302085075677,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "st_orig_model_pred",
+      "source": "sadam",
+      "source_ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "author": "Sadam Torres",
+      "files": [
+        "orig_model_pred.npz"
+      ],
+      "kind": "npz_orig",
+      "reference_auc": 0.954908,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9549084646554911,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 7
+    },
+    {
+      "member": "am_forge_cat",
+      "source": "forge",
+      "source_ref": "amanatar/s6e10-forge-own-pairs",
+      "author": "Aman Atar",
+      "files": [
+        "oof_forge_cat.npy",
+        "test_forge_cat.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960908,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609082115049289,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "am_forge_ghost_xt",
+      "source": "forge",
+      "source_ref": "amanatar/s6e10-forge-own-pairs",
+      "author": "Aman Atar",
+      "files": [
+        "oof_forge_ghost_xt.npy",
+        "test_forge_ghost_xt.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96092,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609196903739662,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "am_forge_lgbm",
+      "source": "forge",
+      "source_ref": "amanatar/s6e10-forge-own-pairs",
+      "author": "Aman Atar",
+      "files": [
+        "oof_forge_lgbm.npy",
+        "test_forge_lgbm.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961037,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610369084612023,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "am_forge_lgbm_xt",
+      "source": "forge",
+      "source_ref": "amanatar/s6e10-forge-own-pairs",
+      "author": "Aman Atar",
+      "files": [
+        "oof_forge_lgbm_xt.npy",
+        "test_forge_lgbm_xt.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960903,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609032170767849,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "am_forge_realmlp",
+      "source": "forge",
+      "source_ref": "amanatar/s6e10-forge-own-pairs",
+      "author": "Aman Atar",
+      "files": [
+        "oof_forge_realmlp.npy",
+        "test_forge_realmlp.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96122,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612202200455199,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "am_forge_xgb",
+      "source": "forge",
+      "source_ref": "amanatar/s6e10-forge-own-pairs",
+      "author": "Aman Atar",
+      "files": [
+        "oof_forge_xgb.npy",
+        "test_forge_xgb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961047,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610469129489915,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "s7_lgb_cpu_strong",
+      "source": "sachith",
+      "source_ref": "sachith7/s6e10-stack-oof-predictions",
+      "author": "Sachith7",
+      "files": [
+        "lgb_cpu_strong.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961083,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610831988450664,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 3
+    },
+    {
+      "member": "s7_xgb_A_auxall",
+      "source": "sachith",
+      "source_ref": "sachith7/s6e10-stack-oof-predictions",
+      "author": "Sachith7",
+      "files": [
+        "xgb_A_auxall.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.960916,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609156818974907,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 3
+    },
+    {
+      "member": "km_cat_w1",
+      "source": "koumeimaki",
+      "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "author": "Koumei Maki",
+      "files": [
+        "oof_cat_w1.npy",
+        "test_cat_w1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961223,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612225430182224,
+      "alignment_evidence": "sidecar_ids_exact_match",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "km_lgb_w1",
+      "source": "koumeimaki",
+      "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "author": "Koumei Maki",
+      "files": [
+        "oof_lgb_w1.npy",
+        "test_lgb_w1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961198,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611976582599542,
+      "alignment_evidence": "sidecar_ids_exact_match",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "km_rmlp_f_nc",
+      "source": "koumeimaki",
+      "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "author": "Koumei Maki",
+      "files": [
+        "oof_rmlp_f_nc.npy",
+        "test_rmlp_f_nc.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961295,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612953641984155,
+      "alignment_evidence": "sidecar_ids_exact_match",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "km_tabicl_fdcat_c250k",
+      "source": "koumeimaki",
+      "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "author": "Koumei Maki",
+      "files": [
+        "oof_tabicl_fdcat_c250k.npy",
+        "test_tabicl_fdcat_c250k.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.957281,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9572811884743073,
+      "alignment_evidence": "sidecar_ids_exact_match",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "km_tabm_bcd_rc_v2",
+      "source": "koumeimaki",
+      "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "author": "Koumei Maki",
+      "files": [
+        "oof_tabm_bcd_rc_v2.npy",
+        "test_tabm_bcd_rc_v2.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960768,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607676145519911,
+      "alignment_evidence": "sidecar_ids_exact_match",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "km_tabpfn_catfd10",
+      "source": "koumeimaki",
+      "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "author": "Koumei Maki",
+      "files": [
+        "oof_tabpfn_catfd10.npy",
+        "test_tabpfn_catfd10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961178,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611776065739986,
+      "alignment_evidence": "sidecar_ids_exact_match",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "km_xgb_w1",
+      "source": "koumeimaki",
+      "source_ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "author": "Koumei Maki",
+      "files": [
+        "oof_xgb_w1.npy",
+        "test_xgb_w1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961197,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611967454001425,
+      "alignment_evidence": "sidecar_ids_exact_match",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "gpx_cat_aux",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_cat_aux.npy",
+        "test_cat_aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960937,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609373475390603,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_cat_ctr_k",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_cat_ctr_k.npy",
+        "test_cat_ctr_k.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961003,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610033217616205,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_cat_k10",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_cat_k10.npy",
+        "test_cat_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961114,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961113503926776,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_gen_v1",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_gen_v1.npy",
+        "test_gen_v1.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.952399,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.952398737365994,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_glm6_xgb_k",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_glm6_xgb_k.npy",
+        "test_glm6_xgb_k.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960829,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608294463604858,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_lgb_k10",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_lgb_k10.npy",
+        "test_lgb_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961215,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.961215147629552,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_realmlp_fa_aux3_k",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_realmlp_fa_aux3_k.npy",
+        "test_realmlp_fa_aux3_k.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961072,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610718301414868,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_realmlp_fa_aux_n16",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_realmlp_fa_aux_n16.npy",
+        "test_realmlp_fa_aux_n16.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961071,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610708686365428,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_realmlp_fa_auxev",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_realmlp_fa_auxev.npy",
+        "test_realmlp_fa_auxev.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961055,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610549457362352,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_realmlp_fa_s7_k",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_realmlp_fa_s7_k.npy",
+        "test_realmlp_fa_s7_k.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960968,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609684159694304,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_realmlp_pub_aux_k",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_realmlp_pub_aux_k.npy",
+        "test_realmlp_pub_aux_k.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960916,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609155507244872,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_realmlp_v4fa_auxfull",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_realmlp_v4fa_auxfull.npy",
+        "test_realmlp_v4fa_auxfull.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961275,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612749414370906,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_realmlp_vb",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_realmlp_vb.npy",
+        "test_realmlp_vb.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96115,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611501511931979,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_tabm_v4aux",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_tabm_v4aux.npy",
+        "test_tabm_v4aux.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960466,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.960466461668993,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_xgb_d10_k10",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_xgb_d10_k10.npy",
+        "test_xgb_d10_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961258,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612577328758047,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "gpx_xgb_k10",
+      "source": "gp_extra",
+      "source_ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "author": "goodpjw2008",
+      "files": [
+        "oof_xgb_k10.npy",
+        "test_xgb_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961256,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612559945096633,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 9
+    },
+    {
+      "member": "dk_cb_cat",
+      "source": "dmitriy",
+      "source_ref": "dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test",
+      "author": "Dmitriy Kolmikov",
+      "files": [
+        "oof_cb_cat.npy",
+        "test_cb_cat.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960665,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9606650292716415,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_cat_allcat_v1_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_cat_allcat_v1_k5.npy",
+        "test_cat_allcat_v1_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961095,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610948482245232,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_cat_allcat_v2_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_cat_allcat_v2_k5.npy",
+        "test_cat_allcat_v2_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961127,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9611268941845058,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_cat_enc3_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_cat_enc3_k5.npy",
+        "test_cat_enc3_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960635,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9606350916729949,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_cat_enc4_k10",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_cat_enc4_k10.npy",
+        "test_cat_enc4_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.961022,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610220720392155,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_cat_enc4_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_cat_enc4_k5.npy",
+        "test_cat_enc4_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960805,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608046995252815,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_cat_raw_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_cat_raw_k5.npy",
+        "test_cat_raw_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958711,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9587110732405357,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_lgb_enc3_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_lgb_enc3_k5.npy",
+        "test_lgb_enc3_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960585,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9605850310885502,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_lgb_enc4_k10",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_lgb_enc4_k10.npy",
+        "test_lgb_enc4_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960987,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609872428773878,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_lgb_enc4_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_lgb_enc4_k5.npy",
+        "test_lgb_enc4_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960731,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607308978605137,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_lgb_raw_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_lgb_raw_k5.npy",
+        "test_lgb_raw_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.959041,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9590410764368321,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_realmlp_enc_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_realmlp_enc_k5.npy",
+        "test_realmlp_enc_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960956,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609557801665045,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_realmlp_raw_s42_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_realmlp_raw_s42_k5.npy",
+        "test_realmlp_raw_s42_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960883,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608830667637954,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_realmlp_raw_s7_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_realmlp_raw_s7_k5.npy",
+        "test_realmlp_raw_s7_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960885,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608846763862932,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_xgb_enc3_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_xgb_enc3_k5.npy",
+        "test_xgb_enc3_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.96059,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9605899128142732,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_xgb_enc4_k10",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_xgb_enc4_k10.npy",
+        "test_xgb_enc4_k10.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960972,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609719767236196,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_xgb_enc4_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_xgb_enc4_k5.npy",
+        "test_xgb_enc4_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960793,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607928668512626,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kga_xgb_raw_k5",
+      "source": "kagan_abl",
+      "source_ref": "kagankoral/s6e10-ablation-members-oof",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_xgb_raw_k5.npy",
+        "test_xgb_raw_k5.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.958899,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9588992651475904,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "yk_realmlp",
+      "source": "yekenot",
+      "source_ref": "yekenot/ps-s6-e10-realmlp-pytabkit",
+      "author": "Vladimir Demidov",
+      "files": [
+        "oof_preds.csv",
+        "submission.csv"
+      ],
+      "kind": "csv_satisfaction",
+      "reference_auc": 0.961218,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9612169153549391,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 8
+    },
+    {
+      "member": "hm_cat",
+      "source": "hermengardo",
+      "source_ref": "hermengardo/single-catboost-eda-ps6e10",
+      "author": "Hermengardo",
+      "files": [
+        "oof_train.npy",
+        "oof_test.npy"
+      ],
+      "kind": "npy",
+      "reference_auc": 0.960201,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.96020072511204,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 28
+    },
+    {
+      "member": "kr_rmlp_route_ogaux",
+      "source": "kratosyan",
+      "source_ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+      "author": "Kratosyan",
+      "files": [
+        "rmlp_route_ogaux.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961017,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610171043588589,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "kr_xgb_route_ogaux",
+      "source": "kratosyan",
+      "source_ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+      "author": "Kratosyan",
+      "files": [
+        "xgb_route_ogaux.npz"
+      ],
+      "kind": "npz",
+      "reference_auc": 0.961039,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9610392064077757,
+      "alignment_evidence": "author_declared_row_order",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 2
+    },
+    {
+      "member": "kg_lgb",
+      "source": "kagan_enc",
+      "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_members.csv",
+        "test_members.csv"
+      ],
+      "kind": "csv_member",
+      "reference_auc": 0.960821,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9608214817443013,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kg_xgb",
+      "source": "kagan_enc",
+      "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_members.csv",
+        "test_members.csv"
+      ],
+      "kind": "csv_member",
+      "reference_auc": 0.960792,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607918452662273,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kg_cat",
+      "source": "kagan_enc",
+      "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_members.csv",
+        "test_members.csv"
+      ],
+      "kind": "csv_member",
+      "reference_auc": 0.960778,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607779063581142,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kg_cat_allcat",
+      "source": "kagan_enc",
+      "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_members.csv",
+        "test_members.csv"
+      ],
+      "kind": "csv_member",
+      "reference_auc": 0.960799,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9607992447396982,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "kg_realmlp",
+      "source": "kagan_enc",
+      "source_ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+      "author": "Ahmet Kağan Koral",
+      "files": [
+        "oof_members.csv",
+        "test_members.csv"
+      ],
+      "kind": "csv_member",
+      "reference_auc": 0.960979,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9609792982796229,
+      "alignment_evidence": "id_reindex",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "av5_lgbm_champion",
+      "source": "aman_v5",
+      "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+      "author": "Aman Atar",
+      "files": [
+        "oof_artifacts.npz"
+      ],
+      "kind": "npz_aman",
+      "reference_auc": 0.958668,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9586678838576573,
+      "alignment_evidence": "author_row_order_plus_label_vector",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "av5_lgbm_te",
+      "source": "aman_v5",
+      "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+      "author": "Aman Atar",
+      "files": [
+        "oof_artifacts.npz"
+      ],
+      "kind": "npz_aman",
+      "reference_auc": 0.958013,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9580125633521217,
+      "alignment_evidence": "author_row_order_plus_label_vector",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "av5_lgbm_te_rows",
+      "source": "aman_v5",
+      "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+      "author": "Aman Atar",
+      "files": [
+        "oof_artifacts.npz"
+      ],
+      "kind": "npz_aman",
+      "reference_auc": 0.958568,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9585680113691101,
+      "alignment_evidence": "author_row_order_plus_label_vector",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "av5_xgb_gpu",
+      "source": "aman_v5",
+      "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+      "author": "Aman Atar",
+      "files": [
+        "oof_artifacts.npz"
+      ],
+      "kind": "npz_aman",
+      "reference_auc": 0.958502,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9585021012203925,
+      "alignment_evidence": "author_row_order_plus_label_vector",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "av5_catboost_gpu",
+      "source": "aman_v5",
+      "source_ref": "amanatar/s6e10-the-original-prior-stack-v5",
+      "author": "Aman Atar",
+      "files": [
+        "oof_artifacts.npz"
+      ],
+      "kind": "npz_aman",
+      "reference_auc": 0.95982,
+      "reference_scale": "probabilities",
+      "actual_auc": 0.9598197302326672,
+      "alignment_evidence": "author_row_order_plus_label_vector",
+      "applied_scale": "probability_to_logit",
+      "captured_source_version": 1
+    },
+    {
+      "member": "own_old_xgb",
+      "author": "this project",
+      "alignment_evidence": "saved_fold_indices_full_coverage",
+      "actual_auc": 0.9606913460649781,
+      "cache_hashes": [
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_01_component_0.npz",
+          "sha256": "89630bc73ebc9e68497b7fd05597028a3b86ac36205f52efd2ecb07f15cc0fe3"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_02_component_0.npz",
+          "sha256": "b1cbc677ad26d94f61a04c1d53e8b4b65f74abd4b4c0ef55af9d1b1555bea436"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_03_component_0.npz",
+          "sha256": "c07c38d57e4fc92ee199b3c23f84618b29d5984791a52203f6254c64ac254ca2"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_04_component_0.npz",
+          "sha256": "afe54808e6d36b14d01c9c90315faf4895d40cc46d496318ace37522fc895d35"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_05_component_0.npz",
+          "sha256": "0d7bc3831d332add22b6e4df6feb74e4775c49aeb2f6749af25457a903b29901"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_06_component_0.npz",
+          "sha256": "23dd162e92a587ce1f6b9ce199cb09997d3a936cba4664b3e67d01a602644561"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_07_component_0.npz",
+          "sha256": "f516c1128e68d1e7275e9c51a3bc22c0097131c87f6246d65da6cff2d03b6702"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_08_component_0.npz",
+          "sha256": "59bdd0ef3471180e290fc37243c1b88c5cdd9e1ce3799d2484b31c02dfc95e18"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_09_component_0.npz",
+          "sha256": "af45fbe8a2fe1810cf021713979c9ae7a35eae77bbf03095624f263d4680553f"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_10_component_0.npz",
+          "sha256": "7920690da60625caa8df45f19a3ee0e10a2eacd4f6dec83db27739570a7807f3"
+        }
+      ],
+      "applied_scale": "probability_to_logit"
+    },
+    {
+      "member": "own_old_cat",
+      "author": "this project",
+      "alignment_evidence": "saved_fold_indices_full_coverage",
+      "actual_auc": 0.9610877921226172,
+      "cache_hashes": [
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_01_component_1.npz",
+          "sha256": "f22e37da7d4779095e14d7d0f4b5bdb4ae8850fc65e84b71f50664638a3baa2f"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_02_component_1.npz",
+          "sha256": "095521ef81127ce6f06a099a2d5db203d7a2f069cbbd34e5c8406602ed4c0a88"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_03_component_1.npz",
+          "sha256": "7c757ebc21a7b9494bc1f3362e3b88ef1dc45105e98c5f0e40d95b2e2db7b94b"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_04_component_1.npz",
+          "sha256": "2a3da5ed755347b4b14f950abd926f6db992f6f8f24d5a1250a974e74b463188"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_05_component_1.npz",
+          "sha256": "28b6e41e38dcf2453b96520aee4ef81966541aff925ac8543fbd044fe338c615"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_06_component_1.npz",
+          "sha256": "f3b7fcf270001e19900407155dadc762ded439e2a2582c54e7e38575cae9840b"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_07_component_1.npz",
+          "sha256": "5bb69950389ea4368d4204801ef4fff501a1a7bbe81d316ffcda650d0cfc792c"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_08_component_1.npz",
+          "sha256": "dafdd4cd0155c924c6583d39c03fc2cd5345c50ff60e35629b198b5a10ccb45d"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_09_component_1.npz",
+          "sha256": "87ad4c8a9b35e153eb9ecf178736d4caf555f0b5f4487402c244a29bde89f798"
+        },
+        {
+          "path": ".artifact_runtime\\optimized_cv\\ad685bf982755538eefb\\fold_10_component_1.npz",
+          "sha256": "c1f9e1632f88f1b2116ddcc42e8cf5290e2caf92ebc70258dd3d68ed9ce5c266"
+        }
+      ],
+      "applied_scale": "probability_to_logit"
+    },
+    {
+      "member": "own_xgb",
+      "author": "this project",
+      "alignment_evidence": "saved_fold_indices_full_coverage",
+      "actual_auc": 0.9612091087961191,
+      "cache_hashes": [
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_01_xgb.npz",
+          "sha256": "6b13502ee6474e836220614f21120ebc5f82111fca7f5623151526f5a4a1897a"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_02_xgb.npz",
+          "sha256": "2bf507bcf184363148bb8e9e310fbbd3a94e3c2381fb0931bec796270914381c"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_03_xgb.npz",
+          "sha256": "fecc52786480527e3ab54cdc8d36ea8b070ea094dcc5ba0cb441679a084b546d"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_04_xgb.npz",
+          "sha256": "22147fa851db34943800331ebf0246259783d4b4a74cb9dc22184dfef0f5ff8c"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_05_xgb.npz",
+          "sha256": "eab19924c823619019d72bf001416d0a21c74a0ccc18489dae936b3c5aa0e6ca"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_06_xgb.npz",
+          "sha256": "78f5cbb77e3f044e2132f9f795212b1003c54f331a64720a9eaec60fd1d42abb"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_07_xgb.npz",
+          "sha256": "f9cf267dd3083740971483ccfaab8c94eaa740597c7d603c7c5ee6747645bdd5"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_08_xgb.npz",
+          "sha256": "4fc512c616ab58fa86f393d2f56b5f7cc0d6da0c0e383391861eab8ad92b9afd"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_09_xgb.npz",
+          "sha256": "1664701a9cb9828c0656147ed4ad37dd9152eedfe9ba1a2e55bc0886c9a21a2c"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_10_xgb.npz",
+          "sha256": "6267db8fd02a0f4189912112949e743ff1ff63a8295bf0e59410b820dc5882fa"
+        }
+      ],
+      "applied_scale": "probability_to_logit"
+    },
+    {
+      "member": "own_realmlp",
+      "author": "this project",
+      "alignment_evidence": "saved_fold_indices_full_coverage",
+      "actual_auc": 0.9607494329514763,
+      "cache_hashes": [
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_01_realmlp.npz",
+          "sha256": "b8d152b8c8098cc6f6591351e51b5ecfc5716d6ff9fc3917fc118fbcfe502b04"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_02_realmlp.npz",
+          "sha256": "d939b48a4db113227d3f54e1b76fdf80125fbac43ccf99727e226ca15256793f"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_03_realmlp.npz",
+          "sha256": "10c22f4947a8ac9ec8a0cca65e26a79f1133c5fc683a446be82808672ade7241"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_04_realmlp.npz",
+          "sha256": "23dccb6a41cd78fac9ef3796bd3a2c01719d29304f864ad2be0f2448805a835b"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_05_realmlp.npz",
+          "sha256": "432172cc8d120088efce85400c9ed130e0c7e38ab43ee3cafc25ec4f06862c10"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_06_realmlp.npz",
+          "sha256": "740db3c94b3f75f32b8b503eb10e7a6e69faa4c5c7a39ef0218a12fe1aff6a7d"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_07_realmlp.npz",
+          "sha256": "7117c9f343d8e1e45ae4faf160b70b4491e19750d5cf3c38e9b2b60af6891c47"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_08_realmlp.npz",
+          "sha256": "9f4e1e917c50b487a3d8e315a3dafd95e051d5b4428b886133ab206ee14f81ca"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_09_realmlp.npz",
+          "sha256": "94b2dc7b636f4e9780d36791fb7f71f32e678b3ee754b3155d353b95e06f5a44"
+        },
+        {
+          "path": ".artifact_runtime\\v3\\cv\\f8070b1c8026703e7d6e\\fold_10_realmlp.npz",
+          "sha256": "b7eb7db9e70b339d92174c5eb2d31f0f4f5b6a4d442a357c88be6e92a9dfc278"
+        }
+      ],
+      "applied_scale": "probability_to_logit"
+    },
+    {
+      "member": "own_lgb",
+      "author": "this project",
+      "alignment_evidence": "saved_fold_indices_full_coverage",
+      "actual_auc": 0.9612386606025262,
+      "cache_hashes": [
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_01.npz",
+          "sha256": "4a5b82e8bbf40624d0bbe50939409b203544052a04b608a4102ac1b1b5be2c08"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_02.npz",
+          "sha256": "e2c84751e23c434b1119d8643ee06fffe077e7823733a12e2787b4669ac38fd8"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_03.npz",
+          "sha256": "d94b430ad9a9549ddc281db61a1b729f2e45b7bf372dc3f070b606881f14781e"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_04.npz",
+          "sha256": "56575c80105eb2d22b68bfcefea23977dcfadc3d37c5923b97000e9ca6fbce2f"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_05.npz",
+          "sha256": "09c8e8ffb590eac2b2537416bd8b23bb49285e4680fe7b6ac5d4a9ceb9955573"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_06.npz",
+          "sha256": "b5bc2f6a74c9b0745aa8e5a465e82589ac7a395861e3bbba2d7b76b58f273b7e"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_07.npz",
+          "sha256": "876a7f9487f5e60a9270a51e1bfc4bf1a790f4c45c48f8680a5395c5e88a90a9"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_08.npz",
+          "sha256": "87257f60808715e87901ee70f2902bb90561e45e753b68e1563233b373eaad5d"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_09.npz",
+          "sha256": "c7dab46346e98152f4f27dbc3ddc186288adc70a8d20120007519696a28e9d90"
+        },
+        {
+          "path": ".artifact_runtime\\v4\\4891ee0e44b7ca16b6ed\\fold_10.npz",
+          "sha256": "68efa1db8217bfe3b3ef3983340bf737de4f899da12bab92ecb4b2b1f7958629"
+        }
+      ],
+      "applied_scale": "probability_to_logit"
+    },
+    {
+      "member": "own_lean_42",
+      "author": "this project",
+      "alignment_evidence": "saved_fold_indices_full_coverage",
+      "actual_auc": 0.961271303460719,
+      "cache_hashes": [
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_0_seed_42.npz",
+          "sha256": "dfb26437a09cd815a56465a5bce8d9b3fa21bfdd82ed453437c07e7e0557e4ec"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_1_seed_42.npz",
+          "sha256": "abd281f2b71cb75be9b00128e1fbd9e8816a759cbe8f7ed82da98e546fe24e55"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_2_seed_42.npz",
+          "sha256": "5f3dbf567e2fdd8ccc96d13241482839abdb1946b3d30572eb8e0710f0873cc7"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_3_seed_42.npz",
+          "sha256": "8b5ef962aec0939c55a0a8882e902f201bc1114778d2d6bb545ec2ff822748b4"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_4_seed_42.npz",
+          "sha256": "34e45c14bd7e092b1dd16ff8908c063961559d567a8953cd10f07540ffe0cb21"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_5_seed_42.npz",
+          "sha256": "36f7e6e749e607358c6762b93fd79dd3b5832813c3a01cdda9ae24d4d54c6b17"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_6_seed_42.npz",
+          "sha256": "06786edea152fa6529a9a139f85cc7de0af29a6e0aa9232f62c1172754402457"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_7_seed_42.npz",
+          "sha256": "4af8a384976e11815c2ce12b239ccc8c099bc9b434f257155af0a9f3a982afc6"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_8_seed_42.npz",
+          "sha256": "b426787966426717446d9e2f2b33d5cd913f7915e596377edd2225040adc4d2e"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_9_seed_42.npz",
+          "sha256": "db374f3931e016ed56c4287e89c5e8622e7816e15d32cf9e50481e66ae0e71b3"
+        }
+      ],
+      "applied_scale": "probability_to_logit"
+    },
+    {
+      "member": "own_lean_20261019",
+      "author": "this project",
+      "alignment_evidence": "saved_fold_indices_full_coverage",
+      "actual_auc": 0.9613019520919533,
+      "cache_hashes": [
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_0_seed_20261019.npz",
+          "sha256": "58c78dd6c8de72c1ca73efd5efccf763c94a07fe6b86f74ce811f9c5ff550893"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_1_seed_20261019.npz",
+          "sha256": "d959b8932f17028e75865222ca042a74481979f072e59a166479b2a9c98844e8"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_2_seed_20261019.npz",
+          "sha256": "3eb580abe8612c3e95a43f859a2b30660ebeb662f458ecd77cb70bafab6e79a5"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_3_seed_20261019.npz",
+          "sha256": "748fe4403afd0368bfddeacfc1be10e924b520c785bce93884854e4c4e3207db"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_4_seed_20261019.npz",
+          "sha256": "5676d4e7d6ce401be0ce4068e13064425acd8c49b963958ceeb7b4f8cadb2e46"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_5_seed_20261019.npz",
+          "sha256": "f035fe758299d8a02d6f62e5477b50ae4b0d581df90d78f6fdba9c1e52826057"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_6_seed_20261019.npz",
+          "sha256": "3f05b289e7a64ec36175be47ab049be38b04dc5e4811f96e3a029a83494de48c"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_7_seed_20261019.npz",
+          "sha256": "c83e5d67eb86818becd30db99c5f424066503676e9ceb6126eba745abec950a8"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_8_seed_20261019.npz",
+          "sha256": "06ab86b1cbca84dea641b57e173463c8f395f20d1c1081391e834b1b477ffff9"
+        },
+        {
+          "path": ".artifact_runtime\\lean_cv_followup\\8f29c4956de9c49f6f97\\fold_9_seed_20261019.npz",
+          "sha256": "050c794e8c5c8232959e93f6a6aa2240b1b0542f6aaffd4df6d3d511858da20c"
+        }
+      ],
+      "applied_scale": "probability_to_logit"
+    }
+  ],
+  "rejected": [],
+  "dtype": "float64 after reference float32 logit rounding"
+}

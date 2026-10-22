@@ -1,0 +1,74 @@
+{
+  "ref": "goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197",
+  "pull": {
+    "tag": "goodpjw2008__s6e10-meta-stack-on-public-oof-lb-0-96197_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197",
+    "bytes": 152811,
+    "sha256": "07eebe8680102b22bcf1fcd27a076b5b94cd39b7033eb7e7e091cc7d635f2e7e",
+    "elapsed": 2.0407850000001417
+  },
+  "version": 5,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": false,
+    "enableTpuNullable": false,
+    "enableInternetNullable": false,
+    "currentVersionNumberNullable": 5,
+    "dockerImageNullable": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "machineShapeNullable": "None",
+    "id": 137644080,
+    "ref": "goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197",
+    "title": "S6E10 | Meta Stack on Public OOF | LB 0.96197",
+    "author": "goodpjw2008",
+    "slug": "s6e10-meta-stack-on-public-oof-lb-0-96197",
+    "lastRunTime": "2026-10-18T03:53:50.0918806Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": false,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": false,
+    "hasEnableInternet": true,
+    "categoryIds": [],
+    "datasetDataSources": [
+      "nina2025/ps-s6e10-7",
+      "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "amanatar/s6e10-forge-own-pairs",
+      "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "dariushafshar/s6e10-golem-oof-library",
+      "cdeotte/s6e10-tfm-oof-and-test-predictions"
+    ],
+    "kernelDataSources": [
+      "ewtherka/s6e10-0-96188-lb-l2-family-wise-actually-helps",
+      "denpugovkin/s6e10-passenger-context-foundation-ensemble"
+    ],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 18,
+    "currentVersionNumber": 5,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "hasDockerImage": true,
+    "machineShape": "None",
+    "hasMachineShape": true
+  },
+  "source_chars": 61171,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "goodpjw2008__s6e10-meta-stack-on-public-oof-lb-0-96197_outputs_v5",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 20419,
+    "sha256": "96de89ee3039b5280c25d3cdb7534a75c8d70bb5ff6f7d34a8ef7f306f8366c7",
+    "elapsed": 1.1358605999994325
+  }
+}

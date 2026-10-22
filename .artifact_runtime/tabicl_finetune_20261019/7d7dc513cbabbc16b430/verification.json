@@ -1,0 +1,39 @@
+{
+  "verified": true,
+  "cells": [
+    {
+      "stage": "screen",
+      "name": "finetuned_32768",
+      "status": "verified",
+      "auc": 0.9559205662599521
+    },
+    {
+      "stage": "screen",
+      "name": "finetuned_65536",
+      "status": "verified",
+      "auc": 0.9561172873502725
+    },
+    {
+      "stage": "screen",
+      "name": "frozen_32768",
+      "status": "verified",
+      "auc": 0.955978703284318
+    },
+    {
+      "stage": "screen",
+      "name": "frozen_65536",
+      "status": "verified",
+      "auc": 0.9562526483354719
+    }
+  ],
+  "protected_unchanged": true,
+  "cache_adapter_verified": true,
+  "matched_current_recipe_reconstructed": true,
+  "large_context_cpu_vs_sequential_adapter_agreement": true,
+  "fit_stop_scored_disjoint": true,
+  "context_indices_verified": true,
+  "prediction_scores_and_paired_intervals_verified": true,
+  "status": "stopped_screen_or_resource",
+  "no_submission_written": true,
+  "verifier_sha256": "a11c33dd47fa74979b0832e37c76eccdbee947b6383d81eba2ce33dd3114d9a4"
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-20",
+  "source_only": true,
+  "files": [
+    {
+      "file": "priorlabs_v9_kv_cache.py",
+      "url": "https://raw.githubusercontent.com/PriorLabs/TabPFN/c70b6ef0488858d32244c52222abfc0c5be207d6/src/tabpfn/architectures/kv_cache.py",
+      "bytes": 8050,
+      "sha256": "fe2ed9c520e71db1fc9e380a2a8e633a8b3b66957c71713685ffac3a33057682"
+    },
+    {
+      "file": "priorlabs_v9_architecture.py",
+      "url": "https://raw.githubusercontent.com/PriorLabs/TabPFN/c70b6ef0488858d32244c52222abfc0c5be207d6/src/tabpfn/architectures/tabpfn_v3_5.py",
+      "bytes": 134857,
+      "sha256": "f572619f16d8a1404450166d83a5514b88e554387499b5d2ce96db0b90ef5d75"
+    },
+    {
+      "file": "kaggle__mitudru__equality_blocks.json",
+      "url": "https://www.kaggle.com/api/v1/kernels/pull/mitudru/s6e10-analysis-first-equality-blocks-stack",
+      "bytes": 77691,
+      "sha256": "7312b6fae80a3601dbfaed77e36fc87be893a02c31113ba4ccb10b2040229906"
+    }
+  ]
+}

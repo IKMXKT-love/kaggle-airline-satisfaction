@@ -1,0 +1,63 @@
+{
+  "ref": "sarunpm/airline-satisfaction-lgbm-0-96025-lb",
+  "pull": {
+    "tag": "sarunpm__airline-satisfaction-lgbm-0-96025-lb_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/sarunpm/airline-satisfaction-lgbm-0-96025-lb",
+    "bytes": 109387,
+    "sha256": "31c05100ae9a57b7c1a8f6843d9fab63af5d7bb0af9e1af2f38294af52db3418",
+    "elapsed": 1.860340400000041
+  },
+  "version": 41,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": false,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 41,
+    "dockerImageNullable": "gcr.io/kaggle-images/python@sha256:dafd4ce5668bbf1ad422e4c109e0f18c9623c3a7c7f48b0235f13142755c40b9",
+    "machineShapeNullable": "None",
+    "id": 136637291,
+    "ref": "sarunpm/airline-satisfaction-lgbm-0-96025-lb",
+    "title": "AirLine Satisfaction: LGBM | 0.96025 LB",
+    "author": "Sarun P M",
+    "slug": "airline-satisfaction-lgbm-0-96025-lb",
+    "lastRunTime": "2026-10-18T03:51:51.9108826Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": false,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [],
+    "datasetDataSources": [],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 25,
+    "currentVersionNumber": 41,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-images/python@sha256:dafd4ce5668bbf1ad422e4c109e0f18c9623c3a7c7f48b0235f13142755c40b9",
+    "hasDockerImage": true,
+    "machineShape": "None",
+    "hasMachineShape": true
+  },
+  "source_chars": 27582,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "sarunpm__airline-satisfaction-lgbm-0-96025-lb_outputs_v41",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 10,
+    "sha256": "6989526cc8fefbd77739858ba1f9ba7e9386f18bc7b2ec7e708178044a041c5a",
+    "elapsed": 0.9102063999998791
+  }
+}

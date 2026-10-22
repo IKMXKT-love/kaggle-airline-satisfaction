@@ -1,0 +1,12 @@
+{
+  "fold": 0,
+  "arm": "plus_both",
+  "columns": 248,
+  "fit_rows": 559708,
+  "auc": 0.9623599475175835,
+  "fit_and_validation_seconds": 8.741617441177368,
+  "iterations": 2,
+  "converged": true,
+  "value": 0.21979577889050092,
+  "max_gradient": 1.0715906747933962e-12
+}

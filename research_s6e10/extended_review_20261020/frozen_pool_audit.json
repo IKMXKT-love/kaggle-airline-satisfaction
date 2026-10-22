@@ -1,0 +1,46 @@
+{
+  "member_count": 247,
+  "matches_frozen_v1_member_names": true,
+  "by_source": {
+    "c124": 124,
+    "sadam": 40,
+    "kagan_abl": 17,
+    "gp_extra": 16,
+    "tfm": 11,
+    "koumeimaki": 7,
+    "forge": 6,
+    "abdullah": 5,
+    "kagan_enc": 5,
+    "aman_v5": 5,
+    "golem": 3,
+    "sachith": 2,
+    "kratosyan": 2,
+    "dmitriy": 1,
+    "yekenot": 1,
+    "hermengardo": 1,
+    "kozy": 1
+  },
+  "manifest_scale": {
+    "probabilities": 242,
+    "logits": 4,
+    "ranks": 1
+  },
+  "authors": 23,
+  "member_tokens": {
+    "realmlp|rmlp": 58,
+    "tabpfn": 13,
+    "xgb": 46,
+    "cat": 53,
+    "lgb": 42,
+    "stack|blend": 0
+  },
+  "alignment_evidence_author_receipt": {
+    "row order": 229,
+    "id": 18
+  },
+  "known_stack245_is_absent": true,
+  "memory_available_gb": 1.6538276672363281,
+  "memory_total_gb": 15.217926025390625,
+  "train_test_matrix_float32_gb": 0.9196673072874546,
+  "train_test_matrix_float64_gb": 1.8393346145749092
+}

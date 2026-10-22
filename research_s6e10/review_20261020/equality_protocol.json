@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-20",
+  "training": false,
+  "source": "https://www.kaggle.com/code/mitudru/s6e10-analysis-first-equality-blocks-stack",
+  "blocks": {
+    "digital": [
+      "Inflight wifi service",
+      "Departure/Arrival time convenient",
+      "Gate location"
+    ],
+    "comfort": [
+      "Food and drink",
+      "Seat comfort",
+      "Inflight entertainment",
+      "Cleanliness"
+    ]
+  },
+  "score_bins": "fixed probability width 0.02",
+  "conditional_cells": [
+    "Class",
+    "Type of Travel",
+    "Customer Type",
+    "score_bin"
+  ],
+  "min_rows_each_flag": 30,
+  "meaning": "Exploratory calibration residual contrasts; no weights, predictions, AUC gains or noise ceiling inferred."
+}

@@ -1,0 +1,23 @@
+{
+  "original_csv_sha256": "ac2f1c51d067615e12a624f49a15d97c79c3051eae8d2e4759842cb0129eb294",
+  "author_scored_prefix": "ac2f1c51d067615e",
+  "prefix_match": true,
+  "source_version": "v1",
+  "downloaded_csv_not_locally_generated": true,
+  "test_ids_exactly_match": true,
+  "csv_rows": 299844,
+  "finite_probabilities": true,
+  "library_vs_original_max_abs_probability_diff": 1.2447936126314119e-08,
+  "library_vs_original_mean_abs_probability_diff": 2.61252048804053e-09,
+  "library_vs_original_exact_equal_count": 1,
+  "test_original_logit_float32_roundtrip_max_abs_diff": 1.2447936126314119e-08,
+  "oof_library_auc": 0.9622050148049933,
+  "oof_original_logit_float32_auc": 0.9622050148049933,
+  "oof_library_vs_original_float32_max_abs_probability_diff": 2.220446049250313e-16,
+  "kaggle_submission_record_independently_queried": false,
+  "score_status": "0.96187 author-reported; downloaded v1 CSV hash matches author-scored artifact; leaderboard record not independently verified",
+  "latest_version_is_different": true,
+  "latest_has_stack245_meta_input": true,
+  "training": false,
+  "own_submission_generated": false
+}

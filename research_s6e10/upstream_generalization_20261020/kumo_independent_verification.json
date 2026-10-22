@@ -1,0 +1,9 @@
+{
+  "checks_passed": true,
+  "auc_implementation": "independent Mann-Whitney rank sum with average ties",
+  "part_hashes_checked": 18,
+  "bag2_producer_fold_scores_matched": 5,
+  "all_fixed_contrasts_reproduced": true,
+  "current_best_sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+  "limitations": "Array verification does not independently prove producer cache provenance or end-to-end independence."
+}

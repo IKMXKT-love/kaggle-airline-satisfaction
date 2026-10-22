@@ -1,0 +1,190 @@
+{
+  "completed": true,
+  "stage": "confirmation",
+  "rows": [
+    {
+      "fold": 0,
+      "arm": "public_only",
+      "auc": 0.9623591653196826,
+      "fit": {
+        "tag": "public_only_fold0",
+        "columns": 246,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 4.481686115264893,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": true,
+        "iterations": 2,
+        "converged": true,
+        "value": 0.21979607034523393,
+        "max_gradient": 1.0220951756939774e-15
+      }
+    },
+    {
+      "fold": 0,
+      "arm": "public_plus_own",
+      "auc": 0.9623603624135598,
+      "fit": {
+        "tag": "public_plus_own_fold0",
+        "columns": 253,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.708591222763062,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.21979140082661985,
+        "max_gradient": 5.037282406244927e-14
+      }
+    },
+    {
+      "fold": 1,
+      "arm": "public_only",
+      "auc": 0.9614093108360477,
+      "fit": {
+        "tag": "public_only_fold1",
+        "columns": 246,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.18538236618042,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.21898223185668692,
+        "max_gradient": 8.130933873786751e-14
+      }
+    },
+    {
+      "fold": 1,
+      "arm": "public_plus_own",
+      "auc": 0.9614127690499634,
+      "fit": {
+        "tag": "public_plus_own_fold1",
+        "columns": 253,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.643085718154907,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.21898008921965825,
+        "max_gradient": 8.265430762646178e-14
+      }
+    },
+    {
+      "fold": 2,
+      "arm": "public_only",
+      "auc": 0.9627989282529895,
+      "fit": {
+        "tag": "public_only_fold2",
+        "columns": 246,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.367086172103882,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.22016211662660368,
+        "max_gradient": 4.404256229465983e-14
+      }
+    },
+    {
+      "fold": 2,
+      "arm": "public_plus_own",
+      "auc": 0.9627950634216526,
+      "fit": {
+        "tag": "public_plus_own_fold2",
+        "columns": 253,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.703893423080444,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.22015511878477184,
+        "max_gradient": 4.4850164587670023e-14
+      }
+    },
+    {
+      "fold": 3,
+      "arm": "public_only",
+      "auc": 0.9624455506060633,
+      "fit": {
+        "tag": "public_only_fold3",
+        "columns": 246,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.143639326095581,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.21990226676341817,
+        "max_gradient": 5.805150087237888e-14
+      }
+    },
+    {
+      "fold": 3,
+      "arm": "public_plus_own",
+      "auc": 0.962434171112307,
+      "fit": {
+        "tag": "public_plus_own_fold3",
+        "columns": 253,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.684668779373169,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.21989637436348203,
+        "max_gradient": 5.906017142289183e-14
+      }
+    },
+    {
+      "fold": 4,
+      "arm": "public_only",
+      "auc": 0.9620440478732256,
+      "fit": {
+        "tag": "public_only_fold4",
+        "columns": 246,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.277488946914673,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.21960720314328663,
+        "max_gradient": 6.501633558381225e-14
+      }
+    },
+    {
+      "fold": 4,
+      "arm": "public_plus_own",
+      "auc": 0.9620498108733188,
+      "fit": {
+        "tag": "public_plus_own_fold4",
+        "columns": 253,
+        "fit_rows": 559708,
+        "C": 0.003,
+        "seconds": 12.767940998077393,
+        "solver": "streaming damped Newton, identical penalized objective",
+        "resumed_same_fold_checkpoint": false,
+        "iterations": 7,
+        "converged": true,
+        "value": 0.2196032569450724,
+        "max_gradient": 6.618842081270717e-14
+      }
+    }
+  ],
+  "public_columns": 246,
+  "own_columns": 7,
+  "epoch": 1792501248.4211836,
+  "validation_status": "Fixed-base-OOF meta-CV, exploratory; not end-to-end nested validation"
+}

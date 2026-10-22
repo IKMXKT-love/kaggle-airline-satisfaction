@@ -1,0 +1,12 @@
+{
+  "arm": "shared_head",
+  "phase": "selection",
+  "initial_state_hash": "bf82e93c98db19714b68c40b6cbe6d94aa47aa9b69e113e83764fa50b0d000cb",
+  "epochs_completed": 24,
+  "updates": 6048,
+  "seconds": 77.25249481201172,
+  "best_epoch": 5,
+  "best_stopping_auc": 0.9599382154687937,
+  "peak_allocated_gb": 0.539466381072998,
+  "parameter_count": 3516304
+}

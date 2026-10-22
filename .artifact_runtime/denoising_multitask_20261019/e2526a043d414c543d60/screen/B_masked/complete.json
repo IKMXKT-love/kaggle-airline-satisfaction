@@ -1,0 +1,27 @@
+{
+  "spec": "B_masked",
+  "initial_hash": "2746c7241bf97cb1cf7b05bb8ca4238c024e30e3b3d664ca7c733c7efb199159",
+  "best_stopping_auc": 0.9601004522993029,
+  "best_epoch": 13,
+  "epochs_completed": 24,
+  "updates_completed": 9672,
+  "warm_epochs": 12,
+  "fine_epochs": 12,
+  "masked_stopping_recovery": {
+    "cross_entropy": 2.0160412319120633,
+    "accuracy": 0.1658327376697641,
+    "masked_positions": 69950,
+    "seed": 1942
+  },
+  "seconds": 64.11954859999969,
+  "peak_allocated_gb": 0.38814401626586914,
+  "peak_reserved_gb": 0.439453125,
+  "parameter_count": 3644536,
+  "best_checkpoint_sha256": "095fd5bf93b9449549a5762c8202785fbe483821bb3e685e78ed1d896198778b",
+  "initial_recovery": {
+    "cross_entropy": 1.793008756158691,
+    "accuracy": 0.14284488920657612,
+    "masked_positions": 69950,
+    "seed": 1942
+  }
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "name": "catboost_allcat_original_d8",
+    "family": "catboost",
+    "use_te": false,
+    "numeric_categories": true,
+    "depth": 8,
+    "selection_auc": 0.9602819750536545,
+    "best_rounds": 1054,
+    "features": 115,
+    "seconds": 111.37623810768127
+  }
+]

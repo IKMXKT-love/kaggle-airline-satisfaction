@@ -1,0 +1,102 @@
+{
+  "stage": "screen",
+  "baseline_auc": 0.960404059765553,
+  "control_auc": 0.96007758756741,
+  "trials": [
+    {
+      "name": "frequency",
+      "standalone_auc": 0.9600441106593253,
+      "blend_auc": 0.960410107265421,
+      "gain": 6.047499867989359e-06
+    },
+    {
+      "name": "profiles",
+      "standalone_auc": 0.960092000495212,
+      "blend_auc": 0.9604247033577159,
+      "gain": 2.064359216291667e-05
+    },
+    {
+      "name": "combined",
+      "standalone_auc": 0.9600513557607496,
+      "blend_auc": 0.9604087127579931,
+      "gain": 4.65299244012396e-06
+    },
+    {
+      "name": "teacher_offset",
+      "standalone_auc": 0.9598755980325542,
+      "blend_auc": 0.9604375166273914,
+      "gain": 3.3456861838421226e-05
+    },
+    {
+      "name": "high_resolution",
+      "standalone_auc": 0.960144958798161,
+      "blend_auc": 0.9604319879049794,
+      "gain": 2.7928139426425247e-05
+    }
+  ],
+  "best": {
+    "name": "teacher_offset",
+    "standalone_auc": 0.9598755980325542,
+    "blend_auc": 0.9604375166273914,
+    "gain": 3.3456861838421226e-05
+  },
+  "rows": {
+    "fit": 411944,
+    "stop": 35822,
+    "scored": 111942
+  },
+  "source": {
+    "source_url": "https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction",
+    "retained_rows": 129859,
+    "removed_exact_overlap": 21,
+    "signature": {
+      "features": [
+        "Age",
+        "Flight Distance",
+        "Inflight wifi service",
+        "Departure/Arrival time convenient",
+        "Ease of Online booking",
+        "Gate location",
+        "Food and drink",
+        "Online boarding",
+        "Seat comfort",
+        "Inflight entertainment",
+        "On-board service",
+        "Leg room service",
+        "Baggage handling",
+        "Checkin service",
+        "Cleanliness",
+        "Departure Delay in Minutes",
+        "Arrival Delay in Minutes",
+        "Gender",
+        "Customer Type",
+        "Type of Travel",
+        "Class"
+      ],
+      "competition_train_features": "8091476e64b5bf5d6544e59a93361adfcdc149817738c3dde99a8d11d2842ee4",
+      "competition_test_features": "12244bac7991005b1a78af966b72335b275ed40be3543234140a66013fb66cbc",
+      "original_file_hashes": [
+        "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+        "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898"
+      ],
+      "prior_specs": [
+        [
+          6,
+          1200
+        ],
+        [
+          3,
+          1800
+        ],
+        [
+          9,
+          1000
+        ]
+      ],
+      "xgboost_version": "3.4.1"
+    },
+    "source_labels_used": "public_original_only"
+  },
+  "scored_labels_used_for_early_stopping": false,
+  "historical_split_seen": true
+}

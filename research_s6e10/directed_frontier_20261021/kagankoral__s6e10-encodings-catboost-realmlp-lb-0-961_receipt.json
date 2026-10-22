@@ -1,0 +1,67 @@
+{
+  "ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+  "pull": {
+    "tag": "kagankoral__s6e10-encodings-catboost-realmlp-lb-0-961_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "bytes": 96441,
+    "sha256": "5dc370872c5436344a5634dd92797026d1798635d0cf297d00b48887b9ba3495",
+    "elapsed": 1.4117579000003389
+  },
+  "version": 1,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 1,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 137360737,
+    "ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "title": "S6E10 | Encodings + CatBoost + RealMLP | LB 0.961",
+    "author": "Ahmet Kağan Koral",
+    "slug": "s6e10-encodings-catboost-realmlp-lb-0-961",
+    "lastRunTime": "2026-10-18T03:56:32.747645Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "arseniyshutko/binary-aviation-satisfaction-129k"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 6,
+    "currentVersionNumber": 1,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 30592,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "kagankoral__s6e10-encodings-catboost-realmlp-lb-0-961_outputs_v1",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 47665,
+    "sha256": "28d18d2092f11ffec8349a474c854c780b8f58834f121494e4f435bd7a835725",
+    "elapsed": 1.3197227999999086
+  }
+}

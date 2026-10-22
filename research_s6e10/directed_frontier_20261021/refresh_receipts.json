@@ -1,0 +1,86 @@
+[
+  {
+    "tag": "current_dataset_search",
+    "url": "https://www.kaggle.com/api/v1/datasets/list?search=s6e10&sortBy=updated&page=1",
+    "bytes": 47317,
+    "sha256": "4fc3699916dd09d16c99fa1668313a9b73432b7d93d4cd1b4f048f46ff16e35d",
+    "elapsed": 1.7358782000001156
+  },
+  {
+    "tag": "refresh_c124",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/cdeotte/s6e10-124-public-oof-and-test-predictions",
+    "bytes": 1937,
+    "sha256": "35bd7146d07be0ee625c838633813a17a604f740d5c21d9e37190cbf6d466d62",
+    "elapsed": 1.236849500000062
+  },
+  {
+    "tag": "refresh_tfm",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "bytes": 3033,
+    "sha256": "41fc5ce008152fed093d8a460d38dc7ec88734d08a799868936ca51fb5d145e1",
+    "elapsed": 1.1888088999999127
+  },
+  {
+    "tag": "refresh_golem",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/dariushafshar/s6e10-golem-oof-library",
+    "bytes": 37907,
+    "sha256": "9d55328202eeedf28ea8f05f6a8f66bd2dba8b2a9860d3870ecacc7c07729104",
+    "elapsed": 1.3870391000000382
+  },
+  {
+    "tag": "refresh_abdullah",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/abdullahsafwan333/oof-dataset",
+    "bytes": 1849,
+    "sha256": "54490fc616117943c8e8f07978cb1c2e1cea2b331eb0dab61464ecaf3aa37cd1",
+    "elapsed": 1.1333716999997705
+  },
+  {
+    "tag": "refresh_sadam",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+    "bytes": 4799,
+    "sha256": "a1b015f6c8d6d3ce19529b43429b7cfa6ee27dc8afaa84fba9c6c46cbc28f59f",
+    "elapsed": 1.230001799999627
+  },
+  {
+    "tag": "refresh_forge",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/amanatar/s6e10-forge-own-pairs",
+    "bytes": 1870,
+    "sha256": "0ca51b49671074a1b4bf72b8cf284e47ed640b7ee04ba878062177e27a9d7577",
+    "elapsed": 0.9241732999998931
+  },
+  {
+    "tag": "refresh_sachith",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/sachith7/s6e10-stack-oof-predictions",
+    "bytes": 5638,
+    "sha256": "2ef7c13b640d88597d2f227c69df2a181cd6279aac3e07a1b2b94fa6a4d6d442",
+    "elapsed": 0.8172784000003048
+  },
+  {
+    "tag": "refresh_koumeimaki",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/koumeimaki/s6e10-route-tfm-nn-oof",
+    "bytes": 12753,
+    "sha256": "bade0803c0fca7b20ba28c34972a2b52971d9ee5f3c257ad301225d49b18e9b9",
+    "elapsed": 1.1267061999997168
+  },
+  {
+    "tag": "refresh_gp_extra",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+    "bytes": 6826,
+    "sha256": "0a8e0d3ec31b3872956a536c06900ba35d4511de8ee97a6b2aad6559ace3ea96",
+    "elapsed": 0.8727352000000792
+  },
+  {
+    "tag": "refresh_dmitriy",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test",
+    "bytes": 7653,
+    "sha256": "1ab4672c6f389f550c2c49715411b5a41fe0243fc7dac14628a0e1df8bfc922d",
+    "elapsed": 1.1090261999997892
+  },
+  {
+    "tag": "refresh_kagan_abl",
+    "url": "https://www.kaggle.com/api/v1/datasets/view/kagankoral/s6e10-ablation-members-oof",
+    "bytes": 9962,
+    "sha256": "0197def0503d2a23051236711b5a6c30775cf50ba588b2839d987ded6f736644",
+    "elapsed": 0.8958250999999109
+  }
+]

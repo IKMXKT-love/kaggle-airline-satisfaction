@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-22 Asia/Taipei",
+  "kind": "Manual factual notes from actual browser accessibility reads; not a raw webpage archive",
+  "pages": [
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/discussion/751334",
+      "title": "Part 2 - How to build a Tabular Transformer!",
+      "author": "Chris Deotte",
+      "posted_local": "2026-10-21 21:06:14",
+      "oof_v1": 0.959795,
+      "oof_v2": 0.960798,
+      "fold0_orderfree": 0.960368,
+      "fold0_side": 0.960655,
+      "fold0_rtd": 0.960977,
+      "a100_shared_pretrain_min": 18,
+      "a100_fold_min": 6.5,
+      "peak_gb_author": 11.4,
+      "public_training_code_or_prediction_link_in_read_post": false,
+      "comment_observed": "Another participant requests training code, fold assignments, OOF and test predictions; no author response in the read comments."
+    },
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/discussion/750479",
+      "title": "[LB 0.96114 / Ensemble 0.96238] 84D Feature Ablation",
+      "score_context": "Body explicitly calls 0.96238 OOF; standalone trees public 0.96114. Both author reported."
+    },
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/code?competitionId=125224&searchQuery=ModernBERT&excludeNonAccessedDatasources=true",
+      "search_result": "No notebooks found",
+      "scope": "Competition code-directory query only; not proof of global absence."
+    },
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/code",
+      "observed_latest": "Mayank Summit Composer and Nina ps-s6e10 displayed Score: 0.9621."
+    }
+  ]
+}

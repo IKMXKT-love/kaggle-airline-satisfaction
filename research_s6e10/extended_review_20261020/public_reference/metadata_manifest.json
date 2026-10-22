@@ -1,0 +1,56 @@
+[
+  {
+    "ref": "goodpjw2008/s6e10-tabpfn-member",
+    "file": "meta.json",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-tabpfn-member/meta.json",
+    "local": "research_s6e10\\extended_review_20261020\\public_reference\\goodpjw2008__meta.json",
+    "bytes": 1716,
+    "sha256": "828ba26bea196d353f097ef7ab7e7e78b8a6b651779c385018f953d7b705ec31",
+    "was_zip": false
+  },
+  {
+    "ref": "goodpjw2008/s6e10-tabpfn-member",
+    "file": "train_tabicl.py",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-tabpfn-member/train_tabicl.py",
+    "local": "research_s6e10\\extended_review_20261020\\public_reference\\goodpjw2008__train_tabicl.py",
+    "bytes": 2911,
+    "sha256": "3d52b70d839d908d86244c3da2762afbb6b649b3d3594ef5fc8e8e8efba7e6ec",
+    "was_zip": false
+  },
+  {
+    "ref": "goodpjw2008/s6e10-tabpfn-member",
+    "file": "train_tabpfn.py",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-tabpfn-member/train_tabpfn.py",
+    "local": "research_s6e10\\extended_review_20261020\\public_reference\\goodpjw2008__train_tabpfn.py",
+    "bytes": 10606,
+    "sha256": "d3e7a04b37f7c5b0e2d6489d16dae059ece790af5eb3bfd597e8b70a68a6cb16",
+    "was_zip": false
+  },
+  {
+    "ref": "dariushafshar/s6e10-golem-oof-library",
+    "file": "README.md",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/README.md",
+    "local": "research_s6e10\\extended_review_20261020\\public_reference\\dariushafshar__README.md",
+    "bytes": 60749,
+    "sha256": "c9e5113c34927c8041dcc179c5bc03d2838fc53b60a7f73284d894147321c06c",
+    "was_zip": false
+  },
+  {
+    "ref": "dariushafshar/s6e10-golem-oof-library",
+    "file": "marginal_value.csv",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/marginal_value.csv",
+    "local": "research_s6e10\\extended_review_20261020\\public_reference\\dariushafshar__marginal_value.csv",
+    "bytes": 3388,
+    "sha256": "55dcaa041138373012604ad954cc2ca678bfe4413e603718c603b6c0b7b66788",
+    "was_zip": false
+  },
+  {
+    "ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+    "file": "members.csv",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/members.csv",
+    "local": "research_s6e10\\extended_review_20261020\\public_reference\\koumeimaki__members.csv",
+    "bytes": 3221,
+    "sha256": "5c9dd24f37b6b4aa32919637ae072ec7efc97b9602bfde21ac008d965402a868",
+    "was_zip": false
+  }
+]

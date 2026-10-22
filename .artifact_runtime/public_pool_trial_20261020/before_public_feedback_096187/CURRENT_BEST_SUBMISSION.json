@@ -1,0 +1,9 @@
+{
+  "as_of_local_date": "2026-10-19",
+  "score_source": "user_reported",
+  "public_auc": 0.96114,
+  "submission_file": "submission_lean_realmlp_10fold.csv",
+  "sha256": "b8cbfd891761efa14fac950684f03929b01da2d10a2c868fdb8228e7cb878eb8",
+  "result_record": "submission_lean_realmlp_10fold_public_result.json",
+  "kaggle_submission_record_independently_verified": false
+}

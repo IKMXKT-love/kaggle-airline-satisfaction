@@ -1,0 +1,229 @@
+{
+  "ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+  "complete": true,
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 8668
+    },
+    {
+      "name": "anchor_twin_dp30_1017.csv",
+      "bytes": 7876254
+    },
+    {
+      "name": "hanifnoerrofiq_agentic_1019.csv",
+      "bytes": 8395597
+    },
+    {
+      "name": "mayankraaz_surface_v2_1019.csv",
+      "bytes": 5697052
+    },
+    {
+      "name": "mayankraaz_surface_v4_096208_1021.csv",
+      "bytes": 5697052
+    },
+    {
+      "name": "members.csv",
+      "bytes": 570
+    },
+    {
+      "name": "oof_cat_aux.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_cat_ctr_k.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_cat_k10.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_gen_v1.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_glm6_xgb_k.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_lgb_k10.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_lgb_v3_k.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp_fa_aux3_k.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp_fa_aux_n16.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp_fa_auxev.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp_fa_s7_k.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp_pub_aux_k.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp_v4fa_auxfull.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_realmlp_vb.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_stack245.npy",
+      "bytes": 5597208
+    },
+    {
+      "name": "oof_tabm_v4aux.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_tabpfn_ne4.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_xgb_d10_k10.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "oof_xgb_k10.npy",
+      "bytes": 2798668
+    },
+    {
+      "name": "series_stacks_p1_p8.npz",
+      "bytes": 57517551
+    },
+    {
+      "name": "stack182_lr_lgb_oof.npz",
+      "bytes": 8272656
+    },
+    {
+      "name": "stack182_lr_lgb_test.npz",
+      "bytes": 3598624
+    },
+    {
+      "name": "surface_step2_1019.csv",
+      "bytes": 7876896
+    },
+    {
+      "name": "surface_u_k6.npy",
+      "bytes": 2398880
+    },
+    {
+      "name": "test_cat_aux.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_cat_ctr_k.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_cat_k10.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_gen_v1.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_glm6_xgb_k.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_lgb_k10.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_lgb_v3_k.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp_fa_aux3_k.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp_fa_aux_n16.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp_fa_auxev.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp_fa_s7_k.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp_pub_aux_k.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp_v4fa_auxfull.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_realmlp_vb.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_stack245.npy",
+      "bytes": 2398880
+    },
+    {
+      "name": "test_tabm_v4aux.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_tabpfn_ne4.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_xgb_d10_k10.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "test_xgb_k10.npy",
+      "bytes": 1199504
+    },
+    {
+      "name": "twin_submission_1015.csv",
+      "bytes": 7876561
+    }
+  ],
+  "receipts": [
+    {
+      "tag": "goodpjw2008_files_p1",
+      "url": "https://www.kaggle.com/api/v1/datasets/list/goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "bytes": 7258,
+      "sha256": "fb3c272e129715bae346ee0e90e5d0b64d66b46880df5562cbdb941aff957ada",
+      "elapsed": 0.9785185000000638
+    },
+    {
+      "tag": "goodpjw2008_files_p2",
+      "url": "https://www.kaggle.com/api/v1/datasets/list/goodpjw2008/s6e10-goodpjw2008-extra-members-oof?pageToken=CfDJ8JDwKpgsc5hJpcljKjpYpOHUPBJkmFr2eveLFLKm_TBUS_g1ozuLEWs-M3dPC0oYi3I9UI4GBeHXJNJ-uhjoyDOyBp7V_BgT2wYk6uorUUb8R-Y2t8gTtAfhesjmpqfLKpJ-0zJjX52emQ",
+      "bytes": 7218,
+      "sha256": "1fbfad0fa4beb5747b37ac87ec2a0367c06464bffccc92fedab228269d9bc0d5",
+      "elapsed": 0.9053742000014608
+    },
+    {
+      "tag": "goodpjw2008_files_p3",
+      "url": "https://www.kaggle.com/api/v1/datasets/list/goodpjw2008/s6e10-goodpjw2008-extra-members-oof?pageToken=CfDJ8JDwKpgsc5hJpcljKjpYpOEhNBPhw8Ch5JmhNuq7ZBTpEurO7WEw3xUYZH--TB0O5s0tud9FFBCOS6iwzELHBIoibbNrlIChZCQ2kF0S5lLAm-BqBzXbf94OEy0EJ73CmiWDxpcxSAwJkYc96RTMnMtN",
+      "bytes": 3529,
+      "sha256": "03fa3fafb56ce317daa01a665e2b1da7115943697d8e70800c703e384f4e92b4",
+      "elapsed": 0.8560176999999385
+    }
+  ]
+}

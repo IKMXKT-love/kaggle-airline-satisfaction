@@ -1,0 +1,19 @@
+{
+  "main.py": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+  "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+  "optimized_training.py": "a6a7ccfe7d5bb8d18cadc547a1c0aa201ec64b23403cf5aa365b88a0c55ff485",
+  "optimized_recipe.json": "782e3095fca89eb9b6d3fb0f96d1cdb32dcefed3210befe59cc8f835f2c5790c",
+  "requirements.txt": "5bb834611f90610d617fbbf4337202478b767298aecaf13fdced6ed02a792e4b",
+  "submission_optimized.csv": "797e4f7307deb3d6fbeb6224f5d26fe5e5b8f49769cb11c0650e633784b96e94",
+  "submission_optimized_oof.csv": "019ad50424224c253a04c8a8499bad53d03703ba954f0b8fd6337eb31d808e3f",
+  "submission_optimized_metrics.json": "a9a20c942c510437e57955c3cb7bb5c5ae41c7a2314dfb7bdc8b68495a32cb11",
+  "optimization_audit.json": "44a80d2d53f703fc6e1b78482ba49e0571d0383abc1c711c8d1fdbd67eb60b32",
+  "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+  "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+  "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+  "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+  "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898",
+  "submission.csv": "c2dbfd066c710a11d2c94b46d64271a05c16859af97c3890b0fd7a07b23eb920",
+  "submission_oof.csv": "826f7642ead919509f87221597bdcbd476c7253df42e3823a8af057fc5ebab9a",
+  "submission_metrics.json": "db2028ffbc3eff51fdf33a518dd3e4c2ceda40645530f744bffcc83d839f8e23"
+}

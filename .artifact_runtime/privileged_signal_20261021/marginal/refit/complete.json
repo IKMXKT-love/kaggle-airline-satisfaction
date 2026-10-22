@@ -1,0 +1,11 @@
+{
+  "phase": "refit",
+  "trees": 555,
+  "rating_accuracy": 0.6438934236870476,
+  "rating_logloss": 0.6973651051521301,
+  "integrated_auc": 0.9947610400888685,
+  "integrated_logloss": 0.08907030562172792,
+  "point_auc": 0.9946045187012511,
+  "global_mixture_auc": 0.9936145746018462,
+  "seconds": 14.636754751205444
+}

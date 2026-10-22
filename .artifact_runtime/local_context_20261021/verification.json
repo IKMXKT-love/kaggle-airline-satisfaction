@@ -1,0 +1,76 @@
+{
+  "verified": true,
+  "all_input_and_incumbent_hashes_verified": true,
+  "verification_source_sha256": "abe29ea69fdb1ab9d5deb5bd672c24ae1083b1356adb2e18315ee5a38ebd7567",
+  "metric_encoder_pools_and_training_tasks_rebuilt": true,
+  "numerical_encodings_and_row_ids_rebuilt": true,
+  "baseline_rebuild_max_error": 0.0,
+  "prediction_checks": {
+    "random_frozen": {
+      "all_rows_auc_and_ids_checked": true,
+      "gpu_rebuilt_groups": [
+        {
+          "anchor": 0,
+          "rows": 768,
+          "maximum_error": 0.0
+        },
+        {
+          "anchor": 32,
+          "rows": 608,
+          "maximum_error": 0.0
+        }
+      ]
+    },
+    "local_frozen": {
+      "all_rows_auc_and_ids_checked": true,
+      "gpu_rebuilt_groups": [
+        {
+          "anchor": 0,
+          "rows": 768,
+          "maximum_error": 0.0
+        },
+        {
+          "anchor": 32,
+          "rows": 608,
+          "maximum_error": 0.0
+        }
+      ]
+    },
+    "random_tuned": {
+      "all_rows_auc_and_ids_checked": true,
+      "gpu_rebuilt_groups": [
+        {
+          "anchor": 0,
+          "rows": 768,
+          "maximum_error": 0.0
+        },
+        {
+          "anchor": 32,
+          "rows": 608,
+          "maximum_error": 0.0
+        }
+      ]
+    },
+    "local_tuned": {
+      "all_rows_auc_and_ids_checked": true,
+      "gpu_rebuilt_groups": [
+        {
+          "anchor": 0,
+          "rows": 768,
+          "maximum_error": 0.0
+        },
+        {
+          "anchor": 32,
+          "rows": 608,
+          "maximum_error": 0.0
+        }
+      ]
+    }
+  },
+  "verification_seconds": 53.46263599395752,
+  "cumulative_seconds": 657.1770935058594,
+  "cumulative_deadline_met": true,
+  "passes_expansion_gate": false,
+  "gpu_rebuild_scope": "Two complete anchor groups per arm; not all GPU predictions rerun",
+  "validation": "New branch outer fold isolated; fusion with fixed public OOF remains conditional, not end-to-end nested."
+}

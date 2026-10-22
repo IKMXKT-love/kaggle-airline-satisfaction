@@ -1,0 +1,14 @@
+{
+  "source": "user_report",
+  "independently_verified": false,
+  "previous": {
+    "score": 0.96074,
+    "submission_file": "submission_v3.csv"
+  },
+  "current": {
+    "score": 0.96082,
+    "submission_file": "submission_v4.csv",
+    "file_association": "assumed_latest_delivered_submission; user did not specify filename or submission ID",
+    "submission_sha256": "75f42132377e87fa2a0a9c4c34610c094c01d6b9fa743bd5437e4ff9b71d5958"
+  }
+}

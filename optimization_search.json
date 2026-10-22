@@ -1,0 +1,633 @@
+{
+  "records": [
+    {
+      "name": "raw_native_d5",
+      "use_te": false,
+      "original": false,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.04,
+      "selection_auc": 0.9579157256721522,
+      "best_rounds": 1541,
+      "features": 21,
+      "seconds": 7.438103914260864,
+      "family": "xgboost"
+    },
+    {
+      "name": "raw_native_d7",
+      "use_te": false,
+      "original": false,
+      "depth": 7,
+      "child": 20,
+      "lr": 0.04,
+      "selection_auc": 0.9578778240401745,
+      "best_rounds": 714,
+      "features": 21,
+      "seconds": 5.428515434265137,
+      "family": "xgboost"
+    },
+    {
+      "name": "original_d5",
+      "use_te": false,
+      "original": true,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.04,
+      "selection_auc": 0.9594388352668899,
+      "best_rounds": 614,
+      "features": 98,
+      "seconds": 13.734944581985474,
+      "family": "xgboost"
+    },
+    {
+      "name": "te_original_d5",
+      "use_te": true,
+      "original": true,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.04,
+      "selection_auc": 0.9597118840568358,
+      "best_rounds": 359,
+      "features": 136,
+      "seconds": 22.96298360824585,
+      "family": "xgboost"
+    },
+    {
+      "name": "te_original_d7",
+      "use_te": true,
+      "original": true,
+      "depth": 7,
+      "child": 20,
+      "lr": 0.04,
+      "selection_auc": 0.9597622066017157,
+      "best_rounds": 273,
+      "features": 136,
+      "seconds": 23.582590579986572,
+      "family": "xgboost"
+    },
+    {
+      "name": "allcat_original_d5",
+      "use_te": false,
+      "original": true,
+      "numeric_categories": true,
+      "digits": false,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.035,
+      "selection_auc": 0.9584030617224392,
+      "best_rounds": 247,
+      "features": 115,
+      "seconds": 17.560746669769287,
+      "family": "xgboost"
+    },
+    {
+      "name": "digits_original_d5",
+      "use_te": false,
+      "original": true,
+      "numeric_categories": false,
+      "digits": true,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.035,
+      "selection_auc": 0.9597138068798532,
+      "best_rounds": 1199,
+      "features": 122,
+      "seconds": 22.11401867866516,
+      "family": "xgboost"
+    },
+    {
+      "name": "te_digits_original_d4",
+      "use_te": true,
+      "original": true,
+      "numeric_categories": false,
+      "digits": true,
+      "depth": 4,
+      "child": 20,
+      "lr": 0.035,
+      "selection_auc": 0.9597427861539072,
+      "best_rounds": 1245,
+      "features": 160,
+      "seconds": 34.15655708312988,
+      "family": "xgboost"
+    },
+    {
+      "name": "raw_original_rows025",
+      "use_te": false,
+      "original": false,
+      "rows_weight": 0.25,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.035,
+      "selection_auc": 0.9580561824455077,
+      "best_rounds": 2145,
+      "features": 22,
+      "seconds": 10.787240505218506,
+      "family": "xgboost"
+    },
+    {
+      "name": "raw_original_rows1",
+      "use_te": false,
+      "original": false,
+      "rows_weight": 1.0,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.035,
+      "selection_auc": 0.9582434913381749,
+      "best_rounds": 2563,
+      "features": 22,
+      "seconds": 12.881699085235596,
+      "family": "xgboost"
+    },
+    {
+      "name": "multi_prior_te_d5",
+      "family": "xgboost",
+      "use_te": true,
+      "original": true,
+      "multiple_priors": true,
+      "extended_keys": false,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.035,
+      "selection_auc": 0.9597257977684384,
+      "best_rounds": 897,
+      "features": 138,
+      "seconds": 30.3816339969635
+    },
+    {
+      "name": "interaction_multi_prior_d5",
+      "family": "xgboost",
+      "use_te": true,
+      "original": true,
+      "multiple_priors": true,
+      "extended_keys": true,
+      "depth": 5,
+      "child": 10,
+      "lr": 0.035,
+      "selection_auc": 0.959647806230365,
+      "best_rounds": 695,
+      "features": 168,
+      "seconds": 47.13735556602478
+    },
+    {
+      "name": "interaction_multi_prior_d7",
+      "family": "xgboost",
+      "use_te": true,
+      "original": true,
+      "multiple_priors": true,
+      "extended_keys": true,
+      "depth": 7,
+      "child": 10,
+      "lr": 0.035,
+      "selection_auc": 0.9596938922274065,
+      "best_rounds": 373,
+      "features": 168,
+      "seconds": 50.349143743515015
+    },
+    {
+      "name": "catboost_original",
+      "family": "catboost",
+      "use_te": false,
+      "numeric_categories": false,
+      "depth": 6,
+      "selection_auc": 0.9595076878182485,
+      "best_rounds": 1317,
+      "features": 98,
+      "seconds": 47.91400909423828,
+      "original": true
+    },
+    {
+      "name": "catboost_allcat_original",
+      "family": "catboost",
+      "use_te": false,
+      "numeric_categories": true,
+      "depth": 6,
+      "selection_auc": 0.9602486206863334,
+      "best_rounds": 2068,
+      "features": 115,
+      "seconds": 137.80529236793518,
+      "original": true
+    },
+    {
+      "name": "catboost_allcat_original_d8",
+      "family": "catboost",
+      "use_te": false,
+      "numeric_categories": true,
+      "depth": 8,
+      "selection_auc": 0.9602819750536545,
+      "best_rounds": 1054,
+      "features": 115,
+      "seconds": 111.37623810768127,
+      "original": true
+    },
+    {
+      "name": "lightgbm_te_original",
+      "family": "lightgbm",
+      "use_te": true,
+      "numeric_categories": false,
+      "depth": -1,
+      "selection_auc": 0.9598125265599831,
+      "best_rounds": 495,
+      "features": 136,
+      "seconds": 39.71274399757385,
+      "original": true
+    }
+  ],
+  "blend_trials": [
+    {
+      "components": [
+        {
+          "name": "te_original_d7",
+          "weight": 1.0
+        }
+      ],
+      "selection_auc": 0.9597622066017157
+    },
+    {
+      "components": [
+        {
+          "name": "te_original_d7",
+          "weight": 0.25
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.75
+        }
+      ],
+      "selection_auc": 0.960270327214543
+    },
+    {
+      "components": [
+        {
+          "name": "te_original_d7",
+          "weight": 0.5
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.5
+        }
+      ],
+      "selection_auc": 0.9601788038135275
+    },
+    {
+      "components": [
+        {
+          "name": "te_original_d7",
+          "weight": 0.75
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.25
+        }
+      ],
+      "selection_auc": 0.9600101156204376
+    },
+    {
+      "components": [
+        {
+          "name": "te_original_d7",
+          "weight": 0.25
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.75
+        }
+      ],
+      "selection_auc": 0.959852878037261
+    },
+    {
+      "components": [
+        {
+          "name": "te_original_d7",
+          "weight": 0.5
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.5
+        }
+      ],
+      "selection_auc": 0.9598570647928102
+    },
+    {
+      "components": [
+        {
+          "name": "te_original_d7",
+          "weight": 0.75
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.25
+        }
+      ],
+      "selection_auc": 0.959827154176617
+    },
+    {
+      "components": [
+        {
+          "name": "te_digits_original_d4",
+          "weight": 1.0
+        }
+      ],
+      "selection_auc": 0.9597427861539072
+    },
+    {
+      "components": [
+        {
+          "name": "te_digits_original_d4",
+          "weight": 0.25
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.75
+        }
+      ],
+      "selection_auc": 0.9602593528646438
+    },
+    {
+      "components": [
+        {
+          "name": "te_digits_original_d4",
+          "weight": 0.5
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.5
+        }
+      ],
+      "selection_auc": 0.9601576116978658
+    },
+    {
+      "components": [
+        {
+          "name": "te_digits_original_d4",
+          "weight": 0.75
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.25
+        }
+      ],
+      "selection_auc": 0.9599844664482277
+    },
+    {
+      "components": [
+        {
+          "name": "te_digits_original_d4",
+          "weight": 0.25
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.75
+        }
+      ],
+      "selection_auc": 0.9598732233606777
+    },
+    {
+      "components": [
+        {
+          "name": "te_digits_original_d4",
+          "weight": 0.5
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.5
+        }
+      ],
+      "selection_auc": 0.9598742344028124
+    },
+    {
+      "components": [
+        {
+          "name": "te_digits_original_d4",
+          "weight": 0.75
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.25
+        }
+      ],
+      "selection_auc": 0.9598291604178851
+    },
+    {
+      "components": [
+        {
+          "name": "multi_prior_te_d5",
+          "weight": 1.0
+        }
+      ],
+      "selection_auc": 0.9597257977684384
+    },
+    {
+      "components": [
+        {
+          "name": "multi_prior_te_d5",
+          "weight": 0.25
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.75
+        }
+      ],
+      "selection_auc": 0.9602552695735922
+    },
+    {
+      "components": [
+        {
+          "name": "multi_prior_te_d5",
+          "weight": 0.5
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.5
+        }
+      ],
+      "selection_auc": 0.9601489332898272
+    },
+    {
+      "components": [
+        {
+          "name": "multi_prior_te_d5",
+          "weight": 0.75
+        },
+        {
+          "name": "catboost_allcat_original_d8",
+          "weight": 0.25
+        }
+      ],
+      "selection_auc": 0.9599716601300727
+    },
+    {
+      "components": [
+        {
+          "name": "multi_prior_te_d5",
+          "weight": 0.25
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.75
+        }
+      ],
+      "selection_auc": 0.9598591486324513
+    },
+    {
+      "components": [
+        {
+          "name": "multi_prior_te_d5",
+          "weight": 0.5
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.5
+        }
+      ],
+      "selection_auc": 0.9598561468687231
+    },
+    {
+      "components": [
+        {
+          "name": "multi_prior_te_d5",
+          "weight": 0.75
+        },
+        {
+          "name": "lightgbm_te_original",
+          "weight": 0.25
+        }
+      ],
+      "selection_auc": 0.9598104010112164
+    }
+  ],
+  "selected": {
+    "components": [
+      {
+        "name": "te_original_d7",
+        "use_te": true,
+        "original": true,
+        "depth": 7,
+        "child": 20,
+        "lr": 0.04,
+        "selection_auc": 0.9597622066017157,
+        "best_rounds": 273,
+        "features": 136,
+        "seconds": 23.582590579986572,
+        "family": "xgboost",
+        "weight": 0.25
+      },
+      {
+        "name": "catboost_allcat_original_d8",
+        "family": "catboost",
+        "use_te": false,
+        "numeric_categories": true,
+        "depth": 8,
+        "selection_auc": 0.9602819750536545,
+        "best_rounds": 1054,
+        "features": 115,
+        "seconds": 111.37623810768127,
+        "original": true,
+        "weight": 0.75
+      }
+    ],
+    "selection_auc": 0.960270327214543,
+    "selection_protocol": {
+      "development_split_seed": 20261017,
+      "development_fraction": 0.8,
+      "selection_split_seed": 42,
+      "selection_fraction_of_development": 0.2,
+      "fit_rows": 447766,
+      "selection_rows": 111942,
+      "reserved_audit_rows": 139927,
+      "audit_used_for_recipe_selection": false,
+      "minimum_xgboost_weight": 0.25,
+      "blend_grid": [
+        0.25,
+        0.5,
+        0.75
+      ],
+      "all_scores_are_local_auc_not_kaggle_scores": true
+    },
+    "best_single_candidate": {
+      "name": "catboost_allcat_original_d8",
+      "family": "catboost",
+      "use_te": false,
+      "numeric_categories": true,
+      "depth": 8,
+      "selection_auc": 0.9602819750536545,
+      "best_rounds": 1054,
+      "features": 115,
+      "seconds": 111.37623810768127,
+      "original": true
+    },
+    "target_auc": 0.965,
+    "data_signature": {
+      "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+      "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+      "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+      "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898"
+    },
+    "validation_dataset": {
+      "train": {
+        "columns": [
+          "id",
+          "Age",
+          "Flight Distance",
+          "Inflight wifi service",
+          "Departure/Arrival time convenient",
+          "Ease of Online booking",
+          "Gate location",
+          "Food and drink",
+          "Online boarding",
+          "Seat comfort",
+          "Inflight entertainment",
+          "On-board service",
+          "Leg room service",
+          "Baggage handling",
+          "Checkin service",
+          "Cleanliness",
+          "Departure Delay in Minutes",
+          "Arrival Delay in Minutes",
+          "Gender",
+          "Customer Type",
+          "Type of Travel",
+          "Class",
+          "satisfaction"
+        ],
+        "rows_sha256": "f8e0e40f396bf7ebf3f92a7db4e93c19d7ea8fe9eaf5a5a374be1dadd944233a"
+      },
+      "test": {
+        "columns": [
+          "id",
+          "Age",
+          "Flight Distance",
+          "Inflight wifi service",
+          "Departure/Arrival time convenient",
+          "Ease of Online booking",
+          "Gate location",
+          "Food and drink",
+          "Online boarding",
+          "Seat comfort",
+          "Inflight entertainment",
+          "On-board service",
+          "Leg room service",
+          "Baggage handling",
+          "Checkin service",
+          "Cleanliness",
+          "Departure Delay in Minutes",
+          "Arrival Delay in Minutes",
+          "Gender",
+          "Customer Type",
+          "Type of Travel",
+          "Class"
+        ],
+        "rows_sha256": "79affd674219eeaf1b9c54157b150dd7ac7d6bc126e7f6bbc2f423b54b742e79"
+      },
+      "original_file_hashes": [
+        "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+        "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898"
+      ]
+    }
+  },
+  "data_signature": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898"
+  }
+}

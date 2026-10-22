@@ -1,0 +1,22 @@
+{
+  "verified": true,
+  "all_counterfactual_source_predictions_rebuilt": true,
+  "query_true_extra_and_target_not_inputs": true,
+  "phase_evidence": {
+    "selection": {
+      "integrated_auc": 0.9940018222475081,
+      "integrated_logloss": 0.09476844972514976,
+      "all_predictions_rebuilt": true
+    },
+    "refit": {
+      "integrated_auc": 0.9947610400888685,
+      "integrated_logloss": 0.08907030562172792,
+      "all_predictions_rebuilt": true
+    }
+  },
+  "passes_deployable_source_gate": false,
+  "protected_unchanged": true,
+  "verification_seconds": 17.479868412017822,
+  "cumulative_seconds": 649.5662865638733,
+  "original_deadline_met": true
+}

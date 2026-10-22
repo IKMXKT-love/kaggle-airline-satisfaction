@@ -1,0 +1,111 @@
+{
+  "params": {
+    "n_ens": 8,
+    "n_epochs": 3,
+    "batch_size": 256,
+    "use_early_stopping": false,
+    "lr": 0.053,
+    "wd": 0.015,
+    "sq_mom": 0.988,
+    "lr_sched": "flat_anneal",
+    "wd_sched": "cos_log_15",
+    "first_layer_lr_factor": 0.25,
+    "embedding_size": 5,
+    "max_one_hot_cat_size": 18,
+    "hidden_sizes": [
+      512,
+      256,
+      128
+    ],
+    "act": "silu",
+    "p_drop": 0.05,
+    "p_drop_sched": "invsqrtp1e-3",
+    "plr_hidden_1": 16,
+    "plr_hidden_2": 8,
+    "plr_act_name": "gelu",
+    "plr_lr_factor": 0.1151,
+    "plr_sigma": 2.33,
+    "ls_eps": 0.01,
+    "ls_eps_sched": "sqrt_cos",
+    "add_front_scale": false,
+    "bias_init_mode": "neg-uniform-dynamic-2",
+    "tfms": [
+      "one_hot",
+      "median_center",
+      "robust_scale",
+      "smooth_clip",
+      "embedding",
+      "l2_normalize"
+    ],
+    "stop_epoch": 3
+  },
+  "fold_assignment": "existing_v4_oof_fold",
+  "fold_label_offset": 1,
+  "network_seeds": [
+    42,
+    20261019
+  ],
+  "seed_formula": "base_seed + fold",
+  "fusion": {
+    "weight": 0.35,
+    "form": "logit"
+  },
+  "fixed_epoch": 3,
+  "outer_labels_used_for_stopping": false,
+  "legacy_base_oof_used_outer_early_stopping": true,
+  "legacy_oof_not_pristine": true,
+  "no_weight_tuning_on_full_oof": true,
+  "followup": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\followup_20261019\\4261d13e038c1512ffc1",
+  "followup_decision": {
+    "current_recipe_stable": true,
+    "frozen_fusion_improves_current": true,
+    "full_cv_warranted": true,
+    "chosen_fusion": {
+      "weight": 0.35,
+      "form": "logit"
+    },
+    "seed_average_incremental_confirmation": {
+      "delta": 8.566487535075417e-06,
+      "approximate_se": 5.252306990796971e-06,
+      "interval95": [
+        -1.7280341668866452e-06,
+        1.886100923703748e-05
+      ]
+    },
+    "note": "Historical split already seen; not a pristine holdout. Full CV is a separate next phase."
+  },
+  "followup_decision_hash": "e9ba35d2837b106dbf9118fe18d77f9c866fd0e5ffa04b3a4d0552d612972397",
+  "hashes": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+    "submission_v4.csv": "75f42132377e87fa2a0a9c4c34610c094c01d6b9fa743bd5437e4ff9b71d5958",
+    "submission_v4_oof.csv": "18c29ecd3b6beaa385c4e6b7c6658f1d9c1760b715f4baa43402f8bcf24f1c6e",
+    "experiment_realmlp_factorial.py": "efb7b3bb62da39db75d9c00e50d7c62566d1a779ebf8a8118a831d0fde4634b2",
+    "train_lean_cv_followup.py": "d62cb1e542612792b0b70820cd3194951bb01622218cac3a9f1619c1e3e27b4e"
+  },
+  "protected": {
+    "main.py": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+    "submission_optimized.csv": "797e4f7307deb3d6fbeb6224f5d26fe5e5b8f49769cb11c0650e633784b96e94",
+    "submission_v3.csv": "e3b94a849f853e682418197f59c1d0eaf4370a895cfa0b6076400d74b4d8516e",
+    "submission_v3_oof.csv": "7413a15b8be0053dc217e1fa735619ef5aa5e5c8ff82ec5d59123f36b96afdb1",
+    "v3_recipe.json": "b2b0d5f5577cf13dd875e5be17ec206f302ada2e4b2199d73538871519d54f3b",
+    "v3_confirmation.json": "e9f0da7e64db7754394c5dd58a95a12e1616999a806bb9e309c0f642e1c8e37d",
+    "v3_verification.json": "5623ead8b1e6e9120d55f454115efa240ff0ce97cf6753f5642ad8b1a7fa0a0e",
+    "submission_v3_metrics.json": "2294651a83115b6eaafcff59bd3d10b0f7de31053a10167bfe44c37b60837cb2",
+    "leaderboard_feedback.json": "ac8326f8f9e783240112188aa26f089a272bd22e5ab62559fef97e26e043c5d5",
+    "submission_v4_lean_realmlp_trial.csv": "9b9c360a926109d778d839662f98ad36a732e1cee2b897bee39870d0f5249beb",
+    "submission_v4_lean_realmlp_trial.json": "0fe8c9287406d6d969941cbacda79293db2b74bf82e6bc1b1c84a7109a96ed14",
+    "submission_v4_lean_realmlp_trial_public_result.json": "218d42668fde2093c617a56fe8c5ae32a31c33dd815e826579692f496ac041d5"
+  },
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "pytabkit": "1.7.3",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0"
+  }
+}

@@ -1,0 +1,247 @@
+### CELL 0 markdown
+<div style="background:linear-gradient(120deg,#1b0b3a 0%,#4b1f8c 50%,#d6913f 100%);padding:30px 34px;border-radius:16px;color:#fff;font-family:Inter,Segoe UI,sans-serif">
+<div style="font-size:13px;letter-spacing:3px;opacity:.85">PLAYGROUND S6E10 · PREDICTING AIRLINE SATISFACTION · ROC AUC</div>
+<div style="font-size:36px;font-weight:800;margin:8px 0 6px">🏔️ Summit Composer</div>
+<div style="font-size:17px;opacity:.95">The public summit is a stack of small, measured moves by different people. Compose them, add one new lever (a <b>reversed disagreement gate</b>), and the board moves: <b>public 0.96210</b>.</div>
+<div style="margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);padding:8px 16px;border-radius:999px;font-weight:700;font-size:18px">Public LB 0.96210</div>
+</div>
+
+### CELL 1 markdown
+## 🧭 How the summit was built (every step is a measured public score)
+
+| step | who | move | public |
+|---|---|---|---|
+| 1 | F.A. Nina, Кирилл Тымчишин | h-blend of four public files + 30% CV-stack "teacher", gated by member disagreement | 0.96206 |
+| 2 | KRISH RABARI | straight line `V34 + t·e` from his surface peak; flat for t = 0 … 4.5 | 0.96207 |
+| 3 | F.A. Nina | h-blend (7) v10: members mixed 81.2/18.8 with ewtherka's 0.96188 LR stack | 0.96207 |
+| 4 | **me** | compose 2 + 3: Nina's recipe on rabari's line point V43 | **0.96208** |
+| 5 | KRISH RABARI | extend that composition: t = 12, teacher share 0.45, teacher pushed away from my CV stack, bolder weights and corrections (V54) | 0.96209 |
+| 6 | **me** | V54 + reversed disagreement gate | 0.96210 |
+| 7 | **me** | **V54's bold move extended ×1.5 + the same reversed gate** (this notebook) | **0.96210** |
+
+Steps 4, 6 and 7 are mine: each time, the gain came from **composing** two moves that were measured separately, not from a new blind step.
+
+### CELL 2 markdown
+## ⚠️ Before you pick this as a final submission
+
+- Every move above was chosen on the **public 20%** of rows. There is no out-of-fold check for the final file, and public gains of 0.00001 are inside public noise (sd ≈ 0.0012·√(1−ρ), Korokke3).
+- V54's teacher is `2 × T188 − my CV stack`: it points **away** from a CV-backed stack, the opposite of what CV would suggest. Treat the private score with caution.
+- Keep one **CV-backed** stack as your other final pick (for example `own_cv_stack_181_test.npy` in my atlas dataset, 5-fold CV 0.962166).
+
+### CELL 3 markdown
+## ⚙️ Settings: change these to make it yours
+
+Defaults reproduce the **0.96210** file exactly.
+
+### CELL 4 code
+# rabari's V54 recipe (the base, fixed): t=12, teacher share 0.45, CV-stack share -1,
+# member weights (-0.25, 0.10, 0.15, 1.00), corrections (0.14, -0.02, -0.04, -0.08), no gate.
+V54_RECIPE = dict(t=12.0, teacher_w=0.45, own_share=-1.0, main=[-0.25, 0.10, 0.15, 1.00], corr=[0.14, -0.02, -0.04, -0.08], gate_amp=0.0)
+
+# ---- this notebook's move (defaults = V54's bold move x1.5 + reversed gate, public 0.96210) ----
+T = 13.0                                   # point on rabari's line V34 + t*e            (V54: 12)
+TEACHER_W = 0.58                           # average teacher share in each member        (V54: 0.45)
+OWN_SHARE = -1.5                           # teacher = (1 - OWN_SHARE)*T188 + OWN_SHARE*CV_stack   (V54: -1)
+MAIN_W = [-0.35, 0.10, 0.15, 1.10]         # member weights (0.96201, 0.96203, 0.96204, line point)
+ORDER_C = [0.175, -0.025, -0.05, -0.10]    # position corrections after sorting each row
+GATE_AMP = -0.05                           # reversed disagreement gate: share = TEACHER_W + GATE_AMP*(pct(member std) - 0.5)
+# Set everything to the V54 values and GATE_AMP = 0 to get V54 back; keep V54 values with GATE_AMP = -0.05 for the plain gate file (also 0.96210).
+
+### CELL 5 markdown
+## 📦 1. Load the inputs (all hash-pinned)
+
+### CELL 6 code
+import os, hashlib, warnings
+from pathlib import Path
+import numpy as np, pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import rankdata
+warnings.filterwarnings('ignore')
+
+ROOT = Path('/kaggle/input') if Path('/kaggle/input').exists() else Path(os.environ['LOCAL_KAGGLE_INPUT'])
+
+def find(name, hint=''):
+    hits = sorted(p for p in ROOT.rglob(name) if hint in str(p))
+    assert hits, f'{name} ({hint}) not found'
+    return hits[0]
+
+ids = pd.read_csv(find('sample_submission.csv', 'playground-series-s6e10')).id.to_numpy()
+N = len(ids)
+pct = lambda v: (rankdata(np.asarray(v, dtype=np.float64), method='average') - 0.5) / len(v)
+
+PINNED = {  # (file, input slug): sha256
+    ('0.96206.csv', 'ps-s6e10-7'): 'de8438a811025afe781ff32af09ae0ada7a035741cdb98c1029be06ddba6143f',
+    ('0.96188.txt', 'ps-s6e10-7'): '95104146ff66aac2d61462e472c0c9e3097b8403d085b10bf4bc24c84d40fd58',
+    ('0.96201.csv', 'ps-s6e10-7'): '8883773ff30ba9a71581657b9daf881ac45652031b6e3ee565844dbcff35797a',
+    ('0.96203.csv', 'ps-s6e10-7'): 'b31119ef653e50b71452187174d6c85d7929550c23b4b020797f19f5f132112d',
+    ('0.96204.csv', 'ps-s6e10-7'): 'c7d3b9e4c1c377c74e0f75b475c50319413a264fc4401c0a00fe689a99542873',
+    ('rabari_v41_submission.csv', 's6e10-lb-surface-atlas'): '7d0e2547eebde1746f0a0fa40d427cf5f944617514e7b022499901f8b3426265',
+    ('rabari_v43_submission.csv', 's6e10-lb-surface-atlas'): '193d53924035c155256c7b85bb9c42e51fa3bd69c25db7a9d9bd7ee0451ca55a',
+    ('rabari_v54_submission.csv', 's6e10-lb-surface-atlas'): 'dec9cf59323138bddad66c7d2e8d898877a67a1acf5c664b7e8b5af53700a9fc',
+    ('own_cv_stack_181_test.npy', 's6e10-lb-surface-atlas'): '1f2fc66c782a8e1175db33318b272d1194b71d22a98fbbbfb54a1814a1b31b39',
+}
+for (f, hint), h in PINNED.items():
+    assert hashlib.sha256(find(f, hint).read_bytes()).hexdigest() == h, f'{f} changed upstream'
+
+def raw(name, hint):
+    p = find(name, hint)
+    if p.suffix == '.npy':
+        v = np.load(p).astype(np.float64)
+    else:
+        d = pd.read_csv(p); d.columns = ['id', 'p']
+        v = d.set_index('id').p.reindex(ids).to_numpy(np.float64)
+    assert v.shape == (N,) and np.isfinite(v).all(), name
+    return v
+
+RC = pct(raw('0.96206.csv', 'ps-s6e10-7'))                       # public 0.96206 (Kirill's gate)
+T188 = raw('0.96188.txt', 'ps-s6e10-7')                          # ewtherka's plain-LR stack
+BASE3 = [raw(f, 'ps-s6e10-7') for f in ('0.96201.csv', '0.96203.csv', '0.96204.csv')]
+V41 = pct(raw('rabari_v41_submission.csv', 's6e10-lb-surface-atlas'))   # rabari line, t = 1.25
+V43 = pct(raw('rabari_v43_submission.csv', 's6e10-lb-surface-atlas'))   # rabari line, t = 4.5
+V54 = pct(raw('rabari_v54_submission.csv', 's6e10-lb-surface-atlas'))   # rabari V54, public 0.96209
+OWN = raw('own_cv_stack_181_test.npy', 's6e10-lb-surface-atlas')        # my 181-member CV stack
+print('✅ all 9 inputs hash-verified')
+
+### CELL 7 markdown
+## 🧩 2. Helpers: Nina's h-blend, rabari's line, the gated composition
+
+### CELL 8 code
+%%writefile summit_composer.py
+"""Summit Composer helpers. Reuse: add this notebook as an input, then `from summit_composer import *`."""
+import numpy as np
+from scipy.stats import rankdata
+
+
+def pct(v):
+    return (rankdata(np.asarray(v, dtype=np.float64), method='average') - 0.5) / len(v)
+
+
+def hblend(M, main, corr, mix=(0.3, 0.7)):
+    """F.A. Nina's h-blend: sort each row both ways, weight by member + position, mix the two sides (float32 like the original)."""
+    n, sides = len(M), []
+    for rev in (False, True):
+        order = np.argsort(-M if rev else M, axis=1, kind='stable')
+        s = np.zeros(n)
+        for j in range(M.shape[1]):
+            k = order[:, j]
+            s += M[np.arange(n), k] * (main[k] + corr[j])
+        sides.append(s.astype(np.float32))
+    return (np.float32(mix[0]) * sides[0] + np.float32(mix[1]) * sides[1]).astype(np.float32)
+
+
+def rabari_line(t, RC, V41, V43):
+    """KRISH RABARI's line V34 + t*e, rebuilt from his measured points t = 1.25 (V41) and t = 4.5 (V43)."""
+    a125, a450 = V41 - RC, V43 - RC
+    return pct(RC + a125 + (t - 1.25) / 3.25 * (a450 - a125))
+
+
+def compose(base3, fourth, teacher, teacher_w, main, corr, gate_amp=0.0):
+    """Mix each member with the teacher (share gated by member disagreement), then h-blend."""
+    M = np.column_stack(list(base3) + [fourth])
+    w = teacher_w + gate_amp * (pct(M.std(axis=1)) - 0.5)
+    return pct(hblend(M * (1 - w[:, None]) + w[:, None] * teacher[:, None], np.asarray(main, float), np.asarray(corr, float)))
+
+### CELL 9 markdown
+## 🎚️ The new lever: a reversed disagreement gate
+
+Kirill's gate gives the teacher a **larger** share on rows where the four members **disagree** (`amp > 0`).
+I measured the same idea on the composed recipe and found the sign flips there:
+
+| base (Nina recipe on rabari's line, t = 10) | gate amp on the teacher share | public |
+|---|---|---|
+| no gate | 0 | 0.96208 |
+| Kirill's direction | +0.02 | **0.96207** (lost a digit) |
+| reversed | −0.02 | 0.96208, and my team jumped above every other 0.96208 team (rank evidence) |
+
+At the summit the members already agree with each other on most rows. Where they agree, leaning harder on the CV-backed teacher helps.
+Where they disagree, the public-climbed members carry information the teacher doesn't have, so the teacher should step back.
+
+On V54 the teacher share is 0.45 instead of 0.188, so I scaled the amp in proportion: **−0.05** → **0.96210**. Twice that (−0.10) overshoots: 0.96209.
+
+This notebook's file goes one step further. rabari's V54 is itself a "bold" move away from the plain composition (line t 10 → 12, teacher share 0.188 → 0.45,
+CV-stack share 0 → −1, bolder member weights and doubled corrections). I extend that move ×1.5 and keep the −0.05 gate: also **0.96210**.
+
+### CELL 10 markdown
+## 🏗️ 3. Rebuild V54, then add the reversed gate
+
+### CELL 11 code
+from summit_composer import pct, hblend, rabari_line, compose
+
+def recipe(t, teacher_w, own_share, main, corr, gate_amp):
+    teacher = (1 - own_share) * T188 + own_share * OWN
+    return compose(BASE3, rabari_line(t, RC, V41, V43), teacher, teacher_w, main, corr, gate_amp)
+
+base = recipe(**V54_RECIPE)
+moved = recipe(T, TEACHER_W, OWN_SHARE, MAIN_W, ORDER_C, GATE_AMP)
+fourth = rabari_line(T, RC, V41, V43)
+
+# Check: without the gate the recipe rebuilds rabari's public V54 (his direction files are private,
+# so the line is rebuilt from his V41/V43 outputs; a handful of rows can differ in the last digit).
+print(f'recipe vs rabari V54: rank corr {np.corrcoef(base, V54)[0, 1]:.10f} | rows with a different rank: {(base != V54).sum()}')
+assert np.corrcoef(base, V54)[0, 1] > 0.99999999
+
+# Apply only the change this notebook's move makes, on top of the real V54 file.
+final = pct(V54 + (moved - base))
+print(f'final vs V54: rank corr {np.corrcoef(final, V54)[0, 1]:.7f} | vs 0.96206: {np.corrcoef(final, RC)[0, 1]:.7f}')
+
+### CELL 12 markdown
+## 🔍 4. Check and look
+
+### CELL 13 code
+DEFAULTS = (T, TEACHER_W, OWN_SHARE, MAIN_W, ORDER_C, GATE_AMP) == (13.0, 0.58, -1.5, [-0.35, 0.10, 0.15, 1.10], [0.175, -0.025, -0.05, -0.10], -0.05)
+if DEFAULTS:
+    assert hashlib.sha256(final.astype('<f8').tobytes()).hexdigest() == '40b2b36999b1e96d7441f9038ee76a291c4861dce07c2ced766aa519603c2df3'
+    print('✅ identical to my scored 0.96210 file')
+
+w = TEACHER_W + GATE_AMP * (pct(np.column_stack(BASE3 + [fourth]).std(axis=1)) - 0.5)
+fig, ax = plt.subplots(1, 2, figsize=(14, 4.2))
+ax[0].hist(w, bins=60, color='#4b1f8c'); ax[0].set_title('Teacher share per row after the reversed gate', fontweight='bold')
+ax[0].set_xlabel('teacher share (agreeing rows → more teacher)')
+amps = [0.02, 0.0, -0.02, -0.05, -0.10]
+ax[1].plot(['t=10 +0.02', 't=10 0', 't=10 −0.02', 'V54 0', 'V54 −0.05', 'V54 −0.10', 'V54×1.5 −0.05'], [0.96207, 0.96208, 0.96208, 0.96209, 0.96210, 0.96209, 0.96210], 'o-', c='#d6913f', lw=2, ms=9)
+ax[1].tick_params(axis='x', rotation=30)
+ax[1].set_title('Measured public score vs gate amp', fontweight='bold'); ax[1].set_ylabel('public LB (rounded)')
+plt.tight_layout(); plt.show()
+
+### CELL 14 markdown
+## 📤 5. Write the submission
+
+### CELL 15 code
+sub = pd.DataFrame({'id': ids, 'satisfaction': final})
+assert sub.satisfaction.between(0, 1).all() and sub.id.is_unique and len(sub) == N
+sub.to_csv('submission.csv', index=False, float_format='%.9f')
+print('exported:', sorted(p for p in os.listdir('.') if p.endswith(('.csv', '.py'))))
+sub.head()
+
+### CELL 16 markdown
+## 🔁 Make it yours
+
+**1. Try the gate on your own composition.** `compose()` in `summit_composer.py` takes any three base members, any fourth member, any teacher, and a `gate_amp`.
+A negative amp gives the teacher more weight on rows where the members agree.
+
+**2. Move along rabari's line or the recipe knobs.** `T`, `TEACHER_W`, `OWN_SHARE`, `MAIN_W`, `ORDER_C` in the settings cell. Put in the `V54_RECIPE` values with `GATE_AMP = 0` and you get rabari's V54 back.
+
+**3. Reuse the pieces.** Add this notebook as an input:
+
+```python
+import sys; sys.path.append('/kaggle/input/<this-notebook>')
+from summit_composer import compose, rabari_line, hblend, pct
+```
+
+My 181-member CV stack (test **and** OOF, CV 0.962166) and every file used here are in
+[s6e10-lb-surface-atlas](https://www.kaggle.com/datasets/mayankraaz/s6e10-lb-surface-atlas).
+
+### CELL 17 markdown
+## 🙏 Credits
+
+This notebook composes other people's measured work. Please upvote them:
+- **[KRISH RABARI](https://www.kaggle.com/code/rabari9999/s6e10-lb-0-96209-rank-10)**: the surface line and the V54 recipe this file starts from. His V41, V43 and V54 outputs are rehosted unchanged in my atlas dataset because notebook inputs only expose the latest version.
+- **[F.A. Nina](https://www.kaggle.com/nina2025)**: the h-blend rule, the h-blend (7) v10 recipe, and the [ps-s6e10-7](https://www.kaggle.com/datasets/nina2025/ps-s6e10-7) dataset with the members and the teacher.
+- **[Кирилл Тымчишин](https://www.kaggle.com/code/kirilltym/0-96206-disagreement-gated-teachers)**: the disagreement gate that this notebook reverses, and the 0.96206 anchor.
+- **[ewtherka](https://www.kaggle.com/code/ewtherka/s6e10-0-96188-lb-l2-family-wise-actually-helps)**: the 0.96188 plain-LR stack used as the teacher.
+- The member files: Hanif Noer Rofiq, samanyu1808, KRISH RABARI and others credited in Nina's dataset; the stacks underneath: Chris Deotte, Den Pugovkin, goodpjw2008 and every public OOF author.
+- **[Korokke3](https://www.kaggle.com/code/korokke3/s6e10-is-your-0-00001-real-lb-noise-calculator)**: the noise formula in the warning.
+- **Kaggle's yellow bar** on the submissions page (the two auto-selected best submissions) is a free way to see which of your tied files is better unrounded.
+- My earlier notebook [LB Surface Ascent v2](https://www.kaggle.com/code/mayankraaz/s6e10-lb-surface-ascent-v2-0-96208) has the 0.96208 composition and the surface analysis behind it.
+
+If the reversed gate or the composition idea was useful, an upvote helps. Thank you! ✈️

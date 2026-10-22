@@ -1,0 +1,176 @@
+{
+  "protocol": "Exact empirical independent donor marginal equality; 15% independent selection per field. Missing equals missing. Descriptive only; no satisfaction labels read.",
+  "inputs": [
+    {
+      "path": "train.csv",
+      "rows": 699635
+    },
+    {
+      "path": "test.csv",
+      "rows": 299844
+    },
+    {
+      "path": "external_data/train.csv",
+      "rows": 103904
+    },
+    {
+      "path": "external_data/test.csv",
+      "rows": 25976
+    }
+  ],
+  "total_rows": 1129359,
+  "columns": [
+    {
+      "column": "Gender",
+      "unique_including_missing": 2,
+      "same_value_probability": 0.5000024325032271,
+      "selected_probability": 0.15,
+      "changed_probability": 0.07499963512451593
+    },
+    {
+      "column": "Customer Type",
+      "unique_including_missing": 2,
+      "same_value_probability": 0.7101886738556153,
+      "selected_probability": 0.15,
+      "changed_probability": 0.0434716989216577
+    },
+    {
+      "column": "Age",
+      "unique_including_missing": 75,
+      "same_value_probability": 0.02025358281813216,
+      "selected_probability": 0.15,
+      "changed_probability": 0.14696196257728017
+    },
+    {
+      "column": "Type of Travel",
+      "unique_including_missing": 2,
+      "same_value_probability": 0.5870362043596091,
+      "selected_probability": 0.15,
+      "changed_probability": 0.06194456934605863
+    },
+    {
+      "column": "Class",
+      "unique_including_missing": 3,
+      "same_value_probability": 0.45705610680634023,
+      "selected_probability": 0.15,
+      "changed_probability": 0.08144158397904896
+    },
+    {
+      "column": "Flight Distance",
+      "unique_including_missing": 3824,
+      "same_value_probability": 0.002104038512743694,
+      "selected_probability": 0.15,
+      "changed_probability": 0.14968439422308844
+    },
+    {
+      "column": "Inflight wifi service",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.2101405020769043,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11847892468846435
+    },
+    {
+      "column": "Departure/Arrival time convenient",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.1954977987954201,
+      "selected_probability": 0.15,
+      "changed_probability": 0.12067533018068699
+    },
+    {
+      "column": "Ease of Online booking",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.20163878923005613,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11975418161549156
+    },
+    {
+      "column": "Gate location",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.21560076841562664,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11765988473765598
+    },
+    {
+      "column": "Food and drink",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.21137321767819142,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11829401734827129
+    },
+    {
+      "column": "Online boarding",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.21936624276044808,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11709506358593277
+    },
+    {
+      "column": "Seat comfort",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.23714192111938218,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11442871183209267
+    },
+    {
+      "column": "Inflight entertainment",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.22400427235264073,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11639935914710388
+    },
+    {
+      "column": "On-board service",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.23363947866092435,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11495407820086134
+    },
+    {
+      "column": "Leg room service",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.2254612254335522,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11618081618496717
+    },
+    {
+      "column": "Baggage handling",
+      "unique_including_missing": 5,
+      "same_value_probability": 0.2808328698060011,
+      "selected_probability": 0.15,
+      "changed_probability": 0.10787506952909984
+    },
+    {
+      "column": "Checkin service",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.23488742927677522,
+      "selected_probability": 0.15,
+      "changed_probability": 0.11476688560848372
+    },
+    {
+      "column": "Cleanliness",
+      "unique_including_missing": 6,
+      "same_value_probability": 0.21891576865383988,
+      "selected_probability": 0.15,
+      "changed_probability": 0.117162634701924
+    },
+    {
+      "column": "Departure Delay in Minutes",
+      "unique_including_missing": 466,
+      "same_value_probability": 0.7550034156508406,
+      "selected_probability": 0.15,
+      "changed_probability": 0.03674948765237391
+    },
+    {
+      "column": "Arrival Delay in Minutes",
+      "unique_including_missing": 473,
+      "same_value_probability": 0.7652043240340961,
+      "selected_probability": 0.15,
+      "changed_probability": 0.035219351394885585
+    }
+  ],
+  "rating_mean_same_value_probability": 0.2237307910969048,
+  "expected_selected_fields_per_row": 3.15,
+  "expected_changed_fields_per_row": 2.1441976405799448,
+  "training": false,
+  "auc_computed": false
+}

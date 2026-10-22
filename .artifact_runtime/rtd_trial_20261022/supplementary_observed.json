@@ -1,0 +1,23 @@
+{
+  "descriptive_only_no_new_fitting": true,
+  "single_rtd_vs_clean": {
+    "delta": 0.002024718852518487,
+    "approximate_se": 0.0001864730891576618,
+    "interval95": [
+      0.0016592315977694697,
+      0.0023902061072675037
+    ]
+  },
+  "source_hash_matches": {
+    "rtd_trial_support.py": true,
+    "experiment_rtd_trial.py": true,
+    "evaluate_rtd_trial.py": true,
+    "verify_rtd_trial.py": true
+  },
+  "protected_hash_matches": {
+    "submission_public_pool_20261020.csv": true,
+    "CURRENT_BEST_RESULT.md": true,
+    "CURRENT_BEST_SUBMISSION.json": true,
+    "CURRENT_RECOMMENDED_CANDIDATE.json": true
+  }
+}

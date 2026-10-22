@@ -1,0 +1,10 @@
+{
+  "phase": "refit",
+  "arm": "shuffled22",
+  "trees": 751,
+  "seconds": 3.4573888778686523,
+  "auc": 0.9948236783788087,
+  "logloss": 0.0886809378862381,
+  "fitted_rows": 97394,
+  "scored_rows": 32465
+}

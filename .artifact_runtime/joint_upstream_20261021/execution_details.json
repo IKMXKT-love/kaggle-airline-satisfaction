@@ -1,0 +1,7 @@
+{
+  "started_epoch": 1792553415.6494918,
+  "fit_deadline_epoch": 1792554011.906911,
+  "initialization": "baseline zero; extended arms warm-start from same-fold newly fitted baseline with zero extra coefficients; same convex objective",
+  "data_ready_epoch": 1792553418.3055718,
+  "available_memory_bytes": 3593764864
+}

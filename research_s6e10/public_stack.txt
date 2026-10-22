@@ -1,0 +1,251 @@
+# S6E10 | Stacking every public OOF library | nested CV 0.96205 · LB 0.96167
+
+Many people in this episode have shared out-of-fold (OOF) predictions on the same split,
+`StratifiedKFold(5, shuffle=True, random_state=42)` over `train.csv`. Each public stack I found combines only some of them.
+This notebook puts **all of them** into one logistic-regression stack and measures, with a **nested** CV, what every
+library adds.
+
+| stack | members | nested CV |
+|---|---:|---:|
+| goodpjw2008 Part 8 (48 members, their own nested CV) | 48 | 0.961933 |
+| najiama blend 02 (OOF of the best public submission) | 1 | 0.961920 |
+| public libraries **without** goodpjw's 40 own models | 79 | 0.962003 |
+| all public libraries | 119 | 0.962004 |
+| **+ the 5 models of busyaprime (this notebook, v3)** | **124** | **0.96205** |
+
+**Public LB 0.96167** for the 124-member stack (the 119-member version of this notebook scored 0.96163). The 79-member
+variant scored 0.96155, a gap I can't distinguish from noise; more on that below.
+
+**What moved the stack** (sections 4 and 4b):
+- the **TabPFN-3.5 / TabICL** foundation members: **+0.00012**, positive in all 5 outer folds (+0.00006 to +0.00023);
+- the **10-fold members** of sachith7: +0.0001 in a stack without goodpjw2008's 40 own models, but only **+0.000035**
+  in the full stack (they overlap with those models); still positive in every fold;
+- busyaprime's RealMLP (Vladimir Demidov's configuration), worth about +0.00003 on top of everything else;
+- the rest, all GBDT / RealMLP members on similar features, adds only +0.00001 to +0.00003 each.
+
+**A note on the public LB.** The public part is a small share of the test set. On OOF subsamples of that size, the SD of the
+difference between two *different* strong stacks is about 1e-4. So 0.96160 vs 0.96165 is noise, and I select by nested CV
+only (no weights tuned on the LB, no rounding or extrapolation tricks).
+
+Nothing here is trained from scratch. All the credit for the members goes to their authors (section 1); please upvote their work.
+
+## 1. Sources (please upvote them)
+
+| source | what it contributes |
+|---|---|
+| [goodpjw2008 · Part 8](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160) | 48 members: GBDT / RealMLP / DeepFM on route-ID features, plus 8 TabPFN-3.5 and TabICL members |
+| [sachith7 · stack OOF predictions](https://www.kaggle.com/datasets/sachith7/s6e10-stack-oof-predictions) | 22 members, 10 of them trained on 10 folds |
+| [megayak · OOF library](https://www.kaggle.com/datasets/megayak/s6e10-oof-library) | LightGBM / XGBoost / CatBoost / RealMLP (seed groups averaged → 11) |
+| [dariushafshar · golem OOF library](https://www.kaggle.com/datasets/dariushafshar/s6e10-golem-oof-library) | 14 members |
+| [arhancanli12 · OOF + test predictions](https://www.kaggle.com/datasets/arhancanli12/s6e10-oof-test-predictions) | LGB / XGB / CatBoost / RealMLP |
+| [najiama · OOF](https://www.kaggle.com/datasets/najiama/s6e10-oof) | blend 01 (blend 02 adds nothing on top) |
+| [samanyu1808 · TabPFN route + og](https://www.kaggle.com/code/samanyu1808/s6e10-tabpfn-route-og), [TabPFN seeds](https://www.kaggle.com/code/samanyu1808/s6e10-tabpfn-seeds) | TabPFN-3.5 multi-seed |
+| [hemingweb · TabPFN-3.5 full context](https://www.kaggle.com/code/hemingweb/s6e10-exp01-tabpfn35-full-context) | TabPFN-3.5, raw columns |
+| [mitudru · equality blocks](https://www.kaggle.com/code/mitudru/s6e10-analysis-first-equality-blocks-stack) | 7 members |
+| [wangxintong111 · CatBoost rating crosses](https://www.kaggle.com/code/wangxintong111/s6e10-catboost-rating-crosses-cv-0-96080), [LightGBM context stats](https://www.kaggle.com/code/wangxintong111/s6e10-lightgbm-context-stats-cv-0-96065) | 2 members |
+| [thisray · XGB / RealMLP / CatBoost](https://www.kaggle.com/code/thisray/s6e10-xgb-realmlp-catboost-lb-0-96123) | 3 members |
+| [megayak · honest OOF stack](https://www.kaggle.com/code/megayak/s6e10-honest-oof-stack) | 4 members |
+| [busyaprime · Route or distance? Both](https://www.kaggle.com/code/busyaprime/s6e10-route-or-distance-both-lb-0-96169) | 5 members (2 LightGBM, CatBoost, XGBoost, RealMLP), OOF saved by re-running their notebook: [dataset](https://www.kaggle.com/datasets/kratosyan/s6e10-busyaprime-five-members-oof) |
+
+Notebook outputs are pinned to the version attached to this notebook; if an author re-runs theirs, the numbers can move
+in the 5th decimal. The TabPFN-3.5 members come with Prior Labs' non-commercial licence; their authors note that it
+allows use in Kaggle competitions.
+
+import glob, os, time
+import numpy as np, pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
+
+T0 = time.time()
+def find_dir(slug):
+    # works with both Kaggle input layouts: /kaggle/input/<slug> and /kaggle/input/{datasets,notebooks,competitions}/<owner>/<slug>
+    hits = [p for p in glob.glob(f'/kaggle/input/**/{slug}', recursive=True) if os.path.isdir(p)]
+    assert hits, f'input not attached: {slug}'
+    return sorted(hits, key=len)[0]
+
+COMP = find_dir('playground-series-s6e10')
+tr = pd.read_csv(f'{COMP}/train.csv', usecols=['id', 'satisfaction'])
+te = pd.read_csv(f'{COMP}/test.csv', usecols=['id'])
+y = tr['satisfaction'].astype(int).values
+NTR = len(y)
+OOF, TEST, SRC = {}, {}, {}
+
+def add(name, o, t, src):
+    o, t = np.asarray(o, float), np.asarray(t, float)
+    assert o.shape == (NTR,) and t.shape == (len(te),), (name, o.shape, t.shape)
+    assert np.isfinite(o).all() and np.isfinite(t).all(), name
+    OOF[name], TEST[name], SRC[name] = o, t, src
+
+def by_id(df, ids, col):
+    return df.set_index('id')[col].loc[ids].values
+
+## 2. Load every library
+Every array is aligned to `train.csv` / `test.csv` order by `id` (or checked to be in that order).
+
+# goodpjw2008 Part 8: 48 members (40 own models + 8 TabPFN/TabICL)
+d = find_dir('s6e10-tabpfn-route-categories-lb-0-96160')
+go, gt = pd.read_csv(f'{d}/oof_members.csv'), pd.read_csv(f'{d}/test_members.csv')
+assert (go['id'].values == tr['id'].values).all() and (gt['id'].values == te['id'].values).all()
+for c in go.columns[1:]:
+    add('gp_' + c, go[c].values, gt[c].values, 'goodpjw P8')
+del go, gt
+
+# megayak OOF library (RealMLP seeds averaged)
+d = find_dir('s6e10-oof-library')
+mo, mt = pd.read_parquet(f'{d}/oof_predictions.parquet'), pd.read_parquet(f'{d}/test_predictions.parquet')
+assert (mo['id'].values == tr['id'].values).all() and (mt['id'].values == te['id'].values).all()
+groups = {}
+for c in mo.columns:
+    if c in ('id', 'fold', 'satisfaction'):
+        continue
+    groups.setdefault(c.rsplit('_s', 1)[0] if c.startswith('realmlp') else c, []).append(c)
+for g, cols in groups.items():
+    add('mg_' + g, mo[cols].mean(1).values, mt[cols].mean(1).values, 'megayak')
+
+# dariushafshar golem library (.npy, row order of train/test)
+d = find_dir('s6e10-golem-oof-library')
+for k in 'abcdefghijklmn':
+    add('gl_' + k, np.load(f'{d}/oof_{k}.npy'), np.load(f'{d}/test_{k}.npy'), 'golem')
+
+# arhancanli12
+d = find_dir('s6e10-oof-test-predictions')
+ao, at = pd.read_parquet(f'{d}/oof_predictions.parquet'), pd.read_parquet(f'{d}/test_predictions.parquet')
+assert (ao['id'].values == tr['id'].values).all() and (at['id'].values == te['id'].values).all()
+for c in ['lgb_5f', 'xgb_5f', 'cat_5f', 'realmlp_5f']:
+    add('ar_' + c, ao[c].values, at[c].values, 'arhancanli12')
+
+# sachith7 (22 members, 10 of them 10-fold)
+d = find_dir('s6e10-stack-oof-predictions')
+for f in sorted(glob.glob(f'{d}/*.npz')):
+    z = np.load(f)
+    add('sa_' + os.path.basename(f)[:-4], z['oof'], z['test'], 'sachith7')
+
+# najiama blend 01
+d = find_dir('s6e10-oof')
+add('nj_01', by_id(pd.read_csv(f'{d}/01_blend_oof.csv'), tr['id'], 'satisfaction'),
+    by_id(pd.read_csv(f'{d}/01_submission.csv'), te['id'], 'satisfaction'), 'najiama')
+
+# TabPFN-3.5 kernel outputs: samanyu1808 (route + og, raw seeds), hemingweb (raw full context)
+for nm, slug in [('pfn_samanyu_route_og', 's6e10-tabpfn-route-og'), ('pfn_samanyu_seeds', 's6e10-tabpfn-seeds'),
+                 ('pfn_hemingweb_raw', 's6e10-exp01-tabpfn35-full-context')]:
+    d = find_dir(slug)
+    add(nm, by_id(pd.read_csv(f'{d}/oof_exp01_tabpfn35.csv'), tr['id'], 'pred'),
+        by_id(pd.read_csv(f'{d}/test_exp01_tabpfn35.csv'), te['id'], 'satisfaction'), 'TabPFN outputs')
+
+# mitudru (7 members)
+d = find_dir('s6e10-analysis-first-equality-blocks-stack')
+mo2 = pd.read_parquet(f'{d}/oof_predictions.parquet').set_index('id').loc[tr['id']]
+mt2 = pd.read_parquet(f'{d}/test_predictions.parquet').set_index('id').loc[te['id']]
+for c in mo2.columns:
+    add('mi_' + c, mo2[c].values, mt2[c].values, 'mitudru')
+
+# wangxintong111 (2 members)
+for slug, c in [('s6e10-catboost-rating-crosses-cv-0-96080', 'rating_segments'),
+                ('s6e10-lightgbm-context-stats-cv-0-96065', 'context_numeric')]:
+    d = find_dir(slug)
+    add('wx_' + c, by_id(pd.read_parquet(f'{d}/oof_predictions.parquet'), tr['id'], c),
+        by_id(pd.read_parquet(f'{d}/test_predictions.parquet'), te['id'], c), 'wangxintong111')
+
+# thisray (3) and megayak honest stack (4)
+for slug, tag in [('s6e10-xgb-realmlp-catboost-lb-0-96123', 'thisray'), ('s6e10-honest-oof-stack', 'megayak honest')]:
+    d = find_dir(slug)
+    o = pd.read_csv(f'{d}/oof_members.csv').set_index('id').loc[tr['id']]
+    t = pd.read_csv(f'{d}/test_members.csv').set_index('id').loc[te['id']]
+    for c in t.columns:
+        add(f'{tag.split()[0][:2]}{"h" if "honest" in tag else ""}_{c}', o[c].values, t[c].values, tag)
+
+# busyaprime's five models (their folds use seed 33; every row is still out of fold)
+d = find_dir('s6e10-busyaprime-five-members-oof')
+for f in sorted(glob.glob(f'{d}/bp_*.npz')):
+    z = np.load(f)
+    add(os.path.basename(f)[:-4], z['oof'], z['test'], 'busyaprime')
+
+del mo, mt, ao, at, mo2, mt2, o, t   # raw tables are no longer needed
+names = list(OOF)
+print(len(names), 'members |', pd.Series(SRC).value_counts().to_dict())
+print(f'loaded in {time.time() - T0:.0f}s')
+
+single = pd.Series({n: roc_auc_score(y, OOF[n]) for n in names}).sort_values(ascending=False)
+best = single.groupby(pd.Series(SRC)).agg(['size', 'max']).sort_values('max', ascending=False)
+best.columns = ['members', 'best single OOF AUC']
+best
+
+## 3. Nested logistic-regression stack on logits
+
+The stacker is `LogisticRegression(C=1)` on clipped logits of all members. To score it honestly, it is itself
+cross-validated (meta folds `StratifiedKFold(5, shuffle=True, random_state=7)`, as in goodpjw's Part 8): each row's stack
+prediction comes from a stacker that never saw that row. The submission uses one stacker fitted on all OOF rows.
+
+def logit(p):
+    p = np.clip(p, 1e-6, 1 - 1e-6)
+    return np.log(p / (1 - p))
+
+Z = np.column_stack([logit(OOF[n]) for n in names])
+ZT = np.column_stack([logit(TEST[n]) for n in names])
+idx = {n: i for i, n in enumerate(names)}
+import gc
+del OOF, TEST   # from here on only the logit matrices are used (keeps the run well inside the RAM limit)
+gc.collect()
+META = list(StratifiedKFold(5, shuffle=True, random_state=7).split(Z, y))
+
+def nested(cols, C=1.0):
+    ci = [idx[c] for c in cols]
+    out = np.zeros(NTR)
+    for a, b in META:
+        out[b] = LogisticRegression(C=C, max_iter=3000).fit(Z[a][:, ci], y[a]).decision_function(Z[b][:, ci])
+    return out
+
+t = time.time()
+stack_oof = nested(names)
+print(f'nested CV, all {len(names)} members: {roc_auc_score(y, stack_oof):.6f}  '
+      f'folds: {" ".join(f"{roc_auc_score(y[b], stack_oof[b]):.5f}" for _, b in META)}  ({time.time() - t:.0f}s)')
+
+## 4. What each source is worth (leave one source out)
+
+full_auc = roc_auc_score(y, stack_oof)
+rows = []
+for s in pd.Series(SRC).unique():
+    cols = [n for n in names if SRC[n] != s]
+    rows.append((s, sum(SRC[n] == s for n in names), roc_auc_score(y, nested(cols)) - full_auc))
+abl = pd.DataFrame(rows, columns=['left out', 'members', 'Δ nested CV']).sort_values('Δ nested CV')
+abl['Δ nested CV'] = abl['Δ nested CV'].map(lambda v: f'{v:+.6f}')
+abl
+
+## 4b. Are the gains consistent across folds?
+
+A question from the discussion: are the gains of the foundation members and the 10-fold members spread over the outer
+folds, or concentrated in one? Each group is dropped from the full stack, and the per-fold AUC difference is shown.
+
+FM = [n for n in names if 'tabpfn' in n or 'tabicl' in n]
+K10 = [n for n in names if SRC[n] == 'sachith7' and '_k10' in n]
+def per_fold(cols):
+    s = nested(cols)
+    return [roc_auc_score(y[b], s[b]) for _, b in META] + [roc_auc_score(y, s)]
+full_f = per_fold(names)
+rows = []
+for lab, drop in [(f'{len(FM)} TabPFN / TabICL members', FM), (f'{len(K10)} ten-fold members', K10), ('both', FM + K10)]:
+    rest = per_fold([n for n in names if n not in drop])
+    rows.append([lab] + [f'{a - b:+.6f}' for a, b in zip(full_f, rest)])
+pd.DataFrame(rows, columns=['gain of'] + [f'fold {i}' for i in range(5)] + ['pooled'])
+
+## 5. Submission
+
+m = LogisticRegression(C=1.0, max_iter=3000).fit(Z, y)
+pred = 1 / (1 + np.exp(-m.decision_function(ZT)))
+sub = pd.DataFrame({'id': te['id'], 'satisfaction': pred})
+sub.to_csv('submission.csv', index=False)
+print(sub.shape, sub['satisfaction'].describe().round(4).to_dict())
+print(f'total {time.time() - T0:.0f}s')
+
+## Takeaways
+
+- Stacking everything that is already public beats every single public stack on nested CV (0.96205 vs 0.96193),
+  without training a model.
+- New *diverse* members matter more than tuning: the foundation models carry most of the gain, in every fold.
+- A negative result: I added four more 10-fold members of my own on the same features (XGBoost with route features, an
+  original-data teacher and aux expected values; RealMLP; two TabM). Each scored 0.9600–0.9611 alone, but the stack went
+  from 0.962013 to 0.962002. GBDT and NN members on these features are saturated.
+- Choose by nested CV, not by public LB: differences below ~1e-4 on the public LB are noise.
+
+If this was useful, an upvote is appreciated, and please upvote the source notebooks and datasets too.

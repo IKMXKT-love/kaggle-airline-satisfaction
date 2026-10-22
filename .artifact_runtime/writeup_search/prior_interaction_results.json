@@ -1,0 +1,47 @@
+[
+  {
+    "name": "multi_prior_te_d5",
+    "family": "xgboost",
+    "use_te": true,
+    "original": true,
+    "multiple_priors": true,
+    "extended_keys": false,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.035,
+    "selection_auc": 0.9597257977684384,
+    "best_rounds": 897,
+    "features": 138,
+    "seconds": 30.3816339969635
+  },
+  {
+    "name": "interaction_multi_prior_d5",
+    "family": "xgboost",
+    "use_te": true,
+    "original": true,
+    "multiple_priors": true,
+    "extended_keys": true,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.035,
+    "selection_auc": 0.959647806230365,
+    "best_rounds": 695,
+    "features": 168,
+    "seconds": 47.13735556602478
+  },
+  {
+    "name": "interaction_multi_prior_d7",
+    "family": "xgboost",
+    "use_te": true,
+    "original": true,
+    "multiple_priors": true,
+    "extended_keys": true,
+    "depth": 7,
+    "child": 10,
+    "lr": 0.035,
+    "selection_auc": 0.9596938922274065,
+    "best_rounds": 373,
+    "features": 168,
+    "seconds": 50.349143743515015
+  }
+]

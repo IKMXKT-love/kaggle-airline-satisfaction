@@ -1,0 +1,14 @@
+{
+  "phase": "selection",
+  "arm": "teacher_offset",
+  "initial_state_hash": "97833d1d4aa50bcbc8c3d0345fd549dc8aab88bc2c8929d8dc7f7aba6d1e3e16",
+  "epochs_completed": 16,
+  "updates": 4032,
+  "best_epoch": 15,
+  "best_stopping_auc": 0.9574132343998393,
+  "competition_draws": 4128768,
+  "original_draws": 4128768,
+  "original_labels_used": false,
+  "prior": 0.4435720514010615,
+  "seconds": 50.43513798713684
+}

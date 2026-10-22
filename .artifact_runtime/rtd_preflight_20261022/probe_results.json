@@ -1,0 +1,48 @@
+[
+  {
+    "batch": 32,
+    "microstep_seconds": [
+      0.07443209999996725,
+      0.05549040000005334,
+      0.06042879999995421,
+      0.0643720000000485,
+      0.06380560000002333,
+      0.08177760000012313,
+      0.07377039999983026,
+      0.0831166000000394
+    ],
+    "median_microstep_seconds": 0.06907119999993938,
+    "microstep_rows_per_second": 463.2900543211655,
+    "optimizer_seconds": 0.015454600000111895,
+    "peak_allocated_bytes": 2323232256,
+    "peak_reserved_bytes": 2405433344,
+    "projected_training_seconds": 11090.380854666508,
+    "pretrain_rows_total": 3388077,
+    "supervised_rows_total": 1679124,
+    "projection_excludes": "real tokenizer, auxiliary features, data preparation, stop/evaluation inference, checkpointing, verification; classification cost approximated by RTD backbone cost",
+    "synthetic_final_loss": 0.5850211381912231
+  },
+  {
+    "batch": 64,
+    "microstep_seconds": [
+      0.09165310000003046,
+      0.08871750000002976,
+      0.09017790000007153,
+      0.0897099999999682,
+      0.09012189999998554,
+      0.0882094999999481,
+      0.08698370000001887,
+      0.09137039999995977
+    ],
+    "median_microstep_seconds": 0.08991594999997687,
+    "microstep_rows_per_second": 711.7758306509186,
+    "optimizer_seconds": 0.015950399999837828,
+    "peak_allocated_bytes": 2821097984,
+    "peak_reserved_bytes": 2852126720,
+    "projected_training_seconds": 7276.957854983282,
+    "pretrain_rows_total": 3388077,
+    "supervised_rows_total": 1679124,
+    "projection_excludes": "real tokenizer, auxiliary features, data preparation, stop/evaluation inference, checkpointing, verification; classification cost approximated by RTD backbone cost",
+    "synthetic_final_loss": 0.5917840600013733
+  }
+]

@@ -1,0 +1,69 @@
+{
+  "overall_oof_auc": 0.9580775526618023,
+  "per_fold": [
+    {
+      "fold": 0,
+      "auc": 0.9578170822014381,
+      "head_auc": 0.9577667849105715,
+      "neighbor_auc": 0.9577841584985238,
+      "fit_seconds": 184.77427840399997
+    },
+    {
+      "fold": 1,
+      "auc": 0.9585387710431313,
+      "head_auc": 0.9585011754860612,
+      "neighbor_auc": 0.9584454491375314,
+      "fit_seconds": 182.4042430300001
+    },
+    {
+      "fold": 2,
+      "auc": 0.9577319975893519,
+      "head_auc": 0.9576550536747702,
+      "neighbor_auc": 0.9577303415286786,
+      "fit_seconds": 182.1551774080001
+    },
+    {
+      "fold": 3,
+      "auc": 0.9580350726261301,
+      "head_auc": 0.9580860776601134,
+      "neighbor_auc": 0.9577951844881099,
+      "fit_seconds": 182.49602476899986
+    },
+    {
+      "fold": 4,
+      "auc": 0.9584579607452377,
+      "head_auc": 0.9583935789292791,
+      "neighbor_auc": 0.9584408987471525,
+      "fit_seconds": 181.5221195900001
+    }
+  ],
+  "head_oof_auc": 0.9579897494594511,
+  "neighbor_oof_auc": 0.9580194716810898,
+  "log_loss": 0.228444416465496,
+  "brier": 0.061027819345546984,
+  "coverage_one": true,
+  "fold_assignment_sha256": "0d2df9a59085ee4ac172f74548ccb3b02d46be5bf5386db2e2d58263ad424c08",
+  "params": {
+    "version": "hybrid-neighborhood-plr-v1",
+    "epochs": 12,
+    "batch_size": 512,
+    "context_rows": 2048,
+    "frequencies": 8,
+    "frequency_scale": 2.0,
+    "category_dim": 8,
+    "width": 256,
+    "metric_dim": 64,
+    "dropout": 0.1,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "temperature": 1.0,
+    "nca_loss_weight": 0.5,
+    "retrieval_prediction_weight": 0.5,
+    "gradient_clip": 1.0,
+    "encode_batch": 4096,
+    "query_batch": 256,
+    "bank_chunk": 32768,
+    "precision": "float32_no_amp",
+    "seed": 2026
+  }
+}

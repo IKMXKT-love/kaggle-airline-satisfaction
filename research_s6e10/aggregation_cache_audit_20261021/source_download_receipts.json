@@ -1,0 +1,32 @@
+[
+  {
+    "tag": "source_members_json",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/sachith7/s6e10-stack-oof-predictions/members.json",
+    "bytes": 10690,
+    "sha256": "0ab007e3d8232631b05bd4c3927c4757fe2adee97728951632480d9a3e0cd5d2",
+    "elapsed": 2.1661536999999953,
+    "normalized_file": "members.json",
+    "normalized_sha256": "0ab007e3d8232631b05bd4c3927c4757fe2adee97728951632480d9a3e0cd5d2",
+    "normalized_bytes": 10690
+  },
+  {
+    "tag": "source_rmlp_v4aux_k10_npz",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/sachith7/s6e10-stack-oof-predictions/rmlp_v4aux_k10.npz",
+    "bytes": 4249553,
+    "sha256": "333d638f169695a40f0f66fe7f3abf788b01ca3c3bf381d64504c6ffcdb1d686",
+    "elapsed": 10.692975300000398,
+    "normalized_file": "rmlp_v4aux_k10.npz",
+    "normalized_sha256": "333d638f169695a40f0f66fe7f3abf788b01ca3c3bf381d64504c6ffcdb1d686",
+    "normalized_bytes": 4249553
+  },
+  {
+    "tag": "source_rmlp_v4aux_k10s2_npz",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/sachith7/s6e10-stack-oof-predictions/rmlp_v4aux_k10s2.npz",
+    "bytes": 4249849,
+    "sha256": "3885071505a01f81097c7bdb1c777bf91a0f47016add2a8e46be76f4888865c2",
+    "elapsed": 9.229127499999777,
+    "normalized_file": "rmlp_v4aux_k10s2.npz",
+    "normalized_sha256": "3885071505a01f81097c7bdb1c777bf91a0f47016add2a8e46be76f4888865c2",
+    "normalized_bytes": 4249849
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "completed": true,
+  "baseline_auc": 0.9623591653196826,
+  "arms": {
+    "competition_only": {
+      "single_auc": 0.9602520262950435,
+      "primary_blend_auc": 0.9623393065979499,
+      "primary_blend_delta": {
+        "delta": -1.9858721732768522e-05,
+        "approximate_se": 1.765927608597251e-05,
+        "interval95": [
+          -5.447090286127463e-05,
+          1.4753459395737593e-05
+        ]
+      },
+      "diagnostic_weights": {
+        "0.05": -4.0610142340025135e-06,
+        "0.2": -8.468823563723138e-05
+      }
+    },
+    "shared_head": {
+      "single_auc": 0.960112323991039,
+      "primary_blend_auc": 0.9623487356004764,
+      "primary_blend_delta": {
+        "delta": -1.0429719206140265e-05,
+        "approximate_se": 2.0359982428584735e-05,
+        "interval95": [
+          -5.033528476616635e-05,
+          2.9475846353885818e-05
+        ]
+      },
+      "diagnostic_weights": {
+        "0.05": 1.053897859537578e-06,
+        "0.2": -7.141860003123668e-05
+      }
+    },
+    "dual_head": {
+      "single_auc": 0.9604558001259388,
+      "primary_blend_auc": 0.9623457433831097,
+      "primary_blend_delta": {
+        "delta": -1.3421936572929588e-05,
+        "approximate_se": 1.7286276979889135e-05,
+        "interval95": [
+          -4.730303945351229e-05,
+          2.0459166307653116e-05
+        ]
+      },
+      "diagnostic_weights": {
+        "0.05": -1.565430455152672e-06,
+        "0.2": -6.731723431818715e-05
+      }
+    }
+  },
+  "dual_vs_competition_single": {
+    "delta": 0.00020377383089545994,
+    "approximate_se": 7.937006617334772e-05,
+    "interval95": [
+      4.820850119569841e-05,
+      0.00035933916059522144
+    ]
+  },
+  "dual_vs_shared_single": {
+    "delta": 0.00034347613489993557,
+    "approximate_se": 9.87491209395606e-05,
+    "interval95": [
+      0.00014992785785839682,
+      0.0005370244119414743
+    ]
+  },
+  "dual_vs_competition_primary_blend": {
+    "delta": 6.436785159838927e-06,
+    "approximate_se": 8.671936085827515e-06,
+    "interval95": [
+      -1.0560209568383003e-05,
+      2.3433779888060857e-05
+    ]
+  },
+  "passes_expansion_gate": false,
+  "gate_uses_only_predeclared_dual_10percent_blend": true,
+  "scored_rows": 139927,
+  "new_public_score": null,
+  "elapsed_from_preparation_seconds": 322.48495149612427,
+  "uncertainty": "Paired fixed-prediction sample uncertainty only; no training randomness, multiple-selection, or public OOF dependence adjustment.",
+  "validation_caveat": "Fixed public OOF baseline inherits upstream early-stopping and indirect fold label dependence; not end-to-end nested validation."
+}

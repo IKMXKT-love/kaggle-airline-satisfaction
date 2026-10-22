@@ -1,0 +1,250 @@
+### CELL 0 markdown
+## Setup Libraries
+
+### CELL 1 code
+%%time
+!pip install -q pytabkit
+
+### CELL 2 code
+import random
+import warnings
+import numpy as np, pandas as pd
+from colorama import Fore, Style
+from importlib.metadata import version
+from sklearn.metrics import roc_auc_score
+from sklearn.preprocessing import TargetEncoder
+from sklearn.model_selection import StratifiedKFold
+
+import torch
+import pytabkit
+from pytabkit import RealMLP_TD_Classifier
+
+warnings.filterwarnings('ignore')
+print("PyTorch  version:", torch.__version__)
+print("PyTabKit version:", version("pytabkit"))
+
+def seed_everything(seed: int):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+seed_everything(42)
+
+### CELL 3 markdown
+## Load Data
+
+### CELL 4 code
+train = pd.read_csv("/kaggle/input/competitions/playground-series-s6e10/train.csv")
+test = pd.read_csv("/kaggle/input/competitions/playground-series-s6e10/test.csv")
+print("Train shape:", train.shape)
+print("Test shape :", test.shape)
+
+### CELL 5 markdown
+## Preprocess Features
+
+### CELL 6 code
+%%time
+ID = 'id'
+TARGET = 'satisfaction'
+train[TARGET] = train[TARGET].map({False: 0, True: 1})
+X = train.drop([ID, TARGET], axis=1); train_id = train[ID]
+y = train[TARGET]
+X_test = test.drop([ID], axis=1); test_id = test[ID]
+del train, test
+print("X      init shape:", X.shape)
+print("X_test init shape:", X_test.shape, "\n")
+
+cat_cols = X.select_dtypes(include=['object']).columns.tolist()
+num_cols = X.select_dtypes(exclude=['object']).columns.tolist()
+print("init len(cat_cols):", len(cat_cols))
+print("init len(num_cols):", len(num_cols), "\n")
+
+category_map = {}
+important_combos = [
+    ('Class', 'Type of Travel', 'Gender'),
+    ('Class', 'Type of Travel', 'Age'),
+    ('Food and drink', 'Cleanliness'),
+    ('Flight Distance', 'Departure/Arrival time convenient'),
+]
+def feature_engineering(df, fit=False):
+    # Fill NaNs
+    for col in cat_cols:
+        df[col] = df[col].fillna("missing")
+    for col in num_cols:
+        df[col] = df[col].fillna(0.0)
+    
+    # Categorize numericals
+    for col in num_cols:
+        cat_name = f"{col}_cat_"
+        if fit:
+            codes, uniques = df[col].factorize()
+            category_map[col] = uniques
+        else:
+            uniques = category_map[col]
+            code_map = {cat: i for i, cat in enumerate(uniques)}
+            codes = df[col].map(code_map).fillna(-1).astype('int32')
+        df[cat_name] = codes
+        df[cat_name] = df[cat_name].astype('category')
+
+    # Count encoding
+    for col in cat_cols + ['Leg room service']:
+        count_name = f"_{col}_count"
+        if fit:
+            count_map = df[col].value_counts()
+            category_map[count_name] = count_map
+        else:
+            count_map = category_map[count_name]
+        df[count_name] = df[col].map(count_map).fillna(0).astype('int32')
+
+    # Create interaction categories
+    combo_names = []
+    for cols in important_combos:
+        combo_name = '_'.join(cols) + '_'
+        combo_names.append(combo_name)
+        combo_series = df[cols[0]].astype(str)
+        for col in cols[1:]:
+            combo_series = combo_series + '_' + df[col].astype(str)
+        if fit:
+            codes, uniques = pd.factorize(combo_series, sort=False)
+            category_map[combo_name] = uniques
+        else:
+            uniques = category_map[combo_name]
+            code_map = {cat: i for i, cat in enumerate(uniques)}
+            codes = combo_series.map(code_map).fillna(-1).astype('int32')
+        df[combo_name] = codes
+        df[combo_name] = df[combo_name].astype('category') 
+
+    new_cat_cols = [col for col in df.columns if col.endswith('_')]
+    new_num_cols = [col for col in df.columns if col.startswith('_')]
+    return df, new_cat_cols, new_num_cols, combo_names
+
+X, new_cat_cols, new_num_cols, combo_names = feature_engineering(X, fit=True)
+X_test, _, _, _ = feature_engineering(X_test, fit=False)
+cat_cols += new_cat_cols; num_cols += new_num_cols
+print("len(new_cat_cols):", len(new_cat_cols))
+print("len(new_num_cols):", len(new_num_cols), "\n")
+
+print("prep len(cat_cols):", len(cat_cols))
+print("prep len(num_cols):", len(num_cols), "\n")
+print("X      prep shape:", X.shape)
+print("X_test prep shape:", X_test.shape, "\n")
+
+### CELL 7 markdown
+## Config
+
+### CELL 8 code
+class CFG:
+    FOLDS = 5
+    SEED = 42
+    TE = True
+
+params = {
+    'random_state': 42,
+    'verbosity': 2,
+    'val_metric_name': '1-auc_ovr',
+
+    'n_ens': 8,
+    'n_epochs': 3,
+    'batch_size': 288,
+    'use_early_stopping': False,
+    'early_stopping_additive_patience': 10,
+    'early_stopping_multiplicative_patience': 1,
+
+    'lr': 0.053,
+    'wd': 0.015,
+    'sq_mom': 0.988,
+    'lr_sched': 'flat_anneal',
+    'wd_sched': 'cos_log_15',
+    'first_layer_lr_factor': 0.25,
+
+    'embedding_size': 5,
+    'max_one_hot_cat_size': 2,
+    'hidden_sizes': [512, 256, 128],
+    'act': 'silu',
+    'p_drop': 0.05,
+    'p_drop_sched': 'pow5',
+
+    'plr_hidden_1': 16,
+    'plr_hidden_2': 8,
+    'plr_act_name': 'gelu',
+    'plr_lr_factor': 0.1151,
+    'plr_sigma': 2.33,
+
+    'ls_eps': 0.01,
+    'ls_eps_sched': 'sqrt_cos',
+
+    'add_front_scale': False,
+    'bias_init_mode': 'neg-uniform-dynamic-2',
+    'tfms': ['one_hot', 'median_center', 'robust_scale',
+             'smooth_clip', 'embedding', 'l2_normalize'],
+}
+
+### CELL 9 markdown
+## Train K-Fold
+
+### CELL 10 code
+%%time
+skf = StratifiedKFold(n_splits=CFG.FOLDS, shuffle=True, random_state=CFG.SEED)
+oof_preds = np.zeros(len(X))
+test_preds = np.zeros(len(X_test))
+
+for fold, (tr_idx, val_idx) in enumerate(skf.split(X, y), 1):
+    X_tr = X.iloc[tr_idx].copy()
+    X_val = X.iloc[val_idx].copy()
+    y_tr = y.iloc[tr_idx]
+    y_val = y.iloc[val_idx]
+    X_tst = X_test.copy()
+
+    # Target encoding
+    if CFG.TE:
+        te_cols = combo_names
+        TE = TargetEncoder(cv=CFG.FOLDS, smooth='auto', shuffle=True, random_state=CFG.SEED)
+        tr_enc = TE.fit_transform(X_tr[te_cols], y_tr)
+        val_enc = TE.transform(X_val[te_cols])
+        tst_enc = TE.transform(X_tst[te_cols])
+
+        te_names = [f"_{col}TE" for col in te_cols]
+        X_tr[te_names] = tr_enc
+        X_val[te_names] = val_enc
+        X_tst[te_names] = tst_enc
+
+        combos_to_drop = ['Class_Type of Travel_Age_', 
+                          'Flight Distance_Departure/Arrival time convenient_']
+        X_tr = X_tr.drop(combos_to_drop, axis=1)
+        X_val = X_val.drop(combos_to_drop, axis=1)
+        X_tst = X_tst.drop(combos_to_drop, axis=1)
+
+    if fold == 1: print("len(FEATURES):", len(X_tr.columns.tolist()), "\n")
+    print("#"*16)
+    print(f"### Fold {fold}/{CFG.FOLDS} ...")
+    print("#"*16)
+
+    model = RealMLP_TD_Classifier(**params)
+    model.fit(X_tr, y_tr, X_val, y_val)
+
+    val_preds = model.predict_proba(X_val)[:, 1]
+    fold_test_preds = model.predict_proba(X_tst)[:, 1]
+
+    oof_preds[val_idx] = val_preds
+    test_preds += fold_test_preds / CFG.FOLDS
+
+    fold_score = roc_auc_score(y_val, val_preds)
+    print(f"{Fore.GREEN}{Style.BRIGHT}Fold {fold} | Score: {fold_score:.5f}{Style.RESET_ALL}\n")
+    torch.cuda.empty_cache()
+
+### CELL 11 markdown
+## Evaluation and Submission
+
+### CELL 12 code
+oof_score = roc_auc_score(y, oof_preds)
+print("\n" + "="*26)
+print(f"Overall OOF Score: {Fore.BLACK}{Style.BRIGHT}{oof_score:.5f}{Style.RESET_ALL}")
+print("="*26)
+
+oof_df = pd.DataFrame({ID: train_id, TARGET: oof_preds})
+oof_df.to_csv('oof_preds.csv', index=False)
+
+sub = pd.DataFrame({ID: test_id, TARGET: test_preds})
+sub.to_csv('submission.csv', index=False)
+sub.head()
+
+### CELL 13 code

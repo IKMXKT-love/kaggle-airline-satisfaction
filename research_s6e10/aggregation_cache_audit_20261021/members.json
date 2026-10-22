@@ -1,0 +1,551 @@
+{
+ "xgb_raw": {
+  "model": "xgb",
+  "featset": "raw",
+  "params": {},
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.9588324278029428,
+  "fold_auc": [
+   0.9591092077435722,
+   0.9576130236081131,
+   0.9596410468274089,
+   0.9587980162397047,
+   0.9590212707247094
+  ],
+  "best_iter": [
+   1586,
+   1681,
+   1730,
+   1483,
+   1468
+  ],
+  "total_seconds": 87.7,
+  "device": null
+ },
+ "xgb_te": {
+  "model": "xgb",
+  "featset": "raw+te",
+  "params": {},
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.9601785611123836,
+  "fold_auc": [
+   0.9605820889775274,
+   0.9588863997612034,
+   0.9610052053378537,
+   0.9602625968374081,
+   0.9601823054164529
+  ],
+  "best_iter": [
+   1280,
+   981,
+   1121,
+   1192,
+   1596
+  ],
+  "total_seconds": 88.9,
+  "device": null
+ },
+ "xgb_route": {
+  "model": "xgb",
+  "featset": "raw+fdagg+cnt+te",
+  "params": {},
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.9603173327885292,
+  "fold_auc": [
+   0.9607221801042451,
+   0.959307914382533,
+   0.960960266042532,
+   0.9604962547274283,
+   0.960123705534681
+  ],
+  "best_iter": [
+   981,
+   901,
+   2279,
+   1167,
+   2293
+  ],
+  "total_seconds": 158.8,
+  "device": null
+ },
+ "xgb_A": {
+  "model": "xgb",
+  "featset": "raw+fdagg+cnt+ogx+te",
+  "params": {},
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.9609030457096748,
+  "fold_auc": [
+   0.9612040302552327,
+   0.9598493134770372,
+   0.9615596836490141,
+   0.9611416815607214,
+   0.9607901707326583
+  ],
+  "best_iter": [
+   706,
+   595,
+   1560,
+   644,
+   1392
+  ],
+  "total_seconds": 122.5,
+  "device": null
+ },
+ "xgb_A_auxev": {
+  "model": "xgb",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_ev",
+  "params": {},
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.9610442187105437,
+  "fold_auc": [
+   0.9612959189536364,
+   0.9601328213178622,
+   0.9616955593610642,
+   0.9611973237922122,
+   0.9609502472168946
+  ],
+  "best_iter": [
+   809,
+   745,
+   556,
+   660,
+   1032
+  ],
+  "total_seconds": 121.5,
+  "device": null
+ },
+ "rmlp_v4aux_k10": {
+  "model": "realmlp",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_all",
+  "params": {},
+  "seed": 42,
+  "nfold": 10,
+  "oof_auc": 0.9613979792104848,
+  "fold_auc": [
+   0.9615399615947453,
+   0.9605948405179966,
+   0.9620029152619153,
+   0.9615631652460181,
+   0.9612890043291682
+  ],
+  "best_iter": null,
+  "total_seconds": 904.4,
+  "device": "cuda"
+ },
+ "rmlp_raw_aux_k10": {
+  "model": "realmlp",
+  "featset": "raw+aux_all",
+  "params": {},
+  "seed": 11,
+  "nfold": 10,
+  "oof_auc": 0.9612519703354689,
+  "fold_auc": [
+   0.9614643867923758,
+   0.960383281198441,
+   0.9619579231994473,
+   0.961396970876764,
+   0.9610755632917904
+  ],
+  "best_iter": null,
+  "total_seconds": 834.7,
+  "device": "cuda"
+ },
+ "lgb_A_auxall_k10": {
+  "model": "lgb",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_all",
+  "params": {
+   "learning_rate": 0.01
+  },
+  "seed": 42,
+  "nfold": 10,
+  "oof_auc": 0.9612370099995874,
+  "fold_auc": [
+   0.9613380965957378,
+   0.960229261968737,
+   0.9618498672580977,
+   0.9613873073499113,
+   0.9613909178642966
+  ],
+  "best_iter": [
+   1705,
+   1138,
+   1401,
+   1186,
+   964,
+   1236,
+   917,
+   1439,
+   1391,
+   1458
+  ],
+  "total_seconds": 2396.5,
+  "device": null
+ },
+ "cat_ctr_auxev_k10": {
+  "model": "cat",
+  "featset": "raw+fdagg+cnt+ogx+ctr+aux_ev",
+  "params": {
+   "l2_leaf_reg": 10
+  },
+  "seed": 3,
+  "nfold": 10,
+  "oof_auc": 0.9611595341456769,
+  "fold_auc": [
+   0.9612547782410804,
+   0.9602772844173759,
+   0.9618668518643684,
+   0.9613790535335842,
+   0.9610127986336675
+  ],
+  "best_iter": [
+   1309,
+   2104,
+   1465,
+   1416,
+   2173,
+   1837,
+   1287,
+   1447,
+   2189,
+   1070
+  ],
+  "total_seconds": 2223.6,
+  "device": null
+ },
+ "rmlp_ogx_aux": {
+  "model": "realmlp",
+  "featset": "raw+ogx+aux_all",
+  "params": {},
+  "seed": 31,
+  "nfold": 5,
+  "oof_auc": 0.9610812312789847,
+  "fold_auc": [
+   0.9612865918644605,
+   0.9602791400620198,
+   0.9618173502801939,
+   0.9611708762777098,
+   0.9608812837641294
+  ],
+  "best_iter": null,
+  "total_seconds": 381.1,
+  "device": "cuda"
+ },
+ "rmlp_v4aux": {
+  "model": "realmlp",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_all",
+  "params": {},
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.9612681465306602,
+  "fold_auc": [
+   0.9614357338279207,
+   0.9605684638770142,
+   0.961946938941963,
+   0.9613841362513504,
+   0.9610583623402199
+  ],
+  "best_iter": null,
+  "total_seconds": 414.9,
+  "device": "cuda"
+ },
+ "rmlp_B": {
+  "model": "realmlp",
+  "featset": "raw+ogl+cnt+te+aux_all",
+  "params": {},
+  "seed": 5,
+  "nfold": 5,
+  "oof_auc": 0.9612819176267225,
+  "fold_auc": [
+   0.9615320370815938,
+   0.9605157293222131,
+   0.9619118117492236,
+   0.961408569302445,
+   0.9610663029680142
+  ],
+  "best_iter": null,
+  "total_seconds": 398.6,
+  "device": "cuda"
+ },
+ "rmlp_B_k10": {
+  "model": "realmlp",
+  "featset": "raw+ogl+cnt+te+aux_all",
+  "params": {},
+  "seed": 5,
+  "nfold": 10,
+  "oof_auc": 0.9613779209938148,
+  "fold_auc": [
+   0.9615821357190253,
+   0.9605972841541941,
+   0.96197558550142,
+   0.9614638390599622,
+   0.9612729039347252
+  ],
+  "best_iter": null,
+  "total_seconds": 884.9,
+  "device": "cuda"
+ },
+ "rmlp_raw_aux_s2": {
+  "model": "realmlp",
+  "featset": "raw+aux_all",
+  "params": {},
+  "seed": 11,
+  "nfold": 5,
+  "oof_auc": 0.9611181158818394,
+  "fold_auc": [
+   0.9612678638118628,
+   0.9603147462976755,
+   0.961856165586063,
+   0.9612433116017698,
+   0.9609383141854271
+  ],
+  "best_iter": null,
+  "total_seconds": 384.6,
+  "device": "cuda"
+ },
+ "lgb_A_auxall": {
+  "model": "lgb",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_all",
+  "params": {
+   "learning_rate": 0.01
+  },
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.961135553179542,
+  "fold_auc": [
+   0.961352349979709,
+   0.960164658634229,
+   0.9616752162811308,
+   0.9613365207305278,
+   0.9611747151393337
+  ],
+  "best_iter": [
+   1530,
+   1344,
+   1464,
+   1143,
+   2184
+  ],
+  "total_seconds": 1260.1,
+  "device": null
+ },
+ "cat_ctr_auxev": {
+  "model": "cat",
+  "featset": "raw+fdagg+cnt+ogx+ctr+aux_ev",
+  "params": {
+   "l2_leaf_reg": 10
+  },
+  "seed": 3,
+  "nfold": 5,
+  "oof_auc": 0.9609837008214042,
+  "fold_auc": [
+   0.9611356900591888,
+   0.9600656718133489,
+   0.961645713652324,
+   0.9611228491731463,
+   0.9609825912013306
+  ],
+  "best_iter": [
+   1248,
+   1342,
+   1934,
+   2107,
+   1659
+  ],
+  "total_seconds": 1076.9,
+  "device": null
+ },
+ "rmlp_v4aux_k10s2": {
+  "model": "realmlp",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_all",
+  "params": {},
+  "seed": 101,
+  "nfold": 10,
+  "oof_auc": 0.9614127153624121,
+  "fold_auc": [
+   0.9615500482229145,
+   0.9606067667207745,
+   0.9620414630073131,
+   0.9615862156944156,
+   0.9612857743590262
+  ],
+  "best_iter": null,
+  "total_seconds": 909.5,
+  "device": "cuda"
+ },
+ "cat_ctr_auxall_k10": {
+  "model": "cat",
+  "featset": "raw+fdagg+cnt+ogx+ctr+aux_all",
+  "params": {
+   "l2_leaf_reg": 10,
+   "depth": 7
+  },
+  "seed": 4,
+  "nfold": 10,
+  "oof_auc": 0.9611744083324105,
+  "fold_auc": [
+   0.961203196221201,
+   0.9603927801124902,
+   0.9617947330397209,
+   0.961491329811986,
+   0.9610003683494452
+  ],
+  "best_iter": [
+   1150,
+   1493,
+   2254,
+   1615,
+   2651,
+   3041,
+   2342,
+   1726,
+   1928,
+   1863
+  ],
+  "total_seconds": 2266.3,
+  "device": null
+ },
+ "lgb_B_k10": {
+  "model": "lgb",
+  "featset": "raw+ogl+om+digits+cnt+te",
+  "params": {
+   "num_leaves": 255,
+   "min_child_samples": 100,
+   "colsample_bytree": 0.4,
+   "learning_rate": 0.01
+  },
+  "seed": 5,
+  "nfold": 10,
+  "oof_auc": 0.9610650621608037,
+  "fold_auc": [
+   0.961276469747683,
+   0.959999597413575,
+   0.9617855515562693,
+   0.9611745955338021,
+   0.9610803885886545
+  ],
+  "best_iter": [
+   1075,
+   952,
+   1197,
+   718,
+   1342,
+   1184,
+   1223,
+   940,
+   1230,
+   900
+  ],
+  "total_seconds": 1096.7,
+  "device": null
+ },
+ "rmlp_ogx_aux_k10": {
+  "model": "realmlp",
+  "featset": "raw+ogx+aux_all",
+  "params": {},
+  "seed": 31,
+  "nfold": 10,
+  "oof_auc": 0.9611754647437851,
+  "fold_auc": [
+   0.9613194013416498,
+   0.9603244177913326,
+   0.9618748764022717,
+   0.9613420690407609,
+   0.9610352425702777
+  ],
+  "best_iter": null,
+  "total_seconds": 860.7,
+  "device": "cuda"
+ },
+ "rmlp_v4ev_e4_k10": {
+  "model": "realmlp",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_ev",
+  "params": {
+   "n_epochs": 4
+  },
+  "seed": 21,
+  "nfold": 10,
+  "oof_auc": 0.961244057071063,
+  "fold_auc": [
+   0.9613819548252073,
+   0.9604193717537275,
+   0.9619680006897358,
+   0.961286642223385,
+   0.9611829438136676
+  ],
+  "best_iter": null,
+  "total_seconds": 1146.1,
+  "device": "cuda"
+ },
+ "lgb_A": {
+  "model": "lgb",
+  "featset": "raw+fdagg+cnt+ogx+te",
+  "params": {},
+  "seed": 42,
+  "nfold": 5,
+  "oof_auc": 0.9609714197256752,
+  "fold_auc": [
+   0.9611542498771588,
+   0.9599939827822813,
+   0.9616385933984568,
+   0.9611173911878518,
+   0.960999620918338
+  ],
+  "best_iter": [
+   575,
+   715,
+   550,
+   694,
+   779
+  ],
+  "total_seconds": 214.4,
+  "device": null
+ },
+ "xgb_A_auxall": {
+  "model": "xgb",
+  "featset": "raw+fdagg+cnt+ogx+te+aux_all",
+  "params": {},
+  "seed": 1,
+  "nfold": 5,
+  "oof_auc": 0.960915681914045,
+  "fold_auc": [
+   0.9612436381289129,
+   0.9600279627551818,
+   0.9612045404754526,
+   0.9612516417752615,
+   0.9610595431861815
+  ],
+  "best_iter": [
+   611,
+   974,
+   299,
+   618,
+   536
+  ],
+  "total_seconds": 129.5,
+  "device": null
+ },
+ "lgb_cpu_strong": {
+  "model": "lgb",
+  "featset": "raw + route profile + value counts + in-fold target encodings + overlap-screened original-data teacher + 13 aux expected ratings",
+  "params": "see strong_recipe in the CPU notebook",
+  "seed": 20261003,
+  "nfold": 5,
+  "fold_construction": "StratifiedKFold(5, shuffle=True, random_state=20261003) \u2014 NOT the seed-42 split; still one OOF prediction per row",
+  "oof_auc": 0.9610831988988685,
+  "fold_auc": [
+   0.9610907935551246,
+   0.960195316760074,
+   0.9617126658490962,
+   0.961251818286539,
+   0.9611587039317143
+  ],
+  "fold_auc_note": "fold_auc computed on the dataset's standard seed-42 split for comparability",
+  "source": "https://www.kaggle.com/code/sachith7/s6e10-cpu-strong-lightgbm-beats-this-blend (public v12)",
+  "transductive_features": "route profile, value counts and aux expected ratings use train+test feature rows (no labels)"
+ }
+}

@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "converged": true,
+  "iterations": 163,
+  "calls": 184,
+  "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+  "gradient_max": 4.859187439907971e-07,
+  "objective": 0.1551101136530697,
+  "training_rows": 419781,
+  "fitting_seconds": 18.46875810623169,
+  "baseline_fit": {
+    "iterations": 7,
+    "converged": true,
+    "value": 0.21971238371523696,
+    "max_gradient": 4.541492846393304e-14
+  }
+}

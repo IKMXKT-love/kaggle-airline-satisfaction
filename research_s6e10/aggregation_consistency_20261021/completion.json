@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-21",
+  "status": "research_completed_no_training_proposed",
+  "new_fits": 0,
+  "new_base_inferences": 0,
+  "labels_read": false,
+  "new_submissions": 0,
+  "report": "research_s6e10/STACK_AGGREGATION_REVIEW_20261021.md",
+  "observed_difference_is_not_proven_score_loss": true,
+  "next_question": "Can existing auditable cached predictions support a matched aggregation comparison without rebuilding the full pool?",
+  "qft": "backup awaiting upstream artifacts",
+  "protected_files_unchanged": true
+}

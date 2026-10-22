@@ -1,0 +1,95 @@
+{
+  "seed": 20261022,
+  "arms": [
+    "shared21",
+    "privileged22",
+    "shuffled22"
+  ],
+  "primary": "privileged22",
+  "parameters": {
+    "max_depth": 6,
+    "learning_rate": 0.04,
+    "min_child_weight": 5,
+    "subsample": 0.9,
+    "colsample_bytree": 1.0,
+    "reg_lambda": 5,
+    "tree_method": "hist",
+    "device": "cuda",
+    "enable_categorical": true,
+    "n_jobs": 4,
+    "random_state": 20261022,
+    "eval_metric": "auc"
+  },
+  "max_trees": 1200,
+  "early_stopping": 100,
+  "minimum_source_auc_gain": 0.0005,
+  "require_paired_lower_above_zero": true,
+  "require_logloss_not_worse": true,
+  "original_rows": 129859,
+  "removed_overlap": 21,
+  "row_counts": {
+    "fit": 87654,
+    "stopping": 9740,
+    "outer_train": 97394,
+    "scored": 32465
+  },
+  "competition_target_used": false,
+  "source_field_is_not_available_for_competition_inference": true,
+  "input_sha256": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898",
+    "experiment_privileged_signal.py": "b48ca757c64904aeaa9c902d279ef74507a5679b9378f3440a3e66d954f02aca",
+    "verify_privileged_signal.py": "929e8c39e36d7dd7e64fae6752c8c8c15a2be840cbeec0212cbd7a738d2bf637",
+    "PRIVILEGED_SIGNAL_PLAN_20261021.md": "8a95c5b154263a7f1ce3af951bfeb3321889653f38dba59508a140d9538ec7f9",
+    "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+    "multitask_support.py": "d32ff14b182cfb837f41c996770b995314325ad63796113896bc7fc2b9f96bff",
+    "experiment_domain_transfer.py": "57ea260cb23abd5bbe468a74a690be0d05d6ad5c8d9fd55189448645a2236e46"
+  },
+  "protected": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  },
+  "profile": {
+    "extra_counts": {
+      "4": 47310,
+      "5": 34058,
+      "3": 25316,
+      "2": 14308,
+      "1": 8862,
+      "0": 5
+    },
+    "equality_rates": {
+      "Age": 0.0,
+      "Flight Distance": 0.0,
+      "Inflight wifi service": 0.2572328448548041,
+      "Departure/Arrival time convenient": 0.23155884459298162,
+      "Ease of Online booking": 0.19342517653762928,
+      "Gate location": 0.2311969135754934,
+      "Food and drink": 0.2232960364703255,
+      "Online boarding": 0.25311299178339586,
+      "Seat comfort": 0.2587575755242224,
+      "Inflight entertainment": 0.5365973863960142,
+      "On-board service": 0.5576278887100624,
+      "Leg room service": 0.43427101702615917,
+      "Baggage handling": 0.6025458381783318,
+      "Checkin service": 0.26332406687253096,
+      "Cleanliness": 0.24026829099253805,
+      "Departure Delay in Minutes": 0.018935922808584697,
+      "Arrival Delay in Minutes": 0.01817355747387551
+    }
+  },
+  "costs": {
+    "preparation_probe_seconds": 10.943655014038086,
+    "probe_seconds_20_60_trees": [
+      0.5585612999998375,
+      0.42477199999984805
+    ],
+    "conservative_seconds_per_tree": 0.007079533333330801,
+    "projected_complete_seconds": 185.89863653498793
+  },
+  "role": "Source information gate only; does not demonstrate transfer or competition improvement"
+}

@@ -1,0 +1,7 @@
+{
+  "solver_max_coefficient_error_vs_sklearn": 1.6653345369377348e-16,
+  "rows": 1703,
+  "regularization_convention_matches": true,
+  "seed": 20261020,
+  "newton_max_coefficient_error_vs_sklearn": 1.357532015966445e-08
+}

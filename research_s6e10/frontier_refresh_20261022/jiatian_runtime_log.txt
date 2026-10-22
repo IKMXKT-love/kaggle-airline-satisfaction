@@ -1,0 +1,103 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+Python: 3.13.15
+LightGBM: 4.6.0 | XGBoost: 3.4.1
+CUDA GPU Active: True | Device: Tesla T4
+Competition Data Path: /kaggle/input/competitions/playground-series-s6e10
+Loaded: Train=(699635, 23), Test=(299844, 22)
+Original data directory not found; using localized prior fallback.
+Feature Space Pruned & Finalized: 84 Dimensions!
+Starting 15-Fold GPU Training Loop (LightGBM + XGBoost GPU + CatBoost GPU)...
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 01/15] LGB: 0.96199 | XGB: 0.96132 | CAT: 0.96192 | Fold Time: 497.9s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 02/15] LGB: 0.96102 | XGB: 0.96014 | CAT: 0.96103 | Fold Time: 513.5s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 03/15] LGB: 0.96127 | XGB: 0.96014 | CAT: 0.96080 | Fold Time: 477.1s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 04/15] LGB: 0.95938 | XGB: 0.95964 | CAT: 0.95940 | Fold Time: 363.8s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 05/15] LGB: 0.95972 | XGB: 0.95858 | CAT: 0.95923 | Fold Time: 449.1s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 06/15] LGB: 0.96182 | XGB: 0.96057 | CAT: 0.96122 | Fold Time: 565.6s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 07/15] LGB: 0.96072 | XGB: 0.96057 | CAT: 0.96131 | Fold Time: 346.3s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 08/15] LGB: 0.96113 | XGB: 0.96111 | CAT: 0.96229 | Fold Time: 398.6s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 09/15] LGB: 0.96227 | XGB: 0.96126 | CAT: 0.96181 | Fold Time: 504.5s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 10/15] LGB: 0.96073 | XGB: 0.95999 | CAT: 0.96092 | Fold Time: 445.0s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 11/15] LGB: 0.95995 | XGB: 0.96004 | CAT: 0.96167 | Fold Time: 340.2s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 12/15] LGB: 0.96126 | XGB: 0.96089 | CAT: 0.96170 | Fold Time: 468.8s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 13/15] LGB: 0.96079 | XGB: 0.96066 | CAT: 0.96122 | Fold Time: 348.1s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 14/15] LGB: 0.96089 | XGB: 0.96037 | CAT: 0.96123 | Fold Time: 436.2s
+Default metric period is 5 because AUC is/are not implemented for GPU
+
+Default metric period is 5 because AUC is/are not implemented for GPU
+[Fold 15/15] LGB: 0.96072 | XGB: 0.95987 | CAT: 0.96071 | Fold Time: 434.1s
+
+15 Folds Completed in 109.81 mins!
+  15-Fold ST-LightGBM OOF ROC-AUC: 0.960852 (vs 5-Fold: 0.960262, Delta: +0.000626)
+  15-Fold ST-XGBoost  OOF ROC-AUC: 0.960331 (vs 5-Fold: 0.960313, Delta: +0.000170)
+  15-Fold ST-CatBoost OOF ROC-AUC: 0.961089 (vs 5-Fold: 0.961124, Delta: +0.001013)
+======================================================================
+[FINAL ENSEMBLE] 15-Fold Level-2 Stacking OOF ROC-AUC: 0.961729
+Meta-Learner Weights: {'LightGBM': np.float64(0.4591), 'XGBoost': np.float64(-0.0627), 'CatBoost': np.float64(0.6019)}
+======================================================================
+
+Generated submission.csv successfully!
+Shape: (299844, 2)
+Missing Values: {'id': 0, 'satisfaction': 0}
+       id  satisfaction
+0  699635      0.234593
+1  699636      0.867540
+2  699637      0.936887
+3  699638      0.069069
+4  699639      0.026967
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 43793 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 384616 bytes to __results__.html

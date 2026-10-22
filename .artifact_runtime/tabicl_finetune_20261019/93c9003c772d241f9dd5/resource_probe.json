@@ -1,0 +1,22 @@
+{
+  "cache_adapter_verified": true,
+  "maximum_prediction_difference": 0.0,
+  "checks": [
+    {
+      "chunk": 2048,
+      "status": "ok",
+      "step_seconds": [
+        0.6570544242858887,
+        0.316436767578125
+      ],
+      "loss": 0.24607963860034943,
+      "gradient_norm": 1.9250777959823608,
+      "peak_gpu_gb": 3.955327033996582,
+      "projected_training_seconds": 398.17498111724854,
+      "parameters_updated": true
+    }
+  ],
+  "chosen_chunk": 2048,
+  "system_ram_gb": 15.217926025390625,
+  "available_ram_gb": 2.9021530151367188
+}

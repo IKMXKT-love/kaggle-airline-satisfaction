@@ -1,0 +1,15 @@
+{
+  "as_of_local_date": "2026-10-20",
+  "status": "user_reported_public_score_current_best",
+  "submission_file": "submission_public_pool_20261020.csv",
+  "sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+  "oof_auc": 0.9622047560968178,
+  "public_auc": 0.96187,
+  "public_prediction_members": 246,
+  "own_branch_members_used": 0,
+  "reason_own_members_omitted": "No stable incremental five-fold improvement",
+  "source_attribution": "public_pool_sources_20261020.csv",
+  "report": "PUBLIC_POOL_TRIAL_REPORT_20261020.md",
+  "current_submitted_best_record_unchanged": false,
+  "score_source": "user_reported"
+}

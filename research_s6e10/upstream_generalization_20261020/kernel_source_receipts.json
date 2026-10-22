@@ -1,0 +1,43 @@
+[
+  {
+    "tag": "ewtherka__s6e10-tabfm-trying-to-be-better__source",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/ewtherka/s6e10-tabfm-trying-to-be-better",
+    "bytes": 109284,
+    "sha256": "44be289653c9f69c99bce525dad0b7e5a45efcdf04ec429a81a2ea384334bd97",
+    "elapsed": 2.215349400001287
+  },
+  {
+    "tag": "ewtherka__s6e10-tabfm-trying-to-be-better__outputs",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 7723,
+    "sha256": "3458396485c1828b8d7b11bd44d13e306b546adcd883bdb7c153b6ff0a2f5c91",
+    "elapsed": 1.5797462000045925
+  },
+  {
+    "tag": "kof3st__predicting-airline-satisfaction-tabpfn-results__source",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/kof3st/predicting-airline-satisfaction-tabpfn-results",
+    "bytes": 339564,
+    "sha256": "fb29b27820b8a3fa96c5deb1206b2f879a7ba1331bfa15699a51e1ad2007213a",
+    "elapsed": 2.255345799996576
+  },
+  {
+    "tag": "kof3st__predicting-airline-satisfaction-tabpfn-results__outputs",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 27796,
+    "sha256": "6bd4447d651535534924206e749473c8548a0c76784aaa4d511349aaf9ca9cbb",
+    "elapsed": 2.249321900002542
+  },
+  {
+    "tag": "najiama__s6e10-oof__outputs",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "error": "HTTPError: HTTP Error 403: Forbidden",
+    "elapsed": 2.5457538000046043
+  },
+  {
+    "tag": "denpugovkin__s6e10-passenger-context-foundation-ensemble__outputs",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 94984,
+    "sha256": "2e69ad269bb5060dc9bcf8b43894d30e67b9a879f44646ba00cb6320231500c9",
+    "elapsed": 3.375786999997217
+  }
+]

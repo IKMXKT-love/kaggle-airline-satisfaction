@@ -1,0 +1,821 @@
+{
+  "note": "Unsupervised descriptive diagnostics only. No target model fitted; full-source comparison is not a training feature pipeline.",
+  "columns": [
+    {
+      "name": "Age",
+      "train_unique": 75,
+      "original_unique": 75,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.06279645179234632,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Flight Distance",
+      "train_unique": 3474,
+      "original_unique": 3821,
+      "train_values_absent_from_original_rows": 4,
+      "source_vs_train_total_variation": 0.35631357162038524,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Inflight wifi service",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.03694945816361912,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Departure/Arrival time convenient",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.028183399818386988,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Ease of Online booking",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.03507037719780362,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Gate location",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.022442195644497814,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Food and drink",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.0222118782804362,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Online boarding",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.030430686988357478,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Seat comfort",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.044415914962689804,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Inflight entertainment",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.035709219096554334,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "On-board service",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.04754850294602005,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Leg room service",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.03816928830915835,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Baggage handling",
+      "train_unique": 5,
+      "original_unique": 5,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.06562055805688062,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Checkin service",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.04591134973632658,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Cleanliness",
+      "train_unique": 6,
+      "original_unique": 6,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.03336847444424742,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Departure Delay in Minutes",
+      "train_unique": 167,
+      "original_unique": 466,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.34303509492627354,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Arrival Delay in Minutes",
+      "train_unique": 168,
+      "original_unique": 472,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.3552003359492947,
+      "train_noninteger_rows": 0,
+      "original_noninteger_rows": 0
+    },
+    {
+      "name": "Gender",
+      "train_unique": 2,
+      "original_unique": 2,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.010050129167950228
+    },
+    {
+      "name": "Customer Type",
+      "train_unique": 2,
+      "original_unique": 2,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.00779353647266412
+    },
+    {
+      "name": "Type of Travel",
+      "train_unique": 2,
+      "original_unique": 2,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.02041712045289734
+    },
+    {
+      "name": "Class",
+      "train_unique": 3,
+      "original_unique": 3,
+      "train_values_absent_from_original_rows": 0,
+      "source_vs_train_total_variation": 0.029552534629406813
+    }
+  ],
+  "rating_columns": [
+    "Inflight wifi service",
+    "Departure/Arrival time convenient",
+    "Ease of Online booking",
+    "Gate location",
+    "Food and drink",
+    "Online boarding",
+    "Seat comfort",
+    "Inflight entertainment",
+    "On-board service",
+    "Leg room service",
+    "Baggage handling",
+    "Checkin service",
+    "Cleanliness"
+  ],
+  "rating_pairs": [
+    {
+      "left": "Seat comfort",
+      "right": "Inflight entertainment",
+      "train_pearson": 0.7447504767315489,
+      "original_pearson": 0.6118366570012448,
+      "absolute_change": 0.13291381973030414
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Gate location",
+      "train_pearson": 0.580150810775687,
+      "original_pearson": 0.4600405472940293,
+      "absolute_change": 0.12011026348165765
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Ease of Online booking",
+      "train_pearson": 0.5508395495828537,
+      "original_pearson": 0.43761965450615053,
+      "absolute_change": 0.11321989507670321
+    },
+    {
+      "left": "Online boarding",
+      "right": "Inflight entertainment",
+      "train_pearson": 0.3746254491118294,
+      "original_pearson": 0.2839215401395297,
+      "absolute_change": 0.09070390897229968
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Gate location",
+      "train_pearson": 0.42663166931602586,
+      "original_pearson": 0.33857323076359214,
+      "absolute_change": 0.08805843855243373
+    },
+    {
+      "left": "Seat comfort",
+      "right": "Cleanliness",
+      "train_pearson": 0.7625969968866095,
+      "original_pearson": 0.6796130028766154,
+      "absolute_change": 0.08298399400999412
+    },
+    {
+      "left": "Food and drink",
+      "right": "Seat comfort",
+      "train_pearson": 0.6560495627228172,
+      "original_pearson": 0.5758461771082366,
+      "absolute_change": 0.08020338561458062
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Departure/Arrival time convenient",
+      "train_pearson": 0.42383330077654796,
+      "original_pearson": 0.34491518135134464,
+      "absolute_change": 0.07891811942520333
+    },
+    {
+      "left": "Online boarding",
+      "right": "On-board service",
+      "train_pearson": 0.21887498846904319,
+      "original_pearson": 0.15424223738740242,
+      "absolute_change": 0.06463275108164077
+    },
+    {
+      "left": "Seat comfort",
+      "right": "On-board service",
+      "train_pearson": 0.194850894974984,
+      "original_pearson": 0.13054487542051,
+      "absolute_change": 0.06430601955447401
+    },
+    {
+      "left": "On-board service",
+      "right": "Checkin service",
+      "train_pearson": 0.30732493887508583,
+      "original_pearson": 0.2446186689404862,
+      "absolute_change": 0.06270626993459963
+    },
+    {
+      "left": "Online boarding",
+      "right": "Leg room service",
+      "train_pearson": 0.18467089309501875,
+      "original_pearson": 0.12322546989937522,
+      "absolute_change": 0.06144542319564353
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Gate location",
+      "train_pearson": 0.5071927264974986,
+      "original_pearson": 0.44750994578575903,
+      "absolute_change": 0.05968278071173955
+    },
+    {
+      "left": "Inflight entertainment",
+      "right": "Cleanliness",
+      "train_pearson": 0.750996422921313,
+      "original_pearson": 0.6925105378478493,
+      "absolute_change": 0.05848588507346364
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Ease of Online booking",
+      "train_pearson": 0.7719774737103808,
+      "original_pearson": 0.7148068486610117,
+      "absolute_change": 0.057170625049369095
+    },
+    {
+      "left": "Baggage handling",
+      "right": "Checkin service",
+      "train_pearson": 0.2891752876780016,
+      "original_pearson": 0.23450312820140432,
+      "absolute_change": 0.05467215947659729
+    },
+    {
+      "left": "Online boarding",
+      "right": "Seat comfort",
+      "train_pearson": 0.47267739831817857,
+      "original_pearson": 0.41925275681082397,
+      "absolute_change": 0.0534246415073546
+    },
+    {
+      "left": "On-board service",
+      "right": "Cleanliness",
+      "train_pearson": 0.17530959890423162,
+      "original_pearson": 0.12208375652687288,
+      "absolute_change": 0.05322584237735874
+    },
+    {
+      "left": "Seat comfort",
+      "right": "Leg room service",
+      "train_pearson": 0.15600970024802355,
+      "original_pearson": 0.1042724002449676,
+      "absolute_change": 0.051737300003055944
+    },
+    {
+      "left": "On-board service",
+      "right": "Baggage handling",
+      "train_pearson": 0.5678153006307473,
+      "original_pearson": 0.5202955277523166,
+      "absolute_change": 0.04751977287843068
+    },
+    {
+      "left": "Inflight entertainment",
+      "right": "Checkin service",
+      "train_pearson": 0.16628315276915145,
+      "original_pearson": 0.11955403299469036,
+      "absolute_change": 0.04672911977446109
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Seat comfort",
+      "train_pearson": 0.1659050617291972,
+      "original_pearson": 0.1215132447001047,
+      "absolute_change": 0.04439181702909249
+    },
+    {
+      "left": "Online boarding",
+      "right": "Cleanliness",
+      "train_pearson": 0.37244998350265884,
+      "original_pearson": 0.32937739292364243,
+      "absolute_change": 0.04307259057901641
+    },
+    {
+      "left": "Leg room service",
+      "right": "Cleanliness",
+      "train_pearson": 0.1360601581588439,
+      "original_pearson": 0.09669472408851178,
+      "absolute_change": 0.03936543407033212
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Seat comfort",
+      "train_pearson": 0.06631744328879649,
+      "original_pearson": 0.028560732873587444,
+      "absolute_change": 0.03775671041520905
+    },
+    {
+      "left": "Seat comfort",
+      "right": "Baggage handling",
+      "train_pearson": 0.11117832696773612,
+      "original_pearson": 0.07461955203738767,
+      "absolute_change": 0.03655877493034845
+    },
+    {
+      "left": "On-board service",
+      "right": "Leg room service",
+      "train_pearson": 0.3936022658632237,
+      "original_pearson": 0.3577213165974909,
+      "absolute_change": 0.03588094926573282
+    },
+    {
+      "left": "Leg room service",
+      "right": "Checkin service",
+      "train_pearson": 0.18834077025226764,
+      "original_pearson": 0.15269321602038363,
+      "absolute_change": 0.03564755423188401
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Cleanliness",
+      "train_pearson": 0.16620116721956907,
+      "original_pearson": 0.13129952568898817,
+      "absolute_change": 0.034901641530580896
+    },
+    {
+      "left": "Baggage handling",
+      "right": "Cleanliness",
+      "train_pearson": 0.1311902019455083,
+      "original_pearson": 0.09707148957716093,
+      "absolute_change": 0.03411871236834736
+    },
+    {
+      "left": "Food and drink",
+      "right": "Inflight entertainment",
+      "train_pearson": 0.6564870239419751,
+      "original_pearson": 0.6234609372449181,
+      "absolute_change": 0.03302608669705698
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Inflight entertainment",
+      "train_pearson": 0.0795578545372346,
+      "original_pearson": 0.04656350547048874,
+      "absolute_change": 0.03299434906674586
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Cleanliness",
+      "train_pearson": 0.04761591037340788,
+      "original_pearson": 0.015124786217322526,
+      "absolute_change": 0.03249112415608535
+    },
+    {
+      "left": "Food and drink",
+      "right": "On-board service",
+      "train_pearson": 0.08989051672501805,
+      "original_pearson": 0.05740400989737532,
+      "absolute_change": 0.03248650682764273
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Online boarding",
+      "train_pearson": 0.488733633291019,
+      "original_pearson": 0.45744521916173686,
+      "absolute_change": 0.03128841412928213
+    },
+    {
+      "left": "Leg room service",
+      "right": "Baggage handling",
+      "train_pearson": 0.4018043084168606,
+      "original_pearson": 0.3714546839078668,
+      "absolute_change": 0.03034962450899381
+    },
+    {
+      "left": "Food and drink",
+      "right": "Online boarding",
+      "train_pearson": 0.26338878690919926,
+      "original_pearson": 0.2335001900407577,
+      "absolute_change": 0.029888596868441558
+    },
+    {
+      "left": "Online boarding",
+      "right": "Baggage handling",
+      "train_pearson": 0.112208431898209,
+      "original_pearson": 0.08354148905251874,
+      "absolute_change": 0.02866694284569027
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Inflight entertainment",
+      "train_pearson": 0.23627644759236638,
+      "original_pearson": 0.20780164777227977,
+      "absolute_change": 0.028474799820086605
+    },
+    {
+      "left": "Inflight entertainment",
+      "right": "Leg room service",
+      "train_pearson": 0.3257980129878388,
+      "original_pearson": 0.3003974423898976,
+      "absolute_change": 0.025400570597941208
+    },
+    {
+      "left": "Food and drink",
+      "right": "Baggage handling",
+      "train_pearson": 0.057830222504485086,
+      "original_pearson": 0.035320744197532616,
+      "absolute_change": 0.02250947830695247
+    },
+    {
+      "left": "Food and drink",
+      "right": "Leg room service",
+      "train_pearson": 0.05343684024040801,
+      "original_pearson": 0.03317279398216883,
+      "absolute_change": 0.02026404625823918
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "On-board service",
+      "train_pearson": 0.08750507494891972,
+      "original_pearson": 0.0672969787110349,
+      "absolute_change": 0.020208096237884818
+    },
+    {
+      "left": "Food and drink",
+      "right": "Cleanliness",
+      "train_pearson": 0.6782290170545004,
+      "original_pearson": 0.6580539298388811,
+      "absolute_change": 0.020175087215619336
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Checkin service",
+      "train_pearson": 0.11015335248416422,
+      "original_pearson": 0.09113175887254489,
+      "absolute_change": 0.019021593611619328
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Leg room service",
+      "train_pearson": 0.09066730536609527,
+      "original_pearson": 0.10944965526790135,
+      "absolute_change": 0.018782349901806078
+    },
+    {
+      "left": "Gate location",
+      "right": "Inflight entertainment",
+      "train_pearson": 0.021314890600381588,
+      "original_pearson": 0.002740829633866271,
+      "absolute_change": 0.018574060966515316
+    },
+    {
+      "left": "Gate location",
+      "right": "Online boarding",
+      "train_pearson": 0.019974187146908892,
+      "original_pearson": 0.0027559843997710626,
+      "absolute_change": 0.01721820274713783
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Baggage handling",
+      "train_pearson": 0.08760566522241098,
+      "original_pearson": 0.07083303587647899,
+      "absolute_change": 0.01677262934593199
+    },
+    {
+      "left": "Inflight entertainment",
+      "right": "Baggage handling",
+      "train_pearson": 0.3949670624950257,
+      "original_pearson": 0.37912275717780186,
+      "absolute_change": 0.01584430531722386
+    },
+    {
+      "left": "Gate location",
+      "right": "Cleanliness",
+      "train_pearson": 0.009138658045744461,
+      "original_pearson": -0.005917655590168989,
+      "absolute_change": 0.01505631363591345
+    },
+    {
+      "left": "Gate location",
+      "right": "Seat comfort",
+      "train_pearson": 0.017508002397206283,
+      "original_pearson": 0.0027879444035447173,
+      "absolute_change": 0.014720057993661566
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "On-board service",
+      "train_pearson": 0.05330788489358085,
+      "original_pearson": 0.03906419035948476,
+      "absolute_change": 0.014243694534096088
+    },
+    {
+      "left": "Gate location",
+      "right": "Food and drink",
+      "train_pearson": 0.011032745208113917,
+      "original_pearson": -0.0028721959335159582,
+      "absolute_change": 0.013904941141629875
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "On-board service",
+      "train_pearson": 0.13335045850547128,
+      "original_pearson": 0.11992768287635516,
+      "absolute_change": 0.013422775629116118
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Checkin service",
+      "train_pearson": 0.057094033775930336,
+      "original_pearson": 0.04376236607928225,
+      "absolute_change": 0.013331667696648085
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Food and drink",
+      "train_pearson": 0.14540716601628442,
+      "original_pearson": 0.13221387242657867,
+      "absolute_change": 0.013193293589705751
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Food and drink",
+      "train_pearson": 0.04158114330585722,
+      "original_pearson": 0.030513981818549026,
+      "absolute_change": 0.011067161487308196
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Checkin service",
+      "train_pearson": 0.018864051408878327,
+      "original_pearson": 0.008819308212135366,
+      "absolute_change": 0.01004474319674296
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Leg room service",
+      "train_pearson": 0.15085915601128375,
+      "original_pearson": 0.16031695861307763,
+      "absolute_change": 0.00945780260179388
+    },
+    {
+      "left": "Gate location",
+      "right": "Leg room service",
+      "train_pearson": 0.002363752010700456,
+      "original_pearson": -0.005181100226067146,
+      "absolute_change": 0.0075448522367676015
+    },
+    {
+      "left": "Gate location",
+      "right": "Baggage handling",
+      "train_pearson": -0.006403046306275363,
+      "original_pearson": 0.0009719310259387471,
+      "absolute_change": 0.00737497733221411
+    },
+    {
+      "left": "Food and drink",
+      "right": "Checkin service",
+      "train_pearson": 0.09235121458599486,
+      "original_pearson": 0.08519787654060595,
+      "absolute_change": 0.00715333804538891
+    },
+    {
+      "left": "Inflight entertainment",
+      "right": "On-board service",
+      "train_pearson": 0.4252816162768441,
+      "original_pearson": 0.4185735750179839,
+      "absolute_change": 0.0067080412588601535
+    },
+    {
+      "left": "Online boarding",
+      "right": "Checkin service",
+      "train_pearson": 0.21036117903319165,
+      "original_pearson": 0.20423801471241013,
+      "absolute_change": 0.006123164320781527
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Food and drink",
+      "train_pearson": 0.006106604302356348,
+      "original_pearson": 0.0006866832472121806,
+      "absolute_change": 0.005419921055144167
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Leg room service",
+      "train_pearson": 0.005987137725436258,
+      "original_pearson": 0.010617107836989145,
+      "absolute_change": 0.004629970111552887
+    },
+    {
+      "left": "Gate location",
+      "right": "Checkin service",
+      "train_pearson": -0.043934158979586746,
+      "original_pearson": -0.039353015746941486,
+      "absolute_change": 0.00458114323264526
+    },
+    {
+      "left": "Inflight wifi service",
+      "right": "Baggage handling",
+      "train_pearson": 0.1159014123299032,
+      "original_pearson": 0.12037590073327235,
+      "absolute_change": 0.004474488403369156
+    },
+    {
+      "left": "Seat comfort",
+      "right": "Checkin service",
+      "train_pearson": 0.1935808042508201,
+      "original_pearson": 0.18997911726070635,
+      "absolute_change": 0.0036016869901137616
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Baggage handling",
+      "train_pearson": 0.041567500382138606,
+      "original_pearson": 0.03914828204877269,
+      "absolute_change": 0.002419218333365919
+    },
+    {
+      "left": "Checkin service",
+      "right": "Cleanliness",
+      "train_pearson": 0.17441531044056036,
+      "original_pearson": 0.17665803102721367,
+      "absolute_change": 0.002242720586653313
+    },
+    {
+      "left": "Ease of Online booking",
+      "right": "Online boarding",
+      "train_pearson": 0.4032626227424004,
+      "original_pearson": 0.4048657582205696,
+      "absolute_change": 0.0016031354781692042
+    },
+    {
+      "left": "Gate location",
+      "right": "On-board service",
+      "train_pearson": -0.027713407497186884,
+      "original_pearson": -0.029018769284472088,
+      "absolute_change": 0.0013053617872852037
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Cleanliness",
+      "train_pearson": 0.010944122309956988,
+      "original_pearson": 0.009862084641799426,
+      "absolute_change": 0.0010820376681575615
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Online boarding",
+      "train_pearson": 0.07140475818188227,
+      "original_pearson": 0.07228689169756101,
+      "absolute_change": 0.000882133515678743
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Inflight entertainment",
+      "train_pearson": -0.007757235931062801,
+      "original_pearson": -0.00838001406392267,
+      "absolute_change": 0.0006227781328598699
+    },
+    {
+      "left": "Departure/Arrival time convenient",
+      "right": "Seat comfort",
+      "train_pearson": 0.008761889084013418,
+      "original_pearson": 0.008666444776331347,
+      "absolute_change": 9.544430768207088e-05
+    }
+  ],
+  "id_blocks": [
+    {
+      "block": 1,
+      "rows": 69964,
+      "target_rate": 0.4417843462352067,
+      "age_mean": 39.057601051969584,
+      "distance_mean": 1355.3875564576067
+    },
+    {
+      "block": 2,
+      "rows": 69964,
+      "target_rate": 0.44371391001086274,
+      "age_mean": 39.01720885026585,
+      "distance_mean": 1353.467254588074
+    },
+    {
+      "block": 3,
+      "rows": 69964,
+      "target_rate": 0.4427133954605226,
+      "age_mean": 38.987021896975584,
+      "distance_mean": 1355.7992539020067
+    },
+    {
+      "block": 4,
+      "rows": 69964,
+      "target_rate": 0.4438711337259162,
+      "age_mean": 39.023340575152936,
+      "distance_mean": 1355.227016751472
+    },
+    {
+      "block": 5,
+      "rows": 69964,
+      "target_rate": 0.4460579726716597,
+      "age_mean": 39.05004002058202,
+      "distance_mean": 1361.8009261906122
+    },
+    {
+      "block": 6,
+      "rows": 69963,
+      "target_rate": 0.44569272329659965,
+      "age_mean": 38.97583008161457,
+      "distance_mean": 1348.1161899861356
+    },
+    {
+      "block": 7,
+      "rows": 69963,
+      "target_rate": 0.443648785786773,
+      "age_mean": 38.98364849992139,
+      "distance_mean": 1351.1963752269057
+    },
+    {
+      "block": 8,
+      "rows": 69963,
+      "target_rate": 0.4429055357831997,
+      "age_mean": 39.02072524048425,
+      "distance_mean": 1353.2360819290195
+    },
+    {
+      "block": 9,
+      "rows": 69963,
+      "target_rate": 0.44231951174192075,
+      "age_mean": 38.95623400940497,
+      "distance_mean": 1349.5189314351871
+    },
+    {
+      "block": 10,
+      "rows": 69963,
+      "target_rate": 0.44301988193759556,
+      "age_mean": 38.94762946128668,
+      "distance_mean": 1354.0372482597945
+    }
+  ]
+}

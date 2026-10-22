@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-21",
+  "scope": "new auditable upstream signals; no training this research round",
+  "baseline_public_user_reported": 0.96187,
+  "excluded_repeats": [
+    "Kumo setE v14",
+    "Den ModernNCA v45",
+    "joint meta screening of those two",
+    "public-LB-only finished predictions"
+  ],
+  "new_model_fits": 0,
+  "new_base_inferences": 0,
+  "new_submissions": 0,
+  "status": "completed_no_training_candidate",
+  "report": "research_s6e10/DIRECTED_FRONTIER_RESEARCH_20261021.md",
+  "newly_reviewed_notebooks": 7,
+  "retained_notebooks_refreshed": 5,
+  "retained_datasets_refreshed": 11,
+  "next_research_lead": "Q-FT paired raw outputs and producer code; no local training scheduled",
+  "protected_files_match_prior_verification": true
+}

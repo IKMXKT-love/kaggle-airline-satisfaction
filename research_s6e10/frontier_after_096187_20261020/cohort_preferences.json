@@ -1,0 +1,2270 @@
+{
+  "protocol": {
+    "frozen_epoch": 1792503456.5969265,
+    "training": false,
+    "model_inference": false,
+    "submission_generated": false,
+    "cohorts": "Customer Type x Type of Travel x Class, plus each factor alone",
+    "experts": [
+      "ab_tabpfn_catfd10",
+      "km_rmlp_f_nc",
+      "kga_cat_allcat_v1_k5",
+      "mi_xgb_d5",
+      "gpx_gen_v1"
+    ],
+    "minimum_positives_and_negatives_per_fold": 100,
+    "descriptive_flag": "mean within-cohort expert-minus-current AUC > 2*paired fold SE and at least 4/5 positive",
+    "limits": "Exploratory, many comparisons without multiplicity correction. Group AUC does not determine global AUC; changing a group also changes between-group ranking. Native meta-folds inherit public OOF dependencies."
+  },
+  "rows": [
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Business",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 294376,
+      "within_cohort_pair_share_of_global_pairs": 0.11826531603693897,
+      "current_fold_auc": [
+        0.9246673080129895,
+        0.9229111846054439,
+        0.9260843641564517,
+        0.9228250172056517,
+        0.9246702704810893
+      ],
+      "expert_fold_auc": [
+        0.9234398880011981,
+        0.9216440721916621,
+        0.9244763792258042,
+        0.9216059510680762,
+        0.9232379071909856
+      ],
+      "deltas": [
+        -0.0012274200117913248,
+        -0.0012671124137817458,
+        -0.0016079849306475102,
+        -0.0012190661375754974,
+        -0.0014323632901036554
+      ],
+      "mean_delta": -0.0013507893567799468,
+      "paired_fold_se": 7.495888952118868e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00015975153017891392
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Business",
+      "expert": "km_rmlp_f_nc",
+      "rows": 294376,
+      "within_cohort_pair_share_of_global_pairs": 0.11826531603693897,
+      "current_fold_auc": [
+        0.9246673080129895,
+        0.9229111846054439,
+        0.9260843641564517,
+        0.9228250172056517,
+        0.9246702704810893
+      ],
+      "expert_fold_auc": [
+        0.9227672756815349,
+        0.9203465183487027,
+        0.9244087469156389,
+        0.920423455905029,
+        0.921674639470073
+      ],
+      "deltas": [
+        -0.0019000323314545264,
+        -0.0025646662567411216,
+        -0.0016756172408127767,
+        -0.0024015613006226344,
+        -0.0029956310110162976
+      ],
+      "mean_delta": -0.002307501628129471,
+      "paired_fold_se": 0.00023598856142386035,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00027289740930648316
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Business",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 294376,
+      "within_cohort_pair_share_of_global_pairs": 0.11826531603693897,
+      "current_fold_auc": [
+        0.9246673080129895,
+        0.9229111846054439,
+        0.9260843641564517,
+        0.9228250172056517,
+        0.9246702704810893
+      ],
+      "expert_fold_auc": [
+        0.9210715699883932,
+        0.9200722978234439,
+        0.9242663859397647,
+        0.9201887459510563,
+        0.9223383494137629
+      ],
+      "deltas": [
+        -0.003595738024596229,
+        -0.0028388867819999497,
+        -0.001817978216686944,
+        -0.0026362712545954237,
+        -0.0023319210673263813
+      ],
+      "mean_delta": -0.0026441590690409857,
+      "paired_fold_se": 0.00029356012833640607,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0003127123079520705
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Business",
+      "expert": "mi_xgb_d5",
+      "rows": 294376,
+      "within_cohort_pair_share_of_global_pairs": 0.11826531603693897,
+      "current_fold_auc": [
+        0.9246673080129895,
+        0.9229111846054439,
+        0.9260843641564517,
+        0.9228250172056517,
+        0.9246702704810893
+      ],
+      "expert_fold_auc": [
+        0.9219196187130254,
+        0.9204601849695782,
+        0.924388626752943,
+        0.9209401363495855,
+        0.9227332517954393
+      ],
+      "deltas": [
+        -0.002747689299964051,
+        -0.0024509996358657027,
+        -0.0016957374035087014,
+        -0.0018848808560661956,
+        -0.0019370186856499938
+      ],
+      "mean_delta": -0.0021432651762109288,
+      "paired_fold_se": 0.0001961644970603651,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00025347393341555117
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Business",
+      "expert": "gpx_gen_v1",
+      "rows": 294376,
+      "within_cohort_pair_share_of_global_pairs": 0.11826531603693897,
+      "current_fold_auc": [
+        0.9246673080129895,
+        0.9229111846054439,
+        0.9260843641564517,
+        0.9228250172056517,
+        0.9246702704810893
+      ],
+      "expert_fold_auc": [
+        0.8988981770011679,
+        0.8969641695894812,
+        0.8986106521337216,
+        0.8957470283052225,
+        0.8995900725449681
+      ],
+      "deltas": [
+        -0.025769131011821544,
+        -0.025947015015962638,
+        -0.02747371202273008,
+        -0.02707798890042923,
+        -0.02508019793612115
+      ],
+      "mean_delta": -0.026269608977412928,
+      "paired_fold_se": 0.0004400332900378872,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0031067836078805494
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 65542,
+      "within_cohort_pair_share_of_global_pairs": 0.008618391547193202,
+      "current_fold_auc": [
+        0.9382197895032959,
+        0.9415221430282315,
+        0.9357447385554442,
+        0.9405196058755507,
+        0.9374633560048222
+      ],
+      "expert_fold_auc": [
+        0.9371870881173985,
+        0.9409277596960595,
+        0.9348335473849922,
+        0.9395853044334221,
+        0.9363065748128719
+      ],
+      "deltas": [
+        -0.0010327013858973944,
+        -0.0005943833321719882,
+        -0.0009111911704519082,
+        -0.0009343014421285822,
+        -0.0011567811919502846
+      ],
+      "mean_delta": -0.0009258717045200315,
+      "paired_fold_se": 9.35154778010358e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -7.979524872020801e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco",
+      "expert": "km_rmlp_f_nc",
+      "rows": 65542,
+      "within_cohort_pair_share_of_global_pairs": 0.008618391547193202,
+      "current_fold_auc": [
+        0.9382197895032959,
+        0.9415221430282315,
+        0.9357447385554442,
+        0.9405196058755507,
+        0.9374633560048222
+      ],
+      "expert_fold_auc": [
+        0.9367229429474699,
+        0.939679326217679,
+        0.9345036041359519,
+        0.9387529984613474,
+        0.9354941601959053
+      ],
+      "deltas": [
+        -0.001496846555825937,
+        -0.0018428168105524279,
+        -0.0012411344194922513,
+        -0.001766607414203314,
+        -0.001969195808916968
+      ],
+      "mean_delta": -0.0016633202017981795,
+      "paired_fold_se": 0.0001308437001570092,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.433514476745312e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 65542,
+      "within_cohort_pair_share_of_global_pairs": 0.008618391547193202,
+      "current_fold_auc": [
+        0.9382197895032959,
+        0.9415221430282315,
+        0.9357447385554442,
+        0.9405196058755507,
+        0.9374633560048222
+      ],
+      "expert_fold_auc": [
+        0.9362923764852393,
+        0.93903063109068,
+        0.9342886274586689,
+        0.9376128305475119,
+        0.9350080349767831
+      ],
+      "deltas": [
+        -0.0019274130180565452,
+        -0.0024915119375514827,
+        -0.0014561110967752366,
+        -0.0029067753280388464,
+        -0.002455321028039137
+      ],
+      "mean_delta": -0.0022474264816922497,
+      "paired_fold_se": 0.00025160757228826164,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.9369201392754643e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco",
+      "expert": "mi_xgb_d5",
+      "rows": 65542,
+      "within_cohort_pair_share_of_global_pairs": 0.008618391547193202,
+      "current_fold_auc": [
+        0.9382197895032959,
+        0.9415221430282315,
+        0.9357447385554442,
+        0.9405196058755507,
+        0.9374633560048222
+      ],
+      "expert_fold_auc": [
+        0.9365417308156891,
+        0.939592943807808,
+        0.9349393358521704,
+        0.9394093270066994,
+        0.9358527354807786
+      ],
+      "deltas": [
+        -0.0016780586876067316,
+        -0.0019291992204234498,
+        -0.0008054027032737832,
+        -0.0011102788688512888,
+        -0.0016106205240435933
+      ],
+      "mean_delta": -0.0014267120008397693,
+      "paired_fold_se": 0.00020440720118951986,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.2295962648316568e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco",
+      "expert": "gpx_gen_v1",
+      "rows": 65542,
+      "within_cohort_pair_share_of_global_pairs": 0.008618391547193202,
+      "current_fold_auc": [
+        0.9382197895032959,
+        0.9415221430282315,
+        0.9357447385554442,
+        0.9405196058755507,
+        0.9374633560048222
+      ],
+      "expert_fold_auc": [
+        0.920080345825141,
+        0.9242976166404103,
+        0.9189893758393942,
+        0.9222975381557194,
+        0.9197249738756811
+      ],
+      "deltas": [
+        -0.0181394436781549,
+        -0.017224526387821126,
+        -0.016755362716049937,
+        -0.01822206771983137,
+        -0.01773838212914114
+      ],
+      "mean_delta": -0.017615956526199694,
+      "paired_fold_se": 0.00027840948842150677,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00015182121082112237
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco Plus",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 14983,
+      "within_cohort_pair_share_of_global_pairs": 0.00044399234593017105,
+      "current_fold_auc": [
+        0.9415599078008036,
+        0.9470855998302391,
+        0.9461672991125374,
+        0.9443478029869996,
+        0.9386339415825725
+      ],
+      "expert_fold_auc": [
+        0.9398573658198214,
+        0.9451382670938292,
+        0.9446852352905781,
+        0.9438558933884418,
+        0.9377916190413084
+      ],
+      "deltas": [
+        -0.0017025419809821862,
+        -0.0019473327364099013,
+        -0.0014820638219592563,
+        -0.000491909598557827,
+        -0.0008423225412641511
+      ],
+      "mean_delta": -0.0012932341358346644,
+      "paired_fold_se": 0.00027170543074217003,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -5.741860578062102e-07
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco Plus",
+      "expert": "km_rmlp_f_nc",
+      "rows": 14983,
+      "within_cohort_pair_share_of_global_pairs": 0.00044399234593017105,
+      "current_fold_auc": [
+        0.9415599078008036,
+        0.9470855998302391,
+        0.9461672991125374,
+        0.9443478029869996,
+        0.9386339415825725
+      ],
+      "expert_fold_auc": [
+        0.9390765448423365,
+        0.943702028331427,
+        0.9429065121045898,
+        0.9411393982031101,
+        0.9359465913294992
+      ],
+      "deltas": [
+        -0.0024833629584670724,
+        -0.003383571498812077,
+        -0.0032607870079476298,
+        -0.003208404783889507,
+        -0.0026873502530733173
+      ],
+      "mean_delta": -0.0030046953004379206,
+      "paired_fold_se": 0.0001765110449617042,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.3340617152467924e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco Plus",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 14983,
+      "within_cohort_pair_share_of_global_pairs": 0.00044399234593017105,
+      "current_fold_auc": [
+        0.9415599078008036,
+        0.9470855998302391,
+        0.9461672991125374,
+        0.9443478029869996,
+        0.9386339415825725
+      ],
+      "expert_fold_auc": [
+        0.9390598355443798,
+        0.9431654874844515,
+        0.9430335109179523,
+        0.9412591694880477,
+        0.9382524367367079
+      ],
+      "deltas": [
+        -0.002500072256423791,
+        -0.003920112345787596,
+        -0.0031337881945850965,
+        -0.0030886334989519426,
+        -0.00038150484586463307
+      ],
+      "mean_delta": -0.002604822228322612,
+      "paired_fold_se": 0.0005999157929203742,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.156521131884012e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco Plus",
+      "expert": "mi_xgb_d5",
+      "rows": 14983,
+      "within_cohort_pair_share_of_global_pairs": 0.00044399234593017105,
+      "current_fold_auc": [
+        0.9415599078008036,
+        0.9470855998302391,
+        0.9461672991125374,
+        0.9443478029869996,
+        0.9386339415825725
+      ],
+      "expert_fold_auc": [
+        0.9404491910893379,
+        0.943832281816786,
+        0.9434966250373596,
+        0.9419656597634435,
+        0.9381921991294663
+      ],
+      "deltas": [
+        -0.0011107167114656757,
+        -0.003253318013453077,
+        -0.002670674075177737,
+        -0.0023821432235561213,
+        -0.00044174245310624194
+      ],
+      "mean_delta": -0.0019717188953517705,
+      "paired_fold_se": 0.000518730924786083,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.75428097862078e-07
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Business travel | Eco Plus",
+      "expert": "gpx_gen_v1",
+      "rows": 14983,
+      "within_cohort_pair_share_of_global_pairs": 0.00044399234593017105,
+      "current_fold_auc": [
+        0.9415599078008036,
+        0.9470855998302391,
+        0.9461672991125374,
+        0.9443478029869996,
+        0.9386339415825725
+      ],
+      "expert_fold_auc": [
+        0.9212120473135061,
+        0.9272719744530648,
+        0.9254849875072624,
+        0.9294105145905699,
+        0.9184578570170037
+      ],
+      "deltas": [
+        -0.02034786048729742,
+        -0.01981362537717435,
+        -0.020682311605275006,
+        -0.014937288396429715,
+        -0.020176084565568853
+      ],
+      "mean_delta": -0.019191434086349067,
+      "paired_fold_se": 0.0010727173886190878,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.520849841762372e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 185691,
+      "within_cohort_pair_share_of_global_pairs": 0.025015199980826443,
+      "current_fold_auc": [
+        0.8371652073042584,
+        0.8316790118119097,
+        0.8408015581376018,
+        0.8330840655699085,
+        0.8376262545744818
+      ],
+      "expert_fold_auc": [
+        0.8355980956664566,
+        0.8290858355796548,
+        0.836075748557619,
+        0.830449288450045,
+        0.833124145440992
+      ],
+      "deltas": [
+        -0.0015671116378017658,
+        -0.002593176232254968,
+        -0.004725809579982809,
+        -0.002634777119863596,
+        -0.004502109133489807
+      ],
+      "mean_delta": -0.0032045967406785893,
+      "paired_fold_se": 0.0006073513732796263,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.016362832597953e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco",
+      "expert": "km_rmlp_f_nc",
+      "rows": 185691,
+      "within_cohort_pair_share_of_global_pairs": 0.025015199980826443,
+      "current_fold_auc": [
+        0.8371652073042584,
+        0.8316790118119097,
+        0.8408015581376018,
+        0.8330840655699085,
+        0.8376262545744818
+      ],
+      "expert_fold_auc": [
+        0.8354539750721333,
+        0.8290100754498779,
+        0.8369424298322574,
+        0.8323894729008448,
+        0.8348281844585257
+      ],
+      "deltas": [
+        -0.0017112322321251039,
+        -0.002668936362031804,
+        -0.003859128305344406,
+        -0.0006945926690637982,
+        -0.0027980701159561194
+      ],
+      "mean_delta": -0.002346391936904246,
+      "paired_fold_se": 0.0005351769836151107,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -5.869546353505842e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 185691,
+      "within_cohort_pair_share_of_global_pairs": 0.025015199980826443,
+      "current_fold_auc": [
+        0.8371652073042584,
+        0.8316790118119097,
+        0.8408015581376018,
+        0.8330840655699085,
+        0.8376262545744818
+      ],
+      "expert_fold_auc": [
+        0.8368479700320656,
+        0.8263562870164445,
+        0.8393711510747042,
+        0.8314226797339599,
+        0.8361889186702758
+      ],
+      "deltas": [
+        -0.0003172372721927941,
+        -0.00532272479546525,
+        -0.001430407062897654,
+        -0.0016613858359486589,
+        -0.0014373359042060274
+      ],
+      "mean_delta": -0.002033818174142077,
+      "paired_fold_se": 0.0008550484977699783,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -5.087636835080335e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco",
+      "expert": "mi_xgb_d5",
+      "rows": 185691,
+      "within_cohort_pair_share_of_global_pairs": 0.025015199980826443,
+      "current_fold_auc": [
+        0.8371652073042584,
+        0.8316790118119097,
+        0.8408015581376018,
+        0.8330840655699085,
+        0.8376262545744818
+      ],
+      "expert_fold_auc": [
+        0.8341193162751047,
+        0.8278915052006195,
+        0.8356815610832057,
+        0.830573375618708,
+        0.8342878260692186
+      ],
+      "deltas": [
+        -0.0030458910291536467,
+        -0.0037875066112902367,
+        -0.0051199970543961415,
+        -0.0025106899512005176,
+        -0.0033384285052632245
+      ],
+      "mean_delta": -0.0035605026302607534,
+      "paired_fold_se": 0.00044157685313066773,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.90666853282313e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco",
+      "expert": "gpx_gen_v1",
+      "rows": 185691,
+      "within_cohort_pair_share_of_global_pairs": 0.025015199980826443,
+      "current_fold_auc": [
+        0.8371652073042584,
+        0.8316790118119097,
+        0.8408015581376018,
+        0.8330840655699085,
+        0.8376262545744818
+      ],
+      "expert_fold_auc": [
+        0.8086606213568113,
+        0.806345094840128,
+        0.8108031352821762,
+        0.8089658277467606,
+        0.808786299118494
+      ],
+      "deltas": [
+        -0.028504585947447092,
+        -0.025333916971781778,
+        -0.029998422855425644,
+        -0.024118237823147926,
+        -0.02883995545598783
+      ],
+      "mean_delta": -0.027359023810758054,
+      "paired_fold_se": 0.0011197242962133435,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.000684391451906305
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco Plus",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 12459,
+      "within_cohort_pair_share_of_global_pairs": 0.00011083134219134428,
+      "current_fold_auc": [
+        0.8435499726105521,
+        0.8520792216151805,
+        0.8311612174977543,
+        0.8257674504102538,
+        0.8200430193254767
+      ],
+      "expert_fold_auc": [
+        0.8429702918289397,
+        0.8556984202136054,
+        0.8395843766643613,
+        0.8269142394010796,
+        0.8141913944739267
+      ],
+      "deltas": [
+        -0.0005796807816124128,
+        0.0036191985984249664,
+        0.008423159166606964,
+        0.0011467889908257645,
+        -0.005851624851549997
+      ],
+      "mean_delta": 0.001351568224539057,
+      "paired_fold_se": 0.0023537968658557317,
+      "positive_folds": 3,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": 1.4979612038883589e-07
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco Plus",
+      "expert": "km_rmlp_f_nc",
+      "rows": 12459,
+      "within_cohort_pair_share_of_global_pairs": 0.00011083134219134428,
+      "current_fold_auc": [
+        0.8435499726105521,
+        0.8520792216151805,
+        0.8311612174977543,
+        0.8257674504102538,
+        0.8200430193254767
+      ],
+      "expert_fold_auc": [
+        0.8400812678688008,
+        0.84951333216299,
+        0.8276576125406402,
+        0.8233318293477716,
+        0.815352417968458
+      ],
+      "deltas": [
+        -0.003468704741751316,
+        -0.002565889452190495,
+        -0.0035036049571141037,
+        -0.002435621062482185,
+        -0.004690601357018709
+      ],
+      "mean_delta": -0.003332884314111362,
+      "paired_fold_se": 0.0004052376312763792,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -3.6938804190144014e-07
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco Plus",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 12459,
+      "within_cohort_pair_share_of_global_pairs": 0.00011083134219134428,
+      "current_fold_auc": [
+        0.8435499726105521,
+        0.8520792216151805,
+        0.8311612174977543,
+        0.8257674504102538,
+        0.8200430193254767
+      ],
+      "expert_fold_auc": [
+        0.8408035238588354,
+        0.8416241530525572,
+        0.8236671197704273,
+        0.827881385672031,
+        0.8208801521455681
+      ],
+      "deltas": [
+        -0.0027464487517167013,
+        -0.010455068562623238,
+        -0.007494097727327009,
+        0.0021139352617771667,
+        0.0008371328200913464
+      ],
+      "mean_delta": -0.003548909391959687,
+      "paired_fold_se": 0.002400090252776418,
+      "positive_folds": 2,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -3.9333039122635963e-07
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco Plus",
+      "expert": "mi_xgb_d5",
+      "rows": 12459,
+      "within_cohort_pair_share_of_global_pairs": 0.00011083134219134428,
+      "current_fold_auc": [
+        0.8435499726105521,
+        0.8520792216151805,
+        0.8311612174977543,
+        0.8257674504102538,
+        0.8200430193254767
+      ],
+      "expert_fold_auc": [
+        0.8430115635997988,
+        0.8553349044308141,
+        0.8214691690712963,
+        0.8184396985344495,
+        0.8199848851018594
+      ],
+      "deltas": [
+        -0.0005384090107533046,
+        0.003255682815633598,
+        -0.009692048426457989,
+        -0.007327751875804256,
+        -5.8134223617334335e-05
+      ],
+      "mean_delta": -0.0028721321441998572,
+      "paired_fold_se": 0.0024215570345570746,
+      "positive_folds": 1,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -3.1832226049257375e-07
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Eco Plus",
+      "expert": "gpx_gen_v1",
+      "rows": 12459,
+      "within_cohort_pair_share_of_global_pairs": 0.00011083134219134428,
+      "current_fold_auc": [
+        0.8435499726105521,
+        0.8520792216151805,
+        0.8311612174977543,
+        0.8257674504102538,
+        0.8200430193254767
+      ],
+      "expert_fold_auc": [
+        0.8084033077448354,
+        0.8304030414744912,
+        0.7996883917996169,
+        0.8275346334452968,
+        0.7903679896354984
+      ],
+      "deltas": [
+        -0.035146664865716715,
+        -0.021676180140689283,
+        -0.03147282569813736,
+        0.001767183035042974,
+        -0.02967502968997837
+      ],
+      "mean_delta": -0.023240703471895753,
+      "paired_fold_se": 0.00662858366371527,
+      "positive_folds": 1,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -2.575798359261241e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Business",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 43896,
+      "within_cohort_pair_share_of_global_pairs": 0.0035519406215352494,
+      "current_fold_auc": [
+        0.9355503239784089,
+        0.93278196190047,
+        0.9423125319410077,
+        0.9366018647177303,
+        0.9364853454963139
+      ],
+      "expert_fold_auc": [
+        0.9348074982086134,
+        0.9318420821481406,
+        0.9421551099960555,
+        0.9345421964620668,
+        0.9349670623620382
+      ],
+      "deltas": [
+        -0.0007428257697954521,
+        -0.0009398797523294533,
+        -0.00015742194495227402,
+        -0.002059668255663505,
+        -0.0015182831342757108
+      ],
+      "mean_delta": -0.001083615771403279,
+      "paired_fold_se": 0.0003268215905435289,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -3.848938876583561e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Business",
+      "expert": "km_rmlp_f_nc",
+      "rows": 43896,
+      "within_cohort_pair_share_of_global_pairs": 0.0035519406215352494,
+      "current_fold_auc": [
+        0.9355503239784089,
+        0.93278196190047,
+        0.9423125319410077,
+        0.9366018647177303,
+        0.9364853454963139
+      ],
+      "expert_fold_auc": [
+        0.9329041737477178,
+        0.9303409247009519,
+        0.9411688430676932,
+        0.9336853211686886,
+        0.9357841567120748
+      ],
+      "deltas": [
+        -0.0026461502306910356,
+        -0.002441037199518159,
+        -0.0011436888733145079,
+        -0.0029165435490416947,
+        -0.0007011887842390818
+      ],
+      "mean_delta": -0.0019697217273608957,
+      "paired_fold_se": 0.0004397539914641216,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -6.996334616533745e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Business",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 43896,
+      "within_cohort_pair_share_of_global_pairs": 0.0035519406215352494,
+      "current_fold_auc": [
+        0.9355503239784089,
+        0.93278196190047,
+        0.9423125319410077,
+        0.9366018647177303,
+        0.9364853454963139
+      ],
+      "expert_fold_auc": [
+        0.9326496044305606,
+        0.9305189133802699,
+        0.9408783026035306,
+        0.9336791847680745,
+        0.9345334137112409
+      ],
+      "deltas": [
+        -0.0029007195478483183,
+        -0.002263048520200095,
+        -0.0014342293374771664,
+        -0.002922679949655782,
+        -0.0019519317850730245
+      ],
+      "mean_delta": -0.0022945218280508773,
+      "paired_fold_se": 0.0002846506610933808,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.15000528805323e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Business",
+      "expert": "mi_xgb_d5",
+      "rows": 43896,
+      "within_cohort_pair_share_of_global_pairs": 0.0035519406215352494,
+      "current_fold_auc": [
+        0.9355503239784089,
+        0.93278196190047,
+        0.9423125319410077,
+        0.9366018647177303,
+        0.9364853454963139
+      ],
+      "expert_fold_auc": [
+        0.9330464830335056,
+        0.9306303298958836,
+        0.9412826854303789,
+        0.9339286148425622,
+        0.9342039319111215
+      ],
+      "deltas": [
+        -0.0025038409449033017,
+        -0.0021516320045864568,
+        -0.0010298465106288734,
+        -0.002673249875168149,
+        -0.0022814135851924044
+      ],
+      "mean_delta": -0.002127996584095837,
+      "paired_fold_se": 0.00028884157666086513,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -7.558517509538254e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Business",
+      "expert": "gpx_gen_v1",
+      "rows": 43896,
+      "within_cohort_pair_share_of_global_pairs": 0.0035519406215352494,
+      "current_fold_auc": [
+        0.9355503239784089,
+        0.93278196190047,
+        0.9423125319410077,
+        0.9366018647177303,
+        0.9364853454963139
+      ],
+      "expert_fold_auc": [
+        0.9218576167918748,
+        0.9210215161464548,
+        0.9291109824711913,
+        0.9217648369984983,
+        0.9225680730084258
+      ],
+      "deltas": [
+        -0.013692707186534037,
+        -0.011760445754015247,
+        -0.013201549469816443,
+        -0.01483702771923201,
+        -0.0139172724878881
+      ],
+      "mean_delta": -0.013481800523497168,
+      "paired_fold_se": 0.0005055868421869026,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -4.788655493084478e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Eco",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 76070,
+      "within_cohort_pair_share_of_global_pairs": 0.005362503490230749,
+      "current_fold_auc": [
+        0.8905272255834054,
+        0.8956461207025047,
+        0.9002605768419021,
+        0.9080855178847207,
+        0.9014197278113403
+      ],
+      "expert_fold_auc": [
+        0.8891703259413086,
+        0.894512528343201,
+        0.8979065850489043,
+        0.9057223357892683,
+        0.9009186826202967
+      ],
+      "deltas": [
+        -0.0013568996420967316,
+        -0.001133592359303659,
+        -0.0023539917929977783,
+        -0.0023631820954523874,
+        -0.0005010451910435476
+      ],
+      "mean_delta": -0.0015417422161788207,
+      "paired_fold_se": 0.0003618229008292221,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.267598015295016e-06
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Eco",
+      "expert": "km_rmlp_f_nc",
+      "rows": 76070,
+      "within_cohort_pair_share_of_global_pairs": 0.005362503490230749,
+      "current_fold_auc": [
+        0.8905272255834054,
+        0.8956461207025047,
+        0.9002605768419021,
+        0.9080855178847207,
+        0.9014197278113403
+      ],
+      "expert_fold_auc": [
+        0.8891062668824528,
+        0.8919399652711837,
+        0.8995337769998915,
+        0.906168874577162,
+        0.8981253207607106
+      ],
+      "deltas": [
+        -0.0014209587009526015,
+        -0.003706155431321023,
+        -0.0007267998420106281,
+        -0.0019166433075586964,
+        -0.0032944070506296663
+      ],
+      "mean_delta": -0.0022129928664945233,
+      "paired_fold_se": 0.0005622678173761888,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.186718197043263e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Eco",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 76070,
+      "within_cohort_pair_share_of_global_pairs": 0.005362503490230749,
+      "current_fold_auc": [
+        0.8905272255834054,
+        0.8956461207025047,
+        0.9002605768419021,
+        0.9080855178847207,
+        0.9014197278113403
+      ],
+      "expert_fold_auc": [
+        0.886221501646432,
+        0.8921424589340254,
+        0.8968379335660963,
+        0.9041480268580366,
+        0.8982130385886609
+      ],
+      "deltas": [
+        -0.004305723936973371,
+        -0.0035036617684792715,
+        -0.00342264327580577,
+        -0.003937491026684059,
+        -0.0032066892226794153
+      ],
+      "mean_delta": -0.0036752418461243773,
+      "paired_fold_se": 0.00019736636254620552,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.9708497227284074e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Eco",
+      "expert": "mi_xgb_d5",
+      "rows": 76070,
+      "within_cohort_pair_share_of_global_pairs": 0.005362503490230749,
+      "current_fold_auc": [
+        0.8905272255834054,
+        0.8956461207025047,
+        0.9002605768419021,
+        0.9080855178847207,
+        0.9014197278113403
+      ],
+      "expert_fold_auc": [
+        0.8882111222613447,
+        0.8918316533550392,
+        0.897609186746988,
+        0.9055003482975957,
+        0.9000317867379264
+      ],
+      "deltas": [
+        -0.0023161033220606697,
+        -0.003814467347465489,
+        -0.002651390094914108,
+        -0.002585169587124958,
+        -0.0013879410734138897
+      ],
+      "mean_delta": -0.002551014284995823,
+      "paired_fold_se": 0.0003882961488961032,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.3679823006918598e-05
+    },
+    {
+      "cohort": "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Eco",
+      "expert": "gpx_gen_v1",
+      "rows": 76070,
+      "within_cohort_pair_share_of_global_pairs": 0.005362503490230749,
+      "current_fold_auc": [
+        0.8905272255834054,
+        0.8956461207025047,
+        0.9002605768419021,
+        0.9080855178847207,
+        0.9014197278113403
+      ],
+      "expert_fold_auc": [
+        0.8792024231455648,
+        0.8797185510594739,
+        0.884877950239396,
+        0.8913250919361321,
+        0.8826088032303148
+      ],
+      "deltas": [
+        -0.011324802437840509,
+        -0.01592756964303077,
+        -0.015382626602506111,
+        -0.01676042594858862,
+        -0.018810924581025512
+      ],
+      "mean_delta": -0.015641269842598303,
+      "paired_fold_se": 0.001226376294375405,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.387636412257434e-05
+    },
+    {
+      "cohort": "Customer Type=Loyal Customer",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 576990,
+      "within_cohort_pair_share_of_global_pairs": 0.6888415621154726,
+      "current_fold_auc": [
+        0.9631927773325877,
+        0.9622110953547355,
+        0.9631826726659123,
+        0.9623703228987024,
+        0.9621700074088615
+      ],
+      "expert_fold_auc": [
+        0.9627160586727208,
+        0.9616524328154934,
+        0.9624204563501947,
+        0.9618140776238562,
+        0.9614673039312721
+      ],
+      "deltas": [
+        -0.00047671865986687045,
+        -0.000558662539242083,
+        -0.000762216315717601,
+        -0.0005562452748462121,
+        -0.0007027034775893837
+      ],
+      "mean_delta": -0.00061130925345243,
+      "paired_fold_se": 5.246150578562588e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0004210952210838153
+    },
+    {
+      "cohort": "Customer Type=Loyal Customer",
+      "expert": "km_rmlp_f_nc",
+      "rows": 576990,
+      "within_cohort_pair_share_of_global_pairs": 0.6888415621154726,
+      "current_fold_auc": [
+        0.9631927773325877,
+        0.9622110953547355,
+        0.9631826726659123,
+        0.9623703228987024,
+        0.9621700074088615
+      ],
+      "expert_fold_auc": [
+        0.9623041579839932,
+        0.9612764176234443,
+        0.9624033488285422,
+        0.9614450481292739,
+        0.9610955143393326
+      ],
+      "deltas": [
+        -0.0008886193485945215,
+        -0.0009346777312911891,
+        -0.0007793238373701161,
+        -0.0009252747694284968,
+        -0.0010744930695288923
+      ],
+      "mean_delta": -0.0009204777512426432,
+      "paired_fold_se": 4.737338614902452e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0006340633320585198
+    },
+    {
+      "cohort": "Customer Type=Loyal Customer",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 576990,
+      "within_cohort_pair_share_of_global_pairs": 0.6888415621154726,
+      "current_fold_auc": [
+        0.9631927773325877,
+        0.9622110953547355,
+        0.9631826726659123,
+        0.9623703228987024,
+        0.9621700074088615
+      ],
+      "expert_fold_auc": [
+        0.9621216020605615,
+        0.9608397629307291,
+        0.9623161894811993,
+        0.9612708636827365,
+        0.961192963449876
+      ],
+      "deltas": [
+        -0.0010711752720261591,
+        -0.001371332424006333,
+        -0.0008664831847129406,
+        -0.0010994592159658811,
+        -0.0009770439589854574
+      ],
+      "mean_delta": -0.0010770988111393543,
+      "paired_fold_se": 8.410660214719044e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0007419504276179513
+    },
+    {
+      "cohort": "Customer Type=Loyal Customer",
+      "expert": "mi_xgb_d5",
+      "rows": 576990,
+      "within_cohort_pair_share_of_global_pairs": 0.6888415621154726,
+      "current_fold_auc": [
+        0.9631927773325877,
+        0.9622110953547355,
+        0.9631826726659123,
+        0.9623703228987024,
+        0.9621700074088615
+      ],
+      "expert_fold_auc": [
+        0.962271447453433,
+        0.9611282396791313,
+        0.962341328315167,
+        0.9615837914803748,
+        0.9613359686234245
+      ],
+      "deltas": [
+        -0.0009213298791547198,
+        -0.0010828556756041774,
+        -0.0008413443507452323,
+        -0.0007865314183276295,
+        -0.0008340387854369746
+      ],
+      "mean_delta": -0.0008932200218537467,
+      "paired_fold_se": 5.211900199061948e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0006152870751665515
+    },
+    {
+      "cohort": "Customer Type=Loyal Customer",
+      "expert": "gpx_gen_v1",
+      "rows": 576990,
+      "within_cohort_pair_share_of_global_pairs": 0.6888415621154726,
+      "current_fold_auc": [
+        0.9631927773325877,
+        0.9622110953547355,
+        0.9631826726659123,
+        0.9623703228987024,
+        0.9621700074088615
+      ],
+      "expert_fold_auc": [
+        0.9526309702446727,
+        0.9519666800015768,
+        0.9526296597598922,
+        0.9519724033888234,
+        0.9516255476106754
+      ],
+      "deltas": [
+        -0.010561807087914987,
+        -0.010244415353158676,
+        -0.010553012906020065,
+        -0.010397919509879006,
+        -0.010544459798186079
+      ],
+      "mean_delta": -0.010460322931031763,
+      "paired_fold_se": 6.183839710518279e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.007205505188044219
+    },
+    {
+      "cohort": "Customer Type=disloyal Customer",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 122645,
+      "within_cohort_pair_share_of_global_pairs": 0.0199911878652521,
+      "current_fold_auc": [
+        0.9235429341070991,
+        0.9241250856725483,
+        0.9285522103616473,
+        0.9318753493262268,
+        0.9284412332442883
+      ],
+      "expert_fold_auc": [
+        0.9223837366982834,
+        0.9234644408353078,
+        0.9276854243657986,
+        0.9298344346559518,
+        0.9272930650873171
+      ],
+      "deltas": [
+        -0.0011591974088156487,
+        -0.0006606448372404872,
+        -0.0008667859958486623,
+        -0.002040914670275007,
+        -0.0011481681569711633
+      ],
+      "mean_delta": -0.0011751422138301937,
+      "paired_fold_se": 0.0002356199153907025,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -2.3492488765067656e-05
+    },
+    {
+      "cohort": "Customer Type=disloyal Customer",
+      "expert": "km_rmlp_f_nc",
+      "rows": 122645,
+      "within_cohort_pair_share_of_global_pairs": 0.0199911878652521,
+      "current_fold_auc": [
+        0.9235429341070991,
+        0.9241250856725483,
+        0.9285522103616473,
+        0.9318753493262268,
+        0.9284412332442883
+      ],
+      "expert_fold_auc": [
+        0.9217565159557755,
+        0.9216129390505549,
+        0.9279761719474564,
+        0.9297374704995235,
+        0.926929907737409
+      ],
+      "deltas": [
+        -0.0017864181513236321,
+        -0.002512146621993394,
+        -0.0005760384141908492,
+        -0.0021378788267033544,
+        -0.0015113255068792686
+      ],
+      "mean_delta": -0.0017047615042180997,
+      "paired_fold_se": 0.00032844805148497016,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -3.408020749627379e-05
+    },
+    {
+      "cohort": "Customer Type=disloyal Customer",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 122645,
+      "within_cohort_pair_share_of_global_pairs": 0.0199911878652521,
+      "current_fold_auc": [
+        0.9235429341070991,
+        0.9241250856725483,
+        0.9285522103616473,
+        0.9318753493262268,
+        0.9284412332442883
+      ],
+      "expert_fold_auc": [
+        0.9202246728688975,
+        0.9216143758416986,
+        0.9268339958116145,
+        0.9286925995453595,
+        0.9265167051127214
+      ],
+      "deltas": [
+        -0.0033182612382015586,
+        -0.0025107098308496667,
+        -0.0017182145500327373,
+        -0.0031827497808673,
+        -0.0019245281315668494
+      ],
+      "mean_delta": -0.0025308927063036222,
+      "paired_fold_se": 0.0003219781034728115,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -5.059555155851202e-05
+    },
+    {
+      "cohort": "Customer Type=disloyal Customer",
+      "expert": "mi_xgb_d5",
+      "rows": 122645,
+      "within_cohort_pair_share_of_global_pairs": 0.0199911878652521,
+      "current_fold_auc": [
+        0.9235429341070991,
+        0.9241250856725483,
+        0.9285522103616473,
+        0.9318753493262268,
+        0.9284412332442883
+      ],
+      "expert_fold_auc": [
+        0.9211308559138106,
+        0.9218111697135839,
+        0.9272214766732036,
+        0.9293013636193679,
+        0.9267269892975829
+      ],
+      "deltas": [
+        -0.0024120781932884805,
+        -0.002313915958964352,
+        -0.0013307336884436083,
+        -0.002573985706858961,
+        -0.001714243946705385
+      ],
+      "mean_delta": -0.0020689914988521576,
+      "paired_fold_se": 0.00023490275025680988,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -4.1361597745163004e-05
+    },
+    {
+      "cohort": "Customer Type=disloyal Customer",
+      "expert": "gpx_gen_v1",
+      "rows": 122645,
+      "within_cohort_pair_share_of_global_pairs": 0.0199911878652521,
+      "current_fold_auc": [
+        0.9235429341070991,
+        0.9241250856725483,
+        0.9285522103616473,
+        0.9318753493262268,
+        0.9284412332442883
+      ],
+      "expert_fold_auc": [
+        0.911483979812018,
+        0.911758686317256,
+        0.9161732029219899,
+        0.9175762942079821,
+        0.9141309697587376
+      ],
+      "deltas": [
+        -0.012058954295081081,
+        -0.012366399355292268,
+        -0.012379007439657363,
+        -0.014299055118244697,
+        -0.014310263485550645
+      ],
+      "mean_delta": -0.013082735938765211,
+      "paired_fold_se": 0.0005021332980250147,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0002615394319433406
+    },
+    {
+      "cohort": "Type of Travel=Business travel",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 497441,
+      "within_cohort_pair_share_of_global_pairs": 0.4974755286124589,
+      "current_fold_auc": [
+        0.9594011147522937,
+        0.9584656499159699,
+        0.9598785995385735,
+        0.9595015341793643,
+        0.9592750707257766
+      ],
+      "expert_fold_auc": [
+        0.9588011966676488,
+        0.9577815625269585,
+        0.9591332583784807,
+        0.9588477074207262,
+        0.9585761252448466
+      ],
+      "deltas": [
+        -0.0005999180846448793,
+        -0.0006840873890114896,
+        -0.0007453411600927273,
+        -0.0006538267586381208,
+        -0.0006989454809299689
+      ],
+      "mean_delta": -0.0006764237746634371,
+      "paired_fold_se": 2.4165378117158664e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0003365042748667282
+    },
+    {
+      "cohort": "Type of Travel=Business travel",
+      "expert": "km_rmlp_f_nc",
+      "rows": 497441,
+      "within_cohort_pair_share_of_global_pairs": 0.4974755286124589,
+      "current_fold_auc": [
+        0.9594011147522937,
+        0.9584656499159699,
+        0.9598785995385735,
+        0.9595015341793643,
+        0.9592750707257766
+      ],
+      "expert_fold_auc": [
+        0.9584068347585513,
+        0.9571073883897551,
+        0.9590770015352437,
+        0.9582068292372063,
+        0.9579712944497154
+      ],
+      "deltas": [
+        -0.000994279993742464,
+        -0.0013582615262148767,
+        -0.0008015980033297954,
+        -0.0012947049421579981,
+        -0.0013037762760611527
+      ],
+      "mean_delta": -0.0011505241483012573,
+      "paired_fold_se": 0.00010807192619754654,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.000572357608857567
+    },
+    {
+      "cohort": "Type of Travel=Business travel",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 497441,
+      "within_cohort_pair_share_of_global_pairs": 0.4974755286124589,
+      "current_fold_auc": [
+        0.9594011147522937,
+        0.9584656499159699,
+        0.9598785995385735,
+        0.9595015341793643,
+        0.9592750707257766
+      ],
+      "expert_fold_auc": [
+        0.9577803869432298,
+        0.9568912876362201,
+        0.9588182460684329,
+        0.9579863257572436,
+        0.9579681234565569
+      ],
+      "deltas": [
+        -0.001620727809063971,
+        -0.0015743622797498302,
+        -0.0010603534701405515,
+        -0.0015152084221207174,
+        -0.0013069472692196493
+      ],
+      "mean_delta": -0.0014155198500589439,
+      "paired_fold_se": 0.00010373287763367731,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0007041864856695017
+    },
+    {
+      "cohort": "Type of Travel=Business travel",
+      "expert": "mi_xgb_d5",
+      "rows": 497441,
+      "within_cohort_pair_share_of_global_pairs": 0.4974755286124589,
+      "current_fold_auc": [
+        0.9594011147522937,
+        0.9584656499159699,
+        0.9598785995385735,
+        0.9595015341793643,
+        0.9592750707257766
+      ],
+      "expert_fold_auc": [
+        0.9582469942514363,
+        0.9571205463957426,
+        0.9590213949939789,
+        0.958442430912048,
+        0.958299277006902
+      ],
+      "deltas": [
+        -0.0011541205008573918,
+        -0.0013451035202273198,
+        -0.0008572045445945919,
+        -0.001059103267316397,
+        -0.0009757937188745736
+      ],
+      "mean_delta": -0.0010782651103740549,
+      "paired_fold_se": 8.267167389328131e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0005364105057677043
+    },
+    {
+      "cohort": "Type of Travel=Business travel",
+      "expert": "gpx_gen_v1",
+      "rows": 497441,
+      "within_cohort_pair_share_of_global_pairs": 0.4974755286124589,
+      "current_fold_auc": [
+        0.9594011147522937,
+        0.9584656499159699,
+        0.9598785995385735,
+        0.9595015341793643,
+        0.9592750707257766
+      ],
+      "expert_fold_auc": [
+        0.9469964506352777,
+        0.9461441352558735,
+        0.9474113081254218,
+        0.9466790463126717,
+        0.9467222504185375
+      ],
+      "deltas": [
+        -0.012404664117016018,
+        -0.012321514660096455,
+        -0.012467291413151615,
+        -0.0128224878666926,
+        -0.012552820307239032
+      ],
+      "mean_delta": -0.012513755672839143,
+      "paired_fold_se": 8.598200833398806e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.006225287218272809
+    },
+    {
+      "cohort": "Type of Travel=Personal Travel",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 202194,
+      "within_cohort_pair_share_of_global_pairs": 0.029711818417222247,
+      "current_fold_auc": [
+        0.8383473416163043,
+        0.8315940841563579,
+        0.8406421729741421,
+        0.8323940788171769,
+        0.8361882110257775
+      ],
+      "expert_fold_auc": [
+        0.8365926526424158,
+        0.8301882382933574,
+        0.8366873503493752,
+        0.8299999010544765,
+        0.8314642965733762
+      ],
+      "deltas": [
+        -0.0017546889738885296,
+        -0.001405845863000521,
+        -0.003954822624766874,
+        -0.0023941777627003447,
+        -0.004723914452401279
+      ],
+      "mean_delta": -0.0028466899353515097,
+      "paired_fold_se": 0.0006412953668874506,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -8.458033444929819e-05
+    },
+    {
+      "cohort": "Type of Travel=Personal Travel",
+      "expert": "km_rmlp_f_nc",
+      "rows": 202194,
+      "within_cohort_pair_share_of_global_pairs": 0.029711818417222247,
+      "current_fold_auc": [
+        0.8383473416163043,
+        0.8315940841563579,
+        0.8406421729741421,
+        0.8323940788171769,
+        0.8361882110257775
+      ],
+      "expert_fold_auc": [
+        0.8356136664625713,
+        0.8296004132903118,
+        0.8367136141017091,
+        0.8317290306165719,
+        0.8330489474211049
+      ],
+      "deltas": [
+        -0.0027336751537330173,
+        -0.001993670866046182,
+        -0.003928558872433041,
+        -0.0006650482006049785,
+        -0.0031392636046725375
+      ],
+      "mean_delta": -0.0024920433394979512,
+      "paired_fold_se": 0.0005534954038427041,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -7.404313919101127e-05
+    },
+    {
+      "cohort": "Type of Travel=Personal Travel",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 202194,
+      "within_cohort_pair_share_of_global_pairs": 0.029711818417222247,
+      "current_fold_auc": [
+        0.8383473416163043,
+        0.8315940841563579,
+        0.8406421729741421,
+        0.8323940788171769,
+        0.8361882110257775
+      ],
+      "expert_fold_auc": [
+        0.8372976212697387,
+        0.8262877084686291,
+        0.8386716000958186,
+        0.8311095786334209,
+        0.8345782004335871
+      ],
+      "deltas": [
+        -0.0010497203465655858,
+        -0.005306375687728848,
+        -0.0019705728783234733,
+        -0.0012845001837559211,
+        -0.0016100105921903474
+      ],
+      "mean_delta": -0.002244235937712835,
+      "paired_fold_se": 0.0007810823683364866,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -6.668033066672826e-05
+    },
+    {
+      "cohort": "Type of Travel=Personal Travel",
+      "expert": "mi_xgb_d5",
+      "rows": 202194,
+      "within_cohort_pair_share_of_global_pairs": 0.029711818417222247,
+      "current_fold_auc": [
+        0.8383473416163043,
+        0.8315940841563579,
+        0.8406421729741421,
+        0.8323940788171769,
+        0.8361882110257775
+      ],
+      "expert_fold_auc": [
+        0.835066348542916,
+        0.8286114448316573,
+        0.8351529272413387,
+        0.8297794504282927,
+        0.8328254225938149
+      ],
+      "deltas": [
+        -0.0032809930733883608,
+        -0.0029826393247006644,
+        -0.005489245732803405,
+        -0.002614628388884155,
+        -0.0033627884319625823
+      ],
+      "mean_delta": -0.0035460589903478336,
+      "paired_fold_se": 0.0005032309330188507,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00010535986081797329
+    },
+    {
+      "cohort": "Type of Travel=Personal Travel",
+      "expert": "gpx_gen_v1",
+      "rows": 202194,
+      "within_cohort_pair_share_of_global_pairs": 0.029711818417222247,
+      "current_fold_auc": [
+        0.8383473416163043,
+        0.8315940841563579,
+        0.8406421729741421,
+        0.8323940788171769,
+        0.8361882110257775
+      ],
+      "expert_fold_auc": [
+        0.8090472423444872,
+        0.8059172326599845,
+        0.8106443509980337,
+        0.8094501491250389,
+        0.8069979539847938
+      ],
+      "deltas": [
+        -0.029300099271817093,
+        -0.025676851496373443,
+        -0.029997821976108452,
+        -0.022943929692137988,
+        -0.029190257040983658
+      ],
+      "mean_delta": -0.027421791895484125,
+      "paired_fold_se": 0.0013488421971401875,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.000814751301473481
+    },
+    {
+      "cohort": "Class=Business",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 342212,
+      "within_cohort_pair_share_of_global_pairs": 0.19312569987234943,
+      "current_fold_auc": [
+        0.9432379849919388,
+        0.9411531424241811,
+        0.9445937073426245,
+        0.9418111276132166,
+        0.9433452858704954
+      ],
+      "expert_fold_auc": [
+        0.9424124310478268,
+        0.9401755676426936,
+        0.9434113446289789,
+        0.940892706598682,
+        0.9422335981559191
+      ],
+      "deltas": [
+        -0.0008255539441119897,
+        -0.0009775747814875224,
+        -0.0011823627136455794,
+        -0.0009184210145346539,
+        -0.0011116877145762594
+      ],
+      "mean_delta": -0.001003120033671201,
+      "paired_fold_se": 6.452560715509417e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0001937282585587254
+    },
+    {
+      "cohort": "Class=Business",
+      "expert": "km_rmlp_f_nc",
+      "rows": 342212,
+      "within_cohort_pair_share_of_global_pairs": 0.19312569987234943,
+      "current_fold_auc": [
+        0.9432379849919388,
+        0.9411531424241811,
+        0.9445937073426245,
+        0.9418111276132166,
+        0.9433452858704954
+      ],
+      "expert_fold_auc": [
+        0.9418043870701275,
+        0.9392464821278264,
+        0.9433213002448768,
+        0.9400013919368815,
+        0.9412305052686504
+      ],
+      "deltas": [
+        -0.0014335979218113026,
+        -0.0019066602963547785,
+        -0.0012724070977476742,
+        -0.0018097356763351335,
+        -0.002114780601845001
+      ],
+      "mean_delta": -0.001707436318818778,
+      "paired_fold_se": 0.00015497138567313428,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00032974983405934443
+    },
+    {
+      "cohort": "Class=Business",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 342212,
+      "within_cohort_pair_share_of_global_pairs": 0.19312569987234943,
+      "current_fold_auc": [
+        0.9432379849919388,
+        0.9411531424241811,
+        0.9445937073426245,
+        0.9418111276132166,
+        0.9433452858704954
+      ],
+      "expert_fold_auc": [
+        0.9407412670380553,
+        0.9390388600711707,
+        0.9431467378774417,
+        0.939876263731635,
+        0.9415421494950107
+      ],
+      "deltas": [
+        -0.0024967179538835094,
+        -0.002114282353010477,
+        -0.0014469694651827458,
+        -0.0019348638815815944,
+        -0.0018031363754846819
+      ],
+      "mean_delta": -0.0019591940058286015,
+      "paired_fold_se": 0.00017324899842977932,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0003783707135613605
+    },
+    {
+      "cohort": "Class=Business",
+      "expert": "mi_xgb_d5",
+      "rows": 342212,
+      "within_cohort_pair_share_of_global_pairs": 0.19312569987234943,
+      "current_fold_auc": [
+        0.9432379849919388,
+        0.9411531424241811,
+        0.9445937073426245,
+        0.9418111276132166,
+        0.9433452858704954
+      ],
+      "expert_fold_auc": [
+        0.9414220788989905,
+        0.9393343584016672,
+        0.9432570282039338,
+        0.9403342492392428,
+        0.9418701683929439
+      ],
+      "deltas": [
+        -0.0018159060929482385,
+        -0.0018187840225138974,
+        -0.0013366791386907328,
+        -0.0014768783739738112,
+        -0.0014751174775514686
+      ],
+      "mean_delta": -0.0015846730211356297,
+      "paired_fold_se": 9.833609797096019e-05,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00030604108627564885
+    },
+    {
+      "cohort": "Class=Business",
+      "expert": "gpx_gen_v1",
+      "rows": 342212,
+      "within_cohort_pair_share_of_global_pairs": 0.19312569987234943,
+      "current_fold_auc": [
+        0.9432379849919388,
+        0.9411531424241811,
+        0.9445937073426245,
+        0.9418111276132166,
+        0.9433452858704954
+      ],
+      "expert_fold_auc": [
+        0.9246548521785343,
+        0.9223889806313492,
+        0.9249187671668252,
+        0.9222868509024316,
+        0.9248803317951241
+      ],
+      "deltas": [
+        -0.018583132813404513,
+        -0.018764161792831913,
+        -0.019674940175799294,
+        -0.01952427671078505,
+        -0.018464954075371298
+      ],
+      "mean_delta": -0.019002293113638415,
+      "paired_fold_se": 0.0002496052955378606,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.003669831156750945
+    },
+    {
+      "cohort": "Class=Eco",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 327404,
+      "within_cohort_pair_share_of_global_pairs": 0.12375700997453334,
+      "current_fold_auc": [
+        0.905953263686701,
+        0.9057453809691747,
+        0.9078527428623642,
+        0.9087605156240799,
+        0.9083436443209773
+      ],
+      "expert_fold_auc": [
+        0.9051489947995192,
+        0.9047028338822573,
+        0.9057928257084109,
+        0.9073354465856086,
+        0.9067779580740083
+      ],
+      "deltas": [
+        -0.0008042688871818804,
+        -0.0010425470869174225,
+        -0.0020599171539532612,
+        -0.0014250690384712827,
+        -0.0015656862469689559
+      ],
+      "mean_delta": -0.0013794976826985606,
+      "paired_fold_se": 0.00021727142678955693,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0001707225084775714
+    },
+    {
+      "cohort": "Class=Eco",
+      "expert": "km_rmlp_f_nc",
+      "rows": 327404,
+      "within_cohort_pair_share_of_global_pairs": 0.12375700997453334,
+      "current_fold_auc": [
+        0.905953263686701,
+        0.9057453809691747,
+        0.9078527428623642,
+        0.9087605156240799,
+        0.9083436443209773
+      ],
+      "expert_fold_auc": [
+        0.9046440603964205,
+        0.9037116566810989,
+        0.9064612278314388,
+        0.9074814720759176,
+        0.9064796964626867
+      ],
+      "deltas": [
+        -0.0013092032902805029,
+        -0.0020337242880758,
+        -0.0013915150309253832,
+        -0.0012790435481623286,
+        -0.0018639478582905822
+      ],
+      "mean_delta": -0.0015754868031469193,
+      "paired_fold_se": 0.00015585610327369478,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00019497753601179895
+    },
+    {
+      "cohort": "Class=Eco",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 327404,
+      "within_cohort_pair_share_of_global_pairs": 0.12375700997453334,
+      "current_fold_auc": [
+        0.905953263686701,
+        0.9057453809691747,
+        0.9078527428623642,
+        0.9087605156240799,
+        0.9083436443209773
+      ],
+      "expert_fold_auc": [
+        0.904403041742686,
+        0.9028663876552213,
+        0.9062552598697581,
+        0.9066163135109574,
+        0.9066715146529766
+      ],
+      "deltas": [
+        -0.0015502219440149956,
+        -0.0028789933139533597,
+        -0.0015974829926060918,
+        -0.0021442021131224953,
+        -0.001672129668000677
+      ],
+      "mean_delta": -0.001968606006339524,
+      "paired_fold_se": 0.0002510293585127321,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00024362879316248672
+    },
+    {
+      "cohort": "Class=Eco",
+      "expert": "mi_xgb_d5",
+      "rows": 327404,
+      "within_cohort_pair_share_of_global_pairs": 0.12375700997453334,
+      "current_fold_auc": [
+        0.905953263686701,
+        0.9057453809691747,
+        0.9078527428623642,
+        0.9087605156240799,
+        0.9083436443209773
+      ],
+      "expert_fold_auc": [
+        0.9039214716542847,
+        0.9034682082364498,
+        0.905901172547143,
+        0.9070323005700348,
+        0.9067719378588874
+      ],
+      "deltas": [
+        -0.002031792032416324,
+        -0.0022771727327248747,
+        -0.001951570315221196,
+        -0.0017282150540450791,
+        -0.001571706462089817
+      ],
+      "mean_delta": -0.0019120913192994583,
+      "paired_fold_se": 0.00012223821460776932,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.00023663470447476167
+    },
+    {
+      "cohort": "Class=Eco",
+      "expert": "gpx_gen_v1",
+      "rows": 327404,
+      "within_cohort_pair_share_of_global_pairs": 0.12375700997453334,
+      "current_fold_auc": [
+        0.905953263686701,
+        0.9057453809691747,
+        0.9078527428623642,
+        0.9087605156240799,
+        0.9083436443209773
+      ],
+      "expert_fold_auc": [
+        0.8890400350977654,
+        0.8892263368274518,
+        0.8903452252601638,
+        0.8921125377204975,
+        0.8899114030078814
+      ],
+      "deltas": [
+        -0.016913228588935625,
+        -0.016519044141722894,
+        -0.017507517602200373,
+        -0.01664797790358241,
+        -0.018432241313095843
+      ],
+      "mean_delta": -0.01720400190990743,
+      "paired_fold_se": 0.00035096814463763873,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -0.0021291158359663044
+    },
+    {
+      "cohort": "Class=Eco Plus",
+      "expert": "ab_tabpfn_catfd10",
+      "rows": 30019,
+      "within_cohort_pair_share_of_global_pairs": 0.0013689274237304117,
+      "current_fold_auc": [
+        0.9330500847658886,
+        0.9398170888423558,
+        0.9348593427197307,
+        0.9380312342630864,
+        0.925615804567415
+      ],
+      "expert_fold_auc": [
+        0.9314904100505773,
+        0.9389804903052865,
+        0.9349884340798021,
+        0.9378961308302518,
+        0.923914108925114
+      ],
+      "deltas": [
+        -0.0015596747153112656,
+        -0.0008365985370692997,
+        0.00012909136007144273,
+        -0.00013510343283462678,
+        -0.0017016956423009377
+      ],
+      "mean_delta": -0.0008207961934889374,
+      "paired_fold_se": 0.00036705830254967126,
+      "positive_folds": 1,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -1.1236104185605395e-06
+    },
+    {
+      "cohort": "Class=Eco Plus",
+      "expert": "km_rmlp_f_nc",
+      "rows": 30019,
+      "within_cohort_pair_share_of_global_pairs": 0.0013689274237304117,
+      "current_fold_auc": [
+        0.9330500847658886,
+        0.9398170888423558,
+        0.9348593427197307,
+        0.9380312342630864,
+        0.925615804567415
+      ],
+      "expert_fold_auc": [
+        0.9312316889221212,
+        0.9372572057334212,
+        0.9319823250233578,
+        0.9364266517502696,
+        0.9235323950551884
+      ],
+      "deltas": [
+        -0.0018183958437674175,
+        -0.002559883108934624,
+        -0.002877017696372941,
+        -0.00160458251281681,
+        -0.0020834095122266305
+      ],
+      "mean_delta": -0.0021886577348236846,
+      "paired_fold_se": 0.000234623382928757,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -2.996113594359825e-06
+    },
+    {
+      "cohort": "Class=Eco Plus",
+      "expert": "kga_cat_allcat_v1_k5",
+      "rows": 30019,
+      "within_cohort_pair_share_of_global_pairs": 0.0013689274237304117,
+      "current_fold_auc": [
+        0.9330500847658886,
+        0.9398170888423558,
+        0.9348593427197307,
+        0.9380312342630864,
+        0.925615804567415
+      ],
+      "expert_fold_auc": [
+        0.9313741655674139,
+        0.935482243584536,
+        0.9323833878676311,
+        0.9358389365342454,
+        0.9249500906618453
+      ],
+      "deltas": [
+        -0.0016759191984746513,
+        -0.004334845257819797,
+        -0.0024759548520996155,
+        -0.0021922977288409973,
+        -0.000665713905569687
+      ],
+      "mean_delta": -0.00226894618856095,
+      "paired_fold_se": 0.0006016103930999808,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -3.106022660489678e-06
+    },
+    {
+      "cohort": "Class=Eco Plus",
+      "expert": "mi_xgb_d5",
+      "rows": 30019,
+      "within_cohort_pair_share_of_global_pairs": 0.0013689274237304117,
+      "current_fold_auc": [
+        0.9330500847658886,
+        0.9398170888423558,
+        0.9348593427197307,
+        0.9380312342630864,
+        0.925615804567415
+      ],
+      "expert_fold_auc": [
+        0.9322925116802927,
+        0.9378766138943441,
+        0.9315921980954072,
+        0.9352183624516383,
+        0.9251492056449098
+      ],
+      "deltas": [
+        -0.0007575730855958751,
+        -0.00194047494801175,
+        -0.003267144624323537,
+        -0.002812871811448181,
+        -0.0004665989225052236
+      ],
+      "mean_delta": -0.0018489326783769134,
+      "paired_fold_se": 0.0005500361868277086,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -2.531054648061478e-06
+    },
+    {
+      "cohort": "Class=Eco Plus",
+      "expert": "gpx_gen_v1",
+      "rows": 30019,
+      "within_cohort_pair_share_of_global_pairs": 0.0013689274237304117,
+      "current_fold_auc": [
+        0.9330500847658886,
+        0.9398170888423558,
+        0.9348593427197307,
+        0.9380312342630864,
+        0.925615804567415
+      ],
+      "expert_fold_auc": [
+        0.9157300976512441,
+        0.9223233255670007,
+        0.9150261867648469,
+        0.9293624539307229,
+        0.9083481107583239
+      ],
+      "deltas": [
+        -0.017319987114644442,
+        -0.017493763275355123,
+        -0.019833155954883774,
+        -0.008668780332363513,
+        -0.0172676938090911
+      ],
+      "mean_delta": -0.01611667609726759,
+      "paired_fold_se": 0.0019229215029541366,
+      "positive_folds": 0,
+      "descriptive_flag": false,
+      "within_group_only_global_pair_contribution": -2.2062559888930028e-05
+    }
+  ],
+  "omitted_cohorts": [
+    "Customer Type|Type of Travel|Class=Loyal Customer | Personal Travel | Business",
+    "Customer Type|Type of Travel|Class=disloyal Customer | Business travel | Eco Plus",
+    "Customer Type|Type of Travel|Class=disloyal Customer | Personal Travel | Business",
+    "Customer Type|Type of Travel|Class=disloyal Customer | Personal Travel | Eco",
+    "Customer Type|Type of Travel|Class=disloyal Customer | Personal Travel | Eco Plus"
+  ],
+  "flagged": [],
+  "evaluated_comparisons": 70
+}

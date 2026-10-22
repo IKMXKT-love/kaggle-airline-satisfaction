@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-20",
+  "training": false,
+  "prediction_model_loaded": false,
+  "groups": {
+    "context": [
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "flight_distance": [
+      "Flight Distance"
+    ],
+    "distance_context": [
+      "Flight Distance",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "age_context": [
+      "Age",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "wifi_context": [
+      "Inflight wifi service",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "boarding_context": [
+      "Online boarding",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "digital_context": [
+      "Inflight wifi service",
+      "Ease of Online booking",
+      "Online boarding",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "comfort_context": [
+      "Seat comfort",
+      "Inflight entertainment",
+      "Cleanliness",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "distance_wifi_context": [
+      "Flight Distance",
+      "Inflight wifi service",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ],
+    "full_ratings": [
+      "Inflight wifi service",
+      "Departure/Arrival time convenient",
+      "Ease of Online booking",
+      "Gate location",
+      "Food and drink",
+      "Online boarding",
+      "Seat comfort",
+      "Inflight entertainment",
+      "On-board service",
+      "Leg room service",
+      "Baggage handling",
+      "Checkin service",
+      "Cleanliness"
+    ],
+    "full_ratings_context": [
+      "Inflight wifi service",
+      "Departure/Arrival time convenient",
+      "Ease of Online booking",
+      "Gate location",
+      "Food and drink",
+      "Online boarding",
+      "Seat comfort",
+      "Inflight entertainment",
+      "On-board service",
+      "Leg room service",
+      "Baggage handling",
+      "Checkin service",
+      "Cleanliness",
+      "Class",
+      "Type of Travel",
+      "Customer Type"
+    ]
+  },
+  "common_cell_min_support_per_fold": [
+    5,
+    20,
+    50
+  ],
+  "score_bin_edges": [
+    0.0,
+    0.001,
+    0.01,
+    0.05,
+    0.1,
+    0.2,
+    0.35,
+    0.5,
+    0.65,
+    0.8,
+    0.9,
+    0.95,
+    0.99,
+    0.999,
+    1.0
+  ],
+  "interpretation": "Exploratory fixed-prediction diagnostics. No candidate or blend selected. Previously viewed folds; shared training history; residual means concern calibration, not all ranking errors.",
+  "input_hashes": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "outer_predictions.npz": "7d51a0a47254d31d9c1054701efd6b0aab0c61a35451e5fad4d57892a6962ff9",
+    "audit_frozen_predictions.py": "76b56f276e82c00434c6cd271ba5c19855eabe77562e16ab41167cc1088f75be",
+    "submission_lean_realmlp_10fold.csv": "b8cbfd891761efa14fac950684f03929b01da2d10a2c868fdb8228e7cb878eb8"
+  }
+}

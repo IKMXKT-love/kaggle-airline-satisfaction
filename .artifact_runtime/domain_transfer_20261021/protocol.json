@@ -1,0 +1,106 @@
+{
+  "model": {
+    "members": 8,
+    "embedding_dim": 8,
+    "frequencies": 8,
+    "frequency_sigma": 2.33,
+    "hidden": [
+      512,
+      256,
+      128
+    ],
+    "dropout": 0.05
+  },
+  "training": {
+    "seed": 20261021,
+    "competition_batch": 2048,
+    "original_batch": 512,
+    "source_weight": 0.25,
+    "smoothing": 0.005,
+    "learning_rate": 0.0015,
+    "min_lr_fraction": 0.08,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "amp": "bfloat16",
+    "prediction_batch": 4096
+  },
+  "max_epochs": 24,
+  "arms": [
+    "competition_only",
+    "shared_head",
+    "dual_head"
+  ],
+  "phase": "single outer-fold conditional screen",
+  "outer_fold": 0,
+  "native_public_fold_seed": 42,
+  "fit_rows": 514931,
+  "stopping_rows": 44777,
+  "refit_rows": 559708,
+  "scored_rows": 139927,
+  "original_rows": 129859,
+  "removed_original_overlap": 21,
+  "original_extra_field_used": false,
+  "source_pretraining": false,
+  "joint_training": true,
+  "encoder_fit_scope": "selection competition fit / refit complete outer train; no source or scored fit statistics",
+  "labels_used": "C-only original loss weight zero; other arms mean C BCE + .25 mean O BCE",
+  "compute_control": "All arms execute both-domain forward/loss; equal competition batches/epochs and source batch RNG",
+  "stopping": "selection inner AUC only, then reinitialize and fit complete outer train for selected epoch count",
+  "refit_lr": "prefix of the same resource-frozen max_epochs cosine schedule, not compressed to chosen epochs",
+  "initializer": "same full state across all arms per phase; source head starts as copy of competition head",
+  "primary_blend_weight": 0.1,
+  "diagnostic_blend_weights": [
+    0.05,
+    0.2
+  ],
+  "primary_candidate": "dual_head",
+  "expansion_gate": 0.0003,
+  "require_paired_lower_above_zero": true,
+  "require_primary_dual_blend_better_than_matched_competition_only": true,
+  "no_weight_search": true,
+  "no_submission_during_screen": true,
+  "public_validation_caveat": "Fixed public OOF baseline inherits upstream early-stopping and indirect fold label dependence; not end-to-end nested validation.",
+  "evidence": "Mechanism and source/competition structure support a bounded test; remaining ranking gain is not established.",
+  "historical_partitions_and_recipes_seen": true,
+  "costs": {
+    "preparation_and_probe_seconds": 27.997382402420044,
+    "resource_projection": {
+      "32": {
+        "training_seconds": 616.4046719994658,
+        "inference_seconds": 7.8871475236066955,
+        "conservative_total_seconds": 1054.435111687029
+      },
+      "24": {
+        "training_seconds": 462.30350399959934,
+        "inference_seconds": 6.090785236871652,
+        "conservative_total_seconds": 820.5888162571265
+      },
+      "16": {
+        "training_seconds": 308.2023359997329,
+        "inference_seconds": 4.2944229501366085,
+        "conservative_total_seconds": 586.7425208272243
+      }
+    },
+    "cumulative_hard_deadline_epoch": 1792559306.6439233,
+    "verification_reserve_seconds": 45
+  },
+  "protected": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  },
+  "input_sha256": {
+    "experiment_domain_transfer.py": "57ea260cb23abd5bbe468a74a690be0d05d6ad5c8d9fd55189448645a2236e46",
+    "domain_transfer_support.py": "693cbf5fadd5ddea03bdc3769ef469627977ce1f69572f8c8e5516031c906059",
+    "multitask_support.py": "d32ff14b182cfb837f41c996770b995314325ad63796113896bc7fc2b9f96bff",
+    "tests/test_domain_transfer_contract.py": "8684d6a305e3e15e82c61e6c86e93ea094651ea6d8f1ccec03f0987bb716a203",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898",
+    "research_s6e10\\extended_review_20261020\\reference_predictions\\dariushafshar__folds_seed42.npy": "181ada73928aaf1a7af9a24ffb8f70064f75b880edf08e77cd0b808a9c697f4f",
+    ".artifact_runtime\\public_pool_trial_20261020\\public_only_fold0_validation.npz": "f4aeaa4ca5b88082fd1c6d130e6addae7fa4097d002ebb7e5c657a6abedeed7e"
+  },
+  "probe_sha256": "6e437a47cd9f4305deda47f09cfb5d6365851adcc2a6d5c0a77e688d8780c4eb"
+}

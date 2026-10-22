@@ -1,0 +1,42 @@
+[
+  {
+    "name": "headline.json",
+    "bytes": 1902,
+    "sha256": "93b118d91743add5f8773e459ce2f03e375cd96fb3db07dc6b8f8412a4d2babc",
+    "source": "dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187",
+    "version": "v1",
+    "original_filename": "headline.json"
+  },
+  {
+    "name": "member_check.csv",
+    "bytes": 37184,
+    "sha256": "631455247abf3d8a210f82364339e17b028529954cb1bb5b3fabc3ff9115ff1e",
+    "source": "dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187",
+    "version": "v1",
+    "original_filename": "member_check.csv"
+  },
+  {
+    "name": "stack_oof.npy",
+    "bytes": 2798668,
+    "sha256": "8653fea0de20c88744730e76c10f29b35d7e025d3f44e246e40c9bb8fe7e5add",
+    "source": "dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187",
+    "version": "v1",
+    "original_filename": "stack_oof.npy"
+  },
+  {
+    "name": "stack_test.npy",
+    "bytes": 1199504,
+    "sha256": "2914ce103b86d0bb1ea9f0a8d50ddc3d006a9d8c202edb171edb77bdb7e3b148",
+    "source": "dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187",
+    "version": "v1",
+    "original_filename": "stack_test.npy"
+  },
+  {
+    "name": "submission.csv",
+    "bytes": 7988728,
+    "sha256": "ac2f1c51d067615e12a624f49a15d97c79c3051eae8d2e4759842cb0129eb294",
+    "source": "dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187",
+    "version": "v1",
+    "original_filename": "submission.csv"
+  }
+]

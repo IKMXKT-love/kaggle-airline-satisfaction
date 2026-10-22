@@ -1,0 +1,53 @@
+{
+  "context_sizes": [
+    8192,
+    32768
+  ],
+  "n_estimators": 4,
+  "batch_size": 1,
+  "kv_cache": true,
+  "query_batch": 1024,
+  "warmup_rows": 1024,
+  "probe_rows": 1024,
+  "max_fit_seconds": 300,
+  "max_projected_screen_seconds": 1200,
+  "blend_weight": 0.2,
+  "screen_gate": 0.0002,
+  "seed": 42,
+  "raw_features_only": true,
+  "base_is_current_fixed20_lean42": true,
+  "checkpoint_sha256": "bdc7dbd5e4ff21f8f0456fcf90c6b7cdf72dbea960f2d05b19bec19f9b3d4ed0",
+  "official_repo": "https://huggingface.co/jingang/TabICL",
+  "tabicl_version": "2.2.0",
+  "reduced_context_not_full_context": true,
+  "hashes": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "experiment_tabicl_probe.py": "820fc0dec38b3757f7f9f97c75931680d38927131fb7eb533a40247c5ecf5802",
+    "checkpoint": "bdc7dbd5e4ff21f8f0456fcf90c6b7cdf72dbea960f2d05b19bec19f9b3d4ed0",
+    "reference/indices": "8d9f8c524576ee8df4c05f0b50dcd0975903466b5bd99ee5143d58d1c8bde5be",
+    "reference/baseline": "acdba50916e98b6bb829caf7ca320cc3df4dba037dcc63900f8bb433fa88fda3",
+    "lean_prediction": "9e2b709b41f00c7691978c647729fe8be823a1d9d2f8342f4e491c22084ac338"
+  },
+  "versions": {
+    "tabicl": "2.2.0",
+    "torch": "2.11.0+cu128",
+    "scikit-learn": "1.9.0",
+    "numpy": "2.5.2"
+  },
+  "protected": {
+    "main.py": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+    "submission_optimized.csv": "797e4f7307deb3d6fbeb6224f5d26fe5e5b8f49769cb11c0650e633784b96e94",
+    "submission_v3.csv": "e3b94a849f853e682418197f59c1d0eaf4370a895cfa0b6076400d74b4d8516e",
+    "submission_v3_oof.csv": "7413a15b8be0053dc217e1fa735619ef5aa5e5c8ff82ec5d59123f36b96afdb1",
+    "v3_recipe.json": "b2b0d5f5577cf13dd875e5be17ec206f302ada2e4b2199d73538871519d54f3b",
+    "v3_confirmation.json": "e9f0da7e64db7754394c5dd58a95a12e1616999a806bb9e309c0f642e1c8e37d",
+    "v3_verification.json": "5623ead8b1e6e9120d55f454115efa240ff0ce97cf6753f5642ad8b1a7fa0a0e",
+    "submission_v3_metrics.json": "2294651a83115b6eaafcff59bd3d10b0f7de31053a10167bfe44c37b60837cb2",
+    "leaderboard_feedback.json": "ac8326f8f9e783240112188aa26f089a272bd22e5ab62559fef97e26e043c5d5",
+    "submission_v4_lean_realmlp_trial.csv": "9b9c360a926109d778d839662f98ad36a732e1cee2b897bee39870d0f5249beb"
+  }
+}

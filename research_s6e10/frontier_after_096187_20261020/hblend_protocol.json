@@ -1,0 +1,37 @@
+{
+  "frozen_epoch": 1792503802.7455091,
+  "training": false,
+  "model_inference": false,
+  "submission_generated": false,
+  "parents_in_order": [
+    "mayankraaz own181",
+    "cdeotte135",
+    "goodpjw2008 frozen245",
+    "our public246"
+  ],
+  "main_weights": [
+    0.1,
+    0.2,
+    0.3,
+    0.4
+  ],
+  "rank_position_corrections": [
+    0.07,
+    -0.01,
+    -0.02,
+    -0.04
+  ],
+  "side_mix": [
+    0.3,
+    0.7
+  ],
+  "dtype": "float64; no deliberate rounding",
+  "arms": [
+    "current only",
+    "fixed weighted percentile rank mean",
+    "one fixed hblend row-order rule"
+  ],
+  "no_weight_search": true,
+  "selection": "Parents chosen for complete OOF/test availability, based on published scores before our contrasts. Exploratory, not new independent data.",
+  "important": "Stack-level OOF is only used in fixed transforms; no additional supervised stack of stacks. Inherited parent validation dependencies remain."
+}

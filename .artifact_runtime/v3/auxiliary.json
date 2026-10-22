@@ -1,0 +1,21 @@
+{
+  "signature": "9d1dbfdeaa0d529cc3fee2a75af3ec568dca71ce31942049f8a8effca47c8d9c",
+  "ratings": [
+    "Inflight wifi service",
+    "Departure/Arrival time convenient",
+    "Ease of Online booking",
+    "Gate location",
+    "Food and drink",
+    "Online boarding",
+    "Seat comfort",
+    "Inflight entertainment",
+    "On-board service",
+    "Leg room service",
+    "Baggage handling",
+    "Checkin service",
+    "Cleanliness"
+  ],
+  "source_labels": "public_original_predictor_ratings_only",
+  "satisfaction_labels_used": false,
+  "each_rating_excluded_from_own_predictors": true
+}

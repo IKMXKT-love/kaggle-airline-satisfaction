@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-20",
+  "code_executed": false,
+  "files": [
+    {
+      "kernel": "kozykappa/s6e10-source-transfer-foundation-model-oof",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "kernel": "goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "kernel": "busyaprime/s6e10-route-or-distance-both-lb-0-96169",
+      "url": "https://www.kaggle.com/api/v1/kernels/pull/busyaprime/s6e10-route-or-distance-both-lb-0-96169",
+      "version": 1,
+      "sha256": "a36bc8fac5c001ec1a24ac4880335e36ad85eec1c02b1097b518bbb78373ad06",
+      "bytes": 118977,
+      "text_chars": 46984
+    },
+    {
+      "kernel": "sachith7/s6e10-what-each-step-was-worth",
+      "url": "https://www.kaggle.com/api/v1/kernels/pull/sachith7/s6e10-what-each-step-was-worth",
+      "version": 12,
+      "sha256": "4ea4b7ca564c862a4d1dc5c6488626b492726557e261664313e2c33ec31d5c8b",
+      "bytes": 109877,
+      "text_chars": 40901
+    }
+  ]
+}

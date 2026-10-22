@@ -1,0 +1,6 @@
+{
+  "started_epoch": 1792558406.6439233,
+  "deadline_epoch": 1792559306.6439233,
+  "seconds": 900,
+  "includes": "data preparation, discarded resource probe, selection fits, full outer refits, evaluation, verification"
+}

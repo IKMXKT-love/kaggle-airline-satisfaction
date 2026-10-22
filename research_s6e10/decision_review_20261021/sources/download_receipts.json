@@ -1,0 +1,23 @@
+[
+  {
+    "tag": "tabpfn_finetune_example",
+    "url": "https://raw.githubusercontent.com/PriorLabs/TabPFN/main/examples/finetune_classifier.py",
+    "bytes": 5950,
+    "sha256": "8cbe73c267344e0bae0fd0b3d68ff804b836120aca7de864a020dc5e95099381",
+    "elapsed": 1.1749892000000273
+  },
+  {
+    "tag": "tabdpt_readme",
+    "url": "https://raw.githubusercontent.com/layer6ai-labs/TabDPT-inference/main/README.md",
+    "bytes": 12534,
+    "sha256": "a0134e1ecab7050b94ad85bf5648bf90fc13e82c3ee21401baf5369260903177",
+    "elapsed": 1.21332869999992
+  },
+  {
+    "tag": "localpfn_paper",
+    "url": "https://arxiv.org/html/2406.05207v1",
+    "bytes": 459485,
+    "sha256": "6e9e3f63844a4bb1fcb089cc73d4da3482564f63ad55fdc31730764044c4f3ee",
+    "elapsed": 2.123325700000123
+  }
+]

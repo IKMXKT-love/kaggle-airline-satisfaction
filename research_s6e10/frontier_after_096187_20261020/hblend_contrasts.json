@@ -1,0 +1,90 @@
+{
+  "protocol": {
+    "frozen_epoch": 1792503802.7455091,
+    "training": false,
+    "model_inference": false,
+    "submission_generated": false,
+    "parents_in_order": [
+      "mayankraaz own181",
+      "cdeotte135",
+      "goodpjw2008 frozen245",
+      "our public246"
+    ],
+    "main_weights": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+    ],
+    "rank_position_corrections": [
+      0.07,
+      -0.01,
+      -0.02,
+      -0.04
+    ],
+    "side_mix": [
+      0.3,
+      0.7
+    ],
+    "dtype": "float64; no deliberate rounding",
+    "arms": [
+      "current only",
+      "fixed weighted percentile rank mean",
+      "one fixed hblend row-order rule"
+    ],
+    "no_weight_search": true,
+    "selection": "Parents chosen for complete OOF/test availability, based on published scores before our contrasts. Exploratory, not new independent data.",
+    "important": "Stack-level OOF is only used in fixed transforms; no additional supervised stack of stacks. Inherited parent validation dependencies remain."
+  },
+  "training": false,
+  "model_inference": false,
+  "submission_generated": false,
+  "current_auc": 0.9622047560968178,
+  "parent_scores": [
+    {
+      "name": "atlas181",
+      "auc": 0.9621655407199953,
+      "alignment": "author-declared file order; no independent ID sidecar"
+    },
+    {
+      "name": "cdeotte135",
+      "auc": 0.9620682076820268,
+      "alignment": "author-declared file order; no independent ID sidecar"
+    },
+    {
+      "name": "gp_stack245",
+      "auc": 0.9622243416105974,
+      "alignment": "author-declared file order; no independent ID sidecar"
+    }
+  ],
+  "arms": [
+    {
+      "arm": "fixed_rank_mean",
+      "auc": 0.962205268617202,
+      "delta": 5.125203842437642e-07,
+      "native_fold_deltas": [
+        -5.928977316327355e-06,
+        -1.3509941421130378e-05,
+        -6.890354653288355e-06,
+        -7.858476589794883e-06,
+        2.1498783901896523e-05
+      ],
+      "test_rank_correlation_with_current": 0.9998967704183676
+    },
+    {
+      "arm": "fixed_row_hblend",
+      "auc": 0.9622048673217578,
+      "delta": 1.1122494003590333e-07,
+      "native_fold_deltas": [
+        -6.094521845634304e-06,
+        -1.4357630106154318e-05,
+        -7.109286577877683e-06,
+        -8.479576941056166e-06,
+        2.1597075644863573e-05
+      ],
+      "test_rank_correlation_with_current": 0.9998924911048713
+    }
+  ],
+  "nonlinearity_delta_vs_fixed_rank_mean": -4.012954442078609e-07,
+  "caveat": "No new target-fitted stack layer, but parent early stopping, indirect OOF dependencies and source selection persist. A fixed recipe negative result does not reject all nonlinear blending."
+}

@@ -1,0 +1,71 @@
+{
+  "params": {
+    "n_ens": 8,
+    "n_epochs": 3,
+    "batch_size": 256,
+    "use_early_stopping": false,
+    "lr": 0.053,
+    "wd": 0.015,
+    "sq_mom": 0.988,
+    "lr_sched": "flat_anneal",
+    "wd_sched": "cos_log_15",
+    "first_layer_lr_factor": 0.25,
+    "embedding_size": 5,
+    "max_one_hot_cat_size": 18,
+    "hidden_sizes": [
+      512,
+      256,
+      128
+    ],
+    "act": "silu",
+    "p_drop": 0.05,
+    "p_drop_sched": "invsqrtp1e-3",
+    "plr_hidden_1": 16,
+    "plr_hidden_2": 8,
+    "plr_act_name": "gelu",
+    "plr_lr_factor": 0.1151,
+    "plr_sigma": 2.33,
+    "ls_eps": 0.01,
+    "ls_eps_sched": "sqrt_cos",
+    "add_front_scale": false,
+    "bias_init_mode": "neg-uniform-dynamic-2",
+    "tfms": [
+      "one_hot",
+      "median_center",
+      "robust_scale",
+      "smooth_clip",
+      "embedding",
+      "l2_normalize"
+    ],
+    "stop_epoch": 3
+  },
+  "seed": 42,
+  "blend": {
+    "v4": 0.8,
+    "lean_realmlp": 0.2
+  },
+  "full_training_rows": true,
+  "epochs": 3,
+  "outer_cv_performed": false,
+  "public_trial_requested": true,
+  "screen_status": "stopped_screen",
+  "screen_candidate_blend_gain": 0.0001747749771340879,
+  "fullfit_not_equivalent_to_screen_training_size": true,
+  "original_v4_uses_existing_10fold_predictions": true,
+  "hashes": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+    "submission_v4.csv": "75f42132377e87fa2a0a9c4c34610c094c01d6b9fa743bd5437e4ff9b71d5958",
+    "experiment_realmlp_factorial.py": "efb7b3bb62da39db75d9c00e50d7c62566d1a779ebf8a8118a831d0fde4634b2",
+    "build_realmlp_trial_submission.py": "d0c4d741b00c1a82f8547e3fa940ad542e20389431d6218c9da7b4aaad7fc5bc"
+  },
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "pytabkit": "1.7.3",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "numpy": "2.5.2"
+  },
+  "screen": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\realmlp_factorial\\daf3c37e9d0734bbfbb5"
+}

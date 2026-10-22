@@ -1,0 +1,14 @@
+{
+  "python": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "xgboost": "3.4.1",
+    "catboost": "1.2.10",
+    "torch": "2.11.0+cu128",
+    "tabm": "0.0.3",
+    "rtdl_num_embeddings": "0.0.12"
+  }
+}

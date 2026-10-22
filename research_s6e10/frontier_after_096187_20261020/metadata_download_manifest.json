@@ -1,0 +1,17 @@
+[
+  {
+    "tag": "gp_readme",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/README.md",
+    "sha256": "1446afc6331178cf9dbe133d6933456aad0d74c579b048ca32b75891f6e075fb"
+  },
+  {
+    "tag": "gp_members",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/members.csv",
+    "sha256": "bbd926bdc59ef9f4612d2cf76be197a2b42944ca4c6e17efd9580eeca2280f94"
+  },
+  {
+    "tag": "atlas_metadata",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/mayankraaz/s6e10-lb-surface-atlas/own_cv_stack_181_meta.json",
+    "sha256": "0352a958940c8b362847eec903c9a651077e136c077a6dc06bdc04b064110d40"
+  }
+]

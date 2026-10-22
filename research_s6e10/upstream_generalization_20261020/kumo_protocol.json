@@ -1,0 +1,23 @@
+{
+  "hypothesis": "Kumo Large with nested residual features (set E) provides complementary upstream information beyond the raw Kumo member already in public246.",
+  "source": "https://www.kaggle.com/code/ewtherka/s6e10-tabfm-trying-to-be-better",
+  "source_version": 14,
+  "source_snapshot_sha256": "44be289653c9f69c99bce525dad0b7e5a45efcdf04ec429a81a2ea384334bd97",
+  "selection_before_outcome": "Use all and only fully completed bags 0,1,2; skip incomplete bag3. Arithmetic probability mean matches the author's assembly.",
+  "baseline": "public246 saved meta-OOF and saved full-refit test predictions, C=0.003",
+  "contrasts": "Fixed 5% and 20% candidate logit additions. Matched raw-Kumo additions at the same weights are a representation control; no trained stack or weight search.",
+  "probability_clip": [0.000001, 0.999999],
+  "report": "Overall ROC-AUC, paired fold deltas using native StratifiedKFold(5,shuffle=True,random_state=42), standalone AUC, raw candidate comparison, maximum rank correlation with existing246.",
+  "reference_expansion_gate": 0.0003,
+  "screen_seconds_including_preparation_and_download": 900,
+  "per_download_seconds": 50,
+  "no_model_fits": true,
+  "no_new_submission": true,
+  "limitations": [
+    "Fixed external OOF comparison is exploratory and not end-to-end nested CV.",
+    "Native split has been used for historical selection; it is not an untouched holdout.",
+    "Parts lack independent ID sidecars; row alignment depends on audited source and original row order.",
+    "Resumed parts must be traced to the source versions that produced them; same filename alone does not establish feature-setting identity.",
+    "Failure at these two weights does not rule out all weights or all Kumo representations."
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "complete": true,
+  "folds": [
+    {
+      "fold": 0,
+      "auc": 0.9616066394768572,
+      "seconds": 152.73859119415283,
+      "resources": [
+        {
+          "seed": 42,
+          "seconds": 73.11393976211548,
+          "peak_gpu_gb": 1.4092869758605957
+        },
+        {
+          "seed": 20261019,
+          "seconds": 64.48361992835999,
+          "peak_gpu_gb": 1.4092869758605957
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629671,
+      "scored_rows": 69964
+    },
+    {
+      "fold": 1,
+      "auc": 0.9616491626288386,
+      "seconds": 155.79458618164062,
+      "resources": [
+        {
+          "seed": 43,
+          "seconds": 64.0764000415802,
+          "peak_gpu_gb": 1.40928316116333
+        },
+        {
+          "seed": 20261020,
+          "seconds": 76.58286619186401,
+          "peak_gpu_gb": 1.40928316116333
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629671,
+      "scored_rows": 69964
+    },
+    {
+      "fold": 2,
+      "auc": 0.9600217975591547,
+      "seconds": 157.62001538276672,
+      "resources": [
+        {
+          "seed": 44,
+          "seconds": 71.20860195159912,
+          "peak_gpu_gb": 1.4092869758605957
+        },
+        {
+          "seed": 20261021,
+          "seconds": 71.3437225818634,
+          "peak_gpu_gb": 1.4092869758605957
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629671,
+      "scored_rows": 69964
+    },
+    {
+      "fold": 3,
+      "auc": 0.9607154535530009,
+      "seconds": 168.44364523887634,
+      "resources": [
+        {
+          "seed": 45,
+          "seconds": 76.26364183425903,
+          "peak_gpu_gb": 1.4092869758605957
+        },
+        {
+          "seed": 20261022,
+          "seconds": 77.09431529045105,
+          "peak_gpu_gb": 1.4092869758605957
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629671,
+      "scored_rows": 69964
+    },
+    {
+      "fold": 4,
+      "auc": 0.9616798574009157,
+      "seconds": 153.57195019721985,
+      "resources": [
+        {
+          "seed": 46,
+          "seconds": 69.81257009506226,
+          "peak_gpu_gb": 1.4092869758605957
+        },
+        {
+          "seed": 20261023,
+          "seconds": 68.62315964698792,
+          "peak_gpu_gb": 1.4092869758605957
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629671,
+      "scored_rows": 69964
+    },
+    {
+      "fold": 5,
+      "auc": 0.9623149740030064,
+      "seconds": 164.3292384147644,
+      "resources": [
+        {
+          "seed": 47,
+          "seconds": 73.06369709968567,
+          "peak_gpu_gb": 1.409287929534912
+        },
+        {
+          "seed": 20261024,
+          "seconds": 76.22569727897644,
+          "peak_gpu_gb": 1.409287929534912
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629672,
+      "scored_rows": 69963
+    },
+    {
+      "fold": 6,
+      "auc": 0.9604417411330475,
+      "seconds": 165.95179200172424,
+      "resources": [
+        {
+          "seed": 48,
+          "seconds": 80.52969551086426,
+          "peak_gpu_gb": 1.4092841148376465
+        },
+        {
+          "seed": 20261025,
+          "seconds": 70.25370812416077,
+          "peak_gpu_gb": 1.4092841148376465
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629672,
+      "scored_rows": 69963
+    },
+    {
+      "fold": 7,
+      "auc": 0.9621601031801253,
+      "seconds": 160.14757657051086,
+      "resources": [
+        {
+          "seed": 49,
+          "seconds": 70.4512665271759,
+          "peak_gpu_gb": 1.4092841148376465
+        },
+        {
+          "seed": 20261026,
+          "seconds": 74.65224075317383,
+          "peak_gpu_gb": 1.4092841148376465
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629672,
+      "scored_rows": 69963
+    },
+    {
+      "fold": 8,
+      "auc": 0.9612835286401971,
+      "seconds": 176.38284635543823,
+      "resources": [
+        {
+          "seed": 50,
+          "seconds": 83.90893387794495,
+          "peak_gpu_gb": 1.409287929534912
+        },
+        {
+          "seed": 20261027,
+          "seconds": 77.23104667663574,
+          "peak_gpu_gb": 1.409287929534912
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629672,
+      "scored_rows": 69963
+    },
+    {
+      "fold": 9,
+      "auc": 0.9614019694355751,
+      "seconds": 157.01637887954712,
+      "resources": [
+        {
+          "seed": 51,
+          "seconds": 71.2647635936737,
+          "peak_gpu_gb": 1.409287929534912
+        },
+        {
+          "seed": 20261028,
+          "seconds": 70.48194622993469,
+          "peak_gpu_gb": 1.409287929534912
+        }
+      ],
+      "feature_count": 47,
+      "fit_rows": 629672,
+      "scored_rows": 69963
+    }
+  ],
+  "seeds": [
+    42,
+    20261019
+  ],
+  "blend": {
+    "weight": 0.35,
+    "form": "logit"
+  },
+  "standalone_oof_auc": 0.9613189563138835,
+  "legacy_baseline_oof_auc": 0.9614461831268378,
+  "blended_oof_auc": 0.9616745833317898,
+  "output": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\submission_lean_realmlp_10fold.csv",
+  "output_sha256": "b8cbfd891761efa14fac950684f03929b01da2d10a2c868fdb8228e7cb878eb8",
+  "rows": 299844,
+  "protected_unchanged": true,
+  "legacy_oof_early_stopping_caveat": true,
+  "public_score_unknown": true
+}

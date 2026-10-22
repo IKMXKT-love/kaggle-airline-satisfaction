@@ -1,0 +1,6 @@
+{
+  "cross_entropy": 1.793008756158691,
+  "accuracy": 0.14284488920657612,
+  "masked_positions": 69950,
+  "seed": 1942
+}

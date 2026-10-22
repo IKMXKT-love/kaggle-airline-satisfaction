@@ -1,0 +1,32 @@
+[
+  {
+    "ref": "yekenot/ps-s6-e10-realmlp-pytabkit",
+    "retained_version": 8,
+    "current_version": 8,
+    "version_changed": false
+  },
+  {
+    "ref": "hermengardo/single-catboost-eda-ps6e10",
+    "retained_version": 28,
+    "current_version": 28,
+    "version_changed": false
+  },
+  {
+    "ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+    "retained_version": 2,
+    "current_version": 2,
+    "version_changed": false
+  },
+  {
+    "ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+    "retained_version": 1,
+    "current_version": 1,
+    "version_changed": false
+  },
+  {
+    "ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "retained_version": 1,
+    "current_version": 1,
+    "version_changed": false
+  }
+]

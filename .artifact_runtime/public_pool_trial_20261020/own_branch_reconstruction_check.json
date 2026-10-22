@@ -1,0 +1,7 @@
+{
+  "max_abs_probability_difference": 2.0474161810390967e-08,
+  "tolerance": 2e-07,
+  "source": "own seven cached branches vs preserved current best OOF",
+  "explanation": "Small differences from reference float32 logit rounding",
+  "passed": true
+}

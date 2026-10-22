@@ -1,0 +1,17 @@
+{
+  "pairs": [
+    [
+      "sa_rmlp_v4aux_k10",
+      "sa_rmlp_v4aux_k10s2"
+    ],
+    [
+      "gp_realmlp_pub_s1",
+      "gp_realmlp_pub_s2"
+    ]
+  ],
+  "selection": "first pair is the strongest previously observed shrinkage; second is a separately named public-seed pair; not independent hypothesis selection",
+  "method": "pandas average ranks, direct difference SD; compare cached covariance identity; 20 equal-size baseline-score percentile strata",
+  "limitations": "strata are descriptive; different train/test score functions remain; this does not identify causal source or AUC gain",
+  "labels_read": false,
+  "model_fits": 0
+}

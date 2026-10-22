@@ -1,0 +1,42 @@
+{
+  "verified": true,
+  "folds": {
+    "0": {
+      "base_cache_branches_checked": 84,
+      "base_checkpoint_max_differences": {
+        "old_xgb": 0.0,
+        "old_cat": 0.0,
+        "control": 0.0,
+        "realmlp": 0.0,
+        "lgb": 0.0,
+        "lean_42": 0.0,
+        "lean_20261019": 0.0
+      },
+      "correction_checkpoint_max_differences": {
+        "plain": 0.0,
+        "offset": 0.0
+      }
+    },
+    "1": {
+      "base_cache_branches_checked": 84,
+      "base_checkpoint_max_differences": {
+        "old_xgb": 0.0,
+        "old_cat": 0.0,
+        "control": 0.0,
+        "realmlp": 0.0,
+        "lgb": 0.0,
+        "lean_42": 0.0,
+        "lean_20261019": 0.0
+      },
+      "correction_checkpoint_max_differences": {
+        "plain": 0.0,
+        "offset": 0.0
+      }
+    }
+  },
+  "protected_root_files_unchanged": true,
+  "input_and_source_fingerprints_match": true,
+  "all_oof_training_scopes_rebuilt": true,
+  "gate_reconstructed": true,
+  "auxiliary_cache_matches_current_features_and_source": true
+}

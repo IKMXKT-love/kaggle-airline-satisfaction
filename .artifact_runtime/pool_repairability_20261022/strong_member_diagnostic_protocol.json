@@ -1,0 +1,6 @@
+{
+  "defined_after_inner_result": true,
+  "purpose": "Descriptive sensitivity only: check whether broad246-member oracle is inflated by weak low-weight members. No retraining, gate changes or candidate selection.",
+  "rule": "For each native fold, take12 largest strictly positive coefficients of its frozen LR fitted on other4 native folds; compare same saved pairs.",
+  "started_epoch": 1792647414.4207487
+}

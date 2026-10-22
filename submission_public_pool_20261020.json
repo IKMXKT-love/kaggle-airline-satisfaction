@@ -1,0 +1,77 @@
+{
+  "fold_scores": {
+    "public_only": [
+      0.9623591653196826,
+      0.9614093108360477,
+      0.9627989282529895,
+      0.9624455506060633,
+      0.9620440478732256
+    ],
+    "public_plus_own": [
+      0.9623603624135598,
+      0.9614127690499634,
+      0.9627950634216526,
+      0.962434171112307,
+      0.9620498108733188
+    ],
+    "current_best": [
+      0.961841676432035,
+      0.960740483739217,
+      0.9623836961294814,
+      0.9617528311661899,
+      0.9616652824002522
+    ]
+  },
+  "pooled_aucs": {
+    "public_only": 0.9622047560968178,
+    "public_plus_own": 0.9622040806769043,
+    "current_best": 0.9616745833317898
+  },
+  "own_paired_deltas": [
+    1.1970938772476458e-06,
+    3.4582139156746905e-06,
+    -3.864831336963803e-06,
+    -1.1379493756291659e-05,
+    5.763000093139681e-06
+  ],
+  "own_delta_mean": -9.65203441438689e-07,
+  "own_delta_se": 3.0526722580951163e-06,
+  "own_positive_folds": 3,
+  "own_included": false,
+  "selected_arm": "public_only",
+  "selected_deltas_vs_current": [
+    0.0005174888876475769,
+    0.0006688270968306931,
+    0.00041523212350813576,
+    0.0006927194398733683,
+    0.0003787654729734413
+  ],
+  "passes_material_gain_gate": true,
+  "public_columns": 246,
+  "new_public_score": 0.96187,
+  "validation_caveat": "Fixed-base-OOF meta-CV, inherited early-stopping and indirect label dependencies; not end-to-end nested CV.",
+  "submission": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\submission_public_pool_20261020.csv",
+  "submission_sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+  "full_refit": {
+    "tag": "selected_full_refit",
+    "columns": 246,
+    "fit_rows": 699635,
+    "C": 0.003,
+    "seconds": 18.623812913894653,
+    "solver": "streaming damped Newton, identical penalized objective",
+    "resumed_same_fold_checkpoint": false,
+    "iterations": 7,
+    "converged": true,
+    "value": 0.21969457307051682,
+    "max_gradient": 6.570206127065733e-14
+  },
+  "test_rows": 299844,
+  "finite_probabilities": true,
+  "test_probability_mean": 0.4435694636001258,
+  "intercept": -0.015572943751667088,
+  "all_base_models_reused": true,
+  "public_score_unknown": false,
+  "score_source": "user_reported",
+  "public_result_record": "submission_public_pool_20261020_public_result.json",
+  "kaggle_submission_record_independently_verified": false
+}

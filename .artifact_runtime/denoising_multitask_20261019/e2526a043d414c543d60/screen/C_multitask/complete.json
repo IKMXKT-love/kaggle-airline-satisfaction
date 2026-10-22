@@ -1,0 +1,27 @@
+{
+  "spec": "C_multitask",
+  "initial_hash": "2746c7241bf97cb1cf7b05bb8ca4238c024e30e3b3d664ca7c733c7efb199159",
+  "best_stopping_auc": 0.9598275388681492,
+  "best_epoch": 16,
+  "epochs_completed": 24,
+  "updates_completed": 9672,
+  "warm_epochs": 12,
+  "fine_epochs": 12,
+  "masked_stopping_recovery": {
+    "cross_entropy": 0.7801045777109199,
+    "accuracy": 0.6817155110793424,
+    "masked_positions": 69950,
+    "seed": 1942
+  },
+  "seconds": 72.4647879999975,
+  "peak_allocated_gb": 0.38838815689086914,
+  "peak_reserved_gb": 0.44140625,
+  "parameter_count": 3644536,
+  "best_checkpoint_sha256": "d4ce1efe302b3252bf83041201343fb1c4cd7a8aa756b46ffefbf471190de9a8",
+  "initial_recovery": {
+    "cross_entropy": 1.793008756158691,
+    "accuracy": 0.14284488920657612,
+    "masked_positions": 69950,
+    "seed": 1942
+  }
+}

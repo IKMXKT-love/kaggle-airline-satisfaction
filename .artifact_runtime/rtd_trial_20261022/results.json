@@ -1,0 +1,87 @@
+{
+  "scores": {
+    "matched_baseline": {
+      "score_auc": 0.9622460054943154,
+      "new_member_coefficient": null
+    },
+    "clean": {
+      "score_auc": 0.9622417340315985,
+      "new_member_coefficient": 0.023997560648030245,
+      "single_score_auc": 0.9592594654771597,
+      "vs_matched_baseline": {
+        "delta": -4.271462716821223e-06,
+        "approximate_se": 2.724356457398653e-06,
+        "interval95": [
+          -9.611201373322583e-06,
+          1.0682759396801366e-06
+        ]
+      },
+      "vs_incumbent": {
+        "delta": -0.00011743128808406102,
+        "approximate_se": 3.959166034639716e-05,
+        "interval95": [
+          -0.00019503094236299944,
+          -3.9831633805122594e-05
+        ]
+      }
+    },
+    "rtd": {
+      "score_auc": 0.9622625940908028,
+      "new_member_coefficient": 0.07649071271998434,
+      "single_score_auc": 0.9612841843296782,
+      "vs_matched_baseline": {
+        "delta": 1.6588596487448384e-05,
+        "approximate_se": 9.731147498898248e-06,
+        "interval95": [
+          -2.484452610392181e-06,
+          3.5661645585288946e-05
+        ]
+      },
+      "vs_incumbent": {
+        "delta": -9.657122887979142e-05,
+        "approximate_se": 4.059388336796467e-05,
+        "interval95": [
+          -0.00017613524028100216,
+          -1.700721747858067e-05
+        ]
+      }
+    },
+    "incumbent": {
+      "score_auc": 0.9623591653196826
+    }
+  },
+  "rtd_vs_clean": {
+    "delta": 2.0860059204269603e-05,
+    "approximate_se": 9.639590117310317e-06,
+    "interval95": [
+      1.966462574341381e-06,
+      3.9753655834197825e-05
+    ]
+  },
+  "admission_passed": false,
+  "meta_fits": {
+    "matched_baseline": {
+      "iterations": 7,
+      "converged": true,
+      "value": 0.21996364782253064,
+      "max_gradient": 7.605979783715036e-15
+    },
+    "clean": {
+      "iterations": 7,
+      "converged": true,
+      "value": 0.21996158393933699,
+      "max_gradient": 7.676098865154642e-15
+    },
+    "rtd": {
+      "iterations": 7,
+      "converged": true,
+      "value": 0.21994390833987842,
+      "max_gradient": 7.740065099265392e-15
+    }
+  },
+  "scored_rows": 139927,
+  "meta_fit_rows": 139927,
+  "elapsed_seconds": 9782.717744588852,
+  "limitations": "Historical fold0, public upstream indirect dependence. Candidate epoch selected on meta fitting fold4. Conditional meta comparison; no end-to-end independent guarantee. Fixed-prediction intervals do not cover training or selection uncertainty.",
+  "new_test_predictions": false
+}

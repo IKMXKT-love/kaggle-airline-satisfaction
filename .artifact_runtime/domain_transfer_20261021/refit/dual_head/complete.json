@@ -1,0 +1,12 @@
+{
+  "arm": "dual_head",
+  "phase": "refit",
+  "initial_state_hash": "899101422d3053bd55392e00a3b05ac77d52d23349a9c69ae89be34d8746907d",
+  "epochs_completed": 5,
+  "updates": 1370,
+  "seconds": 18.519915342330933,
+  "best_epoch": 5,
+  "best_stopping_auc": null,
+  "peak_allocated_gb": 0.576840877532959,
+  "parameter_count": 3517520
+}

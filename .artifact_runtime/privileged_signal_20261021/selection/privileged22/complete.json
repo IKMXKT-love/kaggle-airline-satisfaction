@@ -1,0 +1,10 @@
+{
+  "phase": "selection",
+  "arm": "privileged22",
+  "trees": 818,
+  "seconds": 4.6649158000946045,
+  "auc": 0.9946042613751787,
+  "logloss": 0.08950228244066238,
+  "fitted_rows": 87654,
+  "scored_rows": 9740
+}

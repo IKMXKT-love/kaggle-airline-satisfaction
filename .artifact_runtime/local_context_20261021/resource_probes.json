@@ -1,0 +1,24 @@
+[
+  {
+    "context_size": 2048,
+    "query_size": 512,
+    "complete_training_step_seconds": [
+      0.9087523999987752,
+      0.8450677000000724,
+      0.8401484000005439,
+      0.8475345999995625
+    ],
+    "worst_complete_training_step_seconds": 0.9087523999987752,
+    "context_and_1024_query_seconds": [
+      0.713932399999976,
+      0.3861663999996381,
+      0.38633519999893906,
+      0.4349490999993577
+    ],
+    "worst_context_and_1024_query_seconds": 0.713932399999976,
+    "peak_training_gpu_gb": 4.813118934631348,
+    "real_gradient_update_verified": true,
+    "reuse_adapter_max_difference_vs_official": 0.0,
+    "probe_weights_discarded": true
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "signature": "7281c1ca50bbc76d99c041f7ef4e3c67af5665b4d5920a17df53f60a18e5b562",
+  "rows": 129859,
+  "source_labels_only": true,
+  "config": {
+    "iterations": 1800,
+    "learning_rate": 0.04,
+    "depth": 8,
+    "l2_leaf_reg": 5,
+    "loss_function": "Logloss",
+    "thread_count": 8,
+    "random_seed": 42,
+    "verbose": false,
+    "max_ctr_complexity": 2,
+    "allow_writing_files": false,
+    "task_type": "GPU",
+    "devices": "0",
+    "cat_features": [
+      "Gender",
+      "Customer Type",
+      "Type of Travel",
+      "Class"
+    ]
+  }
+}

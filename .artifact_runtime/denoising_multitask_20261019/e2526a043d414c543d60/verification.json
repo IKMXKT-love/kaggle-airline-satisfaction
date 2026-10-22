@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "original_files_unchanged": true,
+  "original_files": 100,
+  "probe_weight_updates_verified": true,
+  "stages": {
+    "screen": {
+      "rows": {
+        "fit": 411944,
+        "stopping": 35822,
+        "scored": 111942
+      },
+      "replay": {
+        "A_clean": {
+          "rows": 111942,
+          "maximum_prediction_difference": 0.0,
+          "auxiliary_weight_difference": 0.0
+        },
+        "B_masked": {
+          "rows": 111942,
+          "maximum_prediction_difference": 0.0,
+          "auxiliary_weight_difference": 0.0
+        },
+        "C_multitask": {
+          "rows": 111942,
+          "maximum_prediction_difference": 0.0,
+          "auxiliary_weight_difference": 0.6951448917388916
+        }
+      },
+      "metrics_rebuilt": true,
+      "gates_rebuilt": true,
+      "shared_initial_weights": true,
+      "warm_and_fine_budgets_verified": true,
+      "recovery_head_updated_only_in_multitask": true
+    }
+  },
+  "checkpoint_replay": true,
+  "no_new_submission_generated_by_this_experiment": true
+}

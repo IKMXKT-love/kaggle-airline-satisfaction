@@ -1,0 +1,36 @@
+{
+  "outer_folds": [
+    0,
+    1
+  ],
+  "split_seed": 20261020,
+  "max_epochs": 24,
+  "patience": 4,
+  "batch_size": 2048,
+  "members": 4,
+  "rank": 8,
+  "lr": 0.003,
+  "weight_decay": 0.02,
+  "label_smoothing": 0.005,
+  "seed": 42,
+  "modes": [
+    "additive",
+    "ffm"
+  ],
+  "fixed_blend_weight": 0.2,
+  "blend_space": "logit",
+  "gate": 0.0003,
+  "early_stopping_only_on_internal_split": true,
+  "refit_full_outer_training": true,
+  "historical_data_previously_seen": true,
+  "hashes": {
+    "experiment_ffm.py": "771826e23943c0370a04616c7170ea34dae4ad262ed73f64ab6848dd16aa2b4d",
+    "ffm_support.py": "48c711741a7b01baa994b14319fd79f36856a6c3cb88156917aa3a8e59c0f280",
+    "tests/test_ffm_contract.py": "a9a8d97377af62c6498b05adcdc96f3f23390f6c1428f674ac4eccd8b4cc061d",
+    "correction_support.py": "3a61fa0efe9d5c16aea59bd053ebed2e72a9ec0db7813e4550d119fadb4765ca",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6"
+  },
+  "reference": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\strong_correction_20261020\\b1385337dbf19f77097b",
+  "frozen_before_correction_outer_scores": true
+}

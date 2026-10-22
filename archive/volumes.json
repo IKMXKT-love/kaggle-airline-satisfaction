@@ -1,0 +1,126 @@
+{
+  "repository": "IKMXKT-love/kaggle-airline-satisfaction",
+  "tag": "archive-20261023",
+  "volumes": [
+    {
+      "name": "kaggle-airline-satisfaction-volume-001.zip",
+      "bytes": 322018987,
+      "sha256": "890d9eec46bfd0dd35684a430f28bdd67a5a981444d7e8b2327a771e293e4d5e",
+      "entries": 129
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-002.zip",
+      "bytes": 330388273,
+      "sha256": "84fe3cc823f336aeab49c09b58313066eacdda3f606a83ce994392fc741d5562",
+      "entries": 247
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-003.zip",
+      "bytes": 497073112,
+      "sha256": "38ad53fea10263ff4187aa9248dac1500843f3bf774c3ee82561c732b83f84c7",
+      "entries": 221
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-004.zip",
+      "bytes": 633547118,
+      "sha256": "47968971ed9d694b51ef7d734913970747b98aa7bac3d412bf57c7afada5714d",
+      "entries": 196
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-005.zip",
+      "bytes": 680605037,
+      "sha256": "118ea5944368c6c344feab4cda2390c7b26de912eceb836117b96a5c44d00688",
+      "entries": 227
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-006.zip",
+      "bytes": 334268727,
+      "sha256": "3fcc5ac8a94b1dce9dde735ecb44f1ec36134bfbc94e83109a707fca96077b56",
+      "entries": 73
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-007.zip",
+      "bytes": 733855251,
+      "sha256": "5b91829b754a8321927c199e87e9ae77cdda95ef5cf842ff39f6845694a7368d",
+      "entries": 1
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-008.zip",
+      "bytes": 431961619,
+      "sha256": "d8f6dbc2a06c31ffd86d51894914097712c8d10fb7bcfaf2670515f89db7707a",
+      "entries": 53
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-009.zip",
+      "bytes": 421938359,
+      "sha256": "e04adf4d9f9e92bba4e9fbd0db8f2fc84e8381122e9b5eb1881807610eeff41a",
+      "entries": 5
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-010.zip",
+      "bytes": 639480779,
+      "sha256": "d1aff8b72050cc9e43a9ef8d1e8517967acf187dad0fdf4e349eed4d090e0058",
+      "entries": 279
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-011.zip",
+      "bytes": 640103699,
+      "sha256": "d4358704de5d689bb53cdfa4299ea73bd2cca3af371d78407bc16491c2639546",
+      "entries": 3657
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-012.zip",
+      "bytes": 542121231,
+      "sha256": "4dd17a0bf1a682e4ecb80fddbd04f3c2147c82984e47a64147fa965bc9e2aff0",
+      "entries": 1386
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-013.zip",
+      "bytes": 256706215,
+      "sha256": "80a13af671c27379ba9980daf4fb324ff768685dac5ab4204f007207ab052288",
+      "entries": 23054
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-014.zip",
+      "bytes": 576811355,
+      "sha256": "f6c3d4e0ed0be3bb125f20054e69534c96b180f15ae50b71304b3bb43ceb8390",
+      "entries": 4
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-015.zip",
+      "bytes": 556717396,
+      "sha256": "3a2ff163aa3ec4d4f94a4a4942cea431140209ef525e0827e54b711a74f2376c",
+      "entries": 5
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-016.zip",
+      "bytes": 527838907,
+      "sha256": "be45f6cc37a6d75173f5a81e17d13a13f89716f8110fbff846fc21c18602a594",
+      "entries": 7
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-017.zip",
+      "bytes": 519248387,
+      "sha256": "6978cf99f5ebad6d90e38817be7266d9b5ca8e4e53ad8edf5a1846181612f534",
+      "entries": 24
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-018.zip",
+      "bytes": 92482942,
+      "sha256": "2859f4ec88d1d58733ae496f8d543fdedae2f292618d579bdf99252c9222b0b8",
+      "entries": 2
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-019.zip",
+      "bytes": 546508795,
+      "sha256": "b62d0988f2feb823eb3b6d7c49f85213d61d192b7a6e4facb166d904bf60a407",
+      "entries": 394
+    },
+    {
+      "name": "kaggle-airline-satisfaction-volume-020.zip",
+      "bytes": 319556784,
+      "sha256": "6afef73412515aa464980b7c1813ee7d4d87b1e36565d17023987fb7157d6020",
+      "entries": 2337
+    }
+  ]
+}

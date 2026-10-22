@@ -1,0 +1,93 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+Training enabled: True | 5 new CUDA neighborhood fits + one fixed CPU stacker
+Verified source snapshot: 1c07663ba959430f
+Preflight passed: (699635, 201) (299844, 201)
+Frozen v1 verified byte-for-byte; five folds, seed2036. New stack CV remains unknown.
+{'epoch': 1, 'training_loss': 0.2449094990723245, 'updates': 1094}
+{'epoch': 2, 'training_loss': 0.23228314696089275, 'updates': 1094}
+{'epoch': 3, 'training_loss': 0.23000253668977416, 'updates': 1094}
+{'epoch': 4, 'training_loss': 0.2285917979769816, 'updates': 1094}
+{'epoch': 5, 'training_loss': 0.2275254359530836, 'updates': 1094}
+{'epoch': 6, 'training_loss': 0.22679302243858848, 'updates': 1094}
+{'epoch': 7, 'training_loss': 0.22583093400436935, 'updates': 1094}
+{'epoch': 8, 'training_loss': 0.22492863686712608, 'updates': 1094}
+{'epoch': 9, 'training_loss': 0.22409994050172358, 'updates': 1094}
+{'epoch': 10, 'training_loss': 0.22346543889211265, 'updates': 1094}
+{'epoch': 11, 'training_loss': 0.22255528778427935, 'updates': 1094}
+{'epoch': 12, 'training_loss': 0.221904042639259, 'updates': 1094}
+{'fold': 0, 'auc': np.float64(0.9578170822014381), 'head_auc': np.float64(0.9577667849105715), 'neighbor_auc': np.float64(0.9577841584985238), 'fit_seconds': 184.77427840399997}
+{'epoch': 1, 'training_loss': 0.24640165284145343, 'updates': 1094}
+{'epoch': 2, 'training_loss': 0.23315488006824178, 'updates': 1094}
+{'epoch': 3, 'training_loss': 0.23065441972977124, 'updates': 1094}
+{'epoch': 4, 'training_loss': 0.2292353702574885, 'updates': 1094}
+{'epoch': 5, 'training_loss': 0.22807642445327636, 'updates': 1094}
+{'epoch': 6, 'training_loss': 0.22711793830126947, 'updates': 1094}
+{'epoch': 7, 'training_loss': 0.2262807733810592, 'updates': 1094}
+{'epoch': 8, 'training_loss': 0.22552139142285332, 'updates': 1094}
+{'epoch': 9, 'training_loss': 0.22447120183493172, 'updates': 1094}
+{'epoch': 10, 'training_loss': 0.22376315262566474, 'updates': 1094}
+{'epoch': 11, 'training_loss': 0.22270338772101064, 'updates': 1094}
+{'epoch': 12, 'training_loss': 0.22188203033963078, 'updates': 1094}
+{'fold': 1, 'auc': np.float64(0.9585387710431313), 'head_auc': np.float64(0.9585011754860612), 'neighbor_auc': np.float64(0.9584454491375314), 'fit_seconds': 182.4042430300001}
+{'epoch': 1, 'training_loss': 0.24502365248500366, 'updates': 1094}
+{'epoch': 2, 'training_loss': 0.23182899079659877, 'updates': 1094}
+{'epoch': 3, 'training_loss': 0.22956924527340206, 'updates': 1094}
+{'epoch': 4, 'training_loss': 0.2281017739130375, 'updates': 1094}
+{'epoch': 5, 'training_loss': 0.2271672451266612, 'updates': 1094}
+{'epoch': 6, 'training_loss': 0.22613184204234174, 'updates': 1094}
+{'epoch': 7, 'training_loss': 0.22519331434922188, 'updates': 1094}
+{'epoch': 8, 'training_loss': 0.22436086739710467, 'updates': 1094}
+{'epoch': 9, 'training_loss': 0.22371801021824056, 'updates': 1094}
+{'epoch': 10, 'training_loss': 0.22278452214859074, 'updates': 1094}
+{'epoch': 11, 'training_loss': 0.2220147808360753, 'updates': 1094}
+{'epoch': 12, 'training_loss': 0.22113191925248374, 'updates': 1094}
+{'fold': 2, 'auc': np.float64(0.9577319975893519), 'head_auc': np.float64(0.9576550536747702), 'neighbor_auc': np.float64(0.9577303415286786), 'fit_seconds': 182.1551774080001}
+{'epoch': 1, 'training_loss': 0.24621042777792243, 'updates': 1094}
+{'epoch': 2, 'training_loss': 0.23295533148977465, 'updates': 1094}
+{'epoch': 3, 'training_loss': 0.23043550960400908, 'updates': 1094}
+{'epoch': 4, 'training_loss': 0.2290670238703363, 'updates': 1094}
+{'epoch': 5, 'training_loss': 0.22795869175350056, 'updates': 1094}
+{'epoch': 6, 'training_loss': 0.2269602716662351, 'updates': 1094}
+{'epoch': 7, 'training_loss': 0.22618908625732986, 'updates': 1094}
+{'epoch': 8, 'training_loss': 0.22530629179142148, 'updates': 1094}
+{'epoch': 9, 'training_loss': 0.22446111886533704, 'updates': 1094}
+{'epoch': 10, 'training_loss': 0.22376049557345454, 'updates': 1094}
+{'epoch': 11, 'training_loss': 0.2226533304854645, 'updates': 1094}
+{'epoch': 12, 'training_loss': 0.22197962329883697, 'updates': 1094}
+{'fold': 3, 'auc': np.float64(0.9580350726261301), 'head_auc': np.float64(0.9580860776601134), 'neighbor_auc': np.float64(0.9577951844881099), 'fit_seconds': 182.49602476899986}
+{'epoch': 1, 'training_loss': 0.24424288210849274, 'updates': 1094}
+{'epoch': 2, 'training_loss': 0.23228119773859873, 'updates': 1094}
+{'epoch': 3, 'training_loss': 0.23022403624592838, 'updates': 1094}
+{'epoch': 4, 'training_loss': 0.2287325616143635, 'updates': 1094}
+{'epoch': 5, 'training_loss': 0.2276339799723107, 'updates': 1094}
+{'epoch': 6, 'training_loss': 0.22666829270069527, 'updates': 1094}
+{'epoch': 7, 'training_loss': 0.2255867168781089, 'updates': 1094}
+{'epoch': 8, 'training_loss': 0.22500278470785878, 'updates': 1094}
+{'epoch': 9, 'training_loss': 0.22408408011891803, 'updates': 1094}
+{'epoch': 10, 'training_loss': 0.22310495718459447, 'updates': 1094}
+{'epoch': 11, 'training_loss': 0.22245214262612997, 'updates': 1094}
+{'epoch': 12, 'training_loss': 0.22157786689562972, 'updates': 1094}
+{'fold': 4, 'auc': np.float64(0.9584579607452377), 'head_auc': np.float64(0.9583935789292791), 'neighbor_auc': np.float64(0.9584408987471525), 'fit_seconds': 181.5221195900001}
+Submit: /kaggle/working/submission.csv
+Download: /kaggle/working/neighborhood_gpu_v33_results.zip
+/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 665468 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Support files will be in __results___files/
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Writing 566109 bytes to __results__.html

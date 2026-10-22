@@ -1,0 +1,17 @@
+{
+  "best_csv_sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+  "all_test_rows_rebuilt": 299844,
+  "rebuild_max_probability_error": 1.1102230246251565e-16,
+  "upstream_downloads_not_required_for_this_rebuild": true,
+  "upstream_file_audit_still_requires_original_downloads": true,
+  "protected_files": {
+    "main.py": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  }
+}

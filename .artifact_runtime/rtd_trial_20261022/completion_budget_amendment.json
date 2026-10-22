@@ -1,0 +1,9 @@
+{
+  "timestamp": 1792684119.5500524,
+  "authorization": "Direct user instruction permits more than two hours and says not to stop at that point. Complete the same fixed comparison and verification; no additional recipes or seeds.",
+  "reason": "Sustained throughput plus full inference/verification may exceed 150 minutes; bounded same-experiment safety cap set to 180 minutes.",
+  "previous_deadline_epoch": 1792691063.0,
+  "new_deadline_epoch": 1792692863.0,
+  "recipe_changed": false,
+  "admission_changed": false
+}

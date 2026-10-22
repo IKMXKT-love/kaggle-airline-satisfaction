@@ -1,0 +1,34 @@
+{
+  "comparison_to_shared21": {
+    "delta": -5.671255054149788e-05,
+    "approximate_se": 3.3694336510068244e-05,
+    "interval95": [
+      -0.00012275345010123164,
+      9.328349018235878e-06
+    ]
+  },
+  "metrics": {
+    "phase": "refit",
+    "trees": 555,
+    "rating_accuracy": 0.6438934236870476,
+    "rating_logloss": 0.6973651051521301,
+    "integrated_auc": 0.9947610400888685,
+    "integrated_logloss": 0.08907030562172792,
+    "point_auc": 0.9946045187012511,
+    "global_mixture_auc": 0.9936145746018462,
+    "seconds": 14.636754751205444
+  },
+  "control": {
+    "phase": "refit",
+    "arm": "shared21",
+    "trees": 853,
+    "seconds": 3.9289066791534424,
+    "auc": 0.99481775263941,
+    "logloss": 0.0884719118475914,
+    "fitted_rows": 97394,
+    "scored_rows": 32465
+  },
+  "passes_deployable_source_gate": false,
+  "competition_score_measured": false,
+  "cumulative_seconds": 518.1928255558014
+}

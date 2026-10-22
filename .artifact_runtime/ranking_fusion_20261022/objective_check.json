@@ -1,0 +1,5 @@
+{
+  "value_error": 2.220446049250313e-16,
+  "gradient_error": 1.1102230246251565e-16,
+  "reference": "CPU explicit pair differences"
+}

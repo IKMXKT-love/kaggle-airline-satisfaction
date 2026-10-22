@@ -1,0 +1,43 @@
+{
+  "name": "finetuned_32768",
+  "state": "finetuned",
+  "context": 32768,
+  "status": "complete",
+  "fit_seconds": 1.1065785884857178,
+  "query_seconds": 42.831331968307495,
+  "seconds": 43.937912702560425,
+  "auc": 0.9559205662599521,
+  "baseline_auc": 0.9606333828423025,
+  "trials": [
+    {
+      "weight": 0.05,
+      "form": "probability",
+      "auc": 0.9606266595899364,
+      "paired": {
+        "delta": -6.723252365914015e-06,
+        "approximate_se": 1.204229769742555e-05,
+        "interval95": [
+          -3.032615585286809e-05,
+          1.6879651121040063e-05
+        ]
+      }
+    },
+    {
+      "weight": 0.2,
+      "form": "probability",
+      "auc": 0.9605227631283487,
+      "paired": {
+        "delta": -0.00011061971395356538,
+        "approximate_se": 4.107736430478788e-05,
+        "interval95": [
+          -0.00019113134799094962,
+          -3.010807991618114e-05
+        ]
+      }
+    }
+  ],
+  "peak_gpu_gb": 2.683727264404297,
+  "process_rss_gb": 2.454853057861328,
+  "checkpoint_sha256": "2d42aeee538a86594d8a804faf8332e0b069d688dbef01a4eea6151fa382c758",
+  "prediction_sha256": "cd9a6cd399cd8d22366ddceaeaf3780acf79a004a4a08abf07b727ea9b56ece7"
+}

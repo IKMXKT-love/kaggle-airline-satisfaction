@@ -1,0 +1,56 @@
+{
+  "protocol": {
+    "training": false,
+    "model_inference": false,
+    "own_submission_generated": false,
+    "seed": 20261021,
+    "pairs_per_fold": 2000000,
+    "chunk": 100000,
+    "folds": [
+      0,
+      1
+    ],
+    "purpose": "Describe whether the frozen public reference changes errors unanimously shared by our seven branches; no fitted fusion or selection.",
+    "caveat": "Exploratory only. Our baseline uses strict cached outer predictions, but public OOF partitions and historical selection differ. This is not strict validation of a new ensemble. Monte Carlo uncertainty is conditional on fixed predictions."
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "rows": 69964,
+      "sampled_pairs": 2000000,
+      "counts": {
+        "base_wrong": 75328,
+        "all_seven_wrong": 53766,
+        "public_corrects_unanimous": 1609,
+        "public_corrects_base_wrong": 8379,
+        "public_breaks_base_correct": 6912,
+        "public_ties": 0,
+        "base_ties": 0
+      },
+      "public_recovers_fraction_of_all_seven_wrong": 0.029925975523565077,
+      "sampled_net_pair_gain_ignoring_ties": 0.0007335,
+      "baseline_auc": 0.9621956601843398,
+      "public_reference_auc_on_same_rows": 0.9628501129682497,
+      "exact_auc_delta_on_these_rows": 0.0006544527839099645
+    },
+    {
+      "fold": 1,
+      "rows": 69964,
+      "sampled_pairs": 2000000,
+      "counts": {
+        "base_wrong": 77490,
+        "all_seven_wrong": 55250,
+        "public_corrects_unanimous": 1594,
+        "public_corrects_base_wrong": 8320,
+        "public_breaks_base_correct": 7539,
+        "public_ties": 0,
+        "base_ties": 0
+      },
+      "public_recovers_fraction_of_all_seven_wrong": 0.028850678733031675,
+      "sampled_net_pair_gain_ignoring_ties": 0.0003905,
+      "baseline_auc": 0.9610899042788947,
+      "public_reference_auc_on_same_rows": 0.9615673079719779,
+      "exact_auc_delta_on_these_rows": 0.0004774036930831338
+    }
+  ]
+}

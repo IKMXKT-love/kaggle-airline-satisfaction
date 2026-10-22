@@ -1,0 +1,126 @@
+{
+  "status": "completed_exploratory_trained_neighborhood_hybrid",
+  "metric": "roc_auc",
+  "direction": "maximize",
+  "overall_oof_auc": null,
+  "per_fold_auc": null,
+  "public_score": null,
+  "selected": "exploratory_not_promoted",
+  "new_base": {
+    "overall_oof_auc": 0.9580775526618023,
+    "per_fold": [
+      {
+        "fold": 0,
+        "auc": 0.9578170822014381,
+        "head_auc": 0.9577667849105715,
+        "neighbor_auc": 0.9577841584985238,
+        "fit_seconds": 184.77427840399997
+      },
+      {
+        "fold": 1,
+        "auc": 0.9585387710431313,
+        "head_auc": 0.9585011754860612,
+        "neighbor_auc": 0.9584454491375314,
+        "fit_seconds": 182.4042430300001
+      },
+      {
+        "fold": 2,
+        "auc": 0.9577319975893519,
+        "head_auc": 0.9576550536747702,
+        "neighbor_auc": 0.9577303415286786,
+        "fit_seconds": 182.1551774080001
+      },
+      {
+        "fold": 3,
+        "auc": 0.9580350726261301,
+        "head_auc": 0.9580860776601134,
+        "neighbor_auc": 0.9577951844881099,
+        "fit_seconds": 182.49602476899986
+      },
+      {
+        "fold": 4,
+        "auc": 0.9584579607452377,
+        "head_auc": 0.9583935789292791,
+        "neighbor_auc": 0.9584408987471525,
+        "fit_seconds": 181.5221195900001
+      }
+    ],
+    "head_oof_auc": 0.9579897494594511,
+    "neighbor_oof_auc": 0.9580194716810898,
+    "log_loss": 0.228444416465496,
+    "brier": 0.061027819345546984,
+    "coverage_one": true,
+    "fold_assignment_sha256": "0d2df9a59085ee4ac172f74548ccb3b02d46be5bf5386db2e2d58263ad424c08",
+    "params": {
+      "version": "hybrid-neighborhood-plr-v1",
+      "epochs": 12,
+      "batch_size": 512,
+      "context_rows": 2048,
+      "frequencies": 8,
+      "frequency_scale": 2.0,
+      "category_dim": 8,
+      "width": 256,
+      "metric_dim": 64,
+      "dropout": 0.1,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0001,
+      "temperature": 1.0,
+      "nca_loss_weight": 0.5,
+      "retrieval_prediction_weight": 0.5,
+      "gradient_clip": 1.0,
+      "encode_batch": 4096,
+      "query_batch": 256,
+      "bank_chunk": 32768,
+      "precision": "float32_no_amp",
+      "seed": 2026
+    }
+  },
+  "params": {
+    "version": "new-neighborhood-view-202-v1",
+    "params": {
+      "version": "hybrid-neighborhood-plr-v1",
+      "epochs": 12,
+      "batch_size": 512,
+      "context_rows": 2048,
+      "frequencies": 8,
+      "frequency_scale": 2.0,
+      "category_dim": 8,
+      "width": 256,
+      "metric_dim": 64,
+      "dropout": 0.1,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0001,
+      "temperature": 1.0,
+      "nca_loss_weight": 0.5,
+      "retrieval_prediction_weight": 0.5,
+      "gradient_clip": 1.0,
+      "encode_batch": 4096,
+      "query_batch": 256,
+      "bank_chunk": 32768,
+      "precision": "float32_no_amp",
+      "seed": 2026
+    },
+    "old_members": 201,
+    "new_members": 202,
+    "parent": "exp037",
+    "parent_submission_sha256": "5724eb0a2e303129ab351a535d3d2e7e8bf02d675068727ec2b9345201ffd345",
+    "fold_assignment_sha256": "0d2df9a59085ee4ac172f74548ccb3b02d46be5bf5386db2e2d58263ad424c08",
+    "final_stack_cv": "unavailable_without_nested_external_base_refits",
+    "frozen_correction": "exp036_unchanged",
+    "early_stopping": false
+  },
+  "members": 202,
+  "meta_fit_seconds": 139.7509604669999,
+  "submission_path": "/kaggle/working/exp042/submission.csv",
+  "submission_sha256": "542666dbb9af97479e96d88d5771a10943873fae5032fe3ca450fce7e25a8a0b",
+  "new_base_coefficient": 0.009702201921709695,
+  "test_change_vs_parent": {
+    "mean_absolute": 8.845835745954715e-05,
+    "maximum_absolute": 0.004710434231207983,
+    "nonidentical_rows": 299844,
+    "interpretation": "unlabeled probability change, not an AUC gain"
+  },
+  "validation_status": "base OOF is frozen-v1 development; final mixed-public stack CV unavailable",
+  "wall_seconds": 1883.4,
+  "experiment_id": "exp042"
+}

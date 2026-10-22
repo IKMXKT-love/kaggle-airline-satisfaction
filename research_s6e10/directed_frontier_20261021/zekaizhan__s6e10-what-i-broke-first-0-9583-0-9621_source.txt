@@ -1,0 +1,726 @@
+### CELL 0 markdown
+# S6E10 | What I Broke First: A Failure Log From 0.9583 to 0.9621
+
+**8 traps · 6 ablations · every number measured on the same frozen folds**
+
+> This is not a “here are 10 Kaggle tips” notebook. It is the ordered list of things I got wrong on Playground S6E10, the exact OOF movement each change produced, and the checks that stopped me from shipping a worse model. The score went **0.958330 → 0.962142**. Two of the steps were negative results, and one looked correct for a whole day before falling below the baseline.
+
+| | |
+|---|---|
+| **Task** | binary classification, ROC AUC |
+| **Members’ folds** | `StratifiedKFold(5, shuffle=True, random_state=42)` |
+| **Stacker’s meta folds** | `StratifiedKFold(5, shuffle=True, random_state=7)` |
+| **Data** | 699,635 train rows, 299,844 test rows |
+| **Baseline → final** | **0.958330 → 0.962142** |
+| **Final public stack** | 198 raw public members + own members, C=0.003 |
+
+---
+
+## Table of Contents
+
+1. [The score ladder](#1-the-score-ladder)
+2. [Trap 1 — treating 0 as a bad rating](#2-trap-1--treating-0-as-a-bad-rating)
+3. [Trap 2 — using the real dataset as extra rows](#3-trap-2--using-the-real-dataset-as-extra-rows)
+4. [Trap 3 — leaking the target through target encoding](#4-trap-3--leaking-the-target-through-target-encoding)
+5. [Trap 4 — stacking the same model family](#5-trap-4--stacking-the-same-model-family)
+6. [Trap 5 — the RealMLP 128-epoch trap](#6-trap-5--the-realmlp-128-epoch-trap)
+7. [Trap 6 — the three kinds of fake public-OOF scores](#7-trap-6--the-three-kinds-of-fake-public-oof-scores)
+8. [Trap 7 — believing a 1e-4 public-LB difference](#8-trap-7--believing-a-1e-4-public-lb-difference)
+9. [Trap 8 — engineering choices that silently cost hours](#9-trap-8--engineering-choices-that-silently-cost-hours)
+10. [Checklist and what I would do next](#10-checklist-and-what-i-would-do-next)
+11. [References and acknowledgements](#11-references-and-acknowledgements)
+
+> **Reproducibility note.** The full training runs are not repeated here. This notebook is deliberately lightweight: it loads the competition table, computes the illustrative EDA/leakage demos live, and presents the model/stack results as pre-computed tables from the frozen run. No external dataset is required, and Run All stays short.
+
+
+### CELL 1 code
+# ============================================================
+# Setup | only the competition table is required
+# ============================================================
+import os
+import glob
+import warnings
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import norm
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
+
+warnings.filterwarnings("ignore")
+SEED = 42
+TARGET = "satisfaction"
+BLUE = "#2E86AB"
+ORANGE = "#F6511D"
+GREEN = "#2A9D8F"
+GREY = "#6C757D"
+
+plt.rcParams.update({
+    "figure.figsize": (11, 6),
+    "figure.dpi": 110,
+    "axes.titlesize": 13,
+    "axes.titleweight": "bold",
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "legend.frameon": False,
+})
+sns.set_style("whitegrid")
+
+
+def resolve_competition_dir():
+    direct = [
+        "/kaggle/input/playground-series-s6e10",
+        "/kaggle/input/competitions/playground-series-s6e10",
+    ]
+    for p in direct:
+        if os.path.exists(os.path.join(p, "train.csv")):
+            return p
+    hits = sorted(glob.glob("/kaggle/input/**/sample_submission.csv", recursive=True))
+    for h in hits:
+        p = os.path.dirname(h)
+        if os.path.exists(os.path.join(p, "train.csv")):
+            return p
+    raise FileNotFoundError("Attach the S6E10 competition data.")
+
+
+COMP = resolve_competition_dir()
+train = pd.read_csv(os.path.join(COMP, "train.csv"))
+test = pd.read_csv(os.path.join(COMP, "test.csv"), usecols=["id"])
+y = train[TARGET].astype(int).values
+
+assert train.shape == (699635, 23), train.shape
+assert test.shape == (299844, 1), test.shape
+
+RATE_COLS = [
+    "Inflight wifi service", "Departure/Arrival time convenient",
+    "Ease of Online booking", "Gate location", "Food and drink",
+    "Online boarding", "Seat comfort", "Inflight entertainment",
+    "On-board service", "Leg room service", "Baggage handling",
+    "Checkin service", "Cleanliness",
+]
+print("competition dir:", COMP)
+print("train:", train.shape, "| test:", test.shape, "| positive rate: %.6f" % y.mean())
+
+
+### CELL 2 markdown
+## 1. The score ladder
+
+Every row below is an OOF number from the frozen seed-42 member folds. The two public-OOF stages use the seed-7 meta folds. No row is a public-LB reading.
+
+| # | Representation | OOF AUC | What changed |
+|---:|---|---:|---|
+| 1 | Competition only, default LGB | 0.958330 | baseline |
+| 2 | + original rows (concat) | 0.958197 | **negative result** |
+| 3 | + teacher / target stats / kNN | 0.958532 | external data as features |
+| 4 | LGB / CatBoost / XGBoost | 0.958852–0.958879 | three families, same features |
+| 5 | Four-member logit stack | **0.960909** | + RealMLP, rank/logit blend |
+| — | RealMLP, 128 epoch + early stop | 0.957489 | **wrong recipe** |
+| — | RealMLP, public 6-epoch recipe | 0.960791 | right recipe |
+| 6 | 124 public raw OOF members | 0.962056 | C=1, seed-7 nested |
+| 7 | 135 (+11 TFM) | 0.962104 | foundation-model diversity |
+| 8 | 182 (+golem, artifacts, forge) | 0.962106 | more raw families |
+| 9 | 198 honest (+17 extra) | 0.962136 | raw-only, no blend |
+| 10 | 199 (+ own RealMLP) | **0.962142** | final local stack |
+
+The point of the table is not that “more” is always better. Row 2 is worse than row 1. The 128-epoch RealMLP is worse than the baseline. The gain comes from **new information and new model families**, not from more rows, more seeds, or a deeper network.
+
+
+### CELL 3 code
+# ============================================================
+# Figure 1 | the ladder, coloured by whether the step helped
+# ============================================================
+ladder = pd.DataFrame({
+    "stage": [
+        "Competition only",
+        "+ original rows (concat)",
+        "+ teacher / stats / kNN",
+        "Best single GBDT",
+        "4-member logit stack",
+        "RealMLP 128-epoch",
+        "RealMLP public recipe",
+        "124 public OOF",
+        "182 public OOF",
+        "199 public + own",
+    ],
+    "auc": [
+        0.958330, 0.958197, 0.958532, 0.958879,
+        0.960909, 0.957489, 0.960791,
+        0.962056, 0.962106, 0.962142,
+    ],
+    "kind": [
+        "baseline", "negative", "positive", "positive",
+        "positive", "negative", "positive",
+        "positive", "positive", "positive",
+    ],
+})
+
+colors = [ORANGE if k == "negative" else (GREY if k == "baseline" else BLUE)
+          for k in ladder["kind"]]
+fig, ax = plt.subplots(figsize=(12, 6))
+bars = ax.barh(ladder["stage"], ladder["auc"], color=colors, height=0.62)
+for bar, v in zip(bars, ladder["auc"]):
+    ax.text(v + 0.00015, bar.get_y() + bar.get_height() / 2,
+            "%.6f" % v, va="center", fontsize=9, fontweight="bold")
+ax.axvline(0.958330, color=GREY, ls="--", lw=1)
+ax.axvline(0.96186, color=GREEN, ls=":", lw=1.4)
+ax.set_xlim(0.9568, 0.96265)
+ax.invert_yaxis()
+ax.set_xlabel("OOF ROC AUC  (dashed: 0.958330 baseline; dotted: 0.96186 top-10% threshold)")
+ax.set_title("The real ladder: two steps were negative, and one “obvious” network was worse than the baseline")
+plt.tight_layout()
+plt.show()
+
+print(ladder.to_string(index=False, float_format=lambda x: "%.6f" % x))
+print("\nDelta baseline -> final: +%.6f" % (ladder.auc.iloc[-1] - ladder.auc.iloc[0]))
+print("Delta 128-epoch RealMLP -> 6-epoch: +%.6f" % (0.960791 - 0.957489))
+
+
+### CELL 4 markdown
+## 2. Trap 1 — treating 0 as a bad rating
+
+The 13 service columns are integers 0–5. The tempting assumption is that 0 is the worst experience. The data says the opposite: **0 means “service not used”**, and non-use is heavily associated with Business cabin and long-haul travellers.
+
+| Column | Positive rate at 0 | Positive rate at 1 | What a linear “0 is worst” model sees |
+|---|---:|---:|---|
+| `Inflight wifi service` | **0.8873** | 0.3907 | completely wrong ordering |
+| `Ease of Online booking` | **0.7076** | 0.4146 | wrong |
+| `Online boarding` | **0.6204** | 0.1053 | wrong |
+| `Gate location` | **0.5430** | 0.5144 | almost flat |
+| `Departure/Arrival time convenient` | 0.4777 | 0.5060 | almost flat |
+
+`Business` + `wifi = 0` is **0.9310** positive; `Eco` + `wifi = 0` is **0.8106**. If you pass these columns as LightGBM categoricals, you force an ordering on the levels and destroy the non-monotone “not used” regime. Keep them numeric; let the trees split, and add explicit `zero_count` / `non_zero_mean` summaries.
+
+The next cell computes the rates from the actual training table and draws the two views that changed my mind.
+
+
+### CELL 5 code
+# ============================================================
+# Figure 2 | “0” is a separate population, not the bottom of a scale
+# ============================================================
+chosen = ["Inflight wifi service", "Ease of Online booking",
+          "Online boarding", "Gate location"]
+global_rate = y.mean()
+
+fig, axes = plt.subplots(1, 2, figsize=(15, 6))
+ax = axes[0]
+width = 0.36
+xpos = np.arange(len(chosen))
+zero_rates = [train.loc[train[c] == 0, TARGET].mean() for c in chosen]
+one_rates = [train.loc[train[c] == 1, TARGET].mean() for c in chosen]
+ax.bar(xpos - width / 2, zero_rates, width, color=ORANGE, label="rating = 0 (not used)")
+ax.bar(xpos + width / 2, one_rates, width, color=BLUE, label="rating = 1")
+for i, (a, b) in enumerate(zip(zero_rates, one_rates)):
+    ax.text(i - width / 2, a + 0.015, "%.1f%%" % (100 * a), ha="center", fontsize=8)
+    ax.text(i + width / 2, b + 0.015, "%.1f%%" % (100 * b), ha="center", fontsize=8)
+ax.axhline(global_rate, color=GREY, ls="--", lw=1, label="overall %.1f%%" % (100 * global_rate))
+ax.set_xticks(xpos)
+ax.set_xticklabels([c.replace(" ", "\n", 1) for c in chosen], fontsize=9)
+ax.set_ylim(0, 1.0)
+ax.set_ylabel("P(satisfied)")
+ax.set_title("The 0 level is often the happiest group")
+ax.legend(loc="upper right")
+
+ax = axes[1]
+pivot = train.pivot_table(index="Class", columns="Inflight wifi service",
+                          values=TARGET, aggfunc="mean")
+pivot = pivot.loc[["Business", "Eco Plus", "Eco"], [0, 1, 2, 3, 4, 5]]
+sns.heatmap(pivot, annot=True, fmt=".1%", cmap="RdYlBu_r", vmin=0, vmax=1,
+            linewidths=0.8, linecolor="white", cbar_kws={"label": "P(satisfied)"}, ax=ax)
+ax.set_title("Class × wifi: the 0 column is not the low end")
+ax.set_xlabel("Inflight wifi service (0 = not used)")
+ax.set_ylabel("")
+plt.tight_layout()
+plt.show()
+
+print("Business + wifi=0: %.4f" % train.loc[(train["Class"] == "Business") &
+                                             (train["Inflight wifi service"] == 0), TARGET].mean())
+print("Eco + wifi=0     : %.4f" % train.loc[(train["Class"] == "Eco") &
+                                             (train["Inflight wifi service"] == 0), TARGET].mean())
+print("Insight: ratings are numeric 0–5, but 0 is a missing-service flag. Do not declare them categorical.")
+
+
+### CELL 6 markdown
+## 3. Trap 2 — using the real dataset as extra rows
+
+The real airline dataset is schema-compatible: 129,880 rows, same 21 feature names. The natural move is `pd.concat([train, original])`. It does not work.
+
+| Statistic | S6E10 synthetic | Original real data |
+|---|---:|---:|
+| Mean departure delay | **1.176 min** | **14.714 min** |
+| Mean arrival delay | **1.134 min** | **15.091 min** |
+| Zero departure delay | **90.78%** | much lower |
+| Eco Plus share | **4.29%** | **7.25%** |
+| Positive rate | 0.443573 | 0.434463 |
+
+Adding 129,880 real rows to 699,635 synthetic rows moves the model toward a different delay/cabin distribution. The measured effect was **−0.000133** OOF (0.958330 → 0.958197): no gain, slightly worse. The external table is useful, but only as a *function* of the real world, not as extra rows.
+
+The three transfer mechanisms that did work:
+
+1. **Teacher** — a LightGBM trained only on the 129,880 real rows, scoring every competition row (competition AUC ≈0.9548).
+2. **Smoothed target statistics** — real-world positive rate per categorical value, category pair and rating level, `alpha=20`, global-prior fallback.
+3. **kNN-to-original** — mean real label of the 40 nearest real passengers in standardized numeric space (AUC ≈0.946 alone).
+
+The teacher/target-stat/kNN representation moved OOF from **0.958330 to 0.958532** (+0.000202). The gain is real but modest; the larger gain came later from the model-family blend and the public stack.
+
+
+### CELL 7 code
+# ============================================================
+# Figure 3 | the transfer experiment and the distribution audit
+# ============================================================
+transfer = pd.DataFrame({
+    "representation": ["Competition only", "Competition + original rows", "Teacher + stats + kNN"],
+    "oof": [0.958330, 0.958197, 0.958532],
+})
+fig, axes = plt.subplots(1, 2, figsize=(15, 6))
+
+ax = axes[0]
+colors = [GREY, ORANGE, BLUE]
+bars = ax.bar(transfer["representation"], transfer["oof"], color=colors, width=0.58)
+for b, v in zip(bars, transfer["oof"]):
+    ax.text(b.get_x() + b.get_width() / 2, v + 0.00008, "%.6f" % v,
+            ha="center", fontsize=10, fontweight="bold")
+ax.set_ylim(0.9579, 0.9588)
+ax.set_ylabel("OOF ROC AUC")
+ax.set_title("Concatenating real rows loses; transferring real signal wins")
+ax.tick_params(axis="x", labelsize=9)
+
+ax = axes[1]
+labels = ["Dep. delay\n(mean min)", "Arr. delay\n(mean min)", "Eco Plus\n(share %)"]
+synth = [1.176, 1.134, 4.29]
+orig = [14.714, 15.091, 7.25]
+x = np.arange(len(labels))
+ax.bar(x - 0.19, synth, 0.36, color=BLUE, label="S6E10 synthetic")
+ax.bar(x + 0.19, orig, 0.36, color=ORANGE, label="original real data")
+for i, (s, o) in enumerate(zip(synth, orig)):
+    ax.text(i - 0.19, s + 0.25, str(s), ha="center", fontsize=8)
+    ax.text(i + 0.19, o + 0.25, str(o), ha="center", fontsize=8)
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.set_ylabel("value")
+ax.set_title("The datasets are not exchangeable")
+ax.legend()
+plt.tight_layout()
+plt.show()
+
+print(transfer.to_string(index=False, float_format=lambda x: "%.6f" % x))
+print("concat delta: %+.6f | transfer delta: %+.6f"
+      % (transfer.oof.iloc[1] - transfer.oof.iloc[0],
+         transfer.oof.iloc[2] - transfer.oof.iloc[0]))
+
+
+### CELL 8 markdown
+## 4. Trap 3 — leaking the target through target encoding
+
+Target encoding is the easiest way to make a CV score look better than the model. The failure mode is subtle: if the encoder is fitted on all training rows and then used to encode the validation fold, each validation row's category already contains that row's target. The model appears to generalise; it is reading the answer key.
+
+The controlled demo below makes the mechanism visible. I create a **fake high-cardinality categorical** with 20,000 levels on an 80,000-row sample, then compare:
+
+- **leaky**: encoder fitted on train + validation, then logistic regression;
+- **fold-safe**: encoder fitted only on the training fold (with `alpha=20` smoothing).
+
+The fake ID is intentionally extreme. Real competition combos have 4–6 levels, so the leak is smaller — but it is the same mechanism, and it is why the real encoder is fitted **inside each fold**, never on the full training table.
+
+The production rule is stricter than “fit on the training fold”: for the RealMLP I used `sklearn.preprocessing.TargetEncoder` with an **internal cross-fitting splitter**, so even the training rows do not see their own labels through the encoder. The validation fold and the test set use the encoder fitted on the four training folds.
+
+
+### CELL 9 code
+# ============================================================
+# Figure 4 | a controlled target-encoding leak
+# ============================================================
+rng = np.random.RandomState(SEED)
+n = 80000
+sample_idx = rng.choice(len(train), n, replace=False)
+y_s = y[sample_idx]
+fake_id = rng.randint(0, 20000, size=n)
+
+skf = StratifiedKFold(5, shuffle=True, random_state=SEED)
+
+
+def target_encode(categories, target, alpha=20):
+    gm = float(np.mean(target))
+    d = pd.DataFrame({"v": categories, "y": target})
+    g = d.groupby("v")["y"].agg(["sum", "count"])
+    return (g["sum"] + alpha * gm) / (g["count"] + alpha), gm
+
+
+leaky_auc, safe_auc = [], []
+for tr, va in skf.split(fake_id, y_s):
+    # leaky: encoder has seen the validation targets
+    enc_all, gm = target_encode(fake_id, y_s)
+    tr_e = pd.Series(fake_id[tr]).map(enc_all).fillna(gm).values
+    va_e = pd.Series(fake_id[va]).map(enc_all).fillna(gm).values
+    lr = LogisticRegression(C=1.0, max_iter=500)
+    lr.fit(tr_e.reshape(-1, 1), y_s[tr])
+    leaky_auc.append(roc_auc_score(y_s[va], lr.predict_proba(va_e.reshape(-1, 1))[:, 1]))
+
+    # fold-safe: encoder fitted on the training fold only
+    enc_tr, gm = target_encode(fake_id[tr], y_s[tr])
+    tr_e = pd.Series(fake_id[tr]).map(enc_tr).fillna(gm).values
+    va_e = pd.Series(fake_id[va]).map(enc_tr).fillna(gm).values
+    lr = LogisticRegression(C=1.0, max_iter=500)
+    lr.fit(tr_e.reshape(-1, 1), y_s[tr])
+    safe_auc.append(roc_auc_score(y_s[va], lr.predict_proba(va_e.reshape(-1, 1))[:, 1]))
+
+fig, ax = plt.subplots(figsize=(10, 5))
+vals = [np.mean(leaky_auc), np.mean(safe_auc)]
+bars = ax.bar(["Leaky encoder\n(fitted on all rows)", "Fold-safe encoder\n(fitted on train fold)"],
+              vals, color=[ORANGE, BLUE], width=0.55)
+for b, v in zip(bars, vals):
+    ax.text(b.get_x() + b.get_width() / 2, v + 0.015, "%.4f" % v,
+            ha="center", fontsize=12, fontweight="bold")
+ax.set_ylim(0, 1.05)
+ax.set_ylabel("mean validation AUC")
+ax.set_title("The leak turns a random ID into 0.77 AUC")
+plt.tight_layout()
+plt.show()
+
+print("leaky fold AUCs:", ["%.4f" % a for a in leaky_auc])
+print("safe  fold AUCs:", ["%.4f" % a for a in safe_auc])
+print("Insight: the fake ID has no real relationship with the target. The leaky encoder still scores ~%.2f." % np.mean(leaky_auc))
+
+
+### CELL 10 markdown
+## 5. Trap 4 — stacking the same model family
+
+Three GBDTs with near-identical OOF scores look like diversity. They are not. LightGBM, CatBoost and XGBoost all split the same engineered features in similar ways; their rank correlation is high and their blend gain is small.
+
+| Model | OOF AUC |
+|---|---:|
+| LightGBM | 0.958879 |
+| CatBoost | 0.958852 |
+| XGBoost | 0.958856 |
+| Three-model rank average | 0.959903 |
+| Four-member logit stack (+ RealMLP) | **0.960909** |
+
+The first three are within 0.000027 of each other. Rank-averaging them buys about **+0.0010**; adding a different model family (RealMLP) buys another **+0.0010**. That is the actual lesson: **family diversity beats another seed or another GBDT parameter set**.
+
+The 0.960909 four-member stack was still below the public-OOF consensus (0.962142), but it was the right local step: it gave the later stack four *raw* members to work with, instead of a pre-blended column.
+
+
+### CELL 11 code
+# ============================================================
+# Figure 5 | same-family models are not diverse
+# ============================================================
+models = pd.DataFrame({
+    "model": ["LightGBM", "CatBoost", "XGBoost", "3-GBDT rank", "4-member logit"],
+    "auc": [0.958879, 0.958852, 0.958856, 0.959903, 0.960909],
+    "group": ["single", "single", "single", "blend", "blend"],
+})
+fig, ax = plt.subplots(figsize=(11, 5))
+colors = [BLUE, BLUE, BLUE, GREY, GREEN]
+bars = ax.bar(models["model"], models["auc"], color=colors, width=0.6)
+for b, v in zip(bars, models["auc"]):
+    ax.text(b.get_x() + b.get_width() / 2, v + 0.00012, "%.6f" % v,
+            ha="center", fontsize=9, fontweight="bold")
+ax.set_ylim(0.9583, 0.9615)
+ax.set_ylabel("OOF ROC AUC")
+ax.set_title("Three GBDTs are one opinion; RealMLP is a second opinion")
+ax.tick_params(axis="x", labelsize=9)
+plt.tight_layout()
+plt.show()
+
+print(models.to_string(index=False, float_format=lambda x: "%.6f" % x))
+print("GBDT spread: %.6f" % (max(models.auc[:3]) - min(models.auc[:3])))
+print("3-GBDT rank gain: %+.6f | RealMLP stack gain over 3-GBDT rank: %+.6f"
+      % (0.959903 - 0.958879, 0.960909 - 0.959903))
+
+
+### CELL 12 markdown
+## 6. Trap 5 — the RealMLP 128-epoch trap
+
+The first RealMLP run looked textbook-correct:
+
+- 5 folds, seed 42;
+- `n_epochs=128`;
+- validation-AUC early stopping;
+- `coslog4` schedule;
+- hidden `[512, 256, 128]`;
+- `embedding_size=5` and the six transformations.
+
+It scored **0.957489** — below the LightGBM baseline. The early-stopping best epoch was only 23–53; the model plateaued almost immediately. More epochs, a lower learning rate and a larger batch changed almost nothing (fold 1 stayed at 0.9580–0.9581).
+
+The public RealMLP recipe does something different, and the difference is not cosmetic:
+
+| Choice | 128-epoch run | Public recipe |
+|---|---|---|
+| epochs | 128 | **6** |
+| schedule | `coslog4` | **`lin_cos_log_15`** |
+| models per fold | 1 | **8** (`n_ens=8`) |
+| batch | 2048 | **512** |
+| one-hot threshold | 9 | **`max_one_hot_cat_size=2`** |
+| activation | default | **`silu`** |
+| dropout | 0.15 | **0.05** |
+| numeric twins | none | **17 categorical twins** |
+| OOF | 0.957489 | **0.960791** |
+
+The largest single change is not the learning rate. It is the combination of a **short, aggressively annealed schedule**, an **8-model internal ensemble**, and **categorical twins of the raw numeric columns**. The 17 twins let RealMLP learn embeddings for exact numeric values (age, distance, delays, rating levels) instead of only a smooth monotone function.
+
+This is the most important meta-lesson in the notebook: **a “better” architecture with the wrong training recipe can be worse than a plain GBDT.** Always reproduce the recipe, not just the class name.
+
+
+### CELL 13 code
+# ============================================================
+# Figure 6 | the same model class, two recipes
+# ============================================================
+fold_128 = [0.958044, 0.957105, 0.958710, 0.958144, 0.958416]
+fold_public = [0.961086, 0.959844, 0.961591, 0.960993, 0.960673]
+x = np.arange(5)
+fig, ax = plt.subplots(figsize=(11, 5))
+ax.bar(x - 0.19, fold_128, 0.36, color=ORANGE, label="128 epochs + early stop (OOF 0.957489)")
+ax.bar(x + 0.19, fold_public, 0.36, color=GREEN, label="6 epochs, n_ens=8, twins (OOF 0.960791)")
+for i in range(5):
+    ax.text(i - 0.19, fold_128[i] + 0.00018, "%.4f" % fold_128[i], ha="center", fontsize=8)
+    ax.text(i + 0.19, fold_public[i] + 0.00018, "%.4f" % fold_public[i], ha="center", fontsize=8)
+ax.set_xticks(x)
+ax.set_xticklabels(["fold 1", "fold 2", "fold 3", "fold 4", "fold 5"])
+ax.set_ylim(0.9565, 0.9628)
+ax.set_ylabel("fold ROC AUC")
+ax.set_title("RealMLP did not fail — the 128-epoch recipe failed")
+ax.legend(loc="upper left", fontsize=8)
+plt.tight_layout()
+plt.show()
+
+print("128-epoch :", fold_128, "OOF 0.957489")
+print("public    :", fold_public, "OOF 0.960791")
+print("delta     : %+.6f" % (0.960791 - 0.957489))
+
+
+### CELL 14 markdown
+## 7. Trap 6 — the three kinds of fake public-OOF scores
+
+A public OOF library is a gift, but not every CSV is a raw model. Three categories can inflate a nested CV without adding a real model:
+
+1. **Blend-level files.** A file that is already a weighted average of several submissions has no single-model OOF. Feeding it to a stacker as if it were a member makes the meta-learner look better than it is. The cdeotte 124 package contains one such file, `nj_01`; I used it only for the diagnostic 124 reproduction and **excluded it from the final stack**.
+2. **Stack-of-stacks.** A column produced by a previous stack (for example `oof_stack245.npy`, `stack247`, or a re-hosted `0.96188/0.96190/0.96193` file) already contains weights fitted on OOF rows. Its nested CV is not honest. Exclude it, even if its single-column AUC is the highest in the pool.
+3. **Public-LB probes.** Files whose weights were tuned by submitting to the public leaderboard at 1e-5 granularity. They can score 0.96197–0.96207 on the public split without a CV claim, and they are the most dangerous thing to place in a stack. They are not used here at all.
+
+A fourth, subtler trap is **the same model counted twice**. The cdeotte package re-hosts members from several authors; the golem library repeats 14 of its 17 members. Deduplicate at rank correlation **> 0.9999**, and hard-restrict known-overlapping libraries to their genuinely new members.
+
+The honest 198-member stack, with `nj_01` excluded and no blend/stack inputs, reaches **0.962136** nested CV; adding our own RealMLP gives **0.962142**. The 124-member number is **0.962056** when the blend is included — almost identical, which is itself evidence that the blend was not carrying the stack.
+
+### What the public ladder actually looked like
+
+| Pool | Members | C | Nested CV |
+|---|---:|---:|---:|
+| cdeotte 124 (includes `nj_01`) | 124 | 1.0 | 0.962056 |
+| + TFM | 135 | 0.003 | 0.962104 |
+| + golem 3 + artifacts 38 + forge 6 | 182 | 0.003 | 0.962106 |
+| honest raw, + extra 17 | 198 | 0.003 | 0.962136 |
+| + own RealMLP | 199 | 0.003 | **0.962142** |
+
+The C search is part of the discipline. The 124-only pool prefers C=1; the 182/198 pool prefers C=0.003. Hard-coding C=1 because a public notebook used it would leave about 0.00008 on the table.
+
+
+### CELL 15 code
+# ============================================================
+# Figure 7 | the public-OOF ladder and C selection
+# ============================================================
+stages = pd.DataFrame({
+    "stage": ["124 (+nj blend)", "135 (+TFM)", "137 (+golem)", "175 (+artifacts)",
+              "181 (+forge)", "182 (with nj)", "198 (honest raw)", "199 (+own)"],
+    "label": ["124\n(+nj blend)", "135\n(+TFM)", "137\n(+golem)", "175\n(+artifacts)",
+              "181\n(+forge)", "182\n(with nj)", "198\n(honest raw)", "199\n(+own)"],
+    "members": [124, 135, 137, 175, 181, 182, 198, 199],
+    "auc": [0.962056, 0.962104, 0.962111, 0.962102, 0.962107, 0.962106, 0.962136, 0.962142],
+})
+c_grid = pd.DataFrame({"C": [0.0003, 0.001, 0.003, 0.01, 1.0],
+                       "auc": [0.962090, 0.962133, 0.962142, 0.962131, 0.962118]})
+loo = pd.DataFrame({
+    "source": ["cdeotte124", "TFM", "goodpjw_extra", "golem", "amanatar", "own", "sadamtorres"],
+    "dropped": [123, 11, 17, 3, 6, 1, 38],
+    "delta": [-0.000065, -0.000041, -0.000036, -0.000007, 0.000001, 0.000002, 0.000006],
+})
+
+fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+ax = axes[0]
+colors = [GREY, BLUE, BLUE, BLUE, BLUE, BLUE, GREEN, GREEN]
+bars = ax.bar(stages["label"], stages["auc"], color=colors, width=0.65)
+for b, v in zip(bars, stages["auc"]):
+    ax.text(b.get_x() + b.get_width() / 2, v + 0.000008, "%.6f" % v,
+            ha="center", fontsize=7.5, rotation=90)
+ax.set_ylim(0.96195, 0.96221)
+ax.set_ylabel("nested CV OOF")
+ax.set_title("More raw members, not more blends")
+ax.tick_params(axis="x", labelsize=7.5)
+
+ax = axes[1]
+ax.plot(c_grid["C"], c_grid["auc"], marker="o", color=BLUE, lw=2.4, ms=8)
+best = c_grid.loc[c_grid["auc"].idxmax()]
+ax.scatter([best["C"]], [best["auc"]], s=120, color=ORANGE, zorder=5)
+ax.annotate("C=0.003\n%.6f" % best["auc"], (best["C"], best["auc"]),
+            textcoords="offset points", xytext=(-55, -38), fontsize=9,
+            color=ORANGE, ha="center")
+ax.set_xscale("log")
+ax.set_xlabel("C (log scale)")
+ax.set_ylabel("nested CV OOF")
+ax.set_title("Select C by nested CV, not by public LB")
+plt.tight_layout()
+plt.show()
+
+print(stages[["stage", "members", "auc"]].to_string(index=False))
+print("\nC grid:")
+print(c_grid.to_string(index=False, float_format=lambda x: "%.6f" % x))
+print("\nLeave-one-source-out at C=0.003:")
+print(loo.to_string(index=False, float_format=lambda x: "%+.6f" % x))
+print("\nFamily-wise scaling: 0.962143 vs flat 0.962142 -> +0.000001 (noise, disabled).")
+
+
+### CELL 16 markdown
+## 8. Trap 7 — believing a 1e-4 public-LB difference
+
+The public split is about 60k rows. At AUC ≈0.962, the standard error of an absolute AUC estimate is on the order of **0.0006–0.0008**. For two highly correlated stacks (`ρ ≈ 0.999`), the standard error of their *difference* is roughly
+
+```text
+SE_diff ≈ sqrt(2) · SE_AUC · sqrt(1 − ρ)
+```
+
+which is about **3e-5 to 6e-5**, not 1e-4. A 0.0001 public move is therefore 2–3 standard errors of a very correlated comparison — not a model improvement, and certainly not a reason to choose a different C or a different member list.
+
+This is why every decision in the notebook uses OOF:
+
+- C is chosen by seed-7 nested CV;
+- a learned combiner must beat equal-weight rank averaging by **0.0002** to be used;
+- the public LB is read only after `submission.csv` is written;
+- two final slots require rank correlation **< 0.995**, not a 0.0001 LB edge.
+
+The next cell simulates the sampling noise directly, so the size of the “signal” is visible rather than rhetorical.
+
+
+### CELL 17 code
+# ============================================================
+# Figure 8 | how much does a 60k public split actually move?
+# ============================================================
+rng = np.random.RandomState(SEED)
+n_public = 60000
+auc_target = 0.962
+d = norm.ppf(auc_target) * np.sqrt(2.0)
+
+auc_draws = []
+for _ in range(300):
+    yy = (rng.rand(n_public) < 0.443573).astype(int)
+    score = rng.normal(loc=d * yy, scale=1.0)
+    auc_draws.append(roc_auc_score(yy, score))
+auc_draws = np.array(auc_draws)
+se_abs = auc_draws.std(ddof=1)
+se_diff_999 = np.sqrt(2) * se_abs * np.sqrt(1 - 0.999)
+
+fig, ax = plt.subplots(figsize=(11, 5))
+ax.hist(auc_draws, bins=28, color=BLUE, alpha=0.75, edgecolor="white")
+ax.axvline(auc_draws.mean(), color=ORANGE, lw=2, label="mean %.5f" % auc_draws.mean())
+ax.axvline(auc_draws.mean() - 1.96 * se_abs, color=GREY, ls="--", lw=1)
+ax.axvline(auc_draws.mean() + 1.96 * se_abs, color=GREY, ls="--", lw=1,
+           label="95% sampling band")
+ax.set_xlabel("AUC on a 60k sample")
+ax.set_ylabel("draws")
+ax.set_title("A 60k public split moves by ~%.4f (1 SD); a 1e-4 difference is not a model verdict" % se_abs)
+ax.legend(loc="upper left", fontsize=8)
+plt.tight_layout()
+plt.show()
+
+print("SD of absolute AUC      : %.6f" % se_abs)
+print("SE of difference, rho=.999: %.6f" % se_diff_999)
+print("95%% band width          : %.6f" % (2 * 1.96 * se_abs))
+print("Insight: selecting a member on +1e-4 public LB is selecting noise.")
+
+
+### CELL 18 markdown
+## 9. Trap 8 — engineering choices that silently cost hours
+
+These are not modelling ideas; they are the things that make a “correct” notebook fail or take three times longer than it should.
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| Run All dies on data load | Hard-coded `/kaggle/input/playground-series-s6e10` | resolve both direct and `competitions/` layouts with `glob` |
+| `Import Notebook` hangs on “Adding data sources” | a stale embedded `kaggle.dataSources` block | remove `metadata.kaggle`; add inputs manually |
+| kNN feature takes forever | 40k references × 700k queries with a bad metric/thread setting | Manhattan distance, batch 20k, and do not use `n_jobs=-1` in a sandbox that blocks joblib pipes |
+| RealMLP rejects the matrix | NaN in a continuous column | fill the raw `Arrival Delay` with 0; keep `arrival_delay_missing` |
+| RealMLP trains for hours | `n_epochs=128` + a schedule meant for a different budget | use the public 6-epoch `lin_cos_log_15` recipe, `n_ens=8` |
+| OOF looks great, LB does not | target encoding fitted on all rows | fold-internal cross-fitting for TE and counts |
+| Stack CV looks 0.9622, then collapses | blend-level / stack-of-stacks member | exclude them; deduplicate at rank corr >0.9999 |
+| Submission assertion fails | wrong id order or 299,843 rows | assert against `sample_submission` and clip to [0.001, 0.999] |
+| A 0.0001 LB move “wins” | public split is 60k rows | select by nested OOF; require 0.0002 materiality |
+
+The training budget matters too. The first valid three-model CPU run took **54 minutes**; the RealMLP public recipe took **10.3 minutes**; the 198-member public stack took **about 25 minutes** including C search and LOO. If a step is much more expensive than its OOF contribution, it is a candidate to cut.
+
+One more engineering discipline: **label every non-standard fold.** The public pool contains 15 ten-fold members and 5 seed-33 members. They are legitimate raw OOF, but a reader must be able to see that they are not seed-42 five-fold. C15 prints a `folds` column for exactly this reason.
+
+
+### CELL 19 markdown
+## 10. Checklist and what I would do next
+
+### What worked
+
+| Change | OOF effect |
+|---|---:|
+| Keep ratings numeric; add zero-count / non-zero-mean | built into the 0.9583 baseline |
+| External data as teacher + target stats + kNN | +0.000202 over competition-only |
+| Three different GBDT families | +0.0010 over a single GBDT |
+| RealMLP with the public recipe | +0.0010 over the GBDT rank blend |
+| Honest public-OOF stack, C selected by seed-7 nested CV | **+0.0012 over the four-member stack** |
+
+### What did not work
+
+| Change | OOF effect |
+|---|---:|
+| Concatenating the 129,880 real rows | **−0.000133** |
+| 0–5 ratings as LightGBM categorical | destroys the non-use regime |
+| Leaky target encoding | apparent gain, invalid CV |
+| 128-epoch RealMLP + early stop | **−0.000841 vs competition-only baseline** |
+| Family-wise scaling on this pool | +1e-6, noise |
+| More GBDT seeds / near-identical members | ≈0 |
+
+### The checklist I now apply before trusting a score
+
+1. **Fold definition is frozen before any model.** Seed 42, same split for every member.
+2. **Any target-derived feature is fitted inside the fold.** For RealMLP, use `TargetEncoder` with an internal CV splitter.
+3. **0 is a service-use flag, not an ordinal bottom.** Keep ratings numeric and add summaries.
+4. **External data is transferred as a function, not as rows.** Teacher / prior / kNN.
+5. **A new model must add a family, not a seed.** Check rank correlation before adding another GBDT.
+6. **A public-OOF member must be raw and paired with a test file.** Reject blends, stacks and LB probes.
+7. **Meta folds use a different seed from member folds.** Seed 7 for the stacker; seed 42 for members.
+8. **C is selected by nested CV.** Never choose C on public LB.
+9. **A learned combiner needs a 0.0002 margin over the simple average.** Otherwise keep the simple average.
+10. **The last check is format, not score.** 299,844 rows, `id,satisfaction`, id order, clip [0.001, 0.999].
+
+### What I would do next
+
+- **Do not chase 0.9630x.** The gap between 0.9621 and the public 0.9620x files is within the 60k-split noise; the private leaderboard can reshuffle it.
+- **Add only material diversity.** A new model family with a genuinely different inductive bias is worth testing; another 0.9588 GBDT is not.
+- **Keep the two slots structurally different.** A RealMLP-heavy public stack and a GBDT-only blend are a better pair than two 0.999-correlated stacks.
+- **Leave the 245-member pool alone unless the missing sources are mounted.** The honest 198-member pool already clears 0.9620; padding it with blends would be a CV illusion.
+
+The final public stack is not “one weird trick.” It is the same three ideas repeated: **clean semantics, fold-safe features, and model-family diversity** — plus the discipline to reject changes that only look good on a 60k public sample.
+
+
+### CELL 20 markdown
+## 11. References and acknowledgements
+
+This notebook is a measurement log, not a claim of originality over the members. The public stack exists because many authors published raw OOF predictions on the same frozen folds. Please upvote their work.
+
+### Datasets and notebooks used in the full run
+
+- **Chris Deotte** — [124 public OOF/test predictions](https://www.kaggle.com/datasets/cdeotte/s6e10-124-public-oof-and-test-predictions) and [TFM predictions](https://www.kaggle.com/datasets/cdeotte/s6e10-tfm-oof-and-test-predictions).
+- **Dariush Afshar** — [golem OOF library](https://www.kaggle.com/datasets/dariushafshar/s6e10-golem-oof-library), including the manifest and the 247-pair stack audit.
+- **sadamtorres** — [airline satisfaction artifacts](https://www.kaggle.com/datasets/sadamtorres/ps-s6e10-airline-satisfaction-artifacts).
+- **amanatar** — [forge own pairs](https://www.kaggle.com/datasets/amanatar/s6e10-forge-own-pairs).
+- **goodpjw2008** — [extra members OOF](https://www.kaggle.com/datasets/goodpjw2008/s6e10-goodpjw2008-extra-members-oof), the twin-stack/family-wise series, and the meta-stack write-ups.
+- **kratosyan** — the stacking-all-public-OOF notebook and the 124-member composition.
+- **yekenot** — the public RealMLP/pytabkit recipe used for the 0.960791 member.
+- **megayak**, **sachith7**, **busyaprime**, **arhancanli12**, **najiama** and the other members inside the frozen packages.
+- **Prior Labs** and the TabPFN/TabICL/Kumo/Mitra/LimiX/TabF authors for the foundation-model OOF members.
+
+### What is mine in this notebook
+
+- the measured failure log and the ablations;
+- the 0–5 rating semantics and the external-data transfer audit;
+- the fold-safe target-encoding demonstration;
+- the 128-epoch vs 6-epoch RealMLP post-mortem;
+- the public-OOF exclusion/dedup/seed-7 nested-CV protocol;
+- the four-member RealMLP/GBDT baseline.
+
+### License
+
+The code and text in this notebook are released under the **Apache License 2.0**. The member predictions remain the work of their original authors; this notebook only measures and combines them.

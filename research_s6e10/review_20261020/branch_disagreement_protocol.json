@@ -1,0 +1,20 @@
+{
+  "training": false,
+  "model_inference": false,
+  "date": "2026-10-20",
+  "score_bin_width": 0.02,
+  "minimum_rows_per_sign_per_cell": 30,
+  "difference_threshold_in_logits": 0.25,
+  "cells": [
+    [
+      "score_bin"
+    ],
+    [
+      "Class",
+      "Type of Travel",
+      "Customer Type",
+      "score_bin"
+    ]
+  ],
+  "limitation": "Exploratory fixed-prediction calibration contrasts, not AUC gains. No model or weight selected; intervals uncorrected for multiple comparisons and training history."
+}

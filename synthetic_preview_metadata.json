@@ -1,0 +1,11 @@
+{
+  "purpose": "inspection_only_not_an_extra_training_input",
+  "fold": 1,
+  "preview_rows": 1000,
+  "total_synthetic_rows_in_fold": 94450,
+  "synthetic_ratio": 0.15,
+  "synthetic_weight": 0.25,
+  "validation_rows_used_for_generation": 0,
+  "test_rows_used_for_generation": 0,
+  "distinct_parents": true
+}

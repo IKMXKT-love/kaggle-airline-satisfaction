@@ -1,0 +1,67 @@
+{
+  "ref": "yekenot/ps-s6-e10-realmlp-pytabkit",
+  "pull": {
+    "tag": "yekenot__ps-s6-e10-realmlp-pytabkit_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/yekenot/ps-s6-e10-realmlp-pytabkit",
+    "bytes": 26206,
+    "sha256": "238ec1aa937df7193398c76be079991f7eef7990506c857aed414c137ccfb6e0",
+    "elapsed": 1.1938854999998512
+  },
+  "version": 8,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 8,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:58f63ed194fa7d5c55181f1e8ec0be141e9211efa23bc7501c1c865f7e00057d",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 136590942,
+    "ref": "yekenot/ps-s6-e10-realmlp-pytabkit",
+    "title": "PS|S6|E10: RealMLP · PyTabKit",
+    "author": "Vladimir Demidov",
+    "slug": "ps-s6-e10-realmlp-pytabkit",
+    "lastRunTime": "2026-10-18T03:56:30.2881486Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu",
+      "deep learning",
+      "neural networks"
+    ],
+    "datasetDataSources": [],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 81,
+    "currentVersionNumber": 8,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:58f63ed194fa7d5c55181f1e8ec0be141e9211efa23bc7501c1c865f7e00057d",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 7548,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "yekenot__ps-s6-e10-realmlp-pytabkit_outputs_v8",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 47430,
+    "sha256": "384f7e54880bed78899d1d4dec9bfa124fbdfc9059bf41b8084540ffbbef4794",
+    "elapsed": 1.4766637999991872
+  }
+}

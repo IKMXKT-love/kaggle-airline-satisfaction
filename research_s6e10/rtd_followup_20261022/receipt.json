@@ -1,0 +1,17 @@
+{
+  "protected_match": {
+    "submission_public_pool_20261020.csv": true,
+    "CURRENT_BEST_RESULT.md": true,
+    "CURRENT_BEST_SUBMISSION.json": true,
+    "CURRENT_RECOMMENDED_CANDIDATE.json": true
+  },
+  "files": {
+    "alvis1111_README.md": "1d2af32c1200a2ac21218278e315f39c29e7b6bbdfa4fb2cdc2197255dbc7236",
+    "audit_corruption.py": "16b36066ef3de4675cfc068880123d883e40f5295683df2512dbfdd16842aaba",
+    "corruption_marginals.json": "d83d37e63bf4a24ea0a3654ec92c613a8bc5bac0e2ebbc4d78800a994cb2a699",
+    "mrjohnsonsea_README.md": "28e37949922acc5cebe04f7ac2ab0c633078a4f0ac34831d769bbb5b8ea2e682"
+  },
+  "browser_rechecked": "https://www.kaggle.com/competitions/playground-series-s6e10/discussion/751334",
+  "observed_comments": 2,
+  "training": false
+}

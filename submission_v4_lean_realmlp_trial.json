@@ -1,0 +1,18 @@
+{
+  "output": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\submission_v4_lean_realmlp_trial.csv",
+  "sha256": "9b9c360a926109d778d839662f98ad36a732e1cee2b897bee39870d0f5249beb",
+  "rows": 299844,
+  "columns": [
+    "id",
+    "satisfaction"
+  ],
+  "min_probability": 0.007556355447,
+  "max_probability": 0.996284653409,
+  "ids_and_order_verified": true,
+  "blend_formula_verified": true,
+  "protected_files_unchanged": true,
+  "fullfit_candidate_only": true,
+  "new_candidate_ten_fold_cv": false,
+  "mean_absolute_change_vs_v4": 0.002553418318952543,
+  "protocol": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\realmlp_trial_submission\\01b1211ec8af66ee5b04\\protocol.json"
+}

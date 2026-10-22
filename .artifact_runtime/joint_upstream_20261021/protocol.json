@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-21",
+  "started_epoch": 1792553196.906911,
+  "setup_allowance_seconds": 90,
+  "initial_start_is_conservative_estimate": true,
+  "deadline_epoch": 1792554096.906911,
+  "total_budget_seconds": 900,
+  "arms": {
+    "baseline246": [],
+    "plus_kumo": [
+      "kumo_setE_3bag"
+    ],
+    "plus_neighborhood": [
+      "den_neighborhood_combined"
+    ],
+    "plus_both": [
+      "kumo_setE_3bag",
+      "den_neighborhood_combined"
+    ]
+  },
+  "C": 0.003,
+  "folds": "Existing native StratifiedKFold(5,shuffle=True,random_state=42), checked against saved fold indices",
+  "probability_clip": [
+    1e-06,
+    0.999999
+  ],
+  "precision": "float64",
+  "solver": "reuse verified streaming damped Newton, max gradient 1e-8",
+  "coefficient_constraints": "unconstrained sign, L2; intercept unpenalized",
+  "no_hyperparameter_or_weight_search": true,
+  "base_model_refitting": false,
+  "base_model_inference": false,
+  "report_all_arms": true,
+  "meaningful_expansion_reference": {
+    "mean_paired_fold_auc_delta": 0.0003,
+    "minimum_positive_folds": 4,
+    "mean_above_two_fold_standard_errors": true
+  },
+  "test_drift": "Compute each arm from the mean of its five fitted meta coefficient vectors (mean logits), compare extended arms to matched baseline on OOF/test; no full-data meta refit or new submission in this screen.",
+  "limitations": [
+    "Fixed public-base OOF meta-CV; not end-to-end nested CV.",
+    "Upstream early stopping, mixed source folds, indirect label dependence and historical selection persist.",
+    "Paired fold SE is descriptive and does not cover selection bias or upstream dependence.",
+    "Kumo alignment relies on audited original row order; resumed source cache history not independently reconstructed.",
+    "The two weak candidates are screened for conditional contribution, not presumed useful."
+  ]
+}

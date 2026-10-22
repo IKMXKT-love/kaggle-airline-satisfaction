@@ -1,0 +1,350 @@
+### CELL 0 markdown
+# S6E10 | XGBoost + RealMLP: route ID + original-data teacher | CV 0.96140 · LB 0.96095
+
+Two models and three ideas, each trained on 10 folds, then a 50/50 average of logits:
+
+| model | 10-fold OOF AUC | public LB |
+|---|---:|---:|
+| XGBoost | 0.96104 | 0.96074 |
+| RealMLP (pytabkit) | 0.96109 | 0.96073 |
+| **50/50 logit average** | **0.96140** | **0.96095** |
+
+The ideas:
+1. **`Flight Distance` is a route ID.** Passengers on the same route share it, so a *route profile* helps: label-free
+   means of the other columns over all train + test rows with the same distance. Add the route's count and fold-safe target
+   encodings of the route and route × Class. This idea was found by
+   [goodpjw2008 (Part 1)](https://www.kaggle.com/code/goodpjw2008/s6e10-route-id-fe-og-model-stack-lb-0-96108).
+2. **A teacher trained on the original dataset.** The competition data was generated from the
+   [Airline Passenger Satisfaction](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction) dataset.
+   An XGBoost fitted only on those 130k original rows (no competition labels → no leakage) predicts every competition row,
+   and its logit becomes a feature.
+3. **Auxiliary expected values.** For each rating, its expected value predicted from the other 20 columns (label-free).
+   I reuse the 13 columns that [sachith7](https://www.kaggle.com/datasets/sachith7/s6e10-stack-oof-predictions) published
+   (`aux_ev.parquet`).
+
+The validation is clean: an outer `StratifiedKFold(10, shuffle=True, random_state=42)` split; early stopping uses an inner
+5% split of the training rows, never the validation fold; target encodings are fitted inside each fold.
+The OOF predictions are saved (`members/*.npz`), so you can stack them.
+
+Runtime on a T4: ~3 minutes for XGBoost, ~20 minutes for RealMLP.
+
+### CELL 1 markdown
+## Setup
+
+### CELL 2 code
+import gc
+import glob
+import json
+import os
+import subprocess
+import sys
+import time
+
+T0 = time.time()
+BUDGET = float(os.environ.get("BUDGET_H", "11")) * 3600
+SMOKE = int(os.environ.get("SMOKE", "0"))          # >0: subsample rows, tiny models (local code check)
+NFOLD = int(os.environ.get("NFOLD", "10"))
+MEMBERS = os.environ.get("MEMBERS", "xgb_route_ogaux,rmlp_route_ogaux").split(",")
+INPUT = os.environ.get("INPUT", "/kaggle/input")
+OUT = os.environ.get("OUT", "/kaggle/working")
+os.makedirs(f"{OUT}/members", exist_ok=True)
+
+import importlib.util
+if importlib.util.find_spec("pytabkit") is None:   # not imported here: torch is loaded only when an NN member runs
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "pytabkit"], check=True)
+
+import numpy as np
+import pandas as pd
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
+
+
+def log(*a):
+    print(f"[{time.time() - T0:7.0f}s]", *a, flush=True)
+
+
+def has_cuda():
+    try:
+        import torch
+        return torch.cuda.is_available()
+    except Exception:
+        return False
+
+
+DEVICE = os.environ.get("DEVICE") or ("cuda" if has_cuda() else "cpu")
+
+### CELL 3 markdown
+## Data and label-free features
+
+The data is the competition files, the original dataset (teacher), and sachith7's `aux_ev.parquet`. The route profile and
+the teacher use no competition labels, so they are computed once for all train + test rows.
+
+### CELL 4 code
+def header(path):
+    with open(path) as fh:
+        return fh.readline()
+
+
+csvs = glob.glob(f"{INPUT}/**/*.csv", recursive=True)
+comp_tr = [p for p in csvs if p.endswith("train.csv") and "satisfaction" in header(p) and "Inflight service" not in header(p)]
+comp_te = [p for p in csvs if p.endswith("test.csv") and "satisfaction" not in header(p) and "Inflight service" not in header(p)
+           and header(p).startswith("id,")]
+orig = [p for p in csvs if "Inflight service" in header(p)]
+aux_path = glob.glob(f"{INPUT}/**/aux_ev.parquet", recursive=True)
+assert len(comp_tr) == 1 and len(comp_te) == 1 and len(orig) == 2 and len(aux_path) == 1, (comp_tr, comp_te, orig, aux_path)
+train, test = pd.read_csv(comp_tr[0]), pd.read_csv(comp_te[0])
+og = pd.concat([pd.read_csv(p) for p in sorted(orig)], ignore_index=True)
+aux = pd.read_parquet(aux_path[0]).reset_index(drop=True)
+assert len(aux) == len(train) + len(test)
+log("data", train.shape, test.shape, "original", og.shape, "aux", aux.shape, "device", DEVICE)
+
+TARGET = "satisfaction"
+CATS = ["Gender", "Customer Type", "Type of Travel", "Class"]
+NUMS = ["Age", "Flight Distance", "Departure Delay in Minutes", "Arrival Delay in Minutes"]
+RATINGS = ["Inflight wifi service", "Departure/Arrival time convenient", "Ease of Online booking", "Gate location",
+           "Food and drink", "Online boarding", "Seat comfort", "Inflight entertainment", "On-board service",
+           "Leg room service", "Baggage handling", "Checkin service", "Cleanliness"]
+FEATS = CATS + NUMS + RATINGS
+y_all = train[TARGET].astype(int).values
+full = pd.concat([train[FEATS], test[FEATS]], ignore_index=True)
+full["Arrival Delay in Minutes"] = full["Arrival Delay in Minutes"].fillna(0.0)
+NTR = len(train)
+
+if SMOKE:   # small consistent subsample of train rows (test kept small too)
+    rng = np.random.default_rng(0)
+    tri = np.sort(rng.choice(NTR, SMOKE, replace=False))
+    tei = NTR + np.arange(min(5000, len(test)))
+else:
+    tri, tei = np.arange(NTR), NTR + np.arange(len(test))
+
+# teacher: XGBoost fitted ONLY on the original dataset (no competition labels) -> one feature for all rows
+TEACHER_CACHE = os.environ.get("TEACHER_CACHE")   # local check only: macOS cannot hold torch and xgboost in one process
+if TEACHER_CACHE and os.path.exists(TEACHER_CACHE):
+    og_p = np.load(TEACHER_CACHE)
+else:
+    import xgboost as xgb
+    both = pd.concat([full[FEATS], og[FEATS].assign(**{"Arrival Delay in Minutes": og["Arrival Delay in Minutes"].fillna(0.0)})],
+                     ignore_index=True)
+    for c in CATS:
+        both[c] = both[c].astype("category").cat.codes
+    og_y = (og[TARGET] == "satisfied").astype(int).values
+    teacher = xgb.XGBClassifier(n_estimators=60 if SMOKE else 600, learning_rate=0.05, max_depth=8, subsample=0.8,
+                                colsample_bytree=0.5, device=DEVICE, tree_method="hist", random_state=0)
+    teacher.fit(both.iloc[len(full):], og_y)
+    og_p = np.clip(teacher.predict_proba(both.iloc[:len(full)])[:, 1], 1e-6, 1 - 1e-6)
+    del both, teacher
+    if TEACHER_CACHE:
+        np.save(TEACHER_CACHE, og_p)
+full["og_logit"] = np.log(og_p / (1 - og_p)).astype(np.float32)
+log("teacher AUC vs competition labels", round(roc_auc_score(y_all, og_p[:NTR]), 5))
+gc.collect()
+
+# route profile: Flight Distance behaves like a route id; label-free means over train+test rows of the same distance
+g = full.groupby("Flight Distance")
+ROUTE = ["fd_count"]
+full["fd_count"] = g["Age"].transform("size").astype(np.float32)
+for c in ["Age", "Departure Delay in Minutes", "Arrival Delay in Minutes"] + RATINGS:
+    full[f"fd_mean_{c}"] = g[c].transform("mean").astype(np.float32)
+    ROUTE.append(f"fd_mean_{c}")
+for c, v in [("Class", "Business"), ("Type of Travel", "Business travel"), ("Customer Type", "Loyal Customer"), ("Gender", "Male")]:
+    full[f"fd_share_{v}"] = (full[c] == v).groupby(full["Flight Distance"]).transform("mean").astype(np.float32)
+    ROUTE.append(f"fd_share_{v}")
+AUX = list(aux.columns)
+for c in AUX:
+    full[c] = aux[c].values.astype(np.float32)
+# original dataset as a lookup (idea from evgendvorkin's "S6E10 LightGBM CV 5 folds 0.96102"): P(satisfied | value) of each
+# column, computed on the ORIGINAL rows only (no competition labels), smoothed towards the original's prior
+ORG = []
+og_prior = (og[TARGET] == "satisfied").mean()
+for c in FEATS:
+    v = og[c].fillna(0.0) if c == "Arrival Delay in Minutes" else og[c]
+    s = (og[TARGET] == "satisfied").groupby(v).agg(["sum", "count"])
+    rate = (s["sum"] + 10 * og_prior) / (s["count"] + 10)
+    full[f"org_{c}"] = full[c].map(rate).fillna(og_prior).astype(np.float32)
+    ORG.append(f"org_{c}")
+log("features: route", len(ROUTE), "aux", len(AUX), "org", len(ORG))
+
+X_all, y = full.iloc[np.r_[tri, tei]].reset_index(drop=True), y_all[tri]
+ntr = len(tri)
+folds = list(StratifiedKFold(NFOLD, shuffle=True, random_state=42).split(np.zeros(ntr), y))
+
+### CELL 5 markdown
+## Fold-safe target encoding and feature frames
+For RealMLP every numeric column also gets a categorical twin, so each route gets its own embedding.
+
+### CELL 6 code
+def target_encode(k_fit, y_fit, k_apply, m=20.0):
+    prior = y_fit.mean()
+    s = pd.DataFrame({"k": k_fit, "y": y_fit}).groupby("k")["y"].agg(["sum", "count"])
+    enc = (s["sum"] + m * prior) / (s["count"] + m)
+    return pd.Series(k_apply).map(enc).fillna(prior).values.astype(np.float32)
+
+
+TE_KEYS = {"te_fd": X_all["Flight Distance"].astype(str).values,
+           "te_fd_cls": (X_all["Flight Distance"].astype(str) + "_" + X_all["Class"].astype(str)).values}
+
+
+def add_te(Xa, ia, ya, others):
+    """fold-safe TE: training rows get inner 5-fold OOF encodings; validation/test rows use all training rows."""
+    Xa = Xa.copy()
+    others = [(o.copy(), io) for o, io in others]
+    for name, keys in TE_KEYS.items():
+        ka, col = keys[ia], np.zeros(len(ia), dtype=np.float32)
+        for i, j in KFold(5, shuffle=True, random_state=0).split(ka):
+            col[j] = target_encode(ka[i], ya[i], ka[j])
+        Xa[name] = col
+        for o, io in others:
+            o[name] = target_encode(ka, ya, keys[io])
+    return Xa, [o for o, _ in others]
+
+
+def tree_frame(cols):
+    X = X_all[cols].copy()
+    for c in CATS:
+        X[c] = X[c].astype("category")
+    return X
+
+
+def nn_frame(cols):
+    X = X_all[cols].copy()
+    cat_cols = list(CATS)
+    for c in NUMS + RATINGS:   # categorical twin of every numeric column: an embedding per value (route id!)
+        X[c + "_cat_"] = X[c].astype(int).astype(str)
+        cat_cols.append(c + "_cat_")
+    for c in cat_cols:
+        X[c] = X[c].astype(str).astype("category")
+    return X, cat_cols
+
+
+def inner_split(idx, yy, seed):
+    return train_test_split(np.arange(len(idx)), test_size=0.05, stratify=yy, random_state=seed)
+
+### CELL 7 markdown
+## Models
+XGBoost (lr 0.03, depth 8, early stopping on the inner split) and RealMLP (pytabkit, `flat_anneal` schedule, 4 epochs, 8-model ensemble).
+
+### CELL 8 code
+def fit_xgb(Xtr, ytr, Xva, Xte, seed):
+    import xgboost as xgb
+    a, b = inner_split(Xtr, ytr, seed)
+    m = xgb.XGBClassifier(n_estimators=200 if SMOKE else 20000, learning_rate=0.03, max_depth=8, subsample=0.8,
+                          colsample_bytree=0.5, min_child_weight=5, reg_lambda=1.0, max_bin=256, tree_method="hist",
+                          device=DEVICE, eval_metric="auc", early_stopping_rounds=50 if SMOKE else 300,
+                          enable_categorical=True, max_cat_to_onehot=1, random_state=seed)
+    m.fit(Xtr.iloc[a], ytr[a], eval_set=[(Xtr.iloc[b], ytr[b])], verbose=False)
+    return m.predict_proba(Xva)[:, 1], m.predict_proba(Xte)[:, 1]
+
+
+def pytabkit_fit(kind, seed):
+    def fit(Xtr, ytr, Xva, Xte, seed=seed, cat_cols=None):
+        from pytabkit import RealMLP_TD_Classifier, TabM_D_Classifier
+        a, b = inner_split(Xtr, ytr, seed)
+        if kind == "tabm":
+            m = TabM_D_Classifier(device=DEVICE, random_state=seed, n_cv=1, n_refit=0, verbosity=0,
+                                  n_epochs=1 if SMOKE else 12, patience=3, batch_size=1024,
+                                  val_metric_name="1-auc_ovr")
+        else:
+            m = RealMLP_TD_Classifier(device=DEVICE, random_state=seed, n_cv=1, n_refit=0, verbosity=0,
+                                      n_ens=2 if SMOKE else 8, n_epochs=1 if SMOKE else 4, batch_size=256,
+                                      use_early_stopping=False, lr=0.053, wd=0.0236, sq_mom=0.988,
+                                      lr_sched="flat_anneal", wd_sched="cos_log_15", first_layer_lr_factor=0.25,
+                                      embedding_size=5, max_one_hot_cat_size=18, hidden_sizes=[512, 256, 128],
+                                      act="silu", p_drop=0.05, p_drop_sched="expm4t", plr_hidden_1=16, plr_hidden_2=8,
+                                      plr_act_name="gelu", plr_lr_factor=0.1151, plr_sigma=2.33, ls_eps=0.01,
+                                      ls_eps_sched="sqrt_cos", add_front_scale=False,
+                                      bias_init_mode="neg-uniform-dynamic-2",
+                                      tfms=["one_hot", "median_center", "robust_scale", "smooth_clip", "embedding",
+                                            "l2_normalize"], val_metric_name="1-auc_ovr")
+        m.fit(Xtr.iloc[a], ytr[a], X_val=Xtr.iloc[b], y_val=ytr[b], cat_col_names=cat_cols)
+        return m.predict_proba(Xva)[:, 1], m.predict_proba(Xte)[:, 1]
+    return fit
+
+
+RAW = FEATS
+SPECS = {
+    "xgb_route_ogaux": dict(kind="tree", cols=RAW + ROUTE + ["og_logit"] + AUX, te=True, fit=fit_xgb, seed=101),
+    "tabm_ogaux": dict(kind="nn", cols=RAW + ["og_logit"] + AUX, fit=pytabkit_fit("tabm", 202), seed=202),
+    "tabm_route_ogaux": dict(kind="nn", cols=RAW + ROUTE + ["og_logit"] + AUX, fit=pytabkit_fit("tabm", 303), seed=303),
+    "rmlp_route_ogaux": dict(kind="nn", cols=RAW + ROUTE + ["og_logit"] + AUX, fit=pytabkit_fit("rmlp", 404), seed=404),
+    "xgb_route_ogaux_org": dict(kind="tree", cols=RAW + ROUTE + ["og_logit"] + AUX + ORG, te=True, fit=fit_xgb, seed=101),
+    "rmlp_route_ogaux_org": dict(kind="nn", cols=RAW + ROUTE + ["og_logit"] + AUX + ORG, fit=pytabkit_fit("rmlp", 404), seed=404),
+}
+FOLD_LIMIT = int(os.environ.get("FOLD_LIMIT", "0"))   # >0: only the first folds (quick local A/B), nothing is saved
+
+### CELL 9 markdown
+## 10-fold training
+
+### CELL 10 code
+summary = {}
+for name in MEMBERS:
+    spec = SPECS[name]
+    if os.path.exists(f"{OUT}/members/{name}.npz"):
+        log(name, "already done");
+        continue
+    if spec["kind"] == "tree":
+        X, cat_cols = tree_frame(spec["cols"]), None
+    else:
+        X, cat_cols = nn_frame(spec["cols"])
+    Xtr_all, Xte = X.iloc[:ntr], X.iloc[ntr:]
+    oof, test_pred, aucs, t_member = np.zeros(ntr), np.zeros(len(Xte)), [], time.time()
+    ok = True
+    for k, (i, j) in enumerate(folds):
+        if FOLD_LIMIT and k >= FOLD_LIMIT:
+            done = np.concatenate([folds[q][1] for q in range(k)])
+            log(f"== {name}: AUC on {k} folds {roc_auc_score(y[done], oof[done]):.6f} (A/B mode, not saved)")
+            ok = False
+            break
+        t_fold = time.time()
+        Xa, Xb, Xt = Xtr_all.iloc[i], Xtr_all.iloc[j], Xte
+        if spec.get("te"):
+            Xa, (Xb, Xt) = add_te(Xa, i, y[i], [(Xb, j), (Xt, ntr + np.arange(len(Xte)))])
+        kw = {"cat_cols": cat_cols} if spec["kind"] == "nn" else {}
+        pv, pt = spec["fit"](Xa.reset_index(drop=True), y[i], Xb, Xt, spec["seed"] + k, **kw)
+        oof[j], test_pred = pv, test_pred + pt / NFOLD
+        aucs.append(roc_auc_score(y[j], pv))
+        dt = time.time() - t_fold
+        log(f"{name} fold {k}: AUC {aucs[-1]:.6f} ({dt:.0f}s)")
+        left = BUDGET - (time.time() - T0)
+        if left < dt * (NFOLD - k - 1) * 1.1:
+            log(f"{name}: не успеет ({left:.0f}s осталось на {NFOLD - k - 1} фолдов по ~{dt:.0f}s) — пропускаю")
+            ok = False
+            break
+        gc.collect()
+    if not ok:
+        continue
+    auc = roc_auc_score(y, oof)
+    np.savez_compressed(f"{OUT}/members/{name}.npz", oof=oof.astype(np.float32), test=test_pred.astype(np.float32),
+                        fold_auc=np.array(aucs), nfold=NFOLD)
+    summary[name] = {"oof_auc": round(auc, 6), "fold_auc": [round(a, 6) for a in aucs], "minutes": round((time.time() - t_member) / 60, 1)}
+    log(f"== {name}: OOF AUC {auc:.6f} за {summary[name]['minutes']} мин")
+    json.dump(summary, open(f"{OUT}/members/summary.json", "w"), indent=1)
+log("готово", summary)
+
+### CELL 11 markdown
+## Blend: 50/50 average of logits
+
+### CELL 12 code
+L = lambda p: np.log(np.clip(p, 1e-6, 1 - 1e-6) / (1 - np.clip(p, 1e-6, 1 - 1e-6)))
+z = {m: np.load(f'{OUT}/members/{m}.npz') for m in ['xgb_route_ogaux', 'rmlp_route_ogaux']}
+oof = 0.5 * L(z['xgb_route_ogaux']['oof']) + 0.5 * L(z['rmlp_route_ogaux']['oof'])
+tst = 0.5 * L(z['xgb_route_ogaux']['test']) + 0.5 * L(z['rmlp_route_ogaux']['test'])
+for m in z:
+    print(f'{m:18s} OOF AUC {roc_auc_score(y, z[m]["oof"]):.6f}')
+print(f'50/50 blend        OOF AUC {roc_auc_score(y, oof):.6f}')
+sub = pd.DataFrame({'id': test['id'].values[: len(tst)], 'satisfaction': 1 / (1 + np.exp(-tst))})
+sub.to_csv(f'{OUT}/submission.csv', index=False)
+sub.head()
+
+### CELL 13 markdown
+## Notes
+
+- Equal weights: the OOF optimum is 0.5 (0.4 to 0.6 gives the same AUC within 1e-5), so nothing is tuned on the LB.
+- The public LB sits about 0.0003–0.00045 below CV for every model here; the public part is only ~20% of the test set, and
+  the noise of a difference between two models on it is around 1e-4.
+- What did not help: P(satisfied | value) looked up in the original dataset, on top of the teacher (+0.00005 for XGBoost,
+  +0.000001 for RealMLP on 3 folds), and TabM on the same features (0.9600–0.9601 alone).
+- Both models are strong but similar (logit correlation 0.995). Much of the remaining gain in this episode comes from
+  stacking *diverse* members, such as TabPFN and members trained on more folds. See my
+  [stack of every public OOF library](https://www.kaggle.com/code/kratosyan/s6e10-stacking-every-public-oof-library).
+- Credits: the route ID idea and the RealMLP recipe come from goodpjw2008's series and yekenot's RealMLP notebook; the aux
+  features come from sachith7. Please upvote them too.

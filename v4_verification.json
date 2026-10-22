@@ -1,0 +1,8 @@
+{
+  "predictions_reconstructed": true,
+  "every_row_oof_once": true,
+  "inputs_and_previous_results_unchanged": true,
+  "rows": 299844,
+  "oof_auc": 0.9614461831268378,
+  "submission_sha256": "75f42132377e87fa2a0a9c4c34610c094c01d6b9fa743bd5437e4ff9b71d5958"
+}

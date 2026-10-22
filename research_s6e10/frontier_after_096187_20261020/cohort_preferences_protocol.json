@@ -1,0 +1,17 @@
+{
+  "frozen_epoch": 1792503456.5969265,
+  "training": false,
+  "model_inference": false,
+  "submission_generated": false,
+  "cohorts": "Customer Type x Type of Travel x Class, plus each factor alone",
+  "experts": [
+    "ab_tabpfn_catfd10",
+    "km_rmlp_f_nc",
+    "kga_cat_allcat_v1_k5",
+    "mi_xgb_d5",
+    "gpx_gen_v1"
+  ],
+  "minimum_positives_and_negatives_per_fold": 100,
+  "descriptive_flag": "mean within-cohort expert-minus-current AUC > 2*paired fold SE and at least 4/5 positive",
+  "limits": "Exploratory, many comparisons without multiplicity correction. Group AUC does not determine global AUC; changing a group also changes between-group ranking. Native meta-folds inherit public OOF dependencies."
+}

@@ -1,0 +1,72 @@
+{
+  "ref": "anhadmahajan06/s6e10-are-you-satisfied",
+  "pull": {
+    "tag": "anhadmahajan06__s6e10-are-you-satisfied_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/anhadmahajan06/s6e10-are-you-satisfied",
+    "bytes": 149495,
+    "sha256": "df429e4deb01c8c59aa4083ea3edfd5c6def0575dad00dc7b102633b73f0941c",
+    "elapsed": 1.8522774999996727
+  },
+  "version": 30,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 30,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:37c64f7dd9c54116ecd1bcc88817c5469b88387388fade02bfa8bf3fc647d461",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 136675691,
+    "ref": "anhadmahajan06/s6e10-are-you-satisfied",
+    "title": "S6E10 | Are You Satisfied",
+    "author": "Anhad Mahajan",
+    "slug": "s6e10-are-you-satisfied",
+    "lastRunTime": "2026-10-18T03:51:51.7925909Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "artificial intelligence",
+      "aviation",
+      "beginner",
+      "intermediate",
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "arseniyshutko/binary-aviation-satisfaction-129k",
+      "anhadmahajan06/ps-s6e10-predicting-airline-satisfaction"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 62,
+    "currentVersionNumber": 30,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:37c64f7dd9c54116ecd1bcc88817c5469b88387388fade02bfa8bf3fc647d461",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 60439,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "anhadmahajan06__s6e10-are-you-satisfied_outputs_v30",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 40366,
+    "sha256": "48981d729e353d8a53a415658f80f8099d9cede5bf10722f4c92ad910eb6178e",
+    "elapsed": 1.3212675999998282
+  }
+}

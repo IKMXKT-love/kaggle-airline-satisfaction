@@ -1,0 +1,9 @@
+{
+  "timestamp": 1792682393.38965,
+  "reason": "Resource-only pre-score throughput amendment. Early clean-arm updates discarded; neither stopping nor score AUC computed. Restart same initialization/order seed and original deadline.",
+  "previous_microbatch": 128,
+  "new_microbatch": 256,
+  "effective_batch_unchanged": 512,
+  "deadline_epoch_unchanged": 1792689263.0,
+  "old_log_sha256": "758c9ab3bdd385ddab285602baada3bff8d9835998d2774734d36a845bbed335"
+}

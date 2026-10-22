@@ -1,0 +1,27 @@
+{
+  "spec": "A_clean",
+  "initial_hash": "2746c7241bf97cb1cf7b05bb8ca4238c024e30e3b3d664ca7c733c7efb199159",
+  "best_stopping_auc": 0.9591705331797085,
+  "best_epoch": 13,
+  "epochs_completed": 24,
+  "updates_completed": 9672,
+  "warm_epochs": 12,
+  "fine_epochs": 12,
+  "masked_stopping_recovery": {
+    "cross_entropy": 2.011960706172286,
+    "accuracy": 0.1728806290207291,
+    "masked_positions": 69950,
+    "seed": 1942
+  },
+  "seconds": 57.74944020000112,
+  "peak_allocated_gb": 0.38848876953125,
+  "peak_reserved_gb": 0.455078125,
+  "parameter_count": 3644536,
+  "best_checkpoint_sha256": "579c90b77550894ad1c605900165d2adfed76387d5884bddc09d1f8e11183495",
+  "initial_recovery": {
+    "cross_entropy": 1.793008756158691,
+    "accuracy": 0.14284488920657612,
+    "masked_positions": 69950,
+    "seed": 1942
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "arithmetic": [
+    {
+      "batch": 32,
+      "projection_seconds": 11090.380854666508,
+      "matches": true,
+      "median_matches": true,
+      "minutes": 184.83968091110847,
+      "allocated_gib": 2.1636786460876465
+    },
+    {
+      "batch": 64,
+      "projection_seconds": 7276.957854983282,
+      "matches": true,
+      "median_matches": true,
+      "minutes": 121.28263091638804,
+      "allocated_gib": 2.627352237701416
+    }
+  ],
+  "protected": {
+    "submission_public_pool_20261020.csv": true,
+    "CURRENT_BEST_RESULT.md": true,
+    "CURRENT_BEST_SUBMISSION.json": true,
+    "CURRENT_RECOMMENDED_CANDIDATE.json": true
+  },
+  "all_pass": true,
+  "probe_script_sha256": "2f6b06373fb196dcaa4b3597a6c99939e829b2aafd23ed58d9e7364e0cb5d785",
+  "upstream_config_sha256": "1609d59e627c33eaed524b4f01e546d42e84190a079a5a5ded84b212c41c324f",
+  "bounds": "Synthetic throughput projection, not full-run measurement or performance evidence"
+}

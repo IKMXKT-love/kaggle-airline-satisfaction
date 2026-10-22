@@ -1,0 +1,32 @@
+[
+  {
+    "name": "gp_stack245_oof.npy",
+    "bytes": 5597208,
+    "sha256": "5540c5173e7bdfba6826d41474d54469765ad025a75928c1ecd747177cbbb478"
+  },
+  {
+    "name": "gp_stack245_test.npy",
+    "bytes": 2398880,
+    "sha256": "324b81eb905ff2c796b5c7b1f01108366580d86fb9ef33b047c85158ea78db58"
+  },
+  {
+    "name": "atlas181_oof.npy",
+    "bytes": 5597208,
+    "sha256": "3103c144d2a7ae97c284594cfda6da870e5bb13f509a4333de711f7b44e66088"
+  },
+  {
+    "name": "atlas181_test.npy",
+    "bytes": 2398880,
+    "sha256": "1f2fc66c782a8e1175db33318b272d1194b71d22a98fbbbfb54a1814a1b31b39"
+  },
+  {
+    "name": "cdeotte135_oof.npy",
+    "bytes": 5597208,
+    "sha256": "10f6c5ac34131dca50c267e391b7c857d2cf513cbb09b097200d2450337f9b90"
+  },
+  {
+    "name": "cdeotte135_test.npy",
+    "bytes": 2398880,
+    "sha256": "acfee86a4a50516aaf63ebb909a81be75dc77cbccc68a8191e23dd1db94b79e3"
+  }
+]

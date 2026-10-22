@@ -1,0 +1,3466 @@
+[
+  {
+    "source": "c124",
+    "filename": "test_gl_c.npy",
+    "bytes": 2398880,
+    "sha256": "3438b716d8a9a84e3f45c9decb33c371844763930a9a88049565b653776674a3",
+    "file_creation_date": "2026-10-06T18:39:37.204Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_c.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_ar_cat_5f.npy",
+    "bytes": 5597208,
+    "sha256": "8341e22a99ad97b84dd4930f0dd8ae63bc0765d885f649f1792a193efaf7e412",
+    "file_creation_date": "2026-10-06T18:39:36.12Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_ar_cat_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_ar_realmlp_5f.npy",
+    "bytes": 5597208,
+    "sha256": "12736f7c3b2a3ffba6a8b2c0f8c2daf83fb8530e3fa100520ab3d5c0a0ab7fa3",
+    "file_creation_date": "2026-10-06T18:39:36.287Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_ar_realmlp_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_b.npy",
+    "bytes": 2398880,
+    "sha256": "9ed651ebc7b45f7bbb2e7f8507d952bc1bd27e968c9fb4beff3a3aa36f736422",
+    "file_creation_date": "2026-10-06T18:39:37.117Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_b.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_bp_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "a2e6217a3edffe50c2d6cef0a95fb23af0b2ade90dd5efd5d1d8f8ef0e5ad521",
+    "file_creation_date": "2026-10-06T18:39:36.848Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_bp_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_bp_realmlp.npy",
+    "bytes": 5597208,
+    "sha256": "747d6f4b7c17e308728cb6450f1ea0b98dcabe84b6d3663b2b744bc7692f463b",
+    "file_creation_date": "2026-10-06T18:39:36.797Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_bp_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_bp_cat.npy",
+    "bytes": 2398880,
+    "sha256": "2e738948962a99c67c198dc15f5e18f1e87224775ebfb97b76e68bf7ff429556",
+    "file_creation_date": "2026-10-06T18:39:36.479Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_bp_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_ar_realmlp_5f.npy",
+    "bytes": 2398880,
+    "sha256": "6eb9898169166f6e2b7175cffea7e4edad2e34367f5a18c396b43063028e59a5",
+    "file_creation_date": "2026-10-06T18:39:36.317Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_ar_realmlp_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_a.npy",
+    "bytes": 2398880,
+    "sha256": "4adb7ecfa54219bae210e881ef58d215b837a14ab3d19b5afcf966f8b36d19ae",
+    "file_creation_date": "2026-10-06T18:39:36.991Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_a.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_bp_lgbm.npy",
+    "bytes": 2398880,
+    "sha256": "4120f218eb5aac223c89d7395210e8a4d47163e8fb937fc1915487eaff4b5fe3",
+    "file_creation_date": "2026-10-06T18:39:36.634Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_bp_lgbm.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_ar_xgb_5f.npy",
+    "bytes": 2398880,
+    "sha256": "e9277af25e7fc614353ea5ef5470b457f3b50d532b61af9d895d1ebf4ea29aba",
+    "file_creation_date": "2026-10-06T18:39:36.453Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_ar_xgb_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_bp_lgbm_xt.npy",
+    "bytes": 2398880,
+    "sha256": "6bba748090f85c6c7a1fc0e77a631f30bcd20b166bb708a0b6a9a234b9ea2d00",
+    "file_creation_date": "2026-10-06T18:39:36.685Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_bp_lgbm_xt.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_ar_cat_5f.npy",
+    "bytes": 2398880,
+    "sha256": "1bc330cbf7414166422d3303f5ba4e17d3bf18c1401c8e6e3ebd57a3a5634d9f",
+    "file_creation_date": "2026-10-06T18:39:36.235Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_ar_cat_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_bp_cat.npy",
+    "bytes": 5597208,
+    "sha256": "38ce5333421792603fd2ae109cc81dee6e9466ca7984aebbdff9290ae3c66a38",
+    "file_creation_date": "2026-10-06T18:39:36.45Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_bp_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_ar_lgb_5f.npy",
+    "bytes": 2398880,
+    "sha256": "eac27309d1c92c8cd5a0ac3b76f794e6147eb1529fca31f738ea93e2e729e87a",
+    "file_creation_date": "2026-10-06T18:39:36.252Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_ar_lgb_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_bp_lgbm_xt.npy",
+    "bytes": 5597208,
+    "sha256": "c53602bfbf4c6eca48d925ee26ce88ca13afa7f45a8121756181abfb14627dd6",
+    "file_creation_date": "2026-10-06T18:39:36.67Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_bp_lgbm_xt.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_c.npy",
+    "bytes": 5597208,
+    "sha256": "b006c03d86148eb781816cf0c2f49ed9811044f47ef45ed40e2719dac9ffb900",
+    "file_creation_date": "2026-10-06T18:39:37.236Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_c.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_b.npy",
+    "bytes": 5597208,
+    "sha256": "bcf117acb14e7f6deaa65e05ef8880b179dd18f47928f7d95189748e6b94d1d4",
+    "file_creation_date": "2026-10-06T18:39:37.161Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_b.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_bp_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "3685a2ce7d0d83fd8d57c2bbbaafc80cd759803ed7de3c9af9587c5615e00029",
+    "file_creation_date": "2026-10-06T18:39:36.842Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_bp_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_ar_lgb_5f.npy",
+    "bytes": 5597208,
+    "sha256": "5019656a416a2d8a53a32d39c8d3fb2ccaec375275d41962cdf924e8d5ca5674",
+    "file_creation_date": "2026-10-06T18:39:36.216Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_ar_lgb_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_bp_lgbm.npy",
+    "bytes": 5597208,
+    "sha256": "50e1316b0a61d4c33cdd3e834de6bb156f02aeefdd23eb6a144d29a3960a8372",
+    "file_creation_date": "2026-10-06T18:39:36.611Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_bp_lgbm.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_ar_xgb_5f.npy",
+    "bytes": 5597208,
+    "sha256": "e33e4765594cb6edb4eba375722502ff74bd0a07835033bbcbce0715c0967ecd",
+    "file_creation_date": "2026-10-06T18:39:36.419Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_ar_xgb_5f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_a.npy",
+    "bytes": 5597208,
+    "sha256": "c52fb064cbe66e6d1fef5eb3e46e6d947b6960eebb8298c480bb77e35520eb51",
+    "file_creation_date": "2026-10-06T18:39:37.029Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_a.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_bp_realmlp.npy",
+    "bytes": 2398880,
+    "sha256": "86b61425fa2569aef1b307c524361d61b2546359d4fe60b49b81205c58ab1064",
+    "file_creation_date": "2026-10-06T18:39:36.778Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_bp_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_d.npy",
+    "bytes": 2398880,
+    "sha256": "8e44eb7aebc4b1ea8ca4cbc32076502b29de4018801e276ed5b8c76935c65e9a",
+    "file_creation_date": "2026-10-06T18:39:37.347Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_d.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_e.npy",
+    "bytes": 5597208,
+    "sha256": "02ef7cb185a0b82d3a4f7d8a388a1197e240a8c24a8c042989a0fa9ee9508acf",
+    "file_creation_date": "2026-10-06T18:39:37.437Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_e.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_d.npy",
+    "bytes": 5597208,
+    "sha256": "d9579fc7d9e782a2ad2a92e6d11fbade0674f8c17850f9b2e9b3e6f1504d8328",
+    "file_creation_date": "2026-10-06T18:39:37.318Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_d.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_e.npy",
+    "bytes": 2398880,
+    "sha256": "19a84697500ae0601512d3828a67e9f91393813dc3140f81c20de68ef377ab9e",
+    "file_creation_date": "2026-10-06T18:39:37.451Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_e.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_g.npy",
+    "bytes": 5597208,
+    "sha256": "2ebff7ec47c15363d432de63a7cf70ca7bbeb7b41354672ec42fb477c061ad46",
+    "file_creation_date": "2026-10-06T18:39:37.736Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_g.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_i.npy",
+    "bytes": 5597208,
+    "sha256": "f68056088f8d0c9c65659536cfed5009f053f2f0aa8c752cf902fb270fec2bf7",
+    "file_creation_date": "2026-10-06T18:39:38.008Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_i.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_j.npy",
+    "bytes": 5597208,
+    "sha256": "25502ef84436089fb00065f5d127ca6bd3e6bc217da91a601e46eb722d1c5001",
+    "file_creation_date": "2026-10-06T18:39:38.075Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_j.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_f.npy",
+    "bytes": 2398880,
+    "sha256": "cd96d1e3d67d805996fda71304053b7839240e7578cc3b768c1998af34dd4f2e",
+    "file_creation_date": "2026-10-06T18:39:37.593Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_h.npy",
+    "bytes": 2398880,
+    "sha256": "92989c98571fb9294f9d56953ee3cc0148f77109a66577204e31a9dc744d1eac",
+    "file_creation_date": "2026-10-06T18:39:37.82Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_h.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_g.npy",
+    "bytes": 2398880,
+    "sha256": "36452c911c868a428ecc8ce137bad336136d17a27f595332a46ea19c5f77b414",
+    "file_creation_date": "2026-10-06T18:39:37.718Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_g.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_j.npy",
+    "bytes": 2398880,
+    "sha256": "31bbc4bfdd2e974edd4acd9f392bfd2369e1799a3b49e8e8b8cd5042eda479b8",
+    "file_creation_date": "2026-10-06T18:39:38.029Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_j.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_i.npy",
+    "bytes": 2398880,
+    "sha256": "670967fd61e2975a9cf63d4383ec63f814b0bf1d680af824967335194144f729",
+    "file_creation_date": "2026-10-06T18:39:37.928Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_i.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_m.npy",
+    "bytes": 5597208,
+    "sha256": "a907cd8846dce655c1793baf1158f7426aed559cc8774403761acb906d786bc4",
+    "file_creation_date": "2026-10-06T18:39:38.412Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_m.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_f.npy",
+    "bytes": 5597208,
+    "sha256": "b5470c04f0f7f0385f46d6142354fae829c5e2069887637d1f2256154e7b2a8e",
+    "file_creation_date": "2026-10-06T18:39:37.53Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_f.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_k.npy",
+    "bytes": 5597208,
+    "sha256": "b7191c1fc8eb3021984234da406fbac6f9ad239f84a0bebdfbd9e7ce072f7180",
+    "file_creation_date": "2026-10-06T18:39:38.175Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_k.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_l.npy",
+    "bytes": 5597208,
+    "sha256": "9dae2c1059644d227077a1c6e848413a7a425518ddf9ec86f78f9df81a32325a",
+    "file_creation_date": "2026-10-06T18:39:38.293Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_l.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_k.npy",
+    "bytes": 2398880,
+    "sha256": "f5ba8b7a85109b487d9cb93bf65c0acec0c9919f5d6831c025e1530f4d5339b9",
+    "file_creation_date": "2026-10-06T18:39:38.159Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_k.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_h.npy",
+    "bytes": 5597208,
+    "sha256": "26fe15bcdc988ba585d0cf802650261887df5b956474b75005979b49259acee1",
+    "file_creation_date": "2026-10-06T18:39:37.85Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_h.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_m.npy",
+    "bytes": 2398880,
+    "sha256": "5de060c56a2d9a8c789d245eb74fc68369ec9e2967ee3c194a5827505724db23",
+    "file_creation_date": "2026-10-06T18:39:38.427Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_m.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_l.npy",
+    "bytes": 2398880,
+    "sha256": "13808d17b3843be007a9514151d62193cc9650017981b6a76d5ad068100f349c",
+    "file_creation_date": "2026-10-06T18:39:38.321Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_l.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_cat_ctr.npy",
+    "bytes": 5597208,
+    "sha256": "3f583ef9b02d1617a00c63eba957163949cee90956c6077baaf3f613ddb25e08",
+    "file_creation_date": "2026-10-06T18:39:38.685Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_cat_ctr.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_cat_ctr.npy",
+    "bytes": 2398880,
+    "sha256": "3033f91242faba2f959cfec4114b2625184fe9a6df405daba8d3881561eceacb",
+    "file_creation_date": "2026-10-06T18:39:38.842Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_cat_ctr.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gl_n.npy",
+    "bytes": 2398880,
+    "sha256": "e354980f626439e5d8b3dae24fbd6f7f288959e4125e91264cb3caf474b4a27e",
+    "file_creation_date": "2026-10-06T18:39:38.564Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gl_n.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gl_n.npy",
+    "bytes": 5597208,
+    "sha256": "c3d9aba2ee1ced3756323fac70091475d442800839be6323537d73607ef192ab",
+    "file_creation_date": "2026-10-06T18:39:38.529Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gl_n.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_cat_ctr3.npy",
+    "bytes": 5597208,
+    "sha256": "267d5f112c8f69fbb594af1c8bc669777a0d76fdc63fc4ecdbc41115ddb41771",
+    "file_creation_date": "2026-10-06T18:39:38.836Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_cat_ctr3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_cat_ctr5.npy",
+    "bytes": 2398880,
+    "sha256": "5eed56cf7e88c0ddd93199dd8ebd98217fa2670bf93165bed54cc25ca9cc0de5",
+    "file_creation_date": "2026-10-06T18:39:38.908Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_cat_ctr5.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_cat_ctr3.npy",
+    "bytes": 2398880,
+    "sha256": "663519e8d43a22086182145692328417fab28a3547540e6e32bc8a70c52ecc3b",
+    "file_creation_date": "2026-10-06T18:39:38.859Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_cat_ctr3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_deepfm_rawaux.npy",
+    "bytes": 2398880,
+    "sha256": "2629ab86b9551fcb13e8eb32a7548abd6aaa08e584bd875ce5aa68098b7dbc0f",
+    "file_creation_date": "2026-10-06T18:39:39.357Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_deepfm_rawaux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_cat_ctr5.npy",
+    "bytes": 5597208,
+    "sha256": "adace8c78a2554cd220a132a057206cd3f05837c9de1634eee53ae430f89c4c2",
+    "file_creation_date": "2026-10-06T18:39:38.971Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_cat_ctr5.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_deepfm_rawaux.npy",
+    "bytes": 5597208,
+    "sha256": "9f0cdefe685e93350ce866c04c5d4bd6d41636ae6bdc968359556674784acbcf",
+    "file_creation_date": "2026-10-06T18:39:39.292Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_deepfm_rawaux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_glm_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "3c431747eaa50d2425752e210fb1dca4ab7c1cb884ee11fb2dee48fd4a074880",
+    "file_creation_date": "2026-10-06T18:39:39.703Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_glm_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_cat_v3.npy",
+    "bytes": 5597208,
+    "sha256": "da4dac95b2a01b417c28244d95e8392b4e774c3f29b9ed17378c6c02ca113334",
+    "file_creation_date": "2026-10-06T18:39:39.086Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_cat_v3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_cat_v3.npy",
+    "bytes": 2398880,
+    "sha256": "978337b9bf4afd2bf078d1d745511fa127184106220bce7abcc08f1b8cf34847",
+    "file_creation_date": "2026-10-06T18:39:39.037Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_cat_v3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_cat_vb.npy",
+    "bytes": 2398880,
+    "sha256": "f30b531e1b62aaed20c104bf0a1c19a3407a39c538296f7da5c6f593d621cec4",
+    "file_creation_date": "2026-10-06T18:39:39.195Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_cat_vb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_lgb_auxall.npy",
+    "bytes": 2398880,
+    "sha256": "4f6a495793956c9130ee11260d1f3e1222b57ca047d2f28ac24c31ce011c5983",
+    "file_creation_date": "2026-10-06T18:39:39.845Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_lgb_auxall.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_glm_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "6647443d1de7f9c8b77791a25c7bc88abf26a82f829a3dcbb34ffb25e64e22c7",
+    "file_creation_date": "2026-10-06T18:39:39.717Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_glm_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_lgb_auxall.npy",
+    "bytes": 5597208,
+    "sha256": "d1b5bec8b917d68a4ade62705ba5510b97397f7cd8cd5be61a94e2543fa43923",
+    "file_creation_date": "2026-10-06T18:39:39.873Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_lgb_auxall.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_lgb_v3.npy",
+    "bytes": 5597208,
+    "sha256": "a38223f12177aaa2a9cb7797eac872534087774d4da73f5ad35339e40002b03d",
+    "file_creation_date": "2026-10-06T18:39:39.96Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_lgb_v3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_lgb_vb.npy",
+    "bytes": 2398880,
+    "sha256": "048875e8a9f36fb815c77b7c71138889d08f37c3dc0734175beb56b20d05fe53",
+    "file_creation_date": "2026-10-06T18:39:40.087Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_lgb_vb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_glm6_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "955f1fa7311c344400a406fae8fbc60d62873ef08317a97853912d02ffb2f708",
+    "file_creation_date": "2026-10-06T18:39:39.591Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_glm6_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_deepfm_v1.npy",
+    "bytes": 2398880,
+    "sha256": "a728c59c48611dde543acc3e60751176bacfce99a32538393cb5f677d0d45eed",
+    "file_creation_date": "2026-10-06T18:39:39.455Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_deepfm_v1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_lgb_vb.npy",
+    "bytes": 5597208,
+    "sha256": "888c9d3a246875371f4bd430dae69fc76a863bc47b403c041c1d22b5e2a2f444",
+    "file_creation_date": "2026-10-06T18:39:40.104Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_lgb_vb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_lgb_v3.npy",
+    "bytes": 2398880,
+    "sha256": "46529dba3f02dbc32ba3bea520bbba6a9d3496b48d2ca7191b7e9eaf89b11ad2",
+    "file_creation_date": "2026-10-06T18:39:40.156Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_lgb_v3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_glm6_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "b79f40402ab630065a196d4f9318bfceafd98aea910daa2c3549e2e3eec05124",
+    "file_creation_date": "2026-10-06T18:39:39.555Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_glm6_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_cat_vb.npy",
+    "bytes": 5597208,
+    "sha256": "03d9fff90c986433f66152a82a24727ffa9a1cbb8842fd5e215b0160ee7430b7",
+    "file_creation_date": "2026-10-06T18:39:39.158Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_cat_vb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_lgb_vb_aux.npy",
+    "bytes": 5597208,
+    "sha256": "bf34c71eb22a10c350b04b15877107f2e1a5c00bba023834a124813bc797eb92",
+    "file_creation_date": "2026-10-06T18:39:40.196Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_lgb_vb_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa.npy",
+    "bytes": 5597208,
+    "sha256": "9ffe8f49d88316d27e1ff244b442749a0e734bcbdb3b8c736ef4ca732caa1f38",
+    "file_creation_date": "2026-10-06T18:39:40.471Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa_aux.npy",
+    "bytes": 2398880,
+    "sha256": "ccdabfc2a4ca6e1635a03ef196d607e63c247ec727ec7c88d7df6dd38ad25126",
+    "file_creation_date": "2026-10-06T18:39:40.553Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_lgb_vb_ogev.npy",
+    "bytes": 2398880,
+    "sha256": "34826a52bb146e6335d2e7b7a4e7a7bd92db3f58a4f073e7048b9510014dda2a",
+    "file_creation_date": "2026-10-06T18:39:40.344Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_lgb_vb_ogev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_lgb_vb_aux.npy",
+    "bytes": 2398880,
+    "sha256": "5c85b2230adc28a213815a9f289a3def18407e6d6f0df57e15bb46999e2a6ce8",
+    "file_creation_date": "2026-10-06T18:39:40.304Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_lgb_vb_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa.npy",
+    "bytes": 2398880,
+    "sha256": "179525c9fbf5d5f62bcd67eaeeb3692a7da02120e40ddd61c21f4c13a61ddcee",
+    "file_creation_date": "2026-10-06T18:39:40.458Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_lgb_vb_ogev.npy",
+    "bytes": 5597208,
+    "sha256": "074fb91492d054cd8591db6a6e0e7124fe1b2c3e653f17175885915926f4b0ff",
+    "file_creation_date": "2026-10-06T18:39:40.379Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_lgb_vb_ogev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_deepfm_v1.npy",
+    "bytes": 5597208,
+    "sha256": "f54c48bcd13a461c5bc718b506bd2f0938beab99501ab5ab380ea6736c00ecba",
+    "file_creation_date": "2026-10-06T18:39:39.417Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_deepfm_v1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa_aux3.npy",
+    "bytes": 2398880,
+    "sha256": "d9dc44380cb5efdad1fe879dfe1ba01b9672f2db88fe723cd2a3a6293b1fccc3",
+    "file_creation_date": "2026-10-06T18:39:40.649Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa_aux3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa_aux_s2.npy",
+    "bytes": 5597208,
+    "sha256": "8a0f02d4256fc787b79075218cd918ae3787783c09db9576c502a991b5680a0c",
+    "file_creation_date": "2026-10-06T18:39:40.89Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa_aux_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa_aux3.npy",
+    "bytes": 5597208,
+    "sha256": "75543218ba0337f2afee8a4945c43bfad6cb06c6e7841b79726caa57051eaf95",
+    "file_creation_date": "2026-10-06T18:39:40.723Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa_aux3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa_s123.npy",
+    "bytes": 5597208,
+    "sha256": "849e4770686aaebcaa3748171776386f70b7264d69fab27c8581485121aa5cec",
+    "file_creation_date": "2026-10-06T18:39:41.189Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa_s123.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa_auxogev.npy",
+    "bytes": 5597208,
+    "sha256": "92dc054b2a91ad387c9b80998e90eea28b53af06ddf1f79571a0d93f46dcbf61",
+    "file_creation_date": "2026-10-06T18:39:41.049Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa_auxogev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa_aux.npy",
+    "bytes": 5597208,
+    "sha256": "3d77d89bee3b8e5c53ca65ce15b932db2f3467334fb4ce06980fb5907a58290b",
+    "file_creation_date": "2026-10-06T18:39:40.543Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa_auxog.npy",
+    "bytes": 5597208,
+    "sha256": "cb68cd50307307eada96e6f07623d4991d80bbb4db1747323cff7658d9b0b947",
+    "file_creation_date": "2026-10-06T18:39:40.857Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa_auxog.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa_aux_s2.npy",
+    "bytes": 2398880,
+    "sha256": "c7c03f182944845494c1ab676a84bdc8a7c25327200352a33ace5680ad5cffb9",
+    "file_creation_date": "2026-10-06T18:39:40.804Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa_aux_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_og.npy",
+    "bytes": 5597208,
+    "sha256": "02d8a7d432df24c8e92fe5275f831af0c88f4855dc8faf6575c2f80296f4c194",
+    "file_creation_date": "2026-10-06T18:39:41.429Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa_auxogev.npy",
+    "bytes": 2398880,
+    "sha256": "7f272c452e1d1e4a54a83f2f3a629e25717f608e5f065d019d94d6082255d185",
+    "file_creation_date": "2026-10-06T18:39:41.007Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa_auxogev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa_s7.npy",
+    "bytes": 2398880,
+    "sha256": "0fc26b326857bc9d0700e94552798f62479d63b7c43ee566b7c81a5eb5ca3192",
+    "file_creation_date": "2026-10-06T18:39:41.213Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa_s7.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_pub.npy",
+    "bytes": 2398880,
+    "sha256": "8d4a179466dd8091903bf234de9416e35332807b856ac5951eaf7c24f8e7c6d5",
+    "file_creation_date": "2026-10-06T18:39:41.43Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_pub.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa_s123.npy",
+    "bytes": 2398880,
+    "sha256": "9582baeae4f3551d346cb79bdde67729c69a3de260d5ce926c29056ceedc4935",
+    "file_creation_date": "2026-10-06T18:39:41.122Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa_s123.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_pub_aux.npy",
+    "bytes": 5597208,
+    "sha256": "5f5df1222437e5988023d6ac76bce39271ddc67873994d9559481dbc91b6d367",
+    "file_creation_date": "2026-10-06T18:39:41.553Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_pub_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_fa_s7.npy",
+    "bytes": 5597208,
+    "sha256": "928351421cdc46ac279751b91e18ed8fac8468617d74945a3dcfa4ee5c56d05f",
+    "file_creation_date": "2026-10-06T18:39:41.274Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_fa_s7.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_og.npy",
+    "bytes": 2398880,
+    "sha256": "5c61782ca1fd6bd0cce1ea8a819466684bff8adc9d0cb8bbba8dad245906235d",
+    "file_creation_date": "2026-10-06T18:39:41.334Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_pub_aux.npy",
+    "bytes": 2398880,
+    "sha256": "c0a76c0a420a89b8c3e079abf162eda2fb9ca0c1aed7607e3327b6a4237693cd",
+    "file_creation_date": "2026-10-06T18:39:41.646Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_pub_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_fa_auxog.npy",
+    "bytes": 2398880,
+    "sha256": "5d21e94b57a1565818c299b4bc83fcace22fc543bae538e7352c4c173c03ef7b",
+    "file_creation_date": "2026-10-06T18:39:40.918Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_fa_auxog.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_pub_s1.npy",
+    "bytes": 2398880,
+    "sha256": "b8806f31f9bb187922d44186a9cc45635a4166ff0a4ac0fda87c693f423bda05",
+    "file_creation_date": "2026-10-06T18:39:41.661Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_pub_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_pub_s2.npy",
+    "bytes": 5597208,
+    "sha256": "4dfac7a12cf135289f553c8aa986e2e672ce9bc708e565da52d4e196c3d10370",
+    "file_creation_date": "2026-10-06T18:39:41.84Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_pub_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_pub.npy",
+    "bytes": 5597208,
+    "sha256": "1a950c4014e078520168ff2435b8faf022df5404a20cc56eb748eceeae3b08dd",
+    "file_creation_date": "2026-10-06T18:39:41.416Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_pub.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_v4.npy",
+    "bytes": 2398880,
+    "sha256": "82e136f353845bf55299390df548ab5bcc3d4940ede880025b859021a1e1938b",
+    "file_creation_date": "2026-10-06T18:39:41.868Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_v4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_pub_s2.npy",
+    "bytes": 2398880,
+    "sha256": "aa502b8c40d9e7a323f9c8b8c3219b880549c4b6598d64cb2cb32cbca437fd4a",
+    "file_creation_date": "2026-10-06T18:39:41.767Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_pub_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_pub_s1.npy",
+    "bytes": 5597208,
+    "sha256": "8e98c1c5911102ce677283f51856d05d6eb2178b7c62cd2d833daf219bdcaa44",
+    "file_creation_date": "2026-10-06T18:39:42.134Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_pub_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_v4fa.npy",
+    "bytes": 2398880,
+    "sha256": "e884823537039c232b90b2d5ee5b56e5bbb70fb53028837293cb8ee7b9b87a83",
+    "file_creation_date": "2026-10-06T18:39:42.297Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_v4fa.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_v4_s1.npy",
+    "bytes": 2398880,
+    "sha256": "d98eadcdc0849b3491a06c93d953b34489dabfa027eadb8f51b34271c9f24fb1",
+    "file_creation_date": "2026-10-06T18:39:41.964Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_v4_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_v4fa.npy",
+    "bytes": 5597208,
+    "sha256": "bf84df654afd86f65e83429656a1158fd22d1fe970f4cd225f2a52e586b20162",
+    "file_creation_date": "2026-10-06T18:39:42.225Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_v4fa.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_v4_s1.npy",
+    "bytes": 5597208,
+    "sha256": "e97c2ceee53851d04b2256d572b3bf98f0b0685996690eeb396a1d445cfb2626",
+    "file_creation_date": "2026-10-06T18:39:42.068Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_v4_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_v4.npy",
+    "bytes": 5597208,
+    "sha256": "bd999e580170446efa3d9108236347d2465a5396a46a4350947de3737c92ad33",
+    "file_creation_date": "2026-10-06T18:39:41.882Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_v4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_v4_s2.npy",
+    "bytes": 2398880,
+    "sha256": "f02ec03154856e39b2af25bdc2125a1f68eef6d46d4a3a9637892e2059b845c3",
+    "file_creation_date": "2026-10-06T18:39:42.095Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_v4_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabpfn_catfd10.npy",
+    "bytes": 5597208,
+    "sha256": "e383772f6ba50347b6cd6c58156d9b3a24feca9254e8bf27085b6cf468097b99",
+    "file_creation_date": "2026-10-06T18:39:42.758Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabpfn_catfd10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_vb_aux.npy",
+    "bytes": 2398880,
+    "sha256": "8369490f8ac7b6eff5c0c94b7dcca406eec4ab8a8e5d3ca3ef942eb4967e2d04",
+    "file_creation_date": "2026-10-06T18:39:42.307Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_vb_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_realmlp_vb_aux_s2.npy",
+    "bytes": 2398880,
+    "sha256": "55b12dc7e9688fc32bdfd6d01b5c2b7213484f2d8c7814e2a76a38f12b02aa1f",
+    "file_creation_date": "2026-10-06T18:39:42.397Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_realmlp_vb_aux_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_vb_aux_s2.npy",
+    "bytes": 5597208,
+    "sha256": "decd0deccd725ab5240702acd9b6baddc9e4ee95eeb466f7bcf197ae71aac1d5",
+    "file_creation_date": "2026-10-06T18:39:42.497Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_vb_aux_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabpfn_catfd10.npy",
+    "bytes": 2398880,
+    "sha256": "c000e0e98c6d09e63430191be98c399769d37ba4be6641c0588287694b50f16b",
+    "file_creation_date": "2026-10-06T18:39:42.757Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabpfn_catfd10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabicl_full_raw.npy",
+    "bytes": 5597208,
+    "sha256": "ee4d37899d273026ae8062f2a4eca9b3af88642512246391fc416978546e7e09",
+    "file_creation_date": "2026-10-06T18:39:42.51Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabicl_full_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabpfn_catfd.npy",
+    "bytes": 2398880,
+    "sha256": "93cbbf49a7ae8c660d11a46099b4ae3979277a88e321518b47bd696aa832b703",
+    "file_creation_date": "2026-10-06T18:39:42.642Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabpfn_catfd.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabpfn_catfd_s1.npy",
+    "bytes": 2398880,
+    "sha256": "8d0dec9be1f70de1d68daadc9119da2ef6a0b7ecbd95bba2d2530491e074f387",
+    "file_creation_date": "2026-10-06T18:39:42.834Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabpfn_catfd_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabpfn_catfd_s1.npy",
+    "bytes": 5597208,
+    "sha256": "493c03480669a369d74932a08cc98acac44144dfe4ed7eb874e6cd3bcf1068f5",
+    "file_creation_date": "2026-10-06T18:39:42.904Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabpfn_catfd_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_vb_aux.npy",
+    "bytes": 5597208,
+    "sha256": "a2af76abb39343101d80c0e775fb7ef694724659c243e09f03b17b2e3a0fff27",
+    "file_creation_date": "2026-10-06T18:39:42.288Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_vb_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_realmlp_v4_s2.npy",
+    "bytes": 5597208,
+    "sha256": "79a8a09ab771189424f3024abe7e4dd6df7aabc578c5720a31e75b483e80bfe7",
+    "file_creation_date": "2026-10-06T18:39:42.093Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_realmlp_v4_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabpfn_catfd.npy",
+    "bytes": 5597208,
+    "sha256": "7de77dbbe4f3088625ba5635c461862d494bdeff227c97d259d669f8b0d17cc7",
+    "file_creation_date": "2026-10-06T18:39:42.624Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabpfn_catfd.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabpfn_te.npy",
+    "bytes": 2398880,
+    "sha256": "304298a70b4e351ead6d8a2d317814fda0988e9bc39c0ed36247afb12fa7cd64",
+    "file_creation_date": "2026-10-06T18:39:43.189Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabpfn_te.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabpfn_full_raw_s1.npy",
+    "bytes": 2398880,
+    "sha256": "fcdf7d31ae118eda1b44c2d1f560d497bc69cc6297576acc666cd0369c117762",
+    "file_creation_date": "2026-10-06T18:39:43.071Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabpfn_full_raw_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabicl_full_raw.npy",
+    "bytes": 2398880,
+    "sha256": "bb24dca4ad073b5e87b290f336b136d86fee90de5fdbbdff7f71275d2e821659",
+    "file_creation_date": "2026-10-06T18:39:42.499Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabicl_full_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_xgb_auxall.npy",
+    "bytes": 5597208,
+    "sha256": "f1f0877a571ddf266a10b28dc839d83db3d960c693264f55b97b1822adf87c30",
+    "file_creation_date": "2026-10-06T18:39:43.422Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_xgb_auxall.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabpfn_full_raw.npy",
+    "bytes": 5597208,
+    "sha256": "c9e302985e3cdcd84e09b3b6289fba572025d0074cddbb269c45e485f225942d",
+    "file_creation_date": "2026-10-06T18:39:42.943Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabpfn_full_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_xgb_auxall.npy",
+    "bytes": 2398880,
+    "sha256": "ca38570b555bc67fc0e50607de2b7487b9a143cb1bc65c808e0108d35583b3c4",
+    "file_creation_date": "2026-10-06T18:39:43.416Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_xgb_auxall.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabpfn_te4.npy",
+    "bytes": 2398880,
+    "sha256": "4b42db0b8ba98e4d2fadffff31ca829eef6f1f964ef5a3301a1c16f66b05d030",
+    "file_creation_date": "2026-10-06T18:39:43.284Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabpfn_te4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_tabpfn_full_raw.npy",
+    "bytes": 2398880,
+    "sha256": "a2ebbe2610eac7d9d1c7895cfa1fd822ed08951ec3871178af5542eb0ffe3d05",
+    "file_creation_date": "2026-10-06T18:39:42.957Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_tabpfn_full_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabpfn_full_raw_s1.npy",
+    "bytes": 5597208,
+    "sha256": "8f271d592b40dd87925d526e37b56e57c92b7a31131e2ffc12a965263c45250a",
+    "file_creation_date": "2026-10-06T18:39:43.082Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabpfn_full_raw_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_xgb_v3.npy",
+    "bytes": 2398880,
+    "sha256": "1c039c006b6331f395cc86a60f717431e6825a08856dc5ebdaa37577b5cd30f0",
+    "file_creation_date": "2026-10-06T18:39:43.621Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_xgb_v3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_xgb_auxev.npy",
+    "bytes": 5597208,
+    "sha256": "568a76f79d8dc29316ed4dcab56d16a35173d3753763c5c2e9eaedc27b0f03ae",
+    "file_creation_date": "2026-10-06T18:39:43.549Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_xgb_auxev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_xgb_auxev.npy",
+    "bytes": 2398880,
+    "sha256": "21895b092e238d8abb75df72ba2c127f722f6aec6a27d9ce6a7c0b8826e77dbf",
+    "file_creation_date": "2026-10-06T18:39:43.527Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_xgb_auxev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabpfn_te.npy",
+    "bytes": 5597208,
+    "sha256": "b87b077394156350c742d23727fb0d455febc967e8269e98ea084436c2d0fcbf",
+    "file_creation_date": "2026-10-06T18:39:43.227Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabpfn_te.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_xgb_v3_s1.npy",
+    "bytes": 5597208,
+    "sha256": "d745756199583c788efa7ca946e84716ba38d779ed4057c788e31c24e4c27fa8",
+    "file_creation_date": "2026-10-06T18:39:43.855Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_xgb_v3_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_meh_cat.npy",
+    "bytes": 5597208,
+    "sha256": "6e91f8dee21a42163cfcdafd92a57a216e631e37d2222520736676a4d8f9b23e",
+    "file_creation_date": "2026-10-06T18:39:44.166Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_meh_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_tabpfn_te4.npy",
+    "bytes": 5597208,
+    "sha256": "3b1851d0e90ca5287d33cc0c1642a745f5691c4e9053e380b400dfcab9b00e00",
+    "file_creation_date": "2026-10-06T18:39:43.394Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_tabpfn_te4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_xgb_vb.npy",
+    "bytes": 2398880,
+    "sha256": "dd1661bf15306f1bb12ff2628bbf162b0e691a511c7c1cae0c5e3c11fa407e5b",
+    "file_creation_date": "2026-10-06T18:39:44.069Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_xgb_vb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_xgb_v3_d10.npy",
+    "bytes": 5597208,
+    "sha256": "4c2f018e4e7ccf8d267ffa606408df44b2c3a1c9db76d01ac990381fa90dc6b1",
+    "file_creation_date": "2026-10-06T18:39:43.823Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_xgb_v3_d10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_xgb_v3_d10.npy",
+    "bytes": 2398880,
+    "sha256": "2bbed0f4cdf7d569be67c6828ba11437f80bc7f7287aef29349eff3f0a7979d7",
+    "file_creation_date": "2026-10-06T18:39:43.743Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_xgb_v3_d10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_xgb_vb.npy",
+    "bytes": 5597208,
+    "sha256": "aee49271c71e16d9d4cf558811b945f4aa0ead40a6e25e35ff7280a134c157f1",
+    "file_creation_date": "2026-10-06T18:39:44.026Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_xgb_vb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_xgb_v3.npy",
+    "bytes": 5597208,
+    "sha256": "e60b5e497f6ffe461ad8e4b3942286c043c9ce20b03a151589a11983264fe2da",
+    "file_creation_date": "2026-10-06T18:39:43.636Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_xgb_v3.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_gp_xgb_v4_tuned.npy",
+    "bytes": 5597208,
+    "sha256": "321cdf990d972738cfa7088532915a5a7946d8a33c5e5bd42978ae8b1c2e7875",
+    "file_creation_date": "2026-10-06T18:39:43.914Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_gp_xgb_v4_tuned.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_xgb_v4_tuned.npy",
+    "bytes": 2398880,
+    "sha256": "8f3b6d798ed963b82a1c097bdf4a9867b809ccef948d9233d1c1f1160ed9e360",
+    "file_creation_date": "2026-10-06T18:39:43.93Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_xgb_v4_tuned.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_meh_realmlp.npy",
+    "bytes": 5597208,
+    "sha256": "533368871425193a7298c055b06114e900e4957b6b74ecdbe2a5739464fcb1de",
+    "file_creation_date": "2026-10-06T18:39:44.433Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_meh_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_meh_cat.npy",
+    "bytes": 2398880,
+    "sha256": "b21d7b859d81e4d5b3c5bd9b95fcf54eccba00488367f5e676f33dd869785e5a",
+    "file_creation_date": "2026-10-06T18:39:44.213Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_meh_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_meh_lgb.npy",
+    "bytes": 5597208,
+    "sha256": "8fac4a332f874916be991c30d023338180c4de2fbd2797ace4f4f67b0678fe47",
+    "file_creation_date": "2026-10-06T18:39:44.324Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_meh_lgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_meh_realmlp.npy",
+    "bytes": 2398880,
+    "sha256": "2d423f8df6eb505e38a8f1a37399252e3b25819a3d271afa4e61dc741ebea3cf",
+    "file_creation_date": "2026-10-06T18:39:44.426Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_meh_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_cat_ctr.npy",
+    "bytes": 5597208,
+    "sha256": "9edde7c52b8b35a716687529002d4712d2812aeb1b16803c8719277ba05f09c0",
+    "file_creation_date": "2026-10-06T18:39:44.794Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_cat_ctr.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_meh_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "c3ff55da0c8bcb42e7bb95b5b12b9082108029956de2118a186dc04d981d734f",
+    "file_creation_date": "2026-10-06T18:39:44.514Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_meh_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_gp_xgb_v3_s1.npy",
+    "bytes": 2398880,
+    "sha256": "9d9db860b2ed105e5544bda7eaf1e46ffe1cd6e0433bd285384565ab2380a7aa",
+    "file_creation_date": "2026-10-06T18:39:43.855Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_gp_xgb_v3_s1.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_meh_lgb.npy",
+    "bytes": 2398880,
+    "sha256": "062f9f096d56d562027b767ecb8056e063626fbbdae31f989b8a46f94f7814e4",
+    "file_creation_date": "2026-10-06T18:39:44.321Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_meh_lgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_lgb_route.npy",
+    "bytes": 5597208,
+    "sha256": "3836859a55cd88b473726cb259458c97fd0a510d53f3b7b0692b8e204969fab7",
+    "file_creation_date": "2026-10-06T18:39:45.094Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_lgb_route.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_cat.npy",
+    "bytes": 2398880,
+    "sha256": "eb6fd043f63c4041b67f807826a18dc0d07b8fe3399c4a5592e94bf0aa13c0fe",
+    "file_creation_date": "2026-10-06T18:39:44.642Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_meh_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "c87712a3a5bfc266b1a6dffca6aaae6e47502f0eab3935caceb4159ceae56956",
+    "file_creation_date": "2026-10-06T18:39:44.52Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_meh_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_cat.npy",
+    "bytes": 5597208,
+    "sha256": "6542e3e19946ca8e1427d3da28e371b1ee24bc1e4301c6d8544eecec83d8ed81",
+    "file_creation_date": "2026-10-06T18:39:44.661Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_lgb.npy",
+    "bytes": 2398880,
+    "sha256": "dc8c9d98222983da94c36152a8962fcc4cde33e23741043f5bbda4b076a514fd",
+    "file_creation_date": "2026-10-06T18:39:44.875Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_lgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_lgb_ogteach.npy",
+    "bytes": 5597208,
+    "sha256": "104f9bd3a89d9d403337dd7ba465399c9f01b1dae66ca2d14a8812bce32e6446",
+    "file_creation_date": "2026-10-06T18:39:45.102Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_lgb_ogteach.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_lgb.npy",
+    "bytes": 5597208,
+    "sha256": "9ba8e71b69b7d00162c63ba4c665cc0f4602e63ba6fdc99ef08ab33546f68b42",
+    "file_creation_date": "2026-10-06T18:39:44.864Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_lgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_lgb_route.npy",
+    "bytes": 2398880,
+    "sha256": "591bfb836b1525b045873fe2ef7fd85ed04a0b29546074001426d5950d9e7931",
+    "file_creation_date": "2026-10-06T18:39:45.159Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_lgb_route.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_realmlp_fa4.npy",
+    "bytes": 5597208,
+    "sha256": "7e352b93e49b4eff14bc041d3e989a3e0ab81fc163fd7d16795cdf2ba43a3c82",
+    "file_creation_date": "2026-10-06T18:39:45.344Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_realmlp_fa4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_lgb_ogteach.npy",
+    "bytes": 2398880,
+    "sha256": "01a51158b769572a038081314308bfa05566c9e84d4328300d798f19696821bf",
+    "file_creation_date": "2026-10-06T18:39:45.007Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_lgb_ogteach.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_cat_ctr.npy",
+    "bytes": 2398880,
+    "sha256": "225ebff86de258c82307fe15326b745641067bfd8cacd2d34172f9b5cb856782",
+    "file_creation_date": "2026-10-06T18:39:44.785Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_cat_ctr.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_realmlp_og.npy",
+    "bytes": 2398880,
+    "sha256": "28ef46b123cc6f736e27dc499d034a68abd2e724a5aab46de973c50c0dbdd5f9",
+    "file_creation_date": "2026-10-06T18:39:45.432Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_realmlp_og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_realmlp_og.npy",
+    "bytes": 5597208,
+    "sha256": "09daef81d776e6b54cc1b21fe527c537a310b037bcdfb915360a8e9c1b8a196a",
+    "file_creation_date": "2026-10-06T18:39:45.484Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_realmlp_og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_realmlp_v4.npy",
+    "bytes": 5597208,
+    "sha256": "7547354cdcffe75e6d5219ffe96e506c6bc466d7717b261a08df1affe7c04494",
+    "file_creation_date": "2026-10-06T18:39:45.599Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_realmlp_v4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_realmlp.npy",
+    "bytes": 5597208,
+    "sha256": "41c52f6025097c81a7a85e1dd0f0332a97b8772b496a0db4f7f889f992309cf3",
+    "file_creation_date": "2026-10-06T18:39:45.307Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_realmlp_fa4.npy",
+    "bytes": 2398880,
+    "sha256": "3b01a184c2768fd814c9220379766d72a7eec5dfb15f07bc34570ccb4c99cff8",
+    "file_creation_date": "2026-10-06T18:39:45.39Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_realmlp_fa4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_realmlp.npy",
+    "bytes": 2398880,
+    "sha256": "eb4e9f77f0aff2e6dc920ed87c92de4c945eac6dfcd6785d47b2bc24d944c566",
+    "file_creation_date": "2026-10-06T18:39:45.252Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_realmlp_v4.npy",
+    "bytes": 2398880,
+    "sha256": "9b732b4934dcbb6baa5c677f39f4a4b6fbf992c45989b56088ee689b0500c9a0",
+    "file_creation_date": "2026-10-06T18:39:45.561Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_realmlp_v4.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mi_glm_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "561cf7e765f485d0d5d5f9d6e4dea2ca8d667aa10d5c05dbec46d9d21662bead",
+    "file_creation_date": "2026-10-06T18:39:46.008Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mi_glm_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_realmlp_v4og.npy",
+    "bytes": 2398880,
+    "sha256": "047eac2ca075b5832cbb3ee091cfd34c069b11a403d4cbd6ed3d315e3a211b29",
+    "file_creation_date": "2026-10-06T18:39:45.688Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_realmlp_v4og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_realmlp_v4og.npy",
+    "bytes": 5597208,
+    "sha256": "8afe268122ac4a7d9c9dc7dc6ebe3261412105c24f17967d3ae447448d8317a8",
+    "file_creation_date": "2026-10-06T18:39:45.694Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_realmlp_v4og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mi_lgb_route_cat.npy",
+    "bytes": 5597208,
+    "sha256": "ed808bd1c91ef7349762a5efc5f4c10efa6ca7224f8d9b62939bd59e8a93dbf5",
+    "file_creation_date": "2026-10-06T18:39:46.077Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mi_lgb_route_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mi_realmlp_raw.npy",
+    "bytes": 2398880,
+    "sha256": "bfab5d5f716aa39535724283d93fef534f10f04e58afc7892c2946ae551c9ba6",
+    "file_creation_date": "2026-10-06T18:39:46.341Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mi_realmlp_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mi_realmlp_lean.npy",
+    "bytes": 2398880,
+    "sha256": "a947adb2668d0b1101c4aca5f2c5ad420a28f38df60178d272e3b16481d53259",
+    "file_creation_date": "2026-10-06T18:39:46.273Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mi_realmlp_lean.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mi_realmlp_lean.npy",
+    "bytes": 5597208,
+    "sha256": "0763be2e54e1b4f4b5f5efc8725164ef27ecfa9bbeca04fbc97b228be4a54e88",
+    "file_creation_date": "2026-10-06T18:39:46.266Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mi_realmlp_lean.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mi_cat_ctr.npy",
+    "bytes": 2398880,
+    "sha256": "24decb6e5b91ad9cb58ff6c93be246a3741f2a9c04f7a0d19583978a59dbbe35",
+    "file_creation_date": "2026-10-06T18:39:45.877Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mi_cat_ctr.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mi_cat_ctr.npy",
+    "bytes": 5597208,
+    "sha256": "f3ba0e3311d41a78431c19f34c1b801c4fbe181035cff4f47c975644dd43df02",
+    "file_creation_date": "2026-10-06T18:39:45.916Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mi_cat_ctr.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mg_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "f8f54d27a0b8006161c23a56abf6b781085e891c705665db2898a17c7aea4f6c",
+    "file_creation_date": "2026-10-06T18:39:45.78Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mg_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_pfn_hemingweb_raw.npy",
+    "bytes": 5597208,
+    "sha256": "208fc40313c736ee5c993931ea789f20aa50174f2e79d3bfdc386cd8d14980ed",
+    "file_creation_date": "2026-10-06T18:39:46.845Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_pfn_hemingweb_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mi_lgb_route_cat.npy",
+    "bytes": 2398880,
+    "sha256": "0c0c6a972a228672b2b0b6446a3dbe4769e7f05e84682b05b65598a1be705550",
+    "file_creation_date": "2026-10-06T18:39:46.24Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mi_lgb_route_cat.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mi_xgb_d5.npy",
+    "bytes": 5597208,
+    "sha256": "ab7378c7e8a5ff99f90b985f3b8a02b06ef2d38ae630bb57df35b4ecc3db77ee",
+    "file_creation_date": "2026-10-06T18:39:46.526Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mi_xgb_d5.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mi_realmlp_raw.npy",
+    "bytes": 5597208,
+    "sha256": "a5503bbea13bcdcb760ea69dbb4d1596e4edc6a9d4fb4aedea8f948b869cbd1d",
+    "file_creation_date": "2026-10-06T18:39:46.375Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mi_realmlp_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mg_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "7898696e1806e5d84769198ebc5d0e4c399d4ba32fa2e6d47bcacabd9e8685f7",
+    "file_creation_date": "2026-10-06T18:39:45.767Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mg_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mi_glm_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "c1c752aa67b5a508728ac3a3debeeb72eae9dfdb0274d167647a6002289bb44c",
+    "file_creation_date": "2026-10-06T18:39:46.004Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mi_glm_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_mi_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "82c954ddf006fb2c77f9f876830970a896763386a7fe7665d6ff40dce4a089b7",
+    "file_creation_date": "2026-10-06T18:39:46.433Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_mi_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_pfn_samanyu_route_og.npy",
+    "bytes": 2398880,
+    "sha256": "9a556ce568f44b5c5c10f8176c8fefb1628cd8b59e34bacfaac1c83ed4bcbd48",
+    "file_creation_date": "2026-10-06T18:39:46.917Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_pfn_samanyu_route_og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_nj_01.npy",
+    "bytes": 5597208,
+    "sha256": "0a04d90afa3e42f78fb03834333c63b553901c66fcf7f14a499499f018c40906",
+    "file_creation_date": "2026-10-06T18:39:46.682Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_nj_01.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_pfn_hemingweb_raw.npy",
+    "bytes": 2398880,
+    "sha256": "e88054e7559a620bdcb7ace910fd40e574dc38bf23a57331df839aee1b96ef92",
+    "file_creation_date": "2026-10-06T18:39:46.781Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_pfn_hemingweb_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_pfn_samanyu_seeds.npy",
+    "bytes": 5597208,
+    "sha256": "afa39103171b5c182382e69888673433cd988b1c7e867fe212dab4503e2314e3",
+    "file_creation_date": "2026-10-06T18:39:46.97Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_pfn_samanyu_seeds.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_pfn_samanyu_seeds.npy",
+    "bytes": 2398880,
+    "sha256": "3d5388276f68ee58ad2986d1dca02d731d26287f5271ffe149351167ca809adc",
+    "file_creation_date": "2026-10-06T18:39:46.976Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_pfn_samanyu_seeds.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_nj_01.npy",
+    "bytes": 2398880,
+    "sha256": "d2ab9dd05d00bcf3a33088e0d04c5b5a6fc536f6c98265a144ca8e4e7c193da9",
+    "file_creation_date": "2026-10-06T18:39:46.667Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_nj_01.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_cat_ctr_auxall_k10.npy",
+    "bytes": 5597208,
+    "sha256": "a7ae020b2f0b3eb880cd610114035fffadb0f319eed0be0218a5edc687e29bd1",
+    "file_creation_date": "2026-10-06T18:39:47.121Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_cat_ctr_auxall_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mi_xgb_d5.npy",
+    "bytes": 2398880,
+    "sha256": "1f6a9322f26f25b9ae00741a82bad6c76199d1b54ba9eb08fad626f90c57d7e9",
+    "file_creation_date": "2026-10-06T18:39:46.557Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mi_xgb_d5.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_cat_ctr_auxev_k10.npy",
+    "bytes": 5597208,
+    "sha256": "650021c6776ee06e55198385f2ce8f9a038e5f90b37b9c9d0abcc96cd6e53cf7",
+    "file_creation_date": "2026-10-06T18:39:47.399Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_cat_ctr_auxev_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_mi_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "586ff5eee5fbd22c170ce2a45e3f1782cd99509612402d8259096c6e7ae88380",
+    "file_creation_date": "2026-10-06T18:39:46.451Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_mi_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_cat_ctr_auxev.npy",
+    "bytes": 5597208,
+    "sha256": "07df25a8ddd21edcf5b39f36848a37b11d511c2717b70abbfc33fc61bdc19270",
+    "file_creation_date": "2026-10-06T18:39:47.288Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_cat_ctr_auxev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_lgb_A_auxall_k10.npy",
+    "bytes": 5597208,
+    "sha256": "9088539555cbd64e9ecd8f636b4f96c804044be6600abf6aa6a87f419c13c979",
+    "file_creation_date": "2026-10-06T18:39:47.732Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_lgb_A_auxall_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_lgb_A_auxall.npy",
+    "bytes": 2398880,
+    "sha256": "237542244e70017549dc451296170b4af4bd5d23e12e1e42d7b98b0b861c9bfe",
+    "file_creation_date": "2026-10-06T18:39:47.623Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_lgb_A_auxall.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_pfn_samanyu_route_og.npy",
+    "bytes": 5597208,
+    "sha256": "866b5d373bff126ade93078522526e24e2d28c9155d5b06b8d955840105f6e4c",
+    "file_creation_date": "2026-10-06T18:39:46.962Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_pfn_samanyu_route_og.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_B.npy",
+    "bytes": 5597208,
+    "sha256": "693285d4f395c69a02b6c82fe9e1b1d241a502cdcb12e4c1d9377d4977329a48",
+    "file_creation_date": "2026-10-06T18:39:48.058Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_B.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_lgb_B_k10.npy",
+    "bytes": 2398880,
+    "sha256": "4ac4bb19881c2bc3519eedb167b377e6a7f3850935ccb96cd447964165aee456",
+    "file_creation_date": "2026-10-06T18:39:47.884Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_lgb_B_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_lgb_A.npy",
+    "bytes": 5597208,
+    "sha256": "6d0d180b0d407621efdd4b0bea792c93b69ec12a355c91d7a3d3c0b49d241bae",
+    "file_creation_date": "2026-10-06T18:39:47.456Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_lgb_A.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_cat_ctr_auxev.npy",
+    "bytes": 2398880,
+    "sha256": "3112f581c9664f16aee5eb0d18e38fb8bd8d9d935b93f5473a585213feb30605",
+    "file_creation_date": "2026-10-06T18:39:47.288Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_cat_ctr_auxev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_lgb_A.npy",
+    "bytes": 2398880,
+    "sha256": "bf3cd9bb20359c34e59f4262f025d76967e130fc711705c406d940394db56fe0",
+    "file_creation_date": "2026-10-06T18:39:47.487Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_lgb_A.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_lgb_B_k10.npy",
+    "bytes": 5597208,
+    "sha256": "c7ace845d2d2f74f3ae23c1641612ccdc8ff91001879338b56c5a89b381fc044",
+    "file_creation_date": "2026-10-06T18:39:47.83Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_lgb_B_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_cat_ctr_auxall_k10.npy",
+    "bytes": 2398880,
+    "sha256": "f03f05377f05e10a57ea7fcc4bd23a02be50f4fa663b76f41cee32d7f8b11340",
+    "file_creation_date": "2026-10-06T18:39:47.137Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_cat_ctr_auxall_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_lgb_A_auxall.npy",
+    "bytes": 5597208,
+    "sha256": "9184ec67c96d241899650eaca28dc13a7621f7d5220085b10d24069ab4c7726c",
+    "file_creation_date": "2026-10-06T18:39:47.612Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_lgb_A_auxall.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_cat_ctr_auxev_k10.npy",
+    "bytes": 2398880,
+    "sha256": "64f35e99edcc7ab9cfd2f7c4a346d0f8c53feed8dc74b12a4b463c0830fb6da3",
+    "file_creation_date": "2026-10-06T18:39:47.399Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_cat_ctr_auxev_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_lgb_A_auxall_k10.npy",
+    "bytes": 2398880,
+    "sha256": "cbbb764856bcccad022acb42a866d7c29b3fba2b20658e2aad7672c416fecde1",
+    "file_creation_date": "2026-10-06T18:39:47.757Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_lgb_A_auxall_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_ogx_aux.npy",
+    "bytes": 2398880,
+    "sha256": "9fadd6df49eeff9979ed9e11eda4cb430e70c78b07e3e578df98c08517574356",
+    "file_creation_date": "2026-10-06T18:39:48.202Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_ogx_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_ogx_aux.npy",
+    "bytes": 5597208,
+    "sha256": "3a55c41d300531e49d2c3be50e1df2da818c9e3c6a0cbec9b5fe307c6abc61da",
+    "file_creation_date": "2026-10-06T18:39:48.218Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_ogx_aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_B_k10.npy",
+    "bytes": 2398880,
+    "sha256": "d90f2045811cf42f7dd7d536e5649454b9a899a92a2b9f88f1dc6651abdbcf79",
+    "file_creation_date": "2026-10-06T18:39:48.071Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_B_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_B.npy",
+    "bytes": 2398880,
+    "sha256": "2280039a9f08ec8ad92575ad6bc8a7a20ff1b684ec64e69a6d47d1eb9501d7bf",
+    "file_creation_date": "2026-10-06T18:39:47.981Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_B.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_raw_aux_k10.npy",
+    "bytes": 5597208,
+    "sha256": "c24b0be108e832a3ce1fbf0cc1c4a01bced48ae8170cc2369bae1e577b31d8a3",
+    "file_creation_date": "2026-10-06T18:39:48.43Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_raw_aux_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_B_k10.npy",
+    "bytes": 5597208,
+    "sha256": "2ab38f14fc0928bbeb497f8b165440c014d234fd0b8658e6f092d892eceb6d4c",
+    "file_creation_date": "2026-10-06T18:39:48.149Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_B_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_raw_aux_s2.npy",
+    "bytes": 2398880,
+    "sha256": "19ed5a19a376fcc11c86b7e7ea6240504328b8123bb136ed793856ed734c354b",
+    "file_creation_date": "2026-10-06T18:39:48.527Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_raw_aux_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_v4aux.npy",
+    "bytes": 5597208,
+    "sha256": "fb212c42cf67c4c35a4097ce366347541ee7869397a28ca163c0f2768703da21",
+    "file_creation_date": "2026-10-06T18:39:48.683Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_v4aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_xgb_A_auxev.npy",
+    "bytes": 2398880,
+    "sha256": "138bc4b1bfaee01bb8f8b86bc027a7a57ff64be40d223bf40dad5e4e31c34722",
+    "file_creation_date": "2026-10-06T18:39:49.16Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_xgb_A_auxev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_v4aux.npy",
+    "bytes": 2398880,
+    "sha256": "5fd0faf7b4655ccf1ad8f8c366aad7bd57506cffc9c67cb7d36f021379e6d6c3",
+    "file_creation_date": "2026-10-06T18:39:48.663Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_v4aux.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_v4ev_e4_k10.npy",
+    "bytes": 5597208,
+    "sha256": "f3be9702812ba504b62c4f1d8e698982b898c26b4f686c7facbcc7bc00704391",
+    "file_creation_date": "2026-10-06T18:39:48.971Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_v4ev_e4_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_raw_aux_k10.npy",
+    "bytes": 2398880,
+    "sha256": "c373865e819cea5b7efdd1d0750b85b9e68747fd313fe557ee7dd84a9dd979de",
+    "file_creation_date": "2026-10-06T18:39:48.419Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_raw_aux_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_xgb_A_auxev.npy",
+    "bytes": 5597208,
+    "sha256": "1f9882c06f9b08265ceba4cf2095a34748474f26829e5bb056663da7d188b595",
+    "file_creation_date": "2026-10-06T18:39:49.166Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_xgb_A_auxev.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_xgb_route.npy",
+    "bytes": 5597208,
+    "sha256": "6b78e7357131daf506817e19a2e0ddcbc4556e02e6bd22cf704f798ff48fce0e",
+    "file_creation_date": "2026-10-06T18:39:49.335Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_xgb_route.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_raw_aux_s2.npy",
+    "bytes": 5597208,
+    "sha256": "fe618e300d10b9e50f8a521c3d01e58a4d1db0b8466ad8778bfdbb7ca92eae25",
+    "file_creation_date": "2026-10-06T18:39:48.598Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_raw_aux_s2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_ogx_aux_k10.npy",
+    "bytes": 2398880,
+    "sha256": "3b00bd39d6a7a36523a5d00001f3505fd8da6a68556c508992845129fd470575",
+    "file_creation_date": "2026-10-06T18:39:48.289Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_ogx_aux_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_xgb_raw.npy",
+    "bytes": 5597208,
+    "sha256": "72b7107f3875a73b91c1872bba357c17bf32fd01194927861e65d3357ff82318",
+    "file_creation_date": "2026-10-06T18:39:49.307Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_xgb_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_v4ev_e4_k10.npy",
+    "bytes": 2398880,
+    "sha256": "6e45a3253900485be5fbadfe026efdc5f3f9963f771d89c1ce2893635a1ff801",
+    "file_creation_date": "2026-10-06T18:39:48.95Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_v4ev_e4_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_xgb_A.npy",
+    "bytes": 2398880,
+    "sha256": "6c3949afed9fb339fb4317e62f4773c57e423dd1779c2739e145f93718edd31a",
+    "file_creation_date": "2026-10-06T18:39:49.059Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_xgb_A.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_xgb_route.npy",
+    "bytes": 2398880,
+    "sha256": "a410c14834bc314a749d2b5719e678a913cb99a1736238ade9b5259472ba98b2",
+    "file_creation_date": "2026-10-06T18:39:49.341Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_xgb_route.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_xgb_te.npy",
+    "bytes": 5597208,
+    "sha256": "8d17b3c356751a8c150c558b86b82e7871b94dd0901c84b9aaeab3e3bccb6864",
+    "file_creation_date": "2026-10-06T18:39:49.489Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_xgb_te.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_xgb_raw.npy",
+    "bytes": 2398880,
+    "sha256": "4002781519abbe62b1c54101e036e4b3ecf82776d3d14387e9f208c7b39bf765",
+    "file_creation_date": "2026-10-06T18:39:49.251Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_xgb_raw.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_th_catboost.npy",
+    "bytes": 2398880,
+    "sha256": "943d4801920b9c7c6f535df156073b15069c553f1617ca3f34fd7dbc40480e57",
+    "file_creation_date": "2026-10-06T18:39:49.564Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_th_catboost.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_th_catboost.npy",
+    "bytes": 5597208,
+    "sha256": "fd34ade65983faae5fdd180986f0b20c0d8ad39b826c3659d3a17cec5256118e",
+    "file_creation_date": "2026-10-06T18:39:49.559Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_th_catboost.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_th_realmlp.npy",
+    "bytes": 5597208,
+    "sha256": "e0f34268ed678da45bdea63a6c5cdcd61f4bcb1c06d33cbae7d8253c112fda68",
+    "file_creation_date": "2026-10-06T18:39:49.694Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_th_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_xgb_A.npy",
+    "bytes": 5597208,
+    "sha256": "6ba42ae957f735c291242f3ee9058612c7a859e8e531921dc5154426deac4b04",
+    "file_creation_date": "2026-10-06T18:39:49.04Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_xgb_A.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_wx_context_numeric.npy",
+    "bytes": 2398880,
+    "sha256": "6a000dbced562443f850e716db029966fde371c2e0f07f084e23824397178329",
+    "file_creation_date": "2026-10-06T18:39:49.899Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_wx_context_numeric.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_th_xgb.npy",
+    "bytes": 5597208,
+    "sha256": "a2a04d0e5c085b6dff80a6e3d2a8dcf6109d454f4e1c860bf048813c059b51a2",
+    "file_creation_date": "2026-10-06T18:39:49.797Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_th_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_wx_context_numeric.npy",
+    "bytes": 5597208,
+    "sha256": "86062998c17231735a194799a0e4225b99fc0ff620fb6b4662b20bf7808641c5",
+    "file_creation_date": "2026-10-06T18:39:49.912Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_wx_context_numeric.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_th_xgb.npy",
+    "bytes": 2398880,
+    "sha256": "0b2004a213375f4e3b7c57e206618c8e418d547b311bf0ea92ecca235d139778",
+    "file_creation_date": "2026-10-06T18:39:49.834Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_th_xgb.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_xgb_te.npy",
+    "bytes": 2398880,
+    "sha256": "1b3c907c5733000f2eb3f550734e4c520cfc0493cd575a37bb546129bd3689f4",
+    "file_creation_date": "2026-10-06T18:39:49.441Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_xgb_te.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_causilo.npy",
+    "bytes": 2798668,
+    "sha256": "7ec5e7aa6cd8a9cce957069bfea454ce11bfd5b7c634000e6a4efaea22038ab3",
+    "file_creation_date": "2026-10-06T16:38:57.945Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_causilo.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_causilo.npy",
+    "bytes": 1199504,
+    "sha256": "27535186bf54c7cec97755c77c4f5eeea9b48ea1439d9f2e00d9bd88e881926c",
+    "file_creation_date": "2026-10-06T16:38:58.076Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_causilo.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_wx_rating_segments.npy",
+    "bytes": 2398880,
+    "sha256": "05adfc56699415a3c1153f36f019ad70738639012872596c5f0b591fbc40107b",
+    "file_creation_date": "2026-10-06T18:39:49.975Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_wx_rating_segments.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_kumolarge.npy",
+    "bytes": 2798668,
+    "sha256": "94bce98307807b60a88862e4ac9a6044f4d4fecf5f792e775e8a8ea4b727a118",
+    "file_creation_date": "2026-10-06T16:38:57.725Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_kumolarge.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_exaone.npy",
+    "bytes": 1199504,
+    "sha256": "721e718aeb6679723d2d2940fe37e93b19f13f1d8f7f1c5e0f10b7119ea02711",
+    "file_creation_date": "2026-10-06T16:38:58.071Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_exaone.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_wx_rating_segments.npy",
+    "bytes": 5597208,
+    "sha256": "567739f1be01211d802e4651fc4aadd04e9c40d3e3425ed4b0bf751203eb307a",
+    "file_creation_date": "2026-10-06T18:39:50.014Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_wx_rating_segments.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_exaone.npy",
+    "bytes": 2798668,
+    "sha256": "591b5cbb8e7e9053062ceeab5a5a7aa5bc7854c02cb2853804385301e7b72d73",
+    "file_creation_date": "2026-10-06T16:38:57.835Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_exaone.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_limix2.npy",
+    "bytes": 1199504,
+    "sha256": "5fc5a2895e0374b21f795e47aebab2dc1ef37264ab9e604d0c7b9522c36bfc67",
+    "file_creation_date": "2026-10-06T16:38:58.291Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_limix2.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_limix2.npy",
+    "bytes": 2798668,
+    "sha256": "2634847729c54bc4807f6475cd186fe0cd3c0dbc19d5793b2bbcbf421b8688a3",
+    "file_creation_date": "2026-10-06T16:38:57.967Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_limix2.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_kumolarge.npy",
+    "bytes": 1199504,
+    "sha256": "55d0c7ac1a76c7949225ae3e712b34eb4af6665640cae715bf9ff6c2aa32538b",
+    "file_creation_date": "2026-10-06T16:38:58.023Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_kumolarge.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_realmlp.npy",
+    "bytes": 2798668,
+    "sha256": "d2ef10c8d4e246315fbbb91c57651efa98bf03cf7cb7e7bfd5d4ac51428a381b",
+    "file_creation_date": "2026-10-06T16:38:58Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_realmlp.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_tabfm.npy",
+    "bytes": 2798668,
+    "sha256": "f18a495a22acf272a468135b22aed2245f7cc609e3720f766662e15b2979feed",
+    "file_creation_date": "2026-10-06T16:38:58.071Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_tabfm.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_xgboost.npy",
+    "bytes": 1199504,
+    "sha256": "cdb3ec0954daa41bb25edd3e577ef4554a4709c725e21d45560447caff70e00a",
+    "file_creation_date": "2026-10-06T16:38:58.112Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_xgboost.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_tabfm.npy",
+    "bytes": 1199504,
+    "sha256": "b833ee3affefc4ac07ad074037f02d1dc16ae31f98280ffefa169e355818599c",
+    "file_creation_date": "2026-10-06T16:38:57.897Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_tabfm.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_tabicl2.npy",
+    "bytes": 1199504,
+    "sha256": "642768a3ea98a1ac936b074e0dc6ce084baa05448b10abfbd70b4b97133fb7df",
+    "file_creation_date": "2026-10-06T16:38:58.098Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_tabicl2.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_tabpfn35.npy",
+    "bytes": 2798668,
+    "sha256": "f75c9d1de9ea23c310a36c175e4552916928f16b3530ed5f51b8c783c3e75e95",
+    "file_creation_date": "2026-10-06T16:38:58.018Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_tabpfn35.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_tabpfn35.npy",
+    "bytes": 1199504,
+    "sha256": "fd49136b12455998ee503833135c84b13337df2bdc10ffe91607e07b207d95a0",
+    "file_creation_date": "2026-10-06T16:38:58.099Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_tabpfn35.npy"
+  },
+  {
+    "source": "golem",
+    "filename": "test_o_tabpfn35.npy",
+    "bytes": 2398880,
+    "sha256": "a30073b4985640cf01cb68c573deafb232da74dc32f1abec63262b29802dbfce",
+    "file_creation_date": "2026-10-14T07:01:27.307Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/test_o_tabpfn35.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_xgboost.npy",
+    "bytes": 2798668,
+    "sha256": "be0862fe5eb2872fda139fb5e75435d7119b693f2a2bfc0d2403e794e2b429a1",
+    "file_creation_date": "2026-10-06T16:38:57.877Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_xgboost.npy"
+  },
+  {
+    "source": "golem",
+    "filename": "oof_p_lgbm_auxev.npy",
+    "bytes": 5597208,
+    "sha256": "062fa8fbbdfef744972fad2e0a700367827f20913f76f7c194bdb4aa9350bc77",
+    "file_creation_date": "2026-10-14T07:01:27.24Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/oof_p_lgbm_auxev.npy"
+  },
+  {
+    "source": "golem",
+    "filename": "oof_o_tabpfn35.npy",
+    "bytes": 5597208,
+    "sha256": "59611e8912b2f20783c0b0dca6547562b398bca6e3cdc3df19e232c81f4aec59",
+    "file_creation_date": "2026-10-14T07:01:27.259Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/oof_o_tabpfn35.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_tabicl2.npy",
+    "bytes": 2798668,
+    "sha256": "9b27d7d1769a4bd7afab9ba68112cef013339b54fe0f4ae0ce3985a9849c9a1f",
+    "file_creation_date": "2026-10-06T16:38:58.356Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_tabicl2.npy"
+  },
+  {
+    "source": "golem",
+    "filename": "test_p_lgbm_auxev.npy",
+    "bytes": 2398880,
+    "sha256": "6cbb2ef5079bff5abbfdbc3e24a188eec27758960195c6b5fd40d9d25026e295",
+    "file_creation_date": "2026-10-14T07:01:27.374Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/test_p_lgbm_auxev.npy"
+  },
+  {
+    "source": "golem",
+    "filename": "oof_q_lgbm_auxev_10fold.npy",
+    "bytes": 5597208,
+    "sha256": "3bd0f6648a0f6cb3811b0df2efec031f0d3997a660c3b7144f3c01e56ee0a79f",
+    "file_creation_date": "2026-10-14T07:01:27.211Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/oof_q_lgbm_auxev_10fold.npy"
+  },
+  {
+    "source": "golem",
+    "filename": "test_q_lgbm_auxev_10fold.npy",
+    "bytes": 2398880,
+    "sha256": "caf8654f34e85d87dabbb63c750947b2df142ae669b76a9b5ae3649feb8ac04f",
+    "file_creation_date": "2026-10-14T07:01:27.296Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/test_q_lgbm_auxev_10fold.npy"
+  },
+  {
+    "source": "abdullah",
+    "filename": "tabpfn_catfd10_oof.csv",
+    "bytes": 20154071,
+    "sha256": "d16fedf2e3ed58d09b2f7dc1f49e10192eb383c05d44bbbb58d658b1364bd027",
+    "file_creation_date": "2026-10-06T10:21:54.14Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/tabpfn_catfd10_oof.csv"
+  },
+  {
+    "source": "abdullah",
+    "filename": "tabpfn_catfd10_test.csv",
+    "bytes": 7984506,
+    "sha256": "756a71ae4582565b8d7783163a0b399f69f5dc8818e2115517b34611bc000aca",
+    "file_creation_date": "2026-10-06T10:21:53.935Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/tabpfn_catfd10_test.csv"
+  },
+  {
+    "source": "abdullah",
+    "filename": "tabpfn_te_cnt_test.csv",
+    "bytes": 7982842,
+    "sha256": "28b21bd3363f9d8aa0b739a8efb4059aea413c1cdeb79e70c7405101947758bc",
+    "file_creation_date": "2026-10-06T10:21:53.74Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/tabpfn_te_cnt_test.csv"
+  },
+  {
+    "source": "abdullah",
+    "filename": "tabpfn_raw_test.csv",
+    "bytes": 7984894,
+    "sha256": "3214aedbf64252711fc0df71def49e81356881a879fdac72ac2ddd0d50b7c977",
+    "file_creation_date": "2026-10-06T10:21:53.932Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/tabpfn_raw_test.csv"
+  },
+  {
+    "source": "abdullah",
+    "filename": "tabpfn_te_cnt_oof.csv",
+    "bytes": 20149708,
+    "sha256": "de03fa9a9787ac45a152cacc0bf2458148a04a4fc554293c00c1b022de1e7b08",
+    "file_creation_date": "2026-10-06T10:21:54.145Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/tabpfn_te_cnt_oof.csv"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e10_sparselr_lr.npz",
+    "bytes": 7524438,
+    "sha256": "4b41347f9bccc41659efeefe0381d4f877868ff6d3ba7edf220268a9a03ab754",
+    "file_creation_date": "2026-10-04T20:50:38.541Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e10_sparselr_lr.npz"
+  },
+  {
+    "source": "abdullah",
+    "filename": "tabpfn_raw_oof.csv",
+    "bytes": 20145413,
+    "sha256": "91e631b86a50548e89e075ae44f1bad34c1d22e7994ab7ea5ce10ca7365d026d",
+    "file_creation_date": "2026-10-06T10:21:53.996Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/tabpfn_raw_oof.csv"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_cat_tuned.npz",
+    "bytes": 7517310,
+    "sha256": "f1f6bfaf4a75b34f71179fb52a607e5c1a8943b74d40aed46b9a8c0b8e2a2c60",
+    "file_creation_date": "2026-10-04T20:50:38.005Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_cat_tuned.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_cat_base.npz",
+    "bytes": 7517530,
+    "sha256": "cd8a297be3bd8d957766ca0e0cbe6241d4bb1cec0e496a8bd957f8692c6bf38f",
+    "file_creation_date": "2026-10-04T20:50:37.934Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_cat_base.npz"
+  },
+  {
+    "source": "abdullah",
+    "filename": "cat_v3_test.csv",
+    "bytes": 7987572,
+    "sha256": "e6b75645210082392c8e3eb1fc8461a34430a60e544abb533cdb24b65b3a5b14",
+    "file_creation_date": "2026-10-06T10:21:53.633Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/cat_v3_test.csv"
+  },
+  {
+    "source": "abdullah",
+    "filename": "cat_v3_oof.csv",
+    "bytes": 20160926,
+    "sha256": "9b75c8088e42a3eefb696b390f881304157b027ed18a7ff09ffe540be44be3d3",
+    "file_creation_date": "2026-10-06T10:21:54.586Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/cat_v3_oof.csv"
+  },
+  {
+    "source": "abdullah",
+    "filename": "xgb_v3_oof.csv",
+    "bytes": 20160043,
+    "sha256": "a70a914040a8c40a2a1bc6ed2af4d5113f3fda476dc88ca36701e268696f9d18",
+    "file_creation_date": "2026-10-06T10:21:54.003Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/xgb_v3_oof.csv"
+  },
+  {
+    "source": "abdullah",
+    "filename": "xgb_v3_test.csv",
+    "bytes": 7987818,
+    "sha256": "8b600bdf82dc440de2505377e86a4afeaca749cf35034154b0adc67ac976c626",
+    "file_creation_date": "2026-10-06T10:21:53.986Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/abdullahsafwan333/oof-dataset/xgb_v3_test.csv"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e12_route_lgb.npz",
+    "bytes": 7515029,
+    "sha256": "0562fadd388a3410d127f928a5d4f08c9bd54b5b9ce9fc1f2eb57818231e0ec4",
+    "file_creation_date": "2026-10-04T20:50:38.402Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e12_route_lgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e12_route_cat.npz",
+    "bytes": 7515887,
+    "sha256": "7b4e64d1d33099f102da0ef202aca4bace6fa8ccd508c7507ade4ddf4f1f4117",
+    "file_creation_date": "2026-10-04T20:50:38.551Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e12_route_cat.npz"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_kumosmall.npy",
+    "bytes": 1199504,
+    "sha256": "b43763fcd351ce92a041bbe07de7bb15715d9d9fa17d9a916427a9c238b758bb",
+    "file_creation_date": "2026-10-06T16:38:57.891Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_kumosmall.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_realmlp.npy",
+    "bytes": 1199504,
+    "sha256": "c8979d754bcf841aa331d1f9e0fc75724aa177c6ad34dd9b0a8701f925ba3135",
+    "file_creation_date": "2026-10-06T16:38:57.745Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_realmlp.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "test_mitra2.npy",
+    "bytes": 1199504,
+    "sha256": "12c5e84a96c5bfd4cd854cd21359f20e350e5e341b87e7769f86664f0c346d68",
+    "file_creation_date": "2026-10-06T16:38:58.027Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/test_mitra2.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_th_realmlp.npy",
+    "bytes": 2398880,
+    "sha256": "1328b4573bc6130d66634aba3861ca951136e0df9b4ef7da38f198f559c64779",
+    "file_creation_date": "2026-10-06T18:39:49.702Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_th_realmlp.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_v4aux_k10.npy",
+    "bytes": 2398880,
+    "sha256": "7ad3c5bdf5a0539f11cfd8cf49f521de7eeec006b01a92b8cd3315ef0c88ac68",
+    "file_creation_date": "2026-10-06T18:39:48.78Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_v4aux_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_v4aux_k10.npy",
+    "bytes": 5597208,
+    "sha256": "398f24e5e367d7aec2a41162975a9c79bae59837a45ed53a487e1a71a50ede81",
+    "file_creation_date": "2026-10-06T18:39:48.785Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_v4aux_k10.npy"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_v4aux_k10s2.npy",
+    "bytes": 5597208,
+    "sha256": "e2cb2ec34d9f64237d48137c26cd33a0fea081701a5a3b7b7a0a73d1ff00526a",
+    "file_creation_date": "2026-10-06T18:39:48.865Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_v4aux_k10s2.npy"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_kumosmall.npy",
+    "bytes": 2798668,
+    "sha256": "2193c207e5f8dce99374baf8d37a0953be0b9b3204ab26e5d452df72e2608803",
+    "file_creation_date": "2026-10-06T16:38:58.128Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_kumosmall.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e14_rmlpseeds_realmlp.npz",
+    "bytes": 4600408,
+    "sha256": "0e598f92f0c1ff47cba6c947b8ed29ca17784e88f811de5c68fffc5155942e51",
+    "file_creation_date": "2026-10-04T20:50:38.531Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e14_rmlpseeds_realmlp.npz"
+  },
+  {
+    "source": "c124",
+    "filename": "oof_sa_rmlp_ogx_aux_k10.npy",
+    "bytes": 5597208,
+    "sha256": "874daa7d46027e23828863f3ed1a0f4db83d5db47fdcbf5fe7c47581e26b7247",
+    "file_creation_date": "2026-10-06T18:39:48.361Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/oof_sa_rmlp_ogx_aux_k10.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e14_seed777.npz",
+    "bytes": 4201203,
+    "sha256": "da51ad3b5081c16d5167f2b67f9b49c5588f7c728366d6e67b34b5ff1a29a500",
+    "file_creation_date": "2026-10-04T20:50:38.511Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e14_seed777.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e14_seed2026.npz",
+    "bytes": 4202365,
+    "sha256": "1651be716dad3d626b008c7f0f7d9ddd29f40ba10ab9aec89a62116e7635c52f",
+    "file_creation_date": "2026-10-04T20:50:38.508Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e14_seed2026.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e14_seed7.npz",
+    "bytes": 4201543,
+    "sha256": "69e1d9053b2bd7a57f354321938f33d31d4f37c80ce3edd329778f80cdbee6d0",
+    "file_creation_date": "2026-10-04T20:50:38.483Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e14_seed7.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e11_knn_lgb.npz",
+    "bytes": 7511730,
+    "sha256": "724c292978aa6a480ce508a88035bd3754e9fe2b5e9e35366ad14ffebe543c81",
+    "file_creation_date": "2026-10-04T20:50:38.391Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e11_knn_lgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e13_realmlp_realmlp.npz",
+    "bytes": 4202291,
+    "sha256": "6abfffc40e4bd58713faa723ddf3e39989e9033d621d798cbf82d66544c8dc64",
+    "file_creation_date": "2026-10-04T20:50:38.573Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e13_realmlp_realmlp.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e1_allcat_cat.npz",
+    "bytes": 7515663,
+    "sha256": "77e8a7c221a8f0709a717e3d364a97f36833000b4b9e34d63a66cf99df76dfd2",
+    "file_creation_date": "2026-10-04T20:50:38.021Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e1_allcat_cat.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e3_origconcat_xgb.npz",
+    "bytes": 4215092,
+    "sha256": "a1d3387fc65da153af453f3380cdc152f682db43dbd477f3625dd1b1472b7609",
+    "file_creation_date": "2026-10-04T20:50:38.114Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e3_origconcat_xgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e14_seed77.npz",
+    "bytes": 4201978,
+    "sha256": "5a5858e181673fe2a982119d6d74935eefb33e00c041d008471aa2e30c5c1569",
+    "file_creation_date": "2026-10-04T20:50:38.525Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e14_seed77.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e3_origconcat_cat.npz",
+    "bytes": 7517818,
+    "sha256": "05b0ec90961a9162ed98d512a8d65216c731f72b6f6b1f0427d82e69bcec2c62",
+    "file_creation_date": "2026-10-04T20:50:38.215Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e3_origconcat_cat.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e3_origconcat_lgb.npz",
+    "bytes": 7515211,
+    "sha256": "40936bc31a1ca705282639415515ddcf6b99fc35b5def53cffaa42291316e3e0",
+    "file_creation_date": "2026-10-04T20:50:38.167Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e3_origconcat_lgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e5_origpred_xgb.npz",
+    "bytes": 4187897,
+    "sha256": "1222e0774c84305ab0ab04aae1e9967b1932003447ec1f917ec7dda2964e1a0a",
+    "file_creation_date": "2026-10-04T20:50:38.182Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e5_origpred_xgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e6_origwide_lgb.npz",
+    "bytes": 7515144,
+    "sha256": "987e7f3a7303a6102d7acf22485d6357243ebc250a169926d427ed22b4760a45",
+    "file_creation_date": "2026-10-04T20:50:38.226Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e6_origwide_lgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e7_combo_cat.npz",
+    "bytes": 7510928,
+    "sha256": "9952f9c671acddbef6a8d934a7a1e149970d4df43f7e93e3de45ce620e0a9810",
+    "file_creation_date": "2026-10-04T20:50:38.473Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e7_combo_cat.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e8_tuned_lgb.npz",
+    "bytes": 7513341,
+    "sha256": "a2fe4f8f3fb15ae3cc751c3192b44ef1a00dc70c892956a5c31be37e300bf7c6",
+    "file_creation_date": "2026-10-04T20:50:38.266Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e8_tuned_lgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e6_origwide_cat.npz",
+    "bytes": 7518091,
+    "sha256": "6af40dbd16d6cd286de834a83c0c5d83f243d114f569525c10945cb725e7ac84",
+    "file_creation_date": "2026-10-04T20:50:38.246Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e6_origwide_cat.npz"
+  },
+  {
+    "source": "c124",
+    "filename": "test_sa_rmlp_v4aux_k10s2.npy",
+    "bytes": 2398880,
+    "sha256": "586be29bfd8773430fe8ee48dcb14804ceb1f3699d7ea40911db171c1bd4c467",
+    "file_creation_date": "2026-10-06T18:39:48.844Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-124-public-oof-and-test-predictions/test_sa_rmlp_v4aux_k10s2.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e5_origpred_cat.npz",
+    "bytes": 7510889,
+    "sha256": "20de2c2063908413e67e70e8a5f50fb875f09dac9bc6f0f4a2f3fe345da1b0b7",
+    "file_creation_date": "2026-10-04T20:50:38.291Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e5_origpred_cat.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_lgb_base.npz",
+    "bytes": 7510398,
+    "sha256": "5de388dc7407d6fd17bffc71095ff0431ae76ccfd1e2792910ea68fa2e55fa49",
+    "file_creation_date": "2026-10-04T20:50:38.024Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_lgb_base.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e8_tuned_cat.npz",
+    "bytes": 7510954,
+    "sha256": "7a7409e3554c3a4ce0af5f1d122c1b3b91f420a1517d37f3613583b36c468d6b",
+    "file_creation_date": "2026-10-04T20:50:38.295Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e8_tuned_cat.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_xgb_tuned.npz",
+    "bytes": 4210560,
+    "sha256": "8c105a9c7d8bb8ad6e185b5b4a7d6c0726f8494ffc83e2793e0e3e7aa3f66b8d",
+    "file_creation_date": "2026-10-04T20:50:37.936Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_xgb_tuned.npz"
+  },
+  {
+    "source": "forge",
+    "filename": "test_forge_ghost_xt.npy",
+    "bytes": 1199504,
+    "sha256": "fb79d9394fe71b050299d1cefedcfa74057bed44027322995b13fc72b101cbf4",
+    "file_creation_date": "2026-10-07T01:37:09.098Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/test_forge_ghost_xt.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "oof_forge_ghost_xt.npy",
+    "bytes": 2798668,
+    "sha256": "2773d7f10c55cc2ddd43f56a989055c8b1e2837f48691e03d8ff271c9e0a4f4d",
+    "file_creation_date": "2026-10-07T01:37:09.098Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/oof_forge_ghost_xt.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "test_forge_lgbm_xt.npy",
+    "bytes": 1199504,
+    "sha256": "56cffececd79645b9ae225ebee1a7b6153d95bc43ef483a50f90b16a0cc91924",
+    "file_creation_date": "2026-10-07T01:37:09.15Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/test_forge_lgbm_xt.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "orig_model_pred.npz",
+    "bytes": 3500163,
+    "sha256": "c0cdd11c2b2a51586c51d486b9a43159f7fb34096c3375df07b57d9b6637dd1b",
+    "file_creation_date": "2026-10-04T20:50:38.082Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/orig_model_pred.npz"
+  },
+  {
+    "source": "forge",
+    "filename": "oof_forge_lgbm.npy",
+    "bytes": 2798668,
+    "sha256": "877691dd87760686b484d799fcf7de57cf1b27b8179d74dcd7af96c80c2b05b5",
+    "file_creation_date": "2026-10-07T01:37:09.066Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/oof_forge_lgbm.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "oof_forge_lgbm_xt.npy",
+    "bytes": 2798668,
+    "sha256": "ed87d109fc38abdee52bf4e7711bb3ef05995a4da3a4b87d622c2e8c151a0c98",
+    "file_creation_date": "2026-10-07T01:37:09.112Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/oof_forge_lgbm_xt.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "test_forge_realmlp.npy",
+    "bytes": 1199504,
+    "sha256": "02c11f1679a483fd879b0dcd116fa5a8b86e6b032e2172343ef836d868c48825",
+    "file_creation_date": "2026-10-07T01:37:09.181Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/test_forge_realmlp.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "test_forge_cat.npy",
+    "bytes": 1199504,
+    "sha256": "869e06f390af94c232af827a3bf416dd485b216921eb422b3c20b061c00b4e5c",
+    "file_creation_date": "2026-10-07T01:37:09.287Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/test_forge_cat.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "test_forge_xgb.npy",
+    "bytes": 1199504,
+    "sha256": "7b767f225333ebd627a774ebc8727838b1fea64ea53d93a8bad782dc56cfe21d",
+    "file_creation_date": "2026-10-07T01:37:09.197Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/test_forge_xgb.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "oof_forge_xgb.npy",
+    "bytes": 2798668,
+    "sha256": "f6bf405b5195d3fb6409853ab8341f4a45b856e2893ee684093d2640987fa40c",
+    "file_creation_date": "2026-10-07T01:37:09.216Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/oof_forge_xgb.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "oof_forge_realmlp.npy",
+    "bytes": 2798668,
+    "sha256": "6170ba3cca00c989176688889260fd9fe7f0f5f3c3e461596c3b4340ee0930cc",
+    "file_creation_date": "2026-10-07T01:37:09.442Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/oof_forge_realmlp.npy"
+  },
+  {
+    "source": "sachith",
+    "filename": "xgb_A_auxall.npz",
+    "bytes": 4200771,
+    "sha256": "d2d1447443daf8d916e90a63a8d8e4c1f94ebbe90649dd58b6c706ef04a001b7",
+    "file_creation_date": "2026-10-10T08:06:41.146Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sachith7/s6e10-stack-oof-predictions/xgb_A_auxall.npz"
+  },
+  {
+    "source": "sachith",
+    "filename": "lgb_cpu_strong.npz",
+    "bytes": 7474281,
+    "sha256": "098b7fead9657ff506730ccad3176c5db7c7a1edf6253b86c6647f8048985486",
+    "file_creation_date": "2026-10-10T08:06:41.311Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sachith7/s6e10-stack-oof-predictions/lgb_cpu_strong.npz"
+  },
+  {
+    "source": "tfm",
+    "filename": "oof_mitra2.npy",
+    "bytes": 2798668,
+    "sha256": "d9f62d11790ce2084f2dd03994fddc49b1cb182c6878aebcdad48b3b4c745897",
+    "file_creation_date": "2026-10-06T16:38:57.909Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/cdeotte/s6e10-tfm-oof-and-test-predictions/oof_mitra2.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_rmlp_f_nc.npy",
+    "bytes": 1199504,
+    "sha256": "86d5969b1b0c18e18f4ad05df9ba72cfc3f5648f2e4e44007ec1bcbf4e892cae",
+    "file_creation_date": "2026-10-08T15:15:31.56Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_rmlp_f_nc.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_lgb_w1.npy",
+    "bytes": 1199504,
+    "sha256": "f454ab2c5f4ccaf60ceb032a2efd2b23978bb677ef96e4096c90509facde1ec6",
+    "file_creation_date": "2026-10-08T15:15:31.788Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_lgb_w1.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "test_forge_lgbm.npy",
+    "bytes": 1199504,
+    "sha256": "32b9a54af652be0eee31afca647fe84be7069f07a502ac0ac7d74aef22958dcc",
+    "file_creation_date": "2026-10-07T01:37:09.086Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/test_forge_lgbm.npy"
+  },
+  {
+    "source": "forge",
+    "filename": "oof_forge_cat.npy",
+    "bytes": 2798668,
+    "sha256": "1a8b52f63c658f62b8e6eaafb95c5c56fe523161337b82242f1b20f214e8d0f6",
+    "file_creation_date": "2026-10-07T01:37:09.079Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/amanatar/s6e10-forge-own-pairs/oof_forge_cat.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "oof_tabicl_fdcat_c250k.npy",
+    "bytes": 2798668,
+    "sha256": "59e4284689ac38c8c2e22d18e881ae8c006a2f1e4861df330c65735a3964e762",
+    "file_creation_date": "2026-10-08T15:15:31.556Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/oof_tabicl_fdcat_c250k.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_tabicl_fdcat_c250k.npy",
+    "bytes": 1199504,
+    "sha256": "cfaa0a080527a9a5aeffd08fd7d167db1432aff190c454afadafd3a9920d5b05",
+    "file_creation_date": "2026-10-08T15:15:31.505Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_tabicl_fdcat_c250k.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "oof_tabm_bcd_rc_v2.npy",
+    "bytes": 2798668,
+    "sha256": "b660a9b1e495ee738d8db91c9d1e727a31a7b9b207d031286bf63709bd51bfea",
+    "file_creation_date": "2026-10-08T15:15:31.788Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/oof_tabm_bcd_rc_v2.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_tabm_bcd_rc_v2.npy",
+    "bytes": 1199504,
+    "sha256": "4004e28b734b135838a930550cf03e6a263b6107a11b3d1a1ed1bd74f790816e",
+    "file_creation_date": "2026-10-08T15:15:31.677Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_tabm_bcd_rc_v2.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "oof_tabpfn_catfd10.npy",
+    "bytes": 2798668,
+    "sha256": "8e1bcbc4b99654101b9dcb9893607793d1bcb5b63da6534b3e9e24fe142e9741",
+    "file_creation_date": "2026-10-08T15:15:31.605Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/oof_tabpfn_catfd10.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_tabpfn_catfd10.npy",
+    "bytes": 1199504,
+    "sha256": "611dda9f576ca9f37dcdb8d883e35cc1b25cfb69e88e4325a4ec00a05079257f",
+    "file_creation_date": "2026-10-08T15:15:31.523Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_tabpfn_catfd10.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_cat_w1.npy",
+    "bytes": 1199504,
+    "sha256": "cf45334e54f2d8fe20e48f684fc0f427d7fd30ef946441d5a062a7189a7a2e02",
+    "file_creation_date": "2026-10-08T15:15:31.787Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_cat_w1.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_xgb_w1.npy",
+    "bytes": 1199504,
+    "sha256": "7f2e3a16cc9d22e7c0cbd4c1470215797ca084e5e017c0d748ec57eac0d7e9a4",
+    "file_creation_date": "2026-10-08T15:15:31.521Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_xgb_w1.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e12_route_xgb.npz",
+    "bytes": 4203494,
+    "sha256": "122e01e00c814e372fec20dfb0c0e8e3726d58f6bf5c0ce403efda835fa6e8ba",
+    "file_creation_date": "2026-10-04T20:50:38.591Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e12_route_xgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e2_origfeat_xgb.npz",
+    "bytes": 4207757,
+    "sha256": "578137ce54568954c00b44509ce06d9f7ec6e785b99fa319fac2eeca9c6052e7",
+    "file_creation_date": "2026-10-04T20:50:38.054Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e2_origfeat_xgb.npz"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_cat_aux.npy",
+    "bytes": 1199504,
+    "sha256": "5776bb44dddbd821048a99bcc4b0c10c170339bed25b7bb75d3fb29760728fb4",
+    "file_creation_date": "2026-10-20T12:32:08.791Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_cat_aux.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_cat_ctr_k.npy",
+    "bytes": 1199504,
+    "sha256": "dfcddb5a6cb68ba4cce8380ba84747ba11b092a97d1eafa137f58434b51cb3e0",
+    "file_creation_date": "2026-10-20T12:32:08.797Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_cat_ctr_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_cat_k10.npy",
+    "bytes": 2798668,
+    "sha256": "3f9b1d26449faa9b000a94e154046aa6b951f50fcd6afc95124b3c271f028819",
+    "file_creation_date": "2026-10-20T12:32:08.578Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_cat_k10.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_cat_ctr_k.npy",
+    "bytes": 2798668,
+    "sha256": "fecc064271b75ad3984d04fbdfbcb6438c97bd78775cbb4154a29689a5229935",
+    "file_creation_date": "2026-10-20T12:32:08.829Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_cat_ctr_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_gen_v1.npy",
+    "bytes": 1199504,
+    "sha256": "a6a307e3322e1fd378f912ab86854cbba244454321ef23cb5057862421c85a84",
+    "file_creation_date": "2026-10-20T12:32:08.603Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_gen_v1.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_cat_k10.npy",
+    "bytes": 1199504,
+    "sha256": "927a06450d6ec1cef756ee3ddec934f446b5d77ff1079e094c0119597b07f782",
+    "file_creation_date": "2026-10-20T12:32:08.454Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_cat_k10.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_gen_v1.npy",
+    "bytes": 2798668,
+    "sha256": "2b782dea0aad233b75ab0896aa0aeba69d7623c74f70aed9d1d2336f6b518404",
+    "file_creation_date": "2026-10-20T12:32:08.303Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_gen_v1.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_glm6_xgb_k.npy",
+    "bytes": 1199504,
+    "sha256": "1ca9af8615ae19f38b6e60c1a16b7621f6628a5bb5eb8091b578e93e38ec4ec8",
+    "file_creation_date": "2026-10-20T12:32:08.887Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_glm6_xgb_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_glm6_xgb_k.npy",
+    "bytes": 2798668,
+    "sha256": "2fc64bacf047e04256335db303f5e36f8025e90794b1bef64094a135f046bc98",
+    "file_creation_date": "2026-10-20T12:32:08.797Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_glm6_xgb_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_lgb_k10.npy",
+    "bytes": 1199504,
+    "sha256": "ba0891a581d662017d694ed7d659749b8bd7dfa4ee8de2a80cdae79bf5d851d2",
+    "file_creation_date": "2026-10-20T12:32:08.781Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_lgb_k10.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_realmlp_fa_aux3_k.npy",
+    "bytes": 2798668,
+    "sha256": "68d56663efa64baa4df918520f9c2bc436a4b5d1ea784640a929fea1a8a9dc81",
+    "file_creation_date": "2026-10-20T12:32:08.639Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_realmlp_fa_aux3_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_realmlp_fa_aux3_k.npy",
+    "bytes": 1199504,
+    "sha256": "a69b00877cbce9cc2d54485e9fa01ed9b681a333937acd751b0914cf31b14ea3",
+    "file_creation_date": "2026-10-20T12:32:08.699Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_realmlp_fa_aux3_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_lgb_k10.npy",
+    "bytes": 2798668,
+    "sha256": "715ffa0087ff80221be2869454565dd25e223ad8a54616ed8135cab43cc0f2ea",
+    "file_creation_date": "2026-10-20T12:32:08.368Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_lgb_k10.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_realmlp_fa_auxev.npy",
+    "bytes": 2798668,
+    "sha256": "6d73634a5d4e253aa75dfae48716896309e02d52f0b1414017fe929cd62722fa",
+    "file_creation_date": "2026-10-20T12:32:08.891Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_realmlp_fa_auxev.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e9_mlp_mlp.npz",
+    "bytes": 4219373,
+    "sha256": "a9d16b77172f91771fab3a690bfe10908fd8991ddc15a1fcd5a373ac3a29ff8f",
+    "file_creation_date": "2026-10-04T20:50:38.267Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e9_mlp_mlp.npz"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_realmlp_fa_aux_n16.npy",
+    "bytes": 1199504,
+    "sha256": "960d8e4986a5ba57227454912e2fe7b36dc44868a0a7e61260029da4bd0412a0",
+    "file_creation_date": "2026-10-20T12:32:08.643Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_realmlp_fa_aux_n16.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_realmlp_fa_aux_n16.npy",
+    "bytes": 2798668,
+    "sha256": "a6b25e53562d75443bd93b4316dd4f3f7ad9251721d4936c2240e784c372e828",
+    "file_creation_date": "2026-10-20T12:32:08.78Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_realmlp_fa_aux_n16.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "oof_cat_w1.npy",
+    "bytes": 2798668,
+    "sha256": "abe050f6276a4954f6df3b4178f8837282005ec261b0e1142223892781b0c6a6",
+    "file_creation_date": "2026-10-08T15:15:31.567Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/oof_cat_w1.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_realmlp_pub_aux_k.npy",
+    "bytes": 1199504,
+    "sha256": "69fb803e6d7222167397e18782d52e18a14b6756352ae0dccb3a2589690cc8c1",
+    "file_creation_date": "2026-10-20T12:32:08.891Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_realmlp_pub_aux_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_realmlp_fa_auxev.npy",
+    "bytes": 1199504,
+    "sha256": "669d2d3c7dff5ad7079cfcae3b5b19bfd57962013e138ea1252fbd6d3659bdcb",
+    "file_creation_date": "2026-10-20T12:32:08.501Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_realmlp_fa_auxev.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_realmlp_fa_s7_k.npy",
+    "bytes": 2798668,
+    "sha256": "2802287e04805127acbbe89c62bef89902fa0bd1e884cd21afb139937f9d7324",
+    "file_creation_date": "2026-10-20T12:32:08.721Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_realmlp_fa_s7_k.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_realmlp_v4fa_auxfull.npy",
+    "bytes": 2798668,
+    "sha256": "70f70ed2ebede0318615cc58704971d7a16f9ff0b41fd1fee743b2a4e7244170",
+    "file_creation_date": "2026-10-20T12:32:08.627Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_realmlp_v4fa_auxfull.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_cat_aux.npy",
+    "bytes": 2798668,
+    "sha256": "dfcf25bb5c445065df23df63536b8a2a10d568e9ba5b286d587dfd5a1c63514c",
+    "file_creation_date": "2026-10-20T12:32:08.704Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_cat_aux.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_realmlp_v4fa_auxfull.npy",
+    "bytes": 1199504,
+    "sha256": "f01600943fe22868741b40fc483944e67f5d3eb61ee4856cb7421b14171d7249",
+    "file_creation_date": "2026-10-20T12:32:08.837Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_realmlp_v4fa_auxfull.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_realmlp_vb.npy",
+    "bytes": 1199504,
+    "sha256": "af9a660ff51701289d2abd2b9e6c0bfbe38c8222c9d1553396f583d5fc5b4308",
+    "file_creation_date": "2026-10-20T12:32:09.252Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_realmlp_vb.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "orig_cat_pred.npz",
+    "bytes": 3432756,
+    "sha256": "49e72e6d1ac180aa7cf639de43fe6e3479131a7c67d1ffc6770d98eb4b170a60",
+    "file_creation_date": "2026-10-04T20:50:38.354Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/orig_cat_pred.npz"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_realmlp_vb.npy",
+    "bytes": 2798668,
+    "sha256": "dd5e3b3da60c4972d5d912d12bfd96ac72a36046ad63ed3b81aec8a096269e89",
+    "file_creation_date": "2026-10-20T12:32:08.733Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_realmlp_vb.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_xgb_k10.npy",
+    "bytes": 1199504,
+    "sha256": "9696198dee35091ea38b27bb3c8be3944819d9ee28754accc869b6f8a0808d46",
+    "file_creation_date": "2026-10-20T12:32:09.042Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_xgb_k10.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e11_knn_xgb.npz",
+    "bytes": 4186210,
+    "sha256": "0cf2f36df1a7b400658a616768621b54ba482d3f91c1c99139fc3e1cd4393a20",
+    "file_creation_date": "2026-10-04T20:50:38.335Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e11_knn_xgb.npz"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_cat_allcat_v2_k5.npy",
+    "bytes": 5597208,
+    "sha256": "ba43cdf671c8c81d4ca04409218f5cf90e62ed71ea8f2a34dbef25216eca24a2",
+    "file_creation_date": "2026-10-11T15:23:28.026Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_cat_allcat_v2_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_cat_allcat_v2_k5.npy",
+    "bytes": 2398880,
+    "sha256": "42448dbb1162f158475da1bd6d8ee94360ff73e3c2ba824784a5084dbcfaa9c1",
+    "file_creation_date": "2026-10-11T15:23:28.382Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_cat_allcat_v2_k5.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_xgb_d10_k10.npy",
+    "bytes": 1199504,
+    "sha256": "e5d5be3f99cd62dacb5ee6e3bb9f3f7e5668a5905349f85eb1801d91531ac975",
+    "file_creation_date": "2026-10-20T12:32:08.886Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_xgb_d10_k10.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_tabm_v4aux.npy",
+    "bytes": 2798668,
+    "sha256": "e5169f6e054397ca58081a3a1378bc18f2e08147181266699a20e9bf55571842",
+    "file_creation_date": "2026-10-20T12:32:08.879Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_tabm_v4aux.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e8_tuned_xgb.npz",
+    "bytes": 4194678,
+    "sha256": "fe58d71999a72f19e17d0dab923797b096cac74809824d58ff0665967cda7cb6",
+    "file_creation_date": "2026-10-04T20:50:38.266Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e8_tuned_xgb.npz"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "oof_lgb_w1.npy",
+    "bytes": 2798668,
+    "sha256": "bae993e2eedabe55d73e885b2785757a072b8a30dc186e0c6a8092cd6c1e5d84",
+    "file_creation_date": "2026-10-08T15:15:31.581Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/oof_lgb_w1.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_xgb_d10_k10.npy",
+    "bytes": 2798668,
+    "sha256": "329be48a4daad839a01d126cc570a3f681d4627b20bfd95671c46d2385938f43",
+    "file_creation_date": "2026-10-20T12:32:08.815Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_xgb_d10_k10.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_xgb_k10.npy",
+    "bytes": 2798668,
+    "sha256": "ced429e14c144593c69768819e10e5d7a25101bb98813af26f391fdf7c0dc8cc",
+    "file_creation_date": "2026-10-20T12:32:08.535Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_xgb_k10.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "oof_xgb_w1.npy",
+    "bytes": 2798668,
+    "sha256": "da18c820d906cb729583642ee4f63222dbae7f4aa5c22a4c46444a9f70e15a63",
+    "file_creation_date": "2026-10-08T15:15:31.526Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/oof_xgb_w1.npy"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "oof_rmlp_f_nc.npy",
+    "bytes": 2798668,
+    "sha256": "8118d4860bb2fa66e5dc2a4aee72806badd36d8c55fe0d9d368aa9e653dce928",
+    "file_creation_date": "2026-10-08T15:15:31.573Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/oof_rmlp_f_nc.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_cat_allcat_v1_k5.npy",
+    "bytes": 2398880,
+    "sha256": "f7165f9fb892c1780c79409d6afaee337399b9f946a8b5fe71e9d7a80d5f2b52",
+    "file_creation_date": "2026-10-11T15:23:28.348Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_cat_allcat_v1_k5.npy"
+  },
+  {
+    "source": "dmitriy",
+    "filename": "oof_cb_cat.npy",
+    "bytes": 5597208,
+    "sha256": "a359a78fd0b4c11f0039c678d8b4173f5e7190bef0679e2527ea876c753e4b8d",
+    "file_creation_date": "2026-10-10T13:53:15.855Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test/oof_cb_cat.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_lgb_enc4_k10.npy",
+    "bytes": 5597208,
+    "sha256": "a39e700ffbb527401b607cdfbdef2dcc0f16c64a5cac1de2e8000bc61b191f1c",
+    "file_creation_date": "2026-10-11T15:23:28.175Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_lgb_enc4_k10.npy"
+  },
+  {
+    "source": "dmitriy",
+    "filename": "test_cb_cat.npy",
+    "bytes": 2398880,
+    "sha256": "c24740831c245fff1ad2144984b8ed249238b95c23113e99eb2449b855b0b5a9",
+    "file_creation_date": "2026-10-10T13:53:15.761Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test/test_cb_cat.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_realmlp_fa_s7_k.npy",
+    "bytes": 1199504,
+    "sha256": "c7adbbb08ae97f41c870c8d74f6a15b8dae65b6024c183d54b7014350dbee11f",
+    "file_creation_date": "2026-10-20T12:32:08.455Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_realmlp_fa_s7_k.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_lgb_enc4_k5.npy",
+    "bytes": 2398880,
+    "sha256": "acae4afe07b11da1ef89966ea5a49fc952db327b0d56e15272fc74bbf562a57e",
+    "file_creation_date": "2026-10-11T15:23:28.382Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_lgb_enc4_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_cat_enc3_k5.npy",
+    "bytes": 2398880,
+    "sha256": "5ed8944697b1f593123af80137ee065af6228747b109f2fa97503ab054542973",
+    "file_creation_date": "2026-10-11T15:23:28.323Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_cat_enc3_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_cat_enc3_k5.npy",
+    "bytes": 5597208,
+    "sha256": "8ac42da734ecfed04229bc9d289e1bab22113ff78ce769b4a211ce816d4c66b6",
+    "file_creation_date": "2026-10-11T15:23:28.045Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_cat_enc3_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_cat_enc4_k10.npy",
+    "bytes": 2398880,
+    "sha256": "08c0d056c11636c0f0f18e116c8597f58a872159b96292597f80aedc4232c8be",
+    "file_creation_date": "2026-10-11T15:23:28.175Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_cat_enc4_k10.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_cat_allcat_v1_k5.npy",
+    "bytes": 5597208,
+    "sha256": "7f6f8b43e43ed086c65316d60eab3db0ff1396a7b4148cd3865a3437ffa37250",
+    "file_creation_date": "2026-10-11T15:23:28.032Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_cat_allcat_v1_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_cat_enc4_k5.npy",
+    "bytes": 2398880,
+    "sha256": "dcf69c04c6c2801ce825ded9cea1c893695e091e2bbdd1b395889535ebd8b07c",
+    "file_creation_date": "2026-10-11T15:23:28.163Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_cat_enc4_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_cat_enc4_k10.npy",
+    "bytes": 5597208,
+    "sha256": "ba0e019316d04b4da60e569ab370e39d7fed1331379bca884bd81636cef5fe72",
+    "file_creation_date": "2026-10-11T15:23:28.33Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_cat_enc4_k10.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_lgb_enc3_k5.npy",
+    "bytes": 2398880,
+    "sha256": "3e046d47f330dda9c713e0a00ecb7d40fb7e651f42e83a35ff042e2d4e54e84c",
+    "file_creation_date": "2026-10-11T15:23:28.293Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_lgb_enc3_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_realmlp_raw_s7_k5.npy",
+    "bytes": 2398880,
+    "sha256": "749da95cc87f1c668d96a4c43ba666db831a286af40e5840943b552c2734014f",
+    "file_creation_date": "2026-10-11T15:23:28.309Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_realmlp_raw_s7_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_cat_enc4_k5.npy",
+    "bytes": 5597208,
+    "sha256": "6d2011ec5c283f3f5dc6e18aee1789cbd6207aed6c9e1ee7c1fa4bc0494dda90",
+    "file_creation_date": "2026-10-11T15:23:28.156Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_cat_enc4_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_xgb_enc3_k5.npy",
+    "bytes": 2398880,
+    "sha256": "9c67f34ee19d893a7b66a2b03a1b6ecf99415d55198cc6dad065efeb2505f61f",
+    "file_creation_date": "2026-10-11T15:23:28.316Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_xgb_enc3_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_lgb_enc4_k10.npy",
+    "bytes": 2398880,
+    "sha256": "d7222798c8882c0a69eb207d53817afe7d535f9bfc6eab65416385b2d7f51a7d",
+    "file_creation_date": "2026-10-11T15:23:28.224Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_lgb_enc4_k10.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_lgb_enc3_k5.npy",
+    "bytes": 5597208,
+    "sha256": "e99c9e9ed6ffc204742c6bdce464a2d63ed070f0233a619542fe0e47e907f17e",
+    "file_creation_date": "2026-10-11T15:23:28.193Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_lgb_enc3_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_cat_raw_k5.npy",
+    "bytes": 5597208,
+    "sha256": "bc35a4ad7a19e4be26da99e8d01948e70d2fce36787a44b110f82bbb14a0ef0f",
+    "file_creation_date": "2026-10-11T15:23:28.343Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_cat_raw_k5.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e6_origwide_xgb.npz",
+    "bytes": 4204510,
+    "sha256": "a62d3de14365a8622d02c6a50489290f372c1280a72a23c1e56a89144770a3da",
+    "file_creation_date": "2026-10-04T20:50:38.2Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e6_origwide_xgb.npz"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_xgb_raw_k5.npy",
+    "bytes": 5597208,
+    "sha256": "5510e51f73f62835daafbb89a3c556873d3847a359f10f9e04342043d75b5594",
+    "file_creation_date": "2026-10-11T15:23:28.257Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_xgb_raw_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_lgb_enc4_k5.npy",
+    "bytes": 5597208,
+    "sha256": "373a8ce77106236ad14327eff8c394d88ddada1f6c0e16cfda75f78a816f6723",
+    "file_creation_date": "2026-10-11T15:23:28.293Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_lgb_enc4_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_realmlp_enc_k5.npy",
+    "bytes": 2398880,
+    "sha256": "b4ca0ed353674bce53eebc4e9085a2ce01e35225e0b1fe9f1dcef1a0d91d1763",
+    "file_creation_date": "2026-10-11T15:23:28.416Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_realmlp_enc_k5.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_xgb_base.npz",
+    "bytes": 4214183,
+    "sha256": "f5db22ce8f09953a6d001afc6c005867776adef600b9b9ca6d1a9fc5408c3671",
+    "file_creation_date": "2026-10-04T20:50:37.909Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_xgb_base.npz"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_realmlp_raw_s42_k5.npy",
+    "bytes": 2398880,
+    "sha256": "c8803b0102efff053ba49d7e015e41d3af9e0c63d80e910821cd85d2a56dcf04",
+    "file_creation_date": "2026-10-11T15:23:28.309Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_realmlp_raw_s42_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_realmlp_enc_k5.npy",
+    "bytes": 5597208,
+    "sha256": "d407cb7c6e8ec023ff9731306b27d4fe4614bffcfeb597754d060e9059deeb96",
+    "file_creation_date": "2026-10-11T15:23:28.274Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_realmlp_enc_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_lgb_raw_k5.npy",
+    "bytes": 5597208,
+    "sha256": "f0367d11a6c8d3f14f2086485d0f80bb0c516a33aafb8c2049a0c47fac27d757",
+    "file_creation_date": "2026-10-11T15:23:28.373Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_lgb_raw_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_realmlp_raw_s42_k5.npy",
+    "bytes": 5597208,
+    "sha256": "a864cc2030f6762258f5e59b44cf8de84a056922edfbbacc63e062756ca9c8b2",
+    "file_creation_date": "2026-10-11T15:23:28.175Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_realmlp_raw_s42_k5.npy"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "oof_realmlp_pub_aux_k.npy",
+    "bytes": 2798668,
+    "sha256": "0c2f103f9cfcde3688b5183e91662935d05144771ee3460d98e047d3de3ae699",
+    "file_creation_date": "2026-10-20T12:32:08.949Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/oof_realmlp_pub_aux_k.npy"
+  },
+  {
+    "source": "kagan_enc",
+    "filename": "test_members.csv",
+    "bytes": 31541420,
+    "sha256": "b00c5b95424a28ba21dd4cf5d951b26af7c6bb7db5fd656c217b89ed589a38e1",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/355839251/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..rJa4_y3Neu7J_-Q5EK7y-g.vW51qxwhTLvyDlu6wY0SNknBNUV10aeZYi909kWh209RxpmR7ZNoy30PIskO7grkzB9WRhGIR6r9r6lST3gC-SQtd65KJFen3BJ8IfsFCf5HTJInrfbtSA7BhIqBhVP6yYiRzE-ak06o77eNOUHu5_va-O7aen3X5XvfA_z2-yD_V5VlDZd9-TiRvprIp285oCHphWCcwgG2Fo_BnP_Rhp-LlcN-Yv7ccosOmwSWw0Mro2D--qS6VlCXRz4fejVxNqwHpEGImgkEdQ4E7Lwxl-r9ktZILW4CKN8P-P5PCastforiqEqu2moqj6lPq05tIvVkXBfDAYZRky1kgjSwruV81YkpGr5nbKGad3_ygUp26BS7b9u_Zxjj02k2vjUbQpLmtr5dKBGFVz0OT5FYt-C7Lq894-ZsiTDsxbB3IiS5gJ-80n-nz3Wk6npVkPkSN6-vMZvKaju3fZO5_GVbNmsjaosnTlfkGKM-biJElTgZZsw_6iNBdKRSk4rHj8sQTaQZva7o12N5zprN66cBC--To7J1iNAQ8V3mWtRrwjAPEL9vIi5Bvx4zXKwUhdQqF1802XIJ_6PXO8GgJXqlMVaSfCOiWbgfi5jNBjlDoVV88QGyC1YHXMhPVblJSKuC8vN8oArLGHoD0C1g9olKjQ.3nTpnBKZ0u8NsvDW0wiJxw/test_members.csv"
+  },
+  {
+    "source": "aman_v5",
+    "filename": "oof_artifacts.npz",
+    "bytes": 56784607,
+    "sha256": "667b47e62aabdd873321a55753f4b4bd6872102caea434459875a42fe7250706",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/355811241/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..M4rxlqZ3L464dNRQ9CpAXQ.OEzvayhaC4GlZ0WRX-924WhNHOBx7CTGv_FY8LTPR3nG8S5EkjIpdLpLGEhBxG5PiMdQxrdmwvvFLSBqp30nh0AFM6510Mge2P0-1DXfPyY_KsSYyQQ50myyM9Rz9jKSznFlS-kyoQRRpPsnwxs6-8zZABmxYpX5FfrQe4TVYQ6pNW6jXrD0yjxKu75hsz7S17he_R8Nz2lUgBf0MVJK0nfLCryX5lMk6kRx9it_TQylFDtQRo98nhr9Jr1c57xRUvjiwSd0_kvlSHVJprzIEsJMz-r6DUrBxxSrAVfOaAXlQZJpkvGdK-pAha7LP8dHMKXPbPvvZWA-PioWk1R-9C_9oRC5pDD45lQBD-wrDUwzdCAOZbqkSpiO15Y52zfxsnIMAL2CcF8VSo_1fmRTeCdwDkz8yRCRpwfAOMhYeC-d64fOzUqEDPGWWbX_vbRw4p8VdRG-UiS3XypvZiHxDfPSuh2Ocsgw-o7C1tcD2mNCv0q3Y37RgpRMyLvjmzWmpLZ_xovSFtGd77bhU0EicYEv8sxEs7UMK0R5XLj07JmcWL30uPoRRNERzoeaCLOahdQGCBqdvBof4xNZ-8n-7ibCohqOTz8vDlWA5YZ1vMC7Xu7TgllwR17JgRVEal57.xJdGYNF9Xoi98R1DRZ_YNw/oof_artifacts.npz"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "train_ids_folds.csv",
+    "bytes": 6885249,
+    "sha256": "0e7b3e02669e471b8c3c1034c477b504182cab727159b54f8f2de5db81b4ddd3",
+    "file_creation_date": "2026-10-08T15:15:32.09Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/train_ids_folds.csv"
+  },
+  {
+    "source": "koumeimaki",
+    "filename": "test_ids.csv",
+    "bytes": 2398756,
+    "sha256": "e53cdb0fc2c630d3a711403f079f171b69fb745562c192fdf911b481b9ac74b9",
+    "file_creation_date": "2026-10-08T15:15:31.83Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/koumeimaki/s6e10-route-tfm-nn-oof/test_ids.csv"
+  },
+  {
+    "source": "gp_extra",
+    "filename": "test_tabm_v4aux.npy",
+    "bytes": 1199504,
+    "sha256": "bae929f5b4450cffbb80fc79dc9bc2e17d077f462eca099d0ed153d88142ef0b",
+    "file_creation_date": "2026-10-20T12:32:08.968Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-goodpjw2008-extra-members-oof/test_tabm_v4aux.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_xgb_enc4_k10.npy",
+    "bytes": 2398880,
+    "sha256": "43632edc8696cbba6978a4e61a76b135be514247e8e43962804fae9935f9cef7",
+    "file_creation_date": "2026-10-11T15:23:28.288Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_xgb_enc4_k10.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_xgb_enc3_k5.npy",
+    "bytes": 5597208,
+    "sha256": "80c80c9f4882d35621e31416802600dea315d508f9ee67818b1fb0cefc1b39e4",
+    "file_creation_date": "2026-10-11T15:23:28.553Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_xgb_enc3_k5.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e11_knn_cat.npz",
+    "bytes": 7510097,
+    "sha256": "83094466ed1ee680d67d1cb89e59bbd80cb9b9d288209b9870e58cf9cc75d34b",
+    "file_creation_date": "2026-10-04T20:50:38.382Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e11_knn_cat.npz"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_xgb_enc4_k5.npy",
+    "bytes": 2398880,
+    "sha256": "534ce7880e982f7bb34a840f99767089bb14b236bc59129eebc41321c4e3b146",
+    "file_creation_date": "2026-10-11T15:23:28.481Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_xgb_enc4_k5.npy"
+  },
+  {
+    "source": "hermengardo",
+    "filename": "oof_test.npy",
+    "bytes": 2398880,
+    "sha256": "7e51bda08f0c7f47e353186755d479ce305466863de7d48f650cd0e45b59aff5",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/355748470/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..ffEyD2YDdhst_fWaA_a7XQ.V62tZJbhjBsl6jRL2Zl4JF3UtnyUHf8P2a0fbPR5GPfVmovnhp-HTxu3lasSOQhWSzvFdNWQ3uHKLfBewoo55a9o9oYaCCNfFAsOvRI9NqDnf-JCE_0PW75DZgrWKnNOxBZHS7g3EWgBLHIr_tFN8ZdDNJEqjbKO8AVjP5u0NGYaBv-8jsjLqYga3sIfx4t6dE-U9f44r3H_4bcFFQp0Y0UXE4AFGu69OGv7Bir3iJC4MyecqvjayyVYb1-sn7azZ1V1miXcGvojS1llekBpvBY-CPbd4Q5tjArEXwTlS8O5cX9Ui1sTa-EKaDgaeWTqXh9Vul2MyOcOav_QoFPLt4sLNea2KOMxvtxKrVBDX1kJ1A-jnsNLMiVq5IrFPo5YEXq9RzcZ-GAtLdj2eUJkwB0ve5VoeDzi4LGxrOG1wybfSQ7UZt43TPNR-ZHIQQEfkVmqp6CRnZDUawydaL-yLy0WM6uR3Xr9J-UFyw1GVUfnzxyUPnzRUOMixpxcFllPFJ6ZEXrh0oABAxRBQGjnqwAAB6wMm_ONl8G9he6HnVW0wqkGFvB_Ww90_LpbJGWo-w73gmPbW1hWBL6v7xyL9nf348HEq2Ag2jvTKK8fJ0keA3fyCSzPultJn6OUpKbu.r8GA3H4_PukzW1Sqs6qDJg/oof_test.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e2_origfeat_lgb.npz",
+    "bytes": 7517093,
+    "sha256": "9710b5a480b0729b9052b8b49829ef168ae7f319ca6e4b21e39cf7cbffbef2dd",
+    "file_creation_date": "2026-10-04T20:50:38.14Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e2_origfeat_lgb.npz"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e2_origfeat_cat.npz",
+    "bytes": 7518120,
+    "sha256": "bc2308241f37d1f415b354e2701006643c74ea0f05145358f4ebe40c4da4b04c",
+    "file_creation_date": "2026-10-04T20:50:38.092Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e2_origfeat_cat.npz"
+  },
+  {
+    "source": "kratosyan",
+    "filename": "rmlp_route_ogaux.npz",
+    "bytes": 3597264,
+    "sha256": "cf95a1058f7a6c2effe4463058b7a41d54b212ef1aa376b60bd66b6d667a8e64",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/355780459/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..pWLQgFGpeak0-bqZ1f21jA.ABVGS9gPuFCZKEhFCOh6MscRDQqQ2rc_XZ7N5kebXxHrDZFUCr09w1JGH2_woCZiYUwtXq5CERlP9ACGhopoun2WJ71IbbFYjXNTzQhtmOSeC1Az1TaqgkiLIkPrbsBXgF7aDtVBauun6FekcoUqtMuw6PH7m1xteXDMDFb26YbCA1J0Hla45lGEVh9qrXNUTMAa3uB9WUwgt9UVFoQGZv3ACK-z-LnmdE09IwYaeiurMzGlXb1L-LiKrGUaks0sa7QmcXh6NVVVtgyjmKLboSQcoyNfvcq-5BEn68hBpS4-F7XQYyLYQnT7-qpYrx85KgMFt23WfYH-5QCOgsc7bB8wLee2-fVlo3w9hpXSGaCBsv3W6yQSJcaVa-HeP8Y7WTG4xhh8h11KNitn6DT_7sC--ChzmgitJZHYAFmvQU9jE-E4OEPlwsOdFkTVrMhKfHUKs6m115-2FqCnINU9gD1QIqIFnbEHlVrdXZydVc6d-fI6DXU2D-GJdYoVa4-NRVWOsERItM3-8V1TO5V0v74MxlFtxg9gps9dY6bHLhg-l2m99mhdzHSAwQlo3N-87uNcV4GnZGbue9cVd1VP7bMcGhSraiH39ggbPwlsU5mk4I3kb3W6oojUGist4hzZ2NnzXy1Cu4XuWmf-LcVMOQ.cTMJ78_3KrFNsVHvVRZLWg/members/rmlp_route_ogaux.npz"
+  },
+  {
+    "source": "hermengardo",
+    "filename": "oof_train.npy",
+    "bytes": 5597208,
+    "sha256": "98921963e633b4d3a131803485300f21a336a4d732633cf3ed2773664880cedb",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/355748470/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..0LdR52rqJoyGEMww4f1O0Q.RVU2DLH7owz3UaGbJWSguTI8DIJmY_M1k0dv63CRyw0rwYPmrttHKFuKR6-svJ3FUz3XxSWo6mQA2BVmDEnJhszFR8dGaO5JxkpPebJBS7dCJTaNcImI8tHc1I5q7sd8lValtOoAq8q-jlLPYXgoFtx8BM9HaxHJGGJuojTMHZWs3XJmXaQxuZLQKlS5RHbh72EdSse--wf7z35ExBsu0eXnXNmvAephkBQEDcIyJuW0-rQXDAzdUJF0kJPreKr9p7XrgVw748Mi2KxW4vAskB5OPxeyB6rwGsEOUsK3Zy-b_ExVx4zu_2JO2i-fVK35bm8a1yW2QXxkY-fau_k7pvRcQsY2vWNrSPcMtNyGTb7SxdjY8hb52MgK7HdHRhA1LbRTkpdJRjnNN_47eMV54rjFHRO9pKs8FWwA4VMyNTY-0hNw7O1DnMVxwiM0spIvoHCDHnL96TuJvOsq99hUDIUGOe7_AUJ3vI36CrlD2UKWzZANrf497jAEAbSPzusnx-EUcyLPzRmL94icYqgrRTiuFa7nA24vQJo41P9rPgJQvgX8FGwyjYkU3D9EUGTPoHbQj5Mka6VwFKfHFRUexGOW1F34zjy3WL3DmKrDDpRQLmsX3ShHyDnVxXXtV_lO.GO24z1rTFiZi5bSdpGzEyA/oof_train.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_xgb_enc4_k10.npy",
+    "bytes": 5597208,
+    "sha256": "b8b54dac3d91718bbe766535e812b4cba0ccfe1ca9f9bb11f31f8cf274508aa7",
+    "file_creation_date": "2026-10-11T15:23:28.398Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_xgb_enc4_k10.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_xgb_raw_k5.npy",
+    "bytes": 2398880,
+    "sha256": "76e2c4443ead1412cd0067ab85a13d7661e3bb79823a16fd71c5c723df56cace",
+    "file_creation_date": "2026-10-11T15:23:28.416Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_xgb_raw_k5.npy"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_xgb_enc4_k5.npy",
+    "bytes": 5597208,
+    "sha256": "3d5cef9d16f7d28fb9a165006b4047a17589c0579310b74746bf5b351f7969c0",
+    "file_creation_date": "2026-10-11T15:23:28.143Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_xgb_enc4_k5.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_lgb_raw.npz",
+    "bytes": 7511970,
+    "sha256": "aa41d7a197abfbd1f9ce572db791c57484f133b9a3586b304abadf4d1e1f4859",
+    "file_creation_date": "2026-10-04T20:50:38.013Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_lgb_raw.npz"
+  },
+  {
+    "source": "yekenot",
+    "filename": "oof_preds.csv",
+    "bytes": 18526744,
+    "sha256": "61288e58037279b966e07b8255150d190f283871a9800a646e43676c84a9cbfb",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/357631432/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..AcuQ1-e0SU-wp-arBJ0uaQ.JmuzrheYbHCE5bKWJt6htdAZYjXdnrUQDcxU-A01f-124Enk5o5hBsEF9JEoz_ns_xTauhhH6qUhOFf6U0lElo2p_BPyWWFpOck0dTTJPVsI-NVuge8UNbp4Xnf_dHAZffiJHZUZ_pn63LEeQGdjmcMflpj29PpVWyhgBXGLrCGzmfioJQT-N2wyKCGf_22QUV4Ue9fJWo3HWOMAQfMLBJMfNp-tLEIx2yqufRWrf2dske-plPlS-EZ4IEDBPsEQEHgmEvWoI68FTW4mokFq0zkyzRrFDZ3R715nvImDH00flvH7yd051M_QfnpoF-XD6NCX5-urarMbOcWL9gI1tA4YCBphKucMepN92TVxWy95uNFRiSHTCK5j2MabFJS44K8VkjSn8COv4-HAYtoI8tlP9UDybEDt9DJC7UG8B1Vg8K5C6FBj3ceHJhmHTYBtft8znqy4e12fY5FHaDhYLp_618PFZNHUh20U3efYUBfpkONSuFKHurlQvoOnL94UB6U2-MwPTMoq9EnIRWoc_i198SS25KOrBe6PJc6VPT8ShnKwuvxVeyP333_wSMLl3pMBakvIV5b1FtpUqxp8CedVKYly07-djV0gqI_qezSJLSJX4F48KigDegW2ZfVJ.LRdL1qaZTDG_GN9PcLBNjw/oof_preds.csv"
+  },
+  {
+    "source": "yekenot",
+    "filename": "submission.csv",
+    "bytes": 7987471,
+    "sha256": "beefd4d78fd285dff41c2721456b140e6389f1a7013182835ecc7a52546fd009",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/357631432/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..U2SwEn2ni6QjUhV7R4b1fg.jlQlPUPwgWdbPk4IfehGPx52KG7fRbV35OvEIi-kQfwpvqwn7K2q3bQgni98GiSIuA_nmeqNNAhVg8Vc-TOZ752SVXvRUpR1pZUdQLDKoMKE8lsglL-Ek98Yrv-PKKre0zF1FhHGIsoKIELcmPUGiyn4h-u94CZymcYkrEOCQZh7AcSz6b8ssYzyOlOpPPfr08Vw_6Nabo1J825Xv_iAJew1OBS1TJ0oPrcNkv54GfcVARjpXcfNBbi0LMKfyNDaTSoeUdfP-_bbuwY4vzpn27F4cUIujmmCXBtLX0yiEnnC2tKqxayMmof0oFsNgMYOgTL408RUsMVgarSev-K389fjUeBly89QyQkfR-p8YLjAMbDEJR2Om6EPdEvqBlufKT6taiOCwepVYKIYlhcD8LzCmKx2DTKkP3t-mOd5wr2y96xNxTxtKHtR75jpu5ZF6RXs1oPjkp0fH58UxvuOqkeDBKtFJ4Z5qpoQhcQKDzYjmF40YFZFVEuoawFxapy2iPNNuCwiIhT4dkJpMnne9UXvA-bZ6cbFJRHInGEfLzSqiu20kcuvVGqmJWD0y3nqFR6-vLxxfcm4Q3FTRD5nTiwttCRM5wluGjDkGX0I07lN-7r9Cs_bNT4Zfr71rR_6.7VSfVVKoB-DpKGHaWXFbqA/submission.csv"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_cat_raw_k5.npy",
+    "bytes": 2398880,
+    "sha256": "9caa5ce507e2df06c442d179b82a7b28789eb223ed1db171560d25e18dc81b68",
+    "file_creation_date": "2026-10-11T15:23:28.213Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_cat_raw_k5.npy"
+  },
+  {
+    "source": "kagan_enc",
+    "filename": "oof_members.csv",
+    "bytes": 73487384,
+    "sha256": "92af1891c70b03d7461cfc96e814944fe033a720f9d629ab3c94a5686e8818dc",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/355839251/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..C_yhfihWJQPl36-v8-QUDQ.UGHq7tvOIZ7lKXhearQqxtRzP9pms5e8t316WzTYOZkoaifMk2kqDybHaIJdGnVrCPNSO3fQ09PFDN1B0FC4f6xB75JZvN8m4ialMhDZt-mvsWnj_uXdPi0x9RF3Eg_8iCsvWuA5tzpWBl247CkqdXWW_o1YDmihq-p1vqm05ofUDxoGvZugzmxsMCX6piG4XOpUE8o-S87NqJiOJbQ6SQIqxHFFUxR2QiaG4nvagaMMNKoYAAfJvDBvde2ni9bj4WCjiuzT2XiDPgq4vMbbBXg8MM6_9b4wP8pM8GppQnS0SPVHOxuD-Tv9bYT987oGWh-egOFTkF4Cd4U17AXBwMIsh9P9PJsYthB0jYlUC-IZFO4yXs4oOHIJlX8hhUth7Y42J-m7kcaueCbR1Jj-5uIRD2zO8py8vMbGF-SCwBz6atK3ysJp2ZK15l1q2czj1KE6HK4FVX_HA-QuVdMXPsKs0outv-axtV-xkhWg1g5m7MEB8Ebx_uQF1vL_j_aqJOBbUJw0fJBvu6qxzcCvPEyeoZ5XEKoXTRXB_UgjVdIhSo2lcPiCPbvkfDOYn7BK_5PdMSLNtXDe_ez47UjxBoaSEQe471lZKPXP5rzoUPTuuDXy4H4mmrOXKuev7i0gTKhVzXrgvQYbb8CCDFNe6A.Hn6Z00stCWnQV0jkGpAJGw/oof_members.csv"
+  },
+  {
+    "source": "kratosyan",
+    "filename": "xgb_route_ogaux.npz",
+    "bytes": 3597528,
+    "sha256": "c6f0506b30a7478a669a94b3689e823ed45b17d7c0d324f343991051b969e651",
+    "file_creation_date": null,
+    "download_url": "https://www.kaggleusercontent.com/kf/355780459/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..2jDSLVkQj_5k5LYWxdKo1g.5-5ZFgyhLrkUEmnwX5Z20HHHg3ZD2zvKfHN8U5sIIL0Gc4ZNomDY__u4ls3B8RAvgyxIjghIPwc_0-DQ5SZA-ronpBljJDBU6k11pgqgeL4xY1ESdvuVtg1VVNPeBlkScYRvRV2XWFkRWMdbAMp_kN-Xh7IsKMxK7TyjLfzz50Sc0d8MKqrfph2B8T7DDZesaxynDjSN3kJRZ9lMtb_G2mqk5TrFqjHRScqeFC-VbWgQ70HhiwB14hkNH3AFpZQSRQU0VOA_HDNc8Fv8poiNqU5FSwGfNqC9U3Xega7NbxuZ0rjjvL1fAJnnUMMKVSSYWByH61QFGwgFabx5R-Qyv4vF3d4vtVrFZC148vAcSxfj1WOOY2NYNdN2qRvwUE3Av-1-yDpvsHPnXXEz-Muj7LUrF3gKAdSqopID3rYs2iNRCn8kjfbFqEYlSCoYcGivgS6dJLzgqx7SMuVMlQzwC4q6t0xJ0L8drLSy4iU8jrH_mtF2-N4kL7xPdCz6WE2zS9lYpTpR48XmTaf6H60OT_hSJX5sXb-S23_QWJzOYkJedvV7cFWkHpI5GE375NffgEXBfDZs92mQE-V-0nBnYHj0lDstho9gGoJDI4R2YfdDi9lWdUpL2lLjHkchYvpesLbTJRX3Jfx1E5YhUg8-eA.LqFEN5Y6dznOkjMWKeFEpg/members/xgb_route_ogaux.npz"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "test_lgb_raw_k5.npy",
+    "bytes": 2398880,
+    "sha256": "a4b44d56e8da66e0c356b7a7b0e818135de51e009a4bb059d3d247aaa8e07a84",
+    "file_creation_date": "2026-10-11T15:23:28.243Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/test_lgb_raw_k5.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_lgb_tuned.npz",
+    "bytes": 7514451,
+    "sha256": "951450c0a70e64e8817cc8fc37d3f294bb1e8ff0cd69ff2ddb979ac25f669648",
+    "file_creation_date": "2026-10-04T20:50:37.979Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_lgb_tuned.npz"
+  },
+  {
+    "source": "kagan_abl",
+    "filename": "oof_realmlp_raw_s7_k5.npy",
+    "bytes": 5597208,
+    "sha256": "4e268d3af11d2624cbb47691f962aa7f9c5976e9347e7eea40738e21517e7c19",
+    "file_creation_date": "2026-10-11T15:23:28.513Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/kagankoral/s6e10-ablation-members-oof/oof_realmlp_raw_s7_k5.npy"
+  },
+  {
+    "source": "sadam",
+    "filename": "preds_e5_origpred_lgb.npz",
+    "bytes": 7512584,
+    "sha256": "f5fde92b63004bb3242d54497586df568a768b3c7133879260a0acf6a5e7f806",
+    "file_creation_date": "2026-10-04T20:50:38.163Z",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/sadamtorres/ps-s6e10-airline-satisfaction-artifacts/preds_e5_origpred_lgb.npz"
+  }
+]

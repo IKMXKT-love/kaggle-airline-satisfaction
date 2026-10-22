@@ -1,0 +1,8 @@
+{
+  "normal_restore": true,
+  "file_hashes_match": true,
+  "empty_directories_preserved": true,
+  "external_links_not_followed": true,
+  "nonempty_destination_rejected": true,
+  "bad_volume_hash_rejected_before_extraction": true
+}

@@ -1,0 +1,54 @@
+{
+  "models": {
+    "clean": {
+      "independent_view_errors": [
+        0.0,
+        7.152557373046875e-07,
+        7.152557373046875e-07,
+        7.152557373046875e-07
+      ],
+      "rebuilt": {
+        "stop": {
+          "rows": 139927,
+          "max_logit_error": 0.0
+        },
+        "score": {
+          "rows": 139927,
+          "max_logit_error": 0.0
+        }
+      }
+    },
+    "rtd": {
+      "independent_view_errors": [
+        0.0,
+        7.152557373046875e-07,
+        7.152557373046875e-07,
+        7.152557373046875e-07
+      ],
+      "rebuilt": {
+        "stop": {
+          "rows": 139927,
+          "max_logit_error": 0.0
+        },
+        "score": {
+          "rows": 139927,
+          "max_logit_error": 0.0
+        }
+      }
+    }
+  },
+  "all_meta_rows_rebuilt_max_error": {
+    "matched_baseline": 3.552713678800501e-15,
+    "clean": 3.552713678800501e-15,
+    "rtd": 3.552713678800501e-15,
+    "incumbent": 3.552713678800501e-15
+  },
+  "preserved": {
+    "submission_public_pool_20261020.csv": true,
+    "CURRENT_BEST_RESULT.md": true,
+    "CURRENT_BEST_SUBMISSION.json": true,
+    "CURRENT_RECOMMENDED_CANDIDATE.json": true
+  },
+  "elapsed_seconds": 10101.287144184113,
+  "all_pass": true
+}

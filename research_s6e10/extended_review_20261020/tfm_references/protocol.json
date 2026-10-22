@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-20",
+  "training": false,
+  "model_inference": false,
+  "source": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+  "models": [
+    "causilo",
+    "exaone",
+    "kumolarge",
+    "kumosmall",
+    "limix2",
+    "mitra2",
+    "tabfm",
+    "tabicl2",
+    "tabpfn35"
+  ],
+  "contrast": "Each model independently at fixed 20 percent logit weight on current baseline; additionally equal-logit average of all nine at fixed 20 percent; no weight search",
+  "multiplicity": "Nine individual exploratory contrasts plus one collective contrast, not an independent confirmation; show every result",
+  "row_alignment": "Author-declared train.csv original row order; no IDs inside .npy, so independent ID verification unavailable."
+}

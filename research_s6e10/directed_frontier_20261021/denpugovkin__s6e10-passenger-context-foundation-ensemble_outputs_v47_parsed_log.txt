@@ -1,0 +1,34 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+Training enabled: True | direct CUDA trees, paired CPU LR; no new base-model downloads
+Verified source snapshot: 8506340df8544356
+Exact201 shapes: (699635, 201) (299844, 201)
+Parent037 CSV, full native036 correction, source catalogue and frozen v1 verified.
+{'fold': 0, 'rounds': 157, 'conditional_linear_auc': np.float64(0.9620267469385467), 'conditional_tree_auc': np.float64(0.9618636035291959)}
+{'fold': 1, 'rounds': 297, 'conditional_linear_auc': np.float64(0.9627884348334307), 'conditional_tree_auc': np.float64(0.9625804019112209)}
+{'fold': 2, 'rounds': 220, 'conditional_linear_auc': np.float64(0.9618476578666438), 'conditional_tree_auc': np.float64(0.9616547848420935)}
+{'fold': 3, 'rounds': 207, 'conditional_linear_auc': np.float64(0.962191250208421), 'conditional_tree_auc': np.float64(0.9620693096789117)}
+{'fold': 4, 'rounds': 365, 'conditional_linear_auc': np.float64(0.9621249285273142), 'conditional_tree_auc': np.float64(0.9619051261517906)}
+Selected tree weight: 0.0
+Final independent CV: None | public score: None
+Submit: /kaggle/working/submission.csv | SHA: 5724eb0a2e303129ab351a535d3d2e7e8bf02d675068727ec2b9345201ffd345
+Download: /kaggle/working/nonlinear_stack_v34_1_results.zip
+/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 568343 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Support files will be in __results___files/
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Writing 570071 bytes to __results__.html

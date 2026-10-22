@@ -1,0 +1,66 @@
+{
+  "ref": "mayankraaz/s6e10-summit-composer-0-96210",
+  "pull": {
+    "tag": "mayankraaz__s6e10-summit-composer-0-96210_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/mayankraaz/s6e10-summit-composer-0-96210",
+    "bytes": 40576,
+    "sha256": "2e95ab9ea3354fac6c23380451499ffb1ce48de614893c289230972171df547f",
+    "elapsed": 2.2746343000000024
+  },
+  "version": 1,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": false,
+    "enableTpuNullable": false,
+    "enableInternetNullable": false,
+    "currentVersionNumberNullable": 1,
+    "dockerImageNullable": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "machineShapeNullable": "None",
+    "id": 140177779,
+    "ref": "mayankraaz/s6e10-summit-composer-0-96210",
+    "title": "🏔️ S6E10 | Summit Composer | 0.96210 🚀",
+    "author": "MAYANK RAJ",
+    "slug": "s6e10-summit-composer-0-96210",
+    "lastRunTime": "2026-10-19T14:46:02.2303064Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": false,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": false,
+    "hasEnableInternet": true,
+    "categoryIds": [],
+    "datasetDataSources": [
+      "nina2025/ps-s6e10-7",
+      "mayankraaz/s6e10-lb-surface-atlas"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 9,
+    "currentVersionNumber": 1,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "hasDockerImage": true,
+    "machineShape": "None",
+    "hasMachineShape": true
+  },
+  "source_chars": 14786,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "mayankraaz__s6e10-summit-composer-0-96210_outputs_v1",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 6898,
+    "sha256": "d940222c50f5471d7a4008fe52336310e673510bc3d485795f6d013ec0008ac2",
+    "elapsed": 1.2056558999999822
+  }
+}

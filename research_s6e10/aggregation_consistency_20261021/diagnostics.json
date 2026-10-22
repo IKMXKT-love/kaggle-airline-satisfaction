@@ -1,0 +1,283 @@
+{
+  "new_fits": 0,
+  "base_inferences": 0,
+  "labels_read": false,
+  "new_submissions": 0,
+  "sample_rows_each": 20000,
+  "public_columns": 246,
+  "test_oof_raw_std_ratio": {
+    "min": 0.9825813363264976,
+    "p05": 0.9911572298303603,
+    "p25": 0.9925663725997025,
+    "median": 0.9934151884242328,
+    "p75": 0.9944000759716483,
+    "p95": 0.9960148198654244,
+    "max": 0.9980333581461011
+  },
+  "within_oof_raw_std_null_ratio": {
+    "min": 0.9950873943361046,
+    "p05": 0.9960637635983958,
+    "p25": 0.9967934187426022,
+    "median": 0.9974809746443015,
+    "p75": 0.9980538481771686,
+    "p95": 0.9994948935400325,
+    "max": 1.0009603198118138
+  },
+  "rank_correlation_shift_test_minus_oof": {
+    "min": -8.068428603447142e-05,
+    "p05": 0.0034700936462422225,
+    "p25": 0.005453801403068614,
+    "median": 0.006710895979837983,
+    "p75": 0.008198782046865916,
+    "p95": 0.011000877665589747,
+    "max": 0.018060264678265603
+  },
+  "rank_correlation_shift_within_oof_null": {
+    "min": -0.001990445907668059,
+    "p05": -0.00010364401552024339,
+    "p25": 0.00047038224107065485,
+    "median": 0.000981420875866612,
+    "p75": 0.0016319345922947148,
+    "p95": 0.002718992149255772,
+    "max": 0.005427229724564664
+  },
+  "eligible_same_author_family_pairs": 652,
+  "descriptive_shrinkage_flags": 198,
+  "strongest_descriptive_shrinkage": [
+    {
+      "members": [
+        "sa_rmlp_v4aux_k10",
+        "sa_rmlp_v4aux_k10s2"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "realmlp",
+      "oof_rank_corr_a": 0.9966796310820705,
+      "test_rank_corr_a": 0.9996726214261787,
+      "rank_disagreement_sd_ratio_a": 0.3140016689064451,
+      "rank_disagreement_sd_ratio_b": 0.3186957060679464,
+      "within_oof_null_ratio": 0.9621150887918085,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.01430396332920549,
+        0.041520482535923185
+      ]
+    },
+    {
+      "members": [
+        "sa_rmlp_ogx_aux",
+        "sa_rmlp_ogx_aux_k10"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "realmlp",
+      "oof_rank_corr_a": 0.9954887851601641,
+      "test_rank_corr_a": 0.9995197653931701,
+      "rank_disagreement_sd_ratio_a": 0.32627212497054126,
+      "rank_disagreement_sd_ratio_b": 0.3235050188348678,
+      "within_oof_null_ratio": 0.9963331371341358,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        -0.07505598439991847,
+        -0.025924800405974027
+      ]
+    },
+    {
+      "members": [
+        "sa_rmlp_v4aux",
+        "sa_rmlp_v4aux_k10s2"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "realmlp",
+      "oof_rank_corr_a": 0.9946422910490076,
+      "test_rank_corr_a": 0.9993909061550951,
+      "rank_disagreement_sd_ratio_a": 0.33717281099596036,
+      "rank_disagreement_sd_ratio_b": 0.3342451163717822,
+      "within_oof_null_ratio": 0.9899300469299543,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        -0.010181707126387957,
+        0.041520482535923185
+      ]
+    },
+    {
+      "members": [
+        "sa_rmlp_raw_aux_k10",
+        "sa_rmlp_raw_aux_s2"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "realmlp",
+      "oof_rank_corr_a": 0.9951379701681771,
+      "test_rank_corr_a": 0.9994432137884781,
+      "rank_disagreement_sd_ratio_a": 0.33840395200756695,
+      "rank_disagreement_sd_ratio_b": 0.33344276187594313,
+      "within_oof_null_ratio": 0.9906519055500399,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.03857976832921944,
+        -0.017709988503705143
+      ]
+    },
+    {
+      "members": [
+        "sa_rmlp_B",
+        "sa_rmlp_B_k10"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "realmlp",
+      "oof_rank_corr_a": 0.9950601962610958,
+      "test_rank_corr_a": 0.9994298013550703,
+      "rank_disagreement_sd_ratio_a": 0.3397490438596828,
+      "rank_disagreement_sd_ratio_b": 0.33674477411094683,
+      "within_oof_null_ratio": 1.003318040750475,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.02746471217709859,
+        0.03708035645790323
+      ]
+    },
+    {
+      "members": [
+        "sa_rmlp_v4aux",
+        "sa_rmlp_v4aux_k10"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "realmlp",
+      "oof_rank_corr_a": 0.9946229203167388,
+      "test_rank_corr_a": 0.9993718401462989,
+      "rank_disagreement_sd_ratio_a": 0.34179196759558717,
+      "rank_disagreement_sd_ratio_b": 0.33323386797835974,
+      "within_oof_null_ratio": 0.9983117586570036,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        -0.010181707126387957,
+        0.01430396332920549
+      ]
+    },
+    {
+      "members": [
+        "gl_p_lgbm_auxev",
+        "gl_q_lgbm_auxev_10fold"
+      ],
+      "author": "Dariush Afshar (this library, v5)",
+      "name_inferred_family": "lgb",
+      "oof_rank_corr_a": 0.9901143532014619,
+      "test_rank_corr_a": 0.9985982274409853,
+      "rank_disagreement_sd_ratio_a": 0.37656177479328773,
+      "rank_disagreement_sd_ratio_b": 0.3791163385367374,
+      "within_oof_null_ratio": 0.9980463728042416,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.004713655673251939,
+        0.0799550244458811
+      ]
+    },
+    {
+      "members": [
+        "sa_cat_ctr_auxev",
+        "sa_cat_ctr_auxev_k10"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "cat",
+      "oof_rank_corr_a": 0.9886450362647432,
+      "test_rank_corr_a": 0.9983560929370019,
+      "rank_disagreement_sd_ratio_a": 0.3804921970806192,
+      "rank_disagreement_sd_ratio_b": 0.3843037710712781,
+      "within_oof_null_ratio": 0.9915023513601127,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        -0.0435237793252364,
+        -0.0029832120767525603
+      ]
+    },
+    {
+      "members": [
+        "sa_lgb_A_auxall",
+        "sa_lgb_A_auxall_k10"
+      ],
+      "author": "Sachith7",
+      "name_inferred_family": "lgb",
+      "oof_rank_corr_a": 0.9917472818956786,
+      "test_rank_corr_a": 0.9987196403595365,
+      "rank_disagreement_sd_ratio_a": 0.3938832226423613,
+      "rank_disagreement_sd_ratio_b": 0.39591311191920475,
+      "within_oof_null_ratio": 1.0089164457019322,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.00830137638515691,
+        0.0015526664575612537
+      ]
+    },
+    {
+      "members": [
+        "kga_cat_enc4_k10",
+        "kga_cat_enc4_k5"
+      ],
+      "author": "Ahmet Kağan Koral",
+      "name_inferred_family": "cat",
+      "oof_rank_corr_a": 0.9908912624380308,
+      "test_rank_corr_a": 0.998476754948049,
+      "rank_disagreement_sd_ratio_a": 0.408936422449894,
+      "rank_disagreement_sd_ratio_b": 0.4066717834970825,
+      "within_oof_null_ratio": 1.000895567393336,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.03149915504639219,
+        -0.013523139032727262
+      ]
+    },
+    {
+      "members": [
+        "kga_lgb_enc4_k10",
+        "kga_lgb_enc4_k5"
+      ],
+      "author": "Ahmet Kağan Koral",
+      "name_inferred_family": "lgb",
+      "oof_rank_corr_a": 0.9911220976560904,
+      "test_rank_corr_a": 0.9984117194317671,
+      "rank_disagreement_sd_ratio_a": 0.4229688938875407,
+      "rank_disagreement_sd_ratio_b": 0.42497005833922846,
+      "within_oof_null_ratio": 1.0091001330219502,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.047479794334440585,
+        -0.014926024852268696
+      ]
+    },
+    {
+      "members": [
+        "kga_xgb_enc4_k10",
+        "kga_xgb_enc4_k5"
+      ],
+      "author": "Ahmet Kağan Koral",
+      "name_inferred_family": "xgb",
+      "oof_rank_corr_a": 0.9918902049738236,
+      "test_rank_corr_a": 0.9984650376338999,
+      "rank_disagreement_sd_ratio_a": 0.4350547624979075,
+      "rank_disagreement_sd_ratio_b": 0.4385239830229669,
+      "within_oof_null_ratio": 0.9951319817649333,
+      "descriptive_shrinkage_flag": true,
+      "existing_full_fit_coefficients": [
+        0.04186068289930788,
+        0.04431728376246869
+      ]
+    }
+  ],
+  "input_fingerprints": {
+    "train_logits.npy": "966abd1448fdf751e9d3d1da66a5c18c010bf5ddb7188822df368b1d0936128f",
+    "test_logits.npy": "403287e1e71a3655d23b3a004cb2670b9c7aaeb905d9ad13dec5ce297af0769a",
+    "matrix_manifest.json": "3706aeb91d669a4b14e7abd7b6eea4ef8636c9cf638322a3e8d8eabe4c11ad94"
+  },
+  "protected_after": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  },
+  "elapsed_seconds": 14.217166600000382,
+  "limitations": [
+    "not an AUC comparison",
+    "not a covariate-shift attribution",
+    "row sampling cannot establish retraining uncertainty",
+    "name-based family classification is approximate",
+    "no rescaling or new prediction recipe"
+  ]
+}

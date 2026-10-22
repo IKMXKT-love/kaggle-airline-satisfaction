@@ -1,0 +1,44 @@
+{
+  "all_passed": true,
+  "completed_meta_fits_verified": 20,
+  "new_base_fits": 0,
+  "new_base_inferences": 0,
+  "source_alignment_checked": true,
+  "input_hashes_checked": true,
+  "independent_auc": "Mann-Whitney rank sum with average ties",
+  "all_training_gradients_recomputed": true,
+  "maximum_independent_gradient": 3.40581323171397e-10,
+  "maximum_validation_logit_reconstruction_error": 3.552713678800501e-15,
+  "checks": [
+    {
+      "arm": "baseline246",
+      "rank_sum_auc": 0.9622047560968179,
+      "mean_test_logit_reconstruction_error": 2.6645352591003757e-15
+    },
+    {
+      "arm": "plus_kumo",
+      "rank_sum_auc": 0.9622054018098435,
+      "mean_test_logit_reconstruction_error": 3.552713678800501e-15
+    },
+    {
+      "arm": "plus_neighborhood",
+      "rank_sum_auc": 0.9622025844728056,
+      "mean_test_logit_reconstruction_error": 2.6645352591003757e-15
+    },
+    {
+      "arm": "plus_both",
+      "rank_sum_auc": 0.9622031707886094,
+      "mean_test_logit_reconstruction_error": 2.6645352591003757e-15
+    }
+  ],
+  "protected_sha256": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  },
+  "verification_seconds": 23.35004997253418,
+  "total_elapsed_including_setup_allowance": 454.2732756137848,
+  "within_total_900_second_budget": true,
+  "validation_caveat": "Independent array/numerical verification does not establish independent end-to-end model validation."
+}

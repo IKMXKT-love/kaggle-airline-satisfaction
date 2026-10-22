@@ -1,0 +1,49 @@
+{
+  "mode": "ffm",
+  "phase": "selection",
+  "fit_rows": 579297,
+  "stop_rows": 50374,
+  "best_epoch": 2,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.26664848973432675,
+      "steps": 283,
+      "stopping_auc": 0.9580897501062595
+    },
+    {
+      "epoch": 2,
+      "loss": 0.23213044018058576,
+      "steps": 566,
+      "stopping_auc": 0.9581636434616543
+    },
+    {
+      "epoch": 3,
+      "loss": 0.2171585825269903,
+      "steps": 849,
+      "stopping_auc": 0.9562675420378828
+    },
+    {
+      "epoch": 4,
+      "loss": 0.20363217414018717,
+      "steps": 1132,
+      "stopping_auc": 0.9545625167284906
+    },
+    {
+      "epoch": 5,
+      "loss": 0.19385898839030813,
+      "steps": 1415,
+      "stopping_auc": 0.9541546271630361
+    },
+    {
+      "epoch": 6,
+      "loss": 0.1869293871655827,
+      "steps": 1698,
+      "stopping_auc": 0.9528980760831884
+    }
+  ],
+  "steps": 1698,
+  "seconds": 21.445542097091675,
+  "peak_gpu_gb": 0.5901556015014648,
+  "parameters": 2692688
+}

@@ -1,0 +1,6 @@
+{
+  ".artifact_runtime\\tabicl_finetune_20261019\\7d7dc513cbabbc16b430\\screen\\finetune\\best.ckpt": "2d42aeee538a86594d8a804faf8332e0b069d688dbef01a4eea6151fa382c758",
+  ".artifact_runtime\\tabicl_finetune_20261019\\7d7dc513cbabbc16b430\\screen\\finetune\\epoch1.ckpt": "c3972b16198f79ba8d944ba4a08f02148fccda5c61c7d37a7c0ce4867188ce4e",
+  ".artifact_runtime\\tabicl_finetune_20261019\\7d7dc513cbabbc16b430\\screen\\finetune\\epoch2.ckpt": "f08ec6fbda6fe41702d3fa4f1ff3c273954ff40f147135a8733b0b2a7daa9834",
+  ".artifact_runtime\\tabicl_finetune_20261019\\7d7dc513cbabbc16b430\\screen\\finetune\\epoch3.ckpt": "cfb4d7467775895825008fd6179a74609d9b983ab1d160de31aa2fa820e71d67"
+}

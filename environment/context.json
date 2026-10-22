@@ -1,0 +1,227 @@
+{
+  "platform": "win32",
+  "python": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
+  "external_link_targets": [
+    {
+      "path": ".artifact_runtime/node_modules",
+      "target": "\\\\?\\C:\\Users\\ASUS\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules",
+      "directory": true
+    },
+    {
+      "path": ".venv/Scripts/libcrypto-3.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\libcrypto-3.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/libffi-8.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\libffi-8.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/libssl-3.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\libssl-3.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/pyexpat.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\pyexpat.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/python3.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\python3.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/python313.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\python313.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/select.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\select.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/sqlite3.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\sqlite3.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/tcl86t.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\tcl86t.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/tk86t.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\tk86t.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/unicodedata.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\unicodedata.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/vcruntime140.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\vcruntime140.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/vcruntime140_1.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\vcruntime140_1.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/winsound.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\winsound.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/zlib1.dll",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\zlib1.dll",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_asyncio.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_asyncio.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_bz2.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_bz2.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_ctypes.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_ctypes.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_ctypes_test.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_ctypes_test.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_decimal.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_decimal.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_elementtree.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_elementtree.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_hashlib.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_hashlib.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_lzma.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_lzma.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_multiprocessing.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_multiprocessing.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_overlapped.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_overlapped.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_queue.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_queue.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_socket.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_socket.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_sqlite3.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_sqlite3.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_ssl.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_ssl.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testbuffer.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testbuffer.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testcapi.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testcapi.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testclinic.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testclinic.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testclinic_limited.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testclinic_limited.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testconsole.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testconsole.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testimportmultiple.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testimportmultiple.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testinternalcapi.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testinternalcapi.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testlimitedcapi.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testlimitedcapi.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testmultiphase.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testmultiphase.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_testsinglephase.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_testsinglephase.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_tkinter.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_tkinter.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_uuid.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_uuid.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_wmi.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_wmi.pyd",
+      "directory": false
+    },
+    {
+      "path": ".venv/Scripts/_zoneinfo.pyd",
+      "target": "\\\\?\\C:\\Users\\ASUS\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_zoneinfo.pyd",
+      "directory": false
+    }
+  ],
+  "note": "No credential values or process environment variables collected."
+}

@@ -1,0 +1,15 @@
+{
+  "auc": 0.9608530766204963,
+  "baseline_auc": 0.9608683292227892,
+  "change": -1.5252602292847861e-05,
+  "weights": [
+    0.4,
+    0.6,
+    0.0
+  ],
+  "labels_used_for_training_or_early_stopping": false,
+  "split_previously_seen": true,
+  "no_tuning_after_confirmation": true,
+  "checkpoint_directory": "C:\\Users\\ASUS\\Documents\\ChatGPT\\kaggle_first\\.artifact_runtime\\v2\\confirmation\\dd762555972598a70694",
+  "signature": "dd762555972598a70694e8efc6fe7cbdd0f15cad9a1a70e0961bce807a54041a"
+}

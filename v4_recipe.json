@@ -1,0 +1,279 @@
+{
+  "spec": {
+    "name": "lgb_63",
+    "family": "lightgbm",
+    "transform": "full",
+    "leaves": 63
+  },
+  "mode": "mix",
+  "weight": 0.3,
+  "auc": 0.9605961453230669,
+  "gain": 4.7233482982078634e-05,
+  "rounds": 696,
+  "signature": "4891ee0e44b7ca16b6ed",
+  "baseline_selection_auc": 0.9605489118400848,
+  "selection_gain": 4.7233482982078634e-05,
+  "ablations": [
+    {
+      "group": "route",
+      "auc": 0.9600263504933719,
+      "change_without_group": -0.00027202287478989007
+    },
+    {
+      "group": "frequency",
+      "auc": 0.9602206432396074,
+      "change_without_group": -7.773012855438743e-05
+    },
+    {
+      "group": "target_encoding",
+      "auc": 0.9600627974791827,
+      "change_without_group": -0.00023557588897915593
+    },
+    {
+      "group": "teacher",
+      "auc": 0.9598484859693502,
+      "change_without_group": -0.000449887398811577
+    },
+    {
+      "group": "auxiliary",
+      "auc": 0.9601042191673547,
+      "change_without_group": -0.00019415420080715062
+    }
+  ],
+  "trials": [
+    {
+      "spec": {
+        "name": "without_route",
+        "family": "xgb",
+        "transform": "without_route"
+      },
+      "mode": "replace_xgb",
+      "weight": 0.4,
+      "auc": 0.9604062844139085,
+      "gain": -0.00014262742617632274,
+      "rounds": 636
+    },
+    {
+      "spec": {
+        "name": "without_frequency",
+        "family": "xgb",
+        "transform": "without_frequency"
+      },
+      "mode": "replace_xgb",
+      "weight": 0.4,
+      "auc": 0.9605035568843824,
+      "gain": -4.5354955702459065e-05,
+      "rounds": 612
+    },
+    {
+      "spec": {
+        "name": "without_target_encoding",
+        "family": "xgb",
+        "transform": "without_target_encoding"
+      },
+      "mode": "replace_xgb",
+      "weight": 0.4,
+      "auc": 0.9604756095070256,
+      "gain": -7.330233305924416e-05,
+      "rounds": 806
+    },
+    {
+      "spec": {
+        "name": "without_teacher",
+        "family": "xgb",
+        "transform": "without_teacher"
+      },
+      "mode": "replace_xgb",
+      "weight": 0.4,
+      "auc": 0.9605564059029558,
+      "gain": 7.494062870927465e-06,
+      "rounds": 1241
+    },
+    {
+      "spec": {
+        "name": "without_auxiliary",
+        "family": "xgb",
+        "transform": "without_auxiliary"
+      },
+      "mode": "replace_xgb",
+      "weight": 0.4,
+      "auc": 0.9604603019346486,
+      "gain": -8.860990543624325e-05,
+      "rounds": 619
+    },
+    {
+      "spec": {
+        "name": "xgb_residual",
+        "family": "xgb",
+        "transform": "residual"
+      },
+      "mode": "replace_xgb",
+      "weight": 0.4,
+      "auc": 0.960570264002391,
+      "gain": 2.1352162306143008e-05,
+      "rounds": 661
+    },
+    {
+      "spec": {
+        "name": "lgb_15",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 15
+      },
+      "mode": "mix",
+      "weight": 0.1,
+      "auc": 0.9605462524791775,
+      "gain": -2.6593609073755076e-06,
+      "rounds": 1584
+    },
+    {
+      "spec": {
+        "name": "lgb_15",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 15
+      },
+      "mode": "mix",
+      "weight": 0.2,
+      "auc": 0.9605370910212672,
+      "gain": -1.1820818817676049e-05,
+      "rounds": 1584
+    },
+    {
+      "spec": {
+        "name": "lgb_15",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 15
+      },
+      "mode": "mix",
+      "weight": 0.3,
+      "auc": 0.9605204161008924,
+      "gain": -2.8495739192391234e-05,
+      "rounds": 1584
+    },
+    {
+      "spec": {
+        "name": "lgb_15",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 15
+      },
+      "mode": "mix",
+      "weight": 0.4,
+      "auc": 0.9604979830579162,
+      "gain": -5.0928782168613296e-05,
+      "rounds": 1584
+    },
+    {
+      "spec": {
+        "name": "lgb_63",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 63
+      },
+      "mode": "mix",
+      "weight": 0.1,
+      "auc": 0.960573153571805,
+      "gain": 2.424173172010935e-05,
+      "rounds": 696
+    },
+    {
+      "spec": {
+        "name": "lgb_63",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 63
+      },
+      "mode": "mix",
+      "weight": 0.2,
+      "auc": 0.9605887825307768,
+      "gain": 3.9870690692001e-05,
+      "rounds": 696
+    },
+    {
+      "spec": {
+        "name": "lgb_63",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 63
+      },
+      "mode": "mix",
+      "weight": 0.3,
+      "auc": 0.9605961453230669,
+      "gain": 4.7233482982078634e-05,
+      "rounds": 696
+    },
+    {
+      "spec": {
+        "name": "lgb_63",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 63
+      },
+      "mode": "mix",
+      "weight": 0.4,
+      "auc": 0.9605956389936833,
+      "gain": 4.672715359843593e-05,
+      "rounds": 696
+    },
+    {
+      "spec": {
+        "name": "lgb_127",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 127
+      },
+      "mode": "mix",
+      "weight": 0.1,
+      "auc": 0.9605660901799042,
+      "gain": 1.7178339819401423e-05,
+      "rounds": 455
+    },
+    {
+      "spec": {
+        "name": "lgb_127",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 127
+      },
+      "mode": "mix",
+      "weight": 0.2,
+      "auc": 0.9605732538030368,
+      "gain": 2.4341962951979212e-05,
+      "rounds": 455
+    },
+    {
+      "spec": {
+        "name": "lgb_127",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 127
+      },
+      "mode": "mix",
+      "weight": 0.3,
+      "auc": 0.960573015834693,
+      "gain": 2.4103994608171142e-05,
+      "rounds": 455
+    },
+    {
+      "spec": {
+        "name": "lgb_127",
+        "family": "lightgbm",
+        "transform": "full",
+        "leaves": 127
+      },
+      "mode": "mix",
+      "weight": 0.4,
+      "auc": 0.9605639837074044,
+      "gain": 1.5071867319527144e-05,
+      "rounds": 455
+    }
+  ],
+  "control_auc": 0.9602983733681618,
+  "prior_xgb_auc": 0.960318078343338,
+  "frozen_before_confirmation": true,
+  "audit_previously_seen": true,
+  "selection_minimum_gain": 2e-05,
+  "confirmation_minimum_gain": 2e-05
+}

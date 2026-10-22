@@ -1,0 +1,19 @@
+{
+  "recorded_date_local": "2026-10-19",
+  "timezone": "Asia/Taipei",
+  "score_source": "user_reported",
+  "kaggle_submission_record_independently_verified": false,
+  "file_attribution": "most_recent_delivered_submission_in_conversation",
+  "user_provided_submission_id": null,
+  "submission_file": "submission_v4_lean_realmlp_trial.csv",
+  "submission_sha256": "9b9c360a926109d778d839662f98ad36a732e1cee2b897bee39870d0f5249beb",
+  "artifact_hash_reverified": true,
+  "public_auc": 0.96104,
+  "previous_best_user_reported_public_auc": 0.96082,
+  "improvement": 0.00022,
+  "target_auc": 0.962,
+  "gap_to_target": 0.00096,
+  "best_user_reported_submission_in_current_conversation": true,
+  "new_candidate_ten_fold_cv": false,
+  "new_training_started_on_score_feedback": false
+}

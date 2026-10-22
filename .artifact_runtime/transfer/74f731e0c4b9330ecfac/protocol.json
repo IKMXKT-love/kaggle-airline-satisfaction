@@ -1,0 +1,89 @@
+{
+  "candidates": [
+    {
+      "name": "control",
+      "mode": null,
+      "offset": false,
+      "bins": 256
+    },
+    {
+      "name": "frequency",
+      "mode": "frequency",
+      "offset": false,
+      "bins": 256
+    },
+    {
+      "name": "profiles",
+      "mode": "profiles",
+      "offset": false,
+      "bins": 256
+    },
+    {
+      "name": "combined",
+      "mode": "combined",
+      "offset": false,
+      "bins": 256
+    },
+    {
+      "name": "teacher_offset",
+      "mode": null,
+      "offset": true,
+      "bins": 256
+    },
+    {
+      "name": "high_resolution",
+      "mode": null,
+      "offset": false,
+      "bins": 4096
+    }
+  ],
+  "internal_stop_fraction": 0.08,
+  "seed": 42,
+  "selection_gate": 0.0002,
+  "confirmation_gate": 0.0001,
+  "replacement_weight": 0.28,
+  "weights": {
+    "old_xgb": 0.07,
+    "old_cat": 0.21,
+    "xgb": 0.28,
+    "realmlp": 0.14,
+    "lgb": 0.3
+  },
+  "no_outer_early_stopping": true,
+  "all_base_branches_retrained": true,
+  "historical_selection_and_audit_seen": true,
+  "max_candidates": 5,
+  "fixed_blend_weights": true,
+  "no_external_predictions": true,
+  "source_profile_shrinkage": 20,
+  "frequency_pseudocount": 1,
+  "full_cv_only_after_confirmation": true,
+  "signature": "74f731e0c4b9330ecfac8234b476511958d0ac6c06f892b0da3d11de7b2fc30b",
+  "hashes": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "main.py": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+    "submission_v4.csv": "75f42132377e87fa2a0a9c4c34610c094c01d6b9fa743bd5437e4ff9b71d5958",
+    "submission_v4_oof.csv": "18c29ecd3b6beaa385c4e6b7c6658f1d9c1760b715f4baa43402f8bcf24f1c6e",
+    "v4_recipe.json": "5c7b5354ccad21ad5d5aa43e8466cbc69b864adf05a9bd6310a65b2696e15566",
+    "submission_v3.csv": "e3b94a849f853e682418197f59c1d0eaf4370a895cfa0b6076400d74b4d8516e",
+    "v3_recipe.json": "b2b0d5f5577cf13dd875e5be17ec206f302ada2e4b2199d73538871519d54f3b",
+    "experiment_transfer.py": "3b904402e25bcc6933afa20e7d73ad63b6d09680e6ecafe663823757816a45ed",
+    "transfer_features.py": "36278b55a9174823716d7afa96fa8ad8098e521147db7368c59576842eca27cc",
+    "v3_features.py": "74312b65e935a069db027ab6b9532392f48f51aa1f4f58b4ee1864be71d31047",
+    "v3_training.py": "8fda35592d1820dbae8d7d385625a4ef41ce6324bf810b4b7261054e48f48303",
+    "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+    "optimized_training.py": "a6a7ccfe7d5bb8d18cadc547a1c0aa201ec64b23403cf5aa365b88a0c55ff485",
+    "v2_training.py": "ce21ebc2649804738ba7e262e97fbd2666a88ee2466269dc35df292344009db7"
+  },
+  "protected": [
+    "train.csv",
+    "test.csv",
+    "main.py",
+    "submission_v4.csv",
+    "submission_v4_oof.csv",
+    "v4_recipe.json",
+    "submission_v3.csv",
+    "v3_recipe.json"
+  ]
+}

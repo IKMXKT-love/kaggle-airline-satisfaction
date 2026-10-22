@@ -1,0 +1,11 @@
+{
+  "steps": 128,
+  "seconds": 83.1305627822876,
+  "query_supervised_rows": 65536,
+  "distinct_query_rows": 62097,
+  "changed_tensors": 390,
+  "overflow_retries": 7,
+  "first_parameter_changed": true,
+  "checkpoint_sha256": "a7edcf8c46c31aaeeb3337b6ea16cd958910f3d99db618404a7a064f14e61760",
+  "peak_gpu_gb": 4.809194564819336
+}

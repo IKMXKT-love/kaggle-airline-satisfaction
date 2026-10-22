@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-21",
+  "status": "audit_complete_no_effective_current_pool_screen",
+  "new_model_fits": 0,
+  "new_base_model_inferences": 0,
+  "raw_target_labels_read": false,
+  "new_submissions": 0,
+  "public_target_containers_have_only_oof_and_test": true,
+  "public_arrays_match_frozen_pool_exactly": true,
+  "local_two_seed_comparison_is_narrower_than_target_mechanism": true,
+  "independent_numeric_and_scope_verification_passed": true,
+  "recommended_action": "do not fit or rescale; hold this direction pending appropriate repeated heldout prediction artifacts",
+  "report": "research_s6e10/AGGREGATION_CACHE_AUDIT_20261021.md",
+  "best_and_current_files_unchanged": true
+}

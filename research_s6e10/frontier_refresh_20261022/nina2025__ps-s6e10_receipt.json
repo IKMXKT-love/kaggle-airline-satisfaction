@@ -1,0 +1,66 @@
+{
+  "ref": "nina2025/ps-s6e10",
+  "pull": {
+    "tag": "nina2025__ps-s6e10_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/nina2025/ps-s6e10",
+    "bytes": 54398,
+    "sha256": "8d725a70270f8ef8cb35495baf2803f26c920b140f234f6cab919c6183ea2d72",
+    "elapsed": 2.1462829999999826
+  },
+  "version": 17,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": false,
+    "enableTpuNullable": false,
+    "enableInternetNullable": false,
+    "currentVersionNumberNullable": 17,
+    "dockerImageNullable": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "machineShapeNullable": "None",
+    "id": 139803162,
+    "ref": "nina2025/ps-s6e10",
+    "title": "PS-s6e10 | 🚂🛬🛬🛬🛫🛫🛫",
+    "author": "F.A.Nina",
+    "slug": "ps-s6e10",
+    "lastRunTime": "2026-10-19T14:46:02.277757Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": false,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": false,
+    "hasEnableInternet": true,
+    "categoryIds": [],
+    "datasetDataSources": [
+      "nina2025/ps-s6e10-02",
+      "nina2025/ps-s6e10-7"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 15,
+    "currentVersionNumber": 17,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-images/python@sha256:81b1e7c4b4f0f2a7e0a33943c95754b1b7af6b30d65221633a284b6b601cd84a",
+    "hasDockerImage": true,
+    "machineShape": "None",
+    "hasMachineShape": true
+  },
+  "source_chars": 16503,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "nina2025__ps-s6e10_outputs_v17",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 4154,
+    "sha256": "2a8580c701af27335f289d0301235a1abbf7ee64a1a05d7f35b669df7036852f",
+    "elapsed": 1.1109763999999984
+  }
+}

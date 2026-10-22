@@ -1,0 +1,68 @@
+{
+  "ref": "amanatar/s6e10-the-original-prior-stack-v5",
+  "pull": {
+    "tag": "amanatar__s6e10-the-original-prior-stack-v5_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/amanatar/s6e10-the-original-prior-stack-v5",
+    "bytes": 111748,
+    "sha256": "fa8db4378b2370a26d9b495f769b23b9ec87ee4a7b9f1218e5384a992437f656",
+    "elapsed": 1.4113721000003352
+  },
+  "version": 1,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": false,
+    "currentVersionNumberNullable": 1,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 137354573,
+    "ref": "amanatar/s6e10-the-original-prior-stack-v5",
+    "title": "S6E10 | The Original-Prior Stack v5",
+    "author": "Aman Atar",
+    "slug": "s6e10-the-original-prior-stack-v5",
+    "lastRunTime": "2026-10-18T03:56:33.2435003Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": false,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "",
+      "arseniyshutko/binary-aviation-satisfaction-129k"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 0,
+    "currentVersionNumber": 1,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 44706,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "amanatar__s6e10-the-original-prior-stack-v5_outputs_v1",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 36980,
+    "sha256": "82df9580661568702934f37a864f4b8539169be0cb9f19b41fb670cface29291",
+    "elapsed": 1.1132950999999593
+  }
+}

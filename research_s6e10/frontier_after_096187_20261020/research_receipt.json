@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-20",
+  "model_fits": 0,
+  "base_model_inferences": 0,
+  "new_submission_generated": false,
+  "current_best_unchanged": true,
+  "current_best_public_score": 0.96187,
+  "neighborhood_fixed20_delta": -9.34774290499707e-05,
+  "cohort_comparisons": 70,
+  "cohort_flags": 0,
+  "fixed_hblend_delta": 1.1122494003590333e-07,
+  "report": "research_s6e10/FRONTIER_AFTER_096187_RESEARCH_20261020.md",
+  "open_choice": "Prioritize OOF-verifiable generalization or allow a separate public-only frontier experiment",
+  "naji_07_contrast": "not_run; interrupted incomplete download",
+  "no_dependencies_installed": true,
+  "epoch": 1792504073.5152078
+}

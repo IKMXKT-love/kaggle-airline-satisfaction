@@ -1,0 +1,14 @@
+{
+  "status": "exploratory post-selection audit of existing saved fits",
+  "purpose": "Check whether existing members have useful signed corrective roles; not a new-model test.",
+  "members": "All 11 members from the existing cdeotte TFM source, without selecting by removal results.",
+  "contrasts": "Current OOF versus fixed deletion of the saved per-fold signed contribution; positive 5% and 20% additions to current OOF.",
+  "no_coefficient_refitting": true,
+  "no_weight_search": true,
+  "limitations": [
+    "Deletion holds all other coefficients fixed; this is not a refitted leave-one-member-out estimate.",
+    "Existing OOF ancestry and historical selection remain; this is not independent validation.",
+    "Negative or large coefficients alone do not prove incremental predictive information.",
+    "The current pool already contains these members, so this diagnostic cannot determine whether a new excluded member would help."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "initial_phase_approx_seconds": 1017.1594204902649,
+  "initial_target_seconds": 900,
+  "initial_overrun_including_inflight_and_transition_seconds": 117.159419298172,
+  "confirmation_elapsed_seconds": 1036.6000962257385,
+  "converged_cv_fit_seconds": 116.96346306800842,
+  "interrupted_lbfgs_process_wall_seconds": 199.82032799720764,
+  "full_refit_seconds": 18.623812913894653,
+  "base_model_fits": 0,
+  "base_model_inferences": 0,
+  "converged_meta_model_fits": 11,
+  "download_files": 433,
+  "saved_download_bytes": 1924446133,
+  "timing_note": "Initial start retrospectively includes 100 seconds of setup allowance; initial wall time is approximate. Saved bytes are not cumulative network traffic."
+}

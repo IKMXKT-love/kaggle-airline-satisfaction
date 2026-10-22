@@ -1,0 +1,755 @@
+# S6E10 | Route or distance? Both | LB 0.96169
+
+On 2026-10-05 the top hundred teams on this board sat inside **0.00021** of each other. Two submissions scored on
+the same public rows, about a fifth of the test set, move apart by chance by as much as
+0.00020 to 0.00045 (95 percent) when they are different models, measured on our own
+out-of-fold predictions. The public board cannot reliably order its top hundred, so this notebook selects on
+cross-validation.
+
+Three measurements carry the analysis. The original dataset appended as rows costs 0.000245 AUC; the
+same rows used as a lookup gain +0.001038, each against its own LightGBM.
+`Flight Distance` has been read on this board as a route ID; measured here it is both:
+66 percent of the way the satisfied rate moves between its values follows
+the length, and the rest, beyond about 3 points of sampling noise, is a key. Told about the key, all four tree models here improve, each with a paired interval clear of zero. And a RealMLP with Vladimir Demidov's configuration, as good as the
+trees and wrong in different places, takes half the blend of our five.
+
+The score is a stack. goodpjw2008 published the out-of-fold predictions of the 48 models in
+their own stack. With our five added, a logistic regression on logits reaches 0.961988 on our folds,
+against 0.961919 for their 48 alone. Most of the score is theirs: our five add
++0.000069. These are the numbers of a private run of exactly this code; CatBoost and RealMLP are not
+bit-reproducible on a GPU, so the run on this page can differ in the sixth decimal.
+
+| | measured |
+|---|---|
+| result | **public LB 0.96169** for the output of this code (private run); CV 0.961988 with the stacker fitted out of fold, the stack of 53 |
+| folds | `StratifiedKFold(5, shuffle=True, random_state=33)`, the same for every model of ours |
+| models | ours: LightGBM twice, CatBoost, XGBoost and RealMLP, the last three on GPU; stacked with goodpjw2008's 48 published members |
+| runtime | 68 minutes on a Kaggle GPU session, measured |
+| built on | evgendvorkin's features, goodpjw2008's route ID and stack members, Vladimir Demidov's RealMLP; linked where used |
+
+## Setup
+
+The look of every chart is set once here: one accent colour for the thing the chart is about, grey for the
+rest, and the number that matters printed on the chart.
+
+import glob, json, pathlib, time, warnings
+import numpy as np, pandas as pd
+import matplotlib as mpl, matplotlib.pyplot as plt
+from scipy.stats import rankdata
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import roc_auc_score
+from sklearn.preprocessing import TargetEncoder
+warnings.filterwarnings("ignore")
+
+INK, MUTED, GRID, ACCENT, SECOND = "#1f2328", "#8b949e", "#e6e8eb", "#d9480f", "#1c7ed6"
+mpl.rcParams.update({
+    "figure.figsize": (9, 4.6), "figure.dpi": 110, "figure.facecolor": "white",
+    "font.size": 11, "axes.titlesize": 13, "axes.titleweight": "semibold", "axes.titlelocation": "left",
+    "axes.labelcolor": INK, "text.color": INK, "xtick.color": MUTED, "ytick.color": MUTED,
+    "axes.edgecolor": GRID, "axes.spines.top": False, "axes.spines.right": False,
+    "axes.grid": True, "grid.color": GRID, "axes.axisbelow": True, "legend.frameon": False})
+
+hits = glob.glob("/kaggle/input/**/playground-series-s6e10", recursive=True)
+COMP = pathlib.Path(hits[0]) if hits else pathlib.Path("/kaggle/input/playground-series-s6e10")
+ORIG = [f for f in sorted(glob.glob("/kaggle/input/**/airline-passenger-satisfaction/*.csv", recursive=True))
+        if "playground" not in f]
+train = pd.read_csv(COMP / "train.csv"); test = pd.read_csv(COMP / "test.csv")
+TGT, SEED = "satisfaction", 33
+y = train[TGT].astype(int).to_numpy()
+FOLDS = list(StratifiedKFold(5, shuffle=True, random_state=SEED).split(train, y))
+print(f"train {train.shape}, test {test.shape}, positive rate {y.mean():.6f}")
+
+## The data names its own splitter
+
+Before a model, the question is what a row is. If rows come in groups the test set does not share, or in
+time, the folds have to respect it or the cross-validation lies.
+
+0 duplicate feature rows in train and 0 rows shared by train and test. `id`
+orders nothing: on its own it scores an AUC of 0.5001. One column does group rows, and a section
+below is about it: `Flight Distance`. But the test set draws from the same groups.
+99.98 percent of test rows carry a distance value that also appears in train;
+61 rows do not. A random split of train reproduces that relation, and a split by
+group would rehearse a situation the test set does not contain. So the folds are stratified on the target and on
+nothing else.
+
+FEATS = [c for c in test.columns if c != "id"]
+key = lambda df: pd.util.hash_pandas_object(df[FEATS].astype(str).fillna(""), index=False)
+print("duplicate feature rows in train:     ", int(train.duplicated(subset=FEATS).sum()))
+print("rows shared by train and test:       ", len(set(key(train)) & set(key(test))))
+print("AUC of id alone:                     ", round(roc_auc_score(y, train["id"]), 4))
+seen = test["Flight Distance"].isin(set(train["Flight Distance"]))
+print(f"test rows whose distance is in train: {seen.mean():.4%} ({int((~seen).sum())} are not)")
+
+## The public board cannot rank the top
+
+A leaderboard is a validation set with a sample size. The leaderboard page says the public board uses about
+20 percent of the test data, 59,968 rows. One score on that many rows sits within about
+**0.00168** of its true value (95 percent, Hanley and McNeil). But a ranking compares two scores on the
+same rows, and the two share most of that noise. The noise of the difference is what decides an order, and
+it can be measured: score two of our out-of-fold prediction sets on 400 random subsets of train
+the size of the public board, and take the spread of the difference.
+
+* two different models (LightGBM against XGBoost, CatBoost or RealMLP): 95 percent half-width
+  0.00020 to 0.00045;
+* two near-copies (goodpjw2008's stack of 48 against the same stack plus our five):
+  0.00010.
+
+The top hundred teams span **0.00021** (828 teams, snapshot of 2026-10-05 19:25:17 UTC).
+That is about the size of the paired noise of two different models and about two times that
+of two near-copies. Where two leaders are near-copies, their order could be real; the board does not say which
+pairs those are.
+
+def auc_se(auc, n, pos):
+    # Hanley and McNeil (1982): one score against its true value
+    n1 = int(n * pos); n0 = n - n1
+    q1 = auc / (2 - auc); q2 = 2 * auc**2 / (1 + auc)
+    return np.sqrt((auc*(1-auc) + (n1-1)*(q1-auc**2) + (n0-1)*(q2-auc**2)) / (n1*n0))
+
+half = 1.96 * auc_se(0.961, int(len(test) * 0.20), y.mean())
+paired_lo, paired_hi, paired_copies = 0.000199, 0.000449, 9.5e-05
+# measured separately on our out-of-fold predictions: 400 random subsets of 59,968 rows
+span = 0.00021   # top 1 minus top 100, public board, snapshot 2026-10-05T19:25:17 UTC
+labels = ["one score\nagainst its truth", "two different models,\nlargest pair", "two different models,\nclosest pair",
+          "two near-copies", "top 100\nspread"]
+vals = [half, paired_hi, paired_lo, paired_copies, span]
+fig, ax = plt.subplots(figsize=(9, 3.6))
+ax.barh(labels, vals, color=[GRID, MUTED, MUTED, MUTED, ACCENT])
+for i, v in enumerate(vals):
+    ax.text(v, i, f"  {v:.5f}", va="center", color=ACCENT if i == 4 else MUTED, fontweight="semibold")
+ax.set_xlim(0, half * 1.3); ax.invert_yaxis()
+ax.set_title("95 percent noise on the public rows, against the spread of the top hundred")
+plt.show()
+
+## The original dataset, used two ways
+
+The competition data is synthetic, generated from a real survey of 129,880 passengers,
+[Airline Passenger Satisfaction](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction) by
+teejmahal20. The usual move is to append those real rows to the training set. Measured on the same folds, row by
+row, it **costs** 0.000245 AUC with a plain LightGBM (63 leaves, learning rate 0.03), run separately on the
+same folds.
+One reading: the real rows are a second population the model has to reconcile with the first.
+
+The same rows do something else when they are used as a lookup. For every column, compute the share of
+satisfied passengers per value **in the original only**, and hand that to the model as a feature. Nothing from
+the competition's labels is used, so it cannot leak. With the ladder's LightGBM (127 leaves, learning rate 0.02)
+that gains **+0.001038**, interval
+[+0.000918, +0.001158]. The lookup is
+evgendvorkin's, from [S6E10 LightGBM CV 5 folds 0.96102](https://www.kaggle.com/code/evgendvorkin/s6e10-lightgbm-cv-5-folds-0-96102); the comparison with appending is this notebook's.
+
+Same rows, opposite sign, each against its own LightGBM. The original is the generator's source, so its
+conditional rates are a prior the synthetic rows inherit; appended as data, it is more data from somewhere else.
+
+arms = ["original as\nextra rows", "original as\nP(satisfied | value)"]
+gain = [-0.000245, 0.001038]
+fig, ax = plt.subplots(figsize=(8, 3.2))
+ax.barh(arms, gain, color=[MUTED, ACCENT]); ax.axvline(0, color=INK, lw=1)
+for i, g in enumerate(gain):
+    ax.text(max(g, 0), i, f"  {g:+.6f}", va="center", ha="left", color=ACCENT if g > 0 else MUTED, fontweight="semibold")
+ax.set_xlim(min(gain) * 2.2, max(gain) * 1.35)
+ax.set_xlabel("change in cross-validated AUC, each against its own LightGBM without the original")
+ax.set_title("The same 129,880 rows: appended they cost, as a lookup they pay")
+plt.show()
+
+## Route or distance? Both
+
+goodpjw2008 read `Flight Distance` as a route ID in [Part 1](https://www.kaggle.com/code/goodpjw2008/s6e10-route-id-fe-og-model-stack-lb-0-96108) of their series, and the later parts build on it.
+Their [Part 8](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160) says the target depends on which route a passenger flew, not on how long the flight is. Both they and
+evgendvorkin also use the length side: their coarse group `distance // 10` lets rare routes borrow from their
+neighbours, and evgendvorkin keys the distance at several resolutions. What can be measured is how much of the
+column is length and how much is key.
+
+`Flight Distance` has 3,521 distinct values over train and test, a median of
+72 rows each. Take the 1,771 values with 50 or more
+training rows, which hold 95.4 percent of train. The share of satisfied passengers
+per value runs from 0.028 to 1.000, with a spread of **0.268**; sampling
+alone, at these row counts, would give 0.046. So the value matters. The question is how.
+
+* **Part of it is length.** Neighbouring values have similar rates: the correlation between one value's rate and
+  the next one's is **0.705**, where a shuffled order gives -0.048 to
+  +0.048. The pooled rate of each value's 10 neighbours explains
+  **66 percent** of the variance. A distance would do exactly this.
+* **The rest is a key.** A value's rate minus its neighbours' rate still has a spread of
+  **0.157**, where sampling alone would give 0.048. That part belongs to
+  the value, not to its place on the axis, which is what an identifier does.
+
+So the column is a length that also names a route. A tree reads the length from the raw number; what one
+number tells it poorly is who flies each value, and that is what the route profile below hands it. Measured
+with and without the profile, all else equal: LightGBM +0.000128 [+0.000037, +0.000216]; CatBoost +0.000115 [+0.000016, +0.000212]; XGBoost +0.000112 [+0.000023, +0.000201]; extra-trees LightGBM +0.000245 [+0.000152, +0.000335].
+
+One measurement looks stronger than it is. Inside one distance value the commonest `Class` has a median share of
+1.000, which reads as "one class per route". The single-class values are the small ones:
+65 percent of values, 16.7 percent of
+rows. Weighted by rows, the commonest class covers 74 percent.
+
+In the chart, each dot is one distance value and the dark line is the pooled rate of its 10
+neighbours, broken where the values thin out. The line is the length. The scatter around it,
+three times wider than sampling, is the route.
+
+g = train.groupby("Flight Distance")[TGT].agg(["sum", "size"]).query("size >= 50")
+rate = g["sum"] / g["size"]; p = y.mean()
+k = np.ones(11)                                   # the value and its ten neighbours
+S = np.convolve(g["sum"], k, "same") - g["sum"]; N = np.convolve(g["size"], k, "same") - g["size"]
+near = S / N                                      # pooled rate of the neighbours, the value left out
+fig, ax = plt.subplots(figsize=(10, 3.8))
+ax.scatter(g.index, rate, s=6, color=ACCENT, alpha=0.5, label="rate of one distance value")
+line = near.copy(); line[np.r_[False, np.diff(g.index.to_numpy()) > 50]] = np.nan   # no line across empty ranges
+ax.plot(g.index, line, color=INK, lw=1, label="pooled rate of its ten neighbours")
+ax.axhline(p, color=MUTED, lw=1, ls="--")
+ax.set_xlabel("Flight Distance"); ax.set_ylabel("share satisfied"); ax.legend(loc="lower right", markerscale=3, frameon=True, framealpha=0.9)
+ax.set_title(f"{len(g):,} distance values with 50+ rows: a smooth length, and a key around it")
+plt.show()
+print(f"spread of the rate              {rate.std():.3f}   sampling alone {np.sqrt((p*(1-p)/g['size']).mean()):.3f}")
+r = rate.to_numpy()
+print(f"neighbour correlation (lag 1)   {np.corrcoef(r[:-1], r[1:])[0, 1]:.3f}")
+print(f"share explained by neighbours   {1 - (rate - near).var(ddof=0) / rate.var(ddof=0):.3f}")
+print(f"rate minus its neighbours       {(rate - near).std(ddof=0):.3f}   sampling alone "
+      f"{np.sqrt((p*(1-p)/g['size'] + p*(1-p)/N).mean()):.3f}")
+
+## The feature ladder
+
+Each block below was added on its own, and each rung was compared with the rung below it **row by row** on
+the same folds, by a paired bootstrap over the 699,635 rows. A difference between two means with
+overlapping spreads says little; a paired difference with an interval that excludes zero says the gain is real.
+
+| block | gain over the rung below | 95% interval, paired over the rows |
+|---|---|---|
+| `org` | +0.001038 | [+0.000918, +0.001158] |
+| `origm` | +0.000285 | [+0.000192, +0.000370] |
+| `digit` | +0.000211 | [+0.000147, +0.000272] |
+| `freq` | +0.000128 | [+0.000055, +0.000200] |
+| `te` | +0.000148 | [+0.000071, +0.000229] |
+| `te2` | +0.000067 | [+0.000006, +0.000127] |
+| `route` | +0.000128 | [+0.000037, +0.000216] |
+
+Two blocks are not in the tree models' features because their interval reached across zero: ten column pairs as
+raw categorical keys (-0.000081 at that rung), and target encodings of the route on top
+of the route profile (+0.000036). They are left out rather than kept on hope.
+
+The eight rungs in the chart took 36 minutes, run once offline; this notebook trains only the
+last rung. The numbers in the chart are from that run.
+
+ladder = [["base", 0.959053], ["org", 0.960091], ["origm", 0.960376], ["digit", 0.960587], ["freq", 0.960715], ["te", 0.960863], ["te2", 0.96093], ["route", 0.961058]]
+names = [b for b, _ in ladder]; score = [s for _, s in ladder]
+step = [0] + [score[i] - score[i-1] for i in range(1, len(score))]
+fig, ax = plt.subplots(figsize=(10, 4))
+ax.bar(names, score, color=[MUTED] + [ACCENT] * (len(names) - 1), width=0.6)
+for i, (s, st) in enumerate(zip(score, step)):
+    ax.text(i, s, f"{s:.5f}" + (f"\n+{st:.5f}" if i else ""), ha="center", va="bottom", fontsize=9)
+ax.set_ylim(score[0] - 0.0003, score[-1] + 0.0004); ax.set_ylabel("cross-validated AUC")
+ax.set_title("Each block added alone, each gain paired against the rung below")
+plt.show()
+
+## The features of the tree models
+
+Seven blocks. The first five use no competition label and are built once over train and test together (`org`
+and `origm` use the original's labels, which are not the competition's). The last two are target encodings,
+fitted **inside each fold, on its training part only** and cross-fitted again within that part, so no row is
+ever encoded with its own label.
+
+None of the blocks is this notebook's invention. Each was read in a public notebook and measured again here,
+one at a time:
+
+* `org` the original as P(satisfied | value), one column per feature; from evgendvorkin's [S6E10 LightGBM CV 5 folds 0.96102](https://www.kaggle.com/code/evgendvorkin/s6e10-lightgbm-cv-5-folds-0-96102)
+* `origm` the prediction of a model trained on the original only; code from the same source, and the idea is
+  also in goodpjw2008's [Part 1](https://www.kaggle.com/code/goodpjw2008/s6e10-route-id-fe-og-model-stack-lb-0-96108)
+* `digit` the digits of the four numeric columns at positions -4 to 3, where synthetic generators leave
+  artefacts; same source
+* `freq` the frequency and the rarity of every value; same source
+* `route` each distance value described by its average passenger: the mean of every other column per value and
+  the number of rows on it, which follow goodpjw2008's [Part 8](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160) (the route reading is from their [Part 1](https://www.kaggle.com/code/goodpjw2008/s6e10-route-id-fe-og-model-stack-lb-0-96108)); and each
+  passenger's difference from the mean, which follows evgendvorkin's profile residuals
+* `te`, `te2` in-fold target encodings of every column and of the ten column pairs; same source as `org`
+
+# Feature code. Identical to the offline ladder that measured each block. The blocks and the ten
+# pairs are evgendvorkin's (S6E10 LightGBM CV 5 folds 0.96102); the route block's means and count follow
+# goodpjw2008's Part 8, its residuals follow evgendvorkin's profile.
+CATS = ["Gender", "Customer Type", "Type of Travel", "Class"]
+RATINGS = ["Inflight wifi service", "Departure/Arrival time convenient", "Ease of Online booking",
+           "Gate location", "Food and drink", "Online boarding", "Seat comfort",
+           "Inflight entertainment", "On-board service", "Leg room service", "Baggage handling",
+           "Checkin service", "Cleanliness"]
+NUMS = ["Age", "Flight Distance", "Departure Delay in Minutes", "Arrival Delay in Minutes"]
+BASE = CATS + NUMS + RATINGS
+PAIRS = [("Class", "Type of Travel"), ("Customer Type", "Type of Travel"), ("Class", "Customer Type"),
+         ("Gender", "Class"), ("Inflight wifi service", "Online boarding"),
+         ("Inflight wifi service", "Type of Travel"), ("Online boarding", "Type of Travel"),
+         ("Seat comfort", "Inflight entertainment"), ("Class", "Inflight wifi service"),
+         ("Class", "Online boarding")]
+
+def is_texty(s):
+    # pandas 3 gives str columns their own dtype, so `dtype == object` alone misses them
+    return pd.api.types.is_object_dtype(s) or pd.api.types.is_string_dtype(s)
+
+def load_original():
+    o = pd.concat([pd.read_csv(f) for f in sorted(ORIG)], ignore_index=True)
+    o = o.drop(columns=[c for c in ("Unnamed: 0", "id", "Inflight service") if c in o.columns])
+    o[TGT] = (o[TGT] == "satisfied").astype(int)
+    return o
+
+def build(tr, te, blocks):
+    full = pd.concat([tr.drop(columns=[TGT]), te], ignore_index=True)
+    X = full[BASE].copy()
+    X["Arrival Delay in Minutes"] = X["Arrival Delay in Minutes"].fillna(0)
+    if "org" in blocks or "origm" in blocks:
+        o = load_original()
+        o["Arrival Delay in Minutes"] = o["Arrival Delay in Minutes"].fillna(0)
+    if "org" in blocks:
+        g = o[TGT].mean()
+        for c in BASE:
+            st = o.groupby(c, observed=False)[TGT].mean()
+            X[f"org_{c}"] = full[c].map(st).fillna(g).astype("float32").values
+    if "origm" in blocks:
+        import lightgbm as lgb
+        Xo = o[BASE].copy()
+        for c in CATS:
+            cat = pd.CategoricalDtype(sorted(set(Xo[c].dropna()) | set(X[c].dropna())))
+            Xo[c] = Xo[c].astype(cat)
+        Xf = X[BASE].copy()
+        for c in CATS:
+            Xf[c] = Xf[c].astype(Xo[c].dtype)
+        m = lgb.LGBMClassifier(n_estimators=600, learning_rate=0.05, num_leaves=63,
+                               colsample_bytree=0.6, subsample=0.8, subsample_freq=1,
+                               reg_lambda=5.0, n_jobs=-1, random_state=SEED, verbose=-1)
+        m.fit(Xo, o[TGT])
+        X["orig_model"] = m.predict_proba(Xf)[:, 1].astype("float32")
+    if "route" in blocks:
+        # Flight Distance is a length that also names a route: its neighbours explain about
+        # two thirds of how the satisfied rate moves between values, the rest belongs to the
+        # value. The route reading is goodpjw2008's (Part 1 of their series). The mean of every
+        # other column per distance value and its row count follow their Part 8; each passenger's
+        # difference from that mean follows evgendvorkin's profile residuals.
+        # No target is touched, so this is built on train and test together.
+        fdk = full["Flight Distance"]
+        coded = full[BASE].copy()
+        coded["Arrival Delay in Minutes"] = coded["Arrival Delay in Minutes"].fillna(0)
+        for c in CATS:
+            coded[c] = coded[c].astype("category").cat.codes
+        grp = coded.groupby(fdk)
+        X["fd_cnt"] = fdk.map(fdk.value_counts()).astype("float32").values
+        for c in BASE:
+            if c == "Flight Distance": continue
+            X[f"fdm_{c}"] = grp[c].transform("mean").astype("float32").values
+            X[f"fdd_{c}"] = (coded[c] - X[f"fdm_{c}"]).astype("float32").values
+    if "digit" in blocks:
+        for c in NUMS:
+            v = X[c].fillna(0)
+            for k in range(-4, 4):
+                X[f"{c}_d{k}"] = (v // (10.0 ** k) % 10).astype("int8")
+    if "pair" in blocks:
+        for a, b in PAIRS:
+            X[f"pair_{a}_{b}"] = full[a].astype(str) + "_" + full[b].astype(str)
+    if "freq" in blocks:
+        for c in list(X.columns):
+            if c.startswith(("org_", "orig_model")): continue
+            f = X[c].map(X[c].value_counts(normalize=True)).astype("float32")
+            X[f"freq_{c}"] = f
+            X[f"rar_{c}"] = (-np.log(f.clip(lower=1 / len(X)))).astype("float32")
+    cat_cols = [c for c in X.columns if c in CATS or is_texty(X[c])]
+    for c in cat_cols:
+        X[c] = X[c].astype(str).astype("category")
+    n = len(tr)
+    return X.iloc[:n].reset_index(drop=True), X.iloc[n:].reset_index(drop=True), cat_cols
+
+def add_te(Xa, ya, Xv, Xt, cols, k):
+    enc = TargetEncoder(target_type="binary", smooth="auto", cv=5, random_state=SEED + k)
+    A = Xa[cols].astype(str); V = Xv[cols].astype(str); T = Xt[cols].astype(str)
+    ta = enc.fit_transform(A, ya)          # cross-fitted on the training part only
+    tv = enc.transform(V); tt = enc.transform(T)
+    names = [f"te_{c}" for c in cols]
+    return (pd.concat([Xa.reset_index(drop=True), pd.DataFrame(ta, columns=names)], axis=1),
+            pd.concat([Xv.reset_index(drop=True), pd.DataFrame(tv, columns=names)], axis=1),
+            pd.concat([Xt.reset_index(drop=True), pd.DataFrame(tt, columns=names)], axis=1))
+
+
+def add_te2(Xa, ya, Xv, Xt, k):
+    """Target encoding of the ten column pairs, cross-fitted inside the fold."""
+    def pairs(F):
+        return pd.DataFrame({f"{a}|{b}": F[a].astype(str) + "_" + F[b].astype(str) for a, b in PAIRS})
+    enc = TargetEncoder(target_type="binary", smooth="auto", cv=5, random_state=SEED + 100 + k)
+    Pa, Pv, Pt = pairs(Xa), pairs(Xv), pairs(Xt)
+    ta = enc.fit_transform(Pa, ya); tv = enc.transform(Pv); tt = enc.transform(Pt)
+    nm = [f"te2_{c}" for c in Pa.columns]
+    return (pd.concat([Xa.reset_index(drop=True), pd.DataFrame(ta, columns=nm)], axis=1),
+            pd.concat([Xv.reset_index(drop=True), pd.DataFrame(tv, columns=nm)], axis=1),
+            pd.concat([Xt.reset_index(drop=True), pd.DataFrame(tt, columns=nm)], axis=1))
+
+BLOCKS = ["org", "origm", "digit", "freq", "route"]
+t0 = time.time()
+X, Xt, cats = build(train, test, BLOCKS)
+print(f"{X.shape[1]} features before the in-fold encodings, {len(cats)} categorical, {time.time()-t0:.0f}s")
+
+## Four tree models on the same folds
+
+Two LightGBMs that are deliberately not the same model: one deep, one shallow with randomised split
+thresholds. Two copies of one model blend to that model. CatBoost and XGBoost run on the GPU.
+
+import lightgbm as lgb, xgboost as xgb
+from catboost import CatBoostClassifier
+
+def fold_frames(k, ia, iv):
+    """The in-fold target encodings, fitted on the training part of fold k only."""
+    Xa, Xv, Xtk = add_te(X.iloc[ia], y[ia], X.iloc[iv], Xt, BASE, k)
+    return add_te2(Xa, y[ia], Xv, Xtk, k)
+
+def fit(name, k, Xa, ya, Xv, yv, Xtk):
+    if name == "lgbm":
+        m = lgb.LGBMClassifier(n_estimators=8000, learning_rate=0.02, max_depth=8, num_leaves=127,
+                               colsample_bytree=0.5, subsample=0.9, subsample_freq=1, min_child_samples=20,
+                               reg_lambda=5.0, reg_alpha=0.05, n_jobs=-1, random_state=SEED + k, verbose=-1)
+        m.fit(Xa, ya, eval_set=[(Xv, yv)], eval_metric="auc", callbacks=[lgb.early_stopping(200, verbose=False)])
+    elif name == "lgbm_xt":
+        m = lgb.LGBMClassifier(n_estimators=12000, learning_rate=0.03, num_leaves=31, extra_trees=True,
+                               colsample_bytree=0.4, subsample=0.8, subsample_freq=1, min_child_samples=60,
+                               reg_lambda=1.0, n_jobs=-1, random_state=SEED + 500 + k, verbose=-1)
+        m.fit(Xa, ya, eval_set=[(Xv, yv)], eval_metric="auc", callbacks=[lgb.early_stopping(200, verbose=False)])
+    elif name == "cat":
+        m = CatBoostClassifier(iterations=12000, learning_rate=0.05, depth=8, l2_leaf_reg=5, border_count=254,
+                               eval_metric="AUC", od_type="Iter", od_wait=400, random_seed=SEED + k,
+                               task_type="GPU", devices="0", cat_features=cats, verbose=0)
+        m.fit(Xa, ya, eval_set=(Xv, yv), use_best_model=True)
+    else:
+        m = xgb.XGBClassifier(n_estimators=12000, learning_rate=0.02, max_depth=8, subsample=0.9,
+                              colsample_bytree=0.5, min_child_weight=5, reg_lambda=5.0, reg_alpha=0.05,
+                              tree_method="hist", device="cuda", enable_categorical=True, max_cat_to_onehot=8,
+                              eval_metric="auc", early_stopping_rounds=300, random_state=SEED + k)
+        m.fit(Xa, ya, eval_set=[(Xv, yv)], verbose=False)
+    return m.predict_proba(Xv)[:, 1], m.predict_proba(Xtk)[:, 1]
+
+ARMS = ["lgbm", "lgbm_xt", "cat", "xgb"]
+OOF = {a: np.zeros(len(X)) for a in ARMS}; TEST = {a: np.zeros(len(Xt)) for a in ARMS}
+for k, (ia, iv) in enumerate(FOLDS):
+    t0 = time.time()
+    Xa, Xv, Xtk = fold_frames(k, ia, iv)
+    for a in ARMS:
+        pv, pt = fit(a, k, Xa, y[ia], Xv, y[iv], Xtk)
+        OOF[a][iv] = pv; TEST[a] += pt / len(FOLDS)
+    print(f"fold {k}: " + "  ".join(f"{a} {roc_auc_score(y[iv], OOF[a][iv]):.6f}" for a in ARMS)
+          + f"   {time.time()-t0:.0f}s", flush=True)
+for a in ARMS:
+    print(f"{a:8s} pooled out-of-fold AUC {roc_auc_score(y, OOF[a]):.6f}")
+
+## A neural model, configured
+
+Offline, on the same folds, the first RealMLP used the library's defaults. It scored
+**0.958243**, below every tree, and the blend gave it a weight of
+**0.000 in every one of the five folds**: different, and too weak to be worth the
+difference.
+Equal-weighting it in lowered the blend from 0.961218 to 0.961018.
+
+The same model with Vladimir Demidov's published configuration and feature engineering, [PS|S6|E10: RealMLP · PyTabKit](https://www.kaggle.com/code/yekenot/ps-s6-e10-realmlp-pytabkit), scored
+**0.961214** offline, above every tree. Its ranks correlate with the trees' at
+0.968 to 0.972, where the trees correlate with each other at
+0.978 to 0.994, and the blend gives it **half the weight**: between
+0.493 and 0.505 in every fold.
+
+A neural model is not useful here for being a neural model. It is useful because, configured well, it is as good
+as the trees and wrong in different places.
+
+The cell below is his configuration with four changes: our folds and seeds; categorical columns taken as every
+non-number dtype, so pandas 3 string columns are caught; quieter logs; and no best-epoch selection. pytabkit restores the best epoch on the validation set it is given, and here that set is the fold
+being scored, so the selection would look at the very rows the out-of-fold AUC is computed on. With `stop_epoch`
+it keeps the last of the three epochs instead. On a GPU the model is not bit-reproducible: with the selection on, the same configuration
+scored 0.961214 and 0.961222 in two separate private Kaggle runs. Without it, a private Kaggle run of this exact code scored 0.961219.
+
+# RealMLP, Vladimir Demidov's configuration and feature engineering, from
+# https://www.kaggle.com/code/yekenot/ps-s6-e10-realmlp-pytabkit . Ours: the folds and seeds, so this arm
+# blends row by row with the four above; the categorical columns selected by exclude="number", so pandas 3
+# string columns are caught; quieter logs; and no best-epoch selection (see the note at stop_epoch).
+# It builds its own 46 columns from the raw data.
+import contextlib, io, logging, subprocess, sys, torch
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--progress-bar", "off", "pytabkit==1.7.3"], check=True)
+from pytabkit import RealMLP_TD_Classifier
+for name in ("lightning", "lightning.pytorch", "lightning.fabric", "pytorch_lightning", "lightning_fabric"):
+    logging.getLogger(name).setLevel(logging.ERROR)
+torch.manual_seed(SEED)
+
+X = train.drop(["id", TGT], axis=1).copy(); X_test = test.drop(["id"], axis=1).copy()
+cat_cols = X.select_dtypes(exclude="number").columns.tolist()
+num_cols = X.select_dtypes(include="number").columns.tolist()
+category_map = {}
+important_combos = [
+    ('Class', 'Type of Travel', 'Gender'),
+    ('Class', 'Type of Travel', 'Age'),
+    ('Flight Distance', 'Departure/Arrival time convenient'),
+]
+def feature_engineering(df, fit=False):
+    # Fill NaNs
+    for col in cat_cols:
+        df[col] = df[col].fillna("missing")
+    for col in num_cols:
+        df[col] = df[col].fillna(0.0)
+    
+    # Categorize numericals
+    for col in num_cols:
+        cat_name = f"{col}_cat_"
+        if fit:
+            codes, uniques = df[col].factorize()
+            category_map[col] = uniques
+        else:
+            uniques = category_map[col]
+            code_map = {cat: i for i, cat in enumerate(uniques)}
+            codes = df[col].map(code_map).fillna(-1).astype('int32')
+        df[cat_name] = codes
+        df[cat_name] = df[cat_name].astype('category')
+
+    # Count encoding
+    for col in cat_cols + ['Leg room service']:
+        count_name = f"_{col}_count"
+        if fit:
+            count_map = df[col].value_counts()
+            category_map[count_name] = count_map
+        else:
+            count_map = category_map[count_name]
+        df[count_name] = df[col].map(count_map).fillna(0).astype('int32')
+
+    # Create interaction categories
+    combo_names = []
+    for cols in important_combos:
+        combo_name = '_'.join(cols) + '_'
+        combo_names.append(combo_name)
+        combo_series = df[cols[0]].astype(str)
+        for col in cols[1:]:
+            combo_series = combo_series + '_' + df[col].astype(str)
+        if fit:
+            codes, uniques = pd.factorize(combo_series, sort=False)
+            category_map[combo_name] = uniques
+        else:
+            uniques = category_map[combo_name]
+            code_map = {cat: i for i, cat in enumerate(uniques)}
+            codes = combo_series.map(code_map).fillna(-1).astype('int32')
+        df[combo_name] = codes
+        df[combo_name] = df[combo_name].astype('category') 
+
+    new_cat_cols = [col for col in df.columns if col.endswith('_')]
+    new_num_cols = [col for col in df.columns if col.startswith('_')]
+    return df, new_cat_cols, new_num_cols, combo_names
+
+X, new_cat_cols, new_num_cols, combo_names = feature_engineering(X, fit=True)
+X_test, _, _, _ = feature_engineering(X_test, fit=False)
+cat_cols += new_cat_cols; num_cols += new_num_cols
+print("len(new_cat_cols):", len(new_cat_cols))
+print("len(new_num_cols):", len(new_num_cols), "\n")
+
+print("prep len(cat_cols):", len(cat_cols))
+print("prep len(num_cols):", len(num_cols), "\n")
+print("X      prep shape:", X.shape)
+print("X_test prep shape:", X_test.shape, "\n")
+
+params = {
+    'random_state': 42,
+    'verbosity': 2,
+    'val_metric_name': '1-auc_ovr',
+
+    'n_ens': 8,
+    'n_epochs': 3,
+    'batch_size': 256,
+    'use_early_stopping': False,
+    'early_stopping_additive_patience': 10,
+    'early_stopping_multiplicative_patience': 1,
+
+    'lr': 0.053,
+    'wd': 0.015,
+    'sq_mom': 0.988,
+    'lr_sched': 'flat_anneal',
+    'wd_sched': 'cos_log_15',
+    'first_layer_lr_factor': 0.25,
+
+    'embedding_size': 5,
+    'max_one_hot_cat_size': 18,
+    'hidden_sizes': [512, 256, 128],
+    'act': 'silu',
+    'p_drop': 0.05,
+    'p_drop_sched': 'invsqrtp1e-3',
+
+    'plr_hidden_1': 16,
+    'plr_hidden_2': 8,
+    'plr_act_name': 'gelu',
+    'plr_lr_factor': 0.1151,
+    'plr_sigma': 2.33,
+
+    'ls_eps': 0.01,
+    'ls_eps_sched': 'sqrt_cos',
+
+    'add_front_scale': False,
+    'bias_init_mode': 'neg-uniform-dynamic-2',
+    'tfms': ['one_hot', 'median_center', 'robust_scale',
+             'smooth_clip', 'embedding', 'l2_normalize'],
+}
+params["random_state"] = SEED
+params["verbosity"] = 0   # his 2 prints the column lists and every epoch, per fold; the model is unchanged
+# pytabkit restores the best epoch on the validation set it is given, and here that set is the fold being
+# scored: a selection on the very rows the out-of-fold AUC is computed on. With stop_epoch set it takes its
+# refit path instead and keeps the last of the three epochs, with no look at the validation fold.
+params["stop_epoch"] = params["n_epochs"]
+
+OOF["realmlp"] = np.zeros(len(train)); TEST["realmlp"] = np.zeros(len(test))
+ys = pd.Series(y)
+for k, (ia, iv) in enumerate(FOLDS):
+    t0 = time.time()
+    Xa, Xv, Xtk = X.iloc[ia].copy(), X.iloc[iv].copy(), X_test.copy()
+    enc = TargetEncoder(cv=5, smooth="auto", shuffle=True, random_state=SEED + k)
+    names = [f"_{c}TE" for c in combo_names]
+    Xa[names] = enc.fit_transform(Xa[combo_names], ys.iloc[ia])
+    Xv[names] = enc.transform(Xv[combo_names]); Xtk[names] = enc.transform(Xtk[combo_names])
+    drop = ["Class_Type of Travel_Age_", "Flight Distance_Departure/Arrival time convenient_"]
+    Xa, Xv, Xtk = Xa.drop(drop, axis=1), Xv.drop(drop, axis=1), Xtk.drop(drop, axis=1)
+    m = RealMLP_TD_Classifier(**params)
+    with contextlib.redirect_stdout(io.StringIO()):     # pytabkit prints a "Refit" line per fold
+        m.fit(Xa, ys.iloc[ia], Xv, ys.iloc[iv])
+    OOF["realmlp"][iv] = m.predict_proba(Xv)[:, 1]
+    TEST["realmlp"] += m.predict_proba(Xtk)[:, 1] / len(FOLDS)
+    print(f"fold {k}: realmlp {roc_auc_score(y[iv], OOF['realmlp'][iv]):.6f}   {time.time()-t0:.0f}s", flush=True)
+    torch.cuda.empty_cache()
+print(f"realmlp  pooled out-of-fold AUC {roc_auc_score(y, OOF['realmlp']):.6f}")
+ARMS = ARMS + ["realmlp"]
+
+## The blend
+
+AUC reads only the order of the predictions, so every model is put on the rank scale before averaging; a model
+with compressed probabilities would otherwise count for less than its ranking earns. Weights are fitted on four
+folds and scored on the fifth, so the number printed is one the weights did not see. Its submission file is
+replaced by the stack's below.
+
+from scipy.optimize import minimize
+rk = lambda a: rankdata(a) / len(a)
+O = np.column_stack([rk(OOF[a]) for a in ARMS]); T = np.column_stack([rk(TEST[a]) for a in ARMS])
+
+def fit_w(P, t):
+    f = lambda w: -roc_auc_score(t, P @ (np.abs(w) / np.abs(w).sum()))
+    w = np.abs(minimize(f, np.ones(P.shape[1]) / P.shape[1], method="Nelder-Mead",
+                        options={"maxiter": 400, "xatol": 1e-4}).x)
+    return w / w.sum()
+
+honest = np.zeros(len(y))
+for ia, iv in FOLDS:
+    honest[iv] = O[iv] @ fit_w(O[ia], y[ia])
+w = fit_w(O, y)
+print("weights      " + "  ".join(f"{a} {x:.3f}" for a, x in zip(ARMS, w)))
+print(f"best single arm             {max(roc_auc_score(y, O[:, i]) for i in range(len(ARMS))):.6f}")
+print(f"blend, weights unseen (CV)  {roc_auc_score(y, honest):.6f}")
+pd.DataFrame({"id": test["id"], TGT: T @ w}).to_csv("submission.csv", index=False)
+print("submission.csv written")
+
+## The stack: our five and goodpjw2008's 48
+
+The blend above is this notebook's own models. goodpjw2008 published every member of their Part 8 stack, out
+of fold and on test: 48 models (7 XGBoost, 5 LightGBM and 5 CatBoost variants, 19 RealMLPs, 2 DeepFM, 2 GLM-margin models, 7 TabPFN and 1 TabICL). [The output of their Part 8](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160/output) is attached as an input; the
+notebook is released under Apache 2.0 (its page, read 2026-10-05). Eight of the members are not trees or networks trained there: 7 are TabPFN-3.5 ([Prior Labs](https://huggingface.co/Prior-Labs/tabpfn_3_5); its licence is non-commercial, and goodpjw2008 notes that Kaggle competitions are allowed) and 1 is TabICL v2 ([soda-inria](https://github.com/soda-inria/tabicl), BSD-3), loaded by Part 8 from goodpjw2008's dataset [s6e10-tabpfn-member](https://www.kaggle.com/datasets/goodpjw2008/s6e10-tabpfn-member). The stacker is theirs
+too, a logistic regression on the members' logits. Here it is fitted on four of our folds and scored on the
+fifth, so the number it prints is one it did not see.
+
+Re-scored on our labels and folds, their 48 reach 0.961919; they report
+0.96193 on their own folds. With our five, 0.961988: +0.000069, interval [+0.000041, +0.000098] paired over the rows.
+Taking the RealMLP out of the stack leaves 0.961942: with the other 52 in place it adds +0.000047. The submission this notebook writes is the stack's.
+
+# The stack. goodpjw2008 published the out-of-fold and test predictions of all 48 members of their
+# Part 8 stack; its output is attached here as an input (the notebook is Apache 2.0; 8 of the members are
+# TabPFN-3.5 and TabICL predictions, see the text above for their licences). Their columns are out of fold
+# on their folds (seed 42), ours on seed 33: every row is still predicted by a model that did not see its
+# label, which is all a stacker needs. The stacker is theirs as well, a logistic regression on logits,
+# fitted here on four of our folds and scored on the fifth, so the printed AUC is one it did not see.
+from sklearn.linear_model import LogisticRegression
+
+# the 48 columns this notebook was written against; a newer upstream version with other members stops here
+THEIR_48 = [
+    'xgb_v3', 'xgb_v3_s1', 'xgb_v3_d10', 'xgb_v4_tuned', 'lgb_v3', 'cat_v3', 'realmlp_pub', 'realmlp_pub_s1',
+    'realmlp_pub_s2', 'realmlp_og', 'realmlp_v4', 'realmlp_v4_s1', 'realmlp_v4_s2', 'realmlp_fa',
+    'realmlp_fa_s7', 'realmlp_fa_s123', 'realmlp_v4fa', 'deepfm_v1', 'xgb_vb', 'cat_vb', 'lgb_vb', 'cat_ctr',
+    'cat_ctr3', 'cat_ctr5', 'glm_xgb', 'glm6_xgb', 'xgb_auxev', 'xgb_auxall', 'lgb_auxall', 'realmlp_fa_aux',
+    'realmlp_fa_aux_s2', 'lgb_vb_ogev', 'realmlp_fa_auxog', 'realmlp_fa_aux3', 'realmlp_pub_aux',
+    'realmlp_fa_auxogev', 'lgb_vb_aux', 'deepfm_rawaux', 'tabpfn_full_raw', 'tabpfn_full_raw_s1',
+    'realmlp_vb_aux', 'realmlp_vb_aux_s2', 'tabpfn_te', 'tabpfn_te4', 'tabpfn_catfd', 'tabpfn_catfd_s1',
+    'tabpfn_catfd10', 'tabicl_full_raw']
+MEM = sorted(glob.glob("/kaggle/input/**/oof_members.csv", recursive=True))
+assert len(MEM) == 1, f"goodpjw2008's Part 8 output is not attached or is ambiguous: {MEM}"
+mo = pd.read_csv(MEM[0]).set_index("id").reindex(train["id"])
+mt = pd.read_csv(MEM[0].replace("oof_members", "test_members")).set_index("id").reindex(test["id"])
+assert list(mo.columns) == THEIR_48 and list(mt.columns) == THEIR_48, "the upstream members changed"
+assert not mo.isna().any().any() and not mt.isna().any().any(), "member ids do not match train and test"
+logit = lambda p: np.log(np.clip(p, 1e-6, 1 - 1e-6) / (1 - np.clip(p, 1e-6, 1 - 1e-6)))
+
+def stack(cols_oof, cols_test):
+    Lo = np.column_stack([logit(c) for c in cols_oof]); Lt = np.column_stack([logit(c) for c in cols_test])
+    oof = np.zeros(len(y))
+    for ia, iv in FOLDS:
+        oof[iv] = LogisticRegression(max_iter=2000).fit(Lo[ia], y[ia]).decision_function(Lo[iv])
+    full = LogisticRegression(max_iter=2000).fit(Lo, y)
+    return oof, full.decision_function(Lt)
+
+theirs_o = [mo[c].to_numpy() for c in THEIR_48]; theirs_t = [mt[c].to_numpy() for c in THEIR_48]
+oof48, _ = stack(theirs_o, theirs_t)
+# the stacker is deterministic on fixed inputs: a different value here means the upstream members changed
+assert abs(roc_auc_score(y, oof48) - 0.961919) < 5e-7, "goodpjw2008's member values changed since this was written"
+oof53, test53 = stack([OOF[a] for a in ARMS] + theirs_o, [TEST[a] for a in ARMS] + theirs_t)
+rest = [a for a in ARMS if a != "realmlp"]
+oof52, _ = stack([OOF[a] for a in rest] + theirs_o, [TEST[a] for a in rest] + theirs_t)
+row = lambda label, v: print(f"{label:40s}{v}")
+row("best single of their 48", f"{max(roc_auc_score(y, mo[c]) for c in THEIR_48):.6f}")
+row("stack of their 48, honest CV", f"{roc_auc_score(y, oof48):.6f}")
+row(f"stack of ours and theirs, {len(ARMS) + 48}, CV", f"{roc_auc_score(y, oof53):.6f}")
+row("our five add", f"{roc_auc_score(y, oof53) - roc_auc_score(y, oof48):+.6f}")
+row("the same stack without the RealMLP", f"{roc_auc_score(y, oof52):.6f}")
+row("the RealMLP adds", f"{roc_auc_score(y, oof53) - roc_auc_score(y, oof52):+.6f}")
+np.savez_compressed("oof_ours.npz", **{a: OOF[a] for a in ARMS}, **{f"test_{a}": TEST[a] for a in ARMS})
+np.savez_compressed("oof_stacks.npz", oof48=oof48, oof52=oof52, oof53=oof53, test53=test53)
+pd.DataFrame({"id": test["id"], TGT: 1 / (1 + np.exp(-test53))}).to_csv("submission.csv", index=False)
+print(f"submission.csv written: the stack of {len(ARMS) + 48}")
+
+## Does the cross-validation move the board?
+
+Six submissions in the order they were made, each a different model or feature set. CV here is the pooled
+out-of-fold AUC for a single model and the out-of-fold score of the blender or stacker for a blend or a stack; the
+last column is the paired noise of the public board between that submission and the one before it, measured as in the
+board section.
+
+| submission | CV | public LB | CV minus LB | paired noise against the previous row |
+|---|---|---|---|---|
+| LightGBM, the 21 raw columns | 0.959010 | 0.95843 | +0.00058 |  |
+| LightGBM, the ladder through te (181 features plus 21 in-fold encodings) | 0.960863 | 0.96028 | +0.00058 | 0.00047 |
+| rank blend of four tree models, three with the route | 0.961214 | 0.96067 | +0.00054 | 0.00026 |
+| rank blend of five, with the tuned RealMLP | 0.961550 | 0.96115 | +0.00040 | 0.00019 |
+| the five, plus three of goodpjw2008's TabPFN members | 0.961815 | 0.96131 | +0.00050 | 0.00018 |
+| logistic stack: the five and goodpjw2008's 48, offline build | 0.961989 | 0.96169 | +0.00030 | 0.00018 |
+| this notebook's code, its own output (private run) | 0.961988 | 0.96169 | +0.00030 | |
+
+CV and the public board put the six in the same order, although the step after "rank blend of five, with the tuned RealMLP" (+0.00016 on the board) is smaller than its paired noise of 0.00018. Our own single models and blends
+sat at +0.00040 to +0.00058 CV minus LB. The stack's offset was +0.00030, close to
+what goodpjw2008's own stacks show (+0.00029 to +0.00038 across their parts 1 to 7, from their table);
+the change from the blend of five, 0.00010, is inside the paired noise of 0.00026 for that pair, so the board does
+not resolve it. This notebook's own output, the same stack with the route in the extra-trees LightGBM, scored 0.96169, the same public score as the offline build; two near-copies on the same rows move by up to 0.00010 by chance. All of this is how closely CV tracked the public fifth of the test set; it says nothing on its
+own about the private four fifths.
+
+## What this does not say
+
+* The public board is about a fifth of the test set; the private board is the rest. Noise falls with the square
+  root of the rows, so on four times the rows the paired noise of two different models is about half:
+  0.00010 to 0.00022, against a public top-hundred spread of 0.00021. The
+  private order of the leaders will not be the public one.
+* The feature ladder was measured once, on one fold assignment and one training seed. The paired intervals cover
+  the rows, not the choice of folds or seeds.
+* Our tree models stop early on the fold they are then scored on. That makes their out-of-fold AUC optimistic by
+  an amount not measured here, and the stacker sees those numbers; whether goodpjw2008's members do the same is
+  not checked here. The RealMLP runs a fixed three epochs with no selection.
+* The distance-and-route split is measured on train with values of 50+ rows, by a neighbour
+  average of 10 values. Another smoother would move the 66
+  percent by a few points; with 4 and 20 neighbours it gives 61 and 66 percent.
+* The RealMLP weight of about one half in the blend is fitted on these folds: 0.501 in the private run of this
+  code, and between 0.493 and 0.505 across the five folds of the offline blend
+  of the same five. On another split it would move.
+* Most of the score is not this notebook's. goodpjw2008's 48 members alone reach
+  0.961919 here; our five add +0.000069. The analysis is this notebook's, and the five models
+  were trained here on these folds, but the RealMLP is Vladimir Demidov's configuration and the deep LightGBM's
+  parameters follow evgendvorkin's. The stack's members and its stacker are goodpjw2008's.
+* Their members were fitted on their own folds (seed 42), ours on seed 33. Every column is out of fold for every
+  row, so the stacker sees no leaked label, but a stack over mixed folds is not the same experiment as a nested CV
+  on one split.
+
+Credits, in the order used:
+[Airline Passenger Satisfaction](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction) by
+teejmahal20, the original data. evgendvorkin, [S6E10 LightGBM CV 5 folds 0.96102](https://www.kaggle.com/code/evgendvorkin/s6e10-lightgbm-cv-5-folds-0-96102), for the `org`, `origm`, `digit`, `freq`, `te` and `te2` blocks,
+the ten column pairs, the route-profile residuals and the deep LightGBM's parameters. goodpjw2008, [Part 1](https://www.kaggle.com/code/goodpjw2008/s6e10-route-id-fe-og-model-stack-lb-0-96108) and
+[Part 8](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160), for reading `Flight Distance` as a route, for the original data as a model, and for the route profile, and [their Part 8 output](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160/output) for the
+48 stack members and the stacker; through it, Prior Labs' TabPFN-3.5 and soda-inria's TabICL.
+Vladimir Demidov, [PS|S6|E10: RealMLP · PyTabKit](https://www.kaggle.com/code/yekenot/ps-s6-e10-realmlp-pytabkit), for the RealMLP configuration and its feature engineering. This notebook's own part is
+the measurements: the paired ladder, the two uses of the original, the measurement of the distance-and-route split,
+the board's paired noise, the blend of the five and the comparisons inside the stack.

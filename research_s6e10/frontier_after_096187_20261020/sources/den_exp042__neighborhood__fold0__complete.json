@@ -1,0 +1,202 @@
+{
+  "files": {
+    "context.json": "281fd743f7b804fe1e0d2a0a1d5d8af107b261807518b689551a410890f271b5",
+    "encoder.pt": "3cff11045e93cdad7d7e2e158508739203c600158fb795a58c50025e3f62bb24",
+    "predictions.npz": "7d97aae9d5a2a53192d238677db1a3f28df2a4e32915a72f93d3b88b9e2d79fc",
+    "training.json": "9eb98a0c80bedc51f95ef1ee3121bd7bf301b5e91fd2b2e66e1cbed054954757"
+  },
+  "signature": {
+    "environment": {
+      "capability": [
+        7,
+        5
+      ],
+      "cuda": "12.8",
+      "gpu": "Tesla T4",
+      "numpy": "2.0.2",
+      "pandas": "2.3.3",
+      "runtime": "kaggle",
+      "torch": "2.10.0+cu128"
+    },
+    "labels": "2e60562b10f039de1f417ecd27fb92344930715a7f9a7c1b616b3bf86c023278",
+    "params": {
+      "bank_chunk": 32768,
+      "batch_size": 512,
+      "category_dim": 8,
+      "context_rows": 2048,
+      "dropout": 0.1,
+      "encode_batch": 4096,
+      "epochs": 12,
+      "frequencies": 8,
+      "frequency_scale": 2.0,
+      "gradient_clip": 1.0,
+      "learning_rate": 0.0003,
+      "metric_dim": 64,
+      "nca_loss_weight": 0.5,
+      "precision": "float32_no_amp",
+      "query_batch": 256,
+      "retrieval_prediction_weight": 0.5,
+      "seed": 2026,
+      "temperature": 1.0,
+      "version": "hybrid-neighborhood-plr-v1",
+      "weight_decay": 0.0001,
+      "width": 256
+    },
+    "seed": 2026,
+    "source": {
+      "__init__.py": "912215d71a7ef65f0b2fb5590e04bb4a5a30fef4000c98379330f39d0fb645a4",
+      "auxiliary_reference.py": "8e97b47d6d7970f751caab2d4a2ca786b7a8fc3e8e978571334a2c9d0e9fb4c7",
+      "bagged_residual.py": "8c9ae2e6960663e59ed7b54f874e50d46f89cce49176070d5523473672f80193",
+      "campaign.py": "9cbf642231a5c18c051b321a2f96c5544d8868a9d8b83f6ae9c3e1b1fe315bc2",
+      "catboost_view.py": "0f419d03bebc8448307ae455896806035ac1c37eeb36b1f236d84db29a9dd6ab",
+      "comparison.py": "472d12d3d93697bba205bf736ac7336cd20384706e4e62cab01d4d6ef4d4dee0",
+      "competition_auxiliary.py": "36637c5afb84db32be84d3a016e43c3766f4c02555d85808f7b753e300805803",
+      "confidence_basis.py": "b5463e9f473140013682f7f44271ad503f9e7bf86fb91300b72a6044b67a09c0",
+      "config.py": "68119bc5cc03dc4676c543009a699754ff983dc47cd1b42384b71a61625dab8f",
+      "contextual_gpu.py": "2f8b07b43ad2d72d36ac4c13cc1d70604d60eeaf557e0d8953fcef1a69bd4125",
+      "distance_context.py": "c3ece73a957ad0ddd04aa80b48c8930a2003c02aad59f3b6478ab43b29e4c42a",
+      "engine.py": "de016ca70fae1006ee401a3b4da67dbfde6492213668d2a3fb90687733b553df",
+      "frozen.py": "36a74f571b7fdf7399ad327f1a4e5ef266e91571b8c2926ba8cb368ae6cf7474",
+      "frozen_consensus.py": "d3550a2b8f350c21045983f20547b1f92af1d3086742d1c847abba8f01ec8bc3",
+      "global_refresh.py": "dad81be79e8abc8e45e8b6d3a921209f200c05eb8995dc608638efec026028e3",
+      "gpu_residual.py": "fcc0eada7dc09e4e34fba180108d082d232e5ac2648aaef9f9d10b569568c669",
+      "lightgbm_view.py": "6babaf5d2eb256932ca4622005e7fff98303c54bf9f5c60ba23f8ce99373c955",
+      "neighborhood_diagnostics.py": "a2e32f673db3766777270b3b430261fa2f934f86e075319ead7cee7315a33e89",
+      "neighborhood_gpu.py": "4e5fff8eada55b47156361b8eb8717345fc71b7b626212cf6afebc51a9fe7f6b",
+      "neighborhood_model.py": "39b33920914e3d1ac07bd83e52743c7192a3c33fa5645d71fc2458baa2996e37",
+      "neural_coverage.py": "e225418ccda4a554d748dc0ce2382c52428080a4541f4a02028313119e661649",
+      "neural_view_b.py": "84ff8127ff4224d7e9ec1f16fbc5e132d49d3fd35823ea92439ea21479f5ec17",
+      "numeric_tokens.py": "ffa0a8850c9a0b4826a06b35af14c77725e2fea369e621ebe31168e83b00db8e",
+      "pairwise_gpu.py": "e8f8b16fd728abf429caf697c01eec0b287639b0fc1369ba3285c1e4855bbeb8",
+      "pipeline.py": "e25220f7ba7937936cd141548bc2463572af800dc7a0435e90d8fe4e33ffbcd4",
+      "public_stack.py": "ee566a349b848f1c4c5274b70aa980c81ebf286dffbefb1817a322a0118caa0b",
+      "rating_tokens.py": "af9eda5163f99ce181cef74028493d5de53daa2be81c8ae1a63ce179379b1844",
+      "realmlp_carrier.py": "c048fc15f520eb54a4d3ccba84d0fc93fe952620436523ecebdb274494d57c0e",
+      "realmlp_model.py": "1c964ddf194e25224d8837f2c53a56e67b254f95f28d4678cd38cefae514a308",
+      "reference.py": "0b7f7401deec64ed4256363c99da688d3cb68d90f40dc1ac519c81965a5666c3",
+      "residual_stack.py": "f7f999223289fdd84b9c9c7c91c4173d4d4f8821b4dd863e589d38b024e3a728",
+      "route_carrier.py": "3b2938b761dd086ca4e4f9cc932fd5fd43ea163f2f3444aa0b3e01c753cfa896",
+      "runtime.py": "da00ca131cd27057fb31842e6da9135c93a292d9f3973571116f58bfc67d41ce",
+      "sequential_gpu.py": "c6095114ad63c2868b8595667e6db806ad33f65ac91c7b70f18f005d0c924da0",
+      "source_auxiliary.py": "8a1959d433a2812394a5eb5ecb27289554304537bed60027fa9aea813a37c2a6",
+      "source_external.py": "c1b9a6d4f9451d88497034e86e175916309fe676fe42b38a9e2181213ae63957",
+      "source_service.py": "6bcff1d4196b676352bb785f229ec9f43349657b4c43cee5a874410a2f7202e9",
+      "source_view.py": "880988ea6a2a354137d46758e0315a17f114c5b60a4e831569c77760b123d8e1",
+      "tabm_carrier.py": "77b92a48c968115828b3becc802af302dcc486f33ba6c55ffad5903cd3300a80",
+      "three_seed_residual.py": "19c0f2fb9415890c0cfdf01775514d463073b6694372323531acaa5d2832b70b",
+      "trained_hybrid.py": "e9c4334d30c9be39e2e58f44ea252b71f46dfeb60d8fa85f83f7e7b17f901ccf",
+      "xgb_model.py": "2ef872e8c2c4c79197ff8f714d6db95e901acec7533ab2e5b02ca755ee8a96c6",
+      "xgb_view.py": "d7d6bffa36b30183ee5c39cd9b5e2e29f5f0521361e07a9355b1c3f5eaecf3ec"
+    },
+    "test_features": "fea779fd6647360f93f6845757609498aa7450b15a2700553035ac2aabb77f2a",
+    "train_features": "4ee4be952edcebf26a0e2964d595c770c4bea0b56b51177773a32d7943b77ff5",
+    "train_ids": "25f9871408a3fb4f7561ccd211d823ded76793992e43ae09c64fb43430e5967c",
+    "valid_features": "fd44790f0cbc931fdab9e62e4d389ec0499c07682989c6e5dcf750bfed714e32",
+    "valid_ids": "c51a85ae31703113af340577596952c560f3933e7f26df29d89a76b22a35cf2d"
+  },
+  "training": {
+    "bank_is_training_only": true,
+    "bank_rows": 559708,
+    "bank_train_ids_sha256": "25f9871408a3fb4f7561ccd211d823ded76793992e43ae09c64fb43430e5967c",
+    "device": "cuda:0",
+    "fit_seconds": 184.77427840399997,
+    "gpu": "Tesla T4",
+    "history": [
+      {
+        "epoch": 1,
+        "training_loss": 0.2449094990723245,
+        "updates": 1094
+      },
+      {
+        "epoch": 2,
+        "training_loss": 0.23228314696089275,
+        "updates": 1094
+      },
+      {
+        "epoch": 3,
+        "training_loss": 0.23000253668977416,
+        "updates": 1094
+      },
+      {
+        "epoch": 4,
+        "training_loss": 0.2285917979769816,
+        "updates": 1094
+      },
+      {
+        "epoch": 5,
+        "training_loss": 0.2275254359530836,
+        "updates": 1094
+      },
+      {
+        "epoch": 6,
+        "training_loss": 0.22679302243858848,
+        "updates": 1094
+      },
+      {
+        "epoch": 7,
+        "training_loss": 0.22583093400436935,
+        "updates": 1094
+      },
+      {
+        "epoch": 8,
+        "training_loss": 0.22492863686712608,
+        "updates": 1094
+      },
+      {
+        "epoch": 9,
+        "training_loss": 0.22409994050172358,
+        "updates": 1094
+      },
+      {
+        "epoch": 10,
+        "training_loss": 0.22346543889211265,
+        "updates": 1094
+      },
+      {
+        "epoch": 11,
+        "training_loss": 0.22255528778427935,
+        "updates": 1094
+      },
+      {
+        "epoch": 12,
+        "training_loss": 0.221904042639259,
+        "updates": 1094
+      }
+    ],
+    "inference_seconds": 131.35436451099997,
+    "native_roundtrip_exact": true,
+    "parameters": 236657,
+    "params": {
+      "bank_chunk": 32768,
+      "batch_size": 512,
+      "category_dim": 8,
+      "context_rows": 2048,
+      "dropout": 0.1,
+      "encode_batch": 4096,
+      "epochs": 12,
+      "frequencies": 8,
+      "frequency_scale": 2.0,
+      "gradient_clip": 1.0,
+      "learning_rate": 0.0003,
+      "metric_dim": 64,
+      "nca_loss_weight": 0.5,
+      "precision": "float32_no_amp",
+      "query_batch": 256,
+      "retrieval_prediction_weight": 0.5,
+      "seed": 2026,
+      "temperature": 1.0,
+      "version": "hybrid-neighborhood-plr-v1",
+      "weight_decay": 0.0001,
+      "width": 256
+    },
+    "peak_gpu_bytes": 638923264,
+    "seed": 2026,
+    "self_matches_masked_in_training": true,
+    "torch": "2.10.0+cu128",
+    "training_class_counts": [
+      311436,
+      248272
+    ],
+    "training_label_sha256": "2e60562b10f039de1f417ecd27fb92344930715a7f9a7c1b616b3bf86c023278"
+  }
+}

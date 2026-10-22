@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "fit_rows": 2048,
+  "query_rows": 256,
+  "fit_and_query_within_selection_fit": true,
+  "no_query_labels_scored": true,
+  "checkpoint_prediction_max_differences": {
+    "old_xgb": 0.0,
+    "old_cat": 0.0,
+    "control": 0.0,
+    "realmlp": 0.0,
+    "lgb": 0.0,
+    "lean_42": 0.0,
+    "lean_20261019": 0.0
+  }
+}

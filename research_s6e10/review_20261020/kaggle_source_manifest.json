@@ -1,0 +1,30 @@
+{
+  "read_date": "2026-10-20",
+  "source_only": true,
+  "files": [
+    {
+      "kernel": "kratosyan/s6e10-stacking-every-public-oof-library",
+      "url": "https://www.kaggle.com/api/v1/kernels/pull/kratosyan/s6e10-stacking-every-public-oof-library",
+      "bytes": 38771,
+      "sha256": "b305754481d8390a516ec11407e0110e5315544b3be7f3686d2a99e574e44b06",
+      "source_length": 14031,
+      "version": 5
+    },
+    {
+      "kernel": "samanyu1808/s6e10-tabpfn-route-og",
+      "url": "https://www.kaggle.com/api/v1/kernels/pull/samanyu1808/s6e10-tabpfn-route-og",
+      "bytes": 49883,
+      "sha256": "7ccf6bca3057b61793353e6d706bb0ddc863afe55187de1e20cfeb327f530a5e",
+      "source_length": 19604,
+      "version": 1
+    },
+    {
+      "kernel": "hemingweb/s6e10-exp01-tabpfn35-full-context",
+      "url": "https://www.kaggle.com/api/v1/kernels/pull/hemingweb/s6e10-exp01-tabpfn35-full-context",
+      "bytes": 46027,
+      "sha256": "822498560f0020adf706f4895a17a870d2ee9e5a6532c22fbeede8d97ae13322",
+      "source_length": 18051,
+      "version": 2
+    }
+  ]
+}

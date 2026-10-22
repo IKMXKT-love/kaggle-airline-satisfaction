@@ -1,0 +1,627 @@
+### CELL 0 markdown
+# S6E10 | Experiment 7: Original-Survey Prior Transfer
+
+**Competition:** Playground Series S6E10 — Predicting Airline Satisfaction  
+**Target / metric:** `satisfaction` / ROC AUC  
+**Change:** train a LightGBM teacher on the public original airline survey training split, then add its probability and logit as two features to the Exp 1–4 feature and Exp 6 cross-fitted ensemble pipeline.  
+**Validation:** stratified 5-fold CV on competition rows only.  
+
+The original dataset's held-out `test.csv` is not read. Exact source rows matching any competition train or test feature row are removed before fitting the source teacher. No TabPFN credentials or Exp 5 code are used.
+
+
+### CELL 1 code
+# Environment & Device Verification
+import os
+import gc
+import time
+import shutil
+import warnings
+import numpy as np
+import pandas as pd
+from scipy.stats import rankdata
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import roc_auc_score
+from sklearn.preprocessing import TargetEncoder
+import lightgbm as lgb
+import torch
+
+warnings.filterwarnings('ignore')
+
+HAS_GPU = torch.cuda.is_available()
+print(f"PyTorch CUDA / GPU Available: {HAS_GPU}")
+if HAS_GPU:
+    print(f"Device Name: {torch.cuda.get_device_name(0)}")
+
+try:
+    import xgboost as xgb
+    HAS_XGB = True
+    print(f"XGBoost Version: {xgb.__version__}")
+except ImportError:
+    HAS_XGB = False
+    print("XGBoost not available; running dual LightGBM architectures.")
+
+
+### CELL 2 code
+# Data Ingestion
+def find_data_file(filename):
+    search_roots = [
+        '/kaggle/input/competitions/playground-series-s6e10',
+        '/kaggle/input/playground-series-s6e10',
+        './data'
+    ]
+    for root in search_roots:
+        candidate = os.path.join(root, filename)
+        if os.path.exists(candidate):
+            return candidate
+    raise FileNotFoundError(f"{filename} not found in search paths!")
+
+train_file = find_data_file('train.csv')
+test_file = find_data_file('test.csv')
+
+print(f"Loading train: {train_file}")
+train = pd.read_csv(train_file)
+print(f"Loading test:  {test_file}")
+test = pd.read_csv(test_file)
+
+print(f"Train raw shape: {train.shape} | Test raw shape: {test.shape}")
+
+
+### CELL 3 code
+# Public original-survey teacher prior (source training split only)
+import glob
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import roc_auc_score
+
+SOURCE_DATASET = 'teejmahal20/airline-passenger-satisfaction'
+SOURCE_TRAIN_CANDIDATES = [
+    '/kaggle/input/airline-passenger-satisfaction/train.csv',
+    '/kaggle/input/datasets/teejmahal20/airline-passenger-satisfaction/train.csv',
+]
+source_train_file = next((p for p in SOURCE_TRAIN_CANDIDATES if os.path.exists(p)), None)
+if source_train_file is None:
+    matches = [p for p in glob.glob('/kaggle/input/**/train.csv', recursive=True)
+               if 'airline-passenger-satisfaction' in p.lower()]
+    if matches:
+        source_train_file = matches[0]
+if source_train_file is None:
+    raise FileNotFoundError('Attached original dataset train.csv not found under /kaggle/input.')
+
+ID_COL = 'id'
+TARGET = 'satisfaction'
+source_df = pd.read_csv(source_train_file)
+source_target = source_df['satisfaction'].astype(str).str.strip().str.lower().map({
+    'satisfied': 1,
+    'neutral or dissatisfied': 0,
+})
+if source_target.isna().any():
+    raise ValueError(f'Unrecognized original target labels: {source_df.loc[source_target.isna(), "satisfaction"].unique()}')
+source_features = [c for c in train.columns if c not in [ID_COL, TARGET]]
+missing_source_cols = sorted(set(source_features) - set(source_df.columns))
+if missing_source_cols:
+    raise ValueError(f'Original dataset is missing competition features: {missing_source_cols}')
+
+source_X = source_df[source_features].copy()
+competition_X = pd.concat([
+    train[source_features],
+    test[source_features],
+], ignore_index=True)
+# Canonicalize shared predictors before hashing so integer/float CSV dtypes do not hide duplicates.
+source_cat_cols = [c for c in ['Gender', 'Customer Type', 'Type of Travel', 'Class'] if c in source_features]
+def canonical_for_hash(frame):
+    out = frame[source_features].copy()
+    for col in source_features:
+        if col in source_cat_cols:
+            out[col] = out[col].astype('string').fillna('<NA>')
+        else:
+            out[col] = pd.to_numeric(out[col], errors='coerce').astype('float64')
+    return out
+source_hash = pd.util.hash_pandas_object(canonical_for_hash(source_X), index=False)
+competition_hash = set(pd.util.hash_pandas_object(canonical_for_hash(competition_X), index=False).to_numpy())
+overlap_mask = source_hash.isin(competition_hash).to_numpy()
+print(f'Original train rows: {len(source_X):,} | exact overlaps excluded: {int(overlap_mask.sum()):,}')
+keep_source = ~overlap_mask
+source_X = source_X.loc[keep_source].reset_index(drop=True)
+source_y = source_target.loc[keep_source].astype('int8').reset_index(drop=True)
+
+for col in source_cat_cols:
+    categories = sorted(set(source_X[col].dropna().astype(str)) |
+                        set(competition_X[col].dropna().astype(str)))
+    dtype = pd.CategoricalDtype(categories=categories)
+    source_X[col] = source_X[col].astype(str).astype(dtype)
+    competition_X[col] = competition_X[col].astype(str).astype(dtype)
+
+SEED = 42
+X_src_fit, X_src_valid, y_src_fit, y_src_valid = train_test_split(
+    source_X, source_y, test_size=0.2, random_state=SEED, stratify=source_y)
+source_params = {
+    'objective': 'binary', 'metric': 'auc', 'learning_rate': 0.04,
+    'num_leaves': 31, 'max_depth': 7, 'min_child_samples': 40,
+    'feature_fraction': 0.9, 'bagging_fraction': 0.9, 'bagging_freq': 1,
+    'lambda_l2': 5.0, 'verbosity': -1, 'seed': SEED,
+    'feature_fraction_seed': SEED, 'bagging_seed': SEED,
+    'num_threads': -1,
+}
+source_fit_ds = lgb.Dataset(X_src_fit, label=y_src_fit, categorical_feature=source_cat_cols)
+source_valid_ds = lgb.Dataset(X_src_valid, label=y_src_valid,
+                              categorical_feature=source_cat_cols, reference=source_fit_ds)
+source_valid_model = lgb.train(
+    source_params, source_fit_ds, num_boost_round=1200,
+    valid_sets=[source_valid_ds],
+    callbacks=[lgb.early_stopping(60, verbose=False), lgb.log_evaluation(0)],
+)
+source_best_iter = source_valid_model.best_iteration or 600
+source_valid_pred = source_valid_model.predict(X_src_valid, num_iteration=source_best_iter)
+print(f'Source holdout AUC: {roc_auc_score(y_src_valid, source_valid_pred):.6f} | best iteration: {source_best_iter}')
+
+source_full_ds = lgb.Dataset(source_X, label=source_y, categorical_feature=source_cat_cols)
+source_model = lgb.train(source_params, source_full_ds, num_boost_round=source_best_iter)
+source_prior = np.clip(source_model.predict(competition_X), 1e-6, 1 - 1e-6)
+source_prior_logit = np.log(source_prior / (1 - source_prior)).astype(np.float32)
+source_prior_train = source_prior[:len(train)].astype(np.float32)
+source_prior_test = source_prior[len(train):].astype(np.float32)
+del source_df, source_X, source_y, competition_X, source_model, source_valid_model
+_ = gc.collect()
+print(f'Added source prior for {len(source_prior_train):,} train and {len(source_prior_test):,} test rows.')
+
+
+### CELL 4 markdown
+## Why Exp 7
+
+Exp 2 scored 0.96045 and Exp 3 scored 0.95846 in the completed submissions, so the stronger multi-model synthetic-data pipeline is retained. The recurring weakness in earlier experiments is that they only learn from synthetic competition rows, even though a public original airline survey contains the same target concept and aligned predictors.
+
+Public S6E10 solution research reports an original-data XGBoost model's `orig_proba` and `orig_logit` as useful predictive features. It also reports direct real-data weighted training among unsuccessful approaches. Exp 7 therefore transfers the external dataset through a source-trained teacher feature rather than mixing raw external rows into competition folds. This is a hypothesis to validate, not a guaranteed gain.
+
+The source teacher is trained on the original dataset's `train.csv` only. Rows whose feature signature exactly matches any competition train or test row are excluded before teacher fitting. The original target is used only to train that teacher. Competition OOF folds, target encodings, and contextual profiles retain the Exp 1–4 / Exp 6 leakage controls.
+
+The external Kaggle dataset is publicly accessible at no cost, matching the S6E10 external-data rule. Its Kaggle license field says `Other (specified in description)`; review the source description/license before reuse beyond this competition.
+
+
+### CELL 5 code
+ID_COL = 'id'
+TARGET = 'satisfaction'
+
+y = train[TARGET].astype(int).values
+test_ids = test[ID_COL].values
+train_ids = train[ID_COL].values
+N_TRAIN = len(train)
+
+# Concatenate for consistent feature engineering
+df_all = pd.concat([
+    train.drop(columns=[ID_COL, TARGET]),
+    test.drop(columns=[ID_COL])
+], ignore_index=True)
+df_all['orig_prior_proba'] = np.concatenate([source_prior_train, source_prior_test]).astype(np.float32)
+df_all['orig_prior_logit'] = source_prior_logit.astype(np.float32)
+del train, test
+gc.collect()
+
+cat_cols = ['Gender', 'Customer Type', 'Type of Travel', 'Class']
+service_cols = [
+    'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
+    'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
+    'Inflight entertainment', 'On-board service', 'Leg room service',
+    'Baggage handling', 'Checkin service', 'Cleanliness'
+]
+
+# --- 1. Operational Delay Features ---
+df_all['Arrival_Delay_Missing'] = df_all['Arrival Delay in Minutes'].isna().astype('int8')
+df_all['Arrival Delay in Minutes'] = df_all['Arrival Delay in Minutes'].fillna(-1.0).astype(np.float32)
+df_all['Departure Delay in Minutes'] = df_all['Departure Delay in Minutes'].fillna(-1.0).astype(np.float32)
+
+df_all['total_delay'] = (df_all['Arrival Delay in Minutes'] + df_all['Departure Delay in Minutes']).astype(np.float32)
+df_all['delay_gap'] = (df_all['Arrival Delay in Minutes'] - df_all['Departure Delay in Minutes']).astype(np.float32)
+df_all['delay_is_zero'] = ((df_all['Arrival Delay in Minutes'] <= 0) & (df_all['Departure Delay in Minutes'] <= 0)).astype('int8')
+df_all['delay_recovered'] = (df_all['Arrival Delay in Minutes'] < df_all['Departure Delay in Minutes']).astype('int8')
+df_all['delay_severe'] = ((df_all['Departure Delay in Minutes'] > 30) | (df_all['Arrival Delay in Minutes'] > 30)).astype('int8')
+df_all['delay_ratio'] = ((df_all['Arrival Delay in Minutes'] + 1.0) / (df_all['Departure Delay in Minutes'] + 1.0)).astype(np.float32)
+
+# --- 2. Service Aggregations & Clusters ---
+service_vals = df_all[service_cols].to_numpy(dtype=np.float32)
+df_all['service_mean'] = service_vals.mean(axis=1).astype(np.float32)
+df_all['service_std'] = service_vals.std(axis=1).astype(np.float32)
+df_all['service_sum'] = service_vals.sum(axis=1).astype(np.float32)
+df_all['service_min'] = service_vals.min(axis=1).astype(np.float32)
+df_all['service_max'] = service_vals.max(axis=1).astype(np.float32)
+df_all['service_low_count'] = (service_vals <= 2).sum(axis=1).astype('int8')
+df_all['service_high_count'] = (service_vals >= 4).sum(axis=1).astype('int8')
+df_all['service_5_count'] = (service_vals == 5).sum(axis=1).astype('int8')
+df_all['service_0_count'] = (service_vals == 0).sum(axis=1).astype('int8')
+
+# Domain clusters
+df_all['hardware_comfort_mean'] = df_all[['Seat comfort', 'Leg room service', 'Food and drink', 'Cleanliness']].mean(axis=1).astype(np.float32)
+df_all['digital_experience_mean'] = df_all[['Inflight wifi service', 'Ease of Online booking', 'Online boarding', 'Inflight entertainment']].mean(axis=1).astype(np.float32)
+df_all['service_staff_mean'] = df_all[['On-board service', 'Baggage handling', 'Checkin service']].mean(axis=1).astype(np.float32)
+df_all['service_ratio'] = (df_all['digital_experience_mean'] / (df_all['hardware_comfort_mean'] + 0.1)).astype(np.float32)
+
+# --- 3. Expectation Discrepancies ---
+df_all['digital_gap'] = (df_all['Online boarding'] - df_all['Ease of Online booking']).astype(np.float32)
+df_all['wifi_boarding_gap'] = (df_all['Inflight wifi service'] - df_all['Online boarding']).astype(np.float32)
+df_all['entertainment_seat_gap'] = (df_all['Inflight entertainment'] - df_all['Seat comfort']).astype(np.float32)
+df_all['gate_time_gap'] = (df_all['Gate location'] - df_all['Departure/Arrival time convenient']).astype(np.float32)
+
+# --- 4. Synthetic Artifact & Digit Features ---
+df_all['distance_mod_1000'] = (df_all['Flight Distance'] % 1000).astype(np.int16)
+df_all['distance_mod_250'] = (df_all['Flight Distance'] % 250).astype(np.int16)
+df_all['distance_mod_100'] = (df_all['Flight Distance'] % 100).astype(np.int16)
+df_all['distance_bucket_100'] = (df_all['Flight Distance'] // 100).astype(np.int16)
+df_all['distance_div_10'] = (df_all['Flight Distance'] // 10).astype(np.int16)
+df_all['distance_digit0'] = (df_all['Flight Distance'] % 10).astype(np.int8)
+df_all['distance_digit1'] = ((df_all['Flight Distance'] // 10) % 10).astype(np.int8)
+df_all['distance_log'] = np.log1p(df_all['Flight Distance']).astype(np.float32)
+df_all['distance_sqrt'] = np.sqrt(df_all['Flight Distance']).astype(np.float32)
+
+df_all['age_bucket'] = (df_all['Age'] // 5).astype(np.int8)
+df_all['age_digit0'] = (df_all['Age'] % 10).astype(np.int8)
+df_all['age_is_senior'] = (df_all['Age'] >= 60).astype('int8')
+df_all['age_is_prime'] = ((df_all['Age'] >= 39) & (df_all['Age'] <= 58)).astype('int8')
+
+# --- 5. Route Profiling ---
+route_cols = ['Online boarding', 'Inflight wifi service', 'Seat comfort', 'service_mean']
+by_route = df_all.groupby('Flight Distance', observed=True)
+df_all['route_count'] = by_route['service_mean'].transform('size').astype(np.float32)
+df_all['route_count_log'] = np.log1p(df_all['route_count']).astype(np.float32)
+for col in route_cols:
+    mu = by_route[col].transform('mean').astype(np.float32)
+    df_all[f'route_{col}_mean'] = mu
+    df_all[f'route_{col}_delta'] = (df_all[col] - mu).astype(np.float32)
+
+# --- 6. Confounders & Interaction Keys ---
+class_num_map = {'Eco': 0, 'Eco Plus': 1, 'Business': 2}
+df_all['Class_Num'] = df_all['Class'].map(class_num_map).astype(np.int8)
+df_all['Distance_Class'] = (df_all['Flight Distance'] * df_all['Class_Num']).astype(np.float32)
+df_all['Age_Class'] = (df_all['Age'] * df_all['Class_Num']).astype(np.float32)
+
+df_all['passenger_segment'] = (df_all['Class'].astype(str) + '_' + df_all['Type of Travel'].astype(str) + '_' + df_all['Customer Type'].astype(str)).astype('category')
+df_all['Class_TypeTravel'] = (df_all['Class'].astype(str) + '_' + df_all['Type of Travel'].astype(str)).astype('category')
+df_all['Class_CustomerType'] = (df_all['Class'].astype(str) + '_' + df_all['Customer Type'].astype(str)).astype('category')
+df_all['Class_Wifi'] = (df_all['Class'].astype(str) + '_' + df_all['Inflight wifi service'].astype(str)).astype('category')
+df_all['Class_OnlineBoarding'] = (df_all['Class'].astype(str) + '_' + df_all['Online boarding'].astype(str)).astype('category')
+df_all['Class_SeatComfort'] = (df_all['Class'].astype(str) + '_' + df_all['Seat comfort'].astype(str)).astype('category')
+
+# --- 7. Joint Frequency Encoding ---
+freq_cols = ['Flight Distance', 'Age', 'passenger_segment', 'Class_Wifi', 'Class_OnlineBoarding', 'Class_TypeTravel']
+for col in freq_cols:
+    freq = df_all[col].value_counts(normalize=True)
+    df_all[f'{col}_freq'] = df_all[col].map(freq).astype(np.float32)
+
+for c in cat_cols:
+    df_all[c] = df_all[c].astype('category')
+
+X_train_full = df_all.iloc[:N_TRAIN].copy().reset_index(drop=True)
+X_test_full = df_all.iloc[N_TRAIN:].copy().reset_index(drop=True)
+
+del df_all
+gc.collect()
+print(f"Feature engineering complete. Total feature count: {X_train_full.shape[1]}")
+
+
+### CELL 6 markdown
+## 3. Exp 7 model evaluation: cross-fitted OOF blend
+
+Train the two LightGBM configurations and XGBoost from Exp 2 on each stratified competition fold using the Exp 4 contextual features plus the two original-survey teacher priors. For each validation fold, search a coarse simplex grid for blend weights using OOF rows from the other folds only. Apply those weights to the held-out fold to form nested meta-OOF predictions. Average fold-specific weights for test predictions. This avoids choosing weights on the same fold whose score is reported.
+
+
+### CELL 7 code
+# Exp 4 conditional profiles + Exp 7 original-survey prior: leakage-safe CV.
+context_keys = [
+    ['Class', 'Type of Travel'],
+    ['Class', 'Customer Type'],
+    ['Class', 'Type of Travel', 'Customer Type'],
+    ['Flight Distance'],
+]
+
+def add_context_features(reference, query, leave_one_out=False):
+    """Group service means/counts from reference; leave each training row out."""
+    out = pd.DataFrame(index=query.index)
+    global_means = reference[service_cols].mean()
+    for keys in context_keys:
+        group_name = '_'.join(k.lower().replace(' ', '_') for k in keys)
+        stats = (reference.groupby(keys, observed=True, dropna=False)[service_cols]
+                 .agg(['sum', 'count']).reset_index())
+        # pandas returns a two-level MultiIndex for aggregated columns; flatten before merge.
+        stats.columns = keys + [f'{col}_{stat}' for col, stat in stats.columns[len(keys):]]
+        merged = query[keys].merge(stats, on=keys, how='left', sort=False)
+        first_count = None
+        for col in service_cols:
+            counts = merged[f'{col}_count'].fillna(0).to_numpy(dtype='float32')
+            sums = merged[f'{col}_sum'].fillna(0).to_numpy(dtype='float32')
+            if leave_one_out:
+                own = query[col].to_numpy(dtype='float32')
+                denom = np.maximum(counts - 1, 0)
+                means = np.where(denom > 0, (sums - own) / np.maximum(denom, 1), float(global_means[col]))
+                counts = np.maximum(counts - 1, 0)
+            else:
+                means = np.where(counts > 0, sums / np.maximum(counts, 1), float(global_means[col]))
+            out[f'ctx_{group_name}_{col}_mean'] = means.astype('float32')
+            out[f'ctx_{group_name}_{col}_delta'] = (query[col].to_numpy(dtype='float32') - means).astype('float32')
+            if first_count is None:
+                first_count = counts
+        out[f'ctx_{group_name}_log_count'] = np.log1p(first_count).astype('float32')
+    return out
+
+te_cols = [
+    'Flight Distance',
+    'distance_bucket_100',
+    'passenger_segment',
+    'Class_TypeTravel',
+    'Class_CustomerType',
+    'Class_Wifi',
+    'Class_OnlineBoarding',
+    'Class_SeatComfort',
+]
+
+N_SPLITS = 5
+SEED = 42
+skf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True, random_state=SEED)
+
+# Out-of-fold prediction storage
+oof_lgb_deep = np.zeros(N_TRAIN, dtype=np.float32)
+oof_lgb_wide = np.zeros(N_TRAIN, dtype=np.float32)
+oof_xgb = np.zeros(N_TRAIN, dtype=np.float32) if HAS_XGB else None
+
+test_lgb_deep = np.zeros(len(X_test_full), dtype=np.float32)
+test_lgb_wide = np.zeros(len(X_test_full), dtype=np.float32)
+test_xgb = np.zeros(len(X_test_full), dtype=np.float32) if HAS_XGB else None
+fold_ids = np.full(N_TRAIN, -1, dtype=np.int8)
+
+# Model 1: Deep Optuna-Tuned LightGBM
+params_lgb_deep = {
+    'objective': 'binary',
+    'metric': 'auc',
+    'learning_rate': 0.025,
+    'num_leaves': 111,
+    'max_depth': 10,
+    'min_child_samples': 30,
+    'subsample': 0.85,
+    'subsample_freq': 1,
+    'colsample_bytree': 0.60,
+    'lambda_l2': 3.0,
+    'lambda_l1': 0.01,
+    'random_state': SEED,
+    'n_jobs': -1,
+    'verbose': -1,
+}
+
+# Model 2: Balanced Structural LightGBM
+params_lgb_wide = {
+    'objective': 'binary',
+    'metric': 'auc',
+    'learning_rate': 0.035,
+    'num_leaves': 63,
+    'max_depth': 8,
+    'min_child_samples': 50,
+    'subsample': 0.88,
+    'subsample_freq': 1,
+    'colsample_bytree': 0.85,
+    'lambda_l2': 12.0,
+    'lambda_l1': 0.1,
+    'random_state': SEED + 100,
+    'n_jobs': -1,
+    'verbose': -1,
+}
+
+print(f"\n{'='*60}")
+print(f"Starting {N_SPLITS}-Fold Cross-Validation Ensemble Training")
+print(f"{'='*60}\n")
+
+total_t0 = time.time()
+
+for fold, (trn_idx, val_idx) in enumerate(skf.split(X_train_full, y), 1):
+    fold_t0 = time.time()
+    fold_ids[val_idx] = fold - 1
+    print(f"--- Fold {fold}/{N_SPLITS} ---")
+    
+    X_tr = X_train_full.iloc[trn_idx].copy()
+    y_tr = y[trn_idx]
+    X_va = X_train_full.iloc[val_idx].copy()
+    y_va = y[val_idx]
+    X_te = X_test_full.copy()
+
+    # Context profiles use fold-train data only. Training rows use leave-one-out stats.
+    X_tr_ctx = add_context_features(X_tr, X_tr, leave_one_out=True)
+    X_va_ctx = add_context_features(X_tr, X_va, leave_one_out=False)
+    X_te_ctx = add_context_features(X_tr, X_te, leave_one_out=False)
+    X_tr = pd.concat([X_tr, X_tr_ctx], axis=1)
+    X_va = pd.concat([X_va, X_va_ctx], axis=1)
+    X_te = pd.concat([X_te, X_te_ctx], axis=1)
+
+    # Leakage-Safe Target Encoding inside Fold
+    te = TargetEncoder(smooth='auto', cv=5, shuffle=True, random_state=SEED + fold)
+    tr_te = te.fit_transform(X_tr[te_cols], y_tr)
+    va_te = te.transform(X_va[te_cols])
+    te_te = te.transform(X_te[te_cols])
+    
+    te_feat_names = [f'TE_{col}' for col in te_cols]
+    X_tr[te_feat_names] = tr_te
+    X_va[te_feat_names] = va_te
+    X_te[te_feat_names] = te_te
+    
+    # --- Train Model 1: Deep LightGBM ---
+    trn_lgb = lgb.Dataset(X_tr, label=y_tr)
+    val_lgb = lgb.Dataset(X_va, label=y_va, reference=trn_lgb)
+    
+    m1 = lgb.train(
+        params_lgb_deep,
+        trn_lgb,
+        num_boost_round=1200,
+        valid_sets=[val_lgb],
+        callbacks=[
+            lgb.early_stopping(stopping_rounds=60, verbose=False),
+            lgb.log_evaluation(period=0)
+        ]
+    )
+    iter1 = m1.best_iteration or 600
+    pred1_va = m1.predict(X_va, num_iteration=iter1)
+    pred1_te = m1.predict(X_te, num_iteration=iter1)
+    oof_lgb_deep[val_idx] = pred1_va
+    test_lgb_deep += pred1_te / N_SPLITS
+    auc1 = roc_auc_score(y_va, pred1_va)
+    print(f"  [Model 1: LGBM Deep]     Best Iter: {iter1:4d} | Val AUC: {auc1:.6f}")
+    
+    # --- Train Model 2: Balanced Structural LightGBM ---
+    m2 = lgb.train(
+        params_lgb_wide,
+        trn_lgb,
+        num_boost_round=1000,
+        valid_sets=[val_lgb],
+        callbacks=[
+            lgb.early_stopping(stopping_rounds=60, verbose=False),
+            lgb.log_evaluation(period=0)
+        ]
+    )
+    iter2 = m2.best_iteration or 500
+    pred2_va = m2.predict(X_va, num_iteration=iter2)
+    pred2_te = m2.predict(X_te, num_iteration=iter2)
+    oof_lgb_wide[val_idx] = pred2_va
+    test_lgb_wide += pred2_te / N_SPLITS
+    auc2 = roc_auc_score(y_va, pred2_va)
+    print(f"  [Model 2: LGBM Balanced] Best Iter: {iter2:4d} | Val AUC: {auc2:.6f}")
+    
+    # --- Train Model 3: XGBoost (if available) ---
+    if HAS_XGB:
+        try:
+            # Prepare categorical features for XGBoost hist
+            xgb_cat_cols = X_tr.select_dtypes(include=['category']).columns.tolist()
+            X_tr_xgb = X_tr.copy()
+            X_va_xgb = X_va.copy()
+            X_te_xgb = X_te.copy()
+            for col in xgb_cat_cols:
+                X_tr_xgb[col] = X_tr_xgb[col].cat.codes.astype('int32')
+                X_va_xgb[col] = X_va_xgb[col].cat.codes.astype('int32')
+                X_te_xgb[col] = X_te_xgb[col].cat.codes.astype('int32')
+            
+            dtrain = xgb.DMatrix(X_tr_xgb, label=y_tr)
+            dval = xgb.DMatrix(X_va_xgb, label=y_va)
+            dtest = xgb.DMatrix(X_te_xgb)
+            
+            xgb_params = {
+                'objective': 'binary:logistic',
+                'eval_metric': 'auc',
+                'learning_rate': 0.04,
+                'max_depth': 7,
+                'subsample': 0.85,
+                'colsample_bytree': 0.65,
+                'reg_lambda': 8.0,
+                'reg_alpha': 0.05,
+                'tree_method': 'hist',
+                'device': 'cuda' if HAS_GPU else 'cpu',
+                'random_state': SEED + fold,
+                'n_jobs': -1
+            }
+            
+            m3 = xgb.train(
+                xgb_params,
+                dtrain,
+                num_boost_round=800,
+                evals=[(dval, 'val')],
+                early_stopping_rounds=50,
+                verbose_eval=False
+            )
+            best_xgb_round = m3.best_iteration + 1 if m3.best_iteration is not None else 800
+            pred3_va = m3.predict(dval, iteration_range=(0, best_xgb_round))
+            pred3_te = m3.predict(dtest, iteration_range=(0, best_xgb_round))
+            oof_xgb[val_idx] = pred3_va
+            test_xgb += pred3_te / N_SPLITS
+            auc3 = roc_auc_score(y_va, pred3_va)
+            print(f"  [Model 3: XGB Hist]      Best Iter: {m3.best_iteration:4d} | Val AUC: {auc3:.6f}")
+            del dtrain, dval, dtest, m3, X_tr_xgb, X_va_xgb, X_te_xgb
+        except Exception as e:
+            print(f"  [Model 3: XGB Hist Notice]: {e}; fallback to dual LightGBM.")
+            HAS_XGB = False
+            oof_xgb = None
+            test_xgb = None
+            
+    print(f"  Fold prediction time: {time.time()-fold_t0:.1f}s")
+    
+    del X_tr, X_va, X_te, trn_lgb, val_lgb, m1, m2, te
+    gc.collect()
+
+# --- Cross-fitted OOF blend weights ---
+def make_weight_grid(n_models, step=0.2):
+    units = int(round(1.0 / step))
+    if n_models == 2:
+        return [np.array([i / units, 1.0 - i / units], dtype=np.float32) for i in range(units + 1)]
+    if n_models == 3:
+        return [np.array([i / units, j / units, (units - i - j) / units], dtype=np.float32)
+                for i in range(units + 1) for j in range(units + 1 - i)]
+    raise ValueError(f"Expected 2 or 3 base models, got {n_models}")
+
+model_oof = [oof_lgb_deep, oof_lgb_wide]
+model_test = [test_lgb_deep, test_lgb_wide]
+model_names = ["LGBM deep", "LGBM balanced"]
+if HAS_XGB and oof_xgb is not None:
+    model_oof.append(oof_xgb)
+    model_test.append(test_xgb)
+    model_names.append("XGBoost hist")
+
+ranked_oof = np.column_stack([(rankdata(pred) - 0.5) / len(pred) for pred in model_oof])
+ranked_test = np.column_stack([(rankdata(pred) - 0.5) / len(pred) for pred in model_test])
+weight_grid = make_weight_grid(len(model_oof), step=0.2)
+nested_meta_oof = np.zeros(N_TRAIN, dtype=np.float32)
+fold_weights = []
+
+for fold_id in range(N_SPLITS):
+    valid_mask = fold_ids == fold_id
+    meta_train_mask = ~valid_mask
+    best_score = -np.inf
+    best_weights = None
+    best_tie_break = -np.inf
+    for weights in weight_grid:
+        candidate = ranked_oof[meta_train_mask] @ weights
+        score = roc_auc_score(y[meta_train_mask], candidate)
+        # Prefer a less extreme solution when coarse-grid candidates are effectively tied.
+        tie_break = -float(np.sum((weights - 1.0 / len(model_oof)) ** 2))
+        if score > best_score + 1e-10 or (abs(score - best_score) <= 1e-10 and tie_break > best_tie_break):
+            best_score = score
+            best_tie_break = tie_break
+            best_weights = weights
+    nested_meta_oof[valid_mask] = ranked_oof[valid_mask] @ best_weights
+    fold_weights.append(best_weights)
+    fold_auc = roc_auc_score(y[valid_mask], nested_meta_oof[valid_mask])
+    print(f"Meta fold {fold_id + 1}: weights={np.round(best_weights, 2).tolist()} | held-out AUC={fold_auc:.6f}")
+
+final_weights = np.mean(np.vstack(fold_weights), axis=0)
+final_weights = final_weights / final_weights.sum()
+final_test_preds = ranked_test @ final_weights
+print("\nBase pooled OOF AUCs:")
+for name, pred in zip(model_names, model_oof):
+    print(f"  {name}: {roc_auc_score(y, pred):.6f}")
+print("Fold-specific weight mean:", np.round(final_weights, 3).tolist())
+print(f"Nested meta-OOF ROC-AUC: {roc_auc_score(y, nested_meta_oof):.6f}")
+print(f"Total Training & Validation Time: {time.time()-total_t0:.1f}s")
+print(f"{'='*60}")
+
+
+### CELL 8 markdown
+## 4. Submission generation
+
+Write the OOF-selected rank blend to `submission.csv`. The OOF weights are cross-fitted by fold; test blend weights are the average of the fold-specific selections.
+
+
+### CELL 9 code
+# Output directory handling
+out_dir = '/kaggle/working' if os.path.exists('/kaggle/working') else '.'
+sub_path = os.path.join(out_dir, 'submission.csv')
+
+sub = pd.DataFrame({
+    ID_COL: test_ids,
+    TARGET: final_test_preds
+})
+sub.to_csv(sub_path, index=False)
+print(f"Submission successfully saved to: {sub_path}")
+print(f"Shape: {sub.shape} | Null count: {sub.isnull().sum().to_dict()}")
+print(sub.head(10))
+
+# Strict Output Hygiene: Ensure ONLY submission.csv exists in /kaggle/working
+if os.path.exists('/kaggle/working'):
+    for fname in os.listdir('/kaggle/working'):
+        if fname != 'submission.csv':
+            fpath = os.path.join('/kaggle/working', fname)
+            try:
+                if os.path.isfile(fpath):
+                    os.remove(fpath)
+                elif os.path.isdir(fpath):
+                    shutil.rmtree(fpath)
+            except Exception as e:
+                print(f"Cleanup notice: {e}")
+    print("\nVerified contents of /kaggle/working:", os.listdir('/kaggle/working'))

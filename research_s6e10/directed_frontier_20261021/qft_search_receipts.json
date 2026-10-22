@@ -1,0 +1,30 @@
+{
+  "terms": [
+    "s6e10 Qwen",
+    "s6e10 Q-FT",
+    "s6e10 transformer"
+  ],
+  "receipts": [
+    {
+      "tag": "dataset_search_0",
+      "url": "https://www.kaggle.com/api/v1/datasets/list?search=s6e10+Qwen&sortBy=updated&page=1",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "elapsed": 1.1117408999998588
+    },
+    {
+      "tag": "dataset_search_1",
+      "url": "https://www.kaggle.com/api/v1/datasets/list?search=s6e10+Q-FT&sortBy=updated&page=1",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "elapsed": 1.0991194999996878
+    },
+    {
+      "tag": "dataset_search_2",
+      "url": "https://www.kaggle.com/api/v1/datasets/list?search=s6e10+transformer&sortBy=updated&page=1",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "elapsed": 1.1060175000002346
+    }
+  ]
+}

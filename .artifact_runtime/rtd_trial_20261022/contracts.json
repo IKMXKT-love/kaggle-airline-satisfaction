@@ -1,0 +1,6 @@
+{
+  "raw_replacement_invariance": true,
+  "all_derived_views_recomputed": true,
+  "fp32_permutation_max_logit_error": 3.56137752532959e-06,
+  "labels_absent_from_tokenizer": true
+}

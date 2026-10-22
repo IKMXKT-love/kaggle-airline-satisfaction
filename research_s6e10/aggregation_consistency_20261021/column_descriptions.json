@@ -1,0 +1,1478 @@
+[
+  {
+    "member": "ar_cat_5f",
+    "author": "Arhan canli",
+    "test_oof_raw_std_ratio": 0.9944292270377306,
+    "within_oof_null_ratio": 0.9960803145835367
+  },
+  {
+    "member": "ar_lgb_5f",
+    "author": "Arhan canli",
+    "test_oof_raw_std_ratio": 0.9944761846344679,
+    "within_oof_null_ratio": 0.9960587099951389
+  },
+  {
+    "member": "ar_realmlp_5f",
+    "author": "Arhan canli",
+    "test_oof_raw_std_ratio": 0.9956572592504273,
+    "within_oof_null_ratio": 0.9974757757885744
+  },
+  {
+    "member": "ar_xgb_5f",
+    "author": "Arhan canli",
+    "test_oof_raw_std_ratio": 0.9942903638963415,
+    "within_oof_null_ratio": 0.9961495278967201
+  },
+  {
+    "member": "bp_cat",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "test_oof_raw_std_ratio": 0.9924323226952118,
+    "within_oof_null_ratio": 0.9979352717888776
+  },
+  {
+    "member": "bp_lgbm",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "test_oof_raw_std_ratio": 0.9925932995479424,
+    "within_oof_null_ratio": 0.9978836507407333
+  },
+  {
+    "member": "bp_lgbm_xt",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "test_oof_raw_std_ratio": 0.9931829876730988,
+    "within_oof_null_ratio": 0.9980488939872945
+  },
+  {
+    "member": "bp_realmlp",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "test_oof_raw_std_ratio": 0.993739484996745,
+    "within_oof_null_ratio": 0.9980554995737934
+  },
+  {
+    "member": "bp_xgb",
+    "author": "Akmal Xodarev (Busya PRIME)",
+    "test_oof_raw_std_ratio": 0.9925664051038944,
+    "within_oof_null_ratio": 0.9976336331175578
+  },
+  {
+    "member": "gl_a",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.994640964730205,
+    "within_oof_null_ratio": 0.9982743404669658
+  },
+  {
+    "member": "gl_b",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9919605634267666,
+    "within_oof_null_ratio": 0.9993564892026373
+  },
+  {
+    "member": "gl_c",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.995025209642593,
+    "within_oof_null_ratio": 0.9995637713507008
+  },
+  {
+    "member": "gl_d",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9946070995137795,
+    "within_oof_null_ratio": 0.9990920818721968
+  },
+  {
+    "member": "gl_e",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.992340847229157,
+    "within_oof_null_ratio": 1.0005000193400568
+  },
+  {
+    "member": "gl_f",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9966121197190602,
+    "within_oof_null_ratio": 1.000755484121058
+  },
+  {
+    "member": "gl_g",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9967226154581093,
+    "within_oof_null_ratio": 1.0009603198118138
+  },
+  {
+    "member": "gl_h",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9939340086160507,
+    "within_oof_null_ratio": 0.9980598835099012
+  },
+  {
+    "member": "gl_i",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9924807251376614,
+    "within_oof_null_ratio": 0.9993116177349272
+  },
+  {
+    "member": "gl_j",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9944986406440506,
+    "within_oof_null_ratio": 0.9960794975893277
+  },
+  {
+    "member": "gl_k",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9942637920678756,
+    "within_oof_null_ratio": 0.9950873943361046
+  },
+  {
+    "member": "gl_l",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9944747823007928,
+    "within_oof_null_ratio": 0.9971843455248427
+  },
+  {
+    "member": "gl_m",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9937315989231645,
+    "within_oof_null_ratio": 0.9968085220762307
+  },
+  {
+    "member": "gl_n",
+    "author": "Dariush Afshar (this library, v4)",
+    "test_oof_raw_std_ratio": 0.9957415355317846,
+    "within_oof_null_ratio": 0.9979150330198393
+  },
+  {
+    "member": "gp_cat_ctr",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9920905200129221,
+    "within_oof_null_ratio": 0.9969417811198704
+  },
+  {
+    "member": "gp_cat_ctr3",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9925304172502969,
+    "within_oof_null_ratio": 0.9970125719103248
+  },
+  {
+    "member": "gp_cat_ctr5",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.993115276987164,
+    "within_oof_null_ratio": 0.9971425253738667
+  },
+  {
+    "member": "gp_cat_v3",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9922726533254341,
+    "within_oof_null_ratio": 0.9960634835268591
+  },
+  {
+    "member": "gp_cat_vb",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9925492731249721,
+    "within_oof_null_ratio": 0.996293801638945
+  },
+  {
+    "member": "gp_deepfm_rawaux",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9951797091899454,
+    "within_oof_null_ratio": 0.9981754972782091
+  },
+  {
+    "member": "gp_deepfm_v1",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.996006393529886,
+    "within_oof_null_ratio": 0.9986501693108252
+  },
+  {
+    "member": "gp_glm6_xgb",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9940788182504137,
+    "within_oof_null_ratio": 0.9973272572617518
+  },
+  {
+    "member": "gp_glm_xgb",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.994039254439601,
+    "within_oof_null_ratio": 0.9973859833515581
+  },
+  {
+    "member": "gp_lgb_auxall",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.992900587277954,
+    "within_oof_null_ratio": 0.9971756211616498
+  },
+  {
+    "member": "gp_lgb_v3",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9929992590184571,
+    "within_oof_null_ratio": 0.9969853107540902
+  },
+  {
+    "member": "gp_lgb_vb",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9926364937230618,
+    "within_oof_null_ratio": 0.9962814978964516
+  },
+  {
+    "member": "gp_lgb_vb_aux",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9925276174541497,
+    "within_oof_null_ratio": 0.9961180833070644
+  },
+  {
+    "member": "gp_lgb_vb_ogev",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.992267269533997,
+    "within_oof_null_ratio": 0.9956890367915695
+  },
+  {
+    "member": "gp_realmlp_fa",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9936408025328104,
+    "within_oof_null_ratio": 0.9975355118730276
+  },
+  {
+    "member": "gp_realmlp_fa_aux",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9927053870540741,
+    "within_oof_null_ratio": 0.9966966685574076
+  },
+  {
+    "member": "gp_realmlp_fa_aux3",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9939940205992265,
+    "within_oof_null_ratio": 0.9970638383596995
+  },
+  {
+    "member": "gp_realmlp_fa_aux_s2",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.993107154295716,
+    "within_oof_null_ratio": 0.9967308476229509
+  },
+  {
+    "member": "gp_realmlp_fa_auxog",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.992756268078769,
+    "within_oof_null_ratio": 0.9971056232716243
+  },
+  {
+    "member": "gp_realmlp_fa_auxogev",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9934096107993627,
+    "within_oof_null_ratio": 0.9974821313281415
+  },
+  {
+    "member": "gp_realmlp_fa_s123",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9932343200860138,
+    "within_oof_null_ratio": 0.9975391883566139
+  },
+  {
+    "member": "gp_realmlp_fa_s7",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9938305212666205,
+    "within_oof_null_ratio": 0.9976499826397179
+  },
+  {
+    "member": "gp_realmlp_og",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9950562616599528,
+    "within_oof_null_ratio": 0.9987330672876965
+  },
+  {
+    "member": "gp_realmlp_pub",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9950996458995226,
+    "within_oof_null_ratio": 0.9985906778926518
+  },
+  {
+    "member": "gp_realmlp_pub_aux",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9947895019477568,
+    "within_oof_null_ratio": 0.9978419833486185
+  },
+  {
+    "member": "gp_realmlp_pub_s1",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9947850651222817,
+    "within_oof_null_ratio": 0.9982111923644283
+  },
+  {
+    "member": "gp_realmlp_pub_s2",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.994940606063745,
+    "within_oof_null_ratio": 0.998239916558045
+  },
+  {
+    "member": "gp_realmlp_v4",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9930793957462986,
+    "within_oof_null_ratio": 0.9984897646972768
+  },
+  {
+    "member": "gp_realmlp_v4_s1",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9927347428227902,
+    "within_oof_null_ratio": 0.9985559881486258
+  },
+  {
+    "member": "gp_realmlp_v4_s2",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9937316587124153,
+    "within_oof_null_ratio": 0.9978484803935675
+  },
+  {
+    "member": "gp_realmlp_v4fa",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9939254015719254,
+    "within_oof_null_ratio": 0.998468279942632
+  },
+  {
+    "member": "gp_realmlp_vb_aux",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9936127158205056,
+    "within_oof_null_ratio": 0.9972483855179527
+  },
+  {
+    "member": "gp_realmlp_vb_aux_s2",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9934168046471998,
+    "within_oof_null_ratio": 0.9970088952005218
+  },
+  {
+    "member": "gp_tabicl_full_raw",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9967814048231968,
+    "within_oof_null_ratio": 1.0000868382987294
+  },
+  {
+    "member": "gp_tabpfn_catfd",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9915479372204347,
+    "within_oof_null_ratio": 0.9979015445604512
+  },
+  {
+    "member": "gp_tabpfn_catfd10",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9926599707061158,
+    "within_oof_null_ratio": 0.9981989573056824
+  },
+  {
+    "member": "gp_tabpfn_catfd_s1",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9917004776662164,
+    "within_oof_null_ratio": 0.9968316528105386
+  },
+  {
+    "member": "gp_tabpfn_full_raw",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9951669083863967,
+    "within_oof_null_ratio": 0.9982273031232041
+  },
+  {
+    "member": "gp_tabpfn_full_raw_s1",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9957630687472379,
+    "within_oof_null_ratio": 0.9983278730332237
+  },
+  {
+    "member": "gp_tabpfn_te",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9951717710911763,
+    "within_oof_null_ratio": 0.9981279205552429
+  },
+  {
+    "member": "gp_tabpfn_te4",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.995509666511872,
+    "within_oof_null_ratio": 0.9985561872784932
+  },
+  {
+    "member": "gp_xgb_auxall",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9916841012750947,
+    "within_oof_null_ratio": 0.9969601566451677
+  },
+  {
+    "member": "gp_xgb_auxev",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9917346558174983,
+    "within_oof_null_ratio": 0.9960646038130057
+  },
+  {
+    "member": "gp_xgb_v3",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9919592161623619,
+    "within_oof_null_ratio": 0.9965814982804222
+  },
+  {
+    "member": "gp_xgb_v3_d10",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9918251528835955,
+    "within_oof_null_ratio": 0.996863171323851
+  },
+  {
+    "member": "gp_xgb_v3_s1",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9927481376653918,
+    "within_oof_null_ratio": 0.9971326903866813
+  },
+  {
+    "member": "gp_xgb_v4_tuned",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9933939342759802,
+    "within_oof_null_ratio": 0.9970880191545393
+  },
+  {
+    "member": "gp_xgb_vb",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9918800814255525,
+    "within_oof_null_ratio": 0.9961563704079888
+  },
+  {
+    "member": "meh_cat",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9912971116224095,
+    "within_oof_null_ratio": 0.9974467545820208
+  },
+  {
+    "member": "meh_lgb",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9912819946938328,
+    "within_oof_null_ratio": 0.9967440113759369
+  },
+  {
+    "member": "meh_realmlp",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9945660875078025,
+    "within_oof_null_ratio": 0.9982220528005721
+  },
+  {
+    "member": "meh_xgb",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.99035352998538,
+    "within_oof_null_ratio": 0.997556485679523
+  },
+  {
+    "member": "mg_cat",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9923829162661084,
+    "within_oof_null_ratio": 0.9960118658382133
+  },
+  {
+    "member": "mg_cat_ctr",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.993294903304918,
+    "within_oof_null_ratio": 0.9974798179604616
+  },
+  {
+    "member": "mg_lgb",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.99240356727135,
+    "within_oof_null_ratio": 0.9970594679251173
+  },
+  {
+    "member": "mg_lgb_ogteach",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9924783074177417,
+    "within_oof_null_ratio": 0.9967419374855362
+  },
+  {
+    "member": "mg_lgb_route",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9920800352658573,
+    "within_oof_null_ratio": 0.9963143177534501
+  },
+  {
+    "member": "mg_realmlp",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9947956960517748,
+    "within_oof_null_ratio": 0.9978720324975637
+  },
+  {
+    "member": "mg_realmlp_fa4",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9943149801838196,
+    "within_oof_null_ratio": 0.9978019130342662
+  },
+  {
+    "member": "mg_realmlp_og",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9935524310066841,
+    "within_oof_null_ratio": 0.9979083696803329
+  },
+  {
+    "member": "mg_realmlp_v4",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9931227614926842,
+    "within_oof_null_ratio": 0.9971625575723376
+  },
+  {
+    "member": "mg_realmlp_v4og",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9929170121279135,
+    "within_oof_null_ratio": 0.9972511781484736
+  },
+  {
+    "member": "mg_xgb",
+    "author": "인공저능연구소( Artificial Idiocy Lab )",
+    "test_oof_raw_std_ratio": 0.9916844092913966,
+    "within_oof_null_ratio": 0.9960485520211272
+  },
+  {
+    "member": "mi_cat_ctr",
+    "author": "Mitudru Dutta",
+    "test_oof_raw_std_ratio": 0.9930985675597975,
+    "within_oof_null_ratio": 0.9970922151107582
+  },
+  {
+    "member": "mi_glm_xgb",
+    "author": "Mitudru Dutta",
+    "test_oof_raw_std_ratio": 0.9923427758930297,
+    "within_oof_null_ratio": 0.9968414971039885
+  },
+  {
+    "member": "mi_lgb_route_cat",
+    "author": "Mitudru Dutta",
+    "test_oof_raw_std_ratio": 0.9938393876822557,
+    "within_oof_null_ratio": 0.996447770742682
+  },
+  {
+    "member": "mi_realmlp_lean",
+    "author": "Mitudru Dutta",
+    "test_oof_raw_std_ratio": 0.9935314476209435,
+    "within_oof_null_ratio": 0.9975838200631532
+  },
+  {
+    "member": "mi_realmlp_raw",
+    "author": "Mitudru Dutta",
+    "test_oof_raw_std_ratio": 0.9938200877670113,
+    "within_oof_null_ratio": 0.9975410366786867
+  },
+  {
+    "member": "mi_xgb",
+    "author": "Mitudru Dutta",
+    "test_oof_raw_std_ratio": 0.9922266706039694,
+    "within_oof_null_ratio": 0.9972077954835388
+  },
+  {
+    "member": "mi_xgb_d5",
+    "author": "Mitudru Dutta",
+    "test_oof_raw_std_ratio": 0.9924774806987543,
+    "within_oof_null_ratio": 0.9970738286214822
+  },
+  {
+    "member": "nj_01",
+    "author": "Naji",
+    "test_oof_raw_std_ratio": 0.9886709920991833,
+    "within_oof_null_ratio": 0.996266441437399
+  },
+  {
+    "member": "pfn_hemingweb_raw",
+    "author": "samanyu1808 and Hemingweb",
+    "test_oof_raw_std_ratio": 0.9955134467489941,
+    "within_oof_null_ratio": 0.997822403165525
+  },
+  {
+    "member": "pfn_samanyu_route_og",
+    "author": "samanyu1808 and Hemingweb",
+    "test_oof_raw_std_ratio": 0.9936040671394522,
+    "within_oof_null_ratio": 0.9971434538159339
+  },
+  {
+    "member": "pfn_samanyu_seeds",
+    "author": "samanyu1808 and Hemingweb",
+    "test_oof_raw_std_ratio": 0.9954545402640703,
+    "within_oof_null_ratio": 0.9975675141631202
+  },
+  {
+    "member": "sa_cat_ctr_auxall_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9932140674544969,
+    "within_oof_null_ratio": 0.997194759112874
+  },
+  {
+    "member": "sa_cat_ctr_auxev",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9925716882720748,
+    "within_oof_null_ratio": 0.9969195551384425
+  },
+  {
+    "member": "sa_cat_ctr_auxev_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9930704638017217,
+    "within_oof_null_ratio": 0.9970471140015711
+  },
+  {
+    "member": "sa_lgb_A",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9922312609054857,
+    "within_oof_null_ratio": 0.9972352393449943
+  },
+  {
+    "member": "sa_lgb_A_auxall",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9926509095485936,
+    "within_oof_null_ratio": 0.9972632153192479
+  },
+  {
+    "member": "sa_lgb_A_auxall_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9938771499982125,
+    "within_oof_null_ratio": 0.9971268641096277
+  },
+  {
+    "member": "sa_lgb_B_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9931224508542459,
+    "within_oof_null_ratio": 0.9972310400726843
+  },
+  {
+    "member": "sa_rmlp_B",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9936792987707262,
+    "within_oof_null_ratio": 0.9977255721412164
+  },
+  {
+    "member": "sa_rmlp_B_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9946127225667205,
+    "within_oof_null_ratio": 0.9974419167495202
+  },
+  {
+    "member": "sa_rmlp_ogx_aux",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9940164909453827,
+    "within_oof_null_ratio": 0.9977012226701679
+  },
+  {
+    "member": "sa_rmlp_ogx_aux_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9949732346778928,
+    "within_oof_null_ratio": 0.9978809108558797
+  },
+  {
+    "member": "sa_rmlp_raw_aux_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9951538357387505,
+    "within_oof_null_ratio": 0.997540026849589
+  },
+  {
+    "member": "sa_rmlp_raw_aux_s2",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9938044705175889,
+    "within_oof_null_ratio": 0.9970484153574252
+  },
+  {
+    "member": "sa_rmlp_v4aux",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.993237972094554,
+    "within_oof_null_ratio": 0.9975857055294807
+  },
+  {
+    "member": "sa_rmlp_v4aux_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9947769568334321,
+    "within_oof_null_ratio": 0.9978925635738822
+  },
+  {
+    "member": "sa_rmlp_v4aux_k10s2",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9945187446947684,
+    "within_oof_null_ratio": 0.9973802093242695
+  },
+  {
+    "member": "sa_rmlp_v4ev_e4_k10",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9940418357243873,
+    "within_oof_null_ratio": 0.9976061447287689
+  },
+  {
+    "member": "sa_xgb_A",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9898030197643879,
+    "within_oof_null_ratio": 0.9970093436038523
+  },
+  {
+    "member": "sa_xgb_A_auxev",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.991113933010258,
+    "within_oof_null_ratio": 0.996415423807731
+  },
+  {
+    "member": "sa_xgb_raw",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9930892127281447,
+    "within_oof_null_ratio": 0.9995775214757567
+  },
+  {
+    "member": "sa_xgb_route",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9872097412743469,
+    "within_oof_null_ratio": 0.9971978937664322
+  },
+  {
+    "member": "sa_xgb_te",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9903059201242137,
+    "within_oof_null_ratio": 0.9988434663663867
+  },
+  {
+    "member": "th_catboost",
+    "author": "thisray",
+    "test_oof_raw_std_ratio": 0.9916916247165892,
+    "within_oof_null_ratio": 0.9960626452206603
+  },
+  {
+    "member": "th_realmlp",
+    "author": "thisray",
+    "test_oof_raw_std_ratio": 0.9932926413986805,
+    "within_oof_null_ratio": 0.9979394662522433
+  },
+  {
+    "member": "th_xgb",
+    "author": "thisray",
+    "test_oof_raw_std_ratio": 0.9921580990994103,
+    "within_oof_null_ratio": 0.9965714390737312
+  },
+  {
+    "member": "wx_context_numeric",
+    "author": "Shelton Wang",
+    "test_oof_raw_std_ratio": 0.9914272501791483,
+    "within_oof_null_ratio": 0.9965180799210908
+  },
+  {
+    "member": "wx_rating_segments",
+    "author": "Shelton Wang",
+    "test_oof_raw_std_ratio": 0.9938918226788476,
+    "within_oof_null_ratio": 0.9979925247915942
+  },
+  {
+    "member": "tfm_causilo",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.997017928301443,
+    "within_oof_null_ratio": 0.998140264026667
+  },
+  {
+    "member": "tfm_exaone",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9967447286912006,
+    "within_oof_null_ratio": 0.9982681937236897
+  },
+  {
+    "member": "tfm_kumolarge",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9956916719634631,
+    "within_oof_null_ratio": 0.9979375980597928
+  },
+  {
+    "member": "tfm_kumosmall",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9963164517424475,
+    "within_oof_null_ratio": 0.9986504812544192
+  },
+  {
+    "member": "tfm_limix2",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.997005841924655,
+    "within_oof_null_ratio": 0.9981436937171019
+  },
+  {
+    "member": "tfm_mitra2",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9972360363366604,
+    "within_oof_null_ratio": 0.9978334390502014
+  },
+  {
+    "member": "tfm_realmlp",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.995775086392202,
+    "within_oof_null_ratio": 0.9980588734031461
+  },
+  {
+    "member": "tfm_tabfm",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9971190538214609,
+    "within_oof_null_ratio": 0.9985547786988979
+  },
+  {
+    "member": "tfm_tabicl2",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9962872168231739,
+    "within_oof_null_ratio": 0.9997260690152154
+  },
+  {
+    "member": "tfm_tabpfn35",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9952701842774351,
+    "within_oof_null_ratio": 0.9976839484898079
+  },
+  {
+    "member": "tfm_xgboost",
+    "author": "Chris Deotte",
+    "test_oof_raw_std_ratio": 0.9929165431120329,
+    "within_oof_null_ratio": 0.9986232859118908
+  },
+  {
+    "member": "gl_o_tabpfn35",
+    "author": "Dariush Afshar (this library, v5)",
+    "test_oof_raw_std_ratio": 0.9926344801036425,
+    "within_oof_null_ratio": 0.9981558786955455
+  },
+  {
+    "member": "gl_p_lgbm_auxev",
+    "author": "Dariush Afshar (this library, v5)",
+    "test_oof_raw_std_ratio": 0.9943960822865563,
+    "within_oof_null_ratio": 0.9954457639087044
+  },
+  {
+    "member": "gl_q_lgbm_auxev_10fold",
+    "author": "Dariush Afshar (this library, v5)",
+    "test_oof_raw_std_ratio": 0.9944483593611437,
+    "within_oof_null_ratio": 0.9953639271550931
+  },
+  {
+    "member": "ab_tabpfn_catfd10",
+    "author": "AbdullahSafwan333",
+    "test_oof_raw_std_ratio": 0.9936918530388357,
+    "within_oof_null_ratio": 0.9972540514105799
+  },
+  {
+    "member": "ab_tabpfn_raw",
+    "author": "AbdullahSafwan333",
+    "test_oof_raw_std_ratio": 0.9960157592910867,
+    "within_oof_null_ratio": 0.9981167327177437
+  },
+  {
+    "member": "ab_tabpfn_te_cnt",
+    "author": "AbdullahSafwan333",
+    "test_oof_raw_std_ratio": 0.9960120015884378,
+    "within_oof_null_ratio": 0.9981044540044836
+  },
+  {
+    "member": "ab_cat_v3",
+    "author": "AbdullahSafwan333",
+    "test_oof_raw_std_ratio": 0.9949203916890371,
+    "within_oof_null_ratio": 0.9959800742323488
+  },
+  {
+    "member": "ab_xgb_v3",
+    "author": "AbdullahSafwan333",
+    "test_oof_raw_std_ratio": 0.994602460183415,
+    "within_oof_null_ratio": 0.9955633144795276
+  },
+  {
+    "member": "st_cat_base",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9948772657339532,
+    "within_oof_null_ratio": 0.9995798023954168
+  },
+  {
+    "member": "st_cat_tuned",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9940324465447123,
+    "within_oof_null_ratio": 0.9987701262772646
+  },
+  {
+    "member": "st_e10_sparselr_lr",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9946334929293267,
+    "within_oof_null_ratio": 0.9987642833116472
+  },
+  {
+    "member": "st_e11_knn_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9949599232782227,
+    "within_oof_null_ratio": 0.9965861392372773
+  },
+  {
+    "member": "st_e11_knn_lgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.993990690619589,
+    "within_oof_null_ratio": 0.9961472123008611
+  },
+  {
+    "member": "st_e11_knn_xgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.993756003643717,
+    "within_oof_null_ratio": 0.9956335400776821
+  },
+  {
+    "member": "st_e12_route_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9923622831829564,
+    "within_oof_null_ratio": 0.9964926949913785
+  },
+  {
+    "member": "st_e12_route_lgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9927450866522983,
+    "within_oof_null_ratio": 0.9960657086524578
+  },
+  {
+    "member": "st_e12_route_xgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9922764595385175,
+    "within_oof_null_ratio": 0.9964204919482973
+  },
+  {
+    "member": "st_e13_realmlp_realmlp",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9941487637373758,
+    "within_oof_null_ratio": 0.9977529839002629
+  },
+  {
+    "member": "st_e14_rmlpseeds_realmlp",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9944788428839402,
+    "within_oof_null_ratio": 0.997661372722548
+  },
+  {
+    "member": "st_e14_seed2026",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9942045358882554,
+    "within_oof_null_ratio": 0.9977086723603301
+  },
+  {
+    "member": "st_e14_seed7",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9941537122733017,
+    "within_oof_null_ratio": 0.997499409573066
+  },
+  {
+    "member": "st_e14_seed77",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9939731343231637,
+    "within_oof_null_ratio": 0.9977033818382147
+  },
+  {
+    "member": "st_e14_seed777",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.99415742105203,
+    "within_oof_null_ratio": 0.9976837481081573
+  },
+  {
+    "member": "st_e1_allcat_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9940470742093899,
+    "within_oof_null_ratio": 0.9985841006607052
+  },
+  {
+    "member": "st_e2_origfeat_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9939832820082368,
+    "within_oof_null_ratio": 0.9974100924651595
+  },
+  {
+    "member": "st_e2_origfeat_lgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.993269638167486,
+    "within_oof_null_ratio": 0.9966949263679765
+  },
+  {
+    "member": "st_e2_origfeat_xgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9925955717214988,
+    "within_oof_null_ratio": 0.996977525326394
+  },
+  {
+    "member": "st_e3_origconcat_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9940749277687667,
+    "within_oof_null_ratio": 0.9986625853969529
+  },
+  {
+    "member": "st_e3_origconcat_lgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9944014072000122,
+    "within_oof_null_ratio": 0.9983295376751787
+  },
+  {
+    "member": "st_e3_origconcat_xgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9928556626262429,
+    "within_oof_null_ratio": 0.9977222942537671
+  },
+  {
+    "member": "st_e5_origpred_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9949859978337633,
+    "within_oof_null_ratio": 0.9968591851295163
+  },
+  {
+    "member": "st_e5_origpred_lgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9942326790311048,
+    "within_oof_null_ratio": 0.9964368142087114
+  },
+  {
+    "member": "st_e5_origpred_xgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9938128750401687,
+    "within_oof_null_ratio": 0.996835206009525
+  },
+  {
+    "member": "st_e6_origwide_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9938375384633937,
+    "within_oof_null_ratio": 0.9977407191665241
+  },
+  {
+    "member": "st_e6_origwide_lgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9940525487189567,
+    "within_oof_null_ratio": 0.997670464002329
+  },
+  {
+    "member": "st_e6_origwide_xgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9930151818003236,
+    "within_oof_null_ratio": 0.9969832507522954
+  },
+  {
+    "member": "st_e7_combo_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.99533089981711,
+    "within_oof_null_ratio": 0.9968144958596087
+  },
+  {
+    "member": "st_e8_tuned_cat",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9954841906146573,
+    "within_oof_null_ratio": 0.9967883842980593
+  },
+  {
+    "member": "st_e8_tuned_lgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9944526550410742,
+    "within_oof_null_ratio": 0.9963908940319632
+  },
+  {
+    "member": "st_e8_tuned_xgb",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9941536754718956,
+    "within_oof_null_ratio": 0.9968712993643528
+  },
+  {
+    "member": "st_e9_mlp_mlp",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9934215819592449,
+    "within_oof_null_ratio": 0.9978000999350835
+  },
+  {
+    "member": "st_lgb_base",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9939863231508387,
+    "within_oof_null_ratio": 0.9980825299164071
+  },
+  {
+    "member": "st_lgb_raw",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9939527002834917,
+    "within_oof_null_ratio": 0.9983523696390194
+  },
+  {
+    "member": "st_lgb_tuned",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9942110365843674,
+    "within_oof_null_ratio": 0.9983359572972612
+  },
+  {
+    "member": "st_xgb_base",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9926787928061827,
+    "within_oof_null_ratio": 0.9997052603996714
+  },
+  {
+    "member": "st_xgb_tuned",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.993087411640831,
+    "within_oof_null_ratio": 0.9979743125407644
+  },
+  {
+    "member": "st_orig_cat_pred",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9980333581461011,
+    "within_oof_null_ratio": 1.0003798501780505
+  },
+  {
+    "member": "st_orig_model_pred",
+    "author": "Sadam Torres",
+    "test_oof_raw_std_ratio": 0.9966318225084885,
+    "within_oof_null_ratio": 0.9966833353113326
+  },
+  {
+    "member": "am_forge_cat",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.992352539311174,
+    "within_oof_null_ratio": 0.9972201529447107
+  },
+  {
+    "member": "am_forge_ghost_xt",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9930879215591026,
+    "within_oof_null_ratio": 0.9974319898745315
+  },
+  {
+    "member": "am_forge_lgbm",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9926319634758667,
+    "within_oof_null_ratio": 0.9973963773095578
+  },
+  {
+    "member": "am_forge_lgbm_xt",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9931924065604951,
+    "within_oof_null_ratio": 0.9978813990426851
+  },
+  {
+    "member": "am_forge_realmlp",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9938698597166743,
+    "within_oof_null_ratio": 0.9980814619579735
+  },
+  {
+    "member": "am_forge_xgb",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9925929913073199,
+    "within_oof_null_ratio": 0.997112437216733
+  },
+  {
+    "member": "s7_lgb_cpu_strong",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9921011293603187,
+    "within_oof_null_ratio": 0.995576871066744
+  },
+  {
+    "member": "s7_xgb_A_auxall",
+    "author": "Sachith7",
+    "test_oof_raw_std_ratio": 0.9912484735673358,
+    "within_oof_null_ratio": 0.9966380543369571
+  },
+  {
+    "member": "km_cat_w1",
+    "author": "Koumei Maki",
+    "test_oof_raw_std_ratio": 0.9926094482658391,
+    "within_oof_null_ratio": 0.9963190136014662
+  },
+  {
+    "member": "km_lgb_w1",
+    "author": "Koumei Maki",
+    "test_oof_raw_std_ratio": 0.9928879626019194,
+    "within_oof_null_ratio": 0.9963356309163166
+  },
+  {
+    "member": "km_rmlp_f_nc",
+    "author": "Koumei Maki",
+    "test_oof_raw_std_ratio": 0.9934427445952707,
+    "within_oof_null_ratio": 0.9965215311156448
+  },
+  {
+    "member": "km_tabicl_fdcat_c250k",
+    "author": "Koumei Maki",
+    "test_oof_raw_std_ratio": 0.9945535654433347,
+    "within_oof_null_ratio": 0.9990681736734228
+  },
+  {
+    "member": "km_tabm_bcd_rc_v2",
+    "author": "Koumei Maki",
+    "test_oof_raw_std_ratio": 0.9920969574879237,
+    "within_oof_null_ratio": 0.9988105788979942
+  },
+  {
+    "member": "km_tabpfn_catfd10",
+    "author": "Koumei Maki",
+    "test_oof_raw_std_ratio": 0.9920674236140049,
+    "within_oof_null_ratio": 0.997559489596394
+  },
+  {
+    "member": "km_xgb_w1",
+    "author": "Koumei Maki",
+    "test_oof_raw_std_ratio": 0.9926504499056779,
+    "within_oof_null_ratio": 0.9961448311571679
+  },
+  {
+    "member": "gpx_cat_aux",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9922694856442897,
+    "within_oof_null_ratio": 0.9971047636617255
+  },
+  {
+    "member": "gpx_cat_ctr_k",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9922960400755241,
+    "within_oof_null_ratio": 0.9975417052094024
+  },
+  {
+    "member": "gpx_cat_k10",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9926086789149707,
+    "within_oof_null_ratio": 0.996314290503958
+  },
+  {
+    "member": "gpx_gen_v1",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9921098660178822,
+    "within_oof_null_ratio": 0.9995349747147719
+  },
+  {
+    "member": "gpx_glm6_xgb_k",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9938733521666272,
+    "within_oof_null_ratio": 0.9976573209088117
+  },
+  {
+    "member": "gpx_lgb_k10",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.992969770646677,
+    "within_oof_null_ratio": 0.9962696283948805
+  },
+  {
+    "member": "gpx_realmlp_fa_aux3_k",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9940334455801418,
+    "within_oof_null_ratio": 0.9971347173417761
+  },
+  {
+    "member": "gpx_realmlp_fa_aux_n16",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9934135722012658,
+    "within_oof_null_ratio": 0.9973233324179944
+  },
+  {
+    "member": "gpx_realmlp_fa_auxev",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9933188919407019,
+    "within_oof_null_ratio": 0.9975639191826732
+  },
+  {
+    "member": "gpx_realmlp_fa_s7_k",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9938902240176536,
+    "within_oof_null_ratio": 0.9975445196643162
+  },
+  {
+    "member": "gpx_realmlp_pub_aux_k",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9947500188293632,
+    "within_oof_null_ratio": 0.9977939815821423
+  },
+  {
+    "member": "gpx_realmlp_v4fa_auxfull",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.993312217398848,
+    "within_oof_null_ratio": 0.9980962414486826
+  },
+  {
+    "member": "gpx_realmlp_vb",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9938137225234123,
+    "within_oof_null_ratio": 0.9979416913299923
+  },
+  {
+    "member": "gpx_tabm_v4aux",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.987997454043648,
+    "within_oof_null_ratio": 0.9977342706163218
+  },
+  {
+    "member": "gpx_xgb_d10_k10",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9929379841002125,
+    "within_oof_null_ratio": 0.996730878334333
+  },
+  {
+    "member": "gpx_xgb_k10",
+    "author": "goodpjw2008",
+    "test_oof_raw_std_ratio": 0.9925118744927672,
+    "within_oof_null_ratio": 0.996544424417826
+  },
+  {
+    "member": "dk_cb_cat",
+    "author": "Dmitriy Kolmikov",
+    "test_oof_raw_std_ratio": 0.994065311669049,
+    "within_oof_null_ratio": 0.9977064228604213
+  },
+  {
+    "member": "kga_cat_allcat_v1_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.992188099371249,
+    "within_oof_null_ratio": 0.9967208007238564
+  },
+  {
+    "member": "kga_cat_allcat_v2_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9926839132040447,
+    "within_oof_null_ratio": 0.997482482529407
+  },
+  {
+    "member": "kga_cat_enc3_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9923421993245077,
+    "within_oof_null_ratio": 0.9963872669498343
+  },
+  {
+    "member": "kga_cat_enc4_k10",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.993207468953847,
+    "within_oof_null_ratio": 0.9965238663241445
+  },
+  {
+    "member": "kga_cat_enc4_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9925663617649719,
+    "within_oof_null_ratio": 0.9966810868579875
+  },
+  {
+    "member": "kga_cat_raw_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9925342663279967,
+    "within_oof_null_ratio": 0.9996120548124294
+  },
+  {
+    "member": "kga_lgb_enc3_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9926799607982922,
+    "within_oof_null_ratio": 0.9973596838565012
+  },
+  {
+    "member": "kga_lgb_enc4_k10",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9934244233643357,
+    "within_oof_null_ratio": 0.9962302298764741
+  },
+  {
+    "member": "kga_lgb_enc4_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9928510820819244,
+    "within_oof_null_ratio": 0.9971065162452097
+  },
+  {
+    "member": "kga_lgb_raw_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9944347161888671,
+    "within_oof_null_ratio": 0.9988405145824901
+  },
+  {
+    "member": "kga_realmlp_enc_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9924065271751392,
+    "within_oof_null_ratio": 0.9977158691921397
+  },
+  {
+    "member": "kga_realmlp_raw_s42_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9935417932869381,
+    "within_oof_null_ratio": 0.9979606672274144
+  },
+  {
+    "member": "kga_realmlp_raw_s7_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9934598600113564,
+    "within_oof_null_ratio": 0.997869903396559
+  },
+  {
+    "member": "kga_xgb_enc3_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9923630522430644,
+    "within_oof_null_ratio": 0.9970517302105534
+  },
+  {
+    "member": "kga_xgb_enc4_k10",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.993098911061864,
+    "within_oof_null_ratio": 0.9965318169920067
+  },
+  {
+    "member": "kga_xgb_enc4_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9924488571340224,
+    "within_oof_null_ratio": 0.996268527608573
+  },
+  {
+    "member": "kga_xgb_raw_k5",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9931508836354989,
+    "within_oof_null_ratio": 0.9997457668121611
+  },
+  {
+    "member": "yk_realmlp",
+    "author": "Vladimir Demidov",
+    "test_oof_raw_std_ratio": 0.9934799888693839,
+    "within_oof_null_ratio": 0.9976760673266282
+  },
+  {
+    "member": "hm_cat",
+    "author": "Hermengardo",
+    "test_oof_raw_std_ratio": 0.9873389562799558,
+    "within_oof_null_ratio": 0.9993746500158145
+  },
+  {
+    "member": "kr_rmlp_route_ogaux",
+    "author": "Kratosyan",
+    "test_oof_raw_std_ratio": 0.9911268152513684,
+    "within_oof_null_ratio": 0.9972328122227364
+  },
+  {
+    "member": "kr_xgb_route_ogaux",
+    "author": "Kratosyan",
+    "test_oof_raw_std_ratio": 0.9908478396501186,
+    "within_oof_null_ratio": 0.9966912370902299
+  },
+  {
+    "member": "kg_lgb",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9931183708711702,
+    "within_oof_null_ratio": 0.9965556875729932
+  },
+  {
+    "member": "kg_xgb",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9929524740080155,
+    "within_oof_null_ratio": 0.9967133203997293
+  },
+  {
+    "member": "kg_cat",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.993251058167048,
+    "within_oof_null_ratio": 0.9965231479715103
+  },
+  {
+    "member": "kg_cat_allcat",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9939053841331128,
+    "within_oof_null_ratio": 0.9972440981969125
+  },
+  {
+    "member": "kg_realmlp",
+    "author": "Ahmet Kağan Koral",
+    "test_oof_raw_std_ratio": 0.9937378956674073,
+    "within_oof_null_ratio": 0.9977445872766288
+  },
+  {
+    "member": "av5_lgbm_champion",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9946388277814895,
+    "within_oof_null_ratio": 0.9980889531969976
+  },
+  {
+    "member": "av5_lgbm_te",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9896259183645321,
+    "within_oof_null_ratio": 0.9984282691140738
+  },
+  {
+    "member": "av5_lgbm_te_rows",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9926159188531858,
+    "within_oof_null_ratio": 0.9984196893803928
+  },
+  {
+    "member": "av5_xgb_gpu",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9887572553730725,
+    "within_oof_null_ratio": 0.9975225211058545
+  },
+  {
+    "member": "av5_catboost_gpu",
+    "author": "Aman Atar",
+    "test_oof_raw_std_ratio": 0.9825813363264976,
+    "within_oof_null_ratio": 0.9978387359583888
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-20",
+  "user_choice": "Prioritize verifiable generalization and search new upstream signals",
+  "baseline_submission": "submission_public_pool_20261020.csv",
+  "baseline_public_score_user_reported": 0.96187,
+  "baseline_oof": 0.9622047560968178,
+  "no_test_only_frontier_as_main_route": true,
+  "training_requires_task_specific_evidence": true,
+  "status": "completed_research_round_no_promotable_candidate",
+  "new_model_fits": 0,
+  "new_submissions": 0,
+  "new_upstream_candidate": "ewtherka Kumo Large setE 3 complete bags, source v14",
+  "candidate_standalone_oof": 0.9598620415406877,
+  "candidate_fixed05_delta": -5.247044296385894e-06,
+  "candidate_fixed20_delta": -7.775879360305549e-05,
+  "current_best_unchanged": true,
+  "report": "research_s6e10/NEW_UPSTREAM_GENERALIZATION_RESEARCH_20261020.md",
+  "array_screen_seconds": 35.747080000001006,
+  "independent_verification_passed": true,
+  "cache_provenance_limit": "resumed producer cache historical chain not independently reconstructed"
+}

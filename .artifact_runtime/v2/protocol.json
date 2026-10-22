@@ -1,0 +1,10 @@
+{
+  "created": "2026-10-17T11:11:56.235782",
+  "selection": "Reuse prior fit/selection split for controlled comparisons; baseline control seed 42",
+  "confirmation": "Old audit is previously seen, not pristine. Freeze candidate and blend before one fixed-round comparison. No tuning on confirmation.",
+  "final": "Stratified 10-fold seed42, same folds as previous OOF; selection bias applies; Kaggle score unknown",
+  "max_cat_trials": 7,
+  "nn": "Two bounded official TabM candidates: full statistics input and compact raw+prior input. Second candidate motivated by first candidate learning plateau; before confirmation feedback.",
+  "preserve": "All previous submissions and input files must match snapshot hashes",
+  "provisional_confirmation": "An automatic job began using provisional tree weights; stopped before viewing any confirmation scores. Final weights will be frozen after both NN screens."
+}

@@ -1,0 +1,82 @@
+{
+  "folds": [
+    {
+      "fold": 0,
+      "rows": 139927,
+      "exact_baseline_auc": 0.9623591653196826,
+      "sampled_baseline_auc": 0.9623115,
+      "sampled_pairs": 2000000,
+      "baseline_wrong_pairs": 75377,
+      "baseline_tied_pairs": 0,
+      "all246_strictly_wrong_pairs": 22076,
+      "all246_wrong_fraction_of_baseline_wrong": 0.29287448425912416,
+      "baseline_wrong_some_member_correct": 53297,
+      "baseline_wrong_no_member_correct": 22080,
+      "baseline_correct_some_member_wrong": 112335,
+      "some_member_correct_fraction_of_baseline_wrong": 0.707072449155578
+    },
+    {
+      "fold": 1,
+      "rows": 139927,
+      "exact_baseline_auc": 0.9614093108360477,
+      "sampled_baseline_auc": 0.9615455,
+      "sampled_pairs": 2000000,
+      "baseline_wrong_pairs": 76909,
+      "baseline_tied_pairs": 0,
+      "all246_strictly_wrong_pairs": 23134,
+      "all246_wrong_fraction_of_baseline_wrong": 0.30079704585939226,
+      "baseline_wrong_some_member_correct": 53771,
+      "baseline_wrong_no_member_correct": 23138,
+      "baseline_correct_some_member_wrong": 114076,
+      "some_member_correct_fraction_of_baseline_wrong": 0.699150944622866
+    },
+    {
+      "fold": 2,
+      "rows": 139927,
+      "exact_baseline_auc": 0.9627989282529895,
+      "sampled_baseline_auc": 0.9627855,
+      "sampled_pairs": 2000000,
+      "baseline_wrong_pairs": 74429,
+      "baseline_tied_pairs": 0,
+      "all246_strictly_wrong_pairs": 21664,
+      "all246_wrong_fraction_of_baseline_wrong": 0.29106934125139394,
+      "baseline_wrong_some_member_correct": 52757,
+      "baseline_wrong_no_member_correct": 21672,
+      "baseline_correct_some_member_wrong": 111686,
+      "some_member_correct_fraction_of_baseline_wrong": 0.708823173762915
+    },
+    {
+      "fold": 3,
+      "rows": 139927,
+      "exact_baseline_auc": 0.9624455506060633,
+      "sampled_baseline_auc": 0.962285,
+      "sampled_pairs": 2000000,
+      "baseline_wrong_pairs": 75430,
+      "baseline_tied_pairs": 0,
+      "all246_strictly_wrong_pairs": 22411,
+      "all246_wrong_fraction_of_baseline_wrong": 0.2971099032215299,
+      "baseline_wrong_some_member_correct": 53014,
+      "baseline_wrong_no_member_correct": 22416,
+      "baseline_correct_some_member_wrong": 112219,
+      "some_member_correct_fraction_of_baseline_wrong": 0.7028238101551108
+    },
+    {
+      "fold": 4,
+      "rows": 139927,
+      "exact_baseline_auc": 0.9620440478732256,
+      "sampled_baseline_auc": 0.962132,
+      "sampled_pairs": 2000000,
+      "baseline_wrong_pairs": 75736,
+      "baseline_tied_pairs": 0,
+      "all246_strictly_wrong_pairs": 22395,
+      "all246_wrong_fraction_of_baseline_wrong": 0.29569821485158976,
+      "baseline_wrong_some_member_correct": 53339,
+      "baseline_wrong_no_member_correct": 22397,
+      "baseline_correct_some_member_wrong": 112435,
+      "some_member_correct_fraction_of_baseline_wrong": 0.7042753776275483
+    }
+  ],
+  "pair_audit_seconds": 45.21387028694153,
+  "elapsed_seconds": 47.24910092353821,
+  "caveat": "Label-aware descriptive counts; not a deployable oracle, training gate or guarantee. Disagreements between classifiers are not new input information."
+}

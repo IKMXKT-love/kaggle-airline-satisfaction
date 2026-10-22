@@ -1,0 +1,212 @@
+{
+  "stage": "screen",
+  "baseline_auc": 0.9606333841356087,
+  "standalone_auc": {
+    "A_clean": 0.9585156251139725,
+    "B_masked": 0.959225679487825,
+    "C_multitask": 0.9590057954448328
+  },
+  "trials": [
+    {
+      "spec": "A_clean",
+      "usage": "replace35",
+      "auc": 0.9604574974001182,
+      "delta": -0.00017588673549035353,
+      "approximate_se": 8.138683497009706e-05,
+      "interval95": [
+        -0.00033540493203174375,
+        -1.6368538948963288e-05
+      ]
+    },
+    {
+      "spec": "A_clean",
+      "usage": "add20",
+      "auc": 0.9606119369152956,
+      "delta": -2.1447220312986434e-05,
+      "approximate_se": 4.795330375636274e-05,
+      "interval95": [
+        -0.0001154356956754574,
+        7.254125504948454e-05
+      ]
+    },
+    {
+      "spec": "B_masked",
+      "usage": "replace35",
+      "auc": 0.9605117697021829,
+      "delta": -0.00012161443342566968,
+      "approximate_se": 6.887327450845776e-05,
+      "interval95": [
+        -0.0002566060514622469,
+        1.3377184610907525e-05
+      ]
+    },
+    {
+      "spec": "B_masked",
+      "usage": "add20",
+      "auc": 0.9606221802238559,
+      "delta": -1.1203911752605062e-05,
+      "approximate_se": 3.89228359219291e-05,
+      "interval95": [
+        -8.74926701595861e-05,
+        6.508484665437598e-05
+      ]
+    },
+    {
+      "spec": "C_multitask",
+      "usage": "replace35",
+      "auc": 0.9605186947103185,
+      "delta": -0.00011468942528999764,
+      "approximate_se": 8.121724327515603e-05,
+      "interval95": [
+        -0.00027387522210930347,
+        4.449637152930819e-05
+      ]
+    },
+    {
+      "spec": "C_multitask",
+      "usage": "add20",
+      "auc": 0.9606446604725093,
+      "delta": 1.1276336900723626e-05,
+      "approximate_se": 4.749204406207866e-05,
+      "interval95": [
+        -8.180806946095053e-05,
+        0.00010436074326239779
+      ]
+    }
+  ],
+  "winner": {
+    "spec": "C_multitask",
+    "usage": "add20",
+    "auc": 0.9606446604725093,
+    "delta": 1.1276336900723626e-05,
+    "approximate_se": 4.749204406207866e-05,
+    "interval95": [
+      -8.180806946095053e-05,
+      0.00010436074326239779
+    ]
+  },
+  "gate": 0.0003,
+  "passed": false,
+  "details": {
+    "A_clean": {
+      "spec": "A_clean",
+      "initial_hash": "2746c7241bf97cb1cf7b05bb8ca4238c024e30e3b3d664ca7c733c7efb199159",
+      "best_stopping_auc": 0.9591705331797085,
+      "best_epoch": 13,
+      "epochs_completed": 24,
+      "updates_completed": 9672,
+      "warm_epochs": 12,
+      "fine_epochs": 12,
+      "masked_stopping_recovery": {
+        "cross_entropy": 2.011960706172286,
+        "accuracy": 0.1728806290207291,
+        "masked_positions": 69950,
+        "seed": 1942
+      },
+      "seconds": 57.74944020000112,
+      "peak_allocated_gb": 0.38848876953125,
+      "peak_reserved_gb": 0.455078125,
+      "parameter_count": 3644536,
+      "best_checkpoint_sha256": "579c90b77550894ad1c605900165d2adfed76387d5884bddc09d1f8e11183495",
+      "initial_recovery": {
+        "cross_entropy": 1.793008756158691,
+        "accuracy": 0.14284488920657612,
+        "masked_positions": 69950,
+        "seed": 1942
+      }
+    },
+    "B_masked": {
+      "spec": "B_masked",
+      "initial_hash": "2746c7241bf97cb1cf7b05bb8ca4238c024e30e3b3d664ca7c733c7efb199159",
+      "best_stopping_auc": 0.9601004522993029,
+      "best_epoch": 13,
+      "epochs_completed": 24,
+      "updates_completed": 9672,
+      "warm_epochs": 12,
+      "fine_epochs": 12,
+      "masked_stopping_recovery": {
+        "cross_entropy": 2.0160412319120633,
+        "accuracy": 0.1658327376697641,
+        "masked_positions": 69950,
+        "seed": 1942
+      },
+      "seconds": 64.11954859999969,
+      "peak_allocated_gb": 0.38814401626586914,
+      "peak_reserved_gb": 0.439453125,
+      "parameter_count": 3644536,
+      "best_checkpoint_sha256": "095fd5bf93b9449549a5762c8202785fbe483821bb3e685e78ed1d896198778b",
+      "initial_recovery": {
+        "cross_entropy": 1.793008756158691,
+        "accuracy": 0.14284488920657612,
+        "masked_positions": 69950,
+        "seed": 1942
+      }
+    },
+    "C_multitask": {
+      "spec": "C_multitask",
+      "initial_hash": "2746c7241bf97cb1cf7b05bb8ca4238c024e30e3b3d664ca7c733c7efb199159",
+      "best_stopping_auc": 0.9598275388681492,
+      "best_epoch": 16,
+      "epochs_completed": 24,
+      "updates_completed": 9672,
+      "warm_epochs": 12,
+      "fine_epochs": 12,
+      "masked_stopping_recovery": {
+        "cross_entropy": 0.7801045777109199,
+        "accuracy": 0.6817155110793424,
+        "masked_positions": 69950,
+        "seed": 1942
+      },
+      "seconds": 72.4647879999975,
+      "peak_allocated_gb": 0.38838815689086914,
+      "peak_reserved_gb": 0.44140625,
+      "parameter_count": 3644536,
+      "best_checkpoint_sha256": "d4ce1efe302b3252bf83041201343fb1c4cd7a8aa756b46ffefbf471190de9a8",
+      "initial_recovery": {
+        "cross_entropy": 1.793008756158691,
+        "accuracy": 0.14284488920657612,
+        "masked_positions": 69950,
+        "seed": 1942
+      }
+    }
+  },
+  "arm_comparisons": {
+    "B_masked_minus_A_clean": {
+      "delta": 0.0007100543738524703,
+      "approximate_se": 0.00010748427605638796,
+      "interval95": [
+        0.0004993851927819499,
+        0.0009207235549229906
+      ]
+    },
+    "C_multitask_minus_B_masked": {
+      "delta": -0.00021988404299235428,
+      "approximate_se": 0.0001338578744409276,
+      "interval95": [
+        -0.0004822454768965723,
+        4.24773909118638e-05
+      ]
+    },
+    "C_multitask_minus_A_clean": {
+      "delta": 0.0004901703308601158,
+      "approximate_se": 0.00014694276688906064,
+      "interval95": [
+        0.000202162507757557,
+        0.0007781781539626747
+      ]
+    }
+  },
+  "pattern_groups": {
+    "seen_rating_pattern": {
+      "rows": 64737,
+      "baseline_auc": 0.9624058856802894,
+      "candidate_blend_auc": 0.9624175672435699
+    },
+    "unseen_rating_pattern": {
+      "rows": 47205,
+      "baseline_auc": 0.9512077282162927,
+      "candidate_blend_auc": 0.9512244339842975
+    }
+  },
+  "note": "Historical partitions already viewed; intervals cover fixed predictions only; screen winner is selected from six fixed trials; no multiple-selection correction."
+}

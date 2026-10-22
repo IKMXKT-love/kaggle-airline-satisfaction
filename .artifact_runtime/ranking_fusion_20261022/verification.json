@@ -1,0 +1,31 @@
+{
+  "verified": true,
+  "native_folds_match_sklearn": true,
+  "protected_files_unchanged": true,
+  "inputs_sha256_match": true,
+  "rows": [
+    {
+      "tag": "inner",
+      "rows": 139927,
+      "baseline_auc": 0.9620133930582603,
+      "candidate_auc": 0.962009333505807,
+      "delta": -4.059552453306026e-06,
+      "seconds": 20.258655071258545,
+      "rebuild_max_errors": {
+        "baseline": 8.881784197001252e-16,
+        "candidate": 1.7763568394002505e-15
+      },
+      "paired": {
+        "delta": -4.059552453332027e-06,
+        "approximate_se": 6.801119927539038e-06,
+        "interval95": [
+          -1.738974751130854e-05,
+          9.270642604644489e-06
+        ]
+      }
+    }
+  ],
+  "elapsed_seconds_including_verification": 79.99567675590515,
+  "inference_scope": "All scored rows reconstructed on CPU. Cached base predictions not retrained.",
+  "validation_scope": "Conditional meta-validation; historical and upstream dependencies remain."
+}

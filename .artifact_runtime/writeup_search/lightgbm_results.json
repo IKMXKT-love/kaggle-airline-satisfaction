@@ -1,0 +1,13 @@
+[
+  {
+    "name": "lightgbm_te_original",
+    "family": "lightgbm",
+    "use_te": true,
+    "numeric_categories": false,
+    "depth": -1,
+    "selection_auc": 0.9598125265599831,
+    "best_rounds": 495,
+    "features": 136,
+    "seconds": 39.71274399757385
+  }
+]

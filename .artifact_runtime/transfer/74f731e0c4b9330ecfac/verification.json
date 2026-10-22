@@ -1,0 +1,53 @@
+{
+  "verified": true,
+  "protected_files_unchanged": true,
+  "source_files_verified": true,
+  "independently_reconstructed_stages": [
+    "screen"
+  ],
+  "paired_uncertainty": {
+    "screen": {
+      "frequency": {
+        "delta": 6.047499867850211e-06,
+        "approximate_se": 2.0587901422106302e-05,
+        "interval95": [
+          -3.430478691947814e-05,
+          4.639978665517856e-05
+        ]
+      },
+      "profiles": {
+        "delta": 2.064359216277514e-05,
+        "approximate_se": 2.0193476261344437e-05,
+        "interval95": [
+          -1.8935621309459956e-05,
+          6.0222805635010235e-05
+        ]
+      },
+      "combined": {
+        "delta": 4.652992440024816e-06,
+        "approximate_se": 2.1071245457942026e-05,
+        "interval95": [
+          -3.6646648657541554e-05,
+          4.5952633537591186e-05
+        ]
+      },
+      "teacher_offset": {
+        "delta": 3.345686183840431e-05,
+        "approximate_se": 3.821861593072297e-05,
+        "interval95": [
+          -4.145162538581271e-05,
+          0.00010836534906262133
+        ]
+      },
+      "high_resolution": {
+        "delta": 2.7928139426604564e-05,
+        "approximate_se": 1.6913174039487038e-05,
+        "interval95": [
+          -5.221681690790032e-06,
+          6.107796054399916e-05
+        ]
+      }
+    }
+  },
+  "status": "stopped_screen"
+}

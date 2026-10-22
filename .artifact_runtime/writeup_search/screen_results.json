@@ -1,0 +1,62 @@
+[
+  {
+    "name": "raw_native_d5",
+    "use_te": false,
+    "original": false,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.04,
+    "selection_auc": 0.9579157256721522,
+    "best_rounds": 1541,
+    "features": 21,
+    "seconds": 7.438103914260864
+  },
+  {
+    "name": "raw_native_d7",
+    "use_te": false,
+    "original": false,
+    "depth": 7,
+    "child": 20,
+    "lr": 0.04,
+    "selection_auc": 0.9578778240401745,
+    "best_rounds": 714,
+    "features": 21,
+    "seconds": 5.428515434265137
+  },
+  {
+    "name": "original_d5",
+    "use_te": false,
+    "original": true,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.04,
+    "selection_auc": 0.9594388352668899,
+    "best_rounds": 614,
+    "features": 98,
+    "seconds": 13.734944581985474
+  },
+  {
+    "name": "te_original_d5",
+    "use_te": true,
+    "original": true,
+    "depth": 5,
+    "child": 10,
+    "lr": 0.04,
+    "selection_auc": 0.9597118840568358,
+    "best_rounds": 359,
+    "features": 136,
+    "seconds": 22.96298360824585
+  },
+  {
+    "name": "te_original_d7",
+    "use_te": true,
+    "original": true,
+    "depth": 7,
+    "child": 20,
+    "lr": 0.04,
+    "selection_auc": 0.9597622066017157,
+    "best_rounds": 273,
+    "features": 136,
+    "seconds": 23.582590579986572
+  }
+]

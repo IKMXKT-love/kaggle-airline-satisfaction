@@ -1,0 +1,408 @@
+# S6E10: What Each Step Was Worth
+
+Which parts of this airline-satisfaction recipe are worth trying before spending more compute?
+
+**TL;DR**
+- Target encoding (+0.001346 AUC) and the original-data teacher (+0.000586) were the largest additions in the controlled, historical XGBoost ladder.
+- Route/count and auxiliary blocks each added about +0.00014 there; their smaller live check is less convincing.
+- Five matched model pairs gained +0.000096 to +0.000176 OOF AUC with ten-fold training. Test improvement was not established.
+- Historical 13-member recipe: **0.961913 combiner CV / 0.96153 public LB** (7 October 2026). These are this recipe's scores.
+
+| Priority | Spend time on | Decision boundary |
+|---|---|---|
+| First | Target encoding; original-data teacher | Largest measured ladder gains; preserve fitting boundaries and check original-row overlap |
+| Next | Ten-fold training for a promising member | Positive historical OOF pairs; weigh recorded fitting cost, not promised test gains |
+| Optional | Route/count and auxiliary blocks | Smaller gains; train+test recipe, cache dependency and environment sensitivity |
+| Finally | Plain logistic regression on logits | Tested tree stacker did not beat it on this frozen member set |
+
+**Execution boundary:** the live ladder re-executes the disclosed **train+test recipe**, including its cached train+test auxiliary file. It is not fold-clean and is not rebuilt fold-fitted. Full-data members are cached; only the 200k-row CPU ladder, one reusable example and combiners execute here.
+
+import hashlib, json, os, platform, re, time, warnings
+import importlib.metadata
+from IPython.display import Markdown, display
+import psutil
+from pathlib import Path
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+import lightgbm as lgb, xgboost as xgb, sklearn
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import KFold, StratifiedKFold, train_test_split
+warnings.filterwarnings('ignore')
+SEED = 42
+np.random.seed(SEED)
+T0 = time.time()
+RUN_TIMES = {}
+USED_FILES = set()
+def hash_file(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for part in iter(lambda: f.read(1024 * 1024), b''):
+            h.update(part)
+    return h.hexdigest()
+def receipt(path):
+    USED_FILES.add(Path(path))
+    return path
+INPUT = Path(os.environ.get('KAGGLE_INPUT', '/kaggle/input'))
+
+def find(name, hint):
+    c = [p for p in INPUT.rglob(name) if hint in str(p).lower()]
+    assert len(c) == 1, ('Ambiguous or missing input', name, hint, len(c))
+    return receipt(c[0])
+
+TARGET, FD = 'satisfaction', 'Flight Distance'
+RATINGS = ['Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking', 'Gate location',
+           'Food and drink', 'Online boarding', 'Seat comfort', 'Inflight entertainment', 'On-board service',
+           'Leg room service', 'Baggage handling', 'Checkin service', 'Cleanliness']
+CATS = ['Gender', 'Customer Type', 'Type of Travel', 'Class']
+NUMS = ['Age', FD, 'Departure Delay in Minutes', 'Arrival Delay in Minutes']
+FEATS = NUMS + RATINGS + CATS
+
+train = pd.read_csv(find('train.csv', 'playground-series-s6e10'))
+test = pd.read_csv(find('test.csv', 'playground-series-s6e10'))
+sample = pd.read_csv(find('sample_submission.csv', 'playground-series-s6e10'))
+orig = pd.read_csv(find('data.csv', 'aviation'))
+y = train[TARGET].astype(str).str.lower().map({'true': 1, 'false': 0}).astype(int).to_numpy()
+orig[TARGET] = orig[TARGET].astype(str).str.lower().map({'true': 1, 'false': 0, 'satisfied': 1,
+                                                          'neutral or dissatisfied': 0}).astype(int)
+orig = orig[FEATS + [TARGET]].drop_duplicates().reset_index(drop=True)
+assert len(train) == 699_635 and len(test) == 299_844 and (sample['id'].values == test['id'].values).all()
+FOLDS = list(StratifiedKFold(5, shuffle=True, random_state=SEED).split(np.zeros(len(y)), y))
+fold_id = np.zeros(len(y), int)
+for k, (_, b) in enumerate(FOLDS):
+    fold_id[b] = k
+
+# saved predictions: ours, plus two public CC0 OOF libraries on the same folds
+OWN = find('members.json', 's6e10-stack-oof').parent
+MEMBERS = json.loads((OWN / 'members.json').read_text())
+mg_o = pd.read_parquet(find('oof_predictions.parquet', 's6e10-oof-library'))
+mg_t = pd.read_parquet(find('test_predictions.parquet', 's6e10-oof-library'))
+assert (mg_o['id'].values == train['id'].values).all() and (mg_t['id'].values == test['id'].values).all()
+assert (mg_o['satisfaction'].astype(int).values == y).all() and (mg_o['fold'].values == fold_id).all()
+GL = find('folds_seed42.npy', 'golem').parent
+assert (np.load(receipt(GL / 'folds_seed42.npy')) == fold_id).all()
+GP_COLS = ['deepfm_rawaux', 'realmlp_pub_s1', 'realmlp_vb_aux', 'xgb_auxall']  # goodpjw2008's published OOF members used by the stack (same folds)
+GP_HASHES = {'oof_gp_deepfm_rawaux.npy': '9f0cdefe685e93350ce866c04c5d4bd6d41636ae6bdc968359556674784acbcf', 'oof_gp_realmlp_pub_s1.npy': '8e98c1c5911102ce677283f51856d05d6eb2178b7c62cd2d833daf219bdcaa44', 'oof_gp_realmlp_vb_aux.npy': 'a2af76abb39343101d80c0e775fb7ef694724659c243e09f03b17b2e3a0fff27', 'oof_gp_xgb_auxall.npy': 'f1f0877a571ddf266a10b28dc839d83db3d960c693264f55b97b1822adf87c30', 'test_gp_deepfm_rawaux.npy': '2629ab86b9551fcb13e8eb32a7548abd6aaa08e584bd875ce5aa68098b7dbc0f', 'test_gp_realmlp_pub_s1.npy': 'b8806f31f9bb187922d44186a9cc45635a4166ff0a4ac0fda87c693f423bda05', 'test_gp_realmlp_vb_aux.npy': '8369490f8ac7b6eff5c0c94b7dcca406eec4ab8a8e5d3ca3ef942eb4967e2d04', 'test_gp_xgb_auxall.npy': 'ca38570b555bc67fc0e50607de2b7487b9a143cb1bc65c808e0108d35583b3c4'}
+def frozen_gp(part, col):
+    name = f'{part}_gp_{col}.npy'
+    path = find(name, '124-public')
+    assert hash_file(path) == GP_HASHES[name], ('Frozen public prediction changed', name)
+    return np.load(path)
+# All eight arrays were pointwise identical to the original ID-aligned CSVs.
+gp_o = pd.DataFrame({col: frozen_gp('oof', col) for col in GP_COLS})
+gp_t = pd.DataFrame({col: frozen_gp('test', col) for col in GP_COLS})
+BP = find('bp_realmlp.npz', 'busyaprime').parent  # busyaprime's members (their folds: random_state=33; still one OOF value per row)
+
+def _load(name):
+    if name.startswith('pub_mg_'):
+        p = name[7:]
+        cols = [c for c in mg_o.columns if c == p or re.fullmatch(re.escape(p) + r'_s\d+', c)]
+        return mg_o[cols].mean(axis=1).to_numpy(), mg_t[cols].mean(axis=1).to_numpy()
+    if name.startswith('pub_gl_'):
+        return np.load(receipt(GL / f'oof_{name[7:]}.npy')), np.load(receipt(GL / f'test_{name[7:]}.npy'))
+    if name.startswith('pub_gp_'):
+        return gp_o[name[7:]].to_numpy(float), gp_t[name[7:]].to_numpy(float)
+    if name.startswith('pub_bp_'):
+        z = np.load(receipt(BP / f'bp_{name[7:]}.npz'))
+        return z['oof'].astype(float), z['test'].astype(float)
+    f = OWN / f'{name}.npz'
+    z = np.load(receipt(f if f.exists() else OWN / 'oof' / f'{name}.npz'))
+    return z['oof'], z['test']
+
+auc = lambda p: roc_auc_score(y, p)
+fold_aucs = lambda p: [roc_auc_score(y[b], p[b]) for _, b in FOLDS]
+logit = lambda p: np.log(np.clip(p, 1e-7, 1 - 1e-7) / (1 - np.clip(p, 1e-7, 1 - 1e-7)))
+print({'python': platform.python_version(), 'numpy': np.__version__, 'pandas': pd.__version__,
+       'sklearn': sklearn.__version__, 'lightgbm': lgb.__version__, 'xgboost': xgb.__version__})
+print(f'train {len(train):,} | test {len(test):,} | original {len(orig):,} | saved members {len(MEMBERS)}')
+
+def load(name):
+    a, b = _load(name)
+    assert a.shape == (len(y),) and b.shape == (len(test),), name
+    assert np.isfinite(a).all() and np.isfinite(b).all(), name
+    assert ((a >= 0) & (a <= 1)).all() and ((b >= 0) & (b <= 1)).all(), name
+    return a, b
+VERSIONS = {p: importlib.metadata.version(p) for p in ['numpy','pandas','scikit-learn','lightgbm','xgboost','matplotlib','pyarrow','psutil']}
+
+def nested_stack(names, C=1.0):
+    'Combiner CV: 5-fold logistic regression on saved member logits (weights refit per outer fold); returns pooled AUC, fold AUCs, OOF stack scores.'
+    Z = np.column_stack([logit(load(n)[0]) for n in names])
+    out = np.zeros(len(y))
+    for a, b in FOLDS:
+        out[b] = LogisticRegression(C=C, max_iter=3000).fit(Z[a], y[a]).decision_function(Z[b])
+    return auc(out), fold_aucs(out), out
+
+LADDER = [('raw 21 columns', 'xgb_raw'), ('+ target encoding (in-fold)', 'xgb_te'),
+          ('+ route profile + counts', 'xgb_route'), ('+ original-data teacher', 'xgb_A'),
+          ('+ aux expected ratings', 'xgb_A_auxev')]
+PREVIOUS = ['rmlp_v4aux_k10', 'pub_mg_lgb_ogteach', 'rmlp_raw_aux_k10', 'pub_gl_k', 'lgb_A_auxall_k10', 'pub_gl_g',
+            'cat_ctr_auxev_k10', 'rmlp_ogx_aux', 'pub_mg_realmlp_v4']
+FINAL = ['rmlp_v4aux_k10s2', 'pub_bp_realmlp', 'pub_gp_xgb_auxall', 'cat_ctr_auxall_k10', 'pub_gl_k', 'pub_gp_realmlp_pub_s1', 'rmlp_raw_aux_k10', 'pub_mg_cat_ctr', 'rmlp_ogx_aux', 'pub_gp_deepfm_rawaux', 'pub_gp_realmlp_vb_aux', 'pub_gl_g', 'xgb_A_auxall']
+OWN_ONLY = ["rmlp_v4aux_k10s2", "cat_ctr_auxall_k10", "rmlp_raw_aux_k10", "lgb_B_k10", "rmlp_ogx_aux_k10", "rmlp_v4ev_e4_k10", "lgb_A"]
+ladder = pd.DataFrame([(lab, n, auc(load(n)[0])) for lab, n in LADDER], columns=['step', 'member', 'OOF AUC'])
+
+lad = ladder.copy()
+lad['gain vs previous'] = lad['OOF AUC'].diff()
+lad['folds up vs previous'] = [None] + [sum(np.array(fold_aucs(load(LADDER[i][1])[0])) > np.array(fold_aucs(load(LADDER[i-1][1])[0]))) for i in range(1,len(LADDER))]
+lad.to_csv('historical_ladder.csv', index=False)
+fig, ax = plt.subplots(figsize=(8.4,3.1))
+labels = ['Raw','Target encoding','Route profile + counts','Original-data teacher','Aux expected ratings']
+ax.barh(labels[::-1], ladder['OOF AUC'].to_numpy()[::-1] - 0.958, left=0.958, color=['#2563eb']*4+['#9ca3af'])
+for i,v in enumerate(ladder['OOF AUC'].to_numpy()[::-1]):
+    ax.text(v+0.000025,i,f'{v:.6f}',va='center',fontsize=9)
+ax.set(xlim=(0.958,0.9615),xlabel='Pooled OOF ROC AUC · truncated axis',title='Historical controlled ladder: one XGBoost, one added block')
+ax.spines[['top','right']].set_visible(False)
+fig.tight_layout(); fig.savefig('historical_ladder.png',dpi=160); plt.show()
+
+## Evidence before extra complexity
+
+The historical ladder used 699,635 rows, identical five-fold partitions, seed 42, XGBoost depth 8 and learning rate 0.02. Each gain is conditional on the preceding blocks; route and counts were added together, so their effects cannot be separated.
+
+The **fresh CPU re-execution** below keeps the prior 200,000-row stratified subset, three folds and LightGBM settings. Category vocabulary, route profiles and counts still use all train+test predictors; the auxiliary file is loaded, not regenerated. Target means use only fitting labels, with early-stopping rows separated first. This repeats the inherited recipe, not an independent confirmation or a new fold-fitted experiment.
+
+def route_profile(full):
+    'Per exact Flight Distance: mean of every other column, plus the route size. Label-free.'
+    g = full.groupby(FD)
+    out = pd.DataFrame({f'fdm_{c}': g[c].transform('mean').astype(np.float32) for c in FEATS if c != FD})
+    out['fd_cnt'] = g['Age'].transform('size').astype(np.float32)
+    return out
+
+def value_counts(full, cols=NUMS):
+    return pd.DataFrame({f'cnt_{c}': full[c].map(full[c].value_counts()).astype(np.float32) for c in cols})
+
+def te_codes(full):
+    'Integer keys whose satisfaction rate is target-encoded inside folds.'
+    def key(cols):
+        code = np.zeros(len(full), dtype=np.int64)
+        for c in cols:
+            k = pd.factorize(full[c], use_na_sentinel=False)[0]
+            code = code * (k.max() + 1) + k
+        return pd.factorize(code)[0]
+    return {'te_fd': key([FD]), 'te_age': key(['Age']), 'te_fd_age': key([FD, 'Age']), 'te_fd_class': key([FD, 'Class']),
+            'te_fd_travel': key([FD, 'Type of Travel']), 'te_seg': key(['Age', 'Class', 'Type of Travel', 'Customer Type'])}
+
+def target_encode(k_fit, y_fit, k_apply, smooth=20.0):
+    prior = y_fit.mean()
+    s = pd.DataFrame({'k': k_fit, 'y': y_fit}).groupby('k')['y'].agg(['sum', 'count'])
+    return pd.Series(k_apply).map((s['sum'] + prior * smooth) / (s['count'] + smooth)).fillna(prior).to_numpy(np.float32)
+
+def add_te(keys, idx_fit, y_fit, *idx_apply, smooth=20.0):
+    '''Fold-safe target encoding.
+    keys      : dict name -> integer codes for every row of `full` (train + test), e.g. te_codes(full)
+    idx_fit   : the rows the model fits on (their labels are the only labels used)
+    y_fit     : labels of idx_fit
+    idx_apply : any other row sets to encode: early-stopping rows, the validation fold, test rows
+    Returns (DataFrame for idx_fit, [one DataFrame per idx_apply]). Fitting rows get inner 5-fold encodings,
+    so no row sees its own label; every other row set is encoded from all fitting rows.'''
+    fit, apps = {}, [dict() for _ in idx_apply]
+    for name, codes in keys.items():
+        col = np.zeros(len(idx_fit), np.float32)
+        for i, j in KFold(5, shuffle=True, random_state=0).split(idx_fit):
+            col[j] = target_encode(codes[idx_fit][i], y_fit[i], codes[idx_fit][j], smooth)
+        fit[name] = col
+        for d, idx in zip(apps, idx_apply):
+            d[name] = target_encode(codes[idx_fit], y_fit, codes[idx], smooth)
+    return pd.DataFrame(fit), [pd.DataFrame(d) for d in apps]
+
+def original_teacher(orig, full):
+    'XGBoost fitted on the original dataset only; its logit becomes a feature for competition rows.'
+    m = xgb.XGBClassifier(n_estimators=600, learning_rate=0.05, max_depth=8, subsample=0.8, colsample_bytree=0.5,
+                          tree_method='hist', n_jobs=4, random_state=0)
+    m.fit(orig[FEATS], orig[TARGET])
+    return logit(m.predict_proba(full[FEATS])[:, 1]).astype(np.float32)
+
+t = time.time()
+full = pd.concat([train[FEATS], test[FEATS]], ignore_index=True)
+for c in CATS:
+    cats = sorted(pd.concat([full[c], orig[c]]).unique())
+    full[c] = pd.Categorical(full[c], categories=cats).codes.astype(np.int16)
+    orig[c] = pd.Categorical(orig[c], categories=cats).codes.astype(np.int16)
+RP, CNT, KEYS = route_profile(full), value_counts(full), te_codes(full)
+TEACH = original_teacher(orig, full)
+AUXEV = pd.read_parquet(receipt(OWN / 'aux_ev.parquet'))
+print(f'features built in {time.time() - t:.0f}s | teacher alone on competition labels: AUC {auc(TEACH[:len(y)]):.4f}')
+
+sub_idx, _ = train_test_split(np.arange(len(y)), train_size=200_000, stratify=y, random_state=SEED)
+sub_idx = np.sort(sub_idx)
+LIVE_FOLDS = list(StratifiedKFold(3, shuffle=True, random_state=SEED).split(sub_idx, y[sub_idx]))
+STEPS = [('raw 21 columns', []), ('+ target encoding', ['te']), ('+ route profile + counts', ['te', 'rp']),
+         ('+ original-data teacher', ['te', 'rp', 'teacher']), ('+ aux expected ratings', ['te', 'rp', 'teacher', 'aux'])]
+
+def frame(idx, blocks):
+    X = full.iloc[idx][FEATS].reset_index(drop=True)
+    parts = [X]
+    if 'rp' in blocks: parts += [RP.iloc[idx].reset_index(drop=True), CNT.iloc[idx].reset_index(drop=True)]
+    if 'teacher' in blocks: parts.append(pd.DataFrame({'teacher': TEACH[idx]}))
+    if 'aux' in blocks: parts.append(AUXEV.iloc[idx].reset_index(drop=True))
+    return pd.concat(parts, axis=1)
+
+assert len(AUXEV) == len(full) and AUXEV.shape[1] == 13
+RUN_TIMES['feature_preparation_seconds'] = time.time() - t
+live = []
+LIVE_PRED = {}
+LIVE_FOLD_VALUES = []
+LIVE_STEP_TIMES = []
+for name, blocks in STEPS:
+    step_t = time.time()
+    oof = np.zeros(len(sub_idx))
+    for a, b in LIVE_FOLDS:
+        ia, ib = sub_idx[a], sub_idx[b]
+        f, e = train_test_split(np.arange(len(ia)), test_size=0.05, stratify=y[ia], random_state=SEED)
+        i_fit, i_es = ia[f], ia[e]   # split off the early-stopping rows FIRST, so their labels never enter the encodings
+        assert not np.intersect1d(i_fit, i_es).size and not np.intersect1d(ia, ib).size
+        Xf, Xe, Xb = frame(i_fit, blocks), frame(i_es, blocks), frame(ib, blocks)
+        if 'te' in blocks:
+            tf, (t_es, tb) = add_te(KEYS, i_fit, y[i_fit], i_es, ib)
+            Xf, Xe, Xb = (pd.concat([X, T], axis=1) for X, T in ((Xf, tf), (Xe, t_es), (Xb, tb)))
+        m = lgb.LGBMClassifier(n_estimators=3000, learning_rate=0.03, num_leaves=63, min_child_samples=50, subsample=0.8,
+                               subsample_freq=1, colsample_bytree=0.5, n_jobs=4, verbose=-1, random_state=SEED)
+        m.fit(Xf, y[i_fit], eval_set=[(Xe, y[i_es])], eval_metric='auc', callbacks=[lgb.early_stopping(150, verbose=False)])
+        oof[b] = m.predict_proba(Xb)[:, 1]
+    LIVE_PRED[name] = oof.copy()
+    LIVE_STEP_TIMES.append(time.time() - step_t)
+    LIVE_FOLD_VALUES.append([roc_auc_score(y[sub_idx][b], oof[b]) for _,b in LIVE_FOLDS])
+    live.append((name, roc_auc_score(y[sub_idx], oof), [roc_auc_score(y[sub_idx][b], oof[b]) for _, b in LIVE_FOLDS]))
+live = pd.DataFrame(live, columns=['step', 'live OOF AUC (200k, 3 folds)', 'fold AUCs'])
+live['gain vs previous'] = live.iloc[:, 1].diff()
+live['fold AUCs'] = live['fold AUCs'].map(lambda v: ' '.join(f'{x:.5f}' for x in v))
+live_full = live.copy()
+live_full['measured fitting seconds'] = LIVE_STEP_TIMES
+live_full.to_csv('live_ladder_precise.csv',index=False)
+np.savez_compressed('live_predictions.npz',indices=sub_idx,fold_id=np.select([np.isin(np.arange(len(sub_idx)),b) for _,b in LIVE_FOLDS],list(range(3)),default=-1),**{f'step_{i}':LIVE_PRED[name] for i,(name,_) in enumerate(STEPS)})
+live.round(6).to_csv('live_ladder.csv', index=False)
+print(f'live ladder took {time.time() - t:.0f}s')
+RUN_TIMES['live_ladder_including_preparation_seconds'] = time.time()-t
+
+pairs = [('rmlp_v4aux', 'rmlp_v4aux_k10'), ('rmlp_B', 'rmlp_B_k10'), ('rmlp_raw_aux_s2', 'rmlp_raw_aux_k10'),
+         ('lgb_A_auxall', 'lgb_A_auxall_k10'), ('cat_ctr_auxev', 'cat_ctr_auxev_k10')]
+kf = pd.DataFrame([(a, auc(load(a)[0]), auc(load(b)[0])) for a, b in pairs], columns=['model', '5-fold', '10-fold'])
+kf['gain'] = kf['10-fold'] - kf['5-fold']
+
+pair_receipts = []
+for a,b in pairs:
+    ma,mb = MEMBERS[a],MEMBERS[b]
+    assert ma['seed'] == mb['seed'] and ma['params'] == mb['params'] and ma['featset'] == mb['featset']
+    assert ma['nfold'] == 5 and mb['nfold'] == 10
+    ta,tb = ma.get('total_seconds'),mb.get('total_seconds')
+    pair_receipts.append({'five_member':a,'ten_member':b,'seed':ma['seed'],'five_seconds':ta,'ten_seconds':tb,'ratio':tb/ta if ta and tb else None})
+pair_cost = pd.DataFrame(pair_receipts)
+kf.join(pair_cost).to_csv('five_vs_ten_folds.csv',index=False)
+t_stack = time.time()
+final_auc, final_folds, final_oof = nested_stack(FINAL)
+own_auc = nested_stack(OWN_ONLY)[0]
+path = [(n, nested_stack(FINAL[:i + 1])[0]) for i, n in enumerate(FINAL)]
+path = pd.DataFrame(path, columns=['added member', 'combiner CV AUC'])
+path['gain'] = path['combiner CV AUC'].diff()
+path['source'] = ['public library' if n.startswith('pub_') else 'ours' for n in path['added member']]
+path.to_csv('selected_stack_path.csv',index=False)
+Z = np.column_stack([logit(load(n)[0]) for n in FINAL])
+w = LogisticRegression(C=1.0, max_iter=3000).fit(Z, y)
+pd.DataFrame({'member':FINAL,'weight':w.coef_[0]}).to_csv('selected_stack_weights.csv',index=False)
+print(f'our models only ({len(OWN_ONLY)} members): combiner CV {own_auc:.6f} | current stack: {final_auc:.6f}')
+RUN_TIMES['selected_stack_replay_and_refit_seconds']=time.time()-t_stack
+
+t_combiner=time.time()
+Zs = np.column_stack([logit(load(n)[0]) for n in FINAL])
+res = {'mean of logits (no fitting)': auc(Zs.mean(1)), 'logistic regression': final_auc}
+oof = np.zeros(len(y))
+for a, b in FOLDS:
+    m = lgb.LGBMClassifier(n_estimators=300, learning_rate=0.03, num_leaves=15, min_child_samples=2000, subsample=0.8,
+                           subsample_freq=1, colsample_bytree=0.8, reg_lambda=5, n_jobs=4, verbose=-1, random_state=0)
+    oof[b] = m.fit(Zs[a], y[a]).predict_proba(Zs[b])[:, 1]
+res['LightGBM stacker'] = auc(oof)
+pd.Series(res,name='combiner CV AUC').to_csv('stacker_compare_precise.csv')
+pd.Series(res, name='combiner CV AUC').round(6).to_csv('stacker_compare.csv')
+RUN_TIMES['combiner_comparison_seconds']=time.time()-t_combiner
+
+evidence = []
+live_up = [None]+[int(np.sum(np.array(LIVE_FOLD_VALUES[i]) > np.array(LIVE_FOLD_VALUES[i-1]))) for i in range(1,5)]
+for i,(label,member) in enumerate(LADDER):
+    hist_gain = lad['gain vs previous'].iloc[i]
+    fresh_gain = live['gain vs previous'].iloc[i]
+    if i == 0:
+        gain = f"AUC: {ladder['OOF AUC'].iloc[i]:.6f} / {live.iloc[i,1]:.6f}"
+    else:
+        gain = f"{hist_gain:+.6f} ({int(lad['folds up vs previous'].iloc[i])}/5) / {fresh_gain:+.6f} ({live_up[i]}/3)"
+    seconds = MEMBERS[member].get('total_seconds')
+    fit_cost = f'{seconds:.1f}s' if seconds is not None else 'not recorded'
+    boundary = ['Train+test category vocabulary','Historical inner-ES leakage; fresh TE fitting-label-only','Train+test route/count summaries','Original-only labels; overlap retained','Train+test cross-predicted auxiliary cache'][i]
+    provenance = 'Cached scores / fresh downstream fit; aux cached' if i==4 else 'Cached scores / fresh fit'
+    evidence.append([label,gain,f'{fit_cost} historical GPU / {LIVE_STEP_TIMES[i]:.1f}s fresh CPU',boundary,provenance])
+evidence.append(['5 → 10 folds (five pairs)',f"{kf['gain'].min():+.6f} to {kf['gain'].max():+.6f}",f"{pair_cost['ratio'].min():.2f}–{pair_cost['ratio'].max():.2f}× recorded fit time",'OOF only; changed training partitions; inherited features','Historical/cached; rescored here'])
+evidence.append(['Tree combiner vs plain LR',f"{res['LightGBM stacker']-final_auc:+.6f}",f"{RUN_TIMES['combiner_comparison_seconds']:.1f}s fresh CPU, whole comparison",'Fixed 13 members; weights cross-fitted; selection reused OOF','Fresh combiners on cached base OOF'])
+evidence = pd.DataFrame(evidence,columns=['Change tested','Measured gain: historical / fresh','Compute cost','Validation boundary','Execution provenance'])
+evidence.to_csv('evidence_and_cost.csv',index=False)
+display(evidence.style.hide(axis='index').set_properties(**{'white-space':'normal','text-align':'left','font-size':'12px'}).set_table_styles([{'selector':'th','props':[('text-align','left')]}]))
+display(Markdown(f"**Fresh ladder:** TE {live['gain vs previous'].iloc[1]:+.6f}, teacher {live['gain vs previous'].iloc[3]:+.6f}; route/count {live['gain vs previous'].iloc[2]:+.6f}, aux {live['gain vs previous'].iloc[4]:+.6f}. Fold wins are in the table. This execution freshly fits the downstream learner; it reuses the transductive auxiliary cache."))
+
+Costs above are recorded **whole-member clocks** (fitting and prediction), not incremental feature-generation costs. Isolated historical route/teacher preparation costs: **not recorded**. The original GPU job logged 907.6 seconds for the broader auxiliary-generation task; that is not an isolated cost of the 13-column cache. Fresh shared preparation is timed separately in `run_manifest.json`; cached training/search costs are not part of this notebook's CPU clock.
+
+**Interpretation:** exact-value target means helping is consistent with a lookup-like pattern in the synthetic data. A generator mechanism, clean-label explanation for the teacher, and information-compression explanation for route/aux features remain **hypotheses**. The teacher helped this tested recipe; we did not establish why. Previous same-code local/Kaggle runs gave different auxiliary directions (about −0.00008 / +0.00025) with different XGBoost builds; these are environment checks, not matched seed repeats.
+
+Ten-fold gains were measured from the five frozen pairs, with other recorded model settings held fixed; fold models trained on 90% rather than 80% of rows. They **do not demonstrate test improvement**. The changed partitions and inherited validation limitations still apply.
+
+## Reuse the label boundary
+
+Expand the helper cell to copy `target_encode` and `add_te`. Split early-stopping rows **before** target encoding; use only fitting labels for every apply set. Fitting rows receive inner five-fold encodings.
+
+The example reuses this notebook's already built category keys and original-only teacher. **Only its target-encoding label boundary is fold-contained; the whole pipeline is transductive.** For a new clean experiment, learn category/count/profile maps inside the fitting partition and rebuild any auxiliary model there; do not relabel these historical scores as that experiment's results. Original-row overlap also needs its own policy.
+
+t_example=time.time()
+tr_idx, va_idx = sub_idx[LIVE_FOLDS[0][0]], sub_idx[LIVE_FOLDS[0][1]]       # any train / validation row indices into `full`
+fit_idx, es_idx = train_test_split(tr_idx, test_size=0.05, stratify=y[tr_idx], random_state=SEED)   # 1. split off early-stopping rows first
+enc_fit, (enc_es, enc_va) = add_te(KEYS, fit_idx, y[fit_idx], es_idx, va_idx)                       # 2. encode with fitting labels only
+def make(idx, enc):                                                                                 # 3. raw columns + encodings + teacher
+    return pd.concat([full.iloc[idx][FEATS].reset_index(drop=True), enc, pd.DataFrame({'teacher': TEACH[idx]})], axis=1)
+m = lgb.LGBMClassifier(n_estimators=3000, learning_rate=0.03, num_leaves=63, min_child_samples=50, subsample=0.8,
+                       subsample_freq=1, colsample_bytree=0.5, n_jobs=4, verbose=-1, random_state=SEED)
+m.fit(make(fit_idx, enc_fit), y[fit_idx], eval_set=[(make(es_idx, enc_es), y[es_idx])], eval_metric='auc',
+      callbacks=[lgb.early_stopping(150, verbose=False)])
+Xv = make(va_idx, enc_va)
+print(f'{Xv.shape[1]} features: 21 raw + {enc_va.shape[1]} target encodings + 1 teacher | '
+      f'validation AUC {roc_auc_score(y[va_idx], m.predict_proba(Xv)[:, 1]):.5f} (one split of the 200k subsample)')
+RUN_TIMES['reusable_example_seconds']=time.time()-t_example
+
+## Negative evidence: two different kinds
+
+**Controlled findings:** the matched historical ladder's route/count block improved only 3/5 full-data folds. On the fixed current 13-member set, the freshly scored tree combiner falls below plain logistic regression (table above). These findings are conditional on their tested context.
+
+**Exploratory checks:** the extra-seed/member round gained +0.000015, positive in 3/5 evaluation folds, and did not pass the recorded +0.00003 acceptance rule; its true effect was not established as zero. Native categorical LightGBM, original expected ratings in view B, and probability-of-actual-value auxiliary features had lower recorded AUCs, but also changed seeds or learning rate. They cannot isolate the feature effect. Exact receipts and the older fixed-member stacker comparisons are in `appendix.md` and `historical_receipts.json`.
+
+## The selected stack, not a new search
+
+The hidden execution recomputes prefixes of the **already selected** 13-member list and refits the same logistic regression on logits. It **does not rerun the original candidate search** or select a larger stack. Prefix scores and weights are saved as CSVs; the historical own-only result remains secondary output evidence. `submission.csv` reproduces this recipe for audit only; no competition submission is made.
+
+T = np.column_stack([logit(load(n)[1]) for n in FINAL])
+sub = sample[['id']].copy()
+sub[TARGET] = 1 / (1 + np.exp(-w.decision_function(T)))
+assert sub[TARGET].between(0, 1).all() and np.isfinite(sub[TARGET]).all() and len(sub) == 299_844
+sub.to_csv('submission.csv', index=False)
+print('submission.csv written | sha256', hashlib.sha256(open('submission.csv', 'rb').read()).hexdigest()[:16])
+
+## Use the guide within its limits
+
+Try target encoding and the teacher first, test small feature blocks on matching folds, then consider extra folds or a simple combiner if their measured cost is justified.
+
+- **OOF** means a base learner did not fit that row's competition target; some features still used its predictors. Five-fold/seed-42 evaluation groups mix base training folds (5, 10, and busyaprime seed 33). Combiner fitting is cross-fitted; the full base-and-selection procedure is **not nested**, and optimism is unmeasured.
+- Historical GBDT target encodings included inner early-stopping labels before that split. Outer validation labels were excluded. The live example fixes that order, but does not repair cached OOF. At least three public members early-stopped on their validation folds; the other five were not fully audited. CV is potentially optimistic by an unmeasured amount.
+- The original teacher retained 465/129,880 original rows near-matching 474 competition rows (347 train, 127 test; 21 exact). Exclusion effects and full-stack seed robustness were not measured. Two saved seeds of one ten-fold RealMLP scored 0.961398 / 0.961413; that is limited seed evidence, not stack robustness.
+- Eight final members are public OOF. The historical rules audit did not explicitly resolve prediction-sharing or every source licence; this review makes no new eligibility claim. Scores are observational historical receipts, not a CV-to-LB calibration. Numeric input versions are unavailable; consumed-file hashes identify this execution in `input_manifest.json`.
+
+**Credits.** Feature lineage: [goodpjw2008](https://www.kaggle.com/code/goodpjw2008/s6e10-more-aux-carriers-lb-0-96152); RealMLP settings: [Vladimir Demidov](https://www.kaggle.com/code/yekenot/ps-s6-e10-realmlp-pytabkit). Public OOF: [megayak](https://www.kaggle.com/datasets/megayak/s6e10-oof-library) and [dariushafshar](https://www.kaggle.com/datasets/dariushafshar/s6e10-golem-oof-library) (CC0), [goodpjw2008's members](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-route-categories-lb-0-96160), [busyaprime](https://www.kaggle.com/code/busyaprime/s6e10-route-or-distance-both-lb-0-96169) packaged by [kratosyan](https://www.kaggle.com/datasets/kratosyan/s6e10-busyaprime-five-members-oof) (Apache-2.0). [Original data](https://www.kaggle.com/datasets/arseniyshutko/binary-aviation-satisfaction-129k) and [our saved predictions](https://www.kaggle.com/datasets/sachith7/s6e10-stack-oof-predictions) are CC0. Competition: [S6E10](https://www.kaggle.com/competitions/playground-series-s6e10). Functions were written in this project; credited ideas and public predictions remain identified.
+
+**Prediction archive:** the four credited goodpjw2008 members are now loaded from [cdeotte's public archive](https://www.kaggle.com/datasets/cdeotte/s6e10-124-public-oof-and-test-predictions), because the original notebook no longer exports them. All eight OOF/test arrays exactly match the reviewed CSV values; file hashes enforce the frozen recipe. The archive metadata lists its licence as unknown, so the existing unresolved source-licence caveat remains; no new eligibility claim is made.
+
+HISTORICAL_RECEIPTS = json.loads("{\"lgb_A_ogev\": {\"model\": \"lgb\", \"featset\": \"raw+fdagg+cnt+ogx+te+ogev\", \"params\": {}, \"seed\": 11, \"n_features\": 66, \"best_iter\": [586, 910, 696, 596, 679], \"fold_seconds\": [42.0, 58.0, 44.0, 40.7, 45.4], \"total_seconds\": 230.3, \"name\": \"lgb_A_ogev\", \"oof_auc\": 0.9610135947743499, \"fold_auc\": [0.961160368402961, 0.9601002299486288, 0.9616478419272239, 0.9611038252718697, 0.9611075121434194], \"utc\": \"2026-10-04T11:46:43Z\"}, \"lgb_B\": {\"model\": \"lgb\", \"featset\": \"raw+ogl+om+digits+cnt+te\", \"params\": {\"num_leaves\": 255, \"min_child_samples\": 100, \"colsample_bytree\": 0.4}, \"seed\": 5, \"n_features\": 58, \"best_iter\": [551, 641, 401, 434, 491], \"fold_seconds\": [46.2, 50.5, 36.3, 37.0, 42.3], \"total_seconds\": 212.6, \"name\": \"lgb_B\", \"oof_auc\": 0.9608625041508179, \"fold_auc\": [0.9609997128174892, 0.9598808013921237, 0.961632969869174, 0.9609441171230075, 0.9609578860373051], \"utc\": \"2026-10-04T11:42:17Z\"}, \"lgb_B_ogev\": {\"model\": \"lgb\", \"featset\": \"raw+ogl+om+digits+cnt+te+ogev\", \"params\": {\"num_leaves\": 255, \"min_child_samples\": 100, \"colsample_bytree\": 0.4}, \"seed\": 13, \"n_features\": 71, \"best_iter\": [497, 628, 385, 461, 363], \"fold_seconds\": [47.4, 102.3, 85.3, 91.6, 48.2], \"total_seconds\": 375.1, \"name\": \"lgb_B_ogev\", \"oof_auc\": 0.9607938518303595, \"fold_auc\": [0.9610459657520402, 0.9598080363251318, 0.9614726245828867, 0.9610136346308085, 0.9607654800537319], \"utc\": \"2026-10-04T11:59:24Z\"}, \"lgb_ctr\": {\"model\": \"lgb\", \"featset\": \"raw+fdagg+cnt+ogx+ctr+ogev\", \"params\": {\"learning_rate\": 0.01, \"cat_smooth\": 20, \"max_cat_to_onehot\": 4, \"min_data_per_group\": 50}, \"seed\": 21, \"n_features\": 64, \"best_iter\": [677, 843, 567, 750, 752], \"fold_seconds\": [62.8, 112.5, 60.7, 74.9, 76.1], \"total_seconds\": 387.4, \"name\": \"lgb_ctr\", \"oof_auc\": 0.9603868303564511, \"fold_auc\": [0.9607359383031432, 0.9595888867102472, 0.9609393736669525, 0.9605030129572861, 0.9603381061064011], \"utc\": \"2026-10-04T12:07:08Z\"}, \"rmlp_v4aux_k10\": {\"nfold\": 10, \"model\": \"realmlp\", \"featset\": \"raw+fdagg+cnt+ogx+te+aux_all\", \"params\": {}, \"seed\": 42, \"device\": \"cuda\", \"fold_seconds\": [91.3, 88.9, 88.8, 90.1, 90.4, 90.4, 91.1, 91.5, 90.7, 91.1], \"total_seconds\": 904.4, \"name\": \"rmlp_v4aux_k10\", \"oof_auc\": 0.9613979792104848, \"fold_auc\": [0.9615399615947453, 0.9605948405179966, 0.9620029152619153, 0.9615631652460181, 0.9612890043291682], \"utc\": \"2026-10-04T18:04:51Z\"}, \"rmlp_v4aux_k10s2\": {\"nfold\": 10, \"model\": \"realmlp\", \"featset\": \"raw+fdagg+cnt+ogx+te+aux_all\", \"params\": {}, \"seed\": 101, \"device\": \"cuda\", \"fold_seconds\": [93.6, 90.5, 90.1, 89.9, 90.6, 91.0, 90.5, 90.9, 90.6, 91.5], \"total_seconds\": 909.5, \"name\": \"rmlp_v4aux_k10s2\", \"oof_auc\": 0.9614127153624121, \"fold_auc\": [0.9615500482229145, 0.9606067667207745, 0.9620414630073131, 0.9615862156944156, 0.9612857743590262], \"utc\": \"2026-10-04T21:30:15Z\"}, \"xgb_A\": {\"model\": \"xgb\", \"featset\": \"raw+fdagg+cnt+ogx+te\", \"params\": {}, \"seed\": 42, \"n_features\": 53, \"best_iter\": [706, 595, 1560, 644, 1392], \"fold_seconds\": [20.7, 18.6, 33.3, 19.2, 30.6], \"total_seconds\": 122.5, \"name\": \"xgb_A\", \"oof_auc\": 0.9609030457096748, \"fold_auc\": [0.9612040302552327, 0.9598493134770372, 0.9615596836490141, 0.9611416815607214, 0.9607901707326583], \"utc\": \"2026-10-04T12:00:26Z\"}, \"xgb_A_auxall\": {\"model\": \"xgb\", \"featset\": \"raw+fdagg+cnt+ogx+te+aux_all\", \"params\": {}, \"seed\": 1, \"n_features\": 83, \"best_iter\": [611, 974, 299, 618, 536], \"fold_seconds\": [26.3, 33.3, 19.6, 25.6, 24.4], \"total_seconds\": 129.5, \"name\": \"xgb_A_auxall\", \"oof_auc\": 0.960915681914045, \"fold_auc\": [0.9612436381289129, 0.9600279627551818, 0.9612045404754526, 0.9612516417752615, 0.9610595431861815], \"utc\": \"2026-10-04T12:04:45Z\"}, \"xgb_A_auxev\": {\"model\": \"xgb\", \"featset\": \"raw+fdagg+cnt+ogx+te+aux_ev\", \"params\": {}, \"seed\": 42, \"n_features\": 66, \"best_iter\": [809, 745, 556, 660, 1032], \"fold_seconds\": [25.7, 24.1, 20.4, 22.1, 29.1], \"total_seconds\": 121.5, \"name\": \"xgb_A_auxev\", \"oof_auc\": 0.9610442187105437, \"fold_auc\": [0.9612959189536364, 0.9601328213178622, 0.9616955593610642, 0.9611973237922122, 0.9609502472168946], \"utc\": \"2026-10-04T12:02:32Z\"}, \"xgb_raw\": {\"model\": \"xgb\", \"featset\": \"raw\", \"params\": {}, \"seed\": 42, \"n_features\": 21, \"best_iter\": [1586, 1681, 1730, 1483, 1468], \"fold_seconds\": [18.2, 18.3, 18.4, 16.3, 16.3], \"total_seconds\": 87.7, \"name\": \"xgb_raw\", \"oof_auc\": 0.9588324278029428, \"fold_auc\": [0.9591092077435722, 0.9576130236081131, 0.9596410468274089, 0.9587980162397047, 0.9590212707247094], \"utc\": \"2026-10-04T11:54:05Z\"}, \"xgb_route\": {\"model\": \"xgb\", \"featset\": \"raw+fdagg+cnt+te\", \"params\": {}, \"seed\": 42, \"n_features\": 52, \"best_iter\": [981, 901, 2279, 1167, 2293], \"fold_seconds\": [24.1, 22.3, 42.5, 26.4, 43.3], \"total_seconds\": 158.8, \"name\": \"xgb_route\", \"oof_auc\": 0.9603173327885292, \"fold_auc\": [0.9607221801042451, 0.959307914382533, 0.960960266042532, 0.9604962547274283, 0.960123705534681], \"utc\": \"2026-10-04T11:58:20Z\"}, \"xgb_te\": {\"model\": \"xgb\", \"featset\": \"raw+te\", \"params\": {}, \"seed\": 42, \"n_features\": 27, \"best_iter\": [1280, 981, 1121, 1192, 1596], \"fold_seconds\": [18.6, 15.4, 16.6, 17.1, 21.1], \"total_seconds\": 88.9, \"name\": \"xgb_te\", \"oof_auc\": 0.9601785611123836, \"fold_auc\": [0.9605820889775274, 0.9588863997612034, 0.9610052053378537, 0.9602625968374081, 0.9601823054164529], \"utc\": \"2026-10-04T11:55:37Z\"}}")
+APPENDIX = "# Preserved historical evidence (not newly fitted)\n\nAccessed 11 October 2026. Public notebook snapshot preserved before cleanup.\n\n## Score receipts (observation only)\n8 members: combiner CV 0.961710, public LB 0.96128 (4 October).\n9 members: combiner CV 0.961794, public LB 0.96134 (4 October).\nCurrent 13 members: combiner CV 0.9619132042292599, public LB 0.96153 (7 October; submission 56902917).\nNo split-size assumption, public-AUC noise estimate or calibration claim follows from these receipts.\n\n## Older fixed eight-member combiner comparison\nLR 0.961710; per-segment LR 0.961702; LR plus segment interactions 0.961700; tree stacker 0.961634 (with extra segment/teacher inputs 0.961632); LR/tree rank average 0.961718. These are different frozen members from the current 13-member comparison. They were not freshly refitted here.\n\n## Changed-setting checks (not controlled feature ablations)\nNative categorical LightGBM 0.960387 vs 0.961014 TE comparator; learning rate and seed differ.\nOriginal expected ratings, view B: 0.960794 vs 0.960863 without; seeds 13 vs 5.\nProbability-of-actual-value auxiliary block: 0.960916 vs 0.961044 expected values; seeds 1 vs 42.\nExtra-seed/member round: +0.000015 and 3/5 folds positive; failed recorded +0.00003 acceptance threshold. Not evidence of zero effect.\n\n## Optional exact-distance diagnostic\nTraining-label analysis retained from the old run: 609 distances with at least 200 rows; mean neighboring-rate gap 0.1075; a per-value binomial standard-error heuristic 0.0204. These are not an appropriate paired null test and do not establish a generator mechanism.\nLast-digit satisfaction rate: 0 digit 0.5124; other digits 0.4087–0.4804. Best-member error heuristic max absolute z 1.37 does not prove absence of a digit effect. This exploratory detour did not select a new method and is no longer in the main guide.\n\n## Clocks\nRecorded GPU job clock for the broader auxiliary generation task: 907.6 seconds. Individual route/teacher preparation clocks were not recorded. Member fitting clocks exclude upstream feature preparation, candidate search and publishing time.\nHistorical model work's complete cost is not inferred from the short CPU replay.\n"
+
+Path('appendix.md').write_text(APPENDIX,encoding='utf-8')
+Path('historical_receipts.json').write_text(json.dumps(HISTORICAL_RECEIPTS,indent=2),encoding='utf-8')
+pd.DataFrame({'evaluation_fold':range(5),'combiner_AUC':final_folds}).to_csv('selected_stack_folds.csv',index=False)
+assert abs(final_auc - 0.9619132042292599) < 1e-8
+for _,name in LADDER:
+    assert abs(auc(load(name)[0])-MEMBERS[name]['oof_auc']) < 1e-10
+assert (sub['id'].to_numpy() == sample['id'].to_numpy()).all() and sub['id'].is_unique
+input_receipts = [{'path':str(p.relative_to(INPUT)).replace('\\','/'),'bytes':p.stat().st_size,'sha256':hash_file(p),'numeric_version':'not exposed'} for p in sorted(USED_FILES)]
+Path('input_manifest.json').write_text(json.dumps({'access_date':'2026-10-11','snapshot_policy':'Consumed file hashes; numeric versions not exposed','files':input_receipts},indent=2),encoding='utf-8')
+manifest = {'seed':SEED,'versions':VERSIONS,'runtime_seconds':time.time()-T0,'timing':RUN_TIMES,'peak_process_rss_mib':psutil.Process().memory_info().peak_wset/1024**2 if os.name=='nt' else __import__('resource').getrusage(__import__('resource').RUSAGE_SELF).ru_maxrss/1024,'fresh_cpu_steps':LIVE_STEP_TIMES,'final_combiner_cv':final_auc,'historical_public_lb':0.96153,'own_only_combiner_cv':own_auc,'live_gains':live['gain vs previous'].fillna(0).tolist(),'live_fold_wins':live_up,'ten_fold_gains':kf['gain'].tolist(),'source_boundary':'disclosed train+test re-execution; aux cached; no candidate search','leakage_checks':{'fit_earlystop_validation_disjoint':True,'live_te_fitting_labels_only':True,'train_test_transductive_predictors':True,'cached_oof_limitations_unrepaired':True},'seed_variation':'Historical two-seed RealMLP evidence only; no fresh repeats or full-stack robustness claim'}
+Path('run_manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+display(Markdown(f"**Run receipt:** {manifest['runtime_seconds']/60:.2f} minutes on CPU; peak process RSS {manifest['peak_process_rss_mib']:.0f} MiB. Version and input-hash receipts plus precise tables are in the outputs. This clock excludes historical base training and candidate search."))

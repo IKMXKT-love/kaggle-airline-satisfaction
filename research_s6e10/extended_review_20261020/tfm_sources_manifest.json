@@ -1,0 +1,97 @@
+[
+  {
+    "name": "tfm_dataset",
+    "url": "https://www.kaggle.com/api/v1/datasets/list/cdeotte/s6e10-tfm-oof-and-test-predictions",
+    "sha256": "4ce73681b6256d60ed2f4ca96a3dd62e195379d10b812a9398a46fe4c8ab587e",
+    "files": [
+      {
+        "name": "oof_causilo.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_exaone.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_kumolarge.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_kumosmall.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_limix2.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_mitra2.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_realmlp.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_tabfm.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_tabicl2.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_tabpfn35.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "oof_xgboost.npy",
+        "bytes": 2798668
+      },
+      {
+        "name": "test_causilo.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_exaone.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_kumolarge.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_kumosmall.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_limix2.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_mitra2.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_realmlp.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_tabfm.npy",
+        "bytes": 1199504
+      },
+      {
+        "name": "test_tabicl2.npy",
+        "bytes": 1199504
+      }
+    ],
+    "more": true
+  },
+  {
+    "name": "tfm_stack_source",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/cdeotte/stacking-tfms-with-public-oof",
+    "sha256": "d32ce55e42637741d627ada5cbb061b50496f4465984879d4c4e72b603c46eff",
+    "source_chars": 8756,
+    "version": 1
+  }
+]

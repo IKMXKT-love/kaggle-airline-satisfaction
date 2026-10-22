@@ -1,0 +1,98 @@
+{
+  "training": false,
+  "model_inference": false,
+  "submission_generated": false,
+  "scope": "Exploratory contrasts of already selected fixed prediction arrays, not end-to-end isolated validation. Own baseline has legacy outer-stopping caveats. Public stack has indirect base-OOF target dependence. Different model partitions; nominal intervals are fixed-prediction only, uncorrected for selection.",
+  "rows": 699635,
+  "current_legacy_oof_auc": 0.9616745833317898,
+  "current_legacy_oof_folds": [
+    0.961841676432035,
+    0.960740483739217,
+    0.9623836961294814,
+    0.9617528311661899,
+    0.9616652824002522
+  ],
+  "tfm": [
+    {
+      "name": "tabpfn_full_raw",
+      "author": "goodpjw2008",
+      "sha256": "a64cb1674255834b9a2c5684a90a8146ba29ac3304caa496a5032d9b2f05a878",
+      "standalone_auc": 0.960728591032499,
+      "fixed_20percent_logit_contrast": {
+        "auc": 0.9617890448077013,
+        "delta": 0.00011446147591141969,
+        "fixed_prediction_approx_se": 1.3414901913098392e-05,
+        "fixed_prediction_nominal_interval95": [
+          8.816826816174684e-05,
+          0.00014075468366109254
+        ]
+      },
+      "native_five_fold_deltas": [
+        8.569371172195694e-05,
+        0.00016442780796877,
+        7.289067349269818e-05,
+        0.00013772245870469213,
+        0.00011708636591201138
+      ],
+      "on_strict_baseline_rows_exploratory": {
+        "auc": 0.961718994394107,
+        "delta": 9.592757748803305e-05,
+        "fixed_prediction_approx_se": 3.096332287792152e-05,
+        "fixed_prediction_nominal_interval95": [
+          3.5239464647306876e-05,
+          0.00015661569032875922
+        ]
+      }
+    },
+    {
+      "name": "tabpfn_catfd10",
+      "author": "goodpjw2008",
+      "sha256": "70bfdeb7185ee3a4e0184b7a57fcdab256f7b997330645d0e1d67f10d60dcd8b",
+      "standalone_auc": 0.9610711041023272,
+      "fixed_20percent_logit_contrast": {
+        "auc": 0.9618099816579406,
+        "delta": 0.00013539832615071714,
+        "fixed_prediction_approx_se": 1.2640969760573011e-05,
+        "fixed_prediction_nominal_interval95": [
+          0.00011062202541999404,
+          0.00016017462688144025
+        ]
+      },
+      "native_five_fold_deltas": [
+        0.00015582478917663956,
+        0.00018731322970277908,
+        0.00012503496051063934,
+        0.000126118652844176,
+        8.320820256435546e-05
+      ],
+      "on_strict_baseline_rows_exploratory": {
+        "auc": 0.9617831551090332,
+        "delta": 0.00016008829241433614,
+        "fixed_prediction_approx_se": 2.922583788401964e-05,
+        "fixed_prediction_nominal_interval95": [
+          0.00010280565016165764,
+          0.00021737093466701464
+        ]
+      }
+    }
+  ],
+  "strict_baseline_auc": 0.9616230668166188,
+  "external_stack_reference_only": {
+    "auc": 0.9622050148049932,
+    "delta": 0.0005304314732034186,
+    "fixed_prediction_approx_se": 4.023708865124372e-05,
+    "fixed_prediction_nominal_interval95": [
+      0.00045156677944698084,
+      0.0006092961669598563
+    ]
+  },
+  "external_stack_native_fold_deltas": [
+    0.0005159018329383702,
+    0.0006698798531313832,
+    0.0004201478487761978,
+    0.0006932395583918449,
+    0.00037523090189317543
+  ],
+  "external_stack_not_own_training_result": true,
+  "baseline_sha256": "a596cc7648c92d3a39863de5781d8bd0dbd5e6b09f65cb1b9f5b1545c50c201c"
+}

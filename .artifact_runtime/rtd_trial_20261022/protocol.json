@@ -1,0 +1,39 @@
+{
+  "start_epoch": 1792682063.0,
+  "deadline_epoch": 1792692863.0,
+  "budget_seconds": 10800,
+  "seed": 20261022,
+  "fit_folds": [
+    1,
+    2,
+    3
+  ],
+  "stop_meta_fold": 4,
+  "score_fold": 0,
+  "pretrain_epochs": 3,
+  "classification_epochs": 2,
+  "microbatch": 256,
+  "effective_batch": 512,
+  "eval_batch": 256,
+  "backbone_lr": 5e-05,
+  "tokenizer_lr": 0.001,
+  "warmup_fraction": 0.03,
+  "weight_decay": 0,
+  "rtd_probability": 0.15,
+  "meta_C": 0.003,
+  "meta_training": "fold4 only, all candidates and baseline matched; checkpoint selected on fold4 then meta fit fold4; scoring exclusively fold0",
+  "incumbent": "existing fold0 public_only LR fitted1/2/3/4",
+  "arms": [
+    "clean",
+    "rtd"
+  ],
+  "admission": "RTD joint stack must beat incumbent fold0 by >=0.00005 and clean joint stack by >=0.00001; approximate paired95CI lower>0 vs incumbent. No test prediction before admission. This is historical conditional screening not fresh blind or end-to-end nested CV.",
+  "inputs": "21 raw per-value embeddings; four periodic numeric; 28-field recomputed row summary; 17-field recomputed numeric summary; no original-label features or public predictions in network; no original author nine-feature-per-field side pipe",
+  "transductive": "unsupervised vocab/scaling/RTD uses train/test/original features; no labels; RTD target denotes replacement operation including same-value draws",
+  "preserved": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  }
+}

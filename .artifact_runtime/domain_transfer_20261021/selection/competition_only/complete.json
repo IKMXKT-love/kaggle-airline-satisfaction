@@ -1,0 +1,12 @@
+{
+  "arm": "competition_only",
+  "phase": "selection",
+  "initial_state_hash": "bf82e93c98db19714b68c40b6cbe6d94aa47aa9b69e113e83764fa50b0d000cb",
+  "epochs_completed": 24,
+  "updates": 6048,
+  "seconds": 77.79277896881104,
+  "best_epoch": 5,
+  "best_stopping_auc": 0.9601176989378427,
+  "peak_allocated_gb": 0.5386662483215332,
+  "parameter_count": 3516304
+}

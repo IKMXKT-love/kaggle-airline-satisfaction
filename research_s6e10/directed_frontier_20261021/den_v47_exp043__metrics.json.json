@@ -1,0 +1,514 @@
+{
+  "status": "completed_control_retained_no_conditional_gain",
+  "metric": "roc_auc",
+  "direction": "maximize",
+  "overall_oof_auc": null,
+  "per_fold_auc": null,
+  "public_score": null,
+  "selected": "exploratory_not_promoted",
+  "conditional_meta": {
+    "weight": 0.0,
+    "comparison": [
+      {
+        "weight": 0.0,
+        "conditional_oof_auc": 0.9621929181957442,
+        "gain": 0.0,
+        "fold_wins": 0,
+        "per_fold_auc": [
+          0.9620267469385467,
+          0.9627884348334307,
+          0.9618476578666438,
+          0.962191250208421,
+          0.9621249285273142
+        ],
+        "eligible_conditional_only": true
+      },
+      {
+        "weight": 0.05,
+        "conditional_oof_auc": 0.9621949737154042,
+        "gain": 2.05551966003803e-06,
+        "fold_wins": 5,
+        "per_fold_auc": [
+          0.96203020723307,
+          0.9627908530172399,
+          0.9618484220590797,
+          0.9621961182363272,
+          0.9621262998523273
+        ],
+        "eligible_conditional_only": false
+      },
+      {
+        "weight": 0.1,
+        "conditional_oof_auc": 0.9621955522837444,
+        "gain": 2.634088000275092e-06,
+        "fold_wins": 5,
+        "per_fold_auc": [
+          0.962032178868414,
+          0.962791829312911,
+          0.9618478581748695,
+          0.9621998541502834,
+          0.9621260842312825
+        ],
+        "eligible_conditional_only": false
+      },
+      {
+        "weight": 0.2,
+        "conditional_oof_auc": 0.9621925819425753,
+        "gain": -3.36253168864431e-07,
+        "fold_wins": 3,
+        "per_fold_auc": [
+          0.9620335926186938,
+          0.9627892824186509,
+          0.9618436839832043,
+          0.9622037208439903,
+          0.9621221453190107
+        ],
+        "eligible_conditional_only": false
+      },
+      {
+        "weight": 0.35,
+        "conditional_oof_auc": 0.9621779253718338,
+        "gain": -1.4992823910375819e-05,
+        "fold_wins": 2,
+        "per_fold_auc": [
+          0.962027423808741,
+          0.9627751782777768,
+          0.9618300849584247,
+          0.96220188703046,
+          0.9621073932803524
+        ],
+        "eligible_conditional_only": false
+      }
+    ],
+    "folds": [
+      {
+        "fold": 0,
+        "rounds": 157,
+        "seed": 2026,
+        "params": {
+          "objective": "binary:logistic",
+          "eval_metric": "auc",
+          "tree_method": "hist",
+          "device": "cuda:0",
+          "grow_policy": "lossguide",
+          "max_depth": 0,
+          "max_leaves": 15,
+          "min_child_weight": 100.0,
+          "eta": 0.03,
+          "subsample": 0.8,
+          "colsample_bytree": 0.5,
+          "lambda": 10.0,
+          "alpha": 0.0,
+          "max_bin": 255,
+          "base_score": 0.5,
+          "seed_per_iteration": true,
+          "nthread": 4,
+          "verbosity": 1,
+          "seed": 2026
+        },
+        "hardware": {
+          "xgboost_version": "3.2.0",
+          "xgboost_build": {
+            "BUILTIN_PREFETCH_PRESENT": true,
+            "CUDA_VERSION": [
+              12,
+              9
+            ],
+            "DEBUG": false,
+            "GCC_VERSION": [
+              10,
+              3,
+              1
+            ],
+            "GLIBC_VERSION": [
+              2,
+              28
+            ],
+            "MM_PREFETCH_PRESENT": true,
+            "NCCL_VERSION": [
+              2,
+              29,
+              2
+            ],
+            "THRUST_VERSION": [
+              2,
+              8,
+              2
+            ],
+            "USE_CUDA": true,
+            "USE_DLOPEN_NCCL": true,
+            "USE_FEDERATED": true,
+            "USE_NCCL": true,
+            "USE_NVCOMP": false,
+            "USE_OPENMP": true,
+            "USE_RMM": false,
+            "libxgboost": "/usr/local/lib/python3.12/dist-packages/xgboost/lib/libxgboost.so"
+          },
+          "torch_version": "2.10.0+cu128",
+          "gpu_count": 2,
+          "training_device": "cuda:0",
+          "gpu_names": [
+            "Tesla T4",
+            "Tesla T4"
+          ]
+        },
+        "fit_seconds": 25.243593497999996,
+        "prediction_backend": "reloaded native CPU tree, not CPU training",
+        "linear_fit_seconds": 101.40150235700003
+      },
+      {
+        "fold": 1,
+        "rounds": 297,
+        "seed": 2027,
+        "params": {
+          "objective": "binary:logistic",
+          "eval_metric": "auc",
+          "tree_method": "hist",
+          "device": "cuda:0",
+          "grow_policy": "lossguide",
+          "max_depth": 0,
+          "max_leaves": 15,
+          "min_child_weight": 100.0,
+          "eta": 0.03,
+          "subsample": 0.8,
+          "colsample_bytree": 0.5,
+          "lambda": 10.0,
+          "alpha": 0.0,
+          "max_bin": 255,
+          "base_score": 0.5,
+          "seed_per_iteration": true,
+          "nthread": 4,
+          "verbosity": 1,
+          "seed": 2027
+        },
+        "hardware": {
+          "xgboost_version": "3.2.0",
+          "xgboost_build": {
+            "BUILTIN_PREFETCH_PRESENT": true,
+            "CUDA_VERSION": [
+              12,
+              9
+            ],
+            "DEBUG": false,
+            "GCC_VERSION": [
+              10,
+              3,
+              1
+            ],
+            "GLIBC_VERSION": [
+              2,
+              28
+            ],
+            "MM_PREFETCH_PRESENT": true,
+            "NCCL_VERSION": [
+              2,
+              29,
+              2
+            ],
+            "THRUST_VERSION": [
+              2,
+              8,
+              2
+            ],
+            "USE_CUDA": true,
+            "USE_DLOPEN_NCCL": true,
+            "USE_FEDERATED": true,
+            "USE_NCCL": true,
+            "USE_NVCOMP": false,
+            "USE_OPENMP": true,
+            "USE_RMM": false,
+            "libxgboost": "/usr/local/lib/python3.12/dist-packages/xgboost/lib/libxgboost.so"
+          },
+          "torch_version": "2.10.0+cu128",
+          "gpu_count": 2,
+          "training_device": "cuda:0",
+          "gpu_names": [
+            "Tesla T4",
+            "Tesla T4"
+          ]
+        },
+        "fit_seconds": 29.12349498200001,
+        "prediction_backend": "reloaded native CPU tree, not CPU training",
+        "linear_fit_seconds": 88.90616711400003
+      },
+      {
+        "fold": 2,
+        "rounds": 220,
+        "seed": 2028,
+        "params": {
+          "objective": "binary:logistic",
+          "eval_metric": "auc",
+          "tree_method": "hist",
+          "device": "cuda:0",
+          "grow_policy": "lossguide",
+          "max_depth": 0,
+          "max_leaves": 15,
+          "min_child_weight": 100.0,
+          "eta": 0.03,
+          "subsample": 0.8,
+          "colsample_bytree": 0.5,
+          "lambda": 10.0,
+          "alpha": 0.0,
+          "max_bin": 255,
+          "base_score": 0.5,
+          "seed_per_iteration": true,
+          "nthread": 4,
+          "verbosity": 1,
+          "seed": 2028
+        },
+        "hardware": {
+          "xgboost_version": "3.2.0",
+          "xgboost_build": {
+            "BUILTIN_PREFETCH_PRESENT": true,
+            "CUDA_VERSION": [
+              12,
+              9
+            ],
+            "DEBUG": false,
+            "GCC_VERSION": [
+              10,
+              3,
+              1
+            ],
+            "GLIBC_VERSION": [
+              2,
+              28
+            ],
+            "MM_PREFETCH_PRESENT": true,
+            "NCCL_VERSION": [
+              2,
+              29,
+              2
+            ],
+            "THRUST_VERSION": [
+              2,
+              8,
+              2
+            ],
+            "USE_CUDA": true,
+            "USE_DLOPEN_NCCL": true,
+            "USE_FEDERATED": true,
+            "USE_NCCL": true,
+            "USE_NVCOMP": false,
+            "USE_OPENMP": true,
+            "USE_RMM": false,
+            "libxgboost": "/usr/local/lib/python3.12/dist-packages/xgboost/lib/libxgboost.so"
+          },
+          "torch_version": "2.10.0+cu128",
+          "gpu_count": 2,
+          "training_device": "cuda:0",
+          "gpu_names": [
+            "Tesla T4",
+            "Tesla T4"
+          ]
+        },
+        "fit_seconds": 27.44587814299996,
+        "prediction_backend": "reloaded native CPU tree, not CPU training",
+        "linear_fit_seconds": 98.19735526900001
+      },
+      {
+        "fold": 3,
+        "rounds": 207,
+        "seed": 2029,
+        "params": {
+          "objective": "binary:logistic",
+          "eval_metric": "auc",
+          "tree_method": "hist",
+          "device": "cuda:0",
+          "grow_policy": "lossguide",
+          "max_depth": 0,
+          "max_leaves": 15,
+          "min_child_weight": 100.0,
+          "eta": 0.03,
+          "subsample": 0.8,
+          "colsample_bytree": 0.5,
+          "lambda": 10.0,
+          "alpha": 0.0,
+          "max_bin": 255,
+          "base_score": 0.5,
+          "seed_per_iteration": true,
+          "nthread": 4,
+          "verbosity": 1,
+          "seed": 2029
+        },
+        "hardware": {
+          "xgboost_version": "3.2.0",
+          "xgboost_build": {
+            "BUILTIN_PREFETCH_PRESENT": true,
+            "CUDA_VERSION": [
+              12,
+              9
+            ],
+            "DEBUG": false,
+            "GCC_VERSION": [
+              10,
+              3,
+              1
+            ],
+            "GLIBC_VERSION": [
+              2,
+              28
+            ],
+            "MM_PREFETCH_PRESENT": true,
+            "NCCL_VERSION": [
+              2,
+              29,
+              2
+            ],
+            "THRUST_VERSION": [
+              2,
+              8,
+              2
+            ],
+            "USE_CUDA": true,
+            "USE_DLOPEN_NCCL": true,
+            "USE_FEDERATED": true,
+            "USE_NCCL": true,
+            "USE_NVCOMP": false,
+            "USE_OPENMP": true,
+            "USE_RMM": false,
+            "libxgboost": "/usr/local/lib/python3.12/dist-packages/xgboost/lib/libxgboost.so"
+          },
+          "torch_version": "2.10.0+cu128",
+          "gpu_count": 2,
+          "training_device": "cuda:0",
+          "gpu_names": [
+            "Tesla T4",
+            "Tesla T4"
+          ]
+        },
+        "fit_seconds": 27.35782005300007,
+        "prediction_backend": "reloaded native CPU tree, not CPU training",
+        "linear_fit_seconds": 98.28146507600002
+      },
+      {
+        "fold": 4,
+        "rounds": 365,
+        "seed": 2030,
+        "params": {
+          "objective": "binary:logistic",
+          "eval_metric": "auc",
+          "tree_method": "hist",
+          "device": "cuda:0",
+          "grow_policy": "lossguide",
+          "max_depth": 0,
+          "max_leaves": 15,
+          "min_child_weight": 100.0,
+          "eta": 0.03,
+          "subsample": 0.8,
+          "colsample_bytree": 0.5,
+          "lambda": 10.0,
+          "alpha": 0.0,
+          "max_bin": 255,
+          "base_score": 0.5,
+          "seed_per_iteration": true,
+          "nthread": 4,
+          "verbosity": 1,
+          "seed": 2030
+        },
+        "hardware": {
+          "xgboost_version": "3.2.0",
+          "xgboost_build": {
+            "BUILTIN_PREFETCH_PRESENT": true,
+            "CUDA_VERSION": [
+              12,
+              9
+            ],
+            "DEBUG": false,
+            "GCC_VERSION": [
+              10,
+              3,
+              1
+            ],
+            "GLIBC_VERSION": [
+              2,
+              28
+            ],
+            "MM_PREFETCH_PRESENT": true,
+            "NCCL_VERSION": [
+              2,
+              29,
+              2
+            ],
+            "THRUST_VERSION": [
+              2,
+              8,
+              2
+            ],
+            "USE_CUDA": true,
+            "USE_DLOPEN_NCCL": true,
+            "USE_FEDERATED": true,
+            "USE_NCCL": true,
+            "USE_NVCOMP": false,
+            "USE_OPENMP": true,
+            "USE_RMM": false,
+            "libxgboost": "/usr/local/lib/python3.12/dist-packages/xgboost/lib/libxgboost.so"
+          },
+          "torch_version": "2.10.0+cu128",
+          "gpu_count": 2,
+          "training_device": "cuda:0",
+          "gpu_names": [
+            "Tesla T4",
+            "Tesla T4"
+          ]
+        },
+        "fit_seconds": 32.76674778100005,
+        "prediction_backend": "reloaded native CPU tree, not CPU training",
+        "linear_fit_seconds": 102.53545416399993
+      }
+    ],
+    "coverage_one": true
+  },
+  "selected_tree_weight": 0.0,
+  "final_rounds": 220,
+  "final_fit_seconds": 15.785893966000003,
+  "params": {
+    "version": "direct-cuda-nonlinear-stacker-v1",
+    "parent": "exp037",
+    "members": 201,
+    "params": {
+      "objective": "binary:logistic",
+      "eval_metric": "auc",
+      "tree_method": "hist",
+      "device": "cuda:0",
+      "grow_policy": "lossguide",
+      "max_depth": 0,
+      "max_leaves": 15,
+      "min_child_weight": 100.0,
+      "eta": 0.03,
+      "subsample": 0.8,
+      "colsample_bytree": 0.5,
+      "lambda": 10.0,
+      "alpha": 0.0,
+      "max_bin": 255,
+      "base_score": 0.5,
+      "seed_per_iteration": true,
+      "nthread": 4,
+      "verbosity": 1
+    },
+    "max_rounds": 4000,
+    "inner_holdout_fraction": 0.1,
+    "early_stopping_rounds": 200,
+    "weights": [
+      0.0,
+      0.05,
+      0.1,
+      0.2,
+      0.35
+    ],
+    "minimum_conditional_auc_gain": 5e-06,
+    "minimum_fold_wins": 4,
+    "canonical_composition": "weighted_raw_logits_then_frozen036_correction",
+    "parent_correction_used_during_training": false,
+    "final_rounds": "integer_median_of_five_inner_selected_rounds",
+    "validation": "conditional_meta_only_not_nested_external_base_refits",
+    "seed": 2026,
+    "xgboost_compatibility": ">=3.2,<4; exact installed version recorded"
+  },
+  "submission_path": "/kaggle/working/exp043/submission.csv",
+  "submission_sha256": "5724eb0a2e303129ab351a535d3d2e7e8bf02d675068727ec2b9345201ffd345",
+  "parent_submission_sha256": "5724eb0a2e303129ab351a535d3d2e7e8bf02d675068727ec2b9345201ffd345",
+  "validation_status": "conditional_meta_only; imported base fits and frozen correction are not independently cross-fitted here",
+  "wall_seconds": 706.0,
+  "experiment_id": "exp043"
+}

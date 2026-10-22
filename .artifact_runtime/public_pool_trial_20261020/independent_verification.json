@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "training": false,
+  "new_public_score": null,
+  "rows": 299844,
+  "column_names_and_ids_verified": true,
+  "finite_probabilities": true,
+  "csv_matches_saved_test_prediction": true,
+  "saved_linear_model_sample_reconstruction_verified": true,
+  "full_training_objective": 0.21969457307051682,
+  "saved_full_model_max_gradient": 6.570206127065733e-14,
+  "oof_auc_recomputed": 0.9622047560968178,
+  "source_rows": 246,
+  "submission_sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+  "test_rank_correlation_with_author_frozen247_reference": 0.9999959735596476,
+  "max_abs_probability_difference_from_author_reference": 0.008938806280959222,
+  "reference_comparison_note": "Prediction similarity is not a public-score or generalization guarantee.",
+  "previous_best_sha256": "b8cbfd891761efa14fac950684f03929b01da2d10a2c868fdb8228e7cb878eb8",
+  "previous_best_unchanged": true
+}

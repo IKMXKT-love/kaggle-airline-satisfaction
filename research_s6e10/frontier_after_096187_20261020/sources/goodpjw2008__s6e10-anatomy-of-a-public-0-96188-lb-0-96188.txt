@@ -1,0 +1,423 @@
+# The whole notebook in one picture.  Every number is a real public-LB reading from our
+# submissions of 10-15 (section 2 lists all five) or a correlation computed in section 1;
+# nothing here is computed by this cell.
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+
+INK, MUTED, RULE, CARD = "#1f2937", "#6b7280", "#d1d5db", "#f3f4f6"
+SEEN, REAL, NEW = "#f59e0b", "#2563eb", "#059669"  # correlation / leaderboard / our measurement
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "text.color": INK,
+                     "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": MUTED})
+fig = plt.figure(figsize=(12, 11.5), dpi=110, facecolor="white")
+fig.text(0.04, 0.972, "Anatomy of a public 0.96188", fontsize=23, fontweight="bold", va="center")
+fig.text(0.04, 0.944, "158 files, 18 submissions, one CV test: only unowned information moves a digit, and extrapolation buys nothing.",
+         fontsize=12.5, color=MUTED, va="center")
+
+# ---------------------------------------------------------------- the pipeline
+ax = fig.add_axes([0.04, 0.80, 0.93, 0.12]); ax.set_xlim(0, 100); ax.set_ylim(0, 10); ax.axis("off")
+boxes = [(0.0, 22.0, "OUR TWIN STACK", "Part 11's file,\npublic LB 0.96187", CARD),
+         (26.0, 25.0, "THE PUBLIC 0.96188s", "yuvrajlamba01, rabari9999:\n92 – 100% one shared anchor", CARD),
+         (55.0, 20.0, "18 PROBES + 1 CV TEST", "doses, sweeps, honest members,\nand the extrapolation trick", "#d1fae5"),
+         (79.0, 21.0, "VERDICT", "everything prints 0.96187\nuntil you basically copy them", "#dbeafe")]
+for x, w, head, body, col in boxes:
+    ax.add_patch(FancyBboxPatch((x, 0.6), w, 8.8, boxstyle="round,pad=0,rounding_size=0.9", fc=col, ec="none"))
+    ax.text(x + w / 2, 7.6, head, ha="center", va="center", fontsize=10.5, fontweight="bold", color=MUTED)
+    ax.text(x + w / 2, 3.9, body, ha="center", va="center", fontsize=10.5, linespacing=1.45)
+for (x, w, *_), (x2, *_) in zip(boxes[:-1], boxes[1:]):
+    ax.add_patch(FancyArrowPatch((x + w + 0.5, 5), (x2 - 0.5, 5), arrowstyle="-|>", mutation_scale=15, color=MUTED, lw=1.6))
+
+
+def panel(x, y, w, h, pad, no, title, sub):
+    fig.text(x, y + h + 0.052, f"{no}", fontsize=15, fontweight="bold", color="white", va="center", ha="center",
+             bbox=dict(boxstyle="circle,pad=0.25", fc=INK, ec="none"))
+    fig.text(x + 0.027, y + h + 0.052, title, fontsize=14.5, fontweight="bold", va="center")
+    fig.text(x - 0.008, y + h + 0.024, sub, fontsize=10.5, color=MUTED, va="center")
+    a = fig.add_axes([x + pad, y, w - pad, h])
+    for s in ("top", "right"):
+        a.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        a.spines[s].set_color(RULE)
+    a.tick_params(length=0, labelsize=10.5)
+    return a
+
+
+# ---------------------------------------------------------------- 1. the correlation map
+a = panel(0.05, 0.435, 0.40, 0.27, 0.19, 1, "The correlation map",
+          "rank correlation with our twin; 158 public files scanned (sections 1b – 1c)")
+rows = [("yuvrajlamba01 0.96188", 0.99991, MUTED), ("najiama 05", 0.99987, MUTED),
+        ("Dariush Afshar 247", 0.99984, MUTED), ("Orange blend", 0.99962, MUTED),
+        ("cdeotte TFM stack", 0.99864, INK), ("karttik 22-OOF", 0.99855, INK),
+        ("samanyu early stack", 0.99822, INK), ("denpugovkin", 0.99729, NEW),
+        ("hemingweb (honest OOFs!)", 0.98265, REAL)]
+lo = 0.9820
+for i, (lab, v, col) in enumerate(rows):
+    a.barh(i, v - lo, left=lo, height=0.52, color=col)
+    a.text(v + 0.00003, i, f"{v:.4f}", va="center", fontsize=9.4, color=col if col != INK else MUTED, fontweight="bold")
+a.set_yticks(range(len(rows))); a.set_yticklabels([r[0] for r in rows], fontsize=9.4)
+a.set_ylim(len(rows) - 0.4, -0.6); a.set_xlim(lo, 1.006)
+a.set_xticks([0.985, 0.990, 0.995, 1.0]); a.set_xticklabels(["0.985", "0.99", "0.995", "1.0"])
+a.axvline(1.0, color=RULE, lw=1, ls="--")
+a.text(lo + 0.0002, -0.52, "grey: flat · dark: mid band · green: real partner · blue: absorbed (§1c)",
+       fontsize=8.8, color=MUTED, va="center")
+a.spines["left"].set_visible(False)
+
+# ---------------------------------------------------------------- 2. correlation decides dose-response
+a = panel(0.56, 0.435, 0.41, 0.27, 0.085, 2, "Correlation decides dose-response",
+          "public LB vs partner weight on our twin anchor (section 2b)")
+near_x, near_y = [0, 2, 6, 8], [0.96187, 0.96187, 0.96187, 0.96187]
+a.plot(near_x, near_y, color=MUTED, lw=2.2)
+a.scatter(near_x, near_y, s=46, facecolor="white", edgecolor=MUTED, linewidth=1.6, zorder=4)
+a.text(0, 0.961855, "white dots: corr 0.9996+ partners, flat at every dose", fontsize=9.2, color=MUTED, va="center")
+dp_x, dp_y = [0, 10, 20, 30, 40, 50], [0.96187, 0.96187, 0.96188, 0.96188, 0.96188, 0.96187]
+a.plot(dp_x, dp_y, color=NEW, lw=2.6, marker="o", ms=7)
+a.text(32, 0.961883, "denpugovkin's file (corr 0.9973):\n+1 digit at 20 – 40%, falls by 50%", ha="center",
+       fontsize=9.8, color=NEW, fontweight="bold", linespacing=1.3)
+a.text(25, 0.961865, "an inverted U — the signature of real diversity,\nand its ceiling here is one rounding digit",
+       ha="center", fontsize=9.4, color=INK, linespacing=1.35)
+a.set_xticks([0, 10, 20, 30, 40, 50]); a.set_xticklabels(["0%", "10%", "20%", "30%", "40%", "50%"], fontsize=9.4)
+a.set_xlim(-2, 52); a.set_ylim(0.961850, 0.961888)
+a.set_yticks([0.96187, 0.96188]); a.set_yticklabels(["0.96187", "0.96188"])
+a.set_xlabel("partner weight", fontsize=9.6)
+a.grid(axis="y", color=RULE, lw=0.6); a.set_axisbelow(True); a.spines["left"].set_visible(False)
+
+# ---------------------------------------------------------------- 3. the weight sweep
+a = panel(0.05, 0.085, 0.40, 0.25, 0.085, 3, "You only get their digit near their file",
+          "public LB as weight moves from our twin to yuvrajlamba01's file")
+xs = [0.0, 0.7, 1.0]
+ys = [0.96187, 0.96188, 0.96188]
+a.step(xs, ys, where="post", color=REAL, lw=2.6)
+a.scatter([0.0, 0.7], [0.96187, 0.96188], s=70, color=REAL, zorder=3)
+a.scatter([1.0], [0.96188], s=70, facecolor="white", edgecolor=REAL, linewidth=1.8, zorder=3)
+a.text(0.0, 0.961873, "ours\n0.96187", ha="left", fontsize=10, color=REAL, fontweight="bold", linespacing=1.3)
+a.text(0.7, 0.961883, "70% theirs: 0.96188\n(measured today)", ha="center", fontsize=10, color=REAL, fontweight="bold", linespacing=1.3)
+a.text(1.0, 0.961875, "their file\n(their badge)", ha="right", fontsize=9.6, color=MUTED, linespacing=1.3)
+a.text(0.5, 0.961862, "at rank correlation 0.99991 a 5th-decimal difference\nis which side of the rounding edge you sit on",
+       ha="center", fontsize=9.8, color=INK, linespacing=1.4)
+a.set_xticks([0, 0.5, 1]); a.set_xticklabels(["0%\n(all ours)", "50%", "100%\n(all theirs)"], fontsize=9.6)
+a.set_xlim(-0.06, 1.06); a.set_ylim(0.961855, 0.961895)
+a.set_yticks([0.96186, 0.96188]); a.set_yticklabels(["0.96186", "0.96188"])
+a.grid(axis="y", color=RULE, lw=0.6); a.set_axisbelow(True); a.spines["left"].set_visible(False)
+
+# ---------------------------------------------------------------- 4. extrapolation, measured in CV
+a = panel(0.56, 0.085, 0.41, 0.25, 0.085, 4, "Extrapolation: the board up, CV down",
+          "the trick behind 0.96191 - 0.96193, tested on public OOFs (section 2d)")
+g = [0.25, 0.5, 1.0, 2.0]
+d_cv = [-38.5, -86.9, -212.5, -617.0]          # ours + g*(ours - ewtherka), nested-OOF AUC change, x1e-6
+a.bar(range(4), d_cv, width=0.55, color=SEEN)
+for i, v in enumerate(d_cv):
+    a.text(i, v - 25, f"{v:+.0f}", ha="center", va="top", fontsize=9.6, color=SEEN, fontweight="bold")
+a.text(i, 60, "", fontsize=1)
+a.text(1.5, 105, "public chain: 0.96190 → 0.96191 → 0.96192 → 0.96193\n(+1e-5 per step, every step picked on the board)",
+       ha="center", fontsize=9.6, color=REAL, fontweight="bold", linespacing=1.35)
+a.text(1.5, -420, "0 of 5 folds up at every strength;\nthe loss grows with the push",
+       ha="center", fontsize=9.6, color=INK, linespacing=1.35)
+a.axhline(0, color=INK, lw=1)
+a.set_xticks(range(4)); a.set_xticklabels([f"g = {x:g}" for x in g], fontsize=9.6)
+a.set_ylim(-700, 170); a.set_yticks([-600, -400, -200, 0]); a.set_yticklabels(["-600", "-400", "-200", "0"])
+a.set_ylabel("CV change, ×1e-6", fontsize=9.6)
+a.grid(axis="y", color=RULE, lw=0.6); a.set_axisbelow(True); a.spines["left"].set_visible(False)
+
+fig.text(0.04, 0.018, "Orange = correlation / CV.  Blue = public leaderboard.  Green = our measurements.  "
+                      "Every borrowed file is credited in the next section.",
+         fontsize=10.5, color=MUTED, va="center")
+fig.savefig("anatomy_summary.png", facecolor="white")
+plt.show()
+
+# S6E10 | Anatomy of a Public 0.96188 | LB 0.96188
+
+> **Why this page exists.** The top public score (0.96188) and our series' (0.96187) differ by one
+> digit in the fifth decimal. We spent five submissions to find out whether that digit is real
+> model quality or a rounding seat — so you do not have to spend yours. **It is a rounding seat;
+> the picture below is the whole argument.** The final file here is 70% borrowed and fully
+> credited; our contribution is the experiment, the five readings, and the anchor they lean on.
+
+**Reading the picture.** *(updated 10-18: 1b – 1d add the 158-file correlation map and our own ingredients; 2c closes second partners; 2d tests the extrapolation trick behind 0.96191 – 0.96193 in CV.)*
+ Panel 1: every top public file is almost the same file (rank correlation
+0.9996 – 0.99991 with [our twin](https://www.kaggle.com/code/goodpjw2008/s6e10-twin-stacks-family-reg-lb-0-96187)).
+Panel 2: the 0.96188 notebooks' own partner recipe moves nothing at any dose. Panel 3: the digit
+only appears once our file is mostly *their* file — this notebook's submission is that 30/70 point,
+**70% yuvrajlamba01's blend**, said plainly. Panel 4: the negative-weight extrapolation behind the newest public tops, applied to public OOFs — it loses in CV at every strength.
+
+> **This is a measurement report, not Part 12 of our series.** The series' next part waits for a
+> genuinely new member (a TabPFN setting the public pool never used), not for rounding luck.
+> Everything borrowed here is listed below with thanks; our contribution is the experiment design
+> and the five readings.
+
+
+## 1. Credits — whose files these are, and thanks
+
+| Whose work | What we used | Result |
+|---|---|---|
+| **[yuvrajlamba01](https://www.kaggle.com/code/yuvrajlamba01/airline-passenger-satisfaction-0-96188)** | their 0.96188 submission — **70% of this notebook's final file** | the weight sweep of section 3 |
+| **[rabari9999](https://www.kaggle.com/code/rabari9999/s6e10-airline-satisfaction-roadmap-lb-0-96188)** | the other 0.96188 notebook; its recipe (92% anchor + 6% + 2% partners) is what section 2 re-tests on our anchor | all doses print 0.96187 |
+| **[ou20040313 / Orange](https://www.kaggle.com/code/ou20040313/s6e10-orange-blend)** | their blend, the least-correlated public file (rank corr 0.9996) | 2% and 6% doses: no change |
+| **[najiama](https://www.kaggle.com/datasets/najiama/s6e10-oof)** | blend 05 submission | 6% dose: no change |
+| **[Dariush Afshar](https://www.kaggle.com/code/dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187)** | his 247-member stack — already half of our twin, as credited in Part 11 | correlation baseline |
+| **[Hitarth Jain](https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747982)** | the ±1.5e-5 LB-noise yardstick every panel leans on | the grey band of panel 4 |
+| **[ewtherka](https://www.kaggle.com/code/ewtherka/s6e10-stacker-s-c-penalty-on-model-families)** | the family-C stack reading (0.96186) in panel 4 | context |
+
+| **[hanifnoerrofiq](https://www.kaggle.com/code/hanifnoerrofiq/agentic-ensemble), [kozykappa](https://www.kaggle.com/code/kozykappa/s6e10-rank-continuation-lb-0-96192), [nina2025](https://www.kaggle.com/code/nina2025/ps-s6e10-h-blend-5)** | the 0.96191 – 0.96193 extrapolation chain (section 2d); kozykappa's own private-LB warning is quoted with thanks | their move, re-tested on OOFs: CV −39 to −617 ×1e-6 |
+| **[ewtherka](https://www.kaggle.com/code/ewtherka/s6e10-0-96188-lb-l2-family-wise-actually-helps)**, **[Dariush Afshar](https://www.kaggle.com/code/dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187)** | their published nested stack OOFs — the only reason the extrapolation could be tested at all | section 2d |
+
+**What is ours:** our twin anchor (Parts 1 – 11: 48 own models, the 245-member pool, the family
+regularization), the five-submission experiment design, and the reading of the results. Thank you
+to everyone above for publishing — a dissection is only possible on published work.
+
+
+## 1b. The correlation map of every public file (measured 10-17)
+
+Before you spend a submission blending any public file into yours, look it up here. We downloaded
+the submission of every top-40-by-score public notebook (37 valid files) and computed each one's
+rank correlation with our twin anchor. **Everything at 0.9995+ was flat at every dose we paid
+for; the one file below 0.998 was the only one that moved anything.**
+
+| public file | corr. with our twin | corr. with denpugovkin |
+|---|---|---|
+| **denpugovkin — passenger context / foundation ensemble** | **0.99729** | 1.0 |
+| samanyu1808 — early megastack (0.96177) | 0.99822 | 0.99724 |
+| karttikjangid05 — "22 OOFs nearly match a full stack" | 0.99855 | 0.99672 |
+| amanatar — frontier megastack "original brain" | 0.99858 | 0.99677 |
+| hitarthjain0 — 165-model stack | 0.99864 | 0.99696 |
+| cdeotte — stacking TFMs with public OOF | 0.99864 | 0.99688 |
+| amanatar — the whole-board stack | 0.99867 | 0.99688 |
+| abdullahsafwan333 — aviator LR stacking | 0.99871 | 0.99694 |
+| kozykappa — micro-AUC uplift | 0.99896 | 0.99917 |
+| samanyu1808 — megastack | 0.99905 | 0.99771 |
+| mojjeed — CV .96180 stacking | 0.99913 | 0.99757 |
+| yeashusemwal — secrets to satisfaction | 0.99933 | 0.99910 |
+| amanatar — apex consensus · rabari ×2 · jenillangaliya · karttik 181 · nursrijan | 0.99937 – 0.99938 | ≈ 0.9973 |
+| kozykappa guarded residual · matterhorn 0.96183 | 0.99946 | 0.9973 |
+| mayankraaz — 0.96190 consensus | 0.99947 | 0.99895 |
+| hitarthjain0 blend · hanifnoerrofiq · rabari/yuvraj 0.9619 · yeashu trust-the-cv | 0.99951 – 0.99959 | ≈ 0.9988 |
+| ou20040313 Orange · matterhorn 0.96180 · amanatar tuner · ewtherka family | 0.99962 – 0.99988 | ≈ 0.9975 |
+| yuvraj 0.96188 · najiama · lucifer19 v28 · amanatar pseudo-label arms | 0.99991 – 0.99994 | ≈ 0.9973 |
+
+Three reads:
+
+1. **The pool has one voice.** 33 of 37 files sit above 0.998 with us — different notebooks,
+   same ranks. Blending among them is re-rounding, not ensembling.
+2. **The mid band (0.9982 – 0.9987) is small and mostly pool-derived** — different *weightings*
+   of the same members (a 22-member subset, a TFM-heavy weighting, an original-data-heavy one).
+   Section 2c measures what they add as second partners: little to nothing.
+3. **Only denpugovkin is structurally different** (his members never published OOFs, so no stack
+   could absorb them) — and section 2b shows even he is worth exactly one rounding digit.
+
+*Method: `scipy.stats.rankdata` correlation on the 299,844 test rows, our frozen twin as the
+reference. The scan script is in the appendix cell of this notebook's version history; it needs
+only each notebook's public `submission.csv`.*
+
+
+### 1c. The full sweep (10-18): 158 files, and the finding that closes the question
+
+We then widened the scan to **every public prediction file we could find** — the top-50 kernels
+by votes, every s6e10 dataset carrying submissions (nina2025's three, rabari9999's artifacts,
+arunklenin's collection, slimypunk03's, anhadmahajan06's) — **158 unique files** in all.
+
+- Everything below correlation 0.97 is a weak single model (LB 0.940 – 0.961); section 2c's
+  pattern says those cost a digit at any useful dose.
+- **The one real test:** [hemingweb](https://www.kaggle.com/code/hemingweb/s6e10-exp01-tabpfn35-full-context)
+  — the only fully independent trainer left (nobody's pool ever collected him; his pages have
+  almost no votes) — publishes honest OOFs on the *same* seed-42 folds (we verified row-for-row),
+  five members, singles up to **0.961386**. Added to the frozen 245-member stack, properly, as
+  members: **−0.000003, each alone ±0.000002.** Even genuinely independent, honestly-validated
+  models are absorbed without residue. The pool has converged at the *information* level, not
+  just the file level — thank you, hemingweb, for publishing everything needed to prove it.
+- And the newest "top public" ([kozykappa's 0.96192](https://www.kaggle.com/code/kozykappa/s6e10-rank-continuation-lb-0-96192))
+  sits at 0.9996 to us, 0.9986 to denpugovkin: the same information, two lucky digits of seat.
+
+**The market summary: one genuinely different file existed, it was worth one digit, and
+everything else — 157 files — is either the same voice or too weak to dose.**
+
+## 1d. Our own ingredients, on the same scale (10-18)
+
+A dissection of other people's files is only half-honest if our own contributions don't sit on
+the same table, measured by the same rules. Everything of ours is public, with model cards, in
+**[the goodpjw2008 member dataset](https://www.kaggle.com/datasets/goodpjw2008/s6e10-goodpjw2008-extra-members-oof)**:
+
+| ingredient | what it is | correlation with the twin |
+|---|---|---|
+| 17 member OOF/test pairs | the own-trained models of Parts 1 – 8 that the public pools collect | (inside every pool) |
+| `stack245` frozen pair | our full 245-member nested stack (LB 0.96186) — **read the card first**: as a *member* it inflates nested CV (ewtherka's proof) | 0.9996 |
+| `twin_submission_1015` | the frozen twin file (LB 0.96187) this page uses as its anchor | 1.0 |
+| **`tabpfn_ne4`** | TabPFN-3.5 with `n_estimators=4`, full 560k context — a setting no public pool has; our strongest honest single (OOF 0.961491, LB 0.96110 alone) | **0.98824 — the most different non-weak file on this whole map** |
+
+And the symmetric test — our newest ingredient, dosed onto our own anchor exactly like
+everyone else's files were:
+
+| twin + our `tabpfn_ne4` | 10% | 20% |
+|---|---|---|
+| public LB | 0.96185 — down | 0.96181 — down more |
+
+**Monotone decline — and that is the map's law confirmed on ourselves.** Low correlation alone
+is not what moved the needle for denpugovkin; *information the pool does not already own* is.
+Our `tabpfn_ne4` looks maximally different, but Part 12 proved the pool's sixteen n_est=1
+TabPFN columns already act as this ensemble — so every percent of it only dilutes the anchor.
+Difference without novelty is noise with a direction.
+
+*(If you blend, these files are yours to use — the dataset cards state folds, scores and the
+training commands. If you stack, take the 17 members and `tabpfn_ne4`, and leave `stack245`
+out of your member list.)*
+
+
+## 2. The measurements
+
+First the correlations (why nothing can move), then the five files and their public readings.
+
+import glob, os
+import numpy as np, pandas as pd
+from scipy.stats import rankdata
+
+INPUT = os.environ.get("INPUT_DIR", "/kaggle/input")
+def find(pat, hint):
+    hits = sorted(p for p in glob.glob(f"{INPUT}/**/{pat}", recursive=True) if hint in p)
+    assert hits, (pat, hint)
+    return hits[0]
+
+te_ids = pd.read_csv(find("test.csv", "playground-series-s6e10"), usecols=["id"])["id"].values
+
+# our twin = 1/2 rank(our frozen 245 stack) + 1/2 rank(Dariush Afshar's 247 stack), as in Part 11
+ours = np.load(find("test_stack245.npy", "extra-members"))
+ours = 1 / (1 + np.exp(-ours)) if (ours.min() < 0 or ours.max() > 1) else ours
+dar = pd.read_csv(find("submission.csv", "247-public-oofs"))["satisfaction"].values
+r = (rankdata(ours) + rankdata(dar)) / 2
+twin = (r - r.min()) / (r.max() - r.min())
+
+yuv = pd.read_csv(find("submission.csv", "airline-passenger-satisfaction-0-96188"))["satisfaction"].values
+orange = pd.read_csv(find("submission.csv", "orange-blend"))["satisfaction"].values
+naj05 = pd.read_csv(find("05_submission.csv", "s6e10-oof"))["satisfaction"].values
+
+rt = rankdata(twin)
+for name, v in (("yuvrajlamba01 0.96188", yuv), ("najiama 05", naj05),
+                ("Orange blend", orange), ("Dariush Afshar 247", dar)):
+    print(f"rank correlation with our twin: {name:22s} {np.corrcoef(rt, rankdata(v))[0, 1]:.5f}")
+
+# The five submissions of 10-15, rebuilt byte-for-byte.  Public LB readings are quoted from
+# the submission page; this notebook's own submission is the last one (the 70/30 sweep point).
+ro, rn, ry = rankdata(orange) / len(orange), rankdata(naj05) / len(naj05), rankdata(yuv) / len(yuv)
+rtw = rankdata(twin) / len(twin)
+files = {
+    "twin alone (Part 11)":            (rtw,                               0.96187),
+    "+ 2% Orange":                     (0.98 * rtw + 0.02 * ro,            0.96187),
+    "+ 6% Orange":                     (0.94 * rtw + 0.06 * ro,            0.96187),
+    "+ 6% najiama05 + 2% Orange":      (0.92 * rtw + 0.06 * rn + 0.02 * ro, 0.96187),
+    "30% twin + 70% yuvrajlamba01":    (0.30 * rtw + 0.70 * ry,            0.96188),
+}
+for k, (v, lb) in files.items():
+    print(f"public LB {lb:.5f}   {k}")
+
+sub = files["30% twin + 70% yuvrajlamba01"][0]
+pd.DataFrame({"id": te_ids, "satisfaction": sub}).to_csv("submission.csv", index=False)
+print("\nsubmission.csv = the 30/70 file (70% yuvrajlamba01's -- see credits)")
+
+## 2b. The sequel (10-17): the one partner that is actually different
+
+The flat doses above were all partners at rank correlation **0.9996+** with our anchor. One
+public file is not: [Den Pugovkin's "Passenger Context + Foundation Ensemble"](https://www.kaggle.com/code/denpugovkin/s6e10-passenger-context-foundation-ensemble)
+(0.96183 alone, correlation **0.9973** — he publishes his whole experiment tree; thank you).
+Five more submissions traced its full dose-response on our twin:
+
+| his weight | 0% | 10% | 20% | 30% | 40% | 50% |
+|---|---|---|---|---|---|---|
+| public LB | 0.96187 | 0.96187 | **0.96188** | **0.96188** | **0.96188** | 0.96187 |
+
+An inverted U — the signature of genuine diversity: it climbs (unlike every near-copy), plateaus
+at 20 – 40%, and falls once the weaker file starts dominating. **And its ceiling is exactly one
+rounding digit.** Both findings in one curve:
+
+1. *Correlation decides whether doses do anything at all.* 0.9996 → flat; 0.9973 → a real curve.
+2. *Even real diversity, at this stage of the pool, buys one digit.* The 0.96190 blends combine
+   this same file with a 0.96188-seated anchor — same curve, luckier seat.
+
+(The figure's panel 2 is this table. Weights were chosen on the public board and are disclosed
+as such — this page is a measurement report, not a leaderboard claim.)
+
+### 2c. Second partners: the mid band, measured (10-17 ~ 18, six more submissions)
+
+Section 1b's map leaves one open question: the **mid band** (correlation 0.9982 – 0.9987 — real
+re-weightings of the pool, independent of denpugovkin too). Can a second partner, added on top
+of the denpugovkin plateau, push past 0.96188? Six submissions, every cell of the answer:
+
+| on top of twin .63 + denpugovkin .27 (the plateau) | public LB |
+|---|---|
+| + karttikjangid05 22-OOF stack, 10% | 0.96188 — held |
+| + karttik 20% (twin .55 + dp .25) | 0.96188 — held |
+| + samanyu1808 early megastack, 10% | 0.96188 — held |
+| + amanatar "original brain", 10% | 0.96187 — **down** |
+| + cdeotte TFM stack, 10% | 0.96187 — **down** |
+| + mid-band consensus, (kt+sam+cd)/3 at 20% (twin .55 + dp .25) | 0.96187 — **down** (the weak component dominates) |
+
+The verdict closes the map: **no second partner, at any dose we paid for, moves the plateau.**
+The stronger mid-band files are absorbed without effect; the weaker ones cost a digit at 10%.
+One genuinely different file bought one rounding digit, and that was the whole market.
+
+*(Weights were picked on the public board and are disclosed as such. If you still want to spend
+submissions here, spend them on finding a file below 0.998 on the map — nothing else did anything.)*
+
+
+## 2d. Extrapolation: the trick behind 0.96191 – 0.96193, measured in CV (10-18)
+
+After this page's first versions, the public top moved again — 0.96190 → 0.96191 → 0.96192 →
+0.96193. We read every one of those notebooks and fitted their files in rank space. None adds a
+model or an OOF. They are **rank extrapolations with negative weights**, chained:
+
+| step | public file | what it is (fitted in percentile-rank space) |
+|---|---|---|
+| 0.96190 | [yeashusemwal](https://www.kaggle.com/code/yeashusemwal/secrets-to-satisfaction-it-s-stacking), [yuvrajlamba01](https://www.kaggle.com/code/yuvrajlamba01/airline-passenger-satisfaction-0-9619) | convex mixes of the denpugovkin-type file with a 0.96188 stack (our section 2b, other anchors) |
+| 0.96191 | [hanifnoerrofiq v1](https://www.kaggle.com/code/hanifnoerrofiq/agentic-ensemble) ("PAS") | ≈ 1.17 · B190 + 0.34 · T188 **− 0.50 · E188** — an anti-blend along the gap between two near-identical 0.96188 files |
+| 0.96192 | [kozykappa — rank continuation](https://www.kaggle.com/code/kozykappa/s6e10-rank-continuation-lb-0-96192) | R(α) = R₁₉₀ + α · (R_PAS − R₁₉₀) at **α = 1.40**: keep walking past PAS |
+| 0.96193 | [hanifnoerrofiq (current)](https://www.kaggle.com/code/hanifnoerrofiq/agentic-ensemble) = nina2025's `0.96193.csv` | ≈ 3 · PAS **− 1 · A190 − 1 · B190**: a double push away from both 0.96190 files |
+
+Every step was chosen on the public board — kozykappa says so plainly and warns about the private
+leaderboard, which is to his credit. None of these directions can be checked in CV from the test
+files alone. **But the move itself can.** Three public stacks publish honest out-of-fold
+predictions on the same folds: ours, [ewtherka's](https://www.kaggle.com/code/ewtherka/s6e10-0-96188-lb-l2-family-wise-actually-helps)
+and [Dariush Afshar's](https://www.kaggle.com/code/dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187).
+So we applied the exact transformation to the OOFs — push our stack away from a sibling stack,
+`R = R_ours + g · (R_ours − R_sibling)` — and scored it:
+
+| push strength g | +0.25 | +0.5 | +1 | +2 |
+|---|---|---|---|---|
+| away from ewtherka (corr 0.9985), CV change ×1e-6 | −38.5 | −86.9 | −212.5 | −617.0 |
+| away from Dariush Afshar, CV change ×1e-6 | −177.1 | −426.8 | −1334.6 | −6670.9 |
+| folds up | 0 / 5 | 0 / 5 | 0 / 5 | 0 / 5 |
+
+**Monotone, every fold, both siblings: extrapolation loses in CV, and loses more the harder it
+pushes.** What it does on the public split is real — +1e-5 per step, four steps in a row — but a
+direction you can only see on 20% of the test rows, chosen by looking at those same rows, is the
+textbook shape of fitting the public split. On the private 80% we expect it to give that back.
+
+*Caveats, stated:* Dariush's published `stack_oof` scores 0.962420, above his own nested CV
+(0.962205) — it likely contains some in-fold signal, so read his row for direction, not size.
+The pushes in the public files are along test-only differences (T188 − E188 has no OOF), so our
+test is of the *move*, not of their exact direction. If you have OOFs for both ends of a
+direction, run this check before you submit an α > 1.
+
+**The practical rule this page ends on:** for your final two picks, keep one file whose every
+weight was chosen in CV; if you want a public-max file, take at most one, knowing what it is.
+
+
+## 3. What this means (and what it does not)
+
+- **The partner axis is exhausted.** The 0.96188 notebooks' own recipe — 6% najiama, 2% Orange —
+  moves our anchor by exactly nothing, at every dose we paid a submission for. Their +0.00001 over
+  us is their anchor's rounding seat, not their partners.
+- **A fifth-decimal LB difference between 0.9999-correlated files is noise.** This is the same
+  conclusion our Part 11 published ("an average of twins cannot beat both twins") and
+  [Hitarth Jain measured](https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747982);
+  today's five readings just paid for it in submissions.
+- **Extrapolation is the newest way to chase it — and CV says it costs.** Pushing a stack away
+  from a sibling stack (section 2d) lost at every strength, in every fold.
+- **Do not chase this digit.** The private leaderboard re-rolls the rounding seats. If your stack's
+  nested CV matches the pool's (≈ 0.9622), you already have everything these files have.
+- **Where the real next step is:** the one axis the whole public pool left untouched is inside the
+  foundation models themselves. That experiment is running; it will be
+  [the series' Part 12](https://www.kaggle.com/code/goodpjw2008/s6e10-twin-stacks-family-reg-lb-0-96187)
+  when its five folds finish — with its own numbers, not borrowed ones.
+
+If this dissection saved you a submission or three, an upvote helps — and please also upvote
+[yuvrajlamba01](https://www.kaggle.com/code/yuvrajlamba01/airline-passenger-satisfaction-0-96188) and
+[rabari9999](https://www.kaggle.com/code/rabari9999/s6e10-airline-satisfaction-roadmap-lb-0-96188),
+whose published files made the measurement possible.
+
+> **Reproducibility.** Every input is a frozen published file, so the rebuilt blends and the score
+> chip's 0.96188 reproduce exactly.

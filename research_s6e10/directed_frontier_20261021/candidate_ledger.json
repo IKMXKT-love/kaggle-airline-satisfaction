@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-21",
+  "sources": [
+    {
+      "ref": "amanatar/s6e10-the-original-prior-stack-v5",
+      "version": 1,
+      "receipt": "amanatar__s6e10-the-original-prior-stack-v5_receipt.json",
+      "newly_reviewed": false,
+      "disposition": "retained notebook version unchanged",
+      "current_output_file_count": 10,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "anhadmahajan06/s6e10-are-you-satisfied",
+      "version": 30,
+      "receipt": "anhadmahajan06__s6e10-are-you-satisfied_receipt.json",
+      "newly_reviewed": true,
+      "disposition": "pseudo-label validation dependency; outputs are test submissions",
+      "current_output_file_count": 10,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "denpugovkin/s6e10-passenger-context-foundation-ensemble",
+      "version": 47,
+      "receipt": "denpugovkin__s6e10-passenger-context-foundation-ensemble_receipt.json",
+      "newly_reviewed": true,
+      "disposition": "v47 nonlinear meta comparison failed its own gate; no new base signal",
+      "current_output_file_count": 170,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197",
+      "version": 5,
+      "receipt": "goodpjw2008__s6e10-meta-stack-on-public-oof-lb-0-96197_receipt.json",
+      "newly_reviewed": true,
+      "disposition": "public selection-noise research; final test file is LB-selected",
+      "current_output_file_count": 5,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "hermengardo/single-catboost-eda-ps6e10",
+      "version": 28,
+      "receipt": "hermengardo__single-catboost-eda-ps6e10_receipt.json",
+      "newly_reviewed": false,
+      "disposition": "retained notebook version unchanged",
+      "current_output_file_count": 11,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961",
+      "version": 1,
+      "receipt": "kagankoral__s6e10-encodings-catboost-realmlp-lb-0-961_receipt.json",
+      "newly_reviewed": false,
+      "disposition": "retained notebook version unchanged",
+      "current_output_file_count": 3,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "kiza123123/s6e10-winning-multi-model-pipeline",
+      "version": 8,
+      "receipt": "kiza123123__s6e10-winning-multi-model-pipeline_receipt.json",
+      "newly_reviewed": true,
+      "disposition": "non-nested target encoding and in-sample meta scoring; no paired output obtained",
+      "current_output_file_count": 0,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+      "version": 2,
+      "receipt": "kratosyan__s6e10-xgboost-realmlp-route-id-teacher_receipt.json",
+      "newly_reviewed": false,
+      "disposition": "retained notebook version unchanged",
+      "current_output_file_count": 4,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "sai10py/s6e10-exp7-original-prior-transfer",
+      "version": 1,
+      "receipt": "sai10py__s6e10-exp7-original-prior-transfer_receipt.json",
+      "newly_reviewed": true,
+      "disposition": "original-data teacher mechanism covered; test submission only",
+      "current_output_file_count": 1,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "sarunpm/airline-satisfaction-lgbm-0-96025-lb",
+      "version": 41,
+      "receipt": "sarunpm__airline-satisfaction-lgbm-0-96025-lb_receipt.json",
+      "newly_reviewed": true,
+      "disposition": "route mechanism covered; encoding boundary issue; no current paired output obtained",
+      "current_output_file_count": 0,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "yekenot/ps-s6-e10-realmlp-pytabkit",
+      "version": 8,
+      "receipt": "yekenot__ps-s6-e10-realmlp-pytabkit_receipt.json",
+      "newly_reviewed": false,
+      "disposition": "retained notebook version unchanged",
+      "current_output_file_count": 2,
+      "output_next_page_token": null
+    },
+    {
+      "ref": "zekaizhan/s6e10-what-i-broke-first-0-9583-0-9621",
+      "version": 2,
+      "receipt": "zekaizhan__s6e10-what-i-broke-first-0-9583-0-9621_receipt.json",
+      "newly_reviewed": true,
+      "disposition": "reported historical OOF tables; no new paired output obtained",
+      "current_output_file_count": 0,
+      "output_next_page_token": null
+    }
+  ],
+  "refreshed_retained_datasets": [
+    {
+      "ref": "abdullahsafwan333/oof-dataset",
+      "current_version": 1,
+      "retained_version": 1,
+      "version_changed": false
+    },
+    {
+      "ref": "cdeotte/s6e10-124-public-oof-and-test-predictions",
+      "current_version": 1,
+      "retained_version": 1,
+      "version_changed": false
+    },
+    {
+      "ref": "dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test",
+      "current_version": 1,
+      "retained_version": 1,
+      "version_changed": false
+    },
+    {
+      "ref": "amanatar/s6e10-forge-own-pairs",
+      "current_version": 1,
+      "retained_version": 1,
+      "version_changed": false
+    },
+    {
+      "ref": "dariushafshar/s6e10-golem-oof-library",
+      "current_version": 6,
+      "retained_version": 6,
+      "version_changed": false
+    },
+    {
+      "ref": "goodpjw2008/s6e10-goodpjw2008-extra-members-oof",
+      "current_version": 9,
+      "retained_version": 9,
+      "version_changed": false
+    },
+    {
+      "ref": "kagankoral/s6e10-ablation-members-oof",
+      "current_version": 1,
+      "retained_version": 1,
+      "version_changed": false
+    },
+    {
+      "ref": "koumeimaki/s6e10-route-tfm-nn-oof",
+      "current_version": 2,
+      "retained_version": 2,
+      "version_changed": false
+    },
+    {
+      "ref": "sachith7/s6e10-stack-oof-predictions",
+      "current_version": 3,
+      "retained_version": 3,
+      "version_changed": false
+    },
+    {
+      "ref": "sadamtorres/ps-s6e10-airline-satisfaction-artifacts",
+      "current_version": 7,
+      "retained_version": 7,
+      "version_changed": false
+    },
+    {
+      "ref": "cdeotte/s6e10-tfm-oof-and-test-predictions",
+      "current_version": 1,
+      "retained_version": 1,
+      "version_changed": false
+    }
+  ],
+  "source_code_executed": false,
+  "new_training_runs": 0,
+  "new_base_inferences": 0,
+  "new_submissions": 0,
+  "candidate_for_training": null,
+  "research_lead_only": {
+    "mechanism": "Q-FT discriminative feature-token Transformer",
+    "status": "awaiting paired original OOF/test, training code, fold/ID evidence and incremental evidence",
+    "author_reported_oof": 0.959795,
+    "increment_over_current_pool": null,
+    "local_reproduction_recommended": false
+  },
+  "evidence_limits": [
+    "author OOF and public claims are not private generalization proofs",
+    "Den saved metrics arithmetic checked; AUC not independently reconstructed",
+    "empty current output list is not proof of a failed run",
+    "negative searches are not proof of global nonexistence"
+  ],
+  "protected_files": {
+    "submission_public_pool_20261020.csv": {
+      "sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+      "matches_previous_verification": true
+    },
+    "CURRENT_BEST_SUBMISSION.json": {
+      "sha256": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+      "matches_previous_verification": true
+    },
+    "CURRENT_BEST_RESULT.md": {
+      "sha256": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+      "matches_previous_verification": true
+    },
+    "CURRENT_RECOMMENDED_CANDIDATE.json": {
+      "sha256": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad",
+      "matches_previous_verification": true
+    }
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "dataset": "dariushafshar/s6e10-golem-oof-library",
+    "file": "stack247_oof.npy",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/stack247_oof.npy",
+    "path": "research_s6e10\\extended_review_20261020\\reference_predictions\\dariushafshar__stack247_oof.npy",
+    "bytes": 5597208,
+    "sha256": "97eaec014cc8f717ebb092256ed4002afe3dd31f548f432242cf55247d2ed6ed",
+    "seconds": 6.325215100001515
+  },
+  {
+    "dataset": "goodpjw2008/s6e10-tabpfn-member",
+    "file": "oof_tabpfn_full_raw.csv",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-tabpfn-member/oof_tabpfn_full_raw.csv",
+    "path": "research_s6e10\\extended_review_20261020\\reference_predictions\\goodpjw2008__oof_tabpfn_full_raw.csv",
+    "bytes": 12474059,
+    "sha256": "a64cb1674255834b9a2c5684a90a8146ba29ac3304caa496a5032d9b2f05a878",
+    "seconds": 6.972096000001329
+  },
+  {
+    "dataset": "dariushafshar/s6e10-golem-oof-library",
+    "file": "folds_seed42.npy",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/dariushafshar/s6e10-golem-oof-library/folds_seed42.npy",
+    "path": "research_s6e10\\extended_review_20261020\\reference_predictions\\dariushafshar__folds_seed42.npy",
+    "bytes": 699763,
+    "sha256": "181ada73928aaf1a7af9a24ffb8f70064f75b880edf08e77cd0b808a9c697f4f",
+    "seconds": 2.8185251000031712
+  },
+  {
+    "dataset": "goodpjw2008/s6e10-tabpfn-member",
+    "file": "oof_tabpfn_catfd10.csv",
+    "url": "https://www.kaggle.com/api/v1/datasets/download/goodpjw2008/s6e10-tabpfn-member/oof_tabpfn_catfd10.csv",
+    "path": "research_s6e10\\extended_review_20261020\\reference_predictions\\goodpjw2008__oof_tabpfn_catfd10.csv",
+    "bytes": 12476728,
+    "sha256": "70bfdeb7185ee3a4e0184b7a57fcdab256f7b997330645d0e1d67f10d60dcd8b",
+    "seconds": 17.80045550000068
+  }
+]

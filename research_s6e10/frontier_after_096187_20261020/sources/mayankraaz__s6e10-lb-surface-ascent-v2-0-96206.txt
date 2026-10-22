@@ -1,0 +1,273 @@
+<div style="background:linear-gradient(120deg,#0b1d3a 0%,#1f4e8c 55%,#3fa7d6 100%);padding:30px 34px;border-radius:16px;color:#fff;font-family:Inter,Segoe UI,sans-serif">
+<div style="font-size:13px;letter-spacing:3px;opacity:.85">PLAYGROUND S6E10 · PREDICTING AIRLINE SATISFACTION · ROC AUC</div>
+<div style="font-size:34px;font-weight:800;margin:8px 0 6px">🛰️ LB Surface Ascent · Summit Edition</div>
+<div style="font-size:17px;opacity:.95">Map the public summit with <b>65 scored files</b>, learn where the surface stops working, then add a <b>CV-backed teacher</b> nobody else has.</div>
+<div style="margin-top:16px;display:inline-block;background:rgba(255,255,255,.16);padding:8px 16px;border-radius:999px;font-weight:700;font-size:18px">Public LB 0.96206 · best of 9 measured probes</div>
+</div>
+
+## 🆕 What's new in Version 3
+
+| | Version 2 | **Version 3** |
+|---|---|---|
+| public LB | 0.96196 | **0.96206** |
+| scored files near the top | 61 (top 0.96196) | **65 files at ≥ 0.96190**, top 0.96206 |
+| final file | surface step | **gated h-blend + 3 teachers, one of them my own 181-member CV stack** |
+| new lesson | flat top at 0.96196 | high-k surface steps **fail** at the summit (measured: 0.96203); low-k is honest |
+| reusable | `lb_surface.py` | + `gate_blend.py`, plug **your own CV stack** in as a teacher |
+
+**The story in three lines**
+
+1. The public top moved to 0.96205–0.96206 through Nina's h-blend and Kirill's disagreement-gated teachers: 70% of four public-LB-climbed files + 30% of two CV-backed stacks.
+2. I fitted my LB surface on 65 scored files around that summit. Its k ≥ 7 gradient predicted 0.96210 for a step of 2; the board said **0.96203**. The low-k fits (k = 2–6) had predicted that miss. The summit is a sharp, narrow peak.
+3. So I stopped walking along the surface and changed the **teacher** instead: adding my own 181-member CV stack and giving it a larger share improved the unrounded score in four steps in a row (section 5).
+
+## ⚠️ Read this before you copy it into your final two
+
+- Public scores here are measured on the public 20% of rows only. The four base files were climbed on that same 20%, so part of their gain is public noise.
+- The teachers are CV-backed stacks. Moving weight toward them moves the file **toward** models whose weights never saw the public rows, which is the safer direction for private.
+- Differences between the probes below are ≤ 0.00001: inside public noise (sd ≈ 0.0012·√(1−ρ), Korokke3). Treat the ordering as a tie-break, not as proof.
+- Keep one **CV-backed** stack as your other final pick (e.g. the `own_cv_stack_181` file in my atlas dataset, CV 0.962166).
+
+## ⚙️ Settings: change these to make it yours
+
+Defaults reproduce the Version 3 **0.96206** file exactly. Everything below reads from this cell.
+
+# ---- the teacher mix: name -> relative weight ----------------------------------
+# '0.96176.csv' = Chris Deotte's TFM stack, '0.96183.csv' = Den Pugovkin's context stack (both in nina2025/ps-s6e10-7)
+# 'own' = my 181-member logistic-regression stack (CV 0.962166, mayankraaz/s6e10-lb-surface-atlas)
+TEACHERS = {'0.96176.csv': 1, '0.96183.csv': 1, 'own': 3}   # measured best: public 0.96206 (q9)
+TEACHER_WEIGHT = 0.35        # average share of the teacher in each row (Kirill's gate used 0.30)
+GATE_AMP = 0.02              # +/- shift of that share by member disagreement (0 = flat weight)
+
+# Plug in YOUR CV-backed stack as an extra teacher: (file name, any part of its input path).
+# It must hold test probabilities (csv with id,satisfaction or a .npy in sample_submission order).
+MY_TEACHER = None            # e.g. ('submission.csv', 'my-stack-notebook')
+MY_TEACHER_SHARE = 1         # its relative weight inside TEACHERS
+
+## 📦 1. Load the four members and the teachers (hash-pinned)
+
+import os, json, hashlib, warnings
+from pathlib import Path
+import numpy as np, pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import rankdata
+warnings.filterwarnings('ignore')
+
+ROOT = Path('/kaggle/input') if Path('/kaggle/input').exists() else Path(os.environ['LOCAL_KAGGLE_INPUT'])
+
+def find(name, hint=''):
+    hits = sorted(p for p in ROOT.rglob(name) if hint in str(p))
+    assert hits, f'{name} ({hint}) not found'
+    return hits[0]
+
+ids = pd.read_csv(find('sample_submission.csv', 'playground-series-s6e10')).id.to_numpy()
+N = len(ids)
+
+def raw(name, hint):
+    p = find(name, hint)
+    if p.suffix == '.npy':
+        v = np.load(p).astype(np.float64)
+    else:
+        d = pd.read_csv(p); d.columns = ['id', 'p']
+        v = d.set_index('id').p.reindex(ids).to_numpy(np.float64)
+    assert v.shape == (N,) and np.isfinite(v).all(), name
+    return v
+
+# Pinned inputs (same files and hashes as Kirill's 0.96206 notebook).
+PINNED = {'0.96201.csv': '8883773ff30ba9a71581657b9daf881ac45652031b6e3ee565844dbcff35797a',
+          '0.96202.csv': '4765dbd769768cb9a7cbe030b9ecfd83a12b4fab25529d135cc6fef6fbc6e028',
+          '0.96203.csv': 'b31119ef653e50b71452187174d6c85d7929550c23b4b020797f19f5f132112d',
+          '0.96204.csv': 'c7d3b9e4c1c377c74e0f75b475c50319413a264fc4401c0a00fe689a99542873',
+          '0.96176.csv': '9b5dc8e667fdecb388e56afd4772ecfb386cfb783f48b4d2270e747ebb371471',
+          '0.96183.csv': '9f499e3b36232a0969dc50c26968946935808503a1f6abb562b91452251211db',
+          '0.96206.csv': 'de8438a811025afe781ff32af09ae0ada7a035741cdb98c1029be06ddba6143f'}
+for f, h in PINNED.items():
+    assert hashlib.sha256(find(f, 'ps-s6e10-7').read_bytes()).hexdigest() == h, f'{f} changed upstream'
+
+MEMBERS = np.column_stack([raw(f'0.{v}.csv', 'ps-s6e10-7') for v in ('96201', '96202', '96203', '96204')])
+TEACHER_FILES = {'0.96176.csv': raw('0.96176.csv', 'ps-s6e10-7'),
+                 '0.96183.csv': raw('0.96183.csv', 'ps-s6e10-7'),
+                 'own': raw('own_cv_stack_181_test.npy', 's6e10-lb-surface-atlas')}
+if MY_TEACHER:
+    TEACHER_FILES['mine'] = raw(*MY_TEACHER); TEACHERS['mine'] = MY_TEACHER_SHARE
+print('members:', MEMBERS.shape, '| teachers:', list(TEACHER_FILES))
+
+## 🧩 2. The gated h-blend, and a bit-for-bit check against the public 0.96206 file
+
+%%writefile gate_blend.py
+"""Gated h-blend with a teacher mix. Reuse: add this notebook as an input, then `from gate_blend import *`."""
+import numpy as np
+from scipy.stats import rankdata
+
+MAIN_W = np.array([0.1, 0.2, 0.3, 0.4])          # per-member weights (Nina's h-blend)
+ORDER_C = np.array([0.07, -0.01, -0.02, -0.04])  # per-position corrections after sorting each row
+
+
+def pct(v):
+    return (rankdata(np.asarray(v, dtype=np.float64), method='average') - 0.5) / len(v)
+
+
+def hblend(M, main=MAIN_W, corr=ORDER_C, mix=(0.3, 0.7)):
+    """Nina's h-blend: sort each row both ways, weight by member + position, mix the two sides."""
+    n, sides = len(M), []
+    for rev in (False, True):
+        order = np.argsort(-M if rev else M, axis=1, kind='stable')
+        s = np.zeros(n)
+        for j in range(M.shape[1]):
+            k = order[:, j]
+            s += M[np.arange(n), k] * (main[k] + corr[j])
+        sides.append(s.astype(np.float32))
+    return (np.float32(mix[0]) * sides[0] + np.float32(mix[1]) * sides[1]).astype(np.float32)
+
+
+def teacher_mix(files, weights):
+    w = {k: v for k, v in weights.items() if v}
+    return sum(files[k] * v for k, v in w.items()) / sum(w.values())
+
+
+def gated_blend(members, teacher, weight=0.30, amp=0.02):
+    """Kirill's gate: the teacher share moves by +/- amp/2 with the rank of member disagreement."""
+    w = weight + amp * (pct(members.std(axis=1)) - 0.5)
+    return pct(hblend((1 - w[:, None]) * members + w[:, None] * teacher[:, None]))
+
+from gate_blend import pct, hblend, teacher_mix, gated_blend
+
+# Validation: Kirill's recipe (two public teachers, w = 0.30) must give the public 0.96206 file exactly.
+kirill = gated_blend(MEMBERS, teacher_mix(TEACHER_FILES, {'0.96176.csv': 1, '0.96183.csv': 1}), 0.30, 0.02)
+ref = pct(raw('0.96206.csv', 'ps-s6e10-7'))
+assert np.array_equal(kirill, ref), 'h-blend reproduction failed'
+print('✅ reproduced the public 0.96206 file bit-for-bit')
+
+## 🗻 3. The summit surface: 65 scored files at ≥ 0.96190
+
+Every file with a known public score near the top, projected on the 16 main SVD directions around the 0.96206 file
+(`summit_basis.npz` in my atlas dataset). The fit is Version 2's surface, `LB ≈ a + g·z − c·|d|²`, with leave-one-out error for each `k`.
+
+sb = np.load(find('summit_basis.npz', 's6e10-lb-surface-atlas'))
+pts = pd.read_csv(find('summit_points.csv', 's6e10-lb-surface-atlas'))
+Z, sq, y = sb['Z'], sb['sq'], sb['y']
+is_q1 = pts.point.str.contains('q1_ubar_r2').to_numpy()
+
+def surface_loo(k, keep):
+    F = np.column_stack([np.ones(keep.sum()), Z[keep, :k], -sq[keep]]); yy = y[keep]
+    err = [F[i] @ np.linalg.lstsq(np.delete(F, i, 0), np.delete(yy, i), rcond=None)[0] - yy[i] for i in range(len(yy))]
+    return np.array(err) * 1e5
+
+rows = []
+for k in range(2, 12):
+    before = surface_loo(k, ~is_q1)                       # what I knew before probe q1
+    F = np.column_stack([np.ones((~is_q1).sum()), Z[~is_q1, :k], -sq[~is_q1]])
+    c = np.linalg.lstsq(F, y[~is_q1], rcond=None)[0]
+    pred_q1 = c[0] + Z[is_q1, :k] @ c[1:k + 1] - c[-1] * sq[is_q1]
+    rows.append((k, np.sqrt((before ** 2).mean()), (pred_q1[0] - y[is_q1][0]) * 1e5))
+tab = pd.DataFrame(rows, columns=['k', 'LOO rmse before q1 (x1e-5)', 'q1 prediction error (x1e-5)'])
+
+fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+sc = ax[0].scatter(Z[:, 0], Z[:, 1], c=y, cmap='turbo', s=70, edgecolor='k', lw=.4, vmin=.9619, vmax=y.max())
+own = pts.point.str.startswith('own_round6').to_numpy()
+ax[0].scatter(Z[own, 0], Z[own, 1], s=180, facecolor='none', edgecolor='crimson', lw=1.5, label='my round-6 probes')
+plt.colorbar(sc, ax=ax[0], label='public LB'); ax[0].legend(); ax[0].set_title('The summit map (anchor = public 0.96206)', fontweight='bold')
+ax[1].plot(tab.k, tab.iloc[:, 1], 'o-', label='leave-one-out rmse (looks great at k ≥ 7)')
+ax[1].plot(tab.k, tab.iloc[:, 2].abs(), 's-', c='crimson', label='|error| on the real probe q1')
+ax[1].set_yscale('log'); ax[1].set_xlabel('k'); ax[1].set_ylabel('x1e-5'); ax[1].legend()
+ax[1].set_title('Low LOO error ≠ good steps: k ≥ 7 misses the real probe by 6e-5', fontweight='bold')
+plt.tight_layout(); plt.show()
+tab.round(2)
+
+**Why the surface broke at the summit.** The newest top files sit only 0.6–0.8 rank units apart and differ by one rounded digit (±0.5e-5).
+A high-k fit turns that rounding noise into a steep gradient (2.4e-5 per unit). Walking 2 units along it predicted **0.96210** and measured **0.96203**.
+The measured line through the 0.96206 file is a narrow peak: −1.6 → 0.962015, −0.45 → 0.96205, 0 → 0.96206, +0.5 → 0.96206, +2 → 0.96203.
+Along that line the curvature is about 10× what the isotropic surface assumes, so the best possible step was worth about 0.4e-5. That is why the next move was a different teacher, not a further step.
+
+## 🧑‍🏫 4. Teacher map: what the board said about each mix
+
+All rows are the gated h-blend of the same four members; only the teacher mix and its share change. `own share` is the share of my 181-member CV stack in the final blend.
+`order` is the unrounded order among the 0.96206 files, read from the leaderboard: Kaggle shows a team's best submission and its timestamp,
+so a new probe with the same displayed score that becomes the shown entry is better unrounded (1 = best).
+
+probes = pd.read_csv(find('round6_probe_scores.csv', 's6e10-lb-surface-atlas'))
+mix = {'q3_gate_3teach': (0.30, 1/3), 'q4_gate_ours_td': (0.30, 1/2), 'q5_gate_ours_only': (0.30, 1.0),
+       'q6_gate_3teach_w35': (0.35, 1/3), 'q7_gate_3teach_w40': (0.40, 1/3), 'q8_gate_ours2_w35': (0.35, 1/2), 'q9_gate_ours3_w35': (0.35, 3/5)}
+t = probes[probes.key.isin(mix)].copy()
+t['teacher share'] = t.key.map(lambda k: mix[k][0]); t['own share'] = t.key.map(lambda k: mix[k][0] * mix[k][1])
+t = pd.concat([pd.DataFrame([{'key': 'kirill_gate (public)', 'what': 'gated h-blend, teacher = (tc+td)/2, w=0.30', 'public_lb': .96206,
+                               'unrounded_order_among_0.96206': 5, 'teacher share': .30, 'own share': 0.0}]), t])
+fig, ax = plt.subplots(figsize=(11, 4.2))
+c = ['#2a9d8f' if s >= .96206 else '#e76f51' for s in t.public_lb]
+ax.scatter(t['own share'], t.public_lb + 1e-7 * t['teacher share'], s=160, c=c, edgecolor='k')
+for _, r in t.iterrows():
+    ax.annotate(f"{r.key.split('_')[0]}  w={r['teacher share']:.2f}", (r['own share'], r.public_lb), textcoords='offset points', xytext=(6, 6), fontsize=9)
+ax.set_xlabel('share of my CV stack in the blend'); ax.set_ylabel('public LB (rounded)')
+ax.set_title('More of my CV stack helped up to ~0.21; alone (0.30) or with a heavier teacher (0.40) it lost a digit', fontweight='bold')
+plt.tight_layout(); plt.show()
+t[['key', 'what', 'public_lb', 'unrounded_order_among_0.96206', 'own share']].reset_index(drop=True)
+
+## 🏁 5. Version 3's file: three teachers, my CV stack at a 0.21 share
+
+`teacher = (Deotte 0.96176 + Pugovkin 0.96183 + 3 × my CV stack) / 5`, average share 0.35, gated by member disagreement. Measured **0.96206**, best of the nine round-6 probes by unrounded order.
+
+teacher = teacher_mix(TEACHER_FILES, TEACHERS)
+final = gated_blend(MEMBERS, teacher, TEACHER_WEIGHT, GATE_AMP)
+own_share = TEACHER_WEIGHT * TEACHERS.get('own', 0) / sum(v for v in TEACHERS.values() if v)
+print(f'teacher mix {TEACHERS} | average teacher share {TEACHER_WEIGHT} | own CV stack share {own_share:.3f}')
+print('rank corr with the public 0.96206 file:', round(np.corrcoef(final, ref)[0, 1], 7))
+print('rows that changed rank vs 0.96206     :', int((final != ref).sum()))
+
+## 📤 6. Write the submission
+
+sub = pd.DataFrame({'id': ids, 'satisfaction': final})
+assert sub.satisfaction.between(0, 1).all() and sub.id.is_unique and len(sub) == N
+sub.to_csv('submission.csv', index=False, float_format='%.9f')
+pts.to_csv('summit_points.csv', index=False)
+np.save('teacher_mix.npy', teacher.astype(np.float32))
+print('exported:', sorted(p for p in os.listdir('.') if p.endswith(('.csv', '.py', '.npy'))))
+sub.head()
+
+## 🔁 Make it yours (3 ways)
+
+**1. Bring your own teacher.** Train or stack any **CV-backed** model, save its test probabilities, attach it, and set
+`MY_TEACHER = ('your_file.csv', 'your-notebook-slug')`. It joins the teacher mix with weight `MY_TEACHER_SHARE`.
+A teacher only needs to be good *and different*; my stack is 0.9993 rank-correlated with Chris Deotte's and it still moved the board.
+
+**2. Tune the mix.** `TEACHERS`, `TEACHER_WEIGHT` and `GATE_AMP` in the settings cell. What I measured: total share 0.30–0.35 is the sweet spot,
+0.40 lost a digit; my stack alone as teacher lost a digit.
+
+**3. Use the pieces.** Add this notebook as an input. Its output folder has:
+
+| file | what it is |
+|---|---|
+| `gate_blend.py` | `hblend()`, `teacher_mix()`, `gated_blend()`, `pct()` |
+| `teacher_mix.npy` | the 3-teacher mix used here (299,844 floats, `sample_submission` order) |
+| `summit_points.csv` | the 65 scored files near the top with their public LB |
+| `submission.csv` | the 0.96206 file |
+
+```python
+import sys; sys.path.append('/kaggle/input/<this-notebook>')
+from gate_blend import gated_blend, teacher_mix
+final = gated_blend(members, teacher_mix(files, {'a': 1, 'b': 1, 'mine': 2}), weight=0.35)
+```
+
+My stack itself (test **and** OOF, CV 0.962166, 181 members listed in the meta file) is in
+[s6e10-lb-surface-atlas](https://www.kaggle.com/datasets/mayankraaz/s6e10-lb-surface-atlas): `own_cv_stack_181_*`.
+
+## 🎯 Choosing your final two
+
+| slot | what | why |
+|---|---|---|
+| 1 | a stack whose weights were chosen in **CV** (e.g. `own_cv_stack_181_test.npy`, goodpjw2008's twin stack, ewtherka's family-wise L2) | it never looked at the public rows |
+| 2 | this file (public 0.96206) | best public digit we can measure, with 35% of it coming from CV-backed teachers |
+
+Don't pick two public-max files: both bets ride the same 20% of rows.
+
+## 🙏 Credits
+
+This notebook post-processes public work. Please upvote the people whose files and ideas it uses:
+- **[F.A. Nina](https://www.kaggle.com/nina2025)**: the h-blend rule ([h-blend (4)](https://www.kaggle.com/code/nina2025/ps-s6e10-h-blend-4), [(5)](https://www.kaggle.com/code/nina2025/ps-s6e10-h-blend-5), [(7)](https://www.kaggle.com/code/nina2025/ps-s6e10-h-blend-7)) and the [ps-s6e10-7](https://www.kaggle.com/datasets/nina2025/ps-s6e10-7) dataset with the four members and two teachers.
+- **[Кирилл Тымчишин](https://www.kaggle.com/kirilltym)**: the [disagreement-gated teachers](https://www.kaggle.com/code/kirilltym/0-96206-disagreement-gated-teachers) recipe and its vectorised h-blend, reproduced bit-for-bit above, plus five measured teacher variants on the summit.
+- The four members: **[KRISH RABARI](https://www.kaggle.com/code/rabari9999/s6e10-lb-0-96201-rank-6)** (0.96201, built on this notebook's surface method and atlas), **[samanyu1808](https://www.kaggle.com/code/samanyu1808/s6e10-measured-notebook-0-96203-please-upvote)** (0.96203, and the [surface probe](https://www.kaggle.com/code/samanyu1808/s6e10-surface-probe-01-step-3-50)), **[Hanif Noer Rofiq](https://www.kaggle.com/code/hanifnoerrofiq/agentic-ensemble)** (agentic ensemble), and the 0.96202/0.96204 files rehosted by Nina.
+- The teachers: **[Chris Deotte](https://www.kaggle.com/code/cdeotte/stacking-tfms-with-public-oof)** (0.96176 TFM stack) and **[Den Pugovkin](https://www.kaggle.com/code/denpugovkin/s6e10-passenger-context-foundation-ensemble)** (0.96183).
+- Scored points on the summit map also come from **[avazaku](https://www.kaggle.com/code/avazaku/s6e10-feature-ensemble-audit-0-96204)** and **[goodpjw2008](https://www.kaggle.com/code/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197)** (also for the nested-CV warning).
+- My 181-member stack is built on the public OOF libraries of Chris Deotte, goodpjw2008, Dariush Afshar, ewtherka, Naji, sachith7, kagankoral, koumeimaki and others.
+- **[Korokke3](https://www.kaggle.com/code/korokke3/s6e10-is-your-0-00001-real-lb-noise-calculator)**: the LB noise formula behind the warning.
+
+If the summit map, the teacher map or the CV stack was useful, an upvote helps. Thank you! ✈️

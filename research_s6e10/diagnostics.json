@@ -1,0 +1,468 @@
+{
+  "source_comparison": {
+    "official_rows": 129880,
+    "previous_rows": 129880,
+    "normalized_rows_and_labels_identical": true,
+    "official_sha256": "2ad76465f6115f93d16121891a6b1235acb8007a4ab065cae0dc46b60ad116e3",
+    "delay_max": {
+      "Departure Delay in Minutes": 1592.0,
+      "Arrival Delay in Minutes": 1584.0
+    }
+  },
+  "marginal_drift": [
+    {
+      "feature": "Cleanliness",
+      "measure": "total_variation",
+      "distance": 0.0029136482093345614,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Food and drink",
+      "measure": "total_variation",
+      "distance": 0.0023638984142038627,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "On-board service",
+      "measure": "total_variation",
+      "distance": 0.0023486572695824368,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Leg room service",
+      "measure": "total_variation",
+      "distance": 0.0020487800644883973,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Departure/Arrival time convenient",
+      "measure": "total_variation",
+      "distance": 0.001914119976423101,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Baggage handling",
+      "measure": "total_variation",
+      "distance": 0.001692665593261266,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Gender",
+      "measure": "total_variation",
+      "distance": 0.0015358024263907588,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Seat comfort",
+      "measure": "total_variation",
+      "distance": 0.0015168641133873927,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Inflight entertainment",
+      "measure": "total_variation",
+      "distance": 0.0015155584206223928,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Customer Type",
+      "measure": "total_variation",
+      "distance": 0.0014214657791792457,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Online boarding",
+      "measure": "total_variation",
+      "distance": 0.001400172356993629,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Checkin service",
+      "measure": "total_variation",
+      "distance": 0.001342038940478968,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Ease of Online booking",
+      "measure": "total_variation",
+      "distance": 0.0012246276968905252,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Age",
+      "measure": "KS",
+      "distance": 0.0011609640177397962,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Flight Distance",
+      "measure": "KS",
+      "distance": 0.0009453639298210859,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Inflight wifi service",
+      "measure": "total_variation",
+      "distance": 0.0008318289315380235,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Departure Delay in Minutes",
+      "measure": "KS",
+      "distance": 0.0006690134054196939,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Gate location",
+      "measure": "total_variation",
+      "distance": 0.0005182833002224212,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Class",
+      "measure": "total_variation",
+      "distance": 0.0004425497830417534,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    },
+    {
+      "feature": "Arrival Delay in Minutes",
+      "measure": "KS",
+      "distance": 0.0004023995272404157,
+      "train_missing": 0.000417360480822143,
+      "test_missing": 0.00043355878390096184
+    },
+    {
+      "feature": "Type of Travel",
+      "measure": "total_variation",
+      "distance": 0.0001610994870705762,
+      "train_missing": 0.0,
+      "test_missing": 0.0
+    }
+  ],
+  "duplicates": {
+    "train_duplicate_rows": 0,
+    "conflicting_groups": 0,
+    "conflicting_rows": 0,
+    "test_rows_exactly_matching_train": 0
+  },
+  "model_auc": {
+    "old_blend": 0.9611118284591139,
+    "xgb": 0.9612091088002577,
+    "realmlp": 0.9607494329266447,
+    "lightgbm": 0.9612386606314965,
+    "v4": 0.9614461831268378
+  },
+  "residual_correlations": {
+    "old_blend": {
+      "old_blend": 1.0,
+      "xgb": 0.9963977501612902,
+      "realmlp": 0.9948589209849933,
+      "lightgbm": 0.9964320095717961,
+      "v4": 0.9984634049035398
+    },
+    "xgb": {
+      "old_blend": 0.9963977501612902,
+      "xgb": 1.0,
+      "realmlp": 0.9950690510036064,
+      "lightgbm": 0.9989607184045441,
+      "v4": 0.9992521213652279
+    },
+    "realmlp": {
+      "old_blend": 0.9948589209849933,
+      "xgb": 0.9950690510036064,
+      "realmlp": 1.0,
+      "lightgbm": 0.9952634375654306,
+      "v4": 0.9970196648763235
+    },
+    "lightgbm": {
+      "old_blend": 0.9964320095717961,
+      "xgb": 0.9989607184045441,
+      "realmlp": 0.9952634375654306,
+      "lightgbm": 1.0,
+      "v4": 0.9993097144599989
+    },
+    "v4": {
+      "old_blend": 0.9984634049035398,
+      "xgb": 0.9992521213652279,
+      "realmlp": 0.9970196648763235,
+      "lightgbm": 0.9993097144599989,
+      "v4": 1.0
+    }
+  },
+  "within_label_prediction_correlations": {
+    "0": {
+      "old_blend": {
+        "old_blend": 1.0,
+        "xgb": 0.9947482448778932,
+        "realmlp": 0.9926192097540996,
+        "lightgbm": 0.9947679707502586,
+        "v4": 0.9977570429025634
+      },
+      "xgb": {
+        "old_blend": 0.9947482448778932,
+        "xgb": 1.0,
+        "realmlp": 0.9929040359887642,
+        "lightgbm": 0.9984959662026816,
+        "v4": 0.9989174182517323
+      },
+      "realmlp": {
+        "old_blend": 0.9926192097540996,
+        "xgb": 0.9929040359887642,
+        "realmlp": 1.0,
+        "lightgbm": 0.9931175496703522,
+        "v4": 0.995717364080586
+      },
+      "lightgbm": {
+        "old_blend": 0.9947679707502586,
+        "xgb": 0.9984959662026816,
+        "realmlp": 0.9931175496703522,
+        "lightgbm": 1.0,
+        "v4": 0.9989830426230843
+      },
+      "v4": {
+        "old_blend": 0.9977570429025634,
+        "xgb": 0.9989174182517323,
+        "realmlp": 0.995717364080586,
+        "lightgbm": 0.9989830426230843,
+        "v4": 1.0
+      }
+    },
+    "1": {
+      "old_blend": {
+        "old_blend": 1.0,
+        "xgb": 0.9957170415505724,
+        "realmlp": 0.9938943043223332,
+        "lightgbm": 0.9957900829970018,
+        "v4": 0.9981762398859414
+      },
+      "xgb": {
+        "old_blend": 0.9957170415505724,
+        "xgb": 1.0,
+        "realmlp": 0.9941475733279594,
+        "lightgbm": 0.9987568965086077,
+        "v4": 0.9991047063675136
+      },
+      "realmlp": {
+        "old_blend": 0.9938943043223332,
+        "xgb": 0.9941475733279594,
+        "realmlp": 1.0,
+        "lightgbm": 0.9944365736216872,
+        "v4": 0.9964765893007587
+      },
+      "lightgbm": {
+        "old_blend": 0.9957900829970018,
+        "xgb": 0.9987568965086077,
+        "realmlp": 0.9944365736216872,
+        "lightgbm": 1.0,
+        "v4": 0.999190770221822
+      },
+      "v4": {
+        "old_blend": 0.9981762398859414,
+        "xgb": 0.9991047063675136,
+        "realmlp": 0.9964765893007587,
+        "lightgbm": 0.999190770221822,
+        "v4": 1.0
+      }
+    }
+  },
+  "hardest_decile_overlap_with_xgb": {
+    "0": {
+      "old_blend": 0.9357548357265791,
+      "xgb": 1.0,
+      "realmlp": 0.9216779264815433,
+      "lightgbm": 0.9640114053790233,
+      "v4": 0.9703562896555268
+    },
+    "1": {
+      "old_blend": 0.9659717075371379,
+      "xgb": 1.0,
+      "realmlp": 0.9605581155544098,
+      "lightgbm": 0.9812779943930654,
+      "v4": 0.985692649759933
+    }
+  },
+  "flight_distance_unique": 3474,
+  "customer_groups": [
+    {
+      "group": "Loyal Customer | Business travel | Business",
+      "n": 294376,
+      "row_share": 0.4207565373373259,
+      "positive_rate": 0.791752724406881,
+      "global_error_pair_share": 0.3898618045754148,
+      "auc": {
+        "old_blend": 0.9215589064232512,
+        "xgb": 0.9218370187473409,
+        "realmlp": 0.9201823399709648,
+        "lightgbm": 0.9218488010560412,
+        "v4": 0.9222773334074976
+      }
+    },
+    {
+      "group": "Loyal Customer | Personal Travel | Eco",
+      "n": 185691,
+      "row_share": 0.2654112501518649,
+      "positive_rate": 0.09706986337517703,
+      "global_error_pair_share": 0.2697024743627455,
+      "auc": {
+        "old_blend": 0.8336696728137919,
+        "xgb": 0.8345828354379925,
+        "realmlp": 0.8305076099628955,
+        "lightgbm": 0.8341996806841049,
+        "v4": 0.8351449924560244
+      }
+    },
+    {
+      "group": "Loyal Customer | Business travel | Eco",
+      "n": 65542,
+      "row_share": 0.09368027614398937,
+      "positive_rate": 0.41272771657868235,
+      "global_error_pair_share": 0.11273583451161041,
+      "auc": {
+        "old_blend": 0.936171262189526,
+        "xgb": 0.9362027305619255,
+        "realmlp": 0.9361963159716016,
+        "lightgbm": 0.936519613148706,
+        "v4": 0.9367709125760094
+      }
+    },
+    {
+      "group": "disloyal Customer | Business travel | Eco",
+      "n": 76070,
+      "row_share": 0.10872812252102883,
+      "positive_rate": 0.12846062836860786,
+      "global_error_pair_share": 0.10325789102559768,
+      "auc": {
+        "old_blend": 0.8955892438027152,
+        "xgb": 0.8964679952857272,
+        "realmlp": 0.8964704988973797,
+        "lightgbm": 0.8963450690340505,
+        "v4": 0.8970999851240398
+      }
+    },
+    {
+      "group": "disloyal Customer | Business travel | Business",
+      "n": 43896,
+      "row_share": 0.0627412865279753,
+      "positive_rate": 0.33479132494988156,
+      "global_error_pair_share": 0.07235836939135452,
+      "auc": {
+        "old_blend": 0.9338619002654714,
+        "xgb": 0.9346727629734304,
+        "realmlp": 0.9340182702776265,
+        "lightgbm": 0.9347037727160872,
+        "v4": 0.9349277456916802
+      }
+    },
+    {
+      "group": "Loyal Customer | Business travel | Eco Plus",
+      "n": 14983,
+      "row_share": 0.021415452343007426,
+      "positive_rate": 0.3948474938263365,
+      "global_error_pair_share": 0.02493612684024017,
+      "auc": {
+        "old_blend": 0.9400894348756567,
+        "xgb": 0.9409371545745431,
+        "realmlp": 0.9402629236053769,
+        "lightgbm": 0.9414687690831078,
+        "v4": 0.9413844669086188
+      }
+    },
+    {
+      "group": "Loyal Customer | Personal Travel | Eco Plus",
+      "n": 12459,
+      "row_share": 0.01780785695398315,
+      "positive_rate": 0.09535275704310137,
+      "global_error_pair_share": 0.018005565889129008,
+      "auc": {
+        "old_blend": 0.8366709863249655,
+        "xgb": 0.829850496805514,
+        "realmlp": 0.8280611321268762,
+        "lightgbm": 0.8313098004562824,
+        "v4": 0.8342750845634351
+      }
+    },
+    {
+      "group": "Loyal Customer | Personal Travel | Business",
+      "n": 3939,
+      "row_share": 0.0056300785409534974,
+      "positive_rate": 0.11195734958111196,
+      "global_error_pair_share": 0.006300289837469941,
+      "auc": {
+        "old_blend": 0.8261416630688867,
+        "xgb": 0.827049859394873,
+        "realmlp": 0.8322287176734616,
+        "lightgbm": 0.8273973206587761,
+        "v4": 0.8297381464497368
+      }
+    },
+    {
+      "group": "disloyal Customer | Business travel | Eco Plus",
+      "n": 2574,
+      "row_share": 0.0036790612247814933,
+      "positive_rate": 0.0641025641025641,
+      "global_error_pair_share": 0.002622350484454321,
+      "auc": {
+        "old_blend": 0.8649408153766809,
+        "xgb": 0.8650049687409588,
+        "realmlp": 0.861959570801414,
+        "lightgbm": 0.8635545995446371,
+        "v4": 0.866427663937004
+      }
+    },
+    {
+      "group": "disloyal Customer | Personal Travel | Eco",
+      "n": 101,
+      "row_share": 0.00014436098822957684,
+      "positive_rate": 0.10891089108910891,
+      "global_error_pair_share": 0.00021348469111329867,
+      "auc": {
+        "old_blend": 0.704040404040404,
+        "xgb": 0.693939393939394,
+        "realmlp": 0.6979797979797979,
+        "lightgbm": 0.6787878787878788,
+        "v4": 0.6858585858585858
+      }
+    }
+  ],
+  "sampling_scale": {
+    "approx_public_rows": 59969,
+    "approx_auc_standard_error": 0.0008331760365628645,
+    "observed_oof_lb_gap": 0.0006261831268378204,
+    "caveat": "OOF-based asymptotic sampling approximation, not actual public/private uncertainty; fold dependence and shift excluded"
+  },
+  "unrated_diagnosis": [
+    {
+      "group": "no_zero_rating",
+      "n": 654914,
+      "row_share": 0.9360795271820306,
+      "global_error_pair_share": 0.9335623231185891,
+      "auc": 0.961631419980169
+    },
+    {
+      "group": "one_or_more_zero_rating",
+      "n": 44721,
+      "row_share": 0.06392047281796936,
+      "global_error_pair_share": 0.06643767688141068,
+      "auc": 0.9583287190955285
+    }
+  ]
+}

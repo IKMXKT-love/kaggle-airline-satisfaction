@@ -1,0 +1,82 @@
+{
+  "verified": true,
+  "all10million_pairs_rebuilt": true,
+  "pair_checks": [
+    {
+      "fold": 0,
+      "all_sampled_pair_arrays_rebuilt": true,
+      "cached_baseline_max_error": 8.881784197001252e-16
+    },
+    {
+      "fold": 1,
+      "all_sampled_pair_arrays_rebuilt": true,
+      "cached_baseline_max_error": 4.440892098500626e-16
+    },
+    {
+      "fold": 2,
+      "all_sampled_pair_arrays_rebuilt": true,
+      "cached_baseline_max_error": 2.220446049250313e-15
+    },
+    {
+      "fold": 3,
+      "all_sampled_pair_arrays_rebuilt": true,
+      "cached_baseline_max_error": 2.220446049250313e-15
+    },
+    {
+      "fold": 4,
+      "all_sampled_pair_arrays_rebuilt": true,
+      "cached_baseline_max_error": 2.220446049250313e-15
+    }
+  ],
+  "fitted_prediction_checks": [
+    {
+      "tag": "inner",
+      "arm": "raw_control",
+      "prediction_max_error": 8.881784197001252e-16,
+      "baseline_max_error": 8.881784197001252e-16,
+      "auc": 0.9620130917682015,
+      "auc_rebuild_error": 0.0,
+      "delta_and_fixed_prediction_ci": {
+        "delta": -3.012900587246685e-07,
+        "approximate_se": 3.4925626714156414e-07,
+        "interval95": [
+          -9.858323423221342e-07,
+          3.832522248727972e-07
+        ]
+      },
+      "baseline_fit_gradient_max": 4.541492846393304e-14
+    },
+    {
+      "tag": "inner",
+      "arm": "conditional",
+      "prediction_max_error": 8.881784197001252e-16,
+      "baseline_max_error": 8.881784197001252e-16,
+      "auc": 0.9620195208759176,
+      "auc_rebuild_error": 0.0,
+      "delta_and_fixed_prediction_ci": {
+        "delta": 6.127817657285061e-06,
+        "approximate_se": 4.57425921094725e-06,
+        "interval95": [
+          -2.8377303961715493e-06,
+          1.5093365710741671e-05
+        ]
+      },
+      "baseline_fit_gradient_max": 4.541492846393304e-14
+    },
+    {
+      "tag": "inner",
+      "contrast": "conditional_vs_raw_control",
+      "paired": {
+        "delta": 6.42910771600973e-06,
+        "approximate_se": 4.5774452396966896e-06,
+        "interval95": [
+          -2.5426849537957817e-06,
+          1.5400900385815244e-05
+        ]
+      }
+    }
+  ],
+  "protected_files_unchanged": true,
+  "elapsed_seconds_including_verification": 261.8424026966095,
+  "limit": "Fixed-prediction CIs omit training, model-selection, upstream-dependence and historical-selection uncertainty."
+}

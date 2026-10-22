@@ -1,0 +1,45 @@
+{
+  "task": "classification",
+  "target": "target_value",
+  "metric": "auc",
+  "n_splits": 10,
+  "random_state": 42,
+  "train_rows": 120,
+  "test_rows": 17,
+  "feature_columns": [
+    "x",
+    "category"
+  ],
+  "classes": [
+    "no",
+    "yes"
+  ],
+  "fold_scores": [
+    0.7777777777777778,
+    0.8472222222222222,
+    0.8055555555555556,
+    0.6944444444444444,
+    0.6666666666666666,
+    0.763888888888889,
+    0.8055555555555556,
+    0.45833333333333337,
+    0.75,
+    0.7638888888888891
+  ],
+  "mean_score": 0.7333333333333334,
+  "std_score": 0.10445330931646203,
+  "oof_score": 0.6663888888888889,
+  "best_iterations": [
+    1,
+    4,
+    1,
+    16,
+    17,
+    16,
+    2,
+    1,
+    6,
+    5
+  ],
+  "data_source": "user_provided"
+}

@@ -1,0 +1,14 @@
+{
+  "frozen_epoch": 1792502822.8493834,
+  "training": false,
+  "model_inference": false,
+  "submission_generated": false,
+  "current_baseline": "selected_predictions.npz of public246, user public0.96187",
+  "candidate_selection": "Sources chosen after reading author-reported standalone results; all contrasts exploratory, not blind confirmation.",
+  "fixed_rule": "0.8 * current saved OOF logit + 0.2 * logit(candidate probability clipped to 1e-6,1-1e-6); no weight fitting or search.",
+  "candidate_sources": [
+    "Den Pugovkin version45 neighborhood combined/head/neighbor OOF",
+    "najiama 07 XGBoost OOF"
+  ],
+  "validation_caveat": "Different source folds and historical selection; contrasts are fixed-prediction exploratory, not end-to-end isolated CV."
+}

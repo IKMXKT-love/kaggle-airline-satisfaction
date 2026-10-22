@@ -1,0 +1,11 @@
+{
+  "frozen_epoch": 1792500761.0621042,
+  "candidate_scores_observed": false,
+  "overall_expansion_gate_vs_current_mean_fold_delta": 0.0003,
+  "overall_minimum_positive_folds": 4,
+  "own_member_inclusion": "Use public_plus_own only when mean paired fold AUC delta > 2*SE and at least 4/5 folds positive; otherwise choose public_only.",
+  "final_fit": "Same C=0.003 on all available training rows, only after converged paired five-fold evaluation. No hyperparameter or weight search.",
+  "fallback": "Do not generate a candidate if resource deadline or convergence fails. Preserve all checkpoints.",
+  "source_drift": "Missing or changed members explicitly reported; never silently claim identical 247-member reconstruction.",
+  "validation": "Historical fixed-base-OOF evaluation, not end-to-end strict CV."
+}

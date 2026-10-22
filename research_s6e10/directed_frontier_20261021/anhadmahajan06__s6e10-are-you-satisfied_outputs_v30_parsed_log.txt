@@ -1,0 +1,202 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+[*] Execution Environment Active:
+   * Device:             CUDA (GPU Available: True)
+   * GPU Name:           Tesla T4
+   * Smoke Dry-Run Mode: False
+   * Stratified Folds:   10 Folds (90% Train / 10% Val per Fold)
+   * Tree Budget (GBDT): 3500 | Early Stopping: 150
+   * Double-Twin Seeds:  Primary=42 | Twin=2026
+Resolved Dataset Paths:
+   * Competition Train:  /kaggle/input/competitions/playground-series-s6e10/train.csv
+   * Competition Test:   /kaggle/input/competitions/playground-series-s6e10/test.csv
+   * Sample Submission:  /kaggle/input/competitions/playground-series-s6e10/sample_submission.csv
+   * Original Dataset:   /kaggle/input/datasets/arseniyshutko/binary-aviation-satisfaction-129k/data.csv
+
+Datasets Loaded Successfully:
+   * Train shape: (699635, 23)
+   * Test shape:  (299844, 22)
+   * Orig shape:  (129880, 22)
+[*] Target Class Distribution:
+   * Train Satisfied Rate:    0.4436 (310,339 / 699,635)
+   * Original Satisfied Rate: 0.4345 (56,428 / 129,880)
+
+[*] Flight Distance Route-ID Overlap:
+   * Distinct Distances in Train: 3,474
+   * Distinct Distances in Test:  3,317
+   * Distinct Distances in Orig:  3,821
+   * [OK] Test Distances Present in Original Dataset: 3,316 / 3,317 (99.97%)
+   * [OK] Test Distances Present in Train Dataset:    3,270 / 3,317 (98.58%)
+[OK] Route Profile Means & Volatility Built: 22 features
+[OK] Frequency Counts Built: 4 features
+[OK] Context, Perception & Psychological Ergonomic Features Formulated: 24 features
+[*] Ingesting Clean Knowledge from 129k Original Aviation Dataset...
+[AUC] Clean Original Route-Class Prior on Train:       0.81993
+[AUC] Clean Original Route-Travel Prior on Train:      0.80617
+[AUC] Clean Original 3-Way Route-Class-Travel Prior:    0.83611
+[AUC] Clean XGBoost-Model ROC AUC against Competition Labels: 0.95506 (33.9s)
+[AUC] Clean LightGBM-Model ROC AUC against Competition Labels: 0.95478
+
+[OK] Master Static Features Assembled: 78 features [78 STATIC FEATURES TOTAL]
+[OK] Formulated 10 In-Fold Compound Target Encoding Keys.
+[OK] Target Encoding Engine Ready (78 Static + 10 Target Encodings = Exactly 88 Sovereign Features!)
+[*] Precomputing Zero-Leakage In-Fold Target Encodings across 10 Folds...
+[OK] All 10 Fold Matrices Built (88 Features per Fold) in 25.5s.
+
+==================== Training: XGBoost_Depth8_Wide_Twin (10 Folds) ====================
+   Fold  1/10 AUC: 0.961540
+   Fold  2/10 AUC: 0.961394
+   Fold  3/10 AUC: 0.959878
+   Fold  4/10 AUC: 0.960863
+   Fold  5/10 AUC: 0.961885
+   Fold  6/10 AUC: 0.962378
+   Fold  7/10 AUC: 0.960694
+   Fold  8/10 AUC: 0.962136
+   Fold  9/10 AUC: 0.961194
+   Fold 10/10 AUC: 0.961143
+[AUC] XGBoost_Depth8_Wide_Twin Overall OOF AUC: 0.961304 (521.0s)
+
+==================== Training: XGBoost_Tuned_D9_Twin (10 Folds) ====================
+   Fold  1/10 AUC: 0.961586
+   Fold  2/10 AUC: 0.961432
+   Fold  3/10 AUC: 0.959847
+   Fold  4/10 AUC: 0.960936
+   Fold  5/10 AUC: 0.961818
+   Fold  6/10 AUC: 0.962390
+   Fold  7/10 AUC: 0.960637
+   Fold  8/10 AUC: 0.962130
+   Fold  9/10 AUC: 0.961140
+   Fold 10/10 AUC: 0.961137
+[AUC] XGBoost_Tuned_D9_Twin Overall OOF AUC: 0.961299 (545.2s)
+
+==================== Training: LightGBM_Deep (10 Folds) ====================
+   Fold  1/10 AUC: 0.961490
+   Fold  2/10 AUC: 0.961267
+   Fold  3/10 AUC: 0.959793
+   Fold  4/10 AUC: 0.960759
+   Fold  5/10 AUC: 0.961636
+   Fold  6/10 AUC: 0.962186
+   Fold  7/10 AUC: 0.960652
+   Fold  8/10 AUC: 0.962058
+   Fold  9/10 AUC: 0.961021
+   Fold 10/10 AUC: 0.961167
+[AUC] LightGBM_Deep Overall OOF AUC: 0.961196 (1123.0s)
+
+==================== Training: LightGBM_ExtraTrees_Twin (10 Folds) ====================
+   Fold  1/10 AUC: 0.961328
+   Fold  2/10 AUC: 0.961274
+   Fold  3/10 AUC: 0.959734
+   Fold  4/10 AUC: 0.960845
+   Fold  5/10 AUC: 0.961798
+   Fold  6/10 AUC: 0.962450
+   Fold  7/10 AUC: 0.960738
+   Fold  8/10 AUC: 0.962173
+   Fold  9/10 AUC: 0.961203
+   Fold 10/10 AUC: 0.961233
+[AUC] LightGBM_ExtraTrees_Twin Overall OOF AUC: 0.961269 (2568.9s)
+
+==================== Training: XGBoost_Depth10_Anchor (10 Folds) ====================
+   Fold  1/10 AUC: 0.961498
+   Fold  2/10 AUC: 0.961410
+   Fold  3/10 AUC: 0.959761
+   Fold  4/10 AUC: 0.960789
+   Fold  5/10 AUC: 0.961719
+   Fold  6/10 AUC: 0.962147
+   Fold  7/10 AUC: 0.960517
+   Fold  8/10 AUC: 0.961956
+   Fold  9/10 AUC: 0.961021
+   Fold 10/10 AUC: 0.960937
+[AUC] XGBoost_Depth10_Anchor Overall OOF AUC: 0.961170 (240.7s)
+[*] Confident Pseudo-Label Selection:
+   * Confident Positive (p >= 0.985): 6,172
+   * Confident Negative (p <= 0.015):  2,120
+   * Total Pseudo-Labeled Test Rows:      8,292 (2.77% of test set)
+
+[*] Refining Champion Models with Pseudo-Augmented Training Folds (sample_weight=0.50)...
+   * XGBoost_Depth8_Wide_Pseudo   OOF AUC: 0.961324
+   * XGBoost_Tuned_D9_Pseudo      OOF AUC: 0.961311
+[OK] Weighted Pseudo-Refinement Completed in 1123.0s.
+[OK] Ingested Pseudo-Refined Models into Ensembling Pool (Total Models: 7)
+[*] Optimizing Continuous Linear ROC AUC Weights via SLSQP Simplex Solver (7 Models)...
+[OK] Linear SLSQP Simplex Completed in 1.7s (AUC: 0.961388).
+[*] Optimizing Temperature-Scaled Logit SLSQP Simplex (tau=0.95, 7 Models)...
+[OK] Logit SLSQP Simplex Completed in 1.8s (AUC: 0.961386).
+
+[AUC] Apex Multi-Strategy Ensembling Evaluation:
+   * 1. Standalone XGBoost Depth 10:          0.961170
+   * 2. Standalone XGBoost Wide Twin:         0.961304
+   * 3. Standalone XGBoost Tuned D9 Twin:     0.961299
+   * 4. Standalone LightGBM ExtraTrees Twin:  0.961269
+   * 5. Pure Regularized XGB Duo (50/50):     0.961326 (Delta: +0.000156)
+   * 6. Pure XGBoost Trio (45/45/10):         0.961331 (Delta: +0.000161)
+   * 7. Proven Asymmetric Grandmaster:        0.961381 (Delta: +0.000212)
+   * 8. Continuous Linear SLSQP Simplex:      0.961388 (Delta: +0.000218)
+   * 9. Temperature-Scaled Logit SLSQP:       0.961386 (Delta: +0.000216)
+   * 10. Discrete Caruana Forward Champion:   0.961414 (Delta: +0.000244)
+   * 11. Apex Consensus Blend (Logit+Lin):    0.961387 (Delta: +0.000217)
+   * 12. Weighted Pseudo-Refined Trio:        0.961346 (Delta: +0.000176)
+
+[+] Temperature-Scaled Logit SLSQP Allocations:
+   * XGBoost_Depth8_Wide_Twin    : 14.29%
+   * XGBoost_Tuned_D9_Twin       : 14.29%
+   * LightGBM_Deep               : 14.29%
+   * LightGBM_ExtraTrees_Twin    : 14.29%
+   * XGBoost_Depth10_Anchor      : 14.29%
+   * XGBoost_Depth8_Wide_Pseudo  : 14.29%
+   * XGBoost_Tuned_D9_Pseudo     : 14.29%
+
+[+] Discrete Caruana Model Allocations:
+   * LightGBM_ExtraTrees_Twin    :  38.0%
+   * XGBoost_Depth8_Wide_Pseudo  :  22.0%
+   * XGBoost_Tuned_D9_Pseudo     :  16.0%
+   * LightGBM_Deep               :  14.0%
+   * XGBoost_Depth10_Anchor      :   6.0%
+   * XGBoost_Depth8_Wide_Twin    :   4.0%
+
+[SELECTED] Discrete Caruana Forward Champion Chosen as Primary Submission!
+   * Final 10-Fold OOF AUC: 0.961414
+[OK] Multi-Track Meta-Blend Generated from /kaggle/input/datasets/anhadmahajan06/ps-s6e10-predicting-airline-satisfaction -> submission_track1_plus_meta.csv
+
+[*] Submissions Successfully Generated (10-Fold Averaged):
+   * Primary Champion:           submission.csv (Discrete Caruana Forward Champion)
+   * Row Count:                  299,844
+   * Mean Prediction:            0.4441
+   * Standard Deviation:         0.4330
+   * Min / Max:                  0.0058 / 0.9974
+   * Logit Simplex (tau=0.95):   submission_logit_tau.csv
+   * Linear Simplex:             submission_slsqp.csv
+   * 50/50 Consensus Blend:      submission_consensus.csv
+   * Discrete Caruana:           submission_caruana.csv
+   * Pure Double-Twin XGB Trio:  submission_xgb_trio.csv
+   * Pure Double-Twin XGB Duo:   submission_duo_xgb.csv
+   * Weighted Pseudo Refined:    submission_pseudo_weighted.csv
+   * Rank Variant:               submission_rank.csv
+   * Multi-Track Meta Blend:     submission_track1_plus_meta.csv
+   * Integrity Checks:           100% Passed [OK]
+
+[*] Submission Preview (submission.csv):
+       id  satisfaction
+0  699635      0.216236
+1  699636      0.668815
+2  699637      0.935304
+3  699638      0.070576
+4  699639      0.043001
+5  699640      0.943433
+6  699641      0.034873
+7  699642      0.920582
+8  699643      0.972405
+9  699644      0.034452
+/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 93992 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 552783 bytes to __results__.html

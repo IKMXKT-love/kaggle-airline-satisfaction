@@ -1,0 +1,14 @@
+{
+  "phase": "refit",
+  "arm": "direct",
+  "initial_state_hash": "97833d1d4aa50bcbc8c3d0345fd549dc8aab88bc2c8929d8dc7f7aba6d1e3e16",
+  "epochs_completed": 8,
+  "updates": 2192,
+  "best_epoch": 8,
+  "best_stopping_auc": null,
+  "competition_draws": 2244608,
+  "original_draws": 2244608,
+  "original_labels_used": false,
+  "prior": 0.44357236273199596,
+  "seconds": 26.959155559539795
+}

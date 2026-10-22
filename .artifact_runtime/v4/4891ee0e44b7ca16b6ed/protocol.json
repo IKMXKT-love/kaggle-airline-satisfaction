@@ -1,0 +1,77 @@
+{
+  "signature": "4891ee0e44b7ca16b6ed3b24e95ca9dd17b85635f3e4b43ceb63d45419e9e65a",
+  "candidates": [
+    {
+      "name": "xgb_control",
+      "family": "xgb",
+      "transform": "full"
+    },
+    {
+      "name": "without_route",
+      "family": "xgb",
+      "transform": "without_route"
+    },
+    {
+      "name": "without_frequency",
+      "family": "xgb",
+      "transform": "without_frequency"
+    },
+    {
+      "name": "without_target_encoding",
+      "family": "xgb",
+      "transform": "without_target_encoding"
+    },
+    {
+      "name": "without_teacher",
+      "family": "xgb",
+      "transform": "without_teacher"
+    },
+    {
+      "name": "without_auxiliary",
+      "family": "xgb",
+      "transform": "without_auxiliary"
+    },
+    {
+      "name": "xgb_residual",
+      "family": "xgb",
+      "transform": "residual"
+    },
+    {
+      "name": "lgb_15",
+      "family": "lightgbm",
+      "transform": "full",
+      "leaves": 15
+    },
+    {
+      "name": "lgb_63",
+      "family": "lightgbm",
+      "transform": "full",
+      "leaves": 63
+    },
+    {
+      "name": "lgb_127",
+      "family": "lightgbm",
+      "transform": "full",
+      "leaves": 127
+    }
+  ],
+  "split": "existing fit/selection; development/audit for frozen confirmation",
+  "ablation": "same XGBoost parameters and seed, each with own early stopping",
+  "mixture_weights": [
+    0.1,
+    0.2,
+    0.3,
+    0.4
+  ],
+  "replacement_weight": 0.4,
+  "gate_selection_gain": 2e-05,
+  "gate_confirmation_gain": 2e-05,
+  "confirmation_already_seen": true,
+  "no_audit_weight_tuning": true,
+  "additional_external_predictions": false,
+  "target": "satisfaction",
+  "excluded": [
+    "id",
+    "satisfaction"
+  ]
+}

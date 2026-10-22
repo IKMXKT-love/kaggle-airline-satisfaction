@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-21",
+  "purpose": "check whether existing/public paired members contain repeated held-out predictions or only OOF/test aggregates",
+  "source_code_execution": false,
+  "new_fits": 0,
+  "new_base_inferences": 0,
+  "new_submissions": 0,
+  "rule": "no model fitting unless aggregation-matched validation boundary and complete bounded cost can be established"
+}

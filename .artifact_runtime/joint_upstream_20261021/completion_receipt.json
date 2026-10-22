@@ -1,0 +1,19 @@
+{
+  "status": "completed_no_expansion",
+  "date": "2026-10-21",
+  "meta_model_fits": 20,
+  "base_model_fits": 0,
+  "base_model_inferences": 0,
+  "new_submissions": 0,
+  "all_four_arms_reported": true,
+  "no_hyperparameter_search": true,
+  "report": "JOINT_UPSTREAM_TRIAL_REPORT_20261021.md",
+  "independent_verification_passed": true,
+  "no_candidates_pass_expansion_gate": true,
+  "current_best_unchanged": true,
+  "current_best_public_score_user_reported": 0.96187,
+  "elapsed_including_conservative_setup_allowance_seconds": 582.3443112373352,
+  "initial_setup_allowance_seconds": 90,
+  "within_900_second_total_budget": true,
+  "followup_fit_started": false
+}

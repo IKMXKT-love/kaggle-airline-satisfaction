@@ -1,0 +1,661 @@
+# S6E10: every public OOF pair I could check, in one logistic stack
+
+I collected every public out-of-fold (OOF) and test prediction pair for this competition that I could find,
+load and check: 292 pairs from 18 public datasets and notebook outputs. 45 of them are near-copies of other pairs, and none failed an alignment check, so 247 remain.
+One logistic regression on their logits, fit on four folds and scored on the fifth, reaches a nested CV of
+**0.962205**.
+
+On the same folds and with the same stacker, the 135 pairs of Chris Deotte's two packaged datasets reach
+0.962092, so the 112 pairs added here are worth +0.000115 (standard error 0.000027, higher in
+5 of 5 folds). My earlier stack of those 135 pairs (C = 1) scored 0.96177 on the public board.
+
+Scored once, this notebook's `submission.csv` is **0.96187** on the public board (read 2026-10-12 01:33 UTC).
+
+**How to use it**
+- Copy & Edit and run it as is, on CPU (about 95 minutes on Kaggle). It writes `submission.csv`,
+  plus `stack_oof.npy` and `stack_test.npy` (this stack's nested out-of-fold and test logits) if you want it as
+  one member of your own stack. Most of that time goes to the three comparison stacks of section 3; set
+  `COMPARE = False` there to skip them and fit only the submission stacker.
+- Section 6 tests a model of yours. Set `YOUR_OOF` and `YOUR_TEST` to your out-of-fold and test predictions and
+  it prints whether they move this stack: the paired fold delta and its standard error.
+- Section 1 credits every source by its author. If this helps you, please upvote them as well: they trained the
+  models; I only checked and stacked them.
+
+import os, glob, json, time, hashlib, warnings
+from collections import deque
+import numpy as np, pandas as pd
+from joblib import Parallel, delayed
+from scipy.stats import rankdata
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
+warnings.filterwarnings("ignore")
+
+T0 = time.time()
+INPUT = os.environ.get("SMOKE_ROOT", "/kaggle/input")
+WORK = os.environ.get("SMOKE_WORK", "/kaggle/working")
+N_JOBS = min(5, os.cpu_count() or 1)
+
+
+def find_dir(slug, root=INPUT, max_depth=6):
+    # the mounted folder called `slug` (a dataset, a notebook's output or the competition), or None
+    queue, hits = deque([(root, 0)]), []
+    while queue:
+        d, depth = queue.popleft()
+        try:
+            entries = sorted(os.scandir(d), key=lambda e: e.name)
+        except OSError:
+            continue
+        for e in entries:
+            if e.is_dir():
+                if e.name == slug:
+                    hits.append(e.path)
+                elif depth < max_depth:
+                    queue.append((e.path, depth + 1))
+    return sorted(hits, key=len)[0] if hits else None
+
+
+COMP = find_dir("playground-series-s6e10")
+train = pd.read_csv(f"{COMP}/train.csv", usecols=["id", "satisfaction"])
+train_ids = train["id"].to_numpy()
+test_ids = pd.read_csv(f"{COMP}/test.csv", usecols=["id"])["id"].to_numpy()
+y = train["satisfaction"].astype(str).str.lower().map({"true": 1, "false": 0, "1": 1, "0": 0})
+assert y.notna().all(), "unexpected label values"
+y = y.to_numpy().astype(int)
+
+# the folds every comparison below is scored on; most public pairs were built on this same split
+fold = np.zeros(len(y), int)
+for k, (_, va) in enumerate(StratifiedKFold(5, shuffle=True, random_state=42).split(np.zeros(len(y)), y)):
+    fold[va] = k
+LIB = find_dir("s6e10-golem-oof-library")
+assert (np.load(f"{LIB}/folds_seed42.npy") == fold).all(), "not the frozen folds"
+print(f"train {len(y):,} rows, test {len(test_ids):,} rows, positive rate {y.mean():.4f}")
+print(f"folds: StratifiedKFold(5, shuffle=True, random_state=42), {np.bincount(fold).tolist()} rows per fold, "
+      "identical to folds_seed42.npy in my OOF library")
+
+## 1. The pool: who made each pair
+
+Each source below is mounted as published (dataset, or a notebook's output). Every pair is an out-of-fold
+prediction for each `train.csv` row plus a test prediction. Pairs published as probabilities become logits; pairs
+already on the logit scale pass through unchanged (Chris Deotte's rule). Where a file carries ids, rows are matched
+to `train.csv` and `test.csv` by id; otherwise the file's row order is taken as given, and section 2 checks it.
+
+| Source | Author | What it is | Pairs loaded | Kept |
+|---|---|---|---|---|
+| [124 public OOF and test predictions](https://www.kaggle.com/datasets/cdeotte/s6e10-124-public-oof-and-test-predictions) | Chris Deotte | the 124 pairs Kratosyan collected from the first week's public libraries (goodpjw2008 (48), Sachith7 (22), 인공저능연구소( Artificial Idiocy Lab ) (15), my own library (14), Mitudru Dutta (7), Akmal Xodarev (Busya PRIME) (5), Arhan canli (4), thisray (3), samanyu1808 and Hemingweb (3 TabPFN runs), Shelton Wang (2), Naji (1)) | 124 | 124 |
+| [TFM OOF and test predictions](https://www.kaggle.com/datasets/cdeotte/s6e10-tfm-oof-and-test-predictions) | Chris Deotte | 9 tabular foundation models (TabPFN-3.5, TabICL-2, two Kumo, Mitra-2, LimiX-2, TabFM, EXAONE, Causilo), a tuned XGBoost and a RealMLP | 11 | 11 |
+| [S6E10 OOF library](https://www.kaggle.com/datasets/dariushafshar/s6e10-golem-oof-library) | Dariush Afshar (mine) | 17 members on the same folds; 14 of them are already in the 124 | 17 | 3 |
+| [OOF dataset](https://www.kaggle.com/datasets/abdullahsafwan333/oof-dataset) | AbdullahSafwan333 | three TabPFN-3.5 feature sets, a CatBoost and an XGBoost, each on 15 folds | 5 | 5 |
+| [airline satisfaction artifacts](https://www.kaggle.com/datasets/sadamtorres/ps-s6e10-airline-satisfaction-artifacts) | Sadam Torres | 38 experiments (LightGBM, XGBoost, CatBoost, RealMLP, an MLP, a sparse logistic regression, kNN features) and 2 models trained only on the original data | 40 | 40 |
+| [Forge own pairs](https://www.kaggle.com/datasets/amanatar/s6e10-forge-own-pairs) | Aman Atar | 6 pairs from The Consensus Forge, on its own seed-33 folds | 6 | 6 |
+| [Stack OOF predictions](https://www.kaggle.com/datasets/sachith7/s6e10-stack-oof-predictions) | Sachith7 | 24 members; 22 of them are already in the 124 | 24 | 2 |
+| [TabPFN/TabICL/NN/GBDT OOFs](https://www.kaggle.com/datasets/koumeimaki/s6e10-route-tfm-nn-oof) | Koumei Maki | TabPFN-3.5, TabICL, TabM, RealMLP, LightGBM, XGBoost and CatBoost | 7 | 7 |
+| [TabPFN-3.5 full-context member](https://www.kaggle.com/datasets/goodpjw2008/s6e10-tabpfn-member) | goodpjw2008 | 8 TabPFN-3.5 and TabICL members, all of them already in the 124 | 8 | 0 |
+| [goodpjw2008 extra members OOF](https://www.kaggle.com/datasets/goodpjw2008/s6e10-goodpjw2008-extra-members-oof) | goodpjw2008 | 17 members of the series, most of them never published before | 17 | 16 |
+| [CatBoost all-categorical OOF and test](https://www.kaggle.com/datasets/dmitriykolmikov/s6e10-catboost-all-categorical-oof-and-test) | Dmitriy Kolmikov | a CatBoost with every column categorical | 1 | 1 |
+| [Ablation members OOF](https://www.kaggle.com/datasets/kagankoral/s6e10-ablation-members-oof) | Ahmet Kağan Koral | 17 LightGBM, XGBoost, CatBoost and RealMLP members on several feature sets | 17 | 17 |
+| [RealMLP with PyTabKit](https://www.kaggle.com/code/yekenot/ps-s6-e10-realmlp-pytabkit) | Vladimir Demidov | a RealMLP | 1 | 1 |
+| [Single CatBoost](https://www.kaggle.com/code/hermengardo/single-catboost-eda-ps6e10) | Hermengardo | a CatBoost | 1 | 1 |
+| [XGBoost + RealMLP route-ID teacher](https://www.kaggle.com/code/kratosyan/s6e10-xgboost-realmlp-route-id-teacher) | Kratosyan | a 10-fold XGBoost and RealMLP with a route-ID teacher | 2 | 2 |
+| [Encodings, CatBoost, RealMLP](https://www.kaggle.com/code/kagankoral/s6e10-encodings-catboost-realmlp-lb-0-961) | Ahmet Kağan Koral | LightGBM, XGBoost, two CatBoosts and a RealMLP | 5 | 5 |
+| [The Original-Prior Stack v5](https://www.kaggle.com/code/amanatar/s6e10-the-original-prior-stack-v5) | Aman Atar | its 5 base members (its blends and its stack are left out) | 5 | 5 |
+| [Source-Transfer + Foundation-Model OOF](https://www.kaggle.com/code/kozykappa/s6e10-source-transfer-foundation-model-oof) | Kozykorpesh | a LightGBM on engineered features | 1 | 1 |
+
+Left out on purpose: files with no out-of-fold half (test-only submissions and blends of other people's
+submission files cannot be stacked or checked), stack- or blend-level OOFs whose weights were fitted on every
+training row, and private datasets. The loaders follow the pattern of Kratosyan's and goodpjw2008's stacking
+notebooks; any source that is not attached, or whose files have changed shape, is skipped and named in the output
+instead of stopping the run.
+
+SOURCES = []    # every public source in loading order: its key, the mounted folder's slug, and how to read it
+
+
+def source(key, slug):
+    def register(fn):
+        SOURCES.append({"key": key, "slug": slug, "load": fn})
+        return fn
+    return register
+
+
+def first(d, name):
+    hits = sorted(glob.glob(os.path.join(d, "**", name), recursive=True), key=len)
+    if not hits:
+        raise FileNotFoundError(name)
+    return hits[0]
+
+
+def by_id(df, ids, col):
+    # column `col` of `df` in the order of `ids`; every id has to be there exactly once
+    s = df.set_index("id")[col]
+    assert s.index.is_unique, "duplicate ids"
+    s = s.reindex(ids)
+    assert s.notna().all(), f"{int(s.isna().sum()):,} ids missing"
+    return s.to_numpy(np.float64)
+
+
+def npy_pairs(d, prefix, pattern="oof_*.npy"):
+    # oof_<name>.npy with test_<name>.npy next to it, rows in train.csv / test.csv order
+    for f in sorted(glob.glob(os.path.join(d, "**", pattern), recursive=True)):
+        name = os.path.basename(f)[4:-4]
+        yield prefix + name, np.load(f), np.load(os.path.join(os.path.dirname(f), f"test_{name}.npy")), "row order"
+
+
+def npz_pairs(d, prefix, pattern="*.npz", strip=0):
+    # one .npz per member holding `oof` and `test`
+    for f in sorted(glob.glob(os.path.join(d, "**", pattern), recursive=True)):
+        with np.load(f) as z:
+            if "oof" in z.files and "test" in z.files:
+                yield prefix + os.path.basename(f)[strip:-4], z["oof"], z["test"], "row order"
+
+
+# ---- the base pool: Chris Deotte's two packaged datasets
+@source("c124", "s6e10-124-public-oof-and-test-predictions")
+def load_c124(d):        # 124 pairs Kratosyan collected from every public library of the first week
+    yield from npy_pairs(d, "")
+
+
+@source("tfm", "s6e10-tfm-oof-and-test-predictions")
+def load_tfm(d):         # 9 tabular foundation models, a tuned XGBoost and a RealMLP
+    yield from npy_pairs(d, "tfm_")
+
+
+# ---- published since, or not in the 124
+@source("golem", "s6e10-golem-oof-library")
+def load_golem(d):       # my library: 14 of its 17 are already in the 124, so the near-copy check drops them
+    man = pd.read_csv(f"{d}/manifest.csv")
+    for r in man.itertuples():
+        yield "gl_" + r.wide_column, np.load(f"{d}/{r.oof_file}"), np.load(f"{d}/{r.test_file}"), "row order"
+
+
+@source("abdullah", "oof-dataset")
+def load_abdullah(d):    # three TabPFN-3.5 feature sets, CatBoost, XGBoost (15 folds each); csv files with ids
+    for m in ("tabpfn_catfd10", "tabpfn_raw", "tabpfn_te_cnt", "cat_v3", "xgb_v3"):
+        o, t = pd.read_csv(f"{d}/{m}_oof.csv"), pd.read_csv(f"{d}/{m}_test.csv")
+        yield "ab_" + m, by_id(o, train_ids, "pred"), by_id(t, test_ids, "pred"), "id"
+
+
+@source("sadam", "ps-s6e10-airline-satisfaction-artifacts")
+def load_sadam(d):       # 38 experiments, plus 2 models trained only on the original data (they never saw a train label)
+    yield from npz_pairs(d, "st_", "preds_*.npz", strip=6)
+    for n in ("orig_cat_pred", "orig_model_pred"):
+        with np.load(first(d, f"{n}.npz")) as z:
+            yield "st_" + n, z["train"], z["test"], "row order"
+
+
+@source("forge", "s6e10-forge-own-pairs")
+def load_forge(d):       # The Consensus Forge: 6 pairs on its own seed-33 folds
+    yield from npy_pairs(d, "am_", "oof_forge_*.npy")
+
+
+@source("sachith", "s6e10-stack-oof-predictions")
+def load_sachith(d):     # 24 members; 22 are already in the 124
+    yield from npz_pairs(d, "s7_")
+
+
+@source("koumeimaki", "s6e10-route-tfm-nn-oof")
+def load_koumeimaki(d):  # TabPFN, TabICL, TabM, RealMLP and three GBDTs on shared folds; ids in two side files
+    assert (pd.read_csv(f"{d}/train_ids_folds.csv")["id"].to_numpy() == train_ids).all()
+    assert (pd.read_csv(f"{d}/test_ids.csv")["id"].to_numpy() == test_ids).all()
+    for name, o, t, _ in npy_pairs(d, "km_"):
+        yield name, o, t, "id"
+
+
+@source("gp_tabpfn", "s6e10-tabpfn-member")
+def load_gp_tabpfn(d):   # TabPFN-3.5 and TabICL members; csv files with ids (all 8 should already be in the 124)
+    for f in sorted(glob.glob(f"{d}/oof_*.csv")):
+        n = os.path.basename(f)[4:-4]
+        yield ("gpt_" + n, by_id(pd.read_csv(f), train_ids, "pred"),
+               by_id(pd.read_csv(f"{d}/test_{n}.csv"), test_ids, "pred"), "id")
+
+
+@source("gp_extra", "s6e10-goodpjw2008-extra-members-oof")
+def load_gp_extra(d):    # 17 members of the goodpjw2008 series that were never published before
+    yield from npy_pairs(d, "gpx_")
+
+
+@source("dmitriy", "s6e10-catboost-all-categorical-oof-and-test")
+def load_dmitriy(d):     # CatBoost with every column categorical
+    yield "dk_cb_cat", np.load(first(d, "oof_cb_cat.npy")), np.load(first(d, "test_cb_cat.npy")), "row order"
+
+
+@source("kagan_abl", "s6e10-ablation-members-oof")
+def load_kagan_abl(d):   # 17 ablation members: LightGBM, XGBoost, CatBoost and RealMLP on several feature sets
+    yield from npy_pairs(d, "kga_")
+
+
+# ---- notebook outputs
+@source("yekenot", "ps-s6-e10-realmlp-pytabkit")
+def load_yekenot(d):     # RealMLP (PyTabKit); csv files with ids
+    o, t = pd.read_csv(first(d, "oof_preds.csv")), pd.read_csv(first(d, "submission.csv"))
+    yield "yk_realmlp", by_id(o, train_ids, "satisfaction"), by_id(t, test_ids, "satisfaction"), "id"
+
+
+@source("hermengardo", "single-catboost-eda-ps6e10")
+def load_hermengardo(d):  # a single CatBoost
+    yield "hm_cat", np.load(first(d, "oof_train.npy")), np.load(first(d, "oof_test.npy")), "row order"
+
+
+@source("kratosyan", "s6e10-xgboost-realmlp-route-id-teacher")
+def load_kratosyan(d):   # 10-fold XGBoost and RealMLP with a route-ID teacher
+    yield from npz_pairs(d, "kr_", "*_route_ogaux.npz")
+
+
+@source("kagan_enc", "s6e10-encodings-catboost-realmlp-lb-0-961")
+def load_kagan_enc(d):   # LightGBM, XGBoost, two CatBoosts, RealMLP; csv files with ids
+    o, t = pd.read_csv(first(d, "oof_members.csv")), pd.read_csv(first(d, "test_members.csv"))
+    for c in [c for c in o.columns if c != "id"]:
+        yield "kg_" + c, by_id(o, train_ids, c), by_id(t, test_ids, c), "id"
+
+
+@source("aman_v5", "s6e10-the-original-prior-stack-v5")
+def load_aman_v5(d):     # the five base members of The Original-Prior Stack v5 (its blends and stack are left out)
+    with np.load(first(d, "oof_artifacts.npz")) as z:
+        assert (z["y"] == y).all(), "labels in a different row order"
+        for m in ("lgbm_champion", "lgbm_te", "lgbm_te_rows", "xgb_gpu", "catboost_gpu"):
+            yield "av5_" + m, z["oof_" + m], z["test_" + m], "row order"
+
+
+@source("kozy", "s6e10-source-transfer-foundation-model-oof")
+def load_kozy(d):        # a LightGBM on engineered features (its output's model_oof_report.csv names the model)
+    yield ("kz_source_transfer", np.load(first(d, "source_transfer_oof.npy")),
+           np.load(first(d, "source_transfer_test.npy")), "row order")
+
+
+print(f"{len(SOURCES)} sources registered: {', '.join(s['key'] for s in SOURCES)}")
+
+## 2. Checks: alignment, scale and near-copies
+
+Every new pair has to pass these checks; the thresholds were fixed before any stack was fitted.
+
+- **Length and values**: one finite value per `train.csv` row and per `test.csv` row.
+- **Row order**: OOF AUC at least 0.90 (a shuffled file scores near 0.5). And the test half has to agree with the
+  pool about as well as the OOF half does: I correlate each pair's logits with the median of the 135 base pairs,
+  on train and on test, and drop a pair whose test correlation is more than 0.03 below its OOF correlation (a test
+  file in the wrong row order agrees with nothing). This test is karttikjangid05's.
+- **Same scale on both halves**: a pair whose OOF half is ranks and test half probabilities (or the reverse) is
+  dropped, and so is one whose mean prediction moves by more than 0.03 between train and test.
+- **Too good to be out of fold**: OOF AUC above 0.9625 is dropped (no public single model is near it; an in-fold
+  prediction would be).
+- **Near-copies**: a pair whose rank correlation with a pair already in the pool is above 0.9999 adds a duplicate
+  column, not information, so it is dropped. The 135 base pairs go first, so the base pool is never changed.
+
+MIN_AUC, MAX_AUC, AGREE_GAP, DRIFT, DUP_RHO = 0.90, 0.9625, 0.03, 0.03, 0.9999
+
+
+def logit(p):
+    p = np.clip(np.asarray(p, np.float64), 1e-15, 1 - 1e-15)
+    return np.log(p / (1 - p))
+
+
+def is_rank(v):
+    # values spread evenly over (0, 1], like rankdata(v) / len(v)
+    q = np.quantile(v, [0.1, 0.25, 0.5, 0.75, 0.9])
+    return bool(v.min() >= 0 and v.max() <= 1 and np.abs(q - [0.1, 0.25, 0.5, 0.75, 0.9]).max() < 0.01)
+
+
+def corr_cols(Z, r):
+    Zc, rc = Z - Z.mean(0), r - r.mean()
+    return (Zc * rc[:, None]).sum(0) / np.sqrt((Zc ** 2).sum(0) * (rc ** 2).sum())
+
+
+rows, OOFL, TSTL = [], [], []
+for s in SOURCES:
+    d = find_dir(s["slug"])
+    if d is None:
+        rows.append(dict(source=s["key"], member="(all)", status="not attached")); continue
+    try:
+        got = list(s["load"](d))
+    except Exception as e:
+        rows.append(dict(source=s["key"], member="(all)", status=f"skipped: {type(e).__name__}: {e}"[:110])); continue
+    for name, o, t, how in got:
+        o, t = np.asarray(o, np.float64).ravel(), np.asarray(t, np.float64).ravel()
+        r = dict(source=s["key"], member=name, aligned=how, status="")
+        if o.shape != y.shape or t.shape != test_ids.shape:
+            r["status"] = f"wrong length {o.shape[0]:,} / {t.shape[0]:,}"
+        elif not (np.isfinite(o).all() and np.isfinite(t).all()):
+            r["status"] = "NaN or inf"
+        else:
+            already = bool(o.min() < 0 or o.max() > 1 or t.min() < 0 or t.max() > 1)
+            r["scale"] = "logits" if already else ("ranks" if is_rank(o) else "probabilities")
+            if not already and is_rank(o) != is_rank(t):
+                r["status"] = "OOF and test on different scales"
+            p_o, p_t = (1 / (1 + np.exp(-o)), 1 / (1 + np.exp(-t))) if already else (o, t)
+            r["drift"] = abs(p_t.mean() - p_o.mean())
+            zo, zt = (o, t) if already else (logit(o), logit(t))
+            OOFL.append(np.clip(zo, -30, 30).astype(np.float32)); TSTL.append(np.clip(zt, -30, 30).astype(np.float32))
+            r["col"] = len(OOFL) - 1
+        rows.append(r)
+CHK = pd.DataFrame(rows)
+assert CHK["col"].notna().any(), "nothing loaded"
+CHK["col"] = CHK["col"].fillna(-1).astype(int)
+live = CHK["col"] >= 0
+Zall, Tall = np.column_stack(OOFL), np.column_stack(TSTL)
+del OOFL, TSTL
+CHK.loc[live, "oof_auc"] = [roc_auc_score(y, Zall[:, c]) for c in CHK.loc[live, "col"]]
+
+# the base pool: Chris Deotte's two packaged datasets, all 135 pairs, kept exactly as published
+BASE = CHK[live & CHK["source"].isin(["c124", "tfm"])]
+assert len(BASE) == 135, f"the base pool should have 135 pairs, found {len(BASE)}"
+ref_o = np.median(Zall[:, BASE["col"].to_numpy()], 1)
+ref_t = np.median(Tall[:, BASE["col"].to_numpy()], 1)
+CHK.loc[live, "agree_oof"] = corr_cols(Zall[:, CHK.loc[live, "col"]], ref_o)
+CHK.loc[live, "agree_test"] = corr_cols(Tall[:, CHK.loc[live, "col"]], ref_t)
+
+new = live & ~CHK.index.isin(BASE.index) & (CHK["status"] == "")
+for i in CHK.index[new]:
+    r = CHK.loc[i]
+    if r["oof_auc"] < MIN_AUC:
+        CHK.loc[i, "status"] = f"OOF AUC {r['oof_auc']:.3f}: row order or label problem"
+    elif r["oof_auc"] > MAX_AUC:
+        CHK.loc[i, "status"] = f"OOF AUC {r['oof_auc']:.4f}: too high to be out of fold"
+    elif r["agree_oof"] - r["agree_test"] > AGREE_GAP:
+        CHK.loc[i, "status"] = f"test half agrees less than OOF half ({r['agree_test']:.3f} vs {r['agree_oof']:.3f})"
+    elif r["drift"] > DRIFT:
+        CHK.loc[i, "status"] = f"mean moves {r['drift']:.3f} between train and test"
+
+# near-copies: rank correlation of the OOF halves, the base first, then the new pairs in loading order
+order = list(BASE["col"]) + [int(c) for c in CHK.loc[new & (CHK["status"] == ""), "col"]]
+Rk = np.column_stack([rankdata(Zall[:, c]) for c in order])        # float64: the threshold sits in the 5th decimal
+Rk -= Rk.mean(0)
+Rk /= np.sqrt((Rk ** 2).mean(0))
+RHO = np.clip((Rk.T @ Rk) / len(Rk), -1, 1)
+del Rk
+kept = list(range(len(BASE)))
+pos = {c: j for j, c in enumerate(order)}
+for j in range(len(BASE), len(order)):
+    best = max(kept, key=lambda m: RHO[j, m])
+    i = CHK.index[CHK["col"] == order[j]][0]
+    CHK.loc[i, "max_rho"] = RHO[j, best]
+    if RHO[j, best] > DUP_RHO:
+        CHK.loc[i, "status"] = f"near-copy of {CHK.loc[CHK['col'] == order[best], 'member'].iloc[0]} (rho {RHO[j, best]:.6f})"
+    else:
+        kept.append(j)
+FULL_COLS = [order[j] for j in kept]
+CHK["in_pool"] = CHK["col"].isin(FULL_COLS)
+NAMES = [CHK.loc[CHK["col"] == c, "member"].iloc[0] for c in FULL_COLS]
+SRCS = [CHK.loc[CHK["col"] == c, "source"].iloc[0] for c in FULL_COLS]
+ZB, ZBT = Zall[:, BASE["col"].to_numpy()], Tall[:, BASE["col"].to_numpy()]
+ZF, ZFT = Zall[:, FULL_COLS], Tall[:, FULL_COLS]
+N_BASE, N_FULL = ZB.shape[1], ZF.shape[1]
+assert len(set(NAMES)) == N_FULL, "duplicate member names"
+del Zall, Tall
+
+tab = CHK[CHK["member"] != "(all)"].assign(kept=lambda d: d["in_pool"]).groupby("source", sort=False).agg(
+    loaded=("member", "size"), kept=("kept", "sum"), best_oof_auc=("oof_auc", "max"))
+tab["dropped"] = tab["loaded"] - tab["kept"]
+print(tab[["loaded", "dropped", "kept", "best_oof_auc"]].to_string(formatters={"best_oof_auc": "{:.6f}".format}))
+skipped = CHK[CHK["member"] == "(all)"]
+if len(skipped):
+    print("\nsources not loaded:\n" + skipped[["source", "status"]].to_string(index=False))
+drop = CHK[(CHK["member"] != "(all)") & ~CHK["in_pool"] & ~CHK.index.isin(BASE.index)]
+reason = drop["status"].str.replace(r" \(.*|:.*| of .*", "", regex=True)
+print(f"\nthresholds: OOF AUC from {MIN_AUC} to {MAX_AUC}, agreement gap {AGREE_GAP}, mean drift {DRIFT}, "
+      f"near-copy rank correlation above {DUP_RHO}")
+print(f"loaded {int((CHK['member'] != '(all)').sum())} pairs from {CHK['source'].nunique()} sources; "
+      f"base pool {N_BASE}; new pairs kept {N_FULL - N_BASE}; full pool {N_FULL}")
+print("dropped, by reason:", reason.value_counts().to_dict())
+print("\nnew pairs that failed a check (near-copies are counted separately below):")
+print(drop[~drop["status"].str.startswith("near-copy")][["source", "member", "status"]].to_string(index=False)
+      if (~drop["status"].str.startswith("near-copy")).any() else "  none")
+print(f"\nnear-copies dropped: {int(drop['status'].str.startswith('near-copy').sum())}")
+print(f"\nrank correlation of each kept new pair with its closest pool member: median "
+      f"{CHK.loc[CHK['in_pool'] & CHK['max_rho'].notna(), 'max_rho'].median():.5f}, "
+      f"lowest {CHK.loc[CHK['in_pool'] & CHK['max_rho'].notna(), 'max_rho'].min():.5f}")
+CHK.drop(columns=["col"]).to_csv(f"{WORK}/member_check.csv", index=False)
+print(f"every pair's checks and verdict: member_check.csv   [{time.time() - T0:.0f}s]")
+
+## 3. The stack, scored on folds it never saw
+
+Each stack is a logistic regression on the members' logits. For each fold it is fit on the other four and
+predicts the held-out fold, so no row is scored by a stacker that saw its label. I fit the base pool (the 135
+packaged pairs) and the full pool, each with two penalties: C = 1, scikit-learn's default, which my 135-pair
+submission used, and C = 0.003, the value Prabhav Semwal's notebook settled on after measuring several penalties on
+187 correlated members. The solver runs to convergence (tolerance 1e-8).
+
+I chose the submission's penalty before fitting anything: C = 0.003, switching to C = 1 only if C = 1 beat it on
+the full pool by more than 2 standard errors in at least 4 of 5 folds. A difference counts as real under the same
+rule. The standard error is that of the five paired fold differences.
+
+COMPARE = True     # False: skip the three comparison stacks (most of the run time) and fit only the submission
+                   # stacker, the full pool at C = 0.003; section 6 still works
+
+
+def lr(C):
+    return LogisticRegression(C=C, tol=1e-8, max_iter=20000)
+
+
+def lr_fold(Z, k, C, ZT):
+    a, b = fold != k, fold == k
+    m = lr(C).fit(Z[a], y[a])
+    return k, m.decision_function(Z[b]), (None if ZT is None else m.decision_function(ZT))
+
+
+def nested(Z, C, ZT=None):
+    # out-of-fold stack logits; with ZT, also the five fold models' mean test logit
+    out, tst = np.zeros(len(y)), []
+    for k, s, t in Parallel(n_jobs=N_JOBS)(delayed(lr_fold)(Z, k, C, ZT) for k in range(5)):
+        out[fold == k] = s
+        tst.append(t)
+    return (out, np.mean(tst, 0)) if ZT is not None else out
+
+
+def fold_aucs(s):
+    return np.array([roc_auc_score(y[fold == k], s[fold == k]) for k in range(5)])
+
+
+def paired(s_new, s_old):
+    d = fold_aucs(s_new) - fold_aucs(s_old)
+    se = d.std(ddof=1) / np.sqrt(5)
+    return {"delta": d.mean(), "se": se, "up": int((d > 0).sum()),
+            "real": bool(d.mean() > 2 * se and (d > 0).sum() >= 4), "folds": d}
+
+
+ARMS, FOLD_TEST, t_all = {}, {}, time.time()
+for pool, Z, ZT in (("base", ZB, ZBT), ("full", ZF, ZFT)):
+    for C in (1.0, 0.003):
+        if not COMPARE and (pool, C) != ("full", 0.003):
+            continue
+        t = time.time()
+        ARMS[pool, C], FOLD_TEST[pool, C] = nested(Z, C, ZT)
+        print(f"{pool} pool ({Z.shape[1]:3d} members), C = {C:<5}  nested CV {roc_auc_score(y, ARMS[pool, C]):.6f}   "
+              f"folds {' '.join(f'{v:.6f}' for v in fold_aucs(ARMS[pool, C]))}   ({time.time() - t:.0f}s)", flush=True)
+
+SWITCH = paired(ARMS["full", 1.0], ARMS["full", 0.003]) if COMPARE else None
+C_SUB = 1.0 if COMPARE and SWITCH["real"] else 0.003          # the rule fixed before fitting
+S_SUB = ARMS["full", C_SUB]
+AUC_SUB = roc_auc_score(y, S_SUB)
+LB_135 = 0.96177     # my submission 56975851 of the base pool stack with C = 1 (public board)
+
+
+def show(label, p):
+    print(f"{label:58s} {p['delta']:+.6f}  (SE {p['se']:.6f}, higher in {p['up']} of 5 folds{', real' if p['real'] else ''})")
+
+
+print(f"\nsubmission stacker: full pool, C = {C_SUB:g}   nested CV {AUC_SUB:.6f}   "
+      f"({time.time() - t_all:.0f}s for {'all four' if COMPARE else 'this one'})")
+if COMPARE:
+    S_BASE_SUB, S_135 = ARMS["base", C_SUB], ARMS["base", 1.0]
+    print("\npaired fold deltas (mean of the five fold differences):")
+    POOL_GAIN = paired(S_SUB, S_BASE_SUB); show(f"full pool minus base pool, both C = {C_SUB:g}", POOL_GAIN)
+    VS_135 = paired(S_SUB, S_135); show(f"full pool C = {C_SUB:g} minus my 135-pair stack (C = 1)", VS_135)
+    C_FULL = paired(ARMS["full", 0.003], ARMS["full", 1.0]); show("C = 0.003 minus C = 1, full pool", C_FULL)
+    C_BASE = paired(ARMS["base", 0.003], ARMS["base", 1.0]); show("C = 0.003 minus C = 1, base pool", C_BASE)
+print(f"\nmy 135-pair stack (base pool, C = 1) on the public board: {LB_135:.5f}")
+LB_PUBLIC = 0.96187    # this notebook's submission.csv, submission 57091277, read 2026-10-12 01:33 UTC
+print(f"this notebook's submission.csv on the public board: {LB_PUBLIC:.5f}")
+
+## 4. `submission.csv`
+
+The submission stacker is refit on every training row and scores the test rows. As a check, its test ranking is
+compared with the average of the five fold models from section 3; the two should be almost the same.
+
+stacker = lr(C_SUB).fit(ZF, y)
+test_logit = stacker.decision_function(ZFT)
+ss = pd.read_csv(f"{COMP}/sample_submission.csv")
+assert (ss["id"].to_numpy() == test_ids).all() and ss.shape[0] == len(test_logit)
+sub = pd.DataFrame({"id": test_ids, "satisfaction": 1 / (1 + np.exp(-test_logit))})
+sub.to_csv(f"{WORK}/submission.csv", index=False)
+np.save(f"{WORK}/stack_oof.npy", S_SUB.astype(np.float32))
+np.save(f"{WORK}/stack_test.npy", test_logit.astype(np.float32))
+RANK_CORR = np.corrcoef(rankdata(test_logit), rankdata(FOLD_TEST["full", C_SUB]))[0, 1]
+SUB_SHA = hashlib.sha256(open(f"{WORK}/submission.csv", "rb").read()).hexdigest()
+print(f"submission.csv: {len(sub):,} rows, mean prediction {sub['satisfaction'].mean():.4f}, sha256 {SUB_SHA[:16]}")
+print(f"test rank correlation, full refit vs the mean of the five fold models: {RANK_CORR:.6f}")
+print("also written: stack_oof.npy (nested out-of-fold logits, train.csv order), stack_test.npy (test logits)")
+SCORED_SHA = "ac2f1c51d067615e"    # sha256 of the file that was scored
+LB_SAME = SUB_SHA.startswith(SCORED_SHA)
+print("this run's submission.csv is " + ("the same file that was scored" if LB_SAME else
+      f"NOT the scored file ({SCORED_SHA}); the public score belongs to that file"))
+
+## 5. Where the weight goes
+
+The refit stacker's coefficients, summed by source. They are per unit of logit, and members are highly
+correlated, so read them as a rough map: a large positive weight paired with a negative one on a near-twin is the
+stacker using the difference between two similar models.
+
+w = pd.Series(stacker.coef_[0], index=NAMES)
+by_src = pd.DataFrame({"members": pd.Series(SRCS).value_counts(sort=False),
+                       "sum of weights": w.groupby(np.array(SRCS)).sum(),
+                       "sum of |weights|": w.abs().groupby(np.array(SRCS)).sum()})
+by_src = by_src.sort_values("sum of |weights|", ascending=False)
+print(by_src.to_string(formatters={"sum of weights": "{:+.3f}".format, "sum of |weights|": "{:.3f}".format}))
+top = w.reindex(w.abs().sort_values(ascending=False).index).head(12)
+print("\nlargest weights:")
+print(pd.DataFrame({"source": [SRCS[NAMES.index(n)] for n in top.index], "weight": top.round(3)}).to_string())
+TOP_MEMBER = top.index[0]
+
+## 6. Does your model move this stack?
+
+Set `YOUR_OOF` and `YOUR_TEST`, then run this cell after the ones above. Your OOF has to be out of fold for every
+`train.csv` row (any fold scheme). A `.csv` or `.parquet` file with an `id` column and one prediction column is
+matched by id; a `.npy` file or a plain array must be in `train.csv` / `test.csv` row order. Probabilities,
+logits and ranks all work.
+
+The cell runs section 2's checks on your pair, adds it to the full pool, refits the nested stack with the same
+penalty, and prints the paired fold delta against the stack above with its standard error. If the gain is real by
+the rule of section 3, it also writes `submission_plus_yours.csv`.
+
+With both left at `None` it runs a demonstration on a member that is already in the pool: the one with the largest
+weight in section 5, removed and added back, which asks what that member adds to everything else.
+
+YOUR_OOF = None     # out-of-fold predictions for train.csv: .csv / .parquet with an id column, .npy, or an array
+YOUR_TEST = None    # the matching predictions for test.csv, same formats
+YOUR_NAME = "your model"
+
+
+def read_pred(src, ids, what):
+    if isinstance(src, (np.ndarray, pd.Series, list)):
+        a = np.asarray(src, np.float64).ravel()
+    elif str(src).endswith(".npy"):
+        a = np.load(src).astype(np.float64).ravel()
+    else:
+        df = pd.read_csv(src) if str(src).endswith(".csv") else pd.read_parquet(src)
+        df.columns = [str(c).strip() for c in df.columns]
+        cols = [c for c in df.columns if c.lower() not in ("id", "fold")]
+        if len(cols) != 1:
+            raise ValueError(f"{what}: expected one prediction column besides id and fold, found {cols}")
+        if "id" in df.columns:
+            s = df.set_index("id")[cols[0]]
+            if not s.index.is_unique:
+                raise ValueError(f"{what}: duplicate ids")
+            s = s.reindex(ids)
+            if s.isna().any():
+                raise ValueError(f"{what}: {int(s.isna().sum()):,} ids have no prediction")
+            a = s.to_numpy(np.float64)
+        else:
+            a = df[cols[0]].to_numpy(np.float64)
+    if len(a) != len(ids) or not np.isfinite(a).all():
+        raise ValueError(f"{what}: need {len(ids):,} finite values, got {len(a):,}")
+    return a
+
+
+def as_logits(o, t):
+    already = bool(o.min() < 0 or o.max() > 1 or t.min() < 0 or t.max() > 1)
+    if not already and is_rank(o) != is_rank(t):
+        raise ValueError("the OOF and test halves are on different scales (one is ranks, the other probabilities)")
+    zo, zt = (o, t) if already else (logit(o), logit(t))
+    return np.clip(zo, -30, 30), np.clip(zt, -30, 30)
+
+
+def closest(zo):
+    r = rankdata(zo)
+    rho = [np.corrcoef(r, rankdata(ZF[:, j]))[0, 1] for j in range(N_FULL)]
+    j = int(np.nanargmax(rho))
+    return NAMES[j], rho[j]
+
+
+if YOUR_OOF is None and YOUR_TEST is None:
+    j = NAMES.index(TOP_MEMBER)
+    keep = [i for i in range(N_FULL) if i != j]
+    WHO, zo, zt = TOP_MEMBER, ZF[:, j], ZFT[:, j]
+    s_without = nested(ZF[:, keep], C_SUB)
+    s_with, base_label = S_SUB, f"the other {N_FULL - 1} members"
+    r = rankdata(zo)
+    rho_near = max(np.corrcoef(r, rankdata(ZF[:, i]))[0, 1] for i in keep)
+    print(f"demonstration: {WHO} ({SRCS[j]}), the largest weight in section 5, removed and added back")
+else:
+    WHO = YOUR_NAME
+    zo, zt = as_logits(read_pred(YOUR_OOF, train_ids, "YOUR_OOF"), read_pred(YOUR_TEST, test_ids, "YOUR_TEST"))
+    agree = corr_cols(zo[:, None], ref_o)[0] - corr_cols(zt[:, None], ref_t)[0]
+    if agree > AGREE_GAP:
+        print(f"warning: your test half agrees with the pool {agree:.3f} less than your OOF half; check its row order")
+    near, rho_near = closest(zo)
+    if rho_near > DUP_RHO:
+        print(f"note: rank correlation {rho_near:.6f} with {near}, a near-copy of a pool member")
+    s_without, base_label = S_SUB, f"the {N_FULL}-member pool"
+    s_with = nested(np.column_stack([ZF, zo.astype(np.float32)]), C_SUB)
+YOU = paired(s_with, s_without)
+YOU_AUC = roc_auc_score(y, zo)
+print(f"{WHO}: OOF AUC {YOU_AUC:.6f}; highest rank correlation with another member {rho_near:.6f}")
+print(f"stack without it ({base_label}): {roc_auc_score(y, s_without):.6f}   with it: {roc_auc_score(y, s_with):.6f}")
+print(f"paired fold delta {YOU['delta']:+.6f}, standard error {YOU['se']:.6f}, higher in {YOU['up']} of 5 folds: "
+      f"{'a real gain' if YOU['real'] else 'not a real change'} (rule: above 2 SE and higher in at least 4 folds)")
+print("per fold:", " ".join(f"{v:+.6f}" for v in YOU["folds"]))
+if YOU["real"] and not (YOUR_OOF is None and YOUR_TEST is None):
+    m = lr(C_SUB).fit(np.column_stack([ZF, zo.astype(np.float32)]), y)
+    p = m.decision_function(np.column_stack([ZFT, zt.astype(np.float32)]))
+    pd.DataFrame({"id": test_ids, "satisfaction": 1 / (1 + np.exp(-p))}).to_csv(f"{WORK}/submission_plus_yours.csv", index=False)
+    print("wrote submission_plus_yours.csv")
+
+n_loaded = int((CHK["member"] != "(all)").sum())
+HEADLINE = {
+    "n_loaded": f"{n_loaded}", "n_sources": f"{CHK['source'].nunique()}", "n_kept": f"{N_FULL}",
+    "n_base": f"{N_BASE}", "n_new": f"{N_FULL - N_BASE}", "n_dropped": f"{n_loaded - N_FULL}",
+    "n_nearcopy": f"{int(drop['status'].str.startswith('near-copy').sum())}",
+    "n_failed": f"{int((~drop['status'].str.startswith('near-copy')).sum())}",
+    "c_sub": f"{C_SUB:g}", "auc_sub": f"{AUC_SUB:.6f}", "auc_full_c003": f"{roc_auc_score(y, ARMS['full', 0.003]):.6f}",
+    **({"auc_base_sub": f"{roc_auc_score(y, S_BASE_SUB):.6f}", "auc_135": f"{roc_auc_score(y, S_135):.6f}",
+        "auc_full_c1": f"{roc_auc_score(y, ARMS['full', 1.0]):.6f}",
+        "auc_base_c1": f"{roc_auc_score(y, ARMS['base', 1.0]):.6f}", "auc_base_c003": f"{roc_auc_score(y, ARMS['base', 0.003]):.6f}",
+        "d_pool": f"{POOL_GAIN['delta']:+.6f}", "d_pool_se": f"{POOL_GAIN['se']:.6f}", "d_pool_up": f"{POOL_GAIN['up']}",
+        "d_pool_real": str(POOL_GAIN["real"]),
+        "d_135": f"{VS_135['delta']:+.6f}", "d_135_se": f"{VS_135['se']:.6f}", "d_135_up": f"{VS_135['up']}",
+        "d_c_full": f"{C_FULL['delta']:+.6f}", "d_c_full_se": f"{C_FULL['se']:.6f}", "d_c_full_up": f"{C_FULL['up']}",
+        "d_c_full_real": str(C_FULL["real"]),
+        "d_c_base": f"{C_BASE['delta']:+.6f}", "d_c_base_se": f"{C_BASE['se']:.6f}", "d_c_base_up": f"{C_BASE['up']}",
+        "switch_real": str(SWITCH["real"])} if COMPARE else {}),
+    "lb_135": f"{LB_135:.5f}", "rank_corr": f"{RANK_CORR:.6f}", "sub_sha": SUB_SHA[:16],
+    **({"lb_same": str(LB_SAME)} if "LB_SAME" in globals() else {}),
+    "top_member": TOP_MEMBER, "top_source": SRCS[NAMES.index(TOP_MEMBER)],
+    "you_who": WHO, "you_auc": f"{YOU_AUC:.6f}", "you_rho": f"{rho_near:.6f}",
+    "you_delta": f"{YOU['delta']:+.6f}", "you_se": f"{YOU['se']:.6f}", "you_up": f"{YOU['up']}", "you_real": str(YOU["real"]),
+    "runtime_min": f"{(time.time() - T0) / 60:.0f}",
+    **{f"kept_{k}": f"{int(v)}" for k, v in tab["kept"].items()},
+    **{f"loaded_{k}": f"{int(v)}" for k, v in tab["loaded"].items()},
+}
+json.dump(HEADLINE, open(os.path.join(WORK, "headline.json"), "w"), indent=1)
+for k, v in HEADLINE.items():
+    print(f"{k:18s} {v}")
+print(f"\ntotal runtime {time.time() - T0:.0f}s")
+
+## What the numbers say
+
+- The newer public pairs still pay. The 112 pairs published since Chris Deotte's packages, or not in them, add +0.000115 to the stack at C = 0.003 (standard error 0.000027, higher in 5 of 5 folds), a real gain by the rule of section 3.
+- The penalty matters: C = 0.003 beats C = 1 by +0.000054 on the full pool (standard error 0.000008, 5 of 5 folds) and by +0.000030 on the 135 base pairs, so it matters more as the pool grows.
+- The member with the largest weight, `tfm_tabfm`, adds +0.000022 to the other 246 members (standard error 0.000004, higher in 5 of 5 folds): a real gain on its own.
+- The nested CV is a little optimistic, for a reason worth knowing: many members (mine included) early-stopped on
+  the fold they then scored, which lifts a single model's OOF AUC slightly, and the stacker inherits some of that.
+  The public board, not the CV, is the check, and it is quoted at the top exactly as scored.
+
+Every member here is somebody's model; the stacker only weighs them. If this notebook is useful to you, please
+upvote the sources in section 1 too.

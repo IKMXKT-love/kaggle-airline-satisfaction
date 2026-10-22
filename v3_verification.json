@@ -1,0 +1,32 @@
+{
+  "preserved_files": 17,
+  "ten_folds_same_as_previous": true,
+  "every_row_oof_once": true,
+  "probabilities_ids_and_schema_valid": true,
+  "predictions_reconstructed": true,
+  "confirmation_reconstructed": true,
+  "rows": 299844,
+  "train_rows": 699635,
+  "oof_auc": 0.961422659136904,
+  "baseline_oof_auc": 0.9611118284591139,
+  "oof_gain": 0.0003108306777900305,
+  "mean_auc": 0.9614315368347974,
+  "improved_folds": 10,
+  "fold_gains": [
+    0.00042333606549138647,
+    0.00022396324070128593,
+    0.0002164989581375787,
+    0.00042219548206123836,
+    0.00022898246996105875,
+    0.00031447345450286157,
+    0.00031955200943456497,
+    0.0004343872104380919,
+    0.00016771559637096534,
+    0.000369998049187914
+  ],
+  "confirmation_auc": 0.9612484169783693,
+  "confirmation_gain": 0.0003800877555800719,
+  "target_local_auc_reached": false,
+  "kaggle_score_unverified": true,
+  "submission_sha256": "e3b94a849f853e682418197f59c1d0eaf4370a895cfa0b6076400d74b4d8516e"
+}

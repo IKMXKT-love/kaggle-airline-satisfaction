@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-21",
+  "analysis_only": true,
+  "competition_train_rows": 699635,
+  "competition_test_rows": 299844,
+  "original_rows": 129880,
+  "conditional_sequence_scores_per_lm_recipe_if_four_orders_two_labels": 7995832,
+  "original_training_row_visits_if_100_epochs": 12988000,
+  "timing_basis": "previous saved cost_receipt: 10 converged CV fits, two five-fold arms",
+  "measured_previous_ten_cv_fit_seconds": 116.96346306800842,
+  "estimated_twenty_meta_fit_seconds_by_previous_mean": 233.92692613601685,
+  "meta_time_estimate_excludes_preparation_and_verification": true,
+  "no_gpu_or_language_model_timing_measured_this_turn": true,
+  "best_sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+  "new_model_fits": 0,
+  "new_base_inferences": 0,
+  "new_submissions": 0,
+  "report": "research_s6e10/FEASIBILITY_REVIEW_20261021.md",
+  "verdict_joint_meta": "feasible as one bounded diagnostic; no positive gain yet",
+  "verdict_lm": "downgraded to backup; full experiment not currently justified",
+  "no_training_launched": true
+}

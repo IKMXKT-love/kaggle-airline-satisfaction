@@ -1,0 +1,52 @@
+{
+  "model": {
+    "members": 8,
+    "embedding_dim": 8,
+    "frequencies": 8,
+    "frequency_sigma": 2.33,
+    "hidden": [
+      512,
+      256,
+      128
+    ],
+    "dropout": 0.05
+  },
+  "base_training": {
+    "seed": 42,
+    "batch_size": 1024,
+    "prediction_batch_size": 2048,
+    "mask_probability": 0.15,
+    "auxiliary_weight": 0.1,
+    "smoothing": 0.01,
+    "weight_decay": 0.01,
+    "warm_lr": 0.001,
+    "fine_lr": 0.0003,
+    "minimum_lr_fraction": 0.1,
+    "gradient_clip": 1.0,
+    "amp_bfloat16": true,
+    "optimizer": "AdamW",
+    "fused": true
+  },
+  "source_hashes": {
+    "experiment_multitask.py": "e52388970395d734bdddfcd9aa6409a5c31a9abeb69124488a96d8ed96ee641c",
+    "multitask_support.py": "d32ff14b182cfb837f41c996770b995314325ad63796113896bc7fc2b9f96bff",
+    "tests/test_multitask_contract.py": "7187a2fd83d2db9f97fe57025b2d9d108fd7c305864b2dcc9da4c61f30c9ce34"
+  },
+  "train_rows": 411944,
+  "probe_rows": 8192,
+  "warmup_steps": 10,
+  "timed_steps": 40,
+  "seconds_per_step": 0.007381845000054454,
+  "estimated_24_epoch_seconds": 71.39720484052668,
+  "warm_epochs": 12,
+  "fine_epochs": 12,
+  "maximum_primary_weight_change": 0.05811739340424538,
+  "maximum_auxiliary_weight_change": 0.051958248019218445,
+  "final_probe_classification_loss": 0.3139820396900177,
+  "final_probe_recovery_loss": 1.4606084823608398,
+  "peak_allocated_gb": 0.17560768127441406,
+  "peak_reserved_gb": 0.220703125,
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "probe_parameters_discarded": true,
+  "no_stopping_or_scored_data_used": true
+}

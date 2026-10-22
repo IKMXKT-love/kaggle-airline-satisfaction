@@ -1,0 +1,14 @@
+{
+  "training": false,
+  "model_inference": false,
+  "own_submission_generated": false,
+  "seed": 20261021,
+  "pairs_per_fold": 2000000,
+  "chunk": 100000,
+  "folds": [
+    0,
+    1
+  ],
+  "purpose": "Describe whether the frozen public reference changes errors unanimously shared by our seven branches; no fitted fusion or selection.",
+  "caveat": "Exploratory only. Our baseline uses strict cached outer predictions, but public OOF partitions and historical selection differ. This is not strict validation of a new ensemble. Monte Carlo uncertainty is conditional on fixed predictions."
+}

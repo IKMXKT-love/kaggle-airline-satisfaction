@@ -1,0 +1,13 @@
+{
+  "step_seconds_by_arm": {
+    "competition_only": 0.01175300624998954,
+    "shared_head": 0.01220699999998942,
+    "dual_head": 0.012041353124999432
+  },
+  "worst_seconds_per_step": 0.01220699999998942,
+  "prediction_seconds_per_row": 1.671582031265162e-06,
+  "peak_allocated_gb": 0.497772216796875,
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "probe_parameters_discarded": true,
+  "uses_only_fit_and_original_rows": true
+}

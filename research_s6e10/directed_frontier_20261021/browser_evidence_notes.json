@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-21",
+  "type": "manually recorded facts from browser accessibility observations; not raw page captures",
+  "observations": [
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/discussion/750009",
+      "title": "How to build a Tabular Transformer!",
+      "author": "Chris Deotte",
+      "author_reported_qft_pooled_oof": 0.959795,
+      "author_reported_fold0_pretrained": 0.960444,
+      "author_reported_fold0_random_init": 0.960436,
+      "author_reported_minutes_per_fold_A100": 52,
+      "author_reported_peak_memory_GB": 26,
+      "audit_level": "discussion read; no predictions or training source obtained; not independently reproduced"
+    },
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/discussion/749010",
+      "title": "Finetuning TFMs",
+      "finding": "Author reports no further improvement from fine-tuned TFMs once original TFMs are in the stack.",
+      "audit_level": "author reply read in current browser session; not independently reproduced"
+    },
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747555",
+      "title": "Embeddings from Keras-FM and TabPFN",
+      "finding": "Author says TabPFN embeddings have not yet been tested downstream.",
+      "audit_level": "author reply read in current browser session"
+    },
+    {
+      "url": "https://www.kaggle.com/competitions/playground-series-s6e10/code?competitionId=125224&searchQuery=Qwen&excludeNonAccessedDatasources=true",
+      "finding": "No notebooks found with this current site filter.",
+      "limitation": "Negative search is not evidence of global nonexistence."
+    }
+  ]
+}

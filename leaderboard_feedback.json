@@ -1,0 +1,14 @@
+{
+  "source": "user_report",
+  "reported_date": "2026-10-17",
+  "independently_verified": false,
+  "previous": {
+    "score": 0.96036
+  },
+  "current": {
+    "score": 0.96074,
+    "submission_file": "submission_v3.csv",
+    "file_association": "assumed_latest_delivered_submission; user did not specify filename or submission ID",
+    "submission_sha256": "e3b94a849f853e682418197f59c1d0eaf4370a895cfa0b6076400d74b4d8516e"
+  }
+}

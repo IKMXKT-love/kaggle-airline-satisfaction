@@ -1,0 +1,11 @@
+{
+  "phase": "selection",
+  "trees": 555,
+  "rating_accuracy": 0.6426078028747433,
+  "rating_logloss": 0.7022834420204163,
+  "integrated_auc": 0.9940018222475081,
+  "integrated_logloss": 0.09476844972514976,
+  "point_auc": 0.9938309838622079,
+  "global_mixture_auc": 0.9928461533412226,
+  "seconds": 15.969026565551758
+}

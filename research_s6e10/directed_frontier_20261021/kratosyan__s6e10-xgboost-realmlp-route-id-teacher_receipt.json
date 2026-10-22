@@ -1,0 +1,68 @@
+{
+  "ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+  "pull": {
+    "tag": "kratosyan__s6e10-xgboost-realmlp-route-id-teacher_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+    "bytes": 47657,
+    "sha256": "86043709799b0d2d0e87cb6e02651565c91b33952928bfdb27d77a82f9647d93",
+    "elapsed": 1.342182800000046
+  },
+  "version": 2,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 2,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 137274164,
+    "ref": "kratosyan/s6e10-xgboost-realmlp-route-id-teacher",
+    "title": "S6E10 | XGBoost + RealMLP: route ID + teacher",
+    "author": "Ashot Mirzoyan",
+    "slug": "s6e10-xgboost-realmlp-route-id-teacher",
+    "lastRunTime": "2026-10-18T03:56:30.2870969Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [
+      "teejmahal20/airline-passenger-satisfaction",
+      "sachith7/s6e10-stack-oof-predictions"
+    ],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 2,
+    "currentVersionNumber": 2,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 17624,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "kratosyan__s6e10-xgboost-realmlp-route-id-teacher_outputs_v2",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 145184,
+    "sha256": "0185b18fa94b34c660bdb8008390e6b89c90a17a3ef67606446fdcd9da1f1c2c",
+    "elapsed": 1.7164525000007416
+  }
+}

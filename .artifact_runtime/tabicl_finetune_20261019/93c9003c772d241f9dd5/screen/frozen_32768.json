@@ -1,0 +1,43 @@
+{
+  "name": "frozen_32768",
+  "state": "frozen",
+  "context": 32768,
+  "status": "complete",
+  "fit_seconds": 10.2118558883667,
+  "query_seconds": 99.01675724983215,
+  "seconds": 109.2286171913147,
+  "auc": 0.955978703284318,
+  "baseline_auc": 0.9606333828423025,
+  "trials": [
+    {
+      "weight": 0.05,
+      "form": "probability",
+      "auc": 0.9606393378707757,
+      "paired": {
+        "delta": 5.955028473377294e-06,
+        "approximate_se": 1.2842550042900282e-05,
+        "interval95": [
+          -1.9216369610707258e-05,
+          3.1126426557461844e-05
+        ]
+      }
+    },
+    {
+      "weight": 0.2,
+      "form": "probability",
+      "auc": 0.9605563140782144,
+      "paired": {
+        "delta": -7.706876408791859e-05,
+        "approximate_se": 4.353788549870775e-05,
+        "interval95": [
+          -0.00016240301966538579,
+          8.265491489548607e-06
+        ]
+      }
+    }
+  ],
+  "peak_gpu_gb": 2.683727264404297,
+  "process_rss_gb": 6.452404022216797,
+  "checkpoint_sha256": "bdc7dbd5e4ff21f8f0456fcf90c6b7cdf72dbea960f2d05b19bec19f9b3d4ed0",
+  "prediction_sha256": "aee78695a735cd3e4e8f6fed6c736fc568cb5f8c2fe58cc66dbdd17aaf2d6498"
+}

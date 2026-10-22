@@ -1,0 +1,5 @@
+{
+  "timestamp": 1792684752.3696175,
+  "change": "Verifier explicitly matches training allow_tf32=True; no training/model/metric/admission change",
+  "verify_source_sha256": "acd9adbf2093a6f7b1c4f6584bf8551fa2c22a38143a2cad9de9d43ff06e58c0"
+}

@@ -1,0 +1,46 @@
+{
+  "protected_files": {
+    "main.py": {
+      "sha256": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+      "matches_cleanup_receipt": true
+    },
+    "train.csv": {
+      "sha256": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+      "matches_cleanup_receipt": true
+    },
+    "test.csv": {
+      "sha256": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+      "matches_cleanup_receipt": true
+    },
+    "sample_submission.csv": {
+      "sha256": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+      "matches_cleanup_receipt": true
+    },
+    "submission_public_pool_20261020.csv": {
+      "sha256": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+      "matches_cleanup_receipt": true
+    },
+    "CURRENT_BEST_RESULT.md": {
+      "sha256": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+      "matches_cleanup_receipt": true
+    },
+    "CURRENT_BEST_SUBMISSION.json": {
+      "sha256": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+      "matches_cleanup_receipt": true
+    },
+    "CURRENT_RECOMMENDED_CANDIDATE.json": {
+      "sha256": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad",
+      "matches_cleanup_receipt": true
+    }
+  },
+  "all_protected_match": true,
+  "author_check_table_recount": {
+    "entries": 78,
+    "actual_members": 77,
+    "retained": 51,
+    "retained_sources": 12
+  },
+  "auc_independently_recomputed": false,
+  "training_launched": false,
+  "new_submission_generated": false
+}

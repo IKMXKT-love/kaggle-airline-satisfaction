@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "real_gradient_steps": 3,
+  "fit_rows": 579297,
+  "probe_predictions_discarded": true,
+  "peak_allocated_gpu_gb": 0.44548559188842773
+}

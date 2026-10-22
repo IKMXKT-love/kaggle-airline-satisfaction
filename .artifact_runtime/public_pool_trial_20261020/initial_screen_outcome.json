@@ -1,0 +1,9 @@
+{
+  "status": "preparation_completed_no_model_fit",
+  "public_columns": 128,
+  "own_columns": 7,
+  "imported_reference_auc_tolerance": 2e-06,
+  "budget_expired": true,
+  "no_new_auc_result": true,
+  "screen_model_gate_not_measured": true
+}

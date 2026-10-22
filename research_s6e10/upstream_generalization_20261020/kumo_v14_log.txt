@@ -1,0 +1,114 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+torch 2.11.0+cu128 | device cuda (Tesla T4, 14.6 GiB)
+Hugging Face token: set
+model kumolarge | pilot False | full run: set E, context 30,000 x 10 bags x 4 estimators, orig share 0.0 | float16 True
+Train (699635, 23) | Test (299844, 22) | Orig None | 13 rating columns | positive rate 0.4436
+set A: 21 columns | set B: 42 columns
+set A: 21 columns | set B: 42 columns | set C: 47 columns | set D: 53 columns | set E: 58 columns
+residual keys: route_resid (3,521), route_class_resid (5,740), age_class_resid (224), distband_seg_resid (405), preflight_resid (1,067), comfort_resid (977), service_resid (1,002), wifi_seg_resid (36), boarding_seg_resid (36), route_resid2 (3,521), route_class_resid2 (5,740), age_seg_resid2 (417), dist_last2_resid (100), dist_hundreds_class_resid (30)
+kumolarge loaded in 10s | GPU memory 0.8 GiB
+folds: StratifiedKFold(5, shuffle=True, random_state=42) | fold sizes [139927, 139927, 139927, 139927, 139927]
+bag 0    0: done earlier
+bag 0    1: done earlier
+bag 0    2: done earlier
+bag 0    3: done earlier
+bag 0    4: done earlier
+bag 0 test: done earlier
+bag 1    0: done earlier
+bag 1    1: done earlier
+bag 1    2: done earlier
+bag 1    3: done earlier
+bag 1    4: done earlier
+      label maps C for pool test: 1 + 5 inner fits (14s)
+      label maps DE for pool test: 1 + 5 inner fits (15s)
+      OOM -> query batch 9944
+      OOM -> query batch 4972
+      OOM -> query batch 2486
+      bag 1 test chunk 1/6: 50,000 rows in 10.7 min | total 0.21 h
+      bag 1 test chunk 2/6: 50,000 rows in 10.8 min | total 0.39 h
+      bag 1 test chunk 3/6: 50,000 rows in 10.8 min | total 0.57 h
+      bag 1 test chunk 4/6: 50,000 rows in 10.8 min | total 0.75 h
+      bag 1 test chunk 5/6: 50,000 rows in 10.8 min | total 0.93 h
+      bag 1 test chunk 6/6: 49,844 rows in 10.8 min | total 1.11 h
+bag 1 test: mean 0.4433 | 299,844 rows | total 1.11 h
+      label maps C for pool 0: 1 + 5 inner fits (8s)
+      label maps DE for pool 0: 1 + 5 inner fits (12s)
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 2    0 chunk 1/3: 50,000 rows in 10.9 min | total 1.31 h
+      bag 2    0 chunk 2/3: 50,000 rows in 10.8 min | total 1.49 h
+      bag 2    0 chunk 3/3: 39,927 rows in 8.6 min | total 1.64 h
+bag 2    0: AUC 0.95958 | 139,927 rows | total 1.64 h
+      label maps C for pool 1: 1 + 5 inner fits (9s)
+      label maps DE for pool 1: 1 + 5 inner fits (13s)
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 2    1 chunk 1/3: 50,000 rows in 10.9 min | total 1.84 h
+      bag 2    1 chunk 2/3: 50,000 rows in 10.8 min | total 2.02 h
+      bag 2    1 chunk 3/3: 39,927 rows in 8.6 min | total 2.16 h
+bag 2    1: AUC 0.95843 | 139,927 rows | total 2.16 h
+      label maps C for pool 2: 1 + 5 inner fits (8s)
+      label maps DE for pool 2: 1 + 5 inner fits (13s)
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 2    2 chunk 1/3: 50,000 rows in 10.9 min | total 2.37 h
+      bag 2    2 chunk 2/3: 50,000 rows in 10.8 min | total 2.55 h
+      bag 2    2 chunk 3/3: 39,927 rows in 8.6 min | total 2.69 h
+bag 2    2: AUC 0.96024 | 139,927 rows | total 2.69 h
+      label maps C for pool 3: 1 + 5 inner fits (9s)
+      label maps DE for pool 3: 1 + 5 inner fits (12s)
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 2    3 chunk 1/3: 50,000 rows in 10.9 min | total 2.89 h
+      bag 2    3 chunk 2/3: 50,000 rows in 10.8 min | total 3.07 h
+      bag 2    3 chunk 3/3: 39,927 rows in 8.6 min | total 3.22 h
+bag 2    3: AUC 0.95952 | 139,927 rows | total 3.22 h
+      label maps C for pool 4: 1 + 5 inner fits (8s)
+      label maps DE for pool 4: 1 + 5 inner fits (13s)
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 2    4 chunk 1/3: 50,000 rows in 10.9 min | total 3.42 h
+      bag 2    4 chunk 2/3: 50,000 rows in 10.8 min | total 3.60 h
+      bag 2    4 chunk 3/3: 39,927 rows in 8.6 min | total 3.74 h
+bag 2    4: AUC 0.95942 | 139,927 rows | total 3.75 h
+      OOM -> query batch 9930
+      OOM -> query batch 4965
+      OOM -> query batch 2482
+      bag 2 test chunk 1/6: 50,000 rows in 10.9 min | total 3.94 h
+      bag 2 test chunk 2/6: 50,000 rows in 10.8 min | total 4.12 h
+      bag 2 test chunk 3/6: 50,000 rows in 10.8 min | total 4.30 h
+      bag 2 test chunk 4/6: 50,000 rows in 10.8 min | total 4.48 h
+      bag 2 test chunk 5/6: 50,000 rows in 10.8 min | total 4.66 h
+      bag 2 test chunk 6/6: 49,844 rows in 10.8 min | total 4.84 h
+bag 2 test: mean 0.4445 | 299,844 rows | total 4.84 h
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 3    0 chunk 1/3: 50,000 rows in 10.9 min | total 5.04 h
+      bag 3    0 chunk 2/3: 50,000 rows in 10.8 min | total 5.22 h
+      bag 3    0 chunk 3/3: 39,927 rows in 8.6 min | total 5.36 h
+bag 3    0: AUC 0.95964 | 139,927 rows | total 5.36 h
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 3    1 chunk 1/3: 50,000 rows in 10.9 min | total 5.56 h
+      bag 3    1 chunk 2/3: 50,000 rows in 10.8 min | total 5.74 h
+      bag 3    1 chunk 3/3: 39,927 rows in 8.6 min | total 5.88 h
+bag 3    1: AUC 0.95866 | 139,927 rows | total 5.88 h
+      OOM -> query batch 9959
+      OOM -> query batch 4979
+      OOM -> query batch 2489
+      bag 3    2 chunk 1/3: 50,000 rows in 10.9 min | total 6.08 h
+      bag 3    2 chunk 2/3: 50,000 rows in 10.8 min | total 6.26 h

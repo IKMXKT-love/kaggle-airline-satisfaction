@@ -1,0 +1,24 @@
+[
+  {
+    "name": "catboost_original",
+    "family": "catboost",
+    "use_te": false,
+    "numeric_categories": false,
+    "depth": 6,
+    "selection_auc": 0.9595076878182485,
+    "best_rounds": 1317,
+    "features": 98,
+    "seconds": 47.91400909423828
+  },
+  {
+    "name": "catboost_allcat_original",
+    "family": "catboost",
+    "use_te": false,
+    "numeric_categories": true,
+    "depth": 6,
+    "selection_auc": 0.9602486206863334,
+    "best_rounds": 2068,
+    "features": 115,
+    "seconds": 137.80529236793518
+  }
+]

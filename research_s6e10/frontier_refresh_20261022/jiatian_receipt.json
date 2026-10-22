@@ -1,0 +1,65 @@
+{
+  "ref": "jiatianzhang2/s6e10-15-fold-gpu-stacking-pipeline",
+  "pull": {
+    "tag": "jiatianzhang2__s6e10-15-fold-gpu-stacking-pipeline_pull",
+    "url": "https://www.kaggle.com/api/v1/kernels/pull/jiatianzhang2/s6e10-15-fold-gpu-stacking-pipeline",
+    "bytes": 65351,
+    "sha256": "da46d8ebfebf52421e1491122e0edacdca10d95212927650a61131e017a83b6a",
+    "elapsed": 1.4064127000001463
+  },
+  "version": 4,
+  "metadata": {
+    "languageNullable": "python",
+    "kernelTypeNullable": "notebook",
+    "isPrivateNullable": false,
+    "enableGpuNullable": true,
+    "enableTpuNullable": false,
+    "enableInternetNullable": true,
+    "currentVersionNumberNullable": 4,
+    "dockerImageNullable": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "machineShapeNullable": "NvidiaTeslaT4",
+    "id": 138471611,
+    "ref": "jiatianzhang2/s6e10-15-fold-gpu-stacking-pipeline",
+    "title": "s6e10-15-fold-gpu-stacking-pipeline",
+    "author": "Jiatian Zhang2",
+    "slug": "s6e10-15-fold-gpu-stacking-pipeline",
+    "lastRunTime": "2026-10-19T07:24:52.233837Z",
+    "language": "python",
+    "hasLanguage": true,
+    "kernelType": "notebook",
+    "hasKernelType": true,
+    "isPrivate": false,
+    "hasIsPrivate": true,
+    "enableGpu": true,
+    "hasEnableGpu": true,
+    "enableTpu": false,
+    "hasEnableTpu": true,
+    "enableInternet": true,
+    "hasEnableInternet": true,
+    "categoryIds": [
+      "gpu"
+    ],
+    "datasetDataSources": [],
+    "kernelDataSources": [],
+    "competitionDataSources": [
+      "playground-series-s6e10"
+    ],
+    "modelDataSources": [],
+    "totalVotes": 6,
+    "currentVersionNumber": 4,
+    "hasCurrentVersionNumber": true,
+    "dockerImage": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+    "hasDockerImage": true,
+    "machineShape": "NvidiaTeslaT4",
+    "hasMachineShape": true
+  },
+  "source_chars": 25854,
+  "cell_output_chars": 0,
+  "outputs": {
+    "tag": "jiatianzhang2__s6e10-15-fold-gpu-stacking-pipeline_outputs_v4",
+    "url": "https://api.kaggle.com/v1/kernels.KernelsApiService/ListKernelSessionOutput",
+    "bytes": 23502,
+    "sha256": "02cd14bd504fd96b9555eb66d083301b2bc8676cca8da7a3632ca190a964e1d4",
+    "elapsed": 1.1912603000000672
+  }
+}

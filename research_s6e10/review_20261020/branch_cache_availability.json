@@ -1,0 +1,38 @@
+{
+  "training": false,
+  "model_inference": false,
+  "rows": [
+    {
+      "outer": 0,
+      "phase": "selection",
+      "fit_rows": 579297,
+      "query_rows": 50374,
+      "seven_branch_inner_oof_available": true,
+      "full_fit_branch_queries_available": true
+    },
+    {
+      "outer": 0,
+      "phase": "refit",
+      "fit_rows": 629671,
+      "query_rows": 69964,
+      "seven_branch_inner_oof_available": true,
+      "full_fit_branch_queries_available": true
+    },
+    {
+      "outer": 1,
+      "phase": "selection",
+      "fit_rows": 579297,
+      "query_rows": 50374,
+      "seven_branch_inner_oof_available": true,
+      "full_fit_branch_queries_available": true
+    },
+    {
+      "outer": 1,
+      "phase": "refit",
+      "fit_rows": 629671,
+      "query_rows": 69964,
+      "seven_branch_inner_oof_available": true,
+      "full_fit_branch_queries_available": true
+    }
+  ]
+}

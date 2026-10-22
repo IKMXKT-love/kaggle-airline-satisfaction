@@ -1,0 +1,759 @@
+# Airline Passenger Satisfaction — TabFM with dependency-driven features (pool member)
+
+A tabular foundation model (Google **TabFM** by default, NVIDIA **Kumo Tabular** as an alternative, both through
+[`structured-data-models`](https://github.com/NVIDIA/structured-data-models)) predicts by in-context learning: labelled
+rows are passed as context, nothing is trained on this competition. The public pool already holds both models on the
+**raw** columns (cdeotte TFM set). This notebook feeds them features built from the EDA's feature dependencies
+(Flight Distance ↔ Class ↔ Type of Travel ↔ Age, and the two delays), so their errors can differ from the raw-column runs.
+
+| Set | Contents | Uses labels? |
+|---|---|---|
+| **A** | raw columns encoded as numbers (baseline, like the pool's TFM members) | no |
+| **B** | A + **typicality** (how usual this passenger is for the route / age), **within-segment ranks**, **regime** features (Business × long haul, age peak), **delay structure** | no |
+| **C** | B + **deconfounded effects**: a small composition model (Class × Travel × Customer, age band, delay flag) and the mean of its residual per route, route × Class, Age × Class, distance band × Class × Travel | yes — **nested** |
+| **D** | C + **rating-interaction residuals**: an additive model of every rating, and the mean of its residual per pre-flight / comfort / service rating 4-tuple and per wifi / boarding × segment | yes — **nested** |
+| **E** | D + **service-adjusted residuals** per route, route × Class, Age × Class × Travel and distance digits | yes — **nested** |
+
+**Sets C–E are nested.** Query rows get label features fitted on all context-pool rows; context rows get them from 5 inner
+folds of that pool, so no row ever sees its own label (otherwise the model learns "copy the feature" from the context
+and fails on the queries). The pilot prints a leakage check: each label feature's AUC on context rows vs query rows.
+
+- **Folds:** `StratifiedKFold(5, shuffle=True, random_state=42)` on `train.csv` in original row order (pool convention).
+- **Pilot first** (`CFG.PILOT = True`): scores 20,000 rows of fold 1 with each set in `PILOT_FEATURE_SETS` on the same
+  context, compares each with the pool's run of the same model (`oof_tabfm.npy` / `oof_kumolarge.npy`), projects the full
+  runtime, then re-runs the two best sets on fold 2 to confirm the ranking.
+  No OOF / submission files are written in pilot mode.
+- **Full run** (`CFG.PILOT = False`): 5 OOF folds + test per bag. **Runs over several sessions:** query rows are
+  saved in chunks of `CHUNK_ROWS`, no chunk is started that would end after `TIME_BUDGET_H`, and the next session
+  (with this session's output attached as an input) continues where it stopped (`/kaggle/working/tfm_parts/`).
+- **Outputs:** `oof_<model>_fs<set>.csv` (`id,pred`) / `submission_<model>_fs<set>.csv` (`id,satisfaction`) + `.npy`.
+- **Settings:** GPU and **Internet on** (pip install + checkpoint download). **TabFM weights are under the TabFM
+  Non-Commercial License v1.0** — read it and set `CFG.ACCEPT_TABFM_LICENSE = True` yourself.
+- **Faster download (optional):** a Hugging Face token, either as the Kaggle Secret `HF_TOKEN` (recommended; Add-ons →
+  Secrets) or in `CFG.HF_TOKEN`. Do not leave a pasted token in a notebook you make public.
+
+import importlib.util, subprocess, sys
+if importlib.util.find_spec("sdm") is None:
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q",
+                    "git+https://github.com/NVIDIA/structured-data-models.git"], check=True)
+
+import os, gc, glob, time, warnings
+os.environ.setdefault('PYTORCH_CUDA_ALLOC_CONF', 'expandable_segments:True')   # less fragmentation on a 15 GB T4
+import numpy as np
+import pandas as pd
+import torch
+import sdm
+from sklearn.model_selection import StratifiedKFold
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+from scipy.stats import spearmanr, rankdata
+
+warnings.filterwarnings('ignore')
+DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+print(f"torch {torch.__version__} | device {DEVICE}"
+      + (f" ({torch.cuda.get_device_name(0)}, {torch.cuda.get_device_properties(0).total_memory / 2**30:.1f} GiB)"
+         if DEVICE == 'cuda' else ''))
+T0 = time.time()
+
+class CFG:
+    TRAIN_PATH = "/kaggle/input/competitions/playground-series-s6e10/train.csv"
+    TEST_PATH  = "/kaggle/input/competitions/playground-series-s6e10/test.csv"
+    ORIG_PATHS = ["/kaggle/input/datasets/teejmahal20/airline-passenger-satisfaction/train.csv",
+                  "/kaggle/input/datasets/teejmahal20/airline-passenger-satisfaction/test.csv"]
+    TARGET = 'satisfaction'
+
+    MODEL_FAMILY = 'kumo'          # 'tabfm' (Google TabFM) | 'kumo' (NVIDIA Kumo Tabular)
+    ACCEPT_TABFM_LICENSE = True    # TabFM Non-Commercial License v1.0 - read it, then set True yourself
+    KUMO_SIZE = 'large'             # only for MODEL_FAMILY = 'kumo'
+    AMP = None                      # None: float16 for Kumo, float32 for TabFM (TabFM gives NaN in float16 on a T4)
+    # Hugging Face token for faster, rate-limit-free checkpoint downloads (optional). Safer than pasting it here:
+    # Kaggle "Add-ons -> Secrets", a secret named HF_TOKEN (attach it to this notebook); it is read automatically.
+    HF_TOKEN = ''
+
+    N_FOLDS = 5                     # the public OOF pool convention - do not change
+    RANDOM_SEED = 42                # the public OOF pool convention - do not change
+
+    # ---- pilot: same context, sets A / B / C, compared with the pool's run of the same model
+    PILOT = False
+    PILOT_FEATURE_SETS = ['C', 'D', 'E']   # measured on TabFM: A 0.9557 / B 0.9556 / C 0.9578 (pool 0.9589)
+    PILOT_CONFIRM = True             # re-run the two best sets on fold 2 (new rows, new context)
+    PILOT_CONTEXT_SIZE = 10_000
+    PILOT_QUERY_ROWS = 20_000
+    REF_GLOB = None                 # None: the cdeotte TFM file for MODEL_FAMILY (oof_tabfm / oof_kumolarge)
+
+    # ---- full run (set from the pilot)
+    FEATURE_SET = 'E'               # 'A' | 'B' | 'C' | 'D' | 'E'
+    CONTEXT_SIZE = 30_000
+    N_BAGS = 10
+    NUM_ESTIMATORS = None           # None: 4 for Kumo, 1 for TabFM (each TabFM estimator keeps a ~0.4 GB / 1k-row cache)
+    QUERY_BATCH = 4096              # starting query batch for TabFM (halved automatically on OOM)
+    ORIG_SHARE = 0.0                # fraction of the context drawn from the original survey
+    TIME_BUDGET_H = 11.3            # never start a chunk that would end after this (Kaggle sessions stop at 12 h)
+    CHUNK_ROWS = 50_000             # query rows saved per chunk: the most a stopped session can lose
+
+    # ---- set C (nested label features)
+    INNER_FOLDS = 5
+    RESID_SMOOTH = 30.0             # residual mean = sum(r) / (n + RESID_SMOOTH)
+
+    RATING_COLS = ['Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
+                   'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
+                   'Inflight entertainment', 'On-board service', 'Leg room service',
+                   'Baggage handling', 'Checkin service', 'Inflight service', 'Cleanliness']
+
+assert CFG.MODEL_FAMILY in ('tabfm', 'kumo') and CFG.FEATURE_SET in ('A', 'B', 'C', 'D', 'E')
+if CFG.MODEL_FAMILY == 'tabfm':
+    assert CFG.ACCEPT_TABFM_LICENSE, (
+        "TabFM weights are distributed under the TabFM Non-Commercial License v1.0 "
+        "(https://huggingface.co/google/tabfm-1.0.0-pytorch/blob/main/LICENSE). "
+        "Read it and set CFG.ACCEPT_TABFM_LICENSE = True to continue, or use MODEL_FAMILY = 'kumo'.")
+def hf_token():
+    if CFG.HF_TOKEN:
+        return CFG.HF_TOKEN.strip()
+    try:
+        from kaggle_secrets import UserSecretsClient
+        return UserSecretsClient().get_secret('HF_TOKEN').strip()
+    except Exception:
+        return os.environ.get('HF_TOKEN', '').strip()
+
+_tok = hf_token()
+if _tok:
+    os.environ['HF_TOKEN'] = _tok                  # read by huggingface_hub when the checkpoint is downloaded
+os.environ.setdefault('HF_XET_HIGH_PERFORMANCE', '1')
+print(f"Hugging Face token: {'set' if _tok else 'not set (anonymous download)'}")
+del _tok
+
+N_EST = CFG.NUM_ESTIMATORS or (1 if CFG.MODEL_FAMILY == 'tabfm' else 4)
+USE_AMP = CFG.AMP if CFG.AMP is not None else (CFG.MODEL_FAMILY == 'kumo')
+
+REF_GLOB = CFG.REF_GLOB or ('/kaggle/input/**/oof_tabfm.npy' if CFG.MODEL_FAMILY == 'tabfm'
+                            else '/kaggle/input/**/oof_kumolarge.npy')
+MODEL_TAG = 'tabfm' if CFG.MODEL_FAMILY == 'tabfm' else f'kumo{CFG.KUMO_SIZE}'
+OUT_DIR = '/kaggle/working'
+PARTS_DIR = os.path.join(OUT_DIR, 'tfm_parts')
+os.makedirs(PARTS_DIR, exist_ok=True)
+print(f"model {MODEL_TAG} | pilot {CFG.PILOT} | full run: set {CFG.FEATURE_SET}, context {CFG.CONTEXT_SIZE:,} "
+      f"x {CFG.N_BAGS} bags x {N_EST} estimators, orig share {CFG.ORIG_SHARE} | float16 {USE_AMP}")
+
+train = pd.read_csv(CFG.TRAIN_PATH)          # never sort / reindex: the pool aligns by row order
+test  = pd.read_csv(CFG.TEST_PATH)
+
+def encode_target(s):
+    if pd.api.types.is_bool_dtype(s) or pd.api.types.is_numeric_dtype(s):
+        return s.astype('int64')
+    return s.astype(str).str.strip().str.lower().isin(['satisfied', 'true', '1']).astype('int64')
+
+train[CFG.TARGET] = encode_target(train[CFG.TARGET])
+y = train[CFG.TARGET].to_numpy()
+NTR = len(y)
+feature_cols = [c for c in test.columns if c != 'id']
+RATINGS = [c for c in CFG.RATING_COLS if c in feature_cols]
+
+orig, y_orig = None, None
+orig_files = [p for p in CFG.ORIG_PATHS if os.path.exists(p)]
+if CFG.ORIG_SHARE > 0 and orig_files:
+    orig = pd.concat([pd.read_csv(p) for p in orig_files], ignore_index=True)
+    orig[CFG.TARGET] = encode_target(orig[CFG.TARGET])
+    orig = orig.reindex(columns=feature_cols + [CFG.TARGET]).dropna(subset=RATINGS).reset_index(drop=True)
+    y_orig = orig[CFG.TARGET].to_numpy()
+SOURCES = {'train': train, 'test': test, **({'orig': orig} if orig is not None else {})}
+print(f"Train {train.shape} | Test {test.shape} | Orig {None if orig is None else orig.shape} | "
+      f"{len(RATINGS)} rating columns | positive rate {y.mean():.4f}")
+
+## Sets A and B (target-free)
+
+Lookup tables are built on the train + test feature pool, never on a label. Rare routes are shrunk toward their
+50-mile distance band: `p = (n * p_route + m * p_band) / (n + m)`.
+
+| Group | Features | EDA dependency it encodes |
+|---|---|---|
+| Typicality | `route_p_business`, `route_p_biztravel`, `route_p_loyal`, `class_surprise`, `travel_surprise`, `age_surprise`, `combo_rarity` | Distance ↔ Class / Travel, Age ↔ Class |
+| Within-segment position | `dist_pct_in_seg`, `age_pct_in_class`, `dist_vs_seg_median`, `age_pct_in_seg` | distance matters inside Business only; age effect differs by class |
+| Regimes | `biz_dist_excess`, `biz_long_regime`, `age_from_peak`, `biz_senior`, `arr_ge_6` | Business × distance > 1,200; peak 51–60, drop after 60; arrival-delay step at 6 min (no class interaction) |
+| Delay structure | `delay_identical`, `recovery_ratio`, `only_arrival_late`, `made_up_time`, `arr_missing` | corr 0.84, 86.9 % identical delays |
+
+RKEY = {'wifi': 'Inflight wifi service', 'time': 'Departure/Arrival time convenient', 'booking': 'Ease of Online booking',
+        'gate': 'Gate location', 'food': 'Food and drink', 'boarding': 'Online boarding', 'seat': 'Seat comfort',
+        'ent': 'Inflight entertainment', 'onboard': 'On-board service', 'leg': 'Leg room service',
+        'bag': 'Baggage handling', 'checkin': 'Checkin service', 'clean': 'Cleanliness'}
+CLASS_ORD = {'Eco': 0, 'Eco Plus': 1, 'Business': 2}
+
+def key_frame(df):
+    """Small integer keys shared by every lookup."""
+    K = pd.DataFrame(index=df.index)
+    K['route'] = df['Flight Distance'].fillna(0).round().astype('int64').clip(0, 9_999)
+    K['band'] = K['route'] // 50
+    K['age'] = df['Age'].fillna(0).round().astype('int64').clip(0, 999)
+    K['age5'] = K['age'] // 5
+    K['cls'] = df['Class'].map(CLASS_ORD).fillna(0).astype('int64')
+    K['bt'] = (df['Type of Travel'] == 'Business travel').astype('int64')
+    K['cust'] = (df['Customer Type'] == 'Loyal Customer').astype('int64')
+    K['combo'] = K['cls'] * 4 + K['bt'] * 2 + K['cust']
+    K['biz'] = (K['cls'] == 2).astype('int64')
+    dep = df['Departure Delay in Minutes'].fillna(0)
+    K['arr6'] = (df['Arrival Delay in Minutes'].fillna(dep) >= 6).astype('int64')
+    K['last2'] = K['route'] % 100
+    K['hund'] = (K['route'] % 1000) // 100
+    for k, col in RKEY.items():
+        K[k] = df[col].fillna(0).round().astype('int64').clip(0, 9) if col in df else 0
+    return K
+
+def keycode(K, cols):
+    code = np.zeros(len(K), dtype=np.int64)
+    for c in cols:
+        code = code * 10_000 + K[c].to_numpy(np.int64)
+    return code
+
+KEYS = {s: key_frame(df) for s, df in SOURCES.items()}
+KP = pd.concat([KEYS['train'], KEYS['test']], ignore_index=True)       # the target-free feature pool
+
+def smoothed(cols, val, m, parent=None):
+    """Mean of `val` per key `cols` on the pool, shrunk toward the mean per `parent` (or the global mean)."""
+    v = pd.Series(KP[val].to_numpy(np.float64))
+    st = v.groupby(keycode(KP, cols)).agg(['sum', 'count'])
+    glob_mean = float(v.mean())
+    pm = v.groupby(keycode(KP, parent)).mean() if parent else None
+    def f(K):
+        s = st.reindex(keycode(K, cols))
+        n, sm = s['count'].fillna(0).to_numpy(), s['sum'].fillna(0).to_numpy()
+        pr = pm.reindex(keycode(K, parent)).fillna(glob_mean).to_numpy() if parent else np.full(len(K), glob_mean)
+        return ((sm + m * pr) / (n + m)).astype('float32')
+    return f
+
+def pct_within(group, val):
+    """Mid-rank percentile of integer `val` inside its `group`, on the pool."""
+    S = np.sort(keycode(KP, group) * 100_000 + KP[val].to_numpy(np.int64))
+    def f(K):
+        g = keycode(K, group) * 100_000
+        comb = g + K[val].to_numpy(np.int64)
+        lo, hi = np.searchsorted(S, g, 'left'), np.searchsorted(S, g + 99_999, 'right')
+        mid = (np.searchsorted(S, comb, 'left') + np.searchsorted(S, comb, 'right')) / 2
+        n = hi - lo
+        return np.where(n > 0, (mid - lo) / np.maximum(n, 1), 0.5).astype('float32')
+    return f
+
+F_P_BUSINESS  = smoothed(['route'], 'biz', 50, ['band'])
+F_P_BIZTRAVEL = smoothed(['route'], 'bt', 50, ['band'])
+F_P_LOYAL     = smoothed(['route'], 'cust', 50, ['band'])
+F_E_CLASS     = smoothed(['band', 'age5'], 'cls', 30, ['band'])
+F_E_TRAVEL    = smoothed(['band', 'age5'], 'bt', 30, ['band'])
+F_E_AGE       = smoothed(['route', 'cls'], 'age', 30, ['band', 'cls'])
+F_PCT_DIST_SEG  = pct_within(['cls', 'bt'], 'route')
+F_PCT_AGE_CLASS = pct_within(['cls'], 'age')
+F_PCT_AGE_SEG   = pct_within(['cls', 'bt', 'cust'], 'age')
+SEG_MEDIAN = pd.Series(KP['route'].to_numpy(np.float64)).groupby(keycode(KP, ['cls', 'bt'])).median()
+N_BAND_COMBO = pd.Series(1, index=keycode(KP, ['band', 'combo'])).groupby(level=0).size()
+N_BAND = pd.Series(1, index=KP['band'].to_numpy()).groupby(level=0).size()
+
+COLS_A = ['age', 'distance', 'dep_delay', 'arr_delay', 'male', 'loyal', 'business_travel', 'class_ord'] + \
+         ['r_' + ''.join(w[0] for w in c.replace('/', ' ').split()).lower() for c in RATINGS]
+SET_TYPICALITY = ['route_p_business', 'route_p_biztravel', 'route_p_loyal', 'class_surprise', 'travel_surprise',
+                  'age_surprise', 'combo_rarity']
+SET_POSITION = ['dist_pct_in_seg', 'age_pct_in_class', 'dist_vs_seg_median', 'age_pct_in_seg']
+SET_REGIME = ['biz_dist_excess', 'biz_long_regime', 'age_from_peak', 'biz_senior', 'arr_ge_6']
+SET_DELAY = ['delay_identical', 'recovery_ratio', 'only_arrival_late', 'made_up_time', 'arr_missing']
+COLS_B = COLS_A + SET_TYPICALITY + SET_POSITION + SET_REGIME + SET_DELAY
+
+def static_features(df, K):
+    out = pd.DataFrame(index=df.index)
+    dep = df['Departure Delay in Minutes'].astype('float32').fillna(0)
+    arr_raw = df['Arrival Delay in Minutes'].astype('float32')
+    arr = arr_raw.fillna(dep)
+    # ---- A: raw columns as numbers
+    out['age'] = df['Age'].astype('float32')
+    out['distance'] = df['Flight Distance'].astype('float32')
+    out['dep_delay'], out['arr_delay'] = dep, arr
+    out['male'] = (df['Gender'] == 'Male').astype('float32')
+    out['loyal'] = K['cust'].astype('float32')
+    out['business_travel'] = K['bt'].astype('float32')
+    out['class_ord'] = K['cls'].astype('float32')
+    for c, name in zip(RATINGS, COLS_A[8:]):
+        out[name] = df[c].astype('float32')
+    # ---- typicality
+    out['route_p_business'] = F_P_BUSINESS(K)
+    out['route_p_biztravel'] = F_P_BIZTRAVEL(K)
+    out['route_p_loyal'] = F_P_LOYAL(K)
+    out['class_surprise'] = K['cls'].to_numpy() - F_E_CLASS(K)
+    out['travel_surprise'] = K['bt'].to_numpy() - F_E_TRAVEL(K)
+    out['age_surprise'] = K['age'].to_numpy() - F_E_AGE(K)
+    n_bc = N_BAND_COMBO.reindex(keycode(K, ['band', 'combo'])).fillna(0).to_numpy()
+    n_b = N_BAND.reindex(K['band'].to_numpy()).fillna(0).to_numpy()
+    out['combo_rarity'] = np.log((n_bc + 1) / (n_b + 12))
+    # ---- within-segment position
+    out['dist_pct_in_seg'] = F_PCT_DIST_SEG(K)
+    out['age_pct_in_class'] = F_PCT_AGE_CLASS(K)
+    out['dist_vs_seg_median'] = K['route'].to_numpy() / SEG_MEDIAN.reindex(keycode(K, ['cls', 'bt'])).fillna(1000).to_numpy()
+    out['age_pct_in_seg'] = F_PCT_AGE_SEG(K)
+    # ---- regimes
+    biz, dist, age = K['biz'].to_numpy(), K['route'].to_numpy(), K['age'].to_numpy()
+    out['biz_dist_excess'] = biz * np.maximum(0, dist - 1200) / 1000
+    out['biz_long_regime'] = biz * (dist > 1200)
+    out['age_from_peak'] = np.abs(age - 55)
+    out['biz_senior'] = biz * (age > 60)
+    out['arr_ge_6'] = (arr >= 6)
+    # ---- delay structure
+    out['delay_identical'] = (arr_raw == dep)
+    out['recovery_ratio'] = (dep - arr) / (dep + 1)
+    out['only_arrival_late'] = (dep == 0) & (arr > 0)
+    out['made_up_time'] = arr < dep
+    out['arr_missing'] = arr_raw.isna()
+    out = out.astype('float32')
+    assert list(out.columns) == COLS_B
+    return out
+
+STATIC = {s: static_features(df, KEYS[s]) for s, df in SOURCES.items()}
+STATIC_NP = {s: f.to_numpy(np.float32) for s, f in STATIC.items()}
+for s, f in STATIC.items():
+    assert np.isfinite(STATIC_NP[s]).all(), f"non-finite static features in {s}"
+print(f"set A: {len(COLS_A)} columns | set B: {len(COLS_B)} columns")
+display(STATIC['train'][SET_TYPICALITY + SET_POSITION + SET_REGIME + SET_DELAY].describe().T.round(3))
+
+## Sets C, D and E: residual encodings (labels, nested)
+
+Each block follows the same recipe: a small **base model** absorbs what is easy to explain, its **residual**
+`r = y − p_base` is taken on the fitting rows, and the residual is averaged (`sum(r) / (n + 30)`) over keys with far too
+many cells for a 10,000-row context to estimate.
+
+| Set | Base model (logistic regression on one-hot) | Residual averaged per |
+|---|---|---|
+| **C** | Class × Travel × Customer, 5-year age band, arrival delay ≥ 6 → `base_logit` | route, route × Class, Age × Class, 50-mile band × Class × Travel |
+| **D** = C + | every rating **separately** (13 × 6 levels: thresholds, V-shapes, rating 0) + the C terms → `base2_logit` | rating **interactions** the additive model misses: wifi × time × booking × gate, food × entertainment × seat × cleanliness, on-board × leg room × baggage × check-in, wifi × Class × Travel, boarding × Class × Travel |
+| **E** = D + | the same service-aware base as D | route, route × Class, Age × Class × Travel, last two digits of the distance, hundreds digit × Class — route / age effects **with the service experience held fixed** |
+
+Fitting rows: the context pool of each job (the 4 other folds, or all of train for test). Query rows use maps fitted
+on the whole pool; context rows use maps from 5 inner folds of the pool. Orig rows (if any) use the whole-pool maps.
+
+BLOCKS = {
+    'C': dict(logit='base_logit', base=['combo', 'age5', 'arr6'],
+              keys={'route_resid': ['route'], 'route_class_resid': ['route', 'cls'],
+                    'age_class_resid': ['age', 'cls'], 'distband_seg_resid': ['band', 'cls', 'bt']}),
+    'DE': dict(logit='base2_logit', base=list(RKEY) + ['combo', 'age5', 'arr6'],
+               keys={'preflight_resid': ['wifi', 'time', 'booking', 'gate'],
+                     'comfort_resid': ['food', 'ent', 'seat', 'clean'],
+                     'service_resid': ['onboard', 'leg', 'bag', 'checkin'],
+                     'wifi_seg_resid': ['wifi', 'cls', 'bt'],
+                     'boarding_seg_resid': ['boarding', 'cls', 'bt'],
+                     'route_resid2': ['route'], 'route_class_resid2': ['route', 'cls'],
+                     'age_seg_resid2': ['age', 'cls', 'bt'],
+                     'dist_last2_resid': ['last2'], 'dist_hundreds_class_resid': ['hund', 'cls']}),
+}
+BLOCK_COLS = {b: [cfg['logit']] + list(cfg['keys']) for b, cfg in BLOCKS.items()}
+LABEL_C = BLOCK_COLS['C']
+LABEL_D = ['base2_logit', 'preflight_resid', 'comfort_resid', 'service_resid', 'wifi_seg_resid', 'boarding_seg_resid']
+LABEL_E = ['route_resid2', 'route_class_resid2', 'age_seg_resid2', 'dist_last2_resid', 'dist_hundreds_class_resid']
+FSET_LABEL = {'A': [], 'B': [], 'C': LABEL_C, 'D': LABEL_C + LABEL_D, 'E': LABEL_C + LABEL_D + LABEL_E}
+FSET_COLS = {'A': COLS_A, **{f: COLS_B + cols for f, cols in FSET_LABEL.items() if f != 'A'}}
+
+# contiguous integer codes per key, shared by every source
+CODES, NK = {s: {} for s in SOURCES}, {}
+for b, cfg in BLOCKS.items():
+    for name, cols in cfg['keys'].items():
+        raw = {s: keycode(KEYS[s], cols) for s in SOURCES}
+        uniq, inv = np.unique(np.concatenate(list(raw.values())), return_inverse=True)
+        NK[name], start = len(uniq), 0
+        for s in SOURCES:
+            CODES[s][name] = inv[start:start + len(raw[s])]; start += len(raw[s])
+
+# base-model one-hot matrices (target-free vocabulary from train + test)
+OH = {}
+for b, cfg in BLOCKS.items():
+    enc = OneHotEncoder(handle_unknown='ignore').fit(pd.concat([KEYS['train'][cfg['base']], KEYS['test'][cfg['base']]]))
+    OH[b] = {s: enc.transform(KEYS[s][cfg['base']]).tocsr() for s in SOURCES}
+
+def fit_label(b, rows):
+    Xb, yy = OH[b]['train'][rows], y[rows]
+    lr = LogisticRegression(C=1.0, max_iter=3000).fit(Xb, yy)
+    r = yy - lr.predict_proba(Xb)[:, 1]
+    tabs = {k: (np.bincount(CODES['train'][k][rows], weights=r, minlength=NK[k]),
+                np.bincount(CODES['train'][k][rows], minlength=NK[k])) for k in BLOCKS[b]['keys']}
+    return lr, tabs
+
+def apply_label(b, model, src, rows):
+    lr, tabs = model
+    out = np.empty((len(rows), len(BLOCK_COLS[b])), np.float32)
+    out[:, 0] = lr.decision_function(OH[b][src][rows])
+    for j, k in enumerate(BLOCKS[b]['keys'], 1):
+        s_, n_ = tabs[k]
+        c = CODES[src][k][rows]
+        out[:, j] = s_[c] / (n_[c] + CFG.RESID_SMOOTH)
+    return out
+
+INNER_ID, LABEL_CACHE = {}, {}
+def inner_ids(pool_key, pool_idx):
+    if pool_key not in INNER_ID:
+        ids = np.full(NTR, -1, np.int8)
+        perm = np.random.default_rng(7).permutation(len(pool_idx))
+        ids[pool_idx[perm]] = np.arange(len(pool_idx)) % CFG.INNER_FOLDS
+        INNER_ID[pool_key] = ids
+    return INNER_ID[pool_key]
+
+def label_models(b, pool_key, pool_idx):
+    """Whole-pool maps (for queries / orig rows) + inner-fold maps (for context rows), cached per block and pool."""
+    if (b, pool_key) not in LABEL_CACHE:
+        t = time.time()
+        ids = inner_ids(pool_key, pool_idx)
+        full = fit_label(b, pool_idx)
+        inner = [fit_label(b, pool_idx[ids[pool_idx] != j]) for j in range(CFG.INNER_FOLDS)]
+        LABEL_CACHE[(b, pool_key)] = (full, inner)
+        print(f"      label maps {b} for pool {pool_key}: 1 + {CFG.INNER_FOLDS} inner fits ({time.time() - t:.0f}s)")
+    return LABEL_CACHE[(b, pool_key)]
+
+def context_label_block(b, pool_key, pool_idx, tr_rows):
+    _, inner = label_models(b, pool_key, pool_idx)
+    ids = inner_ids(pool_key, pool_idx)[tr_rows]
+    assert (ids >= 0).all(), "context rows must come from the pool"
+    out = np.empty((len(tr_rows), len(BLOCK_COLS[b])), np.float32)
+    for j in range(CFG.INNER_FOLDS):
+        m = ids == j
+        out[m] = apply_label(b, inner[j], 'train', tr_rows[m])
+    return out
+print(' | '.join(f"set {f}: {len(c)} columns" for f, c in FSET_COLS.items()))
+print('residual keys: ' + ', '.join(f'{k} ({NK[k]:,})' for k in NK))
+
+## Model and in-context prediction
+
+t = time.time()
+if CFG.MODEL_FAMILY == 'tabfm':
+    MODEL = sdm.models.TabFM(task='classification', accept_license=CFG.ACCEPT_TABFM_LICENSE, device=DEVICE).eval()
+else:
+    from sdm.models.kumo.tabular import estimate_fit_batch_size, estimate_predict_batch_size
+    MODEL = sdm.models.KumoTabular(task='classification', size=CFG.KUMO_SIZE, device=DEVICE).eval()
+print(f"{MODEL_TAG} loaded in {time.time() - t:.0f}s"
+      + (f" | GPU memory {torch.cuda.memory_allocated() / 2**30:.1f} GiB" if DEVICE == 'cuda' else ''))
+
+AMP_ON = [DEVICE == 'cuda' and USE_AMP]       # switched off automatically if float16 produces NaN
+
+def autocast():
+    return torch.amp.autocast('cuda', dtype=torch.float16, enabled=AMP_ON[0])
+
+class NonFinite(Exception):
+    pass
+
+if CFG.MODEL_FAMILY == 'tabfm':
+    # ICL key/value cache: 2 (K, V) x 24 layers x 2048 channels per context row and estimator
+    for _r in sorted({CFG.PILOT_CONTEXT_SIZE, CFG.CONTEXT_SIZE}):
+        _gib = 2 * 24 * 2048 * _r * (2 if USE_AMP else 4) / 2**30
+        print(f"TabFM cache at context {_r:,}: ~{_gib:.1f} GiB per estimator "
+              f"(~{_gib * min(N_EST, 2):.1f} GiB on the GPU while predicting with {N_EST} estimator(s))")
+
+def free_bytes():
+    if DEVICE != 'cuda':
+        return 8 * 2**30
+    torch.cuda.empty_cache()
+    return int(torch.cuda.mem_get_info()[0] * 0.8)
+
+def to_table(arr, names):
+    return sdm.TableTensor.from_pandas(pd.DataFrame(arr, columns=names), {n: 'numerical' for n in names}, device=DEVICE)
+
+def sample_context(pool_idx, size, rng):
+    n_orig = int(round(size * CFG.ORIG_SHARE)) if orig is not None else 0
+    tr_rows = np.sort(rng.choice(pool_idx, size=min(size - n_orig, len(pool_idx)), replace=False))
+    og_rows = np.sort(rng.choice(len(orig), size=min(n_orig, len(orig)), replace=False)) if n_orig else np.array([], int)
+    return tr_rows, og_rows
+
+def build_job(pool_key, pool_idx, q_src, q_rows, size, rng, fset):
+    """Context / query tables for one fit. Returns numpy copies too (for the leakage check)."""
+    names = FSET_COLS[fset]
+    lab_cols = FSET_LABEL[fset]
+    sel = [COLS_B.index(c) for c in names if c in COLS_B]
+    tr_rows, og_rows = sample_context(pool_idx, size, rng)
+    xc, lab = STATIC_NP['train'][tr_rows][:, sel], y[tr_rows]
+    xq = STATIC_NP[q_src][q_rows][:, sel]
+    xo = STATIC_NP['orig'][og_rows][:, sel] if len(og_rows) else None
+    blocks = [b for b in BLOCKS if set(BLOCK_COLS[b]) & set(lab_cols)]
+    if blocks:
+        cols_all, c_parts, q_parts, o_parts = [], [], [], []
+        for b in blocks:
+            full = label_models(b, pool_key, pool_idx)[0]
+            cols_all += BLOCK_COLS[b]
+            c_parts.append(context_label_block(b, pool_key, pool_idx, tr_rows))
+            q_parts.append(apply_label(b, full, q_src, q_rows))
+            if xo is not None:
+                o_parts.append(apply_label(b, full, 'orig', og_rows))
+        pick = [cols_all.index(c) for c in lab_cols]
+        xc = np.hstack([xc, np.hstack(c_parts)[:, pick]])
+        xq = np.hstack([xq, np.hstack(q_parts)[:, pick]])
+        if xo is not None:
+            xo = np.hstack([xo, np.hstack(o_parts)[:, pick]])
+    if xo is not None:
+        xc, lab = np.vstack([xc, xo]), np.concatenate([lab, y_orig[og_rows]])
+    y_ctx = sdm.TableTensor.from_pandas(pd.DataFrame({'target': np.where(lab == 1, 'yes', 'no')}),
+                                        {'target': 'categorical'}, device=DEVICE)
+    return to_table(xc, names), y_ctx, to_table(xq, names), xc, lab, xq, names
+
+def _predict_table(x, qb):
+    """Predict a table in batches (halving the batch on OOM). Returns (class-probability frame, batch size used)."""
+    n, i, parts = x.size(0), 0, []
+    while i < n:
+        try:
+            with autocast():
+                out = MODEL.predict(x[i:i + qb]).to_pandas()
+        except torch.cuda.OutOfMemoryError:
+            torch.cuda.empty_cache()
+            if qb <= 16:
+                raise RuntimeError("out of GPU memory even for 16 query rows - lower CONTEXT_SIZE / "
+                                   "PILOT_CONTEXT_SIZE or NUM_ESTIMATORS") from None
+            qb = max(16, qb // 2); print(f"      OOM -> query batch {qb}")
+            continue
+        if not np.isfinite(out.to_numpy(dtype=np.float64)).all():
+            raise NonFinite(f'rows {i}-{i + len(out)}')
+        parts.append(out); i += len(out)
+    return pd.concat(parts, ignore_index=True), qb
+
+def icl_fit(x_ctx, y_ctx, lab, seed):
+    """Fit one context and find the positive-class column. Returns the state the query calls need."""
+    gen = torch.Generator(device=DEVICE).manual_seed(int(seed))
+    if CFG.MODEL_FAMILY == 'kumo':
+        eb = estimate_fit_batch_size(MODEL, x_ctx, y_ctx, memory_budget=free_bytes(), num_estimators=N_EST)
+    else:
+        eb = 1
+    t_fit = time.time()
+    try:
+        with autocast():
+            MODEL.fit(x=x_ctx, y=y_ctx, num_estimators=N_EST, estimator_batch_size=eb, generator=gen)
+    except torch.cuda.OutOfMemoryError:
+        raise RuntimeError("out of GPU memory while fitting the context - lower CONTEXT_SIZE / PILOT_CONTEXT_SIZE "
+                           "or NUM_ESTIMATORS") from None
+    if DEVICE == 'cuda':
+        torch.cuda.synchronize()
+    fit_sec = time.time() - t_fit
+    if CFG.MODEL_FAMILY == 'kumo':
+        qb = estimate_predict_batch_size(MODEL, x_ctx, y_ctx, memory_budget=free_bytes(),
+                                         num_estimators=N_EST, estimator_batch_size=eb)
+        qb = int(min(max(qb, 256), 65_536))
+    else:
+        qb = CFG.QUERY_BATCH
+    # positive-class column: 'yes' if the output keeps the label names, verified in-sample on context rows
+    n_probe = min(512, len(lab))
+    probe, qb_probe = _predict_table(x_ctx[:n_probe], min(qb, n_probe))
+    aucs = {c: roc_auc_score(lab[:n_probe], probe[c]) for c in probe.columns}
+    pos = 'yes' if 'yes' in aucs and aucs['yes'] > 0.5 else max(aucs, key=aucs.get)
+    if qb_probe < min(qb, n_probe):            # the probe already hit OOM: keep its smaller batch
+        qb = qb_probe
+    return {'pos': pos, 'eb': eb, 'qb': qb, 'fit_sec': fit_sec}
+
+def _icl_once(x_ctx, y_ctx, x_q, lab, seed):
+    st = icl_fit(x_ctx, y_ctx, lab, seed)
+    out, qb = _predict_table(x_q, st['qb'])
+    return out[st['pos']].to_numpy(dtype=np.float64), st['eb'], qb, st['fit_sec']
+
+def _nan_fallback(e):
+    if not AMP_ON[0]:
+        raise RuntimeError(f"non-finite predictions in float32 too ({e}) - try FEATURE_SET 'A' to see whether a "
+                           "feature causes it, or a smaller CONTEXT_SIZE") from None
+    AMP_ON[0] = False
+    print(f"      NaN under float16 autocast ({e}) - switching autocast off (float32) and refitting", flush=True)
+
+def icl_fit_safe(x_ctx, y_ctx, lab, seed):
+    while True:
+        try:
+            return icl_fit(x_ctx, y_ctx, lab, seed)
+        except NonFinite as e:
+            MODEL.clear(); _nan_fallback(e)
+
+def icl_query_safe(x, st, refit):
+    """Predict rows of a fitted context; on float16 NaN switch to float32, refit and redo."""
+    while True:
+        try:
+            out, st['qb'] = _predict_table(x, st['qb'])
+            return out[st['pos']].to_numpy(dtype=np.float64)
+        except NonFinite as e:
+            MODEL.clear(); _nan_fallback(e); st.update(refit())
+
+def icl_predict(x_ctx, y_ctx, x_q, lab, seed):
+    """Fit one context, predict the query table in memory-sized batches. Returns P(satisfied).
+    If float16 autocast yields NaN, autocast is switched off for the rest of the run and the job is redone in float32."""
+    while True:
+        try:
+            return _icl_once(x_ctx, y_ctx, x_q, lab, seed)
+        except NonFinite as e:
+            if not AMP_ON[0]:
+                raise RuntimeError(f"non-finite predictions in float32 too ({e}) - try FEATURE_SET 'A' to see whether a "
+                                   "feature causes it, or a smaller CONTEXT_SIZE") from None
+            AMP_ON[0] = False
+            print(f"      NaN under float16 autocast ({e}) - switching autocast off (float32) and refitting", flush=True)
+        finally:
+            MODEL.clear()
+            if DEVICE == 'cuda':
+                torch.cuda.empty_cache()
+
+folds = list(StratifiedKFold(CFG.N_FOLDS, shuffle=True, random_state=CFG.RANDOM_SEED).split(np.zeros(NTR), y))
+print(f"folds: StratifiedKFold({CFG.N_FOLDS}, shuffle=True, random_state={CFG.RANDOM_SEED}) | "
+      f"fold sizes {[len(b) for _, b in folds]}")
+
+## Pilot (only when `CFG.PILOT = True`)
+
+Same 20,000 query rows of fold 1 and the same context rows (from folds 2–5) for every feature set. For set C the
+**leakage check** prints each label feature's AUC on the context rows and on the query rows — they must be close; a
+context AUC far above the query AUC would mean the nesting is broken.
+
+**Promote a set to the full run only if** its AUC is at least the pool model's on the same rows, its spearman with the
+pool model is below ~0.97, and the rank average of the two beats both.
+
+def pilot_run(fold_i, fsets):
+    """Score PILOT_QUERY_ROWS rows of one fold for each feature set, on one shared context. Returns {set: scores}."""
+    tr_idx, va_idx = folds[fold_i]
+    q_rows = np.sort(np.random.default_rng(fold_i).choice(va_idx, size=min(CFG.PILOT_QUERY_ROWS, len(va_idx)),
+                                                           replace=False))
+    if REF is not None:
+        print(f"fold {fold_i + 1}: pool {MODEL_TAG} AUC on these rows {roc_auc_score(y[q_rows], REF[q_rows]):.5f}")
+    res, preds, shown = {}, {}, set()
+    for fset in fsets:
+        t_build = time.time()
+        x_ctx, y_ctx, x_q, xc, lab, xq, names = build_job(fold_i, tr_idx, 'train', q_rows, CFG.PILOT_CONTEXT_SIZE,
+                                                          np.random.default_rng(100 + fold_i), fset)
+        t_build = time.time() - t_build
+        if DEVICE == 'cuda':
+            torch.cuda.synchronize(); torch.cuda.reset_peak_memory_stats()
+        t = time.time()
+        p, eb, qb, fit_sec = icl_predict(x_ctx, y_ctx, x_q, lab, seed=1)
+        sec = time.time() - t
+        per_row = (sec - fit_sec) / len(q_rows)
+        hours_per_bag = (6 * fit_sec + per_row * (NTR + len(test))) / 3600
+        peak = torch.cuda.max_memory_allocated() / 2**30 if DEVICE == 'cuda' else float('nan')
+        auc = roc_auc_score(y[q_rows], p)
+        print(f"set {fset} ({len(names)} cols): AUC {auc:.5f} | {sec:6.1f}s for {len(q_rows):,} rows "
+              f"(features {t_build:.0f}s, fit {fit_sec:.1f}s, query batch {qb}, peak {peak:.1f} GiB) | ~{hours_per_bag:.2f} h per bag")
+        for c in FSET_LABEL[fset]:
+            if c in shown:
+                continue
+            shown.add(c)
+            col = names.index(c)
+            print(f"      leakage check {c:26s} AUC context {roc_auc_score(lab, xc[:, col]):.4f} | "
+                  f"query {roc_auc_score(y[q_rows], xq[:, col]):.4f}")
+        ravg = float('nan')
+        if REF is not None:
+            r = REF[q_rows]
+            ravg = roc_auc_score(y[q_rows], rankdata(p) + rankdata(r))
+            print(f"      vs {MODEL_TAG} pool member: spearman {spearmanr(p, r)[0]:.4f} | rank-average AUC {ravg:.5f} "
+                  f"(ours {auc:.5f}, pool {roc_auc_score(y[q_rows], r):.5f})")
+        res[fset], preds[fset] = (auc, ravg), p
+        pd.DataFrame({'id': train['id'].to_numpy()[q_rows], 'pred': p}).to_csv(
+            f"{OUT_DIR}/pilot_{MODEL_TAG}_fs{fset}_fold{fold_i + 1}_c{CFG.PILOT_CONTEXT_SIZE}.csv", index=False)
+        del x_ctx, y_ctx, x_q; gc.collect()
+    if len(preds) > 1:
+        sets = list(preds)
+        print("spearman between sets: " + ', '.join(f"{a}-{b} {spearmanr(preds[a], preds[b])[0]:.4f}"
+                                                   for i, a in enumerate(sets) for b in sets[i + 1:]))
+    return res
+
+if CFG.PILOT:
+    ref_hits = glob.glob(REF_GLOB, recursive=True)
+    REF = np.load(ref_hits[0]).astype(np.float64).ravel() if ref_hits else None
+    if REF is not None:
+        assert len(REF) == NTR, f"reference has {len(REF)} rows, train has {NTR}"
+        print(f"reference: {ref_hits[0]}")
+    else:
+        print(f"no reference found for {REF_GLOB} - attach cdeotte/s6e10-tfm-oof-and-test-predictions to compare")
+    key = (lambda f: res1[f][1]) if REF is not None else (lambda f: res1[f][0])
+    print("\n=== fold 1 ===")
+    res1 = pilot_run(0, CFG.PILOT_FEATURE_SETS)
+    ranking = sorted(res1, key=key, reverse=True)
+    print("ranking (" + ("rank-average AUC with the pool member" if REF is not None else "AUC") + "): "
+          + ' > '.join(f"{f} {key(f):.5f}" for f in ranking))
+    if CFG.PILOT_CONFIRM and len(ranking) > 1:
+        top = ranking[:2]
+        print(f"\n=== fold 2: confirmation of {top} on new rows with a new context ===")
+        res2 = pilot_run(1, top)
+        key2 = (lambda f: res2[f][1]) if REF is not None else (lambda f: res2[f][0])
+        print("fold 2 ranking: " + ' > '.join(f"{f} {key2(f):.5f}" for f in sorted(res2, key=key2, reverse=True)))
+        print("Trust the winner only if it leads on both folds.")
+    print("\nPick FEATURE_SET / CONTEXT_SIZE / N_BAGS, then set PILOT = False for the full run.")
+
+## Full run: 5 OOF folds + test, per bag (resumable)
+
+def part_path(name):
+    return os.path.join(PARTS_DIR, f'{name}.npy')
+
+def find_part(name):
+    """A finished part / chunk from this session, or from an attached previous session (copied into this output so
+    the next session only needs the latest output attached)."""
+    if os.path.exists(part_path(name)):
+        return part_path(name)
+    hits = glob.glob(f'/kaggle/input/**/tfm_parts/{name}.npy', recursive=True)
+    if not hits:
+        return None
+    np.save(part_path(name), np.load(hits[0]))
+    return part_path(name)
+
+def hours():
+    return (time.time() - T0) / 3600
+
+def fits_budget(seconds):
+    return hours() + 1.15 * seconds / 3600 <= CFG.TIME_BUDGET_H
+
+if not CFG.PILOT:
+    tag = (f"{MODEL_TAG}_fs{CFG.FEATURE_SET}_c{CFG.CONTEXT_SIZE}_e{N_EST}"
+           f"_o{int(CFG.ORIG_SHARE * 100)}")
+    RATE = {'fit': 0.0, 'row': 0.0}          # measured in this session: seconds per fit, per query row
+    stopped = False
+    for b, k in [(b, k) for b in range(CFG.N_BAGS) for k in list(range(CFG.N_FOLDS)) + ['test']]:
+        name = f'{tag}_b{b}_{"test" if k == "test" else f"f{k}"}'
+        if find_part(name):
+            print(f"bag {b} {str(k):>4}: done earlier")
+            continue
+        seed = 1000 * (b + 1) + (99 if k == 'test' else k)
+        if k == 'test':
+            pool_key, pool_idx, q_src, q_rows = 'test', np.arange(NTR), 'test', np.arange(len(test))
+        else:
+            pool_key, (pool_idx, q_rows), q_src = k, folds[k], 'train'
+        chunks = [(j, s0, min(s0 + CFG.CHUNK_ROWS, len(q_rows))) for j, s0 in enumerate(range(0, len(q_rows), CFG.CHUNK_ROWS))]
+        missing = [c for c in chunks if not find_part(f'{name}_c{c[0]}')]
+        if missing and not fits_budget(RATE['fit'] + RATE['row'] * (missing[0][2] - missing[0][1])):
+            stopped = True
+            break
+        if missing:
+            t = time.time()
+            x_ctx, y_ctx, x_q, _, lab, _, _ = build_job(pool_key, pool_idx, q_src, q_rows, CFG.CONTEXT_SIZE,
+                                                        np.random.default_rng(seed), CFG.FEATURE_SET)
+            refit = lambda: icl_fit_safe(x_ctx, y_ctx, lab, seed)
+            st = refit()
+            RATE['fit'] = time.time() - t
+            for j, s0, s1 in missing:
+                if not fits_budget(RATE['row'] * (s1 - s0)):
+                    stopped = True
+                    break
+                tc = time.time()
+                pc = icl_query_safe(x_q[s0:s1], st, refit)
+                np.save(part_path(f'{name}_c{j}'), pc.astype(np.float32))
+                RATE['row'] = (time.time() - tc) / (s1 - s0)
+                print(f"      bag {b} {str(k):>4} chunk {j + 1}/{len(chunks)}: {s1 - s0:,} rows in "
+                      f"{(time.time() - tc) / 60:.1f} min | total {hours():.2f} h", flush=True)
+            MODEL.clear()
+            del x_ctx, y_ctx, x_q; gc.collect()
+            if DEVICE == 'cuda':
+                torch.cuda.empty_cache()
+            if stopped:
+                break
+        p = np.concatenate([np.load(find_part(f'{name}_c{j}')) for j, _, _ in chunks]).astype(np.float64)
+        np.save(part_path(name), p.astype(np.float32))
+        msg = f"AUC {roc_auc_score(y[q_rows], p):.5f}" if k != 'test' else f"mean {p.mean():.4f}"
+        print(f"bag {b} {str(k):>4}: {msg} | {len(p):,} rows | total {hours():.2f} h", flush=True)
+    if stopped:
+        print(f"\ntime budget: stopped cleanly at {hours():.2f} h. Finished parts and chunks are in "
+              f"{PARTS_DIR}. Next session: attach THIS version's output (Add Input -> Your Work -> this notebook) and "
+              f"run again with the same CFG - it continues where this one stopped.")
+
+## Assemble and save (only when every part exists)
+
+if not CFG.PILOT:
+    oof = np.zeros(NTR); test_pred = np.zeros(len(test)); complete = True
+    for b in range(CFG.N_BAGS):
+        for k in range(CFG.N_FOLDS):
+            f = find_part(f'{tag}_b{b}_f{k}')
+            if f is None: complete = False; continue
+            oof[folds[k][1]] += np.load(f) / CFG.N_BAGS
+        f = find_part(f'{tag}_b{b}_test')
+        if f is None: complete = False; continue
+        test_pred += np.load(f) / CFG.N_BAGS
+    if not complete:
+        print("parts missing - rerun with this output attached to finish")
+    else:
+        print(f"OOF AUC {roc_auc_score(y, oof):.6f} | folds " +
+              ' '.join(f'{roc_auc_score(y[b_], oof[b_]):.5f}' for _, b_ in folds))
+        n = f"{MODEL_TAG}_fs{CFG.FEATURE_SET}"
+        np.save(f"{OUT_DIR}/oof_{n}.npy", oof.astype(np.float32))
+        np.save(f"{OUT_DIR}/test_{n}.npy", test_pred.astype(np.float32))
+        pd.DataFrame({'id': train['id'], 'pred': oof}).to_csv(f"{OUT_DIR}/oof_{n}.csv", index=False)
+        pd.DataFrame({'id': test['id'], CFG.TARGET: test_pred}).to_csv(f"{OUT_DIR}/submission_{n}.csv", index=False)
+        print(f"saved oof_{n}.* / test_{n}.npy / submission_{n}.csv | total {(time.time() - T0) / 3600:.2f} h")

@@ -1,0 +1,7 @@
+W1022 23:18:32.928000 45632 .venv\Lib\site-packages\torch\utils\flop_counter.py:29] triton not found; flop counting will not work for triton kernels
+{"elapsed_seconds": 256.30329751968384, "stage": "prepared", "fit_rows": 419781, "stop_rows": 139927, "score_rows": 139927, "pretrain_rows": 1129359}
+{"elapsed_seconds": 256.6511652469635, "stage": "class", "epoch": 1, "epochs": 2, "step": 1, "steps": 3280, "epoch_rows_per_second": 372.26035923094844, "mean_loss": 0.7059955596923828}
+{"elapsed_seconds": 274.063223361969, "stage": "class", "epoch": 1, "epochs": 2, "step": 101, "steps": 3280, "epoch_rows_per_second": 728.0958410262098, "mean_loss": 0.497981468344679}
+{"elapsed_seconds": 291.5461242198944, "stage": "class", "epoch": 1, "epochs": 2, "step": 201, "steps": 3280, "epoch_rows_per_second": 730.104207146708, "mean_loss": 0.39842459337035224}
+{"elapsed_seconds": 309.05768752098083, "stage": "class", "epoch": 1, "epochs": 2, "step": 301, "steps": 3280, "epoch_rows_per_second": 730.3835219752733, "mean_loss": 0.3609597018588817}
+{"elapsed_seconds": 326.8681831359863, "stage": "class", "epoch": 1, "epochs": 2, "step": 401, "steps": 3280, "epoch_rows_per_second": 727.4287396402043, "mean_loss": 0.33789506651219586}

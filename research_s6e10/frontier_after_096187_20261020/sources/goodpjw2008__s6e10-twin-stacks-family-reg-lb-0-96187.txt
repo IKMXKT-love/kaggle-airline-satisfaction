@@ -1,0 +1,642 @@
+# Part 13 in one picture.  Every number is from our runs of 10-20 (our 16 submitted stacks of Parts
+# 1 - 8 and their out-of-fold predictions, random 59,969-row subsets of the training rows, the public
+# scores of our real submissions) and is derived in section 4b; nothing here is computed by this cell.
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+
+INK, MUTED, RULE, CARD = "#1f2937", "#6b7280", "#d1d5db", "#f3f4f6"
+SEEN, REAL, NEW = "#f59e0b", "#2563eb", "#059669"  # cross-validation & noise / leaderboard / new in this part
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "text.color": INK,
+                     "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": MUTED})
+fig = plt.figure(figsize=(12, 11.5), dpi=110, facecolor="white")
+fig.text(0.04, 0.972, "Part 13 in one picture", fontsize=23, fontweight="bold", va="center")
+fig.text(0.04, 0.944, "Twelve parts of public scores, re-read against the board's own noise: one step at a time it is a coin, in sum it is CV.",
+         fontsize=12.5, color=MUTED, va="center")
+
+# ---------------------------------------------------------------- the pipeline
+ax = fig.add_axes([0.04, 0.80, 0.93, 0.12]); ax.set_xlim(0, 100); ax.set_ylim(0, 10); ax.axis("off")
+boxes = [(0.0, 22.0, "THE RULE", "public sd ≈ 0.003 ×\nstd(rank difference)", CARD),
+         (26.0, 23.0, "OUR 15 STEPS", "Parts 1 – 8, every stack\nwe submitted, with its OOF", "#d1fae5"),
+         (53.0, 22.0, "ONE AT A TIME", "public moved past its noise\nin 3 of 15 steps", CARD),
+         (79.0, 21.0, "IN SUM", "P1 → P10: CV +765,\npublic +780 (×1e-6)", "#dbeafe")]
+for x, w, head, body, col in boxes:
+    ax.add_patch(FancyBboxPatch((x, 0.6), w, 8.8, boxstyle="round,pad=0,rounding_size=0.9", fc=col, ec="none"))
+    ax.text(x + w / 2, 7.6, head, ha="center", va="center", fontsize=10.5, fontweight="bold", color=MUTED)
+    ax.text(x + w / 2, 3.9, body, ha="center", va="center", fontsize=10.5, linespacing=1.45)
+for (x, w, *_), (x2, *_) in zip(boxes[:-1], boxes[1:]):
+    ax.add_patch(FancyArrowPatch((x + w + 0.5, 5), (x2 - 0.5, 5), arrowstyle="-|>", mutation_scale=15, color=MUTED, lw=1.6))
+
+
+def panel(x, y, w, h, pad, no, title, sub):
+    fig.text(x, y + h + 0.052, f"{no}", fontsize=15, fontweight="bold", color="white", va="center", ha="center",
+             bbox=dict(boxstyle="circle,pad=0.25", fc=INK, ec="none"))
+    fig.text(x + 0.027, y + h + 0.052, title, fontsize=14.5, fontweight="bold", va="center")
+    fig.text(x - 0.008, y + h + 0.024, sub, fontsize=10.5, color=MUTED, va="center")
+    a = fig.add_axes([x + pad, y, w - pad, h])
+    for s in ("top", "right"):
+        a.spines[s].set_visible(False)
+    for s in ("left", "bottom"):
+        a.spines[s].set_color(RULE)
+    a.tick_params(length=0, labelsize=10.5)
+    return a
+
+
+# ---------------------------------------------------------------- 1. the rule, on our own steps
+a = panel(0.05, 0.435, 0.40, 0.27, 0.085, 1, "The rule holds on our own history",
+          "measured public-size sd vs the rule, 15 steps of Parts 1 – 8")
+std = [0.0141, 0.02376, 0.00985, 0.01794, 0.0135, 0.00532, 0.00385, 0.00551, 0.0207, 0.00678, 0.00746, 0.00698,
+       0.00523, 0.00521, 0.00576]
+sub = [42.5, 66.6, 25.2, 54.4, 42.9, 16.7, 11.7, 18.3, 61.7, 22.0, 22.3, 19.8, 14.2, 17.8, 18.1]
+a.plot([0, 0.026], [0, 0.026 * 3000], color=RULE, lw=2, zorder=1)
+a.scatter(std, sub, s=52, color=NEW, zorder=3)
+a.text(0.0012, 74, "each dot: one step between two of\nour submitted stacks (measured on\n120 random 60k-row OOF subsets)",
+       fontsize=9.4, color=INK, va="top", linespacing=1.35)
+a.text(0.0255, 12, "line: 0.003 × std\nmeasured / rule ≈ 1.0 (median)", ha="right", fontsize=10, color=INK,
+       fontweight="bold", linespacing=1.3)
+a.set_xlim(0, 0.026); a.set_ylim(0, 80)
+a.set_xticks([0, 0.01, 0.02]); a.set_xticklabels(["0", ".01", ".02"])
+a.set_yticks([0, 25, 50, 75]); a.set_ylabel("public sd, ×1e-6", fontsize=9.6)
+a.set_xlabel("std of the percentile-rank difference of the two test files", fontsize=9.6)
+a.grid(axis="y", color=RULE, lw=0.6); a.set_axisbelow(True); a.spines["left"].set_visible(False)
+
+# ---------------------------------------------------------------- 2. fifteen steps
+a = panel(0.56, 0.435, 0.41, 0.27, 0.085, 2, "Fifteen steps, each against its noise",
+          "public change (dot) ± 2 sd (bar) vs CV change (orange tick), ×1e-5")
+cv = [12.06, -0.30, 3.58, 6.29, 7.65, 0.86, 0.16, 0.22, 8.33, 2.24, 1.29, 2.15, 0.66, 1.86, 0.50]
+lb = [-1, 18, 2, 2, 12, 4, 2, -1, 5, 2, -1, 3, 3, 1, 1]
+sd = [4.25, 7.14, 2.98, 5.39, 4.07, 1.65, 1.23, 1.70, 6.22, 2.08, 2.28, 2.13, 1.62, 1.61, 1.78]  # rule + rounding
+for i, (c, l, s) in enumerate(zip(cv, lb, sd)):
+    a.plot([i, i], [c - 2 * s, c + 2 * s], color=SEEN, lw=6, alpha=0.30, solid_capstyle="round")
+    a.plot([i - 0.28, i + 0.28], [c, c], color=SEEN, lw=2.4)
+    out = abs(l - c) > 2 * s
+    a.scatter([i], [l], s=46, color=REAL if not out else "#dc2626", zorder=3)
+a.axhline(0, color=INK, lw=0.8)
+a.annotate("red: the 10-fold detour — its CV was\ninflated: in (z −3.1), back out (z +2.6)", xy=(0, -1), xytext=(1.3, -9.8), fontsize=9.2, color="#dc2626",
+           fontweight="bold", linespacing=1.25, arrowprops=dict(arrowstyle="-", color="#dc2626", lw=1))
+a.text(14.4, 21.5, "orange bar: where the public change lands\n95% of the time if CV is right", ha="right",
+       fontsize=9.2, color=INK, va="top", linespacing=1.35)
+labels = ["k10", "P2", "P3", "P4", "P5", "", "P6", "", "", "P7", "", "", "", "", "P8"]
+a.set_xticks(range(15)); a.set_xticklabels(labels, fontsize=9.2)
+a.set_xlim(-0.7, 14.7); a.set_ylim(-12, 23)
+a.set_yticks([-10, 0, 10, 20]); a.set_ylabel("change, ×1e-5", fontsize=9.6)
+a.grid(axis="y", color=RULE, lw=0.6); a.set_axisbelow(True); a.spines["left"].set_visible(False)
+
+# ---------------------------------------------------------------- 3. in sum
+a = panel(0.05, 0.085, 0.40, 0.25, 0.085, 3, "In sum, the board agrees with CV",
+          "cumulative change from Part 1, ×1e-5; band = public ± 2 sd of the whole move")
+parts = ["P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P10"]
+cvc = [0, 11.8, 15.3, 21.6, 29.3, 30.3, 41.1, 47.6, 76.5]
+lbc = [0, 17, 19, 21, 33, 39, 45, 52, 78]
+band = [0, 6.27, 7.02, 9.10, 10.08, 10.21, 11.88, 11.92, 12.63]
+xs = range(len(parts))
+a.fill_between(xs, [c - 2 * b for c, b in zip(cvc, band)], [c + 2 * b for c, b in zip(cvc, band)], color=SEEN, alpha=0.16, lw=0)
+a.plot(xs, cvc, color=SEEN, lw=2.6, marker="o", ms=6)
+a.plot(xs, lbc, color=REAL, lw=2.6, marker="o", ms=6)
+a.text(8.15, 76.5, "CV\n+76.5", fontsize=9.6, color=SEEN, fontweight="bold", va="top", linespacing=1.2)
+a.text(8.15, 86, "public\n+78", fontsize=9.6, color=REAL, fontweight="bold", va="center", linespacing=1.2)
+a.text(0.2, 70, "P10 = our 245 stack (public 0.96186);\nP9 and P11 – 12 have no matching OOF", fontsize=9.0,
+       color=MUTED, va="top", linespacing=1.3)
+a.set_xticks(list(xs)); a.set_xticklabels(parts, fontsize=9.4)
+a.set_xlim(-0.3, 9.2); a.set_ylim(-8, 102)
+a.set_yticks([0, 25, 50, 75, 100])
+a.grid(axis="y", color=RULE, lw=0.6); a.set_axisbelow(True); a.spines["left"].set_visible(False)
+
+# ---------------------------------------------------------------- 4. the final two
+a = panel(0.56, 0.125, 0.41, 0.21, 0.235, 4, "What it says about the final two",
+          "public gap from this page's twin, ± 2 sd by the rule, ×1e-5")
+rows = [("+ 20% toward LGB\n(the CV-best tweak)", -1, 1.60), ("our Meta Stack file\n(public 0.96197)", 10, 5.52),
+        ("the 0.96206 public top", 19, 6.32)]
+for i, (lab, gap, s) in enumerate(rows):
+    a.plot([gap - 2 * s, gap + 2 * s], [i, i], color=SEEN, lw=8, alpha=0.35, solid_capstyle="round")
+    a.scatter([gap], [i], s=64, color=REAL, zorder=3)
+    a.text(gap + 2 * s + 0.8, i, f"{gap:+d} ± {2*s:.0f}", va="center", fontsize=9.6, color=INK)
+a.axvline(0, color=INK, lw=0.8)
+a.set_yticks(range(len(rows))); a.set_yticklabels([r[0] for r in rows], fontsize=9.4)
+a.set_ylim(2.5, -0.6); a.set_xlim(-6, 40)
+a.set_xticks([0, 10, 20, 30])
+a.spines["left"].set_visible(False)
+
+fig.text(0.552, 0.068, "pick 1: this twin — every weight chosen in CV.\npick 2: at most one public-max file, knowing what it is.",
+         fontsize=10, color=NEW, fontweight="bold", va="center", linespacing=1.4)
+fig.text(0.04, 0.018, "Orange = cross-validation / sampling noise.  Blue = the public leaderboard.  Green = new in Part 13.",
+         fontsize=10.5, color=MUTED, va="center")
+fig.savefig("part13_summary.png", facecolor="white")
+plt.show()
+
+# S6E10 | Twin Stacks + Family Reg | LB 0.96187
+
+> 📦 **The dataset behind this series:** [s6e10-goodpjw2008-extra-members-oof](https://www.kaggle.com/datasets/goodpjw2008/s6e10-goodpjw2008-extra-members-oof) —
+> the 17 members and the frozen 245 stack that Dariush Afshar's and ewtherka's stacks also build on,
+> each file with a model card. If you use it, an upvote **on the dataset** helps the most.
+
+> **Part 13 of a series, published as a new version of the same notebook.** [Part 1 (LB 0.96108)](https://www.kaggle.com/code/goodpjw2008/s6e10-route-id-fe-og-model-stack-lb-0-96108) ·
+> [Part 2 (0.96125)](https://www.kaggle.com/code/goodpjw2008/s6e10-two-view-gbdt-realmlp-stack-lb-0-96125) ·
+> [Part 3 (0.96127)](https://www.kaggle.com/code/goodpjw2008/s6e10-catboost-ctr-glm-margin-xgb-lb-0-96127) ·
+> [Part 4 (0.96129)](https://www.kaggle.com/code/goodpjw2008/s6e10-auxiliary-task-features-lb-0-96129) ·
+> [Part 5 (0.96141)](https://www.kaggle.com/code/goodpjw2008/s6e10-realmlp-aux-task-features-lb-0-96141) ·
+> [Part 6 (0.96152)](https://www.kaggle.com/code/goodpjw2008/s6e10-more-aux-carriers-lb-0-96152) ·
+> [Part 7 (0.96156)](https://www.kaggle.com/code/goodpjw2008/s6e10-tabpfn-3-5-member-lb-0-96156) ·
+> [Part 8 (0.96160 → 0.96164)](https://www.kaggle.com/code/goodpjw2008/s6e10-228-member-meta-stack-lb-0-96184?scriptVersionId=355094993), all 48 models' training code ·
+> [side episode (0.96180)](https://www.kaggle.com/code/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96180) ·
+> Part 9 (0.96184), Part 10 (0.96186), Part 11 (0.96187), Part 12 (0.96187): earlier versions of this page (Version menu).
+
+**What you just saw (Part 13).** With the deadline close, everyone is choosing a final two by
+public score. So we asked how much of a public score is the board's own noise, measured it on our
+[Meta Stack page (Part 3)](https://www.kaggle.com/code/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197), and turned it on this series. **Section 4b**:
+
+1. **The rule.** The public board blurs the score gap between two files by
+   **sd ≈ 0.003 × std of their percentile-rank difference** — two submission files are all it needs.
+   On the 15 steps of Parts 1 – 8 it matches the directly measured sd at a median ratio of **1.0**.
+2. **One step at a time, our public digits were mostly noise.** Only 3 of 15 steps moved the public
+   score past ± 2 sd, and 14 of 15 CV gains were below what the board can resolve. The one real outlier
+   is instructive: retraining on 10 folds raised CV +121e-6 and the public score −1e-5 (z = −3.1).
+   That is the CV artifact Part 3 called out at the time, now a 3-sigma fact.
+3. **In sum, the board agrees with CV.** Part 1 → Part 10: CV **+765e-6**, public **+780e-6**.
+   Trust CV step by step, and the board only in aggregate.
+
+The file this notebook submits is unchanged (the 10-15 twin, public 0.96187), and so is the title.
+
+**Part 12, in short.** Part 11 ended with the twin stacks agreeing to 0.99990 and a claim: member
+selection is exhausted, prior design is not. Part 12 is the week that tested every prior left,
+plus the one dial the whole pool never turned — and it is published **without a new leaderboard
+digit, because the evidence says there is none to be had here**:
+
+1. **The last dial (section 3b).** Every TabPFN in the public pool runs `n_estimators=1`. Turning
+   TabPFN-3.5's own ensemble to 4 builds **the strongest honest single model of this series**:
+   OOF 0.961491 (+0.00042 over the same inputs at n_est=1, all five folds up; LB 0.96110 alone).
+   Added to the 245-member stack it is worth **±0.000000**. The stacker, averaging sixteen
+   n_est=1 TabPFN columns, had already built this ensemble implicitly. 4 → 8 adds +0.00002: saturated.
+2. **The mirage, paid for (section 4).** Pseudo-labels from the public consensus looked like the
+   series' best member (nested CV +0.000030, five folds of five) and lost 0.00004 on the public
+   board: the teacher's test predictions carry every training fold's labels, and the CV gain was
+   that leak reflected back. The one gate CV cannot police.
+3. **The rest of the week's axes** — a pairwise-rank residual on the stack margin (0 trees),
+   blend spaces (three readings, one value), the 0.96188 notebooks' partner recipe at every dose
+   (flat), their digit only by 70% becoming their file (the
+   [anatomy page](https://www.kaggle.com/code/goodpjw2008/s6e10-anatomy-of-a-public-0-96188-lb-0-96188)) —
+   all closed, each with the submission that closed it.
+
+The file this notebook submits is unchanged from Part 11, and so is the title. A measurement
+part: the readings are the product.
+
+## Scoreboard: Part 10 → Part 13
+
+Nested CV = the combiner is scored only on rows its weights never saw (meta folds seed 7 unless stated;
+members use seed 42). The Parts 1 – 8 technique tables live in [version 1 of this page](https://www.kaggle.com/code/goodpjw2008/s6e10-228-member-meta-stack-lb-0-96184?scriptVersionId=355094993).
+
+| stack | nested CV | public LB |
+|---|---|---|
+| Part 10: our 245, LR C = 0.003, pure | 0.962224 | **0.96186** |
+| **+ family-wise regularization** *(new)* | **0.962231** (seed 7; +3.1 / +4.4 × 1e-6 on seeds 13 / 101) | 0.96186 |
+| [Dariush Afshar's 247](https://www.kaggle.com/code/dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187), his run | 0.962205 (his folds) | 0.96187 |
+| **½ our 245 + ½ his 247, rank average** *(Part 11, still this notebook's file)* | — (no honest CV: parents share every member) | **0.96187** |
+| TabPFN-3.5 `n_estimators=4`, single model *(new)* | OOF 0.961491 | 0.96110 |
+| 245 + that member *(new)* | ±0.000000 (1/5 folds) | not submitted (gated) |
+
+### Submission history (every file, CV vs public LB)
+
+| # | date | what | CV | LB |
+|---|---|---|---|---|
+| 1 – 19 | 10-01 → 10-04 | Parts 1 – 8 (own models only, 48 by the end) | 0.958763 → 0.961935 | 0.95808 → 0.96160 (Kaggle run 0.96164) |
+| 23 | 10-08 | side episode, 182 public members | 0.962110 | 0.96180 |
+| 25 – 26 | 10-11 | Part 9: + 29 public, + 17 of ours | 0.962182 / 0.962205 | 0.96181 / 0.96183 |
+| 29 | 10-12 | Part 10: + kagankoral's 17, pure 245 | 0.962222 | **0.96186** (Kaggle-fit output: 0.96185) |
+| 33 | 10-12 | *measurement:* 245 minus our own 48 | 0.962229 (+4.2 × 1e-6!) | 0.96184 — **CV up, LB down** |
+| 34 | 10-12 | *measurement:* bagged laptop TabPFN, single model | OOF 0.95978 | 0.95900 |
+| 35 | 10-12 | *measurement:* ½ ours + ½ Dariush Afshar's | — | **0.96187** (this notebook's file) |
+| 36 | 10-12 | family-wise regularization | 0.962231 | 0.96186 |
+| 37 – 39 | 10-15 | *measurements:* twin in logit / probability space; + partner doses (2 – 6% Orange, 6% najiama) | — | 0.96187 × 5 readings |
+| 40 | 10-15 | *measurement:* 30% ours + 70% yuvrajlamba01's 0.96188 file | — | 0.96188 (their rounding seat, inherited — see the anatomy page) |
+| 41 | 10-15 | *measurement:* frozen 245 + pseudo-label RealMLP (nested CV **+0.000030, 5/5 folds**) | 0.962253 | **0.96182 — the mirage** |
+| 42 | 10-16 | *measurement:* TabPFN `n_estimators=4`, single | OOF 0.961491 | 0.96110 |
+| 43 | 10-17 | *measurement, unplanned:* the twin REBUILT from his kernel's latest run (his kernel re-ran after Part 11) | — | 0.96186 — kernel outputs drift; this version re-hosts the 10-15 file (LB 0.96187) |
+| — | 10-19 | *measurement:* twin + 20% toward the LightGBM stacker (the CV-best tweak, +10.6e-6, 5/5 folds) | — | 0.96186 — −1e-5, inside its ± 3.2e-5 public noise (section 4b) |
+| — | 10-20 | *measurements, predictions written first:* 8 strong-dose moves on the 182-pool stack ([Meta Stack page, Part 3](https://www.kaggle.com/code/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197)) | −101 … −728 × 1e-6 | 0.96131 – 0.96176: the board follows CV once the move is bigger than its noise |
+
+CV − LB has stayed between 0.00028 and 0.00038 since Part 1. Within this week's stacks the public LB
+spans 0.96184 – 0.96187 while nested CV spans 0.000026 — consistent with the ±0.000015 spread
+[a public notebook measured](https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747982)
+for near-identical predictions. We pick by CV and report every LB reading. Part 13 (section 4b) turns
+that yardstick into a formula for any two files, and checks it against every step of this series.
+
+
+## Credits and thanks
+
+**The headline credit of this part: [Dariush Afshar](https://www.kaggle.com/code/dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187).** His independent collection of the whole
+public pool (247 pairs, his own pre-registered checks), his published nested stack pair
+(`stack_oof.npy` / `stack_test.npy`), and his `submission.csv` — which is **half of this notebook's
+final file**. He also published the [golem OOF library](https://www.kaggle.com/datasets/dariushafshar/s6e10-golem-oof-library)
+and the label-noise analysis this series has cited since Part 9. If you upvote one page today, make it his.
+
+**The 245 members themselves** are credited source by source in Part 10 (the previous version of this
+page): Chris Deotte's two packaged datasets (124 + 11, with kratosyan's collection inside, our 48 among
+them), kagankoral's 22, sadamtorres' 38, abdullahsafwan333's 5, koumeimaki's 7, sachith7's 24,
+dariushafshar's 17, amanatar's 11, megayak, busyaprime, mitudru, arhancanli12, thisray, samanyu1808,
+hemingweb, wangxintong111, najiama, yekenot, hermengardo, kratosyan, dmitriykolmikov, kozykappa —
+and [our own 17-member dataset](https://www.kaggle.com/datasets/goodpjw2008/s6e10-goodpjw2008-extra-members-oof),
+which now also carries the frozen 245-stack pair this notebook loads.
+
+**Tested for this part, excluded with the numbers shown (section 4):** najiama's two new blend OOFs,
+kozykappa's source-transfer LightGBM, sadamtorres' two original-data models, mojjeed's 15-fold GBDTs,
+ewtherka's factorization machine, irynavs' CPU baseline — thank you all for publishing; a negative
+reading is still a reading.
+
+**Ideas we borrowed, with thanks:** yeashusemwal (LR C = 0.003, meta folds on a different seed),
+Chris Deotte (logit conventions), karttikjangid05 (the test-half row-order check),
+[Hitarth Jain](https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747982) (the LB-noise yardstick),
+[Koumei Maki](https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747823) (the residual-feature leakage warning).
+
+**New this part, with thanks:** [Den Pugovkin](https://www.kaggle.com/code/denpugovkin/s6e10-passenger-context-foundation-ensemble)
+publishes his whole experiment tree; his `rank:pairwise` residual-correction idea is re-tested here
+(section 4 — zero trees on our margin, matching his own `exploratory_not_promoted` verdict; honest
+bookkeeping on both sides). [ewtherka](https://www.kaggle.com/code/ewtherka/s6e10-0-96188-lb-l2-family-wise-actually-helps)
+proved that stack-of-stacks columns inflate nested CV by up to 4 × 1e-5 — his warning names our own
+published `stack245` pair, and he is right: treat section 3b's absolute CVs with that caveat, and
+prefer his fully-nested protocol if you rebuild. [mayankraaz](https://www.kaggle.com/code/mayankraaz/s6e10-top-10-consensus-stack-0-96190-lb),
+[yuvrajlamba01](https://www.kaggle.com/code/yuvrajlamba01/airline-passenger-satisfaction-0-9619) and
+[nina2025](https://www.kaggle.com/code/nina2025/s6e10) drove the public 0.96188 – 0.96190 line whose
+anatomy we measured. [Prior Labs](https://huggingface.co/Prior-Labs/tabpfn_3_5) built the model whose
+dial section 3b turns.
+
+**New this part, with thanks:** the public files we size the final-two choice against —
+[kirilltym](https://www.kaggle.com/code/kirilltym/0-96206-disagreement-gated-teachers) and
+[mayankraaz](https://www.kaggle.com/code/mayankraaz/s6e10-lb-surface-ascent-v2-0-96206) (the 0.96206 files),
+[hanifnoerrofiq](https://www.kaggle.com/code/hanifnoerrofiq/agentic-ensemble) (0.96198, half of our Meta
+Stack file). [Hitarth Jain's](https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747982)
+LB-noise measurement is the yardstick the rule generalizes.
+
+**What is ours:** Parts 1 – 10, the family-regularization method and its three-seed validation, the
+twin-stack audit of section 3, the laptop-TabPFN recipe and its honest failure, the n_estimators finding and its honest irrelevance to the stack, the five-submission anatomy of the public 0.96188, the public-noise rule and its re-reading of our own history (Part 13, with the 16 series stacks now in our dataset), and every measurement here.
+
+
+## 1. The 245 members (Part 10's pool, loaders unchanged)
+
+import glob, json, os, time, warnings
+import numpy as np, pandas as pd
+from joblib import Parallel, delayed
+from scipy.stats import rankdata, spearmanr
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import roc_auc_score
+warnings.filterwarnings("ignore")
+
+INPUT = os.environ.get("INPUT_DIR", "/kaggle/input")
+def find(pat, hint):
+    hits = sorted(p for p in glob.glob(f"{INPUT}/**/{pat}", recursive=True) if hint in p)
+    assert hits, (pat, hint)
+    return hits
+
+tr = pd.read_csv(find("train.csv", "playground-series-s6e10")[0])
+te = pd.read_csv(find("test.csv", "playground-series-s6e10")[0])
+y = tr["satisfaction"].astype(int).values
+
+def logit(p):
+    p = np.clip(np.asarray(p, dtype=np.float64), 1e-15, 1 - 1e-15)
+    return np.clip(np.log(p / (1 - p)), -30, 30)
+def tologit(v):
+    v = np.asarray(v, dtype=np.float64)
+    return v if (v.min() < 0 or v.max() > 1) else logit(v)
+
+names, cols, tcols = [], [], []
+def add(name, o, t):
+    o, t = np.asarray(o).ravel(), np.asarray(t).ravel()
+    assert len(o) == len(y) and len(t) == len(te) and not np.isnan(o).any(), name
+    names.append(name); cols.append(tologit(o)); tcols.append(tologit(t))
+
+def by_id(path, ids, col):
+    return pd.read_csv(path).set_index("id").loc[ids, col].values
+
+# ---- the 245 members of Part 10 (the loaders are unchanged; see that version for the commentary)
+for d, tag in ((find("oof_gp_cat_ctr.npy", "124-public")[0], ""), (find("oof_tabfm.npy", "tfm-oof")[0], "tfm_")):
+    d = os.path.dirname(d)
+    for f in sorted(glob.glob(f"{d}/oof_*.npy")):
+        add(tag + os.path.basename(f)[4:-4], np.load(f), np.load(f.replace("oof_", "test_")))
+d = os.path.dirname(find("oof_o_tabpfn35.npy", "golem")[0])
+for n in ("o_tabpfn35", "p_lgbm_auxev", "q_lgbm_auxev_10fold"):
+    add("gl2_" + n, np.load(f"{d}/oof_{n}.npy"), np.load(f"{d}/test_{n}.npy"))
+d = os.path.dirname(find("preds_e1_allcat_cat.npz", "artifacts")[0])
+for f in sorted(glob.glob(f"{d}/preds_*.npz")) + sorted(glob.glob(f"{d}/orig_*_pred.npz")):
+    z = np.load(f)
+    if "oof" in z and "test" in z and len(z["oof"]) == len(y) and not np.isnan(z["oof"]).any():
+        add("st_" + os.path.basename(f)[:-4].replace("preds_", ""), z["oof"], z["test"])
+d = os.path.dirname(find("oof_forge_cat.npy", "forge")[0])
+for f in sorted(glob.glob(f"{d}/oof_forge_*.npy")):
+    add("am_" + os.path.basename(f)[4:-4], np.load(f), np.load(f.replace("oof_", "test_")))
+d = os.path.dirname(find("tabpfn_catfd10_oof.csv", "oof-dataset")[0])
+for m in ("cat_v3", "tabpfn_catfd10", "tabpfn_raw", "tabpfn_te_cnt", "xgb_v3"):
+    add("ab_" + m, by_id(f"{d}/{m}_oof.csv", tr["id"], "pred"), by_id(f"{d}/{m}_test.csv", te["id"], "pred"))
+d = os.path.dirname(find("train_ids_folds.csv", "route-tfm-nn-oof")[0])
+for m in ("cat_w1", "lgb_w1", "rmlp_f_nc", "tabicl_fdcat_c250k", "tabm_bcd_rc_v2", "tabpfn_catfd10", "xgb_w1"):
+    add("km_" + m, np.load(f"{d}/oof_{m}.npy"), np.load(f"{d}/test_{m}.npy"))
+d = os.path.dirname(find("lgb_cpu_strong.npz", "stack-oof-predictions")[0])
+for m in ("lgb_cpu_strong", "xgb_A_auxall"):
+    z = np.load(f"{d}/{m}.npz"); add("s7_" + m, z["oof"], z["test"])
+for m in ("rmlp_route_ogaux", "xgb_route_ogaux"):
+    z = np.load(find(f"{m}.npz", "route-id-teacher")[0]); add("kr_" + m, z["oof"], z["test"])
+d = os.path.dirname(find("oof_members.csv", "encodings-catboost-realmlp")[0])
+for m in ("lgb", "xgb", "cat", "cat_allcat", "realmlp"):
+    add("kg_" + m, by_id(f"{d}/oof_members.csv", tr["id"], m), by_id(f"{d}/test_members.csv", te["id"], m))
+d = os.path.dirname(find("oof_preds.csv", "realmlp-pytabkit")[0])
+add("yk_realmlp", by_id(f"{d}/oof_preds.csv", tr["id"], "satisfaction"), by_id(f"{d}/submission.csv", te["id"], "satisfaction"))
+d = os.path.dirname(find("oof_train.npy", "single-catboost-eda")[0])
+add("hm_cat", np.load(f"{d}/oof_train.npy"), np.load(f"{d}/oof_test.npy"))
+d = os.path.dirname(find("oof_cb_cat.npy", "catboost-all-categorical")[0])
+add("dk_cbcat", np.load(f"{d}/oof_cb_cat.npy"), np.load(f"{d}/test_cb_cat.npy"))
+z = np.load(find("oof_artifacts.npz", "original-prior-stack-v5")[0])
+for m in ("lgbm_champion", "lgbm_te", "lgbm_te_rows", "xgb_gpu", "catboost_gpu"):
+    add("av5_" + m, z["oof_" + m], z["test_" + m])
+d = os.path.dirname(find("members.csv", "goodpjw2008-extra-members")[0])
+for m in pd.read_csv(f"{d}/members.csv")["member"]:
+    add("gpx_" + m, np.load(f"{d}/oof_{m}.npy"), np.load(f"{d}/test_{m}.npy"))
+d = os.path.dirname(find("members.csv", "ablation-members")[0])
+for m in pd.read_csv(f"{d}/members.csv")["member"]:
+    add("ka_" + m, np.load(f"{d}/oof_{m}.npy"), np.load(f"{d}/test_{m}.npy"))
+Z, ZT = np.column_stack(cols), np.column_stack(tcols)
+print(f"{Z.shape[1]} members x {Z.shape[0]:,} OOF rows")
+
+## 2. Regularize families, not members
+
+245 members are not 245 opinions: they are four families with different error structures and wildly different head-counts (157 GBDTs, 58 MLPs, 16 TabPFNs, 14 other foundation models). A single C treats a TabPFN column and the 90th GBDT column as equally trustworthy a priori. Giving each family its own penalty is five lines of code; the validation discipline is the part that matters.
+
+# One L2 penalty per model FAMILY.  Scaling a column by s multiplies its effective penalty by 1/s^2,
+# so "TabPFN x 3" means TabPFN columns pay one ninth of the default penalty.
+def family(n):
+    if "tabpfn" in n or n.startswith("pfn_"): return "tabpfn"
+    if n.startswith("tfm_") or "tabicl" in n or "tabm" in n: return "tfm"
+    if "realmlp" in n or "rmlp" in n or "mlp" in n: return "mlp"
+    return "gbdt"
+FAM = np.array([family(n) for n in names])
+print({f: int((FAM == f).sum()) for f in ("gbdt", "mlp", "tabpfn", "tfm")})
+SCALE = np.array([{"tabpfn": 3.0, "tfm": 1.5}.get(f, 1.0) for f in FAM])
+
+def _fold(Zm, a, b):
+    return b, LogisticRegression(C=0.003, max_iter=5000).fit(Zm[a], y[a]).decision_function(Zm[b])
+def nested(Zm, seed):
+    skf = list(StratifiedKFold(5, shuffle=True, random_state=seed).split(Zm, y))
+    o = np.zeros(len(y))
+    for b, v in Parallel(n_jobs=min(5, os.cpu_count()))(delayed(_fold)(Zm, a, b) for a, b in skf):
+        o[b] = v
+    return roc_auc_score(y, o), [roc_auc_score(y[b], o[b]) for _, b in skf]
+
+# The discipline that matters: the scales were chosen on seed 7 ONLY (a 12-point grid, Part 10's pool),
+# then seeds 13 and 101 were run once each, untouched.  Three seeds, one story.
+t0 = time.time()
+for seed in (7, 13, 101):
+    (s0, f0), (s1, f1) = nested(Z, seed), nested(Z * SCALE, seed)
+    print(f"seed {seed:3d}   flat C=0.003 {s0:.6f}   family-reg {s1:.6f}   gain {(s1 - s0) * 1e6:+5.1f} x 1e-6   "
+          f"{sum(b > a for a, b in zip(f0, f1))}/5 folds up")
+print(f"({time.time() - t0:.0f}s)")
+
+## 3. Two collections, one stack: the twin audit
+
+# The twin audit: Dariush Afshar's 247-pair stack against our 245.
+d = os.path.dirname(find("stack_oof.npy", "247-public-oofs")[0])
+dar_oof, dar_test = np.load(f"{d}/stack_oof.npy").ravel(), np.load(f"{d}/stack_test.npy").ravel()
+dar_sub = by_id(f"{d}/submission.csv", te["id"], "satisfaction")
+ours_test = np.load(find("test_stack245.npy", "goodpjw2008-extra-members")[0])   # the frozen pair: LB 0.96186
+ours_oof = np.load(find("oof_stack245.npy", "goodpjw2008-extra-members")[0])
+print(f"his stack OOF AUC {roc_auc_score(y, dar_oof):.6f}   ours {roc_auc_score(y, ours_oof):.6f}")
+print(f"test rank correlation of the two submissions: {spearmanr(dar_sub, ours_test).correlation:.5f}")
+
+# his whole stack as one member of ours (seed-7 nested, same folds as everything else)
+s0, f0 = nested(Z, 7)
+s1, f1 = nested(np.column_stack([Z, tologit(1 / (1 + np.exp(-dar_oof)) if dar_oof.min() < 0 else dar_oof)]), 7)
+print(f"his stack as a member: {s1:.6f} vs {s0:.6f} -> {(s1 - s0) * 1e6:+.1f} x 1e-6, "
+      f"{sum(b > a for a, b in zip(f0, f1))}/5 folds")
+# measured offline with the same folds (code in Part 10 / the series repo):
+#   his 3 members we lacked, as a pool: +0.0000007 ; his near-copy rule on our 245: +0.0000001
+
+## 3b. New in Part 12: the last dial — `n_estimators`
+
+Every TabPFN column in the pool — ours, abdullahsafwan333's 15-fold × 3-seed runs, koumeimaki's,
+hemingweb's, samanyu1808's — uses `n_estimators=1`, one forward pass per fold. TabPFN's own
+ensembling (each estimator re-draws preprocessing and column order) is the one knob nobody
+published. On our machine (121 GB unified memory; the full 560k-row context is 17.5 GB per cache,
+built sequentially, so n_est=4 fits):
+
+| n_estimators (fold 0) | AUC |
+|---|---|
+| 1 (the pool's setting) | 0.961342 |
+| **4** | **0.961768 (+0.00043)** |
+| 8 | 0.961792 (+0.00002 more: saturated) |
+
+Five folds at n_est=4: **OOF 0.961491**, the strongest honest single model of this series
+(previous best 0.961071), every fold up by +0.00032 to +0.00051, public LB **0.96110** alone.
+And the stack? The cell below measures it: **±0.000000**. Sixteen n_est=1 TabPFN columns,
+averaged by a fitted combiner, already *are* a sixteen-estimator ensemble. The dial was real,
+and the pool had turned it collectively without anyone publishing it.
+
+(Training command in the cell; the predictions load from
+[our dataset](https://www.kaggle.com/datasets/goodpjw2008/s6e10-goodpjw2008-extra-members-oof), version 3 —
+deliberately *not* added to `members.csv`, so the frozen 245 pool of Parts 10 – 11 stays frozen.)
+
+# TabPFN-3.5 n_estimators=4, full context: the member the pool implicitly had.
+# Produced on our machine by:  python src/train_tabpfn.py tabpfn_ne4f nfolds=5 ctx=0 feats=raw+catfd+catfd10 n_est=4
+ne4_oof = np.load(find("oof_tabpfn_ne4.npy", "goodpjw2008-extra-members")[0])
+ne4_test = np.load(find("test_tabpfn_ne4.npy", "goodpjw2008-extra-members")[0])
+print(f"single model OOF AUC {roc_auc_score(y, ne4_oof):.6f}   (the pool's best TabPFN at n_est=1: 0.961071)")
+s0, f0 = nested(Z, 7)
+s1, f1 = nested(np.column_stack([Z, tologit(ne4_oof)]), 7)
+print(f"245-member stack + this member: {s1:.6f} vs {s0:.6f} -> {(s1 - s0) * 1e6:+.1f} x 1e-6, "
+      f"{sum(b > a for a, b in zip(f0, f1))}/5 folds up")
+print("the stacker's sixteen n_est=1 TabPFN columns were already this ensemble")
+
+## 4. What did not survive the week (every reading on the same nested folds)
+
+| idea | CV, × 1e-6 | public LB |
+|---|---|---|
+| **pseudo-labels from the public consensus** (183k confident test rows into our members' training; singles jump +0.0003 – 0.0008) | **+30, 5/5 folds — and it is a lie**: the teacher's test predictions contain every fold's labels | **0.96182, down 0.00004.** The week's second CV-up-LB-down trap, worse than Part 11's. If your teacher saw the whole train set, your CV gate is blind |
+| `rank:pairwise` XGBoost residual on the stack's margin (Den Pugovkin's exploratory idea, our folds, λ 50 / 200) | best_iteration 0, twice | — nothing beyond the margin to reorder, same verdict as Part 3's logloss residual |
+| twin averaged in logit / probability instead of rank space | — | 0.96187, three times |
+| the 0.96188 notebooks' partner recipe on our anchor (Orange 2% / 6%, najiama 6%) | — | 0.96187 at every dose ([anatomy page](https://www.kaggle.com/code/goodpjw2008/s6e10-anatomy-of-a-public-0-96188-lb-0-96188)) |
+| `n_estimators` 4 → 8 | fold 0 +24 | — saturated |
+| **drop our own original 48** ("CV says they are redundant", 4/5 folds) | **+4.2** | **0.96184 — down 0.00002.** The week's one trap: CV is trustworthy at the pool level, but a structural deletion of 48 correlated columns shifts the stack enough that the public split disagrees. We keep the 48. |
+| **bagged laptop TabPFN** — 8 random 50k-row contexts per fold on Apple MPS (no CUDA anywhere), catfd10 inputs, probabilities averaged | −2.5 | single model 0.95900. Bagging recovers most of the small-context gap (one draw 0.9585 → eight draws 0.9600 per fold), but its nearest neighbours in the pool are Kumo and Causilo (corr 0.997): the limited-context foundation-model niche was already occupied. Full recipe in the hidden cell below; MPS footnote: contexts beyond ~50k rows are numerically broken (200k → AUC 0.5 in fp16, 0.92 in fp32), which is why the bagging exists at all. |
+| his three members we lacked (kozykappa source-transfer, sadamtorres' two original-data models), as a pool | +0.7 | — |
+| najiama's two new blend OOFs (05: 0.96223, 06: 0.96221 — below the 0.9625 in-fold line, still blends) | −4.8 / −11.5 | — |
+| Caruana greedy selection; its best 0.9 LR + 0.1 blend | −254 / −0.2 | — |
+| the next 10 / 35 of our own unpublished members, as pools | −2.5 / −5.9 | — |
+
+Residual-on-own-OOF features stay untouched ([Koumei Maki's leakage warning](https://www.kaggle.com/competitions/playground-series-s6e10/discussion/747823)).
+
+
+# The laptop TabPFN recipe (not executed here: it needs an Apple-silicon Mac and ~4.5 hours).
+# Single-model result: OOF 0.95978, public LB 0.95900.  Shared so that nobody re-runs the dead end.
+RUN_BAGGED_TABPFN = False
+if RUN_BAGGED_TABPFN:
+    import torch
+    from tabpfn import TabPFNClassifier
+    CATS = ["Gender", "Customer Type", "Type of Travel", "Class"]
+    full = pd.concat([tr.drop(columns=["id", "satisfaction"]), te.drop(columns=["id"])], ignore_index=True)
+    for c in CATS:
+        full[c] = full[c].astype("category").cat.codes
+    full["Arrival Delay in Minutes"] = full["Arrival Delay in Minutes"].fillna(-1)
+    full["fd10"] = full["Flight Distance"] // 10                      # the Part 8 route trick
+    cat_idx = [full.columns.get_loc(c) for c in CATS + ["Flight Distance", "fd10"]]
+    X = full.values.astype(np.float32); Xtr, Xte = X[:len(tr)], X[len(tr):]
+    folds = list(StratifiedKFold(5, shuffle=True, random_state=42).split(Xtr, y))
+    oof, tst = np.zeros(len(tr)), np.zeros(len(te))
+    pr = lambda clf, Q: np.concatenate([clf.predict_proba(Q[i:i + 8192])[:, 1] for i in range(0, len(Q), 8192)])
+    for fi, (a, b) in enumerate(folds):
+        for dr in range(8):                                           # 8 draws of 50k rows: all MPS can take
+            ctx = np.random.default_rng(1000 * fi + dr).choice(a, 50000, replace=False)
+            clf = TabPFNClassifier(n_estimators=1, random_state=dr, device="mps", fit_mode="fit_with_cache",
+                                   ignore_pretraining_limits=True, categorical_features_indices=cat_idx)
+            clf.fit(Xtr[ctx], y[ctx])
+            oof[b] += pr(clf, Xtr[b]) / 8; tst += pr(clf, Xte) / 40
+            del clf; torch.mps.empty_cache()
+
+## 4b. New in Part 13: our own public scores, re-read against the board's noise
+
+**The rule.** On our [Meta Stack page (Part 3)](https://www.kaggle.com/code/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197) we measured how much the public board —
+59,969 rows, 20% of test — blurs the score gap between two submissions. We took random 60k-row subsets
+of the 700k out-of-fold rows (600 per move), then made eight public submissions whose scores we wrote
+down before submitting. The board behaved like a random sample (joint test p = 0.22), and its
+noise follows one line:
+
+> **public sd of a score gap ≈ 0.003 × std( pct_rank(file B) − pct_rank(file A) )**
+> — plus the rounding of both shown scores (sd 0.4e-5). For the private 80%: about 0.0012 ×.
+
+It needs only the two submission files: no OOF, no labels.
+
+**Our own history, re-read.** Parts 1 – 8 submitted 16 stacks, and we kept each one's out-of-fold
+prediction and test file. They are now in [our dataset](https://www.kaggle.com/datasets/goodpjw2008/s6e10-goodpjw2008-extra-members-oof) (version 7, `series_stacks_p1_p8.npz`),
+so the next cell recomputes everything. Our run:
+
+| step | CV change ×1e-6 | public change | ± 2 sd (rule) | z |
+|---|---|---|---|---|
+| P1 → 10-fold retrain | **+120.6** | **−10** | ± 85 | **−3.07** |
+| 10-fold → P2 | −3.0 | **+180** | ± 143 | **+2.56** |
+| P2 → P3 | +35.8 | +20 | ± 60 | −0.53 |
+| P3 → P4 | +62.9 | +20 | ± 108 | −0.80 |
+| P4 → P5 | +76.5 | +120 | ± 81 | +1.07 |
+| P5 → … → P6 (2 steps) | +8.6, +1.6 | +40, +20 | ± 33, ± 25 | +1.91, +1.50 |
+| P6 → … → P7 (3 steps) | +2.2, +83.3, +22.4 | −10, +50, +20 | ± 35, ± 124, ± 42 | −0.72, −0.54, −0.12 |
+| P7 → … → P8 (5 steps) | +12.9, +21.5, +6.6, +18.6, +5.0 | −10, +30, +30, +10, +10 | ± 46, ± 43, ± 32, ± 32, ± 36 | −1.01, +0.40, +1.44, −0.53, +0.28 |
+
+What it says:
+
+1. **The rule holds on our own steps:** the sd measured on OOF subsets over the rule's sd has a
+   median of 1.0 across the 15 steps, and these are additions of members, not the blends it was
+   built on.
+2. **One step at a time, the board could not see our progress.** 14 of 15 CV gains were smaller than
+   what the board can resolve for their own step (± 2 sd). Only 3 public changes cleared ± 2 sd from zero, and the
+   signs agreed 11 times in 15. The "seven sign agreements in a row" in our submission log around
+   Part 7 was partly luck.
+3. **The exception is the 10-fold detour.** An OOF prediction comes from one model trained on 80%
+   (5 folds) or 90% (10 folds) of the rows. A test prediction averages all K fold models, which
+   between them already see every row. So more folds lift the OOF score and leave the test file
+   almost where it was. Part 3 concluded "fold count raises CV only"; the rule puts that at z = −3.1
+   going in and +2.6 coming back out. Skip the detour (P1 → P2 directly) and z = +0.8. The remaining 14 steps have
+   Σz² = 13.1 on 14 df, which is what a random sample gives.
+4. **In sum, the board agrees.** P1 → P8: CV **+476e-6**, public **+520e-6**, ± 2 sd 238e-6. P1 → P10
+   (our 245 stack, public 0.96186): CV +765e-6, public +780e-6. A gain several times the noise
+   shows up; a single +2e-5 step is a coin.
+
+**What it says about the final two** (public gap from this page's twin, ± 2 sd by the rule):
+
+| file | rank corr with the twin | public gap | ± 2 sd |
+|---|---|---|---|
+| twin + 20% toward LGB (the CV-best tweak) | 0.99983 | −1e-5 | ± 3.2e-5 |
+| our [Meta Stack file](https://www.kaggle.com/code/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197) (public 0.96197) | 0.99797 | +10e-5 | ± 11.0e-5 |
+| the 0.96206 public top (kirilltym / mayankraaz) | 0.99734 | +19e-5 | ± 12.6e-5 |
+
+The CV-best tweak is invisible on the board, either way. The public-max files are 1 – 3 sd above
+us *on the public rows*. But they were found by trying files against those same rows, and when we
+replayed that climb on OOF rows where the truth is known, every step the board approved after the
+real information ran out was worth **+2e-5 public and −1.4e-5 private**
+([Meta Stack page](https://www.kaggle.com/code/goodpjw2008/s6e10-meta-stack-on-public-oof-lb-0-96197), part 4). So our two:
+**(1) this twin — every weight chosen in CV; (2) at most one public-max file, knowing it is a bet
+on 20% of the rows.** On the private 80% the noise is about 0.4× these bars: files this close will
+reorder there regardless.
+
+# 4b. Part 13: every public step of Parts 1-8 against the public board's own sampling noise.
+S = np.load(find("series_stacks_p1_p8.npz", "goodpjw2008-extra-members")[0])
+steps, lbs = list(S["names"]), S["public"]                     # our 16 submitted stacks and their public LB
+pr = lambda v: (rankdata(v) - 0.5) / len(v)
+O = {n: pr(S[f"oof_{n}"]) for n in steps}
+T = {n: pr(S[f"test_{n}"]) for n in steps}
+cv_ = {n: roc_auc_score(y, O[n]) for n in steps}
+RND = 1e-5 / np.sqrt(6)                                         # both public scores are shown to 5 decimals
+rule = lambda a, b: 0.003 * (b - a).std()                       # the rule: public sd of the gap between two files
+rng = np.random.default_rng(13); rows = []
+for (a, la), (b, lb) in zip(zip(steps[:-1], lbs[:-1]), zip(steps[1:], lbs[1:])):
+    sub_ = []
+    for _ in range(120):                                        # the rule, checked: sd on random 60k-row OOF subsets
+        ip = rng.choice(len(y), 59_969, replace=False)
+        sub_.append(roc_auc_score(y[ip], O[b][ip]) - roc_auc_score(y[ip], O[a][ip]))
+    size = (T[b] - T[a]).std() / (O[b] - O[a]).std()            # the test move's length relative to the OOF move
+    sd = np.hypot(rule(T[a], T[b]), RND)
+    rows.append((f"{a} -> {b}", (cv_[b] - cv_[a]) * 1e6, (lb - la) * 1e6, np.std(sub_) * size * 1e6,
+                 rule(T[a], T[b]) * 1e6, 2 * sd * 1e6, (lb - la - cv_[b] + cv_[a]) / sd))
+R = pd.DataFrame(rows, columns=["step", "CV x1e-6", "public x1e-6", "sd measured", "sd rule", "+-2 sd", "z"])
+print(R.round(2).to_string(index=False))
+print(f"\nsd measured / sd rule, median over the 15 steps: {np.median(R['sd measured'] / R['sd rule']):.2f}")
+print(f"steps whose public change cleared +-2 sd: {(R['public x1e-6'].abs() > R['+-2 sd']).sum()} of 15;  "
+      f"CV gain below what the board resolves (+-2 sd): {(R['CV x1e-6'] < R['+-2 sd']).sum()} of 15")
+z = (lbs[2] - lbs[0] - cv_["ens_v6"] + cv_["ens_v3"]) / np.hypot(rule(T["ens_v3"], T["ens_v6"]), RND)
+rest = np.r_[z, R["z"].values[2:]]
+print(f"P1 -> P2 directly (skipping the 10-fold detour): z = {z:+.2f};  the 14 steps without it: sum z^2 = {np.sum(rest ** 2):.1f} on 14 df")
+print(f"P1 -> P8 in sum: CV {(cv_['ens_v18'] - cv_['ens_v3']) * 1e6:+.1f}e-6, public {(lbs[-1] - lbs[0]) * 1e6:+.0f}e-6, "
+      f"+-2 sd {2 * np.hypot(rule(T['ens_v3'], T['ens_v18']), RND) * 1e6:.0f}e-6")
+
+### The final file
+
+# The final file: the twin average exactly as submitted on 10-15 (public LB 0.96187),
+# re-hosted in our dataset.  Lesson learned in this very version: "his published kernel output"
+# is NOT frozen -- his kernel re-ran after Part 11, the live rebuild drifted (rank corr 0.999994
+# to the original, public LB 0.96186), and a deterministic recipe quietly became a different file.
+# Pin by re-hosting, not by linking.
+sub = pd.read_csv(find("twin_submission_1015.csv", "goodpjw2008-extra-members")[0])
+sub = sub.set_index("id").loc[te["id"].values].reset_index()
+sub.to_csv("submission.csv", index=False)
+
+# the live rebuild, kept as a drift check (today's halves, not 10-15's):
+r = lambda v: rankdata(v) / len(v)
+live = 0.5 * r(ours_test) + 0.5 * r(dar_sub)
+print(f"frozen 10-15 twin vs live rebuild: rank corr {spearmanr(sub['satisfaction'], live).correlation:.6f}")
+
+# and the two pure alternatives, for anyone who prefers no borrowed half:
+pd.DataFrame({"id": te["id"].values, "satisfaction": ours_test}).to_csv("submission_ours_245.csv", index=False)
+m = LogisticRegression(C=0.003, max_iter=5000).fit(Z * SCALE, y)
+pd.DataFrame({"id": te["id"].values,
+              "satisfaction": 1 / (1 + np.exp(-m.decision_function(ZT * SCALE)))}).to_csv("submission_family_reg.csv", index=False)
+print("submission.csv (frozen twin, LB 0.96187) · submission_ours_245.csv (LB 0.96186) · submission_family_reg.csv (LB 0.96186)")
+sub.head()
+
+## 5. What Parts 11 – 13 taught us
+
+- **When two collectors converge, stop collecting.** Everything that distinguishes the two biggest
+  public-pool stacks is worth less than ±0.0000013 of CV, and their predictions agree to 0.99990.
+  The honest next move was not a 250th member; it was measuring the agreement and saying so.
+- **The stacker still had one dial left.** Not *which* members, but *how much each family is trusted a
+  priori*: cutting the TabPFN family's penalty to a ninth is worth +3 to +7 × 1e-6 on every fold seed we
+  tried. Member selection is exhausted; prior design is not.
+- **An average of twins cannot beat both twins.** Our ½ + ½ file landed exactly on the better parent,
+  not above it — the arithmetic of averaging noise. If you see a blend of near-copies *beat* its
+  parents on the public LB, you are looking at luck, and the private board will take it back.
+- **A member can be worth +0.0004 alone and nothing to the pool.** The stacker is an ensembling
+  machine; any knob that only reduces a member family's variance (seeds, `n_estimators`, bagging)
+  is a knob the stack already turned by averaging that family. New *information* moves pools;
+  new *stability* does not.
+- **The only CV gain the gate cannot police is a leaky teacher.** Nested folds, confirmation
+  seeds, per-fold counts — all of it passed the pseudo-label member, and the public board
+  refused it. If the teacher saw every label, distrust the student's CV on principle.
+- **"Frozen published files" are only frozen if you re-host them.** Between Parts 11 and 12 the
+  other twin's kernel re-ran; a deterministic recipe quietly produced a different file (LB
+  0.96187 → 0.96186, rank corr 0.999994). This version pins the 10-15 original in our dataset.
+- **Size every public gap before you believe it.** public sd ≈ 0.003 × std of the two files'
+  percentile-rank difference. Across this whole series a single step was almost never visible on the
+  board, yet the sum of twelve parts landed within 1.5e-5 of the CV's sum. Steer by CV, and audit by
+  the board only in aggregate or for moves several times their noise.
+- **Spend measurement submissions, not hope submissions.** This week's three measurement files
+  (drop-the-48, the laptop TabPFN, the twin average) each answered a question no CV could. The ten
+  daily submissions are an instrument; the final two are the bet.
+
+Thirteen parts in: two feature ideas, one fold discipline, ~50 trained models, a pool audit, a week of paid negative results, and a ruler for the public board. If this page saved you time, an upvote helps — and [Dariush Afshar's notebook](https://www.kaggle.com/code/dariushafshar/s6e10-247-public-oofs-one-stack-lb-0-96187) carries half of
+today's headline, so upvote his first. Questions and corrections are welcome in the comments.
+
+> **Reproducibility.** Both halves of `submission.csv` are frozen published files, so the score chip's
+> 0.96187 reproduces exactly. The family-regularization and twin-audit cells recompute live; LR fits
+> differ across platforms in the 5th decimal (section 5 of Part 10 quantifies this), so expect the
+> printed gains to wobble by ±0.000003 around the three-seed readings quoted in the text.

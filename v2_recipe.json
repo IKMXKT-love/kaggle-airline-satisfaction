@@ -1,0 +1,933 @@
+{
+  "weights": [
+    0.4,
+    0.6,
+    0.0
+  ],
+  "selection_auc": 0.9603289663650473,
+  "baseline_selection_auc": 0.960270327214543,
+  "cat_config": {
+    "name": "cat_d7_l10",
+    "depth": 7,
+    "l2_leaf_reg": 10,
+    "learning_rate": 0.04
+  },
+  "cat_rounds": 1884,
+  "nn": {
+    "config": {
+      "name": "tabm_ple",
+      "k": 16,
+      "width": 256,
+      "blocks": 2,
+      "embedding": 16,
+      "bins": 32,
+      "dropout": 0.1,
+      "lr": 0.002,
+      "weight_decay": 0.0003,
+      "batch_size": 1024,
+      "max_epochs": 60,
+      "patience": 10
+    },
+    "seed": 42,
+    "epochs": 13,
+    "auc": 0.9590657388946563,
+    "train_auc_sample": 0.9633764935844312,
+    "curves": [
+      {
+        "epoch": 1,
+        "loss": 0.2418544694107672,
+        "auc": 0.958066902984062,
+        "seconds": 19.26993703842163
+      },
+      {
+        "epoch": 2,
+        "loss": 0.22910152173701806,
+        "auc": 0.9583867104519452,
+        "seconds": 25.03553080558777
+      },
+      {
+        "epoch": 3,
+        "loss": 0.22822317684301838,
+        "auc": 0.9583052208438831,
+        "seconds": 30.826380252838135
+      },
+      {
+        "epoch": 4,
+        "loss": 0.22799055444303062,
+        "auc": 0.9585222924308446,
+        "seconds": 36.601062536239624
+      },
+      {
+        "epoch": 5,
+        "loss": 0.22717539173076817,
+        "auc": 0.9585212826820162,
+        "seconds": 42.40243911743164
+      },
+      {
+        "epoch": 6,
+        "loss": 0.22713919038540334,
+        "auc": 0.9587055319355018,
+        "seconds": 48.2051043510437
+      },
+      {
+        "epoch": 7,
+        "loss": 0.22647186548632886,
+        "auc": 0.9589469036146263,
+        "seconds": 53.99591588973999
+      },
+      {
+        "epoch": 8,
+        "loss": 0.22601522672083874,
+        "auc": 0.9588387233995235,
+        "seconds": 59.830315351486206
+      },
+      {
+        "epoch": 9,
+        "loss": 0.22568473176515766,
+        "auc": 0.9589147542853727,
+        "seconds": 65.95474362373352
+      },
+      {
+        "epoch": 10,
+        "loss": 0.22544177952884506,
+        "auc": 0.9589633897122933,
+        "seconds": 71.78334927558899
+      },
+      {
+        "epoch": 11,
+        "loss": 0.2249813582804,
+        "auc": 0.9590269371215521,
+        "seconds": 77.60850954055786
+      },
+      {
+        "epoch": 12,
+        "loss": 0.224525850828615,
+        "auc": 0.9589947360600498,
+        "seconds": 83.43657565116882
+      },
+      {
+        "epoch": 13,
+        "loss": 0.22412327125823006,
+        "auc": 0.9590657388946563,
+        "seconds": 89.22630763053894
+      },
+      {
+        "epoch": 14,
+        "loss": 0.22383250684074668,
+        "auc": 0.9589945630803434,
+        "seconds": 95.07142901420593
+      },
+      {
+        "epoch": 15,
+        "loss": 0.22313629845791105,
+        "auc": 0.9589640707996794,
+        "seconds": 101.04366087913513
+      },
+      {
+        "epoch": 16,
+        "loss": 0.22294136561698574,
+        "auc": 0.9589668969970889,
+        "seconds": 107.069669008255
+      },
+      {
+        "epoch": 17,
+        "loss": 0.22239073038612095,
+        "auc": 0.958921716961052,
+        "seconds": 113.11983728408813
+      },
+      {
+        "epoch": 18,
+        "loss": 0.2219975583791181,
+        "auc": 0.9588423540333993,
+        "seconds": 119.09906530380249
+      },
+      {
+        "epoch": 19,
+        "loss": 0.22168106675837015,
+        "auc": 0.9589770711137666,
+        "seconds": 125.09383535385132
+      },
+      {
+        "epoch": 20,
+        "loss": 0.22112139235725106,
+        "auc": 0.9590116314891342,
+        "seconds": 131.1319420337677
+      },
+      {
+        "epoch": 21,
+        "loss": 0.2205372577350749,
+        "auc": 0.9590430219709654,
+        "seconds": 137.12357759475708
+      },
+      {
+        "epoch": 22,
+        "loss": 0.22030530601606368,
+        "auc": 0.9588962039093213,
+        "seconds": 143.0985724925995
+      },
+      {
+        "epoch": 23,
+        "loss": 0.21976318240823567,
+        "auc": 0.9589069430391524,
+        "seconds": 149.11129069328308
+      }
+    ],
+    "seconds": 149.79080176353455,
+    "features": [
+      "Age",
+      "Flight Distance",
+      "Inflight wifi service",
+      "Departure/Arrival time convenient",
+      "Ease of Online booking",
+      "Gate location",
+      "Food and drink",
+      "Online boarding",
+      "Seat comfort",
+      "Inflight entertainment",
+      "On-board service",
+      "Leg room service",
+      "Baggage handling",
+      "Checkin service",
+      "Cleanliness",
+      "Departure Delay in Minutes",
+      "Arrival Delay in Minutes",
+      "Gender",
+      "Customer Type",
+      "Type of Travel",
+      "Class",
+      "orig_mean__Age",
+      "orig_count__Age",
+      "orig_mean__Flight Distance",
+      "orig_count__Flight Distance",
+      "orig_mean__Inflight wifi service",
+      "orig_count__Inflight wifi service",
+      "orig_mean__Departure/Arrival time convenient",
+      "orig_count__Departure/Arrival time convenient",
+      "orig_mean__Ease of Online booking",
+      "orig_count__Ease of Online booking",
+      "orig_mean__Gate location",
+      "orig_count__Gate location",
+      "orig_mean__Food and drink",
+      "orig_count__Food and drink",
+      "orig_mean__Online boarding",
+      "orig_count__Online boarding",
+      "orig_mean__Seat comfort",
+      "orig_count__Seat comfort",
+      "orig_mean__Inflight entertainment",
+      "orig_count__Inflight entertainment",
+      "orig_mean__On-board service",
+      "orig_count__On-board service",
+      "orig_mean__Leg room service",
+      "orig_count__Leg room service",
+      "orig_mean__Baggage handling",
+      "orig_count__Baggage handling",
+      "orig_mean__Checkin service",
+      "orig_count__Checkin service",
+      "orig_mean__Cleanliness",
+      "orig_count__Cleanliness",
+      "orig_mean__Departure Delay in Minutes",
+      "orig_count__Departure Delay in Minutes",
+      "orig_mean__Arrival Delay in Minutes",
+      "orig_count__Arrival Delay in Minutes",
+      "orig_mean__Gender",
+      "orig_count__Gender",
+      "orig_mean__Customer Type",
+      "orig_count__Customer Type",
+      "orig_mean__Type of Travel",
+      "orig_count__Type of Travel",
+      "orig_mean__Class",
+      "orig_count__Class",
+      "orig_mean__pair__Online boarding__Class",
+      "orig_count__pair__Online boarding__Class",
+      "orig_mean__pair__Online boarding__Type of Travel",
+      "orig_count__pair__Online boarding__Type of Travel",
+      "orig_mean__pair__Inflight wifi service__Class",
+      "orig_count__pair__Inflight wifi service__Class",
+      "orig_mean__pair__Inflight wifi service__Type of Travel",
+      "orig_count__pair__Inflight wifi service__Type of Travel",
+      "orig_mean__pair__Seat comfort__Class",
+      "orig_count__pair__Seat comfort__Class",
+      "orig_mean__pair__Inflight entertainment__Class",
+      "orig_count__pair__Inflight entertainment__Class",
+      "orig_mean__pair__Customer Type__Type of Travel",
+      "orig_count__pair__Customer Type__Type of Travel",
+      "orig_mean__pair__Class__Type of Travel",
+      "orig_count__pair__Class__Type of Travel",
+      "orig_mean__pair__Inflight wifi service__Online boarding",
+      "orig_count__pair__Inflight wifi service__Online boarding",
+      "orig_mean__bin__Age__5",
+      "orig_count__bin__Age__5",
+      "orig_mean__bin__Age__10",
+      "orig_count__bin__Age__10",
+      "orig_mean__bin__Flight Distance__100",
+      "orig_count__bin__Flight Distance__100",
+      "orig_mean__bin__Flight Distance__500",
+      "orig_count__bin__Flight Distance__500",
+      "orig_mean__bin__Departure Delay in Minutes__5",
+      "orig_count__bin__Departure Delay in Minutes__5",
+      "orig_mean__bin__Departure Delay in Minutes__30",
+      "orig_count__bin__Departure Delay in Minutes__30",
+      "orig_mean__bin__Arrival Delay in Minutes__5",
+      "orig_count__bin__Arrival Delay in Minutes__5",
+      "orig_mean__bin__Arrival Delay in Minutes__30",
+      "orig_count__bin__Arrival Delay in Minutes__30",
+      "orig_model_probability",
+      "rating_cat__Inflight wifi service",
+      "rating_cat__Departure/Arrival time convenient",
+      "rating_cat__Ease of Online booking",
+      "rating_cat__Gate location",
+      "rating_cat__Food and drink",
+      "rating_cat__Online boarding",
+      "rating_cat__Seat comfort",
+      "rating_cat__Inflight entertainment",
+      "rating_cat__On-board service",
+      "rating_cat__Leg room service",
+      "rating_cat__Baggage handling",
+      "rating_cat__Checkin service",
+      "rating_cat__Cleanliness"
+    ],
+    "official_package": "0.0.3"
+  },
+  "nn_candidates": [
+    {
+      "config": {
+        "name": "tabm_ple",
+        "k": 16,
+        "width": 256,
+        "blocks": 2,
+        "embedding": 16,
+        "bins": 32,
+        "dropout": 0.1,
+        "lr": 0.002,
+        "weight_decay": 0.0003,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "patience": 10
+      },
+      "seed": 42,
+      "epochs": 13,
+      "auc": 0.9590657388946563,
+      "train_auc_sample": 0.9633764935844312,
+      "curves": [
+        {
+          "epoch": 1,
+          "loss": 0.2418544694107672,
+          "auc": 0.958066902984062,
+          "seconds": 19.26993703842163
+        },
+        {
+          "epoch": 2,
+          "loss": 0.22910152173701806,
+          "auc": 0.9583867104519452,
+          "seconds": 25.03553080558777
+        },
+        {
+          "epoch": 3,
+          "loss": 0.22822317684301838,
+          "auc": 0.9583052208438831,
+          "seconds": 30.826380252838135
+        },
+        {
+          "epoch": 4,
+          "loss": 0.22799055444303062,
+          "auc": 0.9585222924308446,
+          "seconds": 36.601062536239624
+        },
+        {
+          "epoch": 5,
+          "loss": 0.22717539173076817,
+          "auc": 0.9585212826820162,
+          "seconds": 42.40243911743164
+        },
+        {
+          "epoch": 6,
+          "loss": 0.22713919038540334,
+          "auc": 0.9587055319355018,
+          "seconds": 48.2051043510437
+        },
+        {
+          "epoch": 7,
+          "loss": 0.22647186548632886,
+          "auc": 0.9589469036146263,
+          "seconds": 53.99591588973999
+        },
+        {
+          "epoch": 8,
+          "loss": 0.22601522672083874,
+          "auc": 0.9588387233995235,
+          "seconds": 59.830315351486206
+        },
+        {
+          "epoch": 9,
+          "loss": 0.22568473176515766,
+          "auc": 0.9589147542853727,
+          "seconds": 65.95474362373352
+        },
+        {
+          "epoch": 10,
+          "loss": 0.22544177952884506,
+          "auc": 0.9589633897122933,
+          "seconds": 71.78334927558899
+        },
+        {
+          "epoch": 11,
+          "loss": 0.2249813582804,
+          "auc": 0.9590269371215521,
+          "seconds": 77.60850954055786
+        },
+        {
+          "epoch": 12,
+          "loss": 0.224525850828615,
+          "auc": 0.9589947360600498,
+          "seconds": 83.43657565116882
+        },
+        {
+          "epoch": 13,
+          "loss": 0.22412327125823006,
+          "auc": 0.9590657388946563,
+          "seconds": 89.22630763053894
+        },
+        {
+          "epoch": 14,
+          "loss": 0.22383250684074668,
+          "auc": 0.9589945630803434,
+          "seconds": 95.07142901420593
+        },
+        {
+          "epoch": 15,
+          "loss": 0.22313629845791105,
+          "auc": 0.9589640707996794,
+          "seconds": 101.04366087913513
+        },
+        {
+          "epoch": 16,
+          "loss": 0.22294136561698574,
+          "auc": 0.9589668969970889,
+          "seconds": 107.069669008255
+        },
+        {
+          "epoch": 17,
+          "loss": 0.22239073038612095,
+          "auc": 0.958921716961052,
+          "seconds": 113.11983728408813
+        },
+        {
+          "epoch": 18,
+          "loss": 0.2219975583791181,
+          "auc": 0.9588423540333993,
+          "seconds": 119.09906530380249
+        },
+        {
+          "epoch": 19,
+          "loss": 0.22168106675837015,
+          "auc": 0.9589770711137666,
+          "seconds": 125.09383535385132
+        },
+        {
+          "epoch": 20,
+          "loss": 0.22112139235725106,
+          "auc": 0.9590116314891342,
+          "seconds": 131.1319420337677
+        },
+        {
+          "epoch": 21,
+          "loss": 0.2205372577350749,
+          "auc": 0.9590430219709654,
+          "seconds": 137.12357759475708
+        },
+        {
+          "epoch": 22,
+          "loss": 0.22030530601606368,
+          "auc": 0.9588962039093213,
+          "seconds": 143.0985724925995
+        },
+        {
+          "epoch": 23,
+          "loss": 0.21976318240823567,
+          "auc": 0.9589069430391524,
+          "seconds": 149.11129069328308
+        }
+      ],
+      "seconds": 149.79080176353455,
+      "features": [
+        "Age",
+        "Flight Distance",
+        "Inflight wifi service",
+        "Departure/Arrival time convenient",
+        "Ease of Online booking",
+        "Gate location",
+        "Food and drink",
+        "Online boarding",
+        "Seat comfort",
+        "Inflight entertainment",
+        "On-board service",
+        "Leg room service",
+        "Baggage handling",
+        "Checkin service",
+        "Cleanliness",
+        "Departure Delay in Minutes",
+        "Arrival Delay in Minutes",
+        "Gender",
+        "Customer Type",
+        "Type of Travel",
+        "Class",
+        "orig_mean__Age",
+        "orig_count__Age",
+        "orig_mean__Flight Distance",
+        "orig_count__Flight Distance",
+        "orig_mean__Inflight wifi service",
+        "orig_count__Inflight wifi service",
+        "orig_mean__Departure/Arrival time convenient",
+        "orig_count__Departure/Arrival time convenient",
+        "orig_mean__Ease of Online booking",
+        "orig_count__Ease of Online booking",
+        "orig_mean__Gate location",
+        "orig_count__Gate location",
+        "orig_mean__Food and drink",
+        "orig_count__Food and drink",
+        "orig_mean__Online boarding",
+        "orig_count__Online boarding",
+        "orig_mean__Seat comfort",
+        "orig_count__Seat comfort",
+        "orig_mean__Inflight entertainment",
+        "orig_count__Inflight entertainment",
+        "orig_mean__On-board service",
+        "orig_count__On-board service",
+        "orig_mean__Leg room service",
+        "orig_count__Leg room service",
+        "orig_mean__Baggage handling",
+        "orig_count__Baggage handling",
+        "orig_mean__Checkin service",
+        "orig_count__Checkin service",
+        "orig_mean__Cleanliness",
+        "orig_count__Cleanliness",
+        "orig_mean__Departure Delay in Minutes",
+        "orig_count__Departure Delay in Minutes",
+        "orig_mean__Arrival Delay in Minutes",
+        "orig_count__Arrival Delay in Minutes",
+        "orig_mean__Gender",
+        "orig_count__Gender",
+        "orig_mean__Customer Type",
+        "orig_count__Customer Type",
+        "orig_mean__Type of Travel",
+        "orig_count__Type of Travel",
+        "orig_mean__Class",
+        "orig_count__Class",
+        "orig_mean__pair__Online boarding__Class",
+        "orig_count__pair__Online boarding__Class",
+        "orig_mean__pair__Online boarding__Type of Travel",
+        "orig_count__pair__Online boarding__Type of Travel",
+        "orig_mean__pair__Inflight wifi service__Class",
+        "orig_count__pair__Inflight wifi service__Class",
+        "orig_mean__pair__Inflight wifi service__Type of Travel",
+        "orig_count__pair__Inflight wifi service__Type of Travel",
+        "orig_mean__pair__Seat comfort__Class",
+        "orig_count__pair__Seat comfort__Class",
+        "orig_mean__pair__Inflight entertainment__Class",
+        "orig_count__pair__Inflight entertainment__Class",
+        "orig_mean__pair__Customer Type__Type of Travel",
+        "orig_count__pair__Customer Type__Type of Travel",
+        "orig_mean__pair__Class__Type of Travel",
+        "orig_count__pair__Class__Type of Travel",
+        "orig_mean__pair__Inflight wifi service__Online boarding",
+        "orig_count__pair__Inflight wifi service__Online boarding",
+        "orig_mean__bin__Age__5",
+        "orig_count__bin__Age__5",
+        "orig_mean__bin__Age__10",
+        "orig_count__bin__Age__10",
+        "orig_mean__bin__Flight Distance__100",
+        "orig_count__bin__Flight Distance__100",
+        "orig_mean__bin__Flight Distance__500",
+        "orig_count__bin__Flight Distance__500",
+        "orig_mean__bin__Departure Delay in Minutes__5",
+        "orig_count__bin__Departure Delay in Minutes__5",
+        "orig_mean__bin__Departure Delay in Minutes__30",
+        "orig_count__bin__Departure Delay in Minutes__30",
+        "orig_mean__bin__Arrival Delay in Minutes__5",
+        "orig_count__bin__Arrival Delay in Minutes__5",
+        "orig_mean__bin__Arrival Delay in Minutes__30",
+        "orig_count__bin__Arrival Delay in Minutes__30",
+        "orig_model_probability",
+        "rating_cat__Inflight wifi service",
+        "rating_cat__Departure/Arrival time convenient",
+        "rating_cat__Ease of Online booking",
+        "rating_cat__Gate location",
+        "rating_cat__Food and drink",
+        "rating_cat__Online boarding",
+        "rating_cat__Seat comfort",
+        "rating_cat__Inflight entertainment",
+        "rating_cat__On-board service",
+        "rating_cat__Leg room service",
+        "rating_cat__Baggage handling",
+        "rating_cat__Checkin service",
+        "rating_cat__Cleanliness"
+      ],
+      "official_package": "0.0.3"
+    },
+    {
+      "config": {
+        "name": "tabm_compact",
+        "k": 32,
+        "width": 512,
+        "blocks": 2,
+        "embedding": 16,
+        "bins": 48,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "weight_decay": 0.0003,
+        "batch_size": 1024,
+        "max_epochs": 60,
+        "patience": 10,
+        "raw_only": true
+      },
+      "seed": 42,
+      "epochs": 15,
+      "auc": 0.958069604700748,
+      "train_auc_sample": 0.9620434864842158,
+      "curves": [
+        {
+          "epoch": 1,
+          "loss": 0.2502858321596848,
+          "auc": 0.9567945517233042,
+          "seconds": 18.4877188205719
+        },
+        {
+          "epoch": 2,
+          "loss": 0.2308280898229362,
+          "auc": 0.9571023532679171,
+          "seconds": 31.0793354511261
+        },
+        {
+          "epoch": 3,
+          "loss": 0.2297522469256231,
+          "auc": 0.957169837662962,
+          "seconds": 43.67174220085144
+        },
+        {
+          "epoch": 4,
+          "loss": 0.22898337187521478,
+          "auc": 0.957276934895772,
+          "seconds": 56.28737282752991
+        },
+        {
+          "epoch": 5,
+          "loss": 0.22839912757642425,
+          "auc": 0.957368394924783,
+          "seconds": 68.6324143409729
+        },
+        {
+          "epoch": 6,
+          "loss": 0.22809674822916431,
+          "auc": 0.9575199696050276,
+          "seconds": 80.95392632484436
+        },
+        {
+          "epoch": 7,
+          "loss": 0.22788241169898638,
+          "auc": 0.9576746978508178,
+          "seconds": 93.4461088180542
+        },
+        {
+          "epoch": 8,
+          "loss": 0.22758847670518845,
+          "auc": 0.9578263845637135,
+          "seconds": 106.01991820335388
+        },
+        {
+          "epoch": 9,
+          "loss": 0.22733221886500982,
+          "auc": 0.9577081000704686,
+          "seconds": 118.582603931427
+        },
+        {
+          "epoch": 10,
+          "loss": 0.22720913523454575,
+          "auc": 0.9578339398969665,
+          "seconds": 131.0565094947815
+        },
+        {
+          "epoch": 11,
+          "loss": 0.2268107991239482,
+          "auc": 0.9577908099129459,
+          "seconds": 143.43071460723877
+        },
+        {
+          "epoch": 12,
+          "loss": 0.22645805524044854,
+          "auc": 0.9579597032567345,
+          "seconds": 155.80223393440247
+        },
+        {
+          "epoch": 13,
+          "loss": 0.2263087809966672,
+          "auc": 0.957790273675856,
+          "seconds": 168.17496514320374
+        },
+        {
+          "epoch": 14,
+          "loss": 0.22604673934208452,
+          "auc": 0.9579028330258076,
+          "seconds": 180.57161021232605
+        },
+        {
+          "epoch": 15,
+          "loss": 0.2259355825146347,
+          "auc": 0.958069604700748,
+          "seconds": 192.92494916915894
+        },
+        {
+          "epoch": 16,
+          "loss": 0.2257741694484818,
+          "auc": 0.9578826304510645,
+          "seconds": 205.2834174633026
+        },
+        {
+          "epoch": 17,
+          "loss": 0.22547074118721155,
+          "auc": 0.9576448308837098,
+          "seconds": 217.83817744255066
+        },
+        {
+          "epoch": 18,
+          "loss": 0.22528742530980314,
+          "auc": 0.9579240953033317,
+          "seconds": 230.3473789691925
+        },
+        {
+          "epoch": 19,
+          "loss": 0.22493137175828545,
+          "auc": 0.9579208906521908,
+          "seconds": 243.81829404830933
+        },
+        {
+          "epoch": 20,
+          "loss": 0.22494455691056048,
+          "auc": 0.9578909530382302,
+          "seconds": 258.091117143631
+        },
+        {
+          "epoch": 21,
+          "loss": 0.22456046420890088,
+          "auc": 0.9578253871012944,
+          "seconds": 272.3240706920624
+        },
+        {
+          "epoch": 22,
+          "loss": 0.22450568810216676,
+          "auc": 0.957991137225987,
+          "seconds": 286.55105423927307
+        },
+        {
+          "epoch": 23,
+          "loss": 0.22409283875415908,
+          "auc": 0.9578325263132721,
+          "seconds": 300.7580976486206
+        },
+        {
+          "epoch": 24,
+          "loss": 0.22406644576937118,
+          "auc": 0.957868458239882,
+          "seconds": 314.97695422172546
+        },
+        {
+          "epoch": 25,
+          "loss": 0.22373887052158836,
+          "auc": 0.9578635795655073,
+          "seconds": 328.6213493347168
+        }
+      ],
+      "seconds": 329.85370802879333,
+      "features": [
+        "Age",
+        "Flight Distance",
+        "Inflight wifi service",
+        "Departure/Arrival time convenient",
+        "Ease of Online booking",
+        "Gate location",
+        "Food and drink",
+        "Online boarding",
+        "Seat comfort",
+        "Inflight entertainment",
+        "On-board service",
+        "Leg room service",
+        "Baggage handling",
+        "Checkin service",
+        "Cleanliness",
+        "Departure Delay in Minutes",
+        "Arrival Delay in Minutes",
+        "Gender",
+        "Customer Type",
+        "Type of Travel",
+        "Class",
+        "orig_model_probability",
+        "rating_cat__Inflight wifi service",
+        "rating_cat__Departure/Arrival time convenient",
+        "rating_cat__Ease of Online booking",
+        "rating_cat__Gate location",
+        "rating_cat__Food and drink",
+        "rating_cat__Online boarding",
+        "rating_cat__Seat comfort",
+        "rating_cat__Inflight entertainment",
+        "rating_cat__On-board service",
+        "rating_cat__Leg room service",
+        "rating_cat__Baggage handling",
+        "rating_cat__Checkin service",
+        "rating_cat__Cleanliness"
+      ],
+      "official_package": "0.0.3"
+    }
+  ],
+  "source": "selection_only",
+  "trials": [
+    {
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "auc": 0.960270327214543
+    },
+    {
+      "weights": [
+        0.8,
+        0.0,
+        0.2
+      ],
+      "auc": 0.9602622456673233
+    },
+    {
+      "weights": [
+        0.6,
+        0.0,
+        0.4
+      ],
+      "auc": 0.960161928107363
+    },
+    {
+      "weights": [
+        0.4,
+        0.0,
+        0.6
+      ],
+      "auc": 0.9599580141328572
+    },
+    {
+      "weights": [
+        0.19999999999999996,
+        0.0,
+        0.8
+      ],
+      "auc": 0.9596235011266405
+    },
+    {
+      "weights": [
+        0.8,
+        0.2,
+        0.0
+      ],
+      "auc": 0.9603033934979041
+    },
+    {
+      "weights": [
+        0.6000000000000001,
+        0.2,
+        0.2
+      ],
+      "auc": 0.9602898011728964
+    },
+    {
+      "weights": [
+        0.4,
+        0.2,
+        0.4
+      ],
+      "auc": 0.960185557135263
+    },
+    {
+      "weights": [
+        0.20000000000000007,
+        0.2,
+        0.6
+      ],
+      "auc": 0.9599794707296403
+    },
+    {
+      "weights": [
+        0.6,
+        0.4,
+        0.0
+      ],
+      "auc": 0.9603228299503771
+    },
+    {
+      "weights": [
+        0.39999999999999997,
+        0.4,
+        0.2
+      ],
+      "auc": 0.960302027443213
+    },
+    {
+      "weights": [
+        0.19999999999999996,
+        0.4,
+        0.4
+      ],
+      "auc": 0.9601953089874611
+    },
+    {
+      "weights": [
+        0.4,
+        0.6,
+        0.0
+      ],
+      "auc": 0.9603289663650473
+    },
+    {
+      "weights": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "auc": 0.9603025017632678
+    },
+    {
+      "weights": [
+        0.19999999999999996,
+        0.8,
+        0.0
+      ],
+      "auc": 0.9603213937338236
+    }
+  ],
+  "confirmation_not_pristine": true,
+  "data_hashes": {
+    "main.py": "803d55b439254e0288c9879ad38058cf6c86909f49ba1c059ed9b3515dc67e0e",
+    "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+    "optimized_training.py": "a6a7ccfe7d5bb8d18cadc547a1c0aa201ec64b23403cf5aa365b88a0c55ff485",
+    "optimized_recipe.json": "782e3095fca89eb9b6d3fb0f96d1cdb32dcefed3210befe59cc8f835f2c5790c",
+    "requirements.txt": "5bb834611f90610d617fbbf4337202478b767298aecaf13fdced6ed02a792e4b",
+    "submission_optimized.csv": "797e4f7307deb3d6fbeb6224f5d26fe5e5b8f49769cb11c0650e633784b96e94",
+    "submission_optimized_oof.csv": "019ad50424224c253a04c8a8499bad53d03703ba954f0b8fd6337eb31d808e3f",
+    "submission_optimized_metrics.json": "a9a20c942c510437e57955c3cb7bb5c5ae41c7a2314dfb7bdc8b68495a32cb11",
+    "optimization_audit.json": "44a80d2d53f703fc6e1b78482ba49e0571d0383abc1c711c8d1fdbd67eb60b32",
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "sample_submission.csv": "6165ecc5769962253534c2d840f26aab55dc3cc091d256bb3641bf6608194a71",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898",
+    "submission.csv": "c2dbfd066c710a11d2c94b46d64271a05c16859af97c3890b0fd7a07b23eb920",
+    "submission_oof.csv": "826f7642ead919509f87221597bdcbd476c7253df42e3823a8af057fc5ebab9a",
+    "submission_metrics.json": "db2028ffbc3eff51fdf33a518dd3e4c2ceda40645530f744bffcc83d839f8e23"
+  },
+  "protocol": {
+    "created": "2026-10-17T11:11:56.235782",
+    "selection": "Reuse prior fit/selection split for controlled comparisons; baseline control seed 42",
+    "confirmation": "Old audit is previously seen, not pristine. Freeze candidate and blend before one fixed-round comparison. No tuning on confirmation.",
+    "final": "Stratified 10-fold seed42, same folds as previous OOF; selection bias applies; Kaggle score unknown",
+    "max_cat_trials": 7,
+    "nn": "Two bounded official TabM candidates: full statistics input and compact raw+prior input. Second candidate motivated by first candidate learning plateau; before confirmation feedback.",
+    "preserve": "All previous submissions and input files must match snapshot hashes",
+    "provisional_confirmation": "An automatic job began using provisional tree weights; stopped before viewing any confirmation scores. Final weights will be frozen after both NN screens."
+  }
+}

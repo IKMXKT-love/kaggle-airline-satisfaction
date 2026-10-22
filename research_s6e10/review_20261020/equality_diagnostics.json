@@ -1,0 +1,128 @@
+{
+  "protocol": {
+    "date": "2026-10-20",
+    "training": false,
+    "source": "https://www.kaggle.com/code/mitudru/s6e10-analysis-first-equality-blocks-stack",
+    "blocks": {
+      "digital": [
+        "Inflight wifi service",
+        "Departure/Arrival time convenient",
+        "Gate location"
+      ],
+      "comfort": [
+        "Food and drink",
+        "Seat comfort",
+        "Inflight entertainment",
+        "Cleanliness"
+      ]
+    },
+    "score_bins": "fixed probability width 0.02",
+    "conditional_cells": [
+      "Class",
+      "Type of Travel",
+      "Customer Type",
+      "score_bin"
+    ],
+    "min_rows_each_flag": 30,
+    "meaning": "Exploratory calibration residual contrasts; no weights, predictions, AUC gains or noise ceiling inferred."
+  },
+  "rows": [
+    {
+      "fold": 0,
+      "block": "digital",
+      "unconditional": [
+        {
+          "equal": false,
+          "rows": 43668,
+          "positive_rate": 0.22545113126316754,
+          "mean_prediction": 0.225890069870736,
+          "mean_residual": -0.0004389386075684581
+        },
+        {
+          "equal": true,
+          "rows": 26296,
+          "positive_rate": 0.8057879525403103,
+          "mean_prediction": 0.8053154528056662,
+          "mean_residual": 0.0004724997346442049
+        }
+      ],
+      "common_context_score_cells": 41,
+      "covered_rows": 56813,
+      "weighted_equal_minus_nonequal_residual": -0.0003749235894325863,
+      "approx_fixed_cell_standard_error": 0.002961839827503977
+    },
+    {
+      "fold": 0,
+      "block": "comfort",
+      "unconditional": [
+        {
+          "equal": false,
+          "rows": 35083,
+          "positive_rate": 0.5985235014109398,
+          "mean_prediction": 0.598939793456706,
+          "mean_residual": -0.00041629204576629756
+        },
+        {
+          "equal": true,
+          "rows": 34881,
+          "positive_rate": 0.2877211089131619,
+          "mean_prediction": 0.2874957124007762,
+          "mean_residual": 0.00022539651238564283
+        }
+      ],
+      "common_context_score_cells": 65,
+      "covered_rows": 62584,
+      "weighted_equal_minus_nonequal_residual": 0.00010030477023679688,
+      "approx_fixed_cell_standard_error": 0.0020433060780332165
+    },
+    {
+      "fold": 1,
+      "block": "digital",
+      "unconditional": [
+        {
+          "equal": false,
+          "rows": 43587,
+          "positive_rate": 0.22502122192396815,
+          "mean_prediction": 0.22339894838798807,
+          "mean_residual": 0.0016222735359800783
+        },
+        {
+          "equal": true,
+          "rows": 26377,
+          "positive_rate": 0.8047162300489062,
+          "mean_prediction": 0.8064859103001587,
+          "mean_residual": -0.0017696802512525167
+        }
+      ],
+      "common_context_score_cells": 39,
+      "covered_rows": 56432,
+      "weighted_equal_minus_nonequal_residual": -0.0015782437896960614,
+      "approx_fixed_cell_standard_error": 0.0029662195181553532
+    },
+    {
+      "fold": 1,
+      "block": "comfort",
+      "unconditional": [
+        {
+          "equal": false,
+          "rows": 35316,
+          "positive_rate": 0.5955940650130253,
+          "mean_prediction": 0.5969419229632306,
+          "mean_residual": -0.001347857950205365
+        },
+        {
+          "equal": true,
+          "rows": 34648,
+          "positive_rate": 0.28861694758716233,
+          "mean_prediction": 0.28654952285860863,
+          "mean_residual": 0.002067424728553704
+        }
+      ],
+      "common_context_score_cells": 65,
+      "covered_rows": 62851,
+      "weighted_equal_minus_nonequal_residual": 0.001567037988941178,
+      "approx_fixed_cell_standard_error": 0.0020502662340692165
+    }
+  ],
+  "elapsed_seconds": 4.202391499999067
+}

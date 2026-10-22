@@ -1,0 +1,93 @@
+{
+  "arms": [
+    "direct",
+    "teacher_offset",
+    "conditional_ratio"
+  ],
+  "primary_candidate": "conditional_ratio",
+  "outer_fold": 2,
+  "model": {
+    "members": 8,
+    "embedding_dim": 8,
+    "frequencies": 8,
+    "frequency_sigma": 2.33,
+    "hidden": [
+      512,
+      256,
+      128
+    ],
+    "dropout": 0.05
+  },
+  "training": {
+    "seed": 20261021,
+    "group_size": 512,
+    "epoch_divisor": 2048,
+    "learning_rate": 0.0015,
+    "min_lr_fraction": 0.08,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "prediction_batch": 4096
+  },
+  "max_epochs": 16,
+  "primary_blend_weight": 0.1,
+  "diagnostic_weights": [
+    0.05,
+    0.2
+  ],
+  "expansion_gate": 0.0003,
+  "protected": {
+    "submission_public_pool_20261020.csv": "d3029122f333be8c98844b8af4c7f2f2fae91d74487e95994a488df1684a7728",
+    "CURRENT_BEST_RESULT.md": "ecc54e9d2a8931518c925ab34cea163a861eef8f1bd4a4ef22d8468bda8ee88a",
+    "CURRENT_BEST_SUBMISSION.json": "afaea41a9ca39199926b4f2e0f34b5d047aec84c41a87605bbc0c1e259c63ec0",
+    "CURRENT_RECOMMENDED_CANDIDATE.json": "108804080cab13385977598286b8e3d86ee403043310bbabb798dbd7083a8dad"
+  },
+  "input_sha256": {
+    "train.csv": "2313b65c74e6994f01c2628aae82d2f97aa6f74a81950172ff83864837c98b36",
+    "test.csv": "ff7932747f27c5274de904194ac38b4d088ea4f9bb005ae74f0d619fb893a9b6",
+    "external_data/train.csv": "a15fab6d36a6123dedb035e1bc11b31f27b547671ce8d27762e74d96527c364f",
+    "external_data/test.csv": "2b58518af6e6c94334bf0f69160e29c5a5a082e340cf30f517473ede2bb1d898",
+    "experiment_density_ratio.py": "93c1551d1461757e49dacf0a45cfcd3c73db512ac9b4b9423e32ee5a98d3235e",
+    "density_ratio_support.py": "db581f0005613456106576b8ea825668c7b09f660a5f34d13a15959570af8cb0",
+    "domain_transfer_support.py": "693cbf5fadd5ddea03bdc3769ef469627977ce1f69572f8c8e5516031c906059",
+    "multitask_support.py": "d32ff14b182cfb837f41c996770b995314325ad63796113896bc7fc2b9f96bff",
+    "experiment_domain_transfer.py": "57ea260cb23abd5bbe468a74a690be0d05d6ad5c8d9fd55189448645a2236e46",
+    "optimized_features.py": "9c8c04495673d1071044c697abc2aa4e1a6428287dd9f6cefb5d0416106b5c5b",
+    "verify_density_ratio.py": "7efb2c0eec350d4daab55ffccb65052b85562a66a3ed2ea48cea692238056963",
+    "tests/test_density_ratio_contract.py": "cf34a244b8d299939e78b347d208d289a1b85aac93ffc6ce446aa6f9a0f2fce3",
+    "DENSITY_RATIO_PLAN_20261021.md": "e40d77c8a7fe769b4e2663d03bb3c885c987d668e1b2d2e71010699dd0f3325b",
+    "research_s6e10\\extended_review_20261020\\reference_predictions\\dariushafshar__folds_seed42.npy": "181ada73928aaf1a7af9a24ffb8f70064f75b880edf08e77cd0b808a9c697f4f",
+    ".artifact_runtime\\public_pool_trial_20261020\\public_only_fold2_validation.npz": "9fa3d9ca24d705615e4509d18103385cc82d379e2559724bb7149361f17ae5c4",
+    ".artifact_runtime\\public_pool_trial_20261020\\public_only_fold2.npz": "b6366b6da491ed341a9deb380252ccc41a54c88f652e859ef9888dc679635050",
+    ".artifact_runtime\\optimized_cache\\metadata.json": "804de7d9be8df3a2169010edbfef382fe1286c8260f768f71e7a761ba0d75a22",
+    ".artifact_runtime\\optimized_cache\\train_priors.npy": "4ca7c094daa72965b64224aff25ebbe3d4929e8263481a657fd891171ee5ae3b",
+    ".artifact_runtime\\optimized_cache\\original_prior_depth6.ubj": "6147a3bc25107e994ac93a4069b800754e836a3a5966fa576f17c534ef3bea5b",
+    ".artifact_runtime\\optimized_cache\\original_prior_depth3.ubj": "b6a4ca6a7289e969d35ded647617be883f24c86e4f50ed4ab362a1be8aeca49d",
+    ".artifact_runtime\\optimized_cache\\original_prior_depth9.ubj": "a351a9778849ad374fac70a0a4755b2f0bf5b633df38ae7c52129a6bf003282e"
+  },
+  "original_rows": 129859,
+  "removed_original_overlap": 21,
+  "fit_rows": 514931,
+  "stopping_rows": 44777,
+  "refit_rows": 559708,
+  "scored_rows": 139927,
+  "teacher": "mean clipped source-only XGBoost logits; fixed no competition labels; per-phase class-prior shift",
+  "source_teacher_as_domain_input": false,
+  "extra_source_field_used": false,
+  "contrast_limit": 8.0,
+  "selection": "inner AUC including epoch0; refit same schedule prefix at chosen epoch, never score-based weights",
+  "task": "balanced C0,C1,O0,O1 512 each; C objectives weighted to natural pi_C; all arms identical task RNG",
+  "epoch_definition": "ceil(C rows/2048) steps with replacement; actual C rows per step1024, O1024",
+  "public_validation_caveat": "Conditional screen: public upstream OOF inherits early-stopping and indirect label dependence, not nested CV; historical folds seen.",
+  "costs": {
+    "preparation_and_probe_seconds": 122.06486201286316,
+    "conservative_projections": {
+      "24": 904.3189796655718,
+      "16": 674.498208716239,
+      "12": 559.5878232415726
+    }
+  },
+  "no_submission": true,
+  "no_weight_search": true,
+  "encoder_scope": "unlabeled C fitting rows plus retained O rows; no stopping/scored statistics",
+  "pre_score_amendment": "Joint vocabulary/scales prevent asymmetric source unknown-token artifacts; no stopping or scored outcomes observed; original clock retained and first encoders/probe preserved."
+}

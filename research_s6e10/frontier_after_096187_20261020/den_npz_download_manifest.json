@@ -1,0 +1,37 @@
+[
+  {
+    "name": "den_fold0.npz",
+    "source_file": "exp042/neighborhood/fold0/predictions.npz",
+    "source_version": 45,
+    "bytes": 5596782,
+    "sha256": "7d97aae9d5a2a53192d238677db1a3f28df2a4e32915a72f93d3b88b9e2d79fc"
+  },
+  {
+    "name": "den_fold1.npz",
+    "source_file": "exp042/neighborhood/fold1/predictions.npz",
+    "source_version": 45,
+    "bytes": 5597663,
+    "sha256": "018d77ba969914dedbe3da559bb88af43661fcd574ccfe8b21bb0e46eb2fcb1a"
+  },
+  {
+    "name": "den_fold2.npz",
+    "source_file": "exp042/neighborhood/fold2/predictions.npz",
+    "source_version": 45,
+    "bytes": 5594219,
+    "sha256": "ae6eb05694b799ff63edf8fb5587050b53be940f067e0a5c34cb9e1052add631"
+  },
+  {
+    "name": "den_fold3.npz",
+    "source_file": "exp042/neighborhood/fold3/predictions.npz",
+    "source_version": 45,
+    "bytes": 5590123,
+    "sha256": "9d269f2a622d41c4613489844e085ccaaa1424f4f3f6b8acd69450a836e9050d"
+  },
+  {
+    "name": "den_fold4.npz",
+    "source_file": "exp042/neighborhood/fold4/predictions.npz",
+    "source_version": 45,
+    "bytes": 5594485,
+    "sha256": "a54e2a3bde65450e853238cfb577d67e1abffc8cb0d47d03ada89b5dc8b64bbc"
+  }
+]

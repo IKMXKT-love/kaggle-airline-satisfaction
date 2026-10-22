@@ -1,0 +1,633 @@
+# S6E10 | 0.96188 LB | a stack of stacks inflates nested CV (family-wise L2 + a LightGBM blend)
+
+A trimmed copy of Dariush Afshar's *every public OOF pair I could check, in one logistic stack*
+(LB 0.96187). His loaders and his checks (alignment, scale, near-copies) are unchanged. The pool has
+**248 members**: his 247 plus `gpx_stack245`, which goodpjw2008's extra-members dataset now holds next to
+his single models. That 248th "member" is goodpjw2008's whole nested 245-member stack (OOF AUC
+0.962224), not a model, and almost all of its members are already in the pool. Version 7 excluded it;
+this version keeps it on purpose, to measure what a stack of stacks does here. His comparison stacks
+(C = 1, the 135-member base pool), the coefficient tables and the demonstration of section 6 are removed.
+
+> **TL;DR**
+> - With `gpx_stack245` in the pool, nested CV keeps rising as the L2 penalty weakens (family C = 0.003 →
+>   0.011: blend +19 → +48 × 1e-6) and never turns, while on the clean 247 members it peaks at C = 0.003.
+> - Rebuilt **fully nested** (the stage-1 stack built from the training folds only), the same two-stage
+>   stack is no better than one stage and gets worse as C grows. The whole gain was **nested-CV
+>   optimism**, up to +4 × 1e-5 at C = 0.011.
+> - Use the clean 247-member blend (version 7). Do not stack a published stack's OOF.
+
+On top of his pool, this notebook tries two stacker changes and picks among them by nested CV:
+- **family-wise L2** in the logistic regression, from goodpjw2008's
+  [Part 11](https://www.kaggle.com/code/goodpjw2008/s6e10-228-member-meta-stack-lb-0-96184)
+  ("regularize families, not members"): TabPFN columns × 3, other foundation models × 1.5, which divides
+  their effective L2 penalty by 9 and 2.25. He fixed C = 0.003 on his 245 members; I re-measured it in
+  [an earlier notebook](https://www.kaggle.com/code/ewtherka/s6e10-stacker-s-c-penalty-on-model-families)
+  with a converged solver, and here I search C together with it on the full public pool;
+- *Trust the CV*'s **0.8 LR + 0.2 LightGBM** blend (both standardised; LightGBM parameters and input
+  families as there).
+
+Settings: plain LR and blend, each with flat C = 0.003 and family C ∈ {0.003, 0.004, 0.005, 0.006}, plus
+an extended sweep to C = 0.011 in a separate run. The baseline is Dariush Afshar's recipe, **plain LR with
+flat C = 0.003**.
+
+1. Nested CV on Dariush Afshar's own meta folds, `StratifiedKFold(5, shuffle=True, random_state=42)`
+   (the folds most members were trained on), fold-mean AUC. On his 247 members this baseline reproduces
+   his stack (0.962211 against 0.962212, the mean of his five published fold AUCs; his headline 0.962205
+   is the pooled AUC).
+2. **Cross-fitted choice**: for each fold, the setting is picked on the other four and scored on that one.
+3. The chosen setting is re-run against the baseline on two untouched meta-fold seeds (7, 101); it is
+   adopted only if it beats the baseline on seed 42 and on both of them.
+4. Refit on every training row; `submission.csv` and the nested OOF of the adopted stack are written.
+
+CPU only, no internet, about 80 minutes on Kaggle.
+
+## Results on 248 members
+
+Fold-mean AUC on meta-fold seed 42. Δ is the gain over the baseline (0.962208) in units of 1e-6, with
+the number of folds (out of 5) where it is higher. The LightGBM stacker alone scores 0.962134. Rows from
+C = 0.007 come from the extended sweep (same pool and folds; its C = 0.006 row matched this run exactly).
+
+| L2 penalty | C | plain LR | Δ | 0.8 LR + 0.2 LGB | Δ |
+|---|---|---|---|---|---|
+| flat (baseline) | 0.003 | 0.962208 | — | 0.962221 | +13.5 (5/5) |
+| family | 0.003 | 0.962213 | +5.2 (3/5) | 0.962227 | +19.3 (5/5) |
+| family | 0.004 | 0.962215 | +6.6 (3/5) | 0.962230 | +21.9 (5/5) |
+| family | 0.005 | 0.962217 | +9.1 (3/5) | 0.962233 | +25.1 (5/5) |
+| family | 0.006 | 0.962220 | +12.3 (3/5) | 0.962237 | +28.8 (5/5) |
+| family | 0.007 | 0.962224 | +16 | 0.962241 | +33 |
+| family | 0.008 | 0.962228 | +20 | 0.962244 | +36 |
+| family | 0.009 | 0.962232 | +24 | 0.962249 | +41 |
+| family | 0.010 | 0.962236 | +28 | 0.962252 | +44 |
+| family | 0.011 | 0.962241 | +33 | 0.962256 | +48 |
+
+On the grid of this run (up to C = 0.006) the cross-fitted choice picked blend + family C = 0.006 in all
+five folds (+28.8 × 1e-6, SE 7.4), and it held on the untouched seeds:
+
+| meta-fold seed | baseline | blend, family C = 0.006 | Δ |
+|---|---|---|---|
+| 42 (selection, cross-fitted) | 0.962208 | 0.962237 | +28.8 (5/5) |
+| 7 | 0.962218 | 0.962256 | +38.5 (5/5) |
+| 101 | 0.962219 | 0.962248 | +28.3 (5/5) |
+
+## Against the clean 247-member pool (version 7, same folds)
+
+| meta-fold seed | baseline, 247 | baseline, 248 | best blend, 247 (family C = 0.003) | blend, 248 (family C = 0.006) | 248 − 247 |
+|---|---|---|---|---|---|
+| 42 | 0.962211 | 0.962208 | 0.962228 | 0.962237 | +9 |
+| 7 | 0.962225 | 0.962218 | 0.962246 | 0.962256 | +10 |
+| 101 | 0.962223 | 0.962219 | 0.962235 | 0.962248 | +13 |
+
+The extra gain appears only with the stack member and only at a weak penalty. At flat C = 0.003 the stack
+lowers the baseline on every seed (−3, −7 and −4 × 1e-6). On 247 members plain LR peaks at C = 0.002 and
+falls after; on 248 it rises in a straight line to C = 0.011 and never turns. The LightGBM stacker alone
+jumps from 0.962047 to 0.962134 once it can split on the stack.
+
+## The decisive test: a stack of stacks, fully nested
+
+`gpx_stack245` was fitted on every training row, including the fold being scored, so a nested CV over it
+cannot say whether the gain is a real two-stage effect or optimism. I rebuilt the idea so that it can
+([notebook](https://www.kaggle.com/code/ewtherka/is-it-reliable?scriptVersionId=357862898)): for every outer fold (seed 42), a plain LR stack of the 247
+members (flat C = 0.003, goodpjw2008's recipe) is built **from the four training folds only** (inner
+nested CV, seed 7, for its OOF there; a fit on all four scores the held-out fold, as a test set would be
+scored). Stage 2 is family-wise LR on [247 members + that stack], and the LightGBM stacker also gets the
+stage-1 column. The held-out fold never touches stage 1. The single-stage arms reproduce version 7
+exactly (0.962211 and 0.962228; fold 1, 0.962358, matches Dariush Afshar's to the last digit).
+
+| stage 2 | C | fully nested | Δ vs one stage (SE, folds up) | with `gpx_stack245` | inflation |
+|---|---|---|---|---|---|
+| plain LR, family | 0.003 | 0.962212 | +1.0 (5.7, 3/5) | 0.962213 | +1 |
+| plain LR, family | 0.006 | 0.962205 | −6.0 (6.3, 2/5) | 0.962220 | +15 |
+| plain LR, family | 0.011 | 0.962200 | −11.3 (6.4, 1/5) | 0.962241 | +41 |
+| blend, family | 0.003 | 0.962221 | −6.2 (3.0, 1/5) | 0.962227 | +6 |
+| blend, family | 0.006 | 0.962218 | −9.3 (3.6, 1/5) | 0.962237 | +19 |
+| blend, family | 0.011 | 0.962216 | −12.1 (3.9, 1/5) | 0.962256 | +40 |
+
+(Δ in 1e-6: plain LR against one-stage plain LR flat C = 0.003, the blends against the version-7 blend.)
+
+- **It was nested-CV optimism.** Built properly, a stack of stacks is no better than one stage and gets
+  worse as the penalty weakens, exactly like a single stage on the clean pool. That matches goodpjw2008's
+  own measurement in Part 11: Dariush Afshar's stack added to his 245 members lost −14 × 1e-6.
+- **The inflation grows with C**, from +1 × 1e-6 at C = 0.003 to about +4 × 1e-5 at C = 0.011. The weaker
+  the penalty, the more the stacker leans on a column that has already seen the labels of the fold being
+  scored. That is why the curve above never turned, and why the cross-fitted choice and the untouched
+  seeds could not catch it: every meta-fold seed scores rows that `gpx_stack245` was fitted on.
+- **The public board does not contradict it.** `submission.csv` (C = 0.006) scores **0.96188** and the
+  C = 0.011 blend scores **LB_OF_C_0011**, against 0.96187 for the clean 247-member blend and for Dariush
+  Afshar's stack. All of them are scored on the same ~20 % of the test set, so the rise from one C to the
+  next is one draw seen several times, not independent evidence. The fully nested estimate for the C = 0.011
+  blend (−12.1 × 1e-6, SE 3.9, 700k rows) is several times more precise than a public-board difference
+  (±1.5 to 2 × 1e-5), and the private board is scored on other rows.
+- **What to use**: the clean 247-member blend of version 7 (0.8 LR + 0.2 LightGBM, family C = 0.003),
+  validated on three meta-fold seeds without any stack-level member. This version's `submission.csv` is
+  valid (its test predictions use nothing they should not), it is just not better than version 7. If you
+  load goodpjw2008's extra-members dataset, skip its `stack` files.
+
+## 1. Setup (Dariush Afshar's, unchanged)
+
+import os, glob, json, time, hashlib, warnings
+from collections import deque
+import numpy as np, pandas as pd
+from joblib import Parallel, delayed
+from scipy.stats import rankdata
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import StratifiedKFold
+warnings.filterwarnings("ignore")
+
+T0 = time.time()
+INPUT = os.environ.get("SMOKE_ROOT", "/kaggle/input")
+WORK = os.environ.get("SMOKE_WORK", "/kaggle/working")
+N_JOBS = min(5, os.cpu_count() or 1)
+
+
+def find_dir(slug, root=INPUT, max_depth=6):
+    # the mounted folder called `slug` (a dataset, a notebook's output or the competition), or None
+    queue, hits = deque([(root, 0)]), []
+    while queue:
+        d, depth = queue.popleft()
+        try:
+            entries = sorted(os.scandir(d), key=lambda e: e.name)
+        except OSError:
+            continue
+        for e in entries:
+            if e.is_dir():
+                if e.name == slug:
+                    hits.append(e.path)
+                elif depth < max_depth:
+                    queue.append((e.path, depth + 1))
+    return sorted(hits, key=len)[0] if hits else None
+
+
+COMP = find_dir("playground-series-s6e10")
+train = pd.read_csv(f"{COMP}/train.csv", usecols=["id", "satisfaction"])
+train_ids = train["id"].to_numpy()
+test_ids = pd.read_csv(f"{COMP}/test.csv", usecols=["id"])["id"].to_numpy()
+y = train["satisfaction"].astype(str).str.lower().map({"true": 1, "false": 0, "1": 1, "0": 0})
+assert y.notna().all(), "unexpected label values"
+y = y.to_numpy().astype(int)
+
+# the folds every comparison below is scored on; most public pairs were built on this same split
+fold = np.zeros(len(y), int)
+for k, (_, va) in enumerate(StratifiedKFold(5, shuffle=True, random_state=42).split(np.zeros(len(y)), y)):
+    fold[va] = k
+LIB = find_dir("s6e10-golem-oof-library")
+assert (np.load(f"{LIB}/folds_seed42.npy") == fold).all(), "not the frozen folds"
+print(f"train {len(y):,} rows, test {len(test_ids):,} rows, positive rate {y.mean():.4f}")
+print(f"folds: StratifiedKFold(5, shuffle=True, random_state=42), {np.bincount(fold).tolist()} rows per fold, "
+      "identical to folds_seed42.npy in my OOF library")
+
+## 2. The 248-member pool: sources, checks and near-copies (unchanged)
+
+SOURCES = []    # every public source in loading order: its key, the mounted folder's slug, and how to read it
+
+
+def source(key, slug):
+    def register(fn):
+        SOURCES.append({"key": key, "slug": slug, "load": fn})
+        return fn
+    return register
+
+
+def first(d, name):
+    hits = sorted(glob.glob(os.path.join(d, "**", name), recursive=True), key=len)
+    if not hits:
+        raise FileNotFoundError(name)
+    return hits[0]
+
+
+def by_id(df, ids, col):
+    # column `col` of `df` in the order of `ids`; every id has to be there exactly once
+    s = df.set_index("id")[col]
+    assert s.index.is_unique, "duplicate ids"
+    s = s.reindex(ids)
+    assert s.notna().all(), f"{int(s.isna().sum()):,} ids missing"
+    return s.to_numpy(np.float64)
+
+
+def npy_pairs(d, prefix, pattern="oof_*.npy"):
+    # oof_<name>.npy with test_<name>.npy next to it, rows in train.csv / test.csv order
+    for f in sorted(glob.glob(os.path.join(d, "**", pattern), recursive=True)):
+        name = os.path.basename(f)[4:-4]
+        yield prefix + name, np.load(f), np.load(os.path.join(os.path.dirname(f), f"test_{name}.npy")), "row order"
+
+
+def npz_pairs(d, prefix, pattern="*.npz", strip=0):
+    # one .npz per member holding `oof` and `test`
+    for f in sorted(glob.glob(os.path.join(d, "**", pattern), recursive=True)):
+        with np.load(f) as z:
+            if "oof" in z.files and "test" in z.files:
+                yield prefix + os.path.basename(f)[strip:-4], z["oof"], z["test"], "row order"
+
+
+# ---- the base pool: Chris Deotte's two packaged datasets
+@source("c124", "s6e10-124-public-oof-and-test-predictions")
+def load_c124(d):        # 124 pairs Kratosyan collected from every public library of the first week
+    yield from npy_pairs(d, "")
+
+
+@source("tfm", "s6e10-tfm-oof-and-test-predictions")
+def load_tfm(d):         # 9 tabular foundation models, a tuned XGBoost and a RealMLP
+    yield from npy_pairs(d, "tfm_")
+
+
+# ---- published since, or not in the 124
+@source("golem", "s6e10-golem-oof-library")
+def load_golem(d):       # my library: 14 of its 17 are already in the 124, so the near-copy check drops them
+    man = pd.read_csv(f"{d}/manifest.csv")
+    for r in man.itertuples():
+        yield "gl_" + r.wide_column, np.load(f"{d}/{r.oof_file}"), np.load(f"{d}/{r.test_file}"), "row order"
+
+
+@source("abdullah", "oof-dataset")
+def load_abdullah(d):    # three TabPFN-3.5 feature sets, CatBoost, XGBoost (15 folds each); csv files with ids
+    for m in ("tabpfn_catfd10", "tabpfn_raw", "tabpfn_te_cnt", "cat_v3", "xgb_v3"):
+        o, t = pd.read_csv(f"{d}/{m}_oof.csv"), pd.read_csv(f"{d}/{m}_test.csv")
+        yield "ab_" + m, by_id(o, train_ids, "pred"), by_id(t, test_ids, "pred"), "id"
+
+
+@source("sadam", "ps-s6e10-airline-satisfaction-artifacts")
+def load_sadam(d):       # 38 experiments, plus 2 models trained only on the original data (they never saw a train label)
+    yield from npz_pairs(d, "st_", "preds_*.npz", strip=6)
+    for n in ("orig_cat_pred", "orig_model_pred"):
+        with np.load(first(d, f"{n}.npz")) as z:
+            yield "st_" + n, z["train"], z["test"], "row order"
+
+
+@source("forge", "s6e10-forge-own-pairs")
+def load_forge(d):       # The Consensus Forge: 6 pairs on its own seed-33 folds
+    yield from npy_pairs(d, "am_", "oof_forge_*.npy")
+
+
+@source("sachith", "s6e10-stack-oof-predictions")
+def load_sachith(d):     # 24 members; 22 are already in the 124
+    yield from npz_pairs(d, "s7_")
+
+
+@source("koumeimaki", "s6e10-route-tfm-nn-oof")
+def load_koumeimaki(d):  # TabPFN, TabICL, TabM, RealMLP and three GBDTs on shared folds; ids in two side files
+    assert (pd.read_csv(f"{d}/train_ids_folds.csv")["id"].to_numpy() == train_ids).all()
+    assert (pd.read_csv(f"{d}/test_ids.csv")["id"].to_numpy() == test_ids).all()
+    for name, o, t, _ in npy_pairs(d, "km_"):
+        yield name, o, t, "id"
+
+
+@source("gp_tabpfn", "s6e10-tabpfn-member")
+def load_gp_tabpfn(d):   # TabPFN-3.5 and TabICL members; csv files with ids (all 8 should already be in the 124)
+    for f in sorted(glob.glob(f"{d}/oof_*.csv")):
+        n = os.path.basename(f)[4:-4]
+        yield ("gpt_" + n, by_id(pd.read_csv(f), train_ids, "pred"),
+               by_id(pd.read_csv(f"{d}/test_{n}.csv"), test_ids, "pred"), "id")
+
+
+@source("gp_extra", "s6e10-goodpjw2008-extra-members-oof")
+def load_gp_extra(d):    # 17 members of the goodpjw2008 series that were never published before
+    yield from npy_pairs(d, "gpx_")
+
+
+@source("dmitriy", "s6e10-catboost-all-categorical-oof-and-test")
+def load_dmitriy(d):     # CatBoost with every column categorical
+    yield "dk_cb_cat", np.load(first(d, "oof_cb_cat.npy")), np.load(first(d, "test_cb_cat.npy")), "row order"
+
+
+@source("kagan_abl", "s6e10-ablation-members-oof")
+def load_kagan_abl(d):   # 17 ablation members: LightGBM, XGBoost, CatBoost and RealMLP on several feature sets
+    yield from npy_pairs(d, "kga_")
+
+
+# ---- notebook outputs
+@source("yekenot", "ps-s6-e10-realmlp-pytabkit")
+def load_yekenot(d):     # RealMLP (PyTabKit); csv files with ids
+    o, t = pd.read_csv(first(d, "oof_preds.csv")), pd.read_csv(first(d, "submission.csv"))
+    yield "yk_realmlp", by_id(o, train_ids, "satisfaction"), by_id(t, test_ids, "satisfaction"), "id"
+
+
+@source("hermengardo", "single-catboost-eda-ps6e10")
+def load_hermengardo(d):  # a single CatBoost
+    yield "hm_cat", np.load(first(d, "oof_train.npy")), np.load(first(d, "oof_test.npy")), "row order"
+
+
+@source("kratosyan", "s6e10-xgboost-realmlp-route-id-teacher")
+def load_kratosyan(d):   # 10-fold XGBoost and RealMLP with a route-ID teacher
+    yield from npz_pairs(d, "kr_", "*_route_ogaux.npz")
+
+
+@source("kagan_enc", "s6e10-encodings-catboost-realmlp-lb-0-961")
+def load_kagan_enc(d):   # LightGBM, XGBoost, two CatBoosts, RealMLP; csv files with ids
+    o, t = pd.read_csv(first(d, "oof_members.csv")), pd.read_csv(first(d, "test_members.csv"))
+    for c in [c for c in o.columns if c != "id"]:
+        yield "kg_" + c, by_id(o, train_ids, c), by_id(t, test_ids, c), "id"
+
+
+@source("aman_v5", "s6e10-the-original-prior-stack-v5")
+def load_aman_v5(d):     # the five base members of The Original-Prior Stack v5 (its blends and stack are left out)
+    with np.load(first(d, "oof_artifacts.npz")) as z:
+        assert (z["y"] == y).all(), "labels in a different row order"
+        for m in ("lgbm_champion", "lgbm_te", "lgbm_te_rows", "xgb_gpu", "catboost_gpu"):
+            yield "av5_" + m, z["oof_" + m], z["test_" + m], "row order"
+
+
+@source("kozy", "s6e10-source-transfer-foundation-model-oof")
+def load_kozy(d):        # a LightGBM on engineered features (its output's model_oof_report.csv names the model)
+    yield ("kz_source_transfer", np.load(first(d, "source_transfer_oof.npy")),
+           np.load(first(d, "source_transfer_test.npy")), "row order")
+
+
+print(f"{len(SOURCES)} sources registered: {', '.join(s['key'] for s in SOURCES)}")
+
+MIN_AUC, MAX_AUC, AGREE_GAP, DRIFT, DUP_RHO = 0.90, 0.9625, 0.03, 0.03, 0.9999
+
+
+def logit(p):
+    p = np.clip(np.asarray(p, np.float64), 1e-15, 1 - 1e-15)
+    return np.log(p / (1 - p))
+
+
+def is_rank(v):
+    # values spread evenly over (0, 1], like rankdata(v) / len(v)
+    q = np.quantile(v, [0.1, 0.25, 0.5, 0.75, 0.9])
+    return bool(v.min() >= 0 and v.max() <= 1 and np.abs(q - [0.1, 0.25, 0.5, 0.75, 0.9]).max() < 0.01)
+
+
+def corr_cols(Z, r):
+    Zc, rc = Z - Z.mean(0), r - r.mean()
+    return (Zc * rc[:, None]).sum(0) / np.sqrt((Zc ** 2).sum(0) * (rc ** 2).sum())
+
+
+rows, OOFL, TSTL = [], [], []
+for s in SOURCES:
+    d = find_dir(s["slug"])
+    if d is None:
+        rows.append(dict(source=s["key"], member="(all)", status="not attached")); continue
+    try:
+        got = list(s["load"](d))
+    except Exception as e:
+        rows.append(dict(source=s["key"], member="(all)", status=f"skipped: {type(e).__name__}: {e}"[:110])); continue
+    for name, o, t, how in got:
+        o, t = np.asarray(o, np.float64).ravel(), np.asarray(t, np.float64).ravel()
+        r = dict(source=s["key"], member=name, aligned=how, status="")
+        if o.shape != y.shape or t.shape != test_ids.shape:
+            r["status"] = f"wrong length {o.shape[0]:,} / {t.shape[0]:,}"
+        elif not (np.isfinite(o).all() and np.isfinite(t).all()):
+            r["status"] = "NaN or inf"
+        else:
+            already = bool(o.min() < 0 or o.max() > 1 or t.min() < 0 or t.max() > 1)
+            r["scale"] = "logits" if already else ("ranks" if is_rank(o) else "probabilities")
+            if not already and is_rank(o) != is_rank(t):
+                r["status"] = "OOF and test on different scales"
+            p_o, p_t = (1 / (1 + np.exp(-o)), 1 / (1 + np.exp(-t))) if already else (o, t)
+            r["drift"] = abs(p_t.mean() - p_o.mean())
+            zo, zt = (o, t) if already else (logit(o), logit(t))
+            OOFL.append(np.clip(zo, -30, 30).astype(np.float32)); TSTL.append(np.clip(zt, -30, 30).astype(np.float32))
+            r["col"] = len(OOFL) - 1
+        rows.append(r)
+CHK = pd.DataFrame(rows)
+assert CHK["col"].notna().any(), "nothing loaded"
+CHK["col"] = CHK["col"].fillna(-1).astype(int)
+live = CHK["col"] >= 0
+Zall, Tall = np.column_stack(OOFL), np.column_stack(TSTL)
+del OOFL, TSTL
+CHK.loc[live, "oof_auc"] = [roc_auc_score(y, Zall[:, c]) for c in CHK.loc[live, "col"]]
+
+# the base pool: Chris Deotte's two packaged datasets, all 135 pairs, kept exactly as published
+BASE = CHK[live & CHK["source"].isin(["c124", "tfm"])]
+assert len(BASE) == 135, f"the base pool should have 135 pairs, found {len(BASE)}"
+ref_o = np.median(Zall[:, BASE["col"].to_numpy()], 1)
+ref_t = np.median(Tall[:, BASE["col"].to_numpy()], 1)
+CHK.loc[live, "agree_oof"] = corr_cols(Zall[:, CHK.loc[live, "col"]], ref_o)
+CHK.loc[live, "agree_test"] = corr_cols(Tall[:, CHK.loc[live, "col"]], ref_t)
+
+new = live & ~CHK.index.isin(BASE.index) & (CHK["status"] == "")
+for i in CHK.index[new]:
+    r = CHK.loc[i]
+    if r["oof_auc"] < MIN_AUC:
+        CHK.loc[i, "status"] = f"OOF AUC {r['oof_auc']:.3f}: row order or label problem"
+    elif r["oof_auc"] > MAX_AUC:
+        CHK.loc[i, "status"] = f"OOF AUC {r['oof_auc']:.4f}: too high to be out of fold"
+    elif r["agree_oof"] - r["agree_test"] > AGREE_GAP:
+        CHK.loc[i, "status"] = f"test half agrees less than OOF half ({r['agree_test']:.3f} vs {r['agree_oof']:.3f})"
+    elif r["drift"] > DRIFT:
+        CHK.loc[i, "status"] = f"mean moves {r['drift']:.3f} between train and test"
+
+# near-copies: rank correlation of the OOF halves, the base first, then the new pairs in loading order
+order = list(BASE["col"]) + [int(c) for c in CHK.loc[new & (CHK["status"] == ""), "col"]]
+Rk = np.column_stack([rankdata(Zall[:, c]) for c in order])        # float64: the threshold sits in the 5th decimal
+Rk -= Rk.mean(0)
+Rk /= np.sqrt((Rk ** 2).mean(0))
+RHO = np.clip((Rk.T @ Rk) / len(Rk), -1, 1)
+del Rk
+kept = list(range(len(BASE)))
+pos = {c: j for j, c in enumerate(order)}
+for j in range(len(BASE), len(order)):
+    best = max(kept, key=lambda m: RHO[j, m])
+    i = CHK.index[CHK["col"] == order[j]][0]
+    CHK.loc[i, "max_rho"] = RHO[j, best]
+    if RHO[j, best] > DUP_RHO:
+        CHK.loc[i, "status"] = f"near-copy of {CHK.loc[CHK['col'] == order[best], 'member'].iloc[0]} (rho {RHO[j, best]:.6f})"
+    else:
+        kept.append(j)
+FULL_COLS = [order[j] for j in kept]
+CHK["in_pool"] = CHK["col"].isin(FULL_COLS)
+NAMES = [CHK.loc[CHK["col"] == c, "member"].iloc[0] for c in FULL_COLS]
+SRCS = [CHK.loc[CHK["col"] == c, "source"].iloc[0] for c in FULL_COLS]
+ZB, ZBT = Zall[:, BASE["col"].to_numpy()], Tall[:, BASE["col"].to_numpy()]
+ZF, ZFT = Zall[:, FULL_COLS], Tall[:, FULL_COLS]
+N_BASE, N_FULL = ZB.shape[1], ZF.shape[1]
+assert len(set(NAMES)) == N_FULL, "duplicate member names"
+del Zall, Tall
+
+tab = CHK[CHK["member"] != "(all)"].assign(kept=lambda d: d["in_pool"]).groupby("source", sort=False).agg(
+    loaded=("member", "size"), kept=("kept", "sum"), best_oof_auc=("oof_auc", "max"))
+tab["dropped"] = tab["loaded"] - tab["kept"]
+print(tab[["loaded", "dropped", "kept", "best_oof_auc"]].to_string(formatters={"best_oof_auc": "{:.6f}".format}))
+skipped = CHK[CHK["member"] == "(all)"]
+if len(skipped):
+    print("\nsources not loaded:\n" + skipped[["source", "status"]].to_string(index=False))
+drop = CHK[(CHK["member"] != "(all)") & ~CHK["in_pool"] & ~CHK.index.isin(BASE.index)]
+reason = drop["status"].str.replace(r" \(.*|:.*| of .*", "", regex=True)
+print(f"\nthresholds: OOF AUC from {MIN_AUC} to {MAX_AUC}, agreement gap {AGREE_GAP}, mean drift {DRIFT}, "
+      f"near-copy rank correlation above {DUP_RHO}")
+print(f"loaded {int((CHK['member'] != '(all)').sum())} pairs from {CHK['source'].nunique()} sources; "
+      f"base pool {N_BASE}; new pairs kept {N_FULL - N_BASE}; full pool {N_FULL}")
+print("dropped, by reason:", reason.value_counts().to_dict())
+print("\nnew pairs that failed a check (near-copies are counted separately below):")
+print(drop[~drop["status"].str.startswith("near-copy")][["source", "member", "status"]].to_string(index=False)
+      if (~drop["status"].str.startswith("near-copy")).any() else "  none")
+print(f"\nnear-copies dropped: {int(drop['status'].str.startswith('near-copy').sum())}")
+print(f"\nrank correlation of each kept new pair with its closest pool member: median "
+      f"{CHK.loc[CHK['in_pool'] & CHK['max_rho'].notna(), 'max_rho'].median():.5f}, "
+      f"lowest {CHK.loc[CHK['in_pool'] & CHK['max_rho'].notna(), 'max_rho'].min():.5f}")
+CHK.drop(columns=["col"]).to_csv(f"{WORK}/member_check.csv", index=False)
+print(f"every pair's checks and verdict: member_check.csv   [{time.time() - T0:.0f}s]")
+
+## 3. Model families and the LightGBM stacker
+
+The family rule is goodpjw2008's (his loader uses the same `tfm_` prefix for Chris Deotte's set). Scaling a column by s
+divides its effective L2 penalty by s². The LightGBM stacker takes the same families as in *Trust the CV*: everything
+except Chris Deotte's TFM set, the three newer golem members, Sadam Torres' experiments, Koumei Maki's set and the
+Aman Atar / kagankoral encodings members (plus the two sources *Trust the CV* does not load: Aman Atar's forge pairs and
+kozykappa's LightGBM).
+
+import lightgbm as lgb
+from scipy.stats import spearmanr
+Z, ZT = ZF.astype(np.float64), ZFT.astype(np.float64)
+del ZF, ZFT, ZB, ZBT
+NTR = len(y)
+
+def family(n):
+    if 'tabpfn' in n or n.startswith('pfn_'): return 'tabpfn'
+    if n.startswith('tfm_') or 'tabicl' in n or 'tabm' in n: return 'tfm'
+    if 'realmlp' in n or 'rmlp' in n or 'mlp' in n: return 'mlp'
+    return 'gbdt'
+FAM = np.array([family(n) for n in NAMES])
+SCALE = np.array([{'tabpfn': 3.0, 'tfm': 1.5}.get(f, 1.0) for f in FAM])
+print({f: int((FAM == f).sum()) for f in ('gbdt', 'mlp', 'tabpfn', 'tfm')})
+
+GB_EXCLUDE = {'tfm', 'golem', 'sadam', 'koumeimaki', 'kagan_enc', 'aman_v5', 'forge', 'kozy'}
+GB_COLS = [i for i, s in enumerate(SRCS) if s not in GB_EXCLUDE]
+print(f'{Z.shape[1]} members in the LR stacker, {len(GB_COLS)} in the LightGBM stacker')
+
+def meta_folds(seed):
+    mf = np.zeros(NTR, int)
+    for k, (_, b) in enumerate(StratifiedKFold(5, shuffle=True, random_state=seed).split(np.zeros(NTR), y)):
+        mf[b] = k
+    return mf
+P = dict(objective='binary', learning_rate=0.03, num_leaves=15, min_data_in_leaf=2000, feature_fraction=0.5,
+         bagging_fraction=0.8, bagging_freq=1, lambda_l2=10.0, verbose=-1, num_threads=4, seed=0)
+def fit_gb(A, ya):
+    ai = np.random.default_rng(0).permutation(len(A)); cut = int(len(ai) * 0.9)
+    return lgb.train(P, lgb.Dataset(A[ai[:cut]], ya[ai[:cut]]), 3000, valid_sets=[lgb.Dataset(A[ai[cut:]], ya[ai[cut:]])],
+                     callbacks=[lgb.early_stopping(100, verbose=False)])
+def nested_gb(mf):
+    o = np.zeros(NTR); A = Z[:, GB_COLS]
+    for k in range(5):
+        a, b = mf != k, mf == k
+        m = fit_gb(A[a], y[a]); o[b] = m.predict(A[b], raw_score=True, num_iteration=m.best_iteration)
+    return o
+zs = lambda v: (v - v.mean()) / v.std()
+fa = lambda o, mf: np.array([roc_auc_score(y[mf == k], o[mf == k]) for k in range(5)])
+
+## 4. The grid on meta-fold seed 7
+
+CFG = dict(
+    W=0.2,                                    # LightGBM share of the blend (Trust the CV's cross-fitted choice)
+    LR_SETTINGS=[('flat', 0.003),('family', 0.01),('family', 0.015),('family', 0.02),('family', 0.025)],
+    BASELINE=('lr', 'flat', 0.003),           # this pool's own recipe: plain LR, flat C = 0.003
+    SELECT_SEED=42,
+    CONFIRM_SEEDS=[7, 101],
+    TOL=1e-6, MAX_ITER=20000,                 # a converged solver: 1e-6 differences are then not optimizer noise
+)
+X = {'flat': (Z, ZT), 'family': (Z * SCALE, ZT * SCALE)}
+
+def _lr(Zm, a, b, C):
+    m = LogisticRegression(C=C, tol=CFG['TOL'], max_iter=CFG['MAX_ITER']).fit(Zm[a], y[a])
+    return b, m.decision_function(Zm[b])
+def nested_lr(Zm, mf, C):
+    o = np.zeros(NTR)
+    for b, v in Parallel(n_jobs=N_JOBS)(delayed(_lr)(Zm, mf != k, mf == k, C) for k in range(5)):
+        o[b] = v
+    return o
+blend = lambda lr, gb: (1 - CFG['W']) * zs(lr) + CFG['W'] * zs(gb)
+def stack_oof(kind, lr, gb):
+    return lr if kind == 'lr' else blend(lr, gb)
+
+MF = meta_folds(CFG['SELECT_SEED'])
+t = time.time()
+GB7 = nested_gb(MF)
+print(f"LightGBM stacker alone, seed {CFG['SELECT_SEED']}: fold-mean {fa(GB7, MF).mean():.6f}   ({time.time() - t:.0f}s)", flush=True)
+LR7, RES, ROWS = {}, {}, []
+for sch, C in CFG['LR_SETTINGS']:
+    t = time.time()
+    LR7[sch, C] = nested_lr(X[sch][0], MF, C)
+    for kind in ('lr', 'blend'):
+        f = fa(stack_oof(kind, LR7[sch, C], GB7), MF)
+        RES[kind, sch, C] = f
+        ROWS.append(dict(stacker=kind, scheme=sch, C=C, seed=CFG['SELECT_SEED'], fold_mean=f.mean(),
+                         **{f'fold{k + 1}': v for k, v in enumerate(f)}))
+    print(f"{sch:6s} C = {C:<7g} plain LR {RES['lr', sch, C].mean():.6f} | {1 - CFG['W']:.1f} LR + {CFG['W']:.1f} LGB "
+          f"{RES['blend', sch, C].mean():.6f}   ({time.time() - t:.0f}s)", flush=True)
+
+## 5. Honest choice and confirmation on untouched seeds
+
+On each confirmation seed the LightGBM stacker is refitted on that seed's meta folds, so every blend there is nested too.
+
+base = RES[CFG['BASELINE']]
+keys = list(RES)
+tab = pd.DataFrame([dict(stacker=k[0], scheme=k[1], C=k[2], fold_mean=RES[k].mean(), gain_x1e6=(RES[k] - base).mean() * 1e6,
+                         folds_up=int((RES[k] > base).sum())) for k in keys]).sort_values('fold_mean', ascending=False)
+print(tab.to_string(index=False, formatters={'fold_mean': '{:.6f}'.format, 'gain_x1e6': '{:+.1f}'.format}))
+
+picks = [max(keys, key=lambda k: RES[k][[j for j in range(5) if j != b]].mean()) for b in range(5)]
+honest = np.array([RES[p][b] for b, p in enumerate(picks)])
+d = honest - base
+se = d.std(ddof=1) / np.sqrt(5)
+CHOSEN = max(set(picks), key=lambda k: (picks.count(k), RES[k].mean()))
+print(f"\ncross-fitted picks: {picks}")
+print(f"honest 'pick the best by CV': {honest.mean():.6f} vs baseline {base.mean():.6f} -> {d.mean() * 1e6:+.1f} x 1e-6 "
+      f"(SE {se * 1e6:.1f}, {(d > 0).sum()}/5 folds up)")
+print(f"chosen setting: {CHOSEN}")
+
+CONF = []
+if CHOSEN != CFG['BASELINE']:
+    for seed in CFG['CONFIRM_SEEDS']:
+        t = time.time()
+        mf = meta_folds(seed)
+        gb = nested_gb(mf) if CHOSEN[0] == 'blend' else None
+        fb = fa(stack_oof(CFG['BASELINE'][0], nested_lr(X[CFG['BASELINE'][1]][0], mf, CFG['BASELINE'][2]), gb), mf)
+        fc = fa(stack_oof(CHOSEN[0], nested_lr(X[CHOSEN[1]][0], mf, CHOSEN[2]), gb), mf)
+        dd = fc - fb
+        CONF.append(dict(seed=seed, baseline=fb.mean(), chosen=fc.mean(), gain=dd.mean(), folds_up=int((dd > 0).sum())))
+        for k_, f in ((CFG['BASELINE'], fb), (CHOSEN, fc)):
+            ROWS.append(dict(stacker=k_[0], scheme=k_[1], C=k_[2], seed=seed, fold_mean=f.mean(),
+                             **{f'fold{k + 1}': v for k, v in enumerate(f)}))
+        print(f"seed {seed:3d}: baseline {fb.mean():.6f} | chosen {fc.mean():.6f} | gain {dd.mean() * 1e6:+.1f} x 1e-6, "
+              f"{(dd > 0).sum()}/5 folds up   ({time.time() - t:.0f}s)", flush=True)
+g7 = (RES[CHOSEN] - base).mean()
+ADOPT = CHOSEN != CFG['BASELINE'] and g7 > 0 and all(c['gain'] > 0 for c in CONF)
+FINAL = CHOSEN if ADOPT else CFG['BASELINE']
+print(f"\nseed {CFG['SELECT_SEED']} gain {g7 * 1e6:+.1f} x 1e-6 | confirmation gains "
+      + (", ".join(f"seed {c['seed']}: {c['gain'] * 1e6:+.1f}" for c in CONF) or "none (the baseline was chosen)")
+      + f"\n-> {'ADOPT ' + str(CHOSEN) if ADOPT else 'keep the baseline ' + str(CFG['BASELINE'])}")
+
+## 6. Refit on every training row, write the submission and the OOF
+
+For a blend, the test scores are standardised with each stacker's OOF mean and spread (as in *Trust the CV*), so
+`stack_oof.npy` and `stack_test.npy` are on the same scale; for plain LR they are logits. Either way any stacker that
+passes values outside [0, 1] through as logits can use the pair as a member.
+
+def refit_lr(sch, C):
+    return LogisticRegression(C=C, tol=CFG['TOL'], max_iter=CFG['MAX_ITER']).fit(X[sch][0], y).decision_function(X[sch][1])
+sig = lambda v: 1 / (1 + np.exp(-v))
+t = time.time()
+gb_full = None
+def test_scores(kind, sch, C):
+    global gb_full
+    lr_full = refit_lr(sch, C)
+    if kind == 'lr':
+        return lr_full, lr_full
+    if gb_full is None:
+        g = fit_gb(Z[:, GB_COLS], y)
+        gb_full = g.predict(ZT[:, GB_COLS], raw_score=True, num_iteration=g.best_iteration)
+    lo = LR7[sch, C]
+    return (1 - CFG['W']) * (lr_full - lo.mean()) / lo.std() + CFG['W'] * (gb_full - GB7.mean()) / GB7.std(), lr_full
+
+test_fin, lr_fin = test_scores(*FINAL)
+oof_fin = stack_oof(FINAL[0], LR7[FINAL[1:]], GB7)
+pd.DataFrame({'id': test_ids, 'satisfaction': sig(test_fin)}).to_csv(f'{WORK}/submission.csv', index=False)
+pd.DataFrame({'id': test_ids, 'satisfaction': sig(lr_fin)}).to_csv(f'{WORK}/submission_plain_lr.csv', index=False)
+test_base = test_fin if FINAL == CFG['BASELINE'] else test_scores(*CFG['BASELINE'])[0]
+pd.DataFrame({'id': test_ids, 'satisfaction': sig(test_base)}).to_csv(f'{WORK}/submission_baseline_247.csv', index=False)
+
+pd.DataFrame({'id': train_ids, 'pred': oof_fin}).to_csv(f'{WORK}/oof_stack.csv', index=False)
+pd.DataFrame({'id': test_ids, 'pred': test_fin}).to_csv(f'{WORK}/test_stack.csv', index=False)
+np.save(f'{WORK}/stack_oof.npy', oof_fin.astype(np.float32)); np.save(f'{WORK}/stack_test.npy', test_fin.astype(np.float32))
+pd.DataFrame(ROWS).to_csv(f'{WORK}/c_search_247.csv', index=False)
+json.dump(dict(final=list(FINAL), chosen=list(CHOSEN), adopted=bool(ADOPT), w=CFG['W'], picks=[list(p) for p in picks],
+               honest_gain=float(d.mean()), honest_se=float(se), seed7_gain=float(g7), confirm=CONF,
+               oof_fold_mean=float(fa(oof_fin, MF).mean())),
+          open(f'{WORK}/c_search_247.json', 'w'), indent=1)
+print(f"submission.csv = {FINAL}   (refits {time.time() - t:.0f}s)")
+print(f"nested OOF of the adopted stack (seed {CFG['SELECT_SEED']}): fold-mean {fa(oof_fin, MF).mean():.6f}")
+print(f"test rank correlation, adopted vs baseline: {spearmanr(test_fin, test_base).correlation:.6f}")
+print("also written: submission_plain_lr.csv, submission_baseline_247.csv, oof_stack.csv, test_stack.csv, "
+      "stack_oof.npy, stack_test.npy, c_search_247.csv, c_search_247.json")
+print(f"total {(time.time() - T0) / 60:.1f} min")
