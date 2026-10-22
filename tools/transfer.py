@@ -53,7 +53,9 @@ Per-file and per-volume SHA-256 manifests accompany the archive. The local proje
     progress('repository_pushed',repository=REPO,branch=BRANCH,commit=run(['git','rev-parse','HEAD'],STAGE).stdout.strip())
 
 def release():
-    return api(f'repos/{REPO}/releases/tags/{TAG}')
+    matches=[r for r in api(f'repos/{REPO}/releases?per_page=100') if r['tag_name']==TAG]
+    assert len(matches)==1,('Release lookup',TAG,len(matches))
+    return api(f"repos/{REPO}/releases/{matches[0]['id']}")
 
 def upload():
     assets=sorted(p for p in ASSETS.iterdir() if p.is_file())
